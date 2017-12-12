@@ -16,5 +16,5 @@ fclose($fp);
 $cachefile = str_replace('.php','.cache',$vfile);
 if(file_exists($cachefile)) unlink($cachefile);
 
-getLink('reload','parent.',_LANG('a0003','site'),'');
+getLink('reload','parent.','반영되었습니다.','');
 ?>

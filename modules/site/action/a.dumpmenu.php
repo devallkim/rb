@@ -47,7 +47,7 @@ function getMenuXls($site,$table,$j,$parent,$depth,$uid,$mset,$code)
 	global $g,$r;
 	static $j,$string;
 	$xdepth = $depth+1;
-	
+
 	$CD=getDbSelect($table,($site?'site='.$site.' and ':'').'depth='.$xdepth.' and parent='.$parent.' order by gid asc','*');
 	while($C=db_fetch_array($CD))
 	{
@@ -96,9 +96,9 @@ function getMenuTxt($site,$table,$j,$parent,$depth,$uid,$code)
 		$j++;
 		$code = $code.$C['id'].'/';
 		$_code = substr($code,0,strlen($code)-1);
-		
+
 		for ($i = 0; $i < $depth; $i++) $string .= "\t";
-		$string .= '['.$xdepth.']'.($C['hidden']?'['._LANG('a2001','site').']':'').($C['reject']?'['._LANG('a2002','site').']':'').($C['target']?'['._LANG('a2003','site').']':'').$C['name']." = ".RW('c='.$_code)."\r\n";
+		$string .= '['.$xdepth.']'.($C['hidden']?'[숨김]':'').($C['reject']?'[차단]':'').($C['target']?'[새창]':'').$C['name']." = ".RW('c='.$_code)."\r\n";
 
 		if ($C['is_child'])
 		{
@@ -121,7 +121,7 @@ function getMenuPackage($site,$table,$j,$parent,$depth,$uid)
 	while($C=db_fetch_array($CD))
 	{
 		$_parent = $C['parent'] ? getDbData($table,($site?'site='.$site.' and ':'').'uid='.$C['parent'],'id') : array();
-		$j++;		
+		$j++;
 		for ($i = 0; $i < $depth; $i++) $string .= "\t";
 		$string .= "\tarray('name'=>'".$C['name']."','id'=>'".$C['id']."','menutype'=>'".$C['menutype']."','mobile'=>'".$C['mobile']."','target'=>'".$C['target']."','redirect'=>'".$C['redirect']."','joint'=>'".$C['joint']."','layout'=>'".$C['layout']."','imghead'=>'".$C['imghead']."','imgfoot'=>'".$C['imgfoot']."','addattr'=>'".$C['addattr']."','depth'=>'".$C['depth']."','parent'=>'".$_parent['id']."','is_child'=>'".$C['is_child']."','gid'=>'".$C['gid']."',),\r\n";
 
@@ -141,7 +141,7 @@ if ($type == 'xml')
 	$fp = fopen($filepath,'w');
 	fwrite($fp,"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
 	fwrite($fp,"<menu>\n\n");
-	fwrite($fp,"\t<!-- ".$_HS['name']."-"._LANG('a2004','site')." -->\n");
+	fwrite($fp,"\t<!-- ".$_HS['name']."-메뉴구조 -->\n");
 	fwrite($fp,getMenuXml($s,$table['s_menu'],0,0,0,0,''));
 	fwrite($fp,"</menu>\n");
 	fclose($fp);
@@ -149,10 +149,10 @@ if ($type == 'xml')
 
 	$filesize = filesize($filepath);
 
-	header("Content-Type: application/octet-stream"); 
-	header("Content-Length: " .$filesize); 
-	header('Content-Disposition: attachment; filename="'.$filename.'"'); 
-	header("Cache-Control: private, must-revalidate"); 
+	header("Content-Type: application/octet-stream");
+	header("Content-Length: " .$filesize);
+	header('Content-Disposition: attachment; filename="'.$filename.'"');
+	header("Cache-Control: private, must-revalidate");
 	header("Pragma: no-cache");
 	header("Expires: 0");
 
@@ -161,36 +161,36 @@ if ($type == 'xml')
 	exit;
 
 }
-else if($type == 'xls') 
+else if($type == 'xls')
 {
 
-	header("Content-type: application/vnd.ms-excel;" ); 
-	header("Content-Disposition: attachment; filename=menu_".$_HS['id'].".xls" ); 
+	header("Content-type: application/vnd.ms-excel;" );
+	header("Content-Disposition: attachment; filename=menu_".$_HS['id'].".xls" );
 	header("Content-Description: PHP4 Generated Data" );
 
 	echo '<meta http-equiv="content-type" content="text/html; charset=utf-8" />';
 	echo '<table border="1">';
 	echo '<thead>';
-	echo '<th>'._LANG('a2005','site').'</th>';
-	echo '<th>'._LANG('a2006','site').'</th>';
-	echo '<th>'._LANG('a2007','site').'</th>';
-	echo '<th>'._LANG('a2008','site').'</th>';
-	echo '<th>'._LANG('a2009','site').'</th>';
-	echo '<th>'._LANG('a2010','site').'</th>';
-	echo '<th>'._LANG('a2011','site').'</th>';
-	echo '<th>'._LANG('a2012','site').'</th>';
-	echo '<th>'._LANG('a2013','site').'</th>';
-	echo '<th>'._LANG('a2014','site').'</th>';
-	echo '<th>'._LANG('a2015','site').'</th>';
-	echo '<th>'._LANG('a2016','site').'</th>';
-	echo '<th>'._LANG('a2017','site').'</th>';
-	echo '<th>'._LANG('a2018','site').'</th>';
-	echo '<th>'._LANG('a2019','site').'</th>';
-	echo '<th>'._LANG('a2020','site').'</th>';
-	echo '<th>'._LANG('a2021','site').'</th>';
+	echo '<th>단계</th>';
+	echo '<th>1차메뉴</th>';
+	echo '<th>2차메뉴</th>';
+	echo '<th>3차메뉴</th>';
+	echo '<th>4차메뉴</th>';
+	echo '<th>5차메뉴</th>';
+	echo '<th>고유키(PK)</th>';
+	echo '<th>메뉴코드</th>';
+	echo '<th>현재주소</th>';
+	echo '<th>물리주소</th>';
+	echo '<th>메뉴형식</th>';
+	echo '<th>모바일</th>';
+	echo '<th>새창</th>';
+	echo '<th>숨김</th>';
+	echo '<th>차단</th>';
+	echo '<th>리다이렉트</th>';
+	echo '<th>연결주소</th>';
 	echo '</thead>';
 	echo '<tbody>';
-	echo getMenuXls($s,$table['s_menu'],0,0,0,0,array('',_LANG('a2022','site'),_LANG('a2023','site'),_LANG('a2024','site')),'');
+	echo getMenuXls($s,$table['s_menu'],0,0,0,0,array('','모듈','위젯','코딩'),'');
 	echo '</tbody>';
 	echo '</table>';
 	exit;
@@ -198,10 +198,10 @@ else if($type == 'xls')
 else if($type == 'txt')
 {
 
-	header("Content-Type: application/octet-stream"); 
-	header("Content-Disposition: attachment; filename=menu_".$_HS['id'].".txt" ); 
+	header("Content-Type: application/octet-stream");
+	header("Content-Disposition: attachment; filename=menu_".$_HS['id'].".txt" );
 	header("Content-Description: PHP4 Generated Data" );
-	echo $_HS['name']."-"._LANG('a2004','site')."\r\n";
+	echo $_HS['name']."-메뉴구조\r\n";
 	echo "-------------------------------------------------------------------------\r\n\r\n";
 	echo getMenuTxt($s,$table['s_menu'],0,0,0,0,'');
 	exit;
@@ -209,8 +209,8 @@ else if($type == 'txt')
 else if($type == 'package_menu')
 {
 
-	header("Content-Type: application/octet-stream"); 
-	header("Content-Disposition: attachment; filename=var.menu.php" ); 
+	header("Content-Type: application/octet-stream");
+	header("Content-Disposition: attachment; filename=var.menu.php" );
 	header("Content-Description: PHP4 Generated Data" );
 	echo "<?php\r\n";
 	echo "\$d['package']['menus'] = array(\r\n";
@@ -221,8 +221,8 @@ else if($type == 'package_menu')
 }
 else if($type == 'package_page')
 {
-	header("Content-Type: application/octet-stream"); 
-	header("Content-Disposition: attachment; filename=var.page.php" ); 
+	header("Content-Type: application/octet-stream");
+	header("Content-Disposition: attachment; filename=var.page.php" );
 	header("Content-Description: PHP4 Generated Data" );
 	echo "<?php\r\n";
 	echo "\$d['package']['pages'] = array(\r\n";

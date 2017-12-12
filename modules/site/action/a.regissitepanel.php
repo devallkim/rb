@@ -10,7 +10,7 @@ $title = trim($title);
 if ($site_uid)
 {
 	$ISID = getDbData($Table['s_site'],"uid<>".$site_uid." and id='".$id."'",'*');
-	if ($ISID['uid']) getLink('','',_LANG('a7001','site'),'');
+	if ($ISID['uid']) getLink('','','이미 동일한 명칭의 계정아이디가 존재합니다.','');
 
 	$QVAL = "id='$id',name='$name',title='$title',layout='$layout',startpage='$startpage',m_layout='$m_layout',m_startpage='$m_startpage',open='$open'";
 	getDbUpdate($table['s_site'],$QVAL,'uid='.$site_uid);
@@ -24,9 +24,9 @@ if ($site_uid)
 
 if ($_HS['id'] != $id || $_HS['name'] != $name)
 {
-	getLink($g['s'].'/?r='.$id.'&panel=Y&_admpnl_='.urlencode($referer),'parent.parent.',_LANG('a0004','site'),'');
+	getLink($g['s'].'/?r='.$id.'&panel=Y&_admpnl_='.urlencode($referer),'parent.parent.','변경되었습니다','');
 }
 else {
-	getLink('reload','parent.frames._ADMPNL_.',_LANG('a0004','site'),'');
+	getLink('reload','parent.frames._ADMPNL_.','변경되었습니다','');
 }
 ?>

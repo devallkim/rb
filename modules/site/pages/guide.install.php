@@ -5,12 +5,12 @@
 				<i class="kf kf-bi-03 fa-5x text-muted" title="KimsQ is Kind" data-tooltip="tooltip"></i>
 				<br>
 				<br>
-				<?php echo _LANG('s1001','site')?>
+				킴스큐가 설치되었습니다.
 			</h1>
 			<p class="text-muted">
-				<?php echo sprintf(_LANG('s1002','site'),$my['name'])?>
+				<?php echo sprintf('%s님, 이 페이지를 보고 계시면 킴스큐가 정상적으로 설치된 것입니다.',$my['name'])?>
 				<br class="hidden-xs">
-				<?php echo _LANG('s1003','site')?>
+				이제 킴스큐를 시작할 준비가 되셨습니다.
 				<br class="hidden-xs">
 			</p>
 			<p>
@@ -18,7 +18,7 @@
 				<br>
 				<a class="btn btn-primary" href="./?r=<?php echo $r?>&amp;panel=Y&amp;_admpnl_=<?php echo urlencode('./?r='.$r.'&m=admin&module=site')?>">
 					<i class="glyphicon glyphicon-ok"></i>
-					<?php echo _LANG('s1004','site')?>
+					시작하기
 				</a>
 			</p>
 		</div>

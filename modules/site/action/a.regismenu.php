@@ -18,7 +18,7 @@ $image_src = trim($image_src);
 
 if (!$redirect&&(strstr($joint,'&c=')||strstr($joint,'?c=')))
 {
-	getLink('','',_LANG('a5001','site'),'');
+	getLink('','','연결주소에 사용할 수 없는 파라미터가 있습니다.','');
 }
 if(!$redirect&&$menutype==1)
 {
@@ -35,7 +35,7 @@ if ($cat && !$vtype)
 	if ($id != $R['id'])
 	{
 		$ISMCODE = getDbData($table['s_menu'],"id='".$id."' and site=".$s,'*');
-		if ($ISMCODE['uid']) getLink('','',sprintf(_LANG('a5002','site'),$ISMCODE['id'],$ISMCODE['name']),'');
+		if ($ISMCODE['uid']) getLink('','',sprintf('메뉴코드 [%s] 는 다른메뉴 [%s] 에서 사용중입니다.',$ISMCODE['id'],$ISMCODE['name']),'');
 	}
 
 	for ($i = 0; $i < 2; $i++)
@@ -51,7 +51,7 @@ if ($cat && !$vtype)
 		{
 			if (!strstr('[gif][jpg][png][swf]',$fileExt))
 			{
-				getLink('','',_LANG('a5003','site'),'');
+				getLink('','','헤더/풋터파일은 gif/jpg/png/swf 파일만 등록할 수 있습니다.','');
 			}
 			move_uploaded_file($tmpname,$saveFile);
 			@chmod($saveFile,0707);
@@ -74,7 +74,7 @@ if ($cat && !$vtype)
 	$QVAL.= "redirect='$redirect',joint='$joint',perm_g='$perm_g',perm_l='$perm_l',";
 	$QVAL.= "layout='$layout',imghead='$imghead',imgfoot='$imgfoot',addattr='$addattr',addinfo='$addinfo',mediaset='$mediaset'";
 	getDbUpdate($table['s_menu'],$QVAL,'uid='.$cat);
-	
+
 	$_SEO = getDbData($table['s_seo'],'uid='.(int)$seouid,'uid');
 	if($_SEO['uid']) getDbUpdate($table['s_seo'],"title='$title',keywords='$keywords',description='$description',classification='$classification',image_src='$image_src'",'uid='.$_SEO['uid']);
 	else getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'1','$cat','$title','$keywords','$description','$classification','$image_src'");
@@ -87,7 +87,7 @@ if ($cat && !$vtype)
 		rename($vfile1.'.php',$vfile.'.php');
 		rename($vfile1.'.widget.php',$vfile.'.widget.php');
 		if(is_file($vfile1.'.css')) rename($vfile1.'.css',$vfile.'.css');
-		if(is_file($vfile1.'.js')) rename($vfile1.'.js',$vfile.'.js');		
+		if(is_file($vfile1.'.js')) rename($vfile1.'.js',$vfile.'.js');
 		if(is_file($vfile1.'.header.php')) rename($vfile1.'.header.php',$vfile.'.header.php');
 		if(is_file($vfile1.'.footer.php')) rename($vfile1.'.footer.php',$vfile.'.footer.php');
 		if(is_file($vfile1.'.txt')) rename($vfile1.'.txt',$vfile.'.txt');
@@ -233,13 +233,13 @@ else {
 			@chmod($mfile.'.txt',0707);
 		}
 	}
-	
+
 	if ($parent)
 	{
 		getDbUpdate($table['s_menu'],'is_child=1','uid='.$parent);
 	}
-	db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT); 
-	
+	db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT);
+
 	if ($i > 1)
 	{
 		getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&front=menu&cat='.$parent.'&code='.$code.'&vtype='.$vtype,'parent.','','');

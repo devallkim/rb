@@ -1,14 +1,14 @@
 <?php include getLangFile($g['dir_module'].'language/',$d['admin']['syslang'],'/lang.system.php') ?>
 <div class="modal-header">
 	<button type="button" class="close" onclick="hideModal();">&times;</button>
-	<h4 class="modal-title"><i class="fa fa-code fa-lg"></i> <?php echo _LANG('sb001','site')?></h4>
+	<h4 class="modal-title"><i class="fa fa-code fa-lg"></i> 위젯코드</h4>
 </div>
 <div class="modal-body">
 	<textarea id="rb-widget-code-area"></textarea>
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-default" onclick="hideModal();"><?php echo _LANG('s0003','site')?></button>
-	<button type="button" class="btn btn-primary rb-clipboard" data-clipboard-target="rb-widget-code-area" onclick="hideModal();"><?php echo _LANG('sb002','site')?></button>
+	<button type="button" class="btn btn-default" onclick="hideModal();">닫기</button>
+	<button type="button" class="btn btn-primary rb-clipboard" data-clipboard-target="rb-widget-code-area" onclick="hideModal();">복사하기</button>
 </div>
 
 <!-- zero-clipboard -->

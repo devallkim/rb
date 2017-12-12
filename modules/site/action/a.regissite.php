@@ -17,7 +17,7 @@ $meta_image_src = trim($meta_image_src);
 if ($site_uid)
 {
 	$ISID = getDbData($Table['s_site'],"uid<>".$site_uid." and id='".$id."'",'*');
-	if ($ISID['uid']) getLink('','',_LANG('a7001','site'),'');
+	if ($ISID['uid']) getLink('','','이미 동일한 명칭의 계정아이디가 존재합니다.','');
 
 	if ($iconaction)
 	{
@@ -54,7 +54,7 @@ if ($site_uid)
 	}
 }
 else {
-	
+
 	if (!$id)
 	{
 		$id = 's'.date('His');
@@ -65,16 +65,16 @@ else {
 	}
 
 	$ISID = getDbData($Table['s_site'],"id='".$id."'",'*');
-	if ($ISID['uid']) getLink('','',_LANG('a7001','site'),'');
+	if ($ISID['uid']) getLink('','','이미 동일한 명칭의 계정아이디가 존재합니다.','');
 
 	$MAXC = getDbCnt($table['s_site'],'max(gid)','');
 	$gid = $MAXC + 1;
-	
+
 	$QKEY = "gid,id,name,title,titlefix,icon,layout,startpage,m_layout,m_startpage,lang,open,dtd,nametype,timecal,rewrite,buffer,usescode,headercode,footercode";
 	$QVAL = "'$gid','$id','$name','$title','$titlefix','$icon','$layout','$startpage','$m_layout','$m_startpage','$sitelang','$open','$dtd','$nametype','$timecal','$rewrite','$buffer','$usescode','$headercode','$footercode'";
 	getDbInsert($table['s_site'],$QKEY,$QVAL);
 	$LASTUID = getDbCnt($table['s_site'],'max(uid)','');
-	db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT); 
+	db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT);
 	getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'0','$LASTUID','$meta_title','$meta_keywords','$meta_description','$meta_classification','$meta_image_src'");
 
 

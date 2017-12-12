@@ -272,7 +272,7 @@
 			<li title="pagelines"><span class="fa fa-pagelines" onclick="iconDrop(this.className);"></span></li>
 			<li title="maxcdn"><span class="fa fa-maxcdn" onclick="iconDrop(this.className);"></span></li>
 		</ul>
-		<h5 class="text-primary">Web Application Icons <small><?php echo _LANG('s4001','site')?></small></h5>
+		<h5 class="text-primary">Web Application Icons <small>(업데이트 예정)</small></h5>
 		<ul class="icon-list awesome">
 			<li><span class="fa fa-adjust" onclick="iconDrop(this.className);"></span></li>
 			<li><span class="fa fa-anchor" onclick="iconDrop(this.className);"></span></li>
@@ -289,10 +289,10 @@
 
 <div id="_modal_header" class="hidden">
 	<button aria-hidden="true" data-dismiss="modal" class="close rb-close-white" type="button">&times;</button>
-	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-flag"></i> <?php echo _LANG('s4002','site')?></h4>
+	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-flag"></i> 아이콘 갤러리</h4>
 </div>
 <div id="_modal_footer" class="hidden">
-	<button type="button" class="btn btn-default" aria-hidden="true" data-dismiss="modal"><?php echo _LANG('s0003','site')?></button>
+	<button type="button" class="btn btn-default" aria-hidden="true" data-dismiss="modal">닫기</button>
 </div>
 
 

@@ -19,13 +19,13 @@ $extra = trim($extra);
 
 if (strstr($joint,'&c=')||strstr($joint,'?c='))
 {
-	getLink('','',_LANG('a6001','site'),'');
+	getLink('','','연결주소에 사용할 수 없는 파라미터가 있습니다.','');
 }
 
 if (($orign_id && $orign_id != $id) || !$orign_id)
 {
 	$R = getDbData($table['s_page'],"site=".$s." and id='".$id."'",'*');
-	if ($R['uid']) getLink('','',_LANG('a6002','site'),'');
+	if ($R['uid']) getLink('','','동일한 아이디의 페이지가 존재합니다.','');
 }
 
 if ($uid)
@@ -98,7 +98,7 @@ else {
 		fwrite($fp,'');
 		fclose($fp);
 		@chmod($mfile,0707);
-		
+
 		if ($cachetime)
 		{
 			$fp = fopen($g['path_page'].$r.'-pages/'.$xnid.'.txt','w');

@@ -69,5 +69,5 @@ fwrite($fp, "?>");
 fclose($fp);
 @chmod($_tmpdfile,0707);
 
-getLink('reload','parent.frames._ADMPNL_.',_LANG('a0004','site'),'');
+getLink('reload','parent.frames._ADMPNL_.','변경되었습니다.','');
 ?>

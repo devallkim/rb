@@ -10,5 +10,5 @@ DirDelete($w_dir);
 mkdir($w_dir,0707);
 @chmod($w_dir,0707);
 
-getLink('reload','parent.frames._ADMPNL_.',_LANG('a1001','site'),'');
+getLink('reload','parent.frames._ADMPNL_.','위젯 캐시가 재생성 되었습니다.','');
 ?>

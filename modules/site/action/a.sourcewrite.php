@@ -56,15 +56,15 @@ if ($wysiwyg != 'Y')
 			unlink($vfile.'.js');
 		}
 	}
-	
+
 	$cachefile_mobile = str_replace('.php','.cache',$vfile.'.mobile');
 	if(file_exists($cachefile_mobile)) unlink($cachefile_mobile);
-	getLink('','',_LANG('a0003','site'),'');
+	getLink('','','반영되었습니다.','');
 }
 else {
 	$cachefile_pc = str_replace('.php','.cache',$vfile);
 	if(file_exists($cachefile_pc)) unlink($cachefile_pc);
-	getLink('reload','parent.',_LANG('a0003','site'),'');
+	getLink('reload','parent.','반영되었습니다.','');
 }
 exit;
 ?>

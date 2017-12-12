@@ -17,12 +17,12 @@ tags += '<option value="<?php echo $tpl1?>"><?php echo str_replace('.php','',$tp
 <?php closedir($dirs1)?>
 <?php else:?>
 tags += '<select class="form-control<?php echo $sclass?' '.$sclass:''?>" name="<?php echo $sname?>" disabled>';
-tags += '<option><?php echo _LANG('a3001','site')?></option>';
+tags += '<option>서브 레이아웃</option>';
 <?php endif?>
 tags += '</select>';
 block.innerHTML = tags;
 </script>
 
-<?php 
+<?php
 exit;
 ?>

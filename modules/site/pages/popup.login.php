@@ -6,23 +6,23 @@
 		<input type="hidden" name="isModal" value="Y">
 
 		<div class="form-group">
-			<label class="sr-only" for="username"><?php echo _LANG('s7001','site')?></label>
+			<label class="sr-only" for="username">아이디 또는 이메일</label>
 			<div class="input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				<input type="text" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',0)?>" id="username" name="id" placeholder="<?php echo _LANG('s7001','site')?>" class="form-control">
+				<input type="text" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',0)?>" id="username" name="id" placeholder="아이디 또는 이메일" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="sr-only" for="password">Password</label>
 			<div class="input-group">
 				<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-				<input type="password" id="password" name="pw" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',1)?>" placeholder="<?php echo _LANG('s7002','site')?>" class="form-control">
+				<input type="password" id="password" name="pw" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',1)?>" placeholder="패스워드" class="form-control">
 			</div>
 		</div>
 		<div class="checkbox">
-			<label><input name="idpwsave" class="rb-confirm" type="checkbox" value="checked"<?php if($_COOKIE['svshop']):?> checked<?php endif?>> <?php echo _LANG('s7003','site')?></label>
+			<label><input name="idpwsave" class="rb-confirm" type="checkbox" value="checked"<?php if($_COOKIE['svshop']):?> checked<?php endif?>> 아이디/패스워드 기억하기</label>
 		</div>
-		<button type="submit" class="btn btn-primary btn-block btn-lg"><?php echo _LANG('s7004','site')?></button>
+		<button type="submit" class="btn btn-primary btn-block btn-lg">로그인</button>
 	</form>
 </div>
 
@@ -32,17 +32,17 @@
 
 <div id="_modal_header" class="hidden">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-sign-in fa-lg"></i> <?php echo _LANG('s7004','site')?> </h4>
+	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-sign-in fa-lg"></i> 로그인 </h4>
 </div>
 
 <div id="_modal_footer" class="hidden">
-	<a href="#" class="btn btn-default btn-block" data-dismiss="modal" aria-hidden="true"><?php echo _LANG('s0003','site')?></a>
+	<a href="#" class="btn btn-default btn-block" data-dismiss="modal" aria-hidden="true">닫기</a>
 </div>
 
 <script>
 var bootmsg = '<div class="media"><div class="media-body" style="font-size:12px;">';
-	bootmsg+= '<h4 class="media-heading"><?php echo _LANG('s7005','site')?></h4>';
-	bootmsg+= '<?php echo _LANG('s7006','site')?>';
+	bootmsg+= '<h4 class="media-heading">로그인 정보를 저장하시겠습니까?</h4>';
+	bootmsg+= '로그인 정보를 저장할 경우 다음접속시 정보를 입력하지 않으셔도 되지만,PC를 여러사람이 사용하는 공공장소에서는 체크하지 마세요.<br>';
 	bootmsg+= '</div></div>';
 
 $('.rb-confirm').on('click', function() {
@@ -57,13 +57,13 @@ function layoutLogCheck(f)
 {
 	if (f.id.value == '')
 	{
-		alert('<?php echo _LANG('s7007','site')?>');
+		alert('아이디나 이메일주소를 입력해 주세요.');
 		f.id.focus();
 		return false;
 	}
 	if (f.pw.value == '')
 	{
-		alert('<?php echo _LANG('s7008','site')?>');
+		alert('패스워드를 입력해 주세요.');
 		f.pw.focus();
 		return false;
 	}

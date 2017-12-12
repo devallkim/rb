@@ -26,11 +26,11 @@ else {
 
 if (strstr($pwd,'..'))
 {
-  getLink('','',_LANG('sa001','site'),'close');
+  getLink('','','정상적인 접근이 아닙니다.','close');
 }
 if(!is_dir($pwd))
 {
-	getLink('','',_LANG('sa002','site'),'close');
+	getLink('','','존재하지 않는 폴더입니다.','close');
 }
 
 function getDirexists($dir)
@@ -107,17 +107,17 @@ function getWidgetPreviewImg($path)
 		<?php endif?>
 
 		<ul class="nav nav-tabs" role="tablist">
-			<li class="active"><a href="#code" role="tab" data-toggle="tab"><?php echo _LANG('sa008','site')?></a></li>
-			<li><a href="#preview" role="tab" data-toggle="tab"><?php echo _LANG('sa009','site')?></a></li>
+			<li class="active"><a href="#code" role="tab" data-toggle="tab">설정하기</a></li>
+			<li><a href="#preview" role="tab" data-toggle="tab">미리보기</a></li>
 			<?php if($isWcode=='Y'):?>
-			<li class="pull-right"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="<?php echo _LANG('sa011','site')?>" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'<?php echo _LANG('sa012','site')?>');"><i class="glyphicon glyphicon-trash"></i></a></li>
+			<li class="pull-right"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');"><i class="glyphicon glyphicon-trash"></i></a></li>
 			<?php endif?>
 		</ul>
 
 		<div class="tab-content" style="padding-top:12px">
 			<div class="tab-pane active" id="code">
-				<?php include getLangFile($g['path_widget'].$swidget.'/lang.',$d['admin']['syslang'],'.php')?>
-				<?php include $g['path_widget'].$swidget.'/admin.php'?>
+				<?php include getLangFile($g['path_widget'].$swidget.'/lang.',$d['admin']['syslang'],'.php') ?>
+				<?php include $g['path_widget'].$swidget.'/admin.php' ?>
 			</div>
 			<div class="tab-pane" id="preview">
 				<?php $_widgetPreview=getWidgetPreviewImg($g['path_widget'].$swidget.'/thumb')?>
@@ -126,7 +126,7 @@ function getWidgetPreviewImg($path)
 				<?php else:?>
 				<div class="none">
 					<i class="fa fa-puzzle-piece fa-5x"></i><br><br>
-					<?php echo _LANG('sa010','site')?>
+					미리보기가 없습니다.
 				</div>
 				<?php endif?>
 			</div>
@@ -135,12 +135,12 @@ function getWidgetPreviewImg($path)
 		<?php else:?>
 		<?php if($isWcode=='Y'):?>
 		<ul class="nav">
-			<li class="pull-right"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="<?php echo _LANG('sa011','site')?>" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'<?php echo _LANG('sa012','site')?>');"><i class="glyphicon glyphicon-trash"></i></a></li>
+			<li class="pull-right"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');"><i class="glyphicon glyphicon-trash"></i></a></li>
 		</ul>
 		<?php endif?>
 		<div class="none">
 			<i class="fa fa-puzzle-piece fa-5x"></i><br><br>
-			<?php echo _LANG('sa003','site')?>
+			추가할 위젯을 선택하세요.
 		</div>
 		<?php endif?>
 		<textarea id="rb-widget-code-result" class="hidden"></textarea>
@@ -154,21 +154,21 @@ function getWidgetPreviewImg($path)
 
 <div id="_modal_header" class="hidden">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	<h4 class="modal-title"><i class="kf-widget kf-lg"></i> <?php echo _LANG('sa004','site')?></h4>
+	<h4 class="modal-title"><i class="kf-widget kf-lg"></i> 위젯 선택하기</h4>
 </div>
 
 <div id="_modal_footer" class="hidden">
-	<button type="button" class="btn btn-default pull-left" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_"><?php echo _LANG('s0003','site')?></button>
+	<button type="button" class="btn btn-default pull-left" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_">닫기</button>
 	<?php if(!$isWcode||$isEdit):?>
 	<?php if($isCodeOnly):?>
-	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>><?php echo _LANG('sa005','site')?></a>
-	<button type="button" class="btn btn-default" disabled><?php echo _LANG('sa006','site')?></button>
+	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>코드보기</a>
+	<button type="button" class="btn btn-default" disabled>위젯코드만 지원</button>
 	<?php else:?>
-	<button type="button" class="btn btn-default" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>><?php echo _LANG('sa005','site')?></a>
-	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._saveCheck(<?php echo $isEdit?1:0?>);"<?php if(!$swidget):?> disabled<?php endif?>><?php echo _LANG('sa007','site')?></button>
+	<button type="button" class="btn btn-default" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>코드보기</a>
+	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._saveCheck(<?php echo $isEdit?1:0?>);"<?php if(!$swidget):?> disabled<?php endif?>>삽입하기</button>
 	<?php endif?>
 	<?php else:?>
-	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>><?php echo _LANG('sa005','site')?></a>
+	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>코드보기</a>
 	<?php endif?>
 </div>
 

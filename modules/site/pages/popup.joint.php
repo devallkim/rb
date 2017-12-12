@@ -15,7 +15,7 @@
 		<?php else:?>
 		<div class="none">
 			<i class="kf kf-module fa-5x"></i><br><br>
-			<?php echo _LANG('s6001','site')?>
+			연결할 모듈을 선택하세요.
 		</div>
 		<?php endif?>
 	</div>
@@ -29,18 +29,18 @@
 
 <div id="_modal_header" class="hidden">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title"><i class="kf-module kf-lg"></i> <?php echo _LANG('s6002','site')?></h4>
+    <h4 class="modal-title"><i class="kf-module kf-lg"></i> 모듈 연결하기</h4>
 </div>
 
 <div id="_modal_footer" class="hidden">
 	<?php if($dropButtonUrl):?>
-	<button type="button" class="btn btn-default pull-left" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_"><?php echo _LANG('s0003','site')?></button>
-	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.dropJoint('<?php echo $dropButtonUrl?>');"><?php echo _LANG('s6003','site')?></button>
+	<button type="button" class="btn btn-default pull-left" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_">닫기</button>
+	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.dropJoint('<?php echo $dropButtonUrl?>');">모듈연결</button>
 	<?php else:?>
-	<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_"><?php echo _LANG('s0003','site')?></button>
+	<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_">닫기</button>
 	<?php endif?>
 </div>
-	
+
 
 
 
