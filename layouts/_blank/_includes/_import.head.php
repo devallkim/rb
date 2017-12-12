@@ -37,7 +37,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 $g['cssset'] = array
 (
 	$g['dir_module'].'main'=>$g['url_module'].'/main',
- 	$g['dir_module_comm']=>$g['url_module_comm'], 
+	$g['dir_module_comm']=>$g['url_module_comm'],
 	$g['dir_module_mode']=>$g['url_module_mode'],
 	$g['dir_module_admin']=>$g['url_module_admin'],
 );

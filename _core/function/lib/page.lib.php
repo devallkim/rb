@@ -21,7 +21,7 @@ function LIB_getPageLink($lnum,$p,$tpage,$img)
 		else{$np = $jn; $g_q .= '<a href="'.$_N.'p='.$np.'">'.$g_n2.'</a>'; }
 		$g_q  .= $tpage > $p ? '<a href="'.$_N.'p='.$tpage.'"><img src="'.$img.'/lp.gif" alt="Last page"></a>' : '<img src="'.$img.'/lp1.gif" alt="Last page">';
 		return $img;
-	}	
+	}
 	else if ($img=='mobile')
 	{
 		$g_q  = '<div class="'.$lnum.'panel-footer"><span class="'.$lnum.'paging"><span class="'.$lnum.'count"><span class="'.$lnum.'hidden">Current page</span><span class="'.$lnum.'current">'.$p.'</span><span class="'.$lnum.'bar">/</span><span class="'.$lnum.'hidden">Total page</span> '.$tpage.'</span>';

@@ -504,9 +504,6 @@ function getCrypt($str,$salt)
 	if ($ver1[0] > 5 || ($ver1[0] > 4 && $ver1[1] > 4))
 	if(function_exists('password_hash')) return password_hash($str,PASSWORD_BCRYPT,array('cost'=>10,'salt'=>$salt)).'$1';
 	if ($ver1[0] > 4 || ($ver1[0] > 3 && $ver1[1] > 1) || ($ver1[0] > 3 && $ver1[1] > 0 && $ver1[2] > 1))
-	if ($ver1[0] > 5 || ($ver1[0] > 4 && $ver1[1] > 4))	
-	if(function_exists('password_hash')) return password_hash($str,PASSWORD_BCRYPT,array('cost'=>10,'salt'=>$salt)).'$1';
-	if ($ver1[0] > 4 || ($ver1[0] > 3 && $ver1[1] > 1) || ($ver1[0] > 3 && $ver1[1] > 0 && $ver1[2] > 1))	
 	{
 		if (in_array('sha512',hash_algos())) return hash('sha512',$str.$salt).'$2';
 		else if (in_array('sha256',hash_algos())) return hash('sha256',$str.$salt).'$3';

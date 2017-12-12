@@ -17,7 +17,7 @@ $lang['site']['a0014'] = '도움말';
 $lang['site']['a0015'] = '<code>&lt;meta name=&quot;title&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.';
 $lang['site']['a0016'] = '<code>&lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.';
 $lang['site']['a0017'] = '검색 결과에 표시되는 문자를 지정합니다.<br>설명글은 엔터없이 입력해 주세요.';
-$lang['site']['a0018'] = '보기)웹 프레임워크의 혁신 - 킴스큐 Rb 에 대한 다운로드,팁 공유등을 제공합니다. <a href=http://moz.com/learn/seo/meta-description&quot; target=&quot;_blank&quot;>참고</a>';
+$lang['site']['a0018'] = '보기)웹 프레임워크의 혁신 - 킴스큐 Rb 에 대한 다운로드,팁 공유등을 제공합니다. <a href=&quot;http://moz.com/learn/seo/meta-description&quot; target=&quot;_blank&quot;>참고</a>';
 $lang['site']['a0019'] = '150-160자 내에서 작성해 주세요.';
 $lang['site']['a0020'] = '콤마(,)로 구분하여 입력해 주세요.';
 $lang['site']['a0021'] = '<code>&lt;meta name=&quot;keywords&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.';
@@ -73,6 +73,7 @@ $lang['site']['a0070'] = '이미지를 등록하시면 소셜미디어에 이 �
 $lang['site']['a0071'] = '이미지를 직접 지정하려면 이미지의 URL을 입력해 주세요.';
 $lang['site']['a0072'] = '등록파일 보기';
 $lang['site']['a0073'] = '패키지용 데이터 받기';
+$lang['site']['a0074'] = '정말로 변경하시겠습니까?';
 
 // main.php
 $lang['site']['a1001'] = '기본 정보';
@@ -267,6 +268,7 @@ $lang['site']['a3039'] = '페이지 코드는 영문대소문자/숫자/_/- 만 
 $lang['site']['a3040'] = '사용자모드 보기';
 $lang['site']['a3041'] = '새 페이지 만들기';
 $lang['site']['a3042'] = '실행하기';
+$lang['site']['a3043'] = '부가필드';
 
 // _edit.php
 $lang['site']['a4001'] = '페이지';

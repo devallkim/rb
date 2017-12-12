@@ -314,6 +314,24 @@ getId('rb-more-tab-<?php echo $_mtype=='page'?'3':'2'?>').className = 'active';
 </script>
 <?php endif?>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php if($type == 'widget'):?>
 <?php $d['page']['widget'] = array()?>
 <?php if(is_file($g['path_page'].$_filekind.'.widget.php')) include $g['path_page'].$_filekind.'.widget.php'?>

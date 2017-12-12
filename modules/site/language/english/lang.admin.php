@@ -73,6 +73,7 @@ $lang['site']['a0070'] = 'You can transfer images to include social media you re
 $lang['site']['a0071'] = 'To specify the image directly, please enter the URL of the image.'; //이미지를 직접 지정하려면 이미지의 URL을 입력해 주세요.
 $lang['site']['a0072'] = 'View file'; //등록파일 보기;
 $lang['site']['a0073'] = 'Get Data for Package'; //패키지용 데이터 받기
+$lang['site']['a0074'] = 'Confirm change';//'정말로 변경하시겠습니까?';
 
 // main.php
 $lang['site']['a1001'] = 'Main information'; //기본 정보
@@ -267,6 +268,7 @@ $lang['site']['a3039'] = 'Number / _ / Read the page code is case-sensitive / - 
 $lang['site']['a3040'] = 'View user mode'; //사용자모드 보기
 $lang['site']['a3041'] = 'Create a new page'; //새 페이지 만들기
 $lang['site']['a3042'] = 'Save changes'; //실행하기
+$lang['site']['a3043'] = 'Extra Field'; //부가필드
 
 // _edit.php
 $lang['site']['a4001'] = 'Page'; //페이지

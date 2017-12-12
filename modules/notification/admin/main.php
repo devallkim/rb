@@ -25,7 +25,7 @@ $TPG = getTotalPage($NUM,$recnum);
 <div id="notification">
 
 	<div class="page-header">
-  	     <h4><?php echo _LANG('a2001','notification')?></h4>
+		<h4><?php echo _LANG('a2001','notification')?></h4>
 	</div>
 
 	<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="form-horizontal">

@@ -27,6 +27,9 @@ $g['url_module_mode']	= $g['url_module_skin'].'/'.$mod;
 $g['adm_href']			= $g['s'].'/?r='.$r.'&amp;m='.$m.'&amp;module='.$module.'&amp;front='.$front;
 $g['adminlanguage']		= $MD['lang']?$MD['lang']:$d['admin']['syslang'];
 
+$g['dir_module_comm']	= $g['path_module'].$module.'/admin/_main';
+$g['url_module_comm']	= $g['s'].'/modules/'.$module.'/admin/_main';
+
 include getLangFile($g['path_module'].$module.'/language/',$g['adminlanguage'],'/lang.admin.php');
 include getLangFile($g['path_module'].$module.'/language/',$g['adminlanguage'],'/lang.admin-menu.php');
 

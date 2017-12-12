@@ -54,6 +54,6 @@ pt.location.href = gx;
 </script>
 <?php
 exit;
-//if ($reload == 'Y') getLink('reload',"parent.parent.",_LANG('a7003','market'),'');
-//else getLink('',"parent.parent.$('#modal_window').modal('hide');",_LANG('a7003','market'),'');
+//if ($reload == 'Y') getLink('reload',"parent.parent.",_LANG('a3003','market'),'');
+//else getLink('',"parent.parent.$('#modal_window').modal('hide');",_LANG('a3003','market'),'');
 ?>

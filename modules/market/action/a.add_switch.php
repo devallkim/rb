@@ -71,6 +71,6 @@ pt.location.href = gx;
 </script>
 <?php
 exit;
-//if ($reload == 'Y') getLink('reload',"parent.parent.",sprintf(_LANG('a6003','market'),$plFolder.' - v.'.$plVersion),'');
-//else getLink('',"parent.parent.$('#modal_window').modal('hide');",sprintf(_LANG('a6003','market'),$plFolder.' - v.'.$plVersion),'');
+//if ($reload == 'Y') getLink('reload',"parent.parent.",sprintf(_LANG('a5003','market'),$plFolder.'/'.$plVersion),'');
+//else getLink('',"parent.parent.$('#modal_window').modal('hide');",sprintf(_LANG('a5003','market'),$plFolder.'/'.$plVersion),'');
 ?>

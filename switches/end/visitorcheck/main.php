@@ -19,6 +19,7 @@ if ($m != 'admin' && $iframe !='Y' && !$system)
 		getDbUpdate($table['s_counter'],'page=page+1','site='.$s." and date='".$date['today']."'");
 		if ($_keyword && !strstr('[name][nic][id][term]',$where))
 		{
+			if (preg_match("/(http|https):\/\/(.*?)$/i", $_keyword)) exit;	
 			$_INKEY = getDbData($table['s_inkey'],'site='.$s." and date='".$date['today']."' and keyword='".$_keyword."'",'*');
 			if($_INKEY['uid']) getDbUpdate($table['s_inkey'],'hit=hit+1','uid='.$_INKEY['uid']);
 			else getDbInsert($table['s_inkey'],'site,date,keyword,hit',"'".$s."','".$date['today']."','".$_keyword."','1'");

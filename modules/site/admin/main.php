@@ -102,7 +102,7 @@ if ($R['uid'])
 	<div class="page-header clearfix">
 		<h4 class="pull-left"><?php echo _LANG('a0027','site')?></h4>
 		<span class="checkbox pull-right">
-			<label><input type="checkbox" value="" data-toggle="collapse" data-target="#layout-mobile"<?php if($R['m_layout']):?> checked<?php endif?>><i></i><?php echo _LANG('a1012','site')?></label>
+			<label><input type="checkbox" name="m_layout_check" value="" data-toggle="collapse" data-target="#layout-mobile"<?php if($R['m_layout']):?> checked<?php endif?>><i></i><?php echo _LANG('a1012','site')?></label>
 		</span>
 	</div>
 
@@ -655,7 +655,7 @@ $('.form-horizontal').bootstrapValidator({
 function saveCheck(f)
 {
 	f.layout.value = f.layout_1.value + '/' + f.layout_1_sub.value;
-	if(f.m_layout_1.value != '0') f.m_layout.value = f.m_layout_1.value + '/' + f.m_layout_1_sub.value;
+	if(f.m_layout_1.value != '0' && f.m_layout_check.checked == true) f.m_layout.value = f.m_layout_1.value + '/' + f.m_layout_1_sub.value;
 	else f.m_layout.value = '';
 
 	getIframeForAction(f);

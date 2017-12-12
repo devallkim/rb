@@ -1,5 +1,4 @@
 <?php
-
 // config.php 
 $lang['notification']['a1001'] = '알림 설정';
 $lang['notification']['a1002'] = '알림간격';

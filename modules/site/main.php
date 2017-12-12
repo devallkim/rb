@@ -78,6 +78,7 @@ else
 			$g['meta_des'] = $_SEO['description'];
 			$g['meta_bot'] = $_SEO['classification'];
 			$g['meta_img'] = getMetaImage($_SEO['image_src']);
+
 		}
 		else {
 			$g['meta_tit']   = $_HM['name'];

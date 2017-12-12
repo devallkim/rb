@@ -3,6 +3,21 @@ header("Content-type:text/html;charset=utf-8");
 define('__KIMS__',true);
 session_start();
 
+if ($_POST['_live_dbhost'])
+{
+	$_SESSION['_live_dbhost'] = $_POST['_live_dbhost'];
+	$_SESSION['_live_dbname'] = $_POST['_live_dbname'];
+	$_SESSION['_live_dbuser'] = $_POST['_live_dbuser'];
+	$_SESSION['_live_dbpass'] = $_POST['_live_dbpass'];
+	$_SESSION['_live_dbport'] = $_POST['_live_dbport'];
+	$_SESSION['_live_dbhead'] = $_POST['_live_dbhead'];
+	$_SESSION['_live_name'] = $_POST['_live_name'];
+	$_SESSION['_live_id'] = $_POST['_live_id'];
+	$_SESSION['_live_pw'] = $_POST['_live_pw'];
+	$_SESSION['_live_email'] = $_POST['_live_email'];
+	$_SESSION['_live_sitename'] = $_POST['_live_sitename'];
+}
+
 if(!get_magic_quotes_gpc())
 {
 	if (is_array($_GET))
@@ -99,7 +114,7 @@ $g['img_layout'] = $g['url_layout'].'/_images';
 
 define('__KIMS_CONTENT__',$g['path_core'].'engine/content.engine.php');
 
-if($my['admin'] && (!$_SERVER['HTTP_REFERER'] || $panel=='Y') && $panel!='N' && !$iframe && !is_file($g['dir_layout'].'_var/nopanel.txt')) 
+if($my['admin'] && (!$_SERVER['HTTP_REFERER'] || $panel=='Y') && $panel!='N' && !$iframe) 
 {
 	include $g['path_core'].'engine/adminpanel.engine.php';
 }
@@ -125,5 +140,4 @@ else
 	echo "\n".'<!-- KimsQ Rb v.'.$d['admin']['version'].' / Runtime : '.round(getCurrentDate()-$g['time_start'],3).' -->';
 	if($g['buffer']) ob_end_flush();
 }
-db_close($DB_CONNECT);
 ?>
