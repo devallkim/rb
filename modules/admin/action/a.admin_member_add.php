@@ -59,13 +59,17 @@ else {
 if ($uid)
 {
 	$_M = getDbData($table['s_mbrdata'],'memberuid='.$uid,'d_regis');
-	$newPw = getCrypt($pw,$_M['d_regis']);
-	getDbUpdate($table['s_mbrid'],"pw='".$newPw."'",'uid='.$uid);
-	getDbUpdate($table['s_mbrdata'],"email='$email',name='$name',nic='$nic',photo='$photo',tel2='$tel2'",'memberuid='.$uid);
-	if ($my['uid'] == $uid)
+	if($pw!='')
 	{
-		$_SESSION['mbr_pw']  = $newPw;
+		$newPw = getCrypt($pw,$_M['d_regis']);
+	    getDbUpdate($table['s_mbrid'],"pw='".$newPw."'",'uid='.$uid);
+	
+	    if ($my['uid'] == $uid)
+	    {
+		   $_SESSION['mbr_pw']  = $newPw;
+	    }
 	}
+	getDbUpdate($table['s_mbrdata'],"email='$email',name='$name',nic='$nic',photo='$photo',tel2='$tel2'",'memberuid='.$uid);
 }
 else {
 	getDbInsert($table['s_mbrid'],'site,id,pw',"'$s','$id','".getCrypt($pw,$date['totime'])."'");
