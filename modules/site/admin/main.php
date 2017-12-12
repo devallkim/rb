@@ -1,5 +1,4 @@
-<?php$R=array();
-$SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);$SITEN = db_num_rows($SITES);$PAGES1 = getDbArray($table['s_page'],'site='.$s.' and ismain=1','*','uid','asc',0,$p);$PAGES2 = getDbArray($table['s_page'],'site='.$s.' and mobile=1','*','uid','asc',0,$p);
+<?php$R=array();$SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);$SITEN = db_num_rows($SITES);$PAGES1 = getDbArray($table['s_page'],'site='.$s.' and ismain=1','*','uid','asc',0,$p);$PAGES2 = getDbArray($table['s_page'],'site='.$s.' and mobile=1','*','uid','asc',0,$p);
 if ($type != 'makesite'){	$R = $_HS;	$_SEO = getDbData($table['s_seo'],'rel=0 and parent='.$R['uid'],'*');
 }
 if ($R['uid']){	$DOMAINS = getDbArray($table['s_domain'],'site='.$R['uid'],'*','gid','asc',0,$p);	$DOMAINN = db_num_rows($DOMAINS);}?>
@@ -63,7 +62,7 @@ if ($R['uid']){	$DOMAINS = getDbArray($table['s_domain'],'site='.$R['uid'],'*'
 			<label class="col-sm-2 control-label">기본</label>
 			<div class="col-sm-9">
 				<select class="form-control input-lg" name="startpage" required>
-					<option><?php echo _LANG('a1020','site')?></option>
+					<option>레이아웃에 포함된 메인페이지</option>
 					<option disabled><i class="fa fa-edit"></i>페이지 리스트 ↓</option>
 					<?php while($S = db_fetch_array($PAGES1)):?>
 					<option value="<?php echo $S['uid']?>"<?php if($R['startpage']==$S['uid']):?> selected<?php endif?>><?php echo $S['name']?>(<?php echo $S['id']?>)</option>
@@ -111,7 +110,7 @@ if ($R['uid']){	$DOMAINS = getDbArray($table['s_domain'],'site='.$R['uid'],'*'
 		<div class="form-group">			<label class="col-sm-2 control-label">코드삽입</label>			<div class="col-sm-9">				<div class="panel-group">					<div class="panel panel-default">						<div class="panel-heading">							<h4 class="panel-title">								<a data-toggle="collapse" data-parent="#accordion" href="#site-code-head" onclick="sessionSetting('sh_site_main_2','1','','1');">									head 코드 <?php if($R['headercode']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>									<small><code>&lt;head&gt; &lt;/head&gt;</code> 태그 내부에 삽입할 코드를 등록해 주세요.</small>								</a>							</h4>						</div>						<div id="site-code-head" class="panel-collapse collapse<?php if($_SESSION['sh_site_main_2']):?> in<?php endif?>">							<div class="panel-body">								<textarea name="headercode" class="form-control" rows="7"><?php echo htmlspecialchars($R['headercode'])?></textarea>							</div>						</div>					</div>					<div class="panel panel-default">						<div class="panel-heading">							<h4 class="panel-title">								<a data-toggle="collapse" data-parent="#accordion" href="#site-code-foot" onclick="sessionSetting('sh_site_main_3','1','','1');">									foot 코드 <?php if($R['footercode']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>									<small><code>&lt;/body&gt;&lt;/html&gt;</code> 태그 직전에 삽입할 코드를 등록해 주세요.</small>								</a>							</h4>						</div>
 						<div id="site-code-foot" class="panel-collapse collapse<?php if($_SESSION['sh_site_main_3']):?> in<?php endif?>">							<div class="panel-body">								<textarea name="footercode" class="form-control" rows="7"><?php echo htmlspecialchars($R['footercode'])?></textarea>							</div>						</div>					</div>
 					<div class="panel panel-default">						<div class="panel-heading">							<h4 class="panel-title">								<a data-toggle="collapse" data-parent="#accordion" href="#site-code-php" onclick="sessionSetting('sh_site_main_4','1','','1');">									PHP코드 <?php if($R['uid']&&filesize($g['path_var'].'sitephp/'.$R['uid'].'.php')):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
-									<small><?php echo _LANG('a1068','site')?></small>								</a>							</h4>						</div>
+									<small>이 사이트 전용 <code>&lt;?php ?&gt;</code> 를 등록해 주세요.</small>								</a>							</h4>						</div>
 						<div id="site-code-php" class="panel-collapse collapse<?php if($_SESSION['sh_site_main_4']):?> in<?php endif?>">							<div class="panel-body">								<textarea name="sitephpcode" class="form-control" rows="7"><?php if($R['uid']&&is_file($g['path_var'].'sitephp/'.$R['uid'].'.php')) echo htmlspecialchars(implode('',file($g['path_var'].'sitephp/'.$R['uid'].'.php')))?></textarea>							</div>						</div>					</div>					<div class="panel panel-default">						<div class="panel-heading">							<h4 class="panel-title">								<a data-toggle="collapse" data-parent="#accordion" href="#site-code-googleanalytics" onclick="sessionSetting('sh_site_main_5','1','','1');">									구글 웹로그 분석 <?php if($R['dtd']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 									<small>이 사이트 전용 Google Analytics <code>추적 ID</code> 를 등록해 주세요.</small>								</a>							</h4>						</div>
 						<div id="site-code-googleanalytics" class="panel-collapse collapse<?php if($_SESSION['sh_site_main_5']):?> in<?php endif?>">							<div class="panel-body">								<input name="dtd" type="text" class="form-control input-lg" placeholder="" value="<?php echo $R['dtd']?>">								<small class="help-block">
@@ -154,7 +153,7 @@ if ($R['uid']){	$DOMAINS = getDbArray($table['s_domain'],'site='.$R['uid'],'*'
 		<div class="form-group rb-outside">
 			<label class="col-md-2 control-label">설명</label>
 			<div class="col-md-10 col-lg-9">
-				<textarea name="meta_description" class="form-control rb-description" rows="5" placeholder="<?php echo _LANG('a0019','site')?>" maxlength="160"><?php echo $_SEO['description']?></textarea>
+				<textarea name="meta_description" class="form-control rb-description" rows="5" placeholder="150-160자 내에서 작성해 주세요." maxlength="160"><?php echo $_SEO['description']?></textarea>
 				<div class="help-text"><small class="text-muted"><a href="#guide_description" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>
 				<div class="collapse" id="guide_description">
 					<small class="help-block">
@@ -168,7 +167,7 @@ if ($R['uid']){	$DOMAINS = getDbArray($table['s_domain'],'site='.$R['uid'],'*'
 		<div class="form-group">
 			<label class="col-md-2 control-label">키워드</label>
 			<div class="col-md-10 col-lg-9">
-				<input name="meta_keywords" class="form-control" placeholder="<?php echo _LANG('a0020','site')?>" value="<?php echo $_SEO['keywords']?>">
+				<input name="meta_keywords" class="form-control" placeholder="콤마(,)로 구분하여 입력해 주세요." value="<?php echo $_SEO['keywords']?>">
 				<div class="help-text"><small class="text-muted"><a href="#guide_keywords" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>
 				<div class="help-block collapse" id="guide_keywords">
 					<small>
@@ -346,7 +345,7 @@ function iconDropAply()
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)
 {
-	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>"><?php echo _LANG('a1078','site')?></a></li><li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&type=makesite"><?php echo _LANG('a1079','site')?></a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();"><?php echo _LANG('a1080','site')?></a></li>',event);
+	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>">사용자모드 보기</a></li><li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&type=makesite">새 사이트 만들기</a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a></li>',event);
 }
 <?php endif?>
 </script>

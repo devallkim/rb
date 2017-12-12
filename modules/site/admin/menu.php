@@ -11,19 +11,19 @@ if($cat){	$CINFO = getUidData($table['s_menu'],$cat);	$_SEO = getDbData($tabl
 	$code = $code ? $code : $_code;
 }
 $catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';if ($is_regismode){	$CINFO['menutype'] = '3';	$CINFO['name']	   = '';	$CINFO['joint']	   = '';	$CINFO['redirect'] = '';	$CINFO['hidden']   = '';	$CINFO['target']   = '';	$CINFO['imghead']  = '';	$CINFO['imgfoot']  = '';}
-$menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','site'));
+$menuType = array('','모듈연결','위젯전시','직접편집');
 ?>
-<div id="catebody" class="row">	<div id="category" class="col-sm-5 col-md-4 col-lg-4">		<div class="panel-group" id="accordion">			<div class="panel panel-default">				<div class="panel-heading rb-icon">					<div class="icon">						<i class="fa fa-sitemap fa-2x"></i>					</div>					<h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapmetane"><?php echo _LANG('a2001','site')?></a></h4>				</div>				<div class="panel-collapse collapse in" id="collapmetane">					<?php if($SITEN>1):?>					<div class="panel-body rb-panel-form">						<select class="form-control" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">							<?php while($S = db_fetch_array($SITES)):?>							<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>							<?php endwhile?>						</select>					</div>
+<div id="catebody" class="row">	<div id="category" class="col-sm-5 col-md-4 col-lg-4">		<div class="panel-group" id="accordion">			<div class="panel panel-default">				<div class="panel-heading rb-icon">					<div class="icon">						<i class="fa fa-sitemap fa-2x"></i>					</div>					<h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapmetane">메뉴구조</a></h4>				</div>				<div class="panel-collapse collapse in" id="collapmetane">					<?php if($SITEN>1):?>					<div class="panel-body rb-panel-form">						<select class="form-control" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">							<?php while($S = db_fetch_array($SITES)):?>							<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>							<?php endwhile?>						</select>					</div>
 					<?php endif?>
 					<div class="panel-body">						<div style="min-height:300px;">
 							<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
 							<?php $_treeOptions=array('site'=>$s,'table'=>$table['s_menu'],'dispNum'=>true,'dispHidden'=>false,'dispCheckbox'=>false,'allOpen'=>false,'bookmark'=>'site-menu-info')?>
 							<?php $_treeOptions['link'] = $g['adm_href'].'&amp;cat='?>
 							<?php echo getTreeMenu($_treeOptions,$code,0,0,'')?>						</div>					</div>
-					<div class="panel-footer">						<div class="btn-group dropup btn-block">							<button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">								<i class="fa fa-download fa-lg"></i> <?php echo _LANG('a2002','site')?>							</button>							<ul class="dropdown-menu pull-right" role="menu">								<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=xml" target="_blank"><?php echo _LANG('a2003','site')?></a></li>								<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=xls" target="_action_frame_<?php echo $m?>"><?php echo _LANG('a2004','site')?></a></li>								<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=txt" target="_action_frame_<?php echo $m?>"><?php echo _LANG('a2005','site')?></a></li>								<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=package_menu" target="_action_frame_<?php echo $m?>"><?php echo _LANG('a0073','site')?></a></li>
+					<div class="panel-footer">						<div class="btn-group dropup btn-block">							<button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">								<i class="fa fa-download fa-lg"></i> 구조 내려받기							</button>							<ul class="dropdown-menu pull-right" role="menu">								<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=xml" target="_blank">XML로 생성/받기</a></li>								<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=xls" target="_action_frame_<?php echo $m?>">엑셀로 받기</a></li>								<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=txt" target="_action_frame_<?php echo $m?>">텍스트파일로 받기</a></li>								<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=package_menu" target="_action_frame_<?php echo $m?>">패키지용 데이터 받기</a></li>
 							</ul>						</div>					</div>				</div>			</div>
 
-			<?php if($g['device']):?><a name="site-menu-info"></a><?php endif?>			<div class="panel panel-default">				<div class="panel-heading rb-icon">					<div class="icon">						<i class="fa fa-retweet fa-2x"></i>					</div>					<h4 class="panel-title">						<a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">							<?php echo _LANG('a2006','site')?>						</a>					</h4>				</div>
+			<?php if($g['device']):?><a name="site-menu-info"></a><?php endif?>			<div class="panel panel-default">				<div class="panel-heading rb-icon">					<div class="icon">						<i class="fa fa-retweet fa-2x"></i>					</div>					<h4 class="panel-title">						<a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">							순서 조정						</a>					</h4>				</div>
 				<div class="panel-collapse collapse" id="collapseTwo">
 					<?php if($CINFO['is_child']||(!$cat&&$ISCAT)):?>
 					<form role="form" action="<?php echo $g['s']?>/" method="post">
@@ -60,9 +60,9 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 					<?php else:?>
 					<div class="panel-body rb-blank">
 						<?php if($cat):?>
-						<?php echo sprintf(_LANG('a2008','site'),$CINFO['name'])?>
+						<?php echo sprintf('[%s] 하위에 등록된 메뉴가 없습니다.',$CINFO['name'])?>
 						<?php else:?>
-						<?php echo _LANG('a2007','site')?>
+						등록된 메뉴가 없습니다.
 						<?php endif?>
 					</div>
 					<?php endif?>
@@ -70,28 +70,28 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 	<div id="catinfo" class="col-sm-7 col-md-8 col-lg-8">		<form class="form-horizontal rb-form" name="procForm" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" onsubmit="return saveCheck(this);">			<input type="hidden" name="r" value="<?php echo $r?>">			<input type="hidden" name="m" value="<?php echo $module?>">			<input type="hidden" name="a" value="regismenu">			<input type="hidden" name="cat" value="<?php echo $CINFO['uid']?>">
 			<input type="hidden" name="code" value="<?php echo $code?>">			<input type="hidden" name="vtype" value="<?php echo $vtype?>">			<input type="hidden" name="depth" value="<?php echo intval($CINFO['depth'])?>">			<input type="hidden" name="parent" value="<?php echo intval($CINFO['uid'])?>">			<input type="hidden" name="perm_g" value="<?php echo $CINFO['perm_g']?>">			<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
 			<input type="hidden" name="layout" value="">
-			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:3?>">			<div class="page-header">				<h4>					<?php if($is_regismode):?>					<?php if($vtype == 'sub'):?><?php echo _LANG('a2009','site')?><?php else:?><?php echo _LANG('a2010','site')?><?php endif?>					<?php else:?>					<?php echo _LANG('a2011','site')?>
+			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:3?>">			<div class="page-header">				<h4>					<?php if($is_regismode):?>					<?php if($vtype == 'sub'):?>서브메뉴 만들기<?php else:?>최상위 메뉴 만들기<?php endif?>					<?php else:?>					메뉴 등록정보
 					<div class="pull-right rb-top-btnbox hidden-xs">
-						<a href="<?php echo $g['adm_href']?>" class="btn btn-default"><i class="fa fa-plus"></i> <?php echo _LANG('a2012','site')?><?php echo _LANG('a0052','site')?></a>
+						<a href="<?php echo $g['adm_href']?>" class="btn btn-default"><i class="fa fa-plus"></i> 상위메뉴 새 메뉴</a>
 						<div class="btn-group rb-btn-view">
-							<a href="<?php echo RW('c='.$CINFO['code'])?>" class="btn btn-default"><?php echo _LANG('a0053','site')?></a>
+							<a href="<?php echo RW('c='.$CINFO['code'])?>" class="btn btn-default">접속하기</a>
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 								<span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu pull-right" role="menu">
-								<li><a href="<?php echo RW('c='.$CINFO['code'])?>" target="_blank"><i class="glyphicon glyphicon-new-window"></i> <?php echo _LANG('a0054','site')?></a></li>
+								<li><a href="<?php echo RW('c='.$CINFO['code'])?>" target="_blank"><i class="glyphicon glyphicon-new-window"></i> 새창으로 보기</a></li>
 							</ul>
 						</div>
 					</div>					<?php endif?>				</h4>			</div>
-			<?php if($vtype == 'sub'):?>			<div class="form-group">				<label class="col-md-2 control-label"><?php echo _LANG('a2012','site')?></label>				<div class="col-md-9">					<ol class="breadcrumb">						<?php for ($i = 0; $i < $ctnum; $i++):$subcode=$subcode.($i?'/'.$ctarr[$i]['uid']:$ctarr[$i]['uid']) ?>						<li><a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $ctarr[$i]['uid']?>&amp;code=<?php echo $subcode?>"><?php echo $ctarr[$i]['name']?></a></li>						<?php $catcode .= $ctarr[$i]['id'].'/';endfor?>					</ol>				</div>
+			<?php if($vtype == 'sub'):?>			<div class="form-group">				<label class="col-md-2 control-label">상위메뉴</label>				<div class="col-md-9">					<ol class="breadcrumb">						<?php for ($i = 0; $i < $ctnum; $i++):$subcode=$subcode.($i?'/'.$ctarr[$i]['uid']:$ctarr[$i]['uid']) ?>						<li><a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $ctarr[$i]['uid']?>&amp;code=<?php echo $subcode?>"><?php echo $ctarr[$i]['name']?></a></li>						<?php $catcode .= $ctarr[$i]['id'].'/';endfor?>					</ol>				</div>
 			</div>
 			<?php else:?>			<?php if($cat):?>
-			<div class="form-group">				<label class="col-md-2 control-label"><?php echo _LANG('a2012','site')?></label>				<div class="col-md-9">					<ol class="breadcrumb">						<?php for ($i = 0; $i < $ctnum-1; $i++):$subcode=$subcode.($i?'/'.$ctarr[$i]['uid']:$ctarr[$i]['uid'])?>						<li><a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $ctarr[$i]['uid']?>&amp;code=<?php echo $subcode?>"><?php echo $ctarr[$i]['name']?></a></li>						<?php $delparent=$ctarr[$i]['uid'];$catcode .= $ctarr[$i]['id'].'/';endfor?>						<?php if(!$delparent):?><?php echo _LANG('a2013','site')?><?php endif?>					</ol>				</div>
+			<div class="form-group">				<label class="col-md-2 control-label">상위메뉴</label>				<div class="col-md-9">					<ol class="breadcrumb">						<?php for ($i = 0; $i < $ctnum-1; $i++):$subcode=$subcode.($i?'/'.$ctarr[$i]['uid']:$ctarr[$i]['uid'])?>						<li><a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $ctarr[$i]['uid']?>&amp;code=<?php echo $subcode?>"><?php echo $ctarr[$i]['name']?></a></li>						<?php $delparent=$ctarr[$i]['uid'];$catcode .= $ctarr[$i]['id'].'/';endfor?>						<?php if(!$delparent):?>최상위메뉴<?php endif?>					</ol>				</div>
 			</div>			<?php endif?>			<?php endif?>
-			<div class="form-group rb-outside">				<label class="col-md-2 control-label"><?php echo _LANG('a2014','site')?></label>				<div class="col-md-10 col-lg-9">					<?php if($is_fcategory):?>					<div class="input-group input-group-lg">
+			<div class="form-group rb-outside">				<label class="col-md-2 control-label">메뉴명</label>				<div class="col-md-10 col-lg-9">					<?php if($is_fcategory):?>					<div class="input-group input-group-lg">
 						<?php if($CINFO['uid']):?>
 						<span class="input-group-btn">
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-tooltip="tooltip" title="<?php echo _LANG('a0055','site')?>">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-tooltip="tooltip" title="문서의 형식">
 								<span id="rb-document-type"><?php echo $menuType[$CINFO['menutype']]?></span> <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
@@ -102,25 +102,15 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 						</span>
 						<?php endif?>
 
-						<input class="form-control col-md-6" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$cat && !$g['device']):?> autofocus<?php endif?>>						<span class="input-group-btn">							<a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>&amp;vtype=sub" class="btn btn-default" data-tooltip="tooltip" title="<?php echo _LANG('a2015','site')?>">								<i class="fa fa-share fa-rotate-90 fa-lg"></i>							</a>							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletemenu&amp;cat=<?php echo $cat?>&amp;parent=<?php echo $delparent?>&amp;code=<?php echo substr($catcode,0,strlen($catcode)-1)?>" onclick="return hrefCheck(this,true,'<?php echo _LANG('a0056','site')?>');" class="btn btn-default" data-tooltip="tooltip" title="<?php echo _LANG('a2016','site')?>">								<i class="fa fa-trash-o fa-lg"></i>							</a>						</span>					</div>
+						<input class="form-control col-md-6" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$cat && !$g['device']):?> autofocus<?php endif?>>						<span class="input-group-btn">							<a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>&amp;vtype=sub" class="btn btn-default" data-tooltip="tooltip" title="서브메뉴 만들기">								<i class="fa fa-share fa-rotate-90 fa-lg"></i>							</a>							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletemenu&amp;cat=<?php echo $cat?>&amp;parent=<?php echo $delparent?>&amp;code=<?php echo substr($catcode,0,strlen($catcode)-1)?>" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');" class="btn btn-default" data-tooltip="tooltip" title="메뉴삭제">								<i class="fa fa-trash-o fa-lg"></i>							</a>						</span>					</div>
 					<?php else:?>
 					<div class="input-group input-group-lg">
 						<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$g['device']):?> autofocus<?php endif?>>
 						<span class="input-group-btn">
-							<button class="btn btn-default rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_new" data-tooltip="tooltip" title="<?php echo _LANG('a0014','site')?>"><i class="fa fa-question fa-lg text-muted"></i></button>
+							<button class="btn btn-default rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_new" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg text-muted"></i></button>
 						</span>
 					</div>
-					<div id="guide_new" class="collapse help-block">
-						<p>
-							<?php echo _LANG('a2017','site')?><br>
-							<?php echo _LANG('a2018','site')?>
-						</p>
-						<p>
-							<?php echo _LANG('a2019','site')?><br>
-							<?php echo _LANG('a2020','site')?>
-						</p>
-					</div>
-					<?php endif?>
+					<div id="guide_new" class="collapse help-block">						<p>							복수의 메뉴를 한번에 등록하시려면 메뉴명을 콤마(,)로 구분해 주세요.'<br>							보기: <code>회사소개,커뮤니티,고객센터</code>						</p>						<p>							메뉴코드를 같이 등록하시려면 다음과 같은 형식으로 등록해 주세요.<br>							보기: <code>회사소개=company,커뮤니티=community,고객센터=center</code>						</p>					</div>					<?php endif?>
 				</div>			</div>
 			<div class="form-group tab-content<?php if(!$CINFO['uid']||$vtype=='sub'):?> hidden<?php endif?>">
 				<div class="form-group<?php if($CINFO['menutype']!=3):?> hidden<?php endif?>" id="editBox3">
@@ -128,18 +118,18 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 						<fieldset<?php if($CINFO['menutype']!=3):?> disabled<?php endif?>>
 							<div class="btn-group btn-group-justified" data-toggle="buttons">
 								<a class="btn btn-default rb-modal-code">
-									<i class="fa fa-code fa-lg"></i> <?php echo _LANG('a0057','site')?>
+									<i class="fa fa-code fa-lg"></i> 소스코드
 								</a>
 								<a class="btn btn-default rb-modal-wysiwyg">
-									<i class="fa fa-edit fa-lg"></i> <?php echo _LANG('a0058','site')?>
+									<i class="fa fa-edit fa-lg"></i> 위지위그
 								</a>
 							</div>
 						</fieldset>
 						<span class="help-block text-muted">
 							<ul class="rb-guide" style="margin-bottom:0;padding-bottom:0;">
-								<li><?php echo _LANG('a0063','site')?></li>
-								<li><?php echo _LANG('a0064','site')?></li>
-								<?php if($CINFO['menutype']!=3):?><li><?php echo _LANG('a2021','site')?></li><?php endif?>
+								<li>직접꾸미기는 소스코드를 직접 편집하거나 위지위그 에디터를 이용할 수 있습니다.</li>
+								<li>소스코드로 작성한 페이지를 위지위그로 편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
+								<?php if($CINFO['menutype']!=3):?><li>메뉴 속성을 변경한 후에 활성화 됩니다.</li><?php endif?>
 							</ul>
 						</span>
 					</div>
@@ -148,13 +138,13 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 					<div class="col-md-offset-2 col-md-10 col-lg-9">
 						<?php if($CINFO['menutype']==2):?>
 						<fieldset>
-							<a href="#." class="btn btn-default btn-block rb-modal-widget"><i class="fa fa-puzzle-piece fa-lg"></i> <?php echo _LANG('a0059','site')?></a>
+							<a href="#." class="btn btn-default btn-block rb-modal-widget"><i class="fa fa-puzzle-piece fa-lg"></i> 위젯으로 꾸미기</a>
 						</fieldset>
 						<?php else:?>
 						<fieldset disabled>
 							<a href="#." class="btn btn-default btn-block"><i class="fa fa-puzzle-piece fa-lg"></i>
-								<?php echo _LANG('a0059','site')?>
-								<small class="text-muted">( <?php echo _LANG('a2022','site')?> )</small>
+								위젯으로 꾸미기
+								<small class="text-muted">( 메뉴 속성을 변경한 후에 활성화 됩니다. )</small>
 							</a>
 						</fieldset>
 						<?php endif?>
@@ -166,8 +156,8 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 							<div class="input-group">
 								<input type="text" name="joint" id="jointf" value="<?php echo $CINFO['joint']?>" class="form-control">
 								<span class="input-group-btn">
-									<button class="btn btn-default rb-modal-module" type="button" title="<?php echo _LANG('a0060','site')?>" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="fa fa-link fa-lg"></i></button>
-									<button class="btn btn-default" type="button" title="<?php echo _LANG('a0061','site')?>" data-tooltip="tooltip" onclick="getId('jointf').value!=''?window.open(getId('jointf').value):alert('<?php echo _LANG('a0062','site')?>');">Go!</button>
+									<button class="btn btn-default rb-modal-module" type="button" title="모듈연결" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="fa fa-link fa-lg"></i></button>
+									<button class="btn btn-default" type="button" title="미리보기" data-tooltip="tooltip" onclick="getId('jointf').value!=''?window.open(getId('jointf').value):alert('모듈연결 주소를 등록해 주세요.');">Go!</button>
 								</span>
 							</div>
 						</fieldset>
@@ -175,97 +165,97 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" name="redirect" id="xredirect" value="1"<?php if($CINFO['redirect']):?> checked<?php endif?>>
-									<i></i><?php echo _LANG('a2023','site')?>
+									<i></i>입력된 주소로 리다이렉트 시켜줍니다. (외부주소 링크시 사용)
 								</label>
 							</div>
 							<ul class="rb-guide" style="margin-bottom:0;padding-bottom:0;">
-								<li><?php echo _LANG('a2024','site')?></li>
-								<li><?php echo _LANG('a2025','site')?></li>
-								<li><?php echo _LANG('a2026','site')?></li>
+								<li>이 메뉴에 연결시킬 모듈이 있을 경우 모듈연결을 클릭한 후 선택해 주세요.</li>
+								<li>모듈 연결주소가 지정되면 이 메뉴를 호출시 연결주소의 모듈이 출력됩니다.</li>
+								<li>접근권한은 연결된 모듈의 권한설정을 따릅니다.</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-			<?php if($CINFO['uid']&&!$vtype):?>			<div class="form-group rb-outside">				<label class="col-md-2 control-label"><?php echo _LANG('a2027','site')?></label>				<div class="col-md-10 col-lg-9">					<input class="form-control" placeholder="<?php echo _LANG('a2028','site')?>" type="text" name="id" value="<?php echo $CINFO['id']?>" maxlength="20">					<span class="help-block">						<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_menucode">							<i class="fa fa-question-circle fa-fw"></i>							<?php echo _LANG('a2029','site')?>						</button>					</span>					<div id="guide_menucode" class="collapse rb-guide">						<ul>							<li><?php echo _LANG('a2030','site')?></li>							<li><?php echo _LANG('a2031','site')?><code><?php echo RW('c=<span class="b">CODE</span>')?></code></li>							<li><?php echo _LANG('a2032','site')?></li>						</ul>					</div>				</div>			</div>			<?php endif?>
+			<?php if($CINFO['uid']&&!$vtype):?>			<div class="form-group rb-outside">				<label class="col-md-2 control-label">코드</label>				<div class="col-md-10 col-lg-9">					<input class="form-control" placeholder="미등록시 자동생성 됩니다." type="text" name="id" value="<?php echo $CINFO['id']?>" maxlength="20">					<span class="help-block">						<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_menucode">							<i class="fa fa-question-circle fa-fw"></i>							메뉴를 잘 표현할 수 있는 단어로 입력해 주세요.						</button>					</span>					<div id="guide_menucode" class="collapse rb-guide">						<ul>							<li>영문대소문자/숫자/_/- 조합으로 등록할 수 있습니다.</li>							<li>보기) 메뉴호출주소 : <code><?php echo RW('c=<span class="b">CODE</span>')?></code></li>							<li>메뉴코드는 중복될 수 없습니다.</li>						</ul>					</div>				</div>			</div>			<?php endif?>
 			<?php if($is_fcategory && $CINFO['is_child']):?>
 			<div class="form-group">
 				<div class="col-md-offset-2 col-lg-9">
 					<hr>
 					<div class="">
 						<label>
-							<input type="checkbox" name="subcopy" id="cubcopy" value="1" checked> <?php echo _LANG('a2033','site')?>
+							<input type="checkbox" name="subcopy" id="cubcopy" value="1" checked> 이 설정을 서브메뉴에도 일괄적용 <small class="text-muted">(메뉴숨김, 레이아웃, 권한)</small>
 						</label>
 					</div>
 				</div>
 			</div>
 			<?php endif?>
 			<div class="panel-group" id="menu-settings">
-				<!-- 메타설정-->				<div class="panel panel-<?php echo $_SESSION['sh_site_menu_1']==1?'primary':'default'?>" id="menu-settings-meta">					<div class="panel-heading">						<h4 class="panel-title">							<a data-toggle="collapse" data-parent="#menu-settings" href="#menu-settings-meta-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-meta').className.indexOf('default')==-1?'':'1','','');boxDeco('menu-settings-meta','menu-settings-advance');">								<i class="fa fa-caret-right fa-fw"></i><?php echo _LANG('a0007','site')?>							</a>						</h4>					</div>					<div id="menu-settings-meta-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_1']==1):?> in<?php endif?>">						<div class="panel-body">							<div class="form-group rb-outside">								<label class="col-md-2 control-label"><?php echo _LANG('a0009','site')?></label>								<div class="col-md-10 col-lg-9">									<div class="input-group">										<input type="text" class="form-control rb-title" name="title" value="<?php echo $_SEO['title']?>" maxlength="60" placeholder="<?php echo _LANG('a0013','site')?>">										<span class="input-group-btn">											<button class="btn btn-default rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_title" data-tooltip="tooltip" title="<?php echo _LANG('a0014','site')?>"><i class="fa fa-question fa-lg text-muted"></i></button>										</span>									</div>									<div class="help-block collapse" id="guide_title">										<small>											<?php echo _LANG('a0015','site')?>										</small>									</div>								</div>							</div>							<div class="form-group rb-outside">								<label class="col-md-2 control-label"><?php echo _LANG('a0010','site')?></label>								<div class="col-md-10 col-lg-9">									<textarea name="description" class="form-control rb-description_" rows="5" placeholder="<?php echo _LANG('a0019','site')?>"><?php echo $_SEO['description']?></textarea>									<div class="help-text"><small class="text-muted"><a href="#guide_description" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i><?php echo _LANG('a0014','site')?></a></small></div>									<div class="collapse" id="guide_description">										<small class="help-block">											<?php echo _LANG('a0016','site')?><br>
-											<?php echo _LANG('a0017','site')?><br>
-											<?php echo _LANG('a0018','site')?><br>										</small>									</div>								</div>							</div>
+				<!-- 메타설정-->				<div class="panel panel-<?php echo $_SESSION['sh_site_menu_1']==1?'primary':'default'?>" id="menu-settings-meta">					<div class="panel-heading">						<h4 class="panel-title">							<a data-toggle="collapse" data-parent="#menu-settings" href="#menu-settings-meta-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-meta').className.indexOf('default')==-1?'':'1','','');boxDeco('menu-settings-meta','menu-settings-advance');">								<i class="fa fa-caret-right fa-fw"></i> 메타설정							</a>						</h4>					</div>					<div id="menu-settings-meta-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_1']==1):?> in<?php endif?>">						<div class="panel-body">							<div class="form-group rb-outside">								<label class="col-md-2 control-label">타이틀</label>								<div class="col-md-10 col-lg-9">									<div class="input-group">										<input type="text" class="form-control rb-title" name="title" value="<?php echo $_SEO['title']?>" maxlength="60" placeholder="50-60자 내에서 작성해 주세요.">										<span class="input-group-btn">											<button class="btn btn-default rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_title" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg text-muted"></i></button>										</span>									</div>									<div class="help-block collapse" id="guide_title">										<small>											<code>&lt;meta name=&quot;title&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.										</small>									</div>								</div>							</div>							<div class="form-group rb-outside">								<label class="col-md-2 control-label">설명</label>								<div class="col-md-10 col-lg-9">									<textarea name="description" class="form-control rb-description_" rows="5" placeholder="150-160자 내에서 작성해 주세요."><?php echo $_SEO['description']?></textarea>									<div class="help-text"><small class="text-muted"><a href="#guide_description" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>									<div class="collapse" id="guide_description">										<small class="help-block">											<code>&lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.<br>
+											검색 결과에 표시되는 문자를 지정합니다.<br>설명글은 엔터없이 입력해 주세요.<br>
+											보기)웹 프레임워크의 혁신 - 킴스큐 Rb 에 대한 다운로드,팁 공유등을 제공합니다. <a href=&quot;http://moz.com/learn/seo/meta-description&quot; target=&quot;_blank&quot;>참고</a><br>										</small>									</div>								</div>							</div>
 							<div class="form-group">
-								<label class="col-md-2 control-label"><?php echo _LANG('a0011','site')?></label>
+								<label class="col-md-2 control-label">키워드</label>
 								<div class="col-md-10 col-lg-9">
-									<input name="keywords" class="form-control" placeholder="<?php echo _LANG('a0020','site')?>" value="<?php echo $_SEO['keywords']?>">
-									<div class="help-text"><small class="text-muted"><a href="#guide_keywords" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i><?php echo _LANG('a0014','site')?></a></small></div>
+									<input name="keywords" class="form-control" placeholder="콤마(,)로 구분하여 입력해 주세요." value="<?php echo $_SEO['keywords']?>">
+									<div class="help-text"><small class="text-muted"><a href="#guide_keywords" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>
 									<div class="help-block collapse" id="guide_keywords">
 										<small>
-											<?php echo _LANG('a0021','site')?><br>
-											<?php echo _LANG('a0022','site')?><br>
-											<?php echo _LANG('a0023','site')?><br>
+											<code>&lt;meta name=&quot;keywords&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.<br>
+											핵심 키워드를 콤마로 구분하여 20개 미만으로 엔터없이 입력해 주세요.<br>
+											보기)킴스큐,킴스큐Rb,CMS,웹프레임워크,큐마켓<br>
 										</small>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-2 control-label"><?php echo _LANG('a0012','site')?></label>
+								<label class="col-md-2 control-label">크롤링</label>
 								<div class="col-md-10 col-lg-9">
 									<input name="classification" class="form-control" placeholder="" value="<?php echo $_SEO['uid']?$_SEO['classification']:'ALL'?>">
-									<div class="help-text"><small class="text-muted"><a href="#guide_classification" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i><?php echo _LANG('a0014','site')?></a></small></div>
+									<div class="help-text"><small class="text-muted"><a href="#guide_classification" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>
 									<div class="help-block collapse" id="guide_classification">
 										<small class="help-block">
-											<?php echo _LANG('a0024','site')?><br>
-											<?php echo _LANG('a0025','site')?><br>
+											<code>&lt;meta name=&quot;robots&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.<br>
+											all,noindex,nofollow,none 등으로 지정할 수 있습니다.<br>
 										</small>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-2 control-label"><?php echo _LANG('a0069','site')?></label>
+								<label class="col-md-2 control-label">메타이미지</label>
 								<div class="col-md-10 col-lg-9">
 									<div class="input-group">
 										<input class="form-control rb-modal-photo-drop" onmousedown="_mediasetField='meta_image_src&dfiles='+this.value;" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window" type="text" name="image_src" id="meta_image_src" value="<?php echo $_SEO['image_src']?$_SEO['image_src']:''?>">
 										<div class="input-group-btn">
-											<button class="btn btn-default rb-modal-photo1" type="button" title="<?php echo _LANG('a0004','site')?>" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
+											<button class="btn btn-default rb-modal-photo1" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 												<i class="fa fa-photo fa-lg"></i>
 											</button>
 										</div>
 									</div>
 
-									<div class="help-text"><small class="text-muted"><a href="#guide_image_src" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i><?php echo _LANG('a0014','site')?></a></small></div>
+									<div class="help-text"><small class="text-muted"><a href="#guide_image_src" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>
 									<div class="help-block collapse" id="guide_image_src">
 										<small class="help-block">
-											<?php echo _LANG('a0070','site')?><br>
-											<?php echo _LANG('a0071','site')?><br>
+											이미지를 등록하시면 소셜미디어에 이 이미지를 포함하여 전송할 수 있습니다.<br>
+											이미지를 직접 지정하려면 이미지의 URL을 입력해 주세요.<br>
 										</small>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="panel-footer">		  					<small class="text-muted">		  						<i class="fa fa-info-circle fa-lg fa-fw"></i> <?php echo _LANG('a0026','site')?>		  					</small>						</div>					</div>				</div>
+						<div class="panel-footer">		  					<small class="text-muted">		  						<i class="fa fa-info-circle fa-lg fa-fw"></i> meta 정보 설정은 검색엔진최적화, 소셜미디어 최적화와 직접 관련이 있습니다.		  					</small>						</div>					</div>				</div>
 
 				<div class="panel panel-<?php echo $_SESSION['sh_site_menu_1']==2?'primary':'default'?>" id="menu-settings-advance"><!--고급설정-->
-					<div class="panel-heading">						<h4 class="panel-title">							<a data-toggle="collapse" data-parent="#menu-settings" href="#menu-settings-advance-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-advance').className.indexOf('default')==-1?'':'2','','');boxDeco('menu-settings-advance','menu-settings-meta');">								<i class="fa fa-caret-right fa-fw"></i><?php echo _LANG('a0008','site')?>							</a>						</h4>					</div>
+					<div class="panel-heading">						<h4 class="panel-title">							<a data-toggle="collapse" data-parent="#menu-settings" href="#menu-settings-advance-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-advance').className.indexOf('default')==-1?'':'2','','');boxDeco('menu-settings-advance','menu-settings-meta');">								<i class="fa fa-caret-right fa-fw"></i> 고급설정							</a>						</h4>					</div>
 					<div id="menu-settings-advance-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_1']==2):?> in<?php endif?>">						<div class="panel-body">
 							<div class="form-group">
-								<label class="col-md-2 control-label"><?php echo _LANG('a0027','site')?></label>
+								<label class="col-md-2 control-label">레이아웃</label>
 								<div class="col-md-10 col-lg-9">
 									<div class="xrow">
 										<div class="col-sm-6" id="rb-layout-select">
 											<select class="form-control" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','');">
 												<?php $_layoutHexp=explode('/',$_HS['layout'])?>
-												<option value="0"><?php echo _LANG('a0028','site')?>(<?php echo $_layoutHexp[0]?>)</option>
+												<option value="0">사이트 레이아웃(<?php echo $_layoutHexp[0]?>)</option>
 												<?php $_layoutExp1=explode('/',$CINFO['layout'])?>
 												<?php $dirs = opendir($g['path_layout'])?>
 												<?php while(false !== ($tpl = readdir($dirs))):?>
@@ -277,7 +267,7 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 										</div>
 										<div class="col-sm-6" id="rb-layout-select2">
 											<select class="form-control" name="layout_1_sub"<?php if(!$CINFO['layout']):?> disabled<?php endif?>>
-												<?php if(!$R['m_layout']):?><option><?php echo _LANG('a0029','site')?></option><?php endif?>
+												<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
 												<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
 												<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
@@ -290,33 +280,33 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 								</div>
 							</div>
 
-							<div class="form-group">								<label class="col-md-2 control-label"><?php echo _LANG('a2034','site')?></label>								<div class="col-md-10 col-lg-9">									<div class="btn-group btn-group-justified" data-toggle="buttons">										<label class="btn btn-default<?php if($CINFO['mobile']||!$CINFO['uid']):?> active<?php endif?>">											<input type="checkbox" name="mobile" value="1"<?php if($CINFO['mobile']||!$CINFO['uid']):?> checked<?php endif?>>											<span class="glyphicon glyphicon-phone"></span>											<?php echo _LANG('a2035','site')?>										</label>										<label class="btn btn-default<?php if($CINFO['target']):?> active<?php endif?>">											<input type="checkbox" name="target" value="_blank"<?php if($CINFO['target']):?> checked<?php endif?>>											<span class="glyphicon glyphicon-new-window"></span>											<?php echo _LANG('a2036','site')?>										</label>										<label class="btn btn-default<?php if($CINFO['hidden']):?> active<?php endif?>">											<input type="checkbox" name="hidden" value="1"<?php if($CINFO['hidden']):?> checked<?php endif?>>											<span class="glyphicon glyphicon-eye-close"></span>											<?php echo _LANG('a2037','site')?>										</label>										<label class="btn btn-default<?php if($CINFO['reject']):?> active<?php endif?>">											<input type="checkbox" name="reject" value="1"<?php if($CINFO['reject']):?> checked<?php endif?>>											<span class="glyphicon glyphicon-lock"></span>											<?php echo _LANG('a2038','site')?>										</label>									</div>									<span class="help-block">										<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_mpro"><i class="fa fa-question-circle fa-fw"></i><?php echo _LANG('a0014','site')?></button>									</span>									<div id="guide_mpro" class="collapse rb-guide">										<dl class="dl-horizontal">											<dt><?php echo _LANG('a2035','site')?></dt>											<dd><?php echo _LANG('a2039','site')?></dd>											<dt><?php echo _LANG('a2036','site')?></dt>											<dd><?php echo _LANG('a2040','site')?></dd>											<dt><?php echo _LANG('a2037','site')?></dt>											<dd><?php echo _LANG('a2041','site')?></dd>											<dt><?php echo _LANG('a2038','site')?></dt>											<dd><?php echo _LANG('a2042','site')?></dd>										</dl>									</div>								</div>							</div>
+							<div class="form-group">								<label class="col-md-2 control-label">메뉴옵션</label>								<div class="col-md-10 col-lg-9">									<div class="btn-group btn-group-justified" data-toggle="buttons">										<label class="btn btn-default<?php if($CINFO['mobile']||!$CINFO['uid']):?> active<?php endif?>">											<input type="checkbox" name="mobile" value="1"<?php if($CINFO['mobile']||!$CINFO['uid']):?> checked<?php endif?>>											<span class="glyphicon glyphicon-phone"></span>											모바일출력										</label>										<label class="btn btn-default<?php if($CINFO['target']):?> active<?php endif?>">											<input type="checkbox" name="target" value="_blank"<?php if($CINFO['target']):?> checked<?php endif?>>											<span class="glyphicon glyphicon-new-window"></span>											새창열기										</label>										<label class="btn btn-default<?php if($CINFO['hidden']):?> active<?php endif?>">											<input type="checkbox" name="hidden" value="1"<?php if($CINFO['hidden']):?> checked<?php endif?>>											<span class="glyphicon glyphicon-eye-close"></span>											메뉴숨김										</label>										<label class="btn btn-default<?php if($CINFO['reject']):?> active<?php endif?>">											<input type="checkbox" name="reject" value="1"<?php if($CINFO['reject']):?> checked<?php endif?>>											<span class="glyphicon glyphicon-lock"></span>											메뉴잠금										</label>									</div>									<span class="help-block">										<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_mpro"><i class="fa fa-question-circle fa-fw"></i>도움말</button>									</span>									<div id="guide_mpro" class="collapse rb-guide">										<dl class="dl-horizontal">											<dt>모바일출력</dt>											<dd>모바일 레이아웃 사용시 이 메뉴를 출력합니다.</dd>											<dt>새창열기</dt>											<dd>이 메뉴를 클릭시 새창으로 엽니다.</dd>											<dt>메뉴숨김</dt>											<dd>메뉴를 출력하지 않습니다.(링크접근가능)</dd>											<dt>메뉴잠금</dt>											<dd>메뉴의 접근을 차단합니다.(링크접근불가)</dd>										</dl>									</div>								</div>							</div>
 
-							<div class="form-group">								<label class="col-md-2 control-label"><?php echo _LANG('a0030','site')?></label>								<div class="col-md-10 col-lg-9">									<select class="col-md-12 form-control" name="perm_l">										<option value=""><?php echo _LANG('a0031','site')?></option>										<?php $_LEVEL=getDbArray($table['s_mbrlevel'],'','*','uid','asc',0,1)?>										<?php while($_L=db_fetch_array($_LEVEL)):?>										<option value="<?php echo $_L['uid']?>"<?php if($_L['uid']==$CINFO['perm_l']):?> selected<?php endif?>><?php echo sprintf(_LANG('a0035','site'),$_L['name'].'('.number_format($_L['num']).')')?></option>										<?php if($_L['gid'])break; endwhile?>									</select>								</div>							</div>
-							<div class="form-group">								<label class="col-md-2 control-label"><?php echo _LANG('a0032','site')?></label>								<div class="col-md-10 col-lg-9">									<select class="col-md-12 form-control" name="_perm_g" multiple size="5">										<option value=""<?php if(!$CINFO['perm_g']):?> selected="selected"<?php endif?>><?php echo _LANG('a0033','site')?></option>										<?php $_SOSOK=getDbArray($table['s_mbrgroup'],'','*','gid','asc',0,1)?>										<?php while($_S=db_fetch_array($_SOSOK)):?>										<option value="<?php echo $_S['uid']?>"<?php if(strstr($CINFO['perm_g'],'['.$_S['uid'].']')):?> selected<?php endif?>><?php echo $_S['name']?>(<?php echo number_format($_S['num'])?>)</option>										<?php endwhile?>									</select>									<span class="help-block">										<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_permg"><i class="fa fa-question-circle fa-fw"></i><?php echo _LANG('a0014','site')?></button>									</span>									<ul id="guide_permg" class="collapse rb-guide">										<li><?php echo _LANG('a0034','site')?></li>									</ul>
+							<div class="form-group">								<label class="col-md-2 control-label">허용등급</label>								<div class="col-md-10 col-lg-9">									<select class="col-md-12 form-control" name="perm_l">										<option value="">전체허용</option>										<?php $_LEVEL=getDbArray($table['s_mbrlevel'],'','*','uid','asc',0,1)?>										<?php while($_L=db_fetch_array($_LEVEL)):?>										<option value="<?php echo $_L['uid']?>"<?php if($_L['uid']==$CINFO['perm_l']):?> selected<?php endif?>><?php echo sprintf('%s 이상',$_L['name'].'('.number_format($_L['num']).')')?></option>										<?php if($_L['gid'])break; endwhile?>									</select>								</div>							</div>
+							<div class="form-group">								<label class="col-md-2 control-label">차단그룹</label>								<div class="col-md-10 col-lg-9">									<select class="col-md-12 form-control" name="_perm_g" multiple size="5">										<option value=""<?php if(!$CINFO['perm_g']):?> selected="selected"<?php endif?>>차단안함</option>										<?php $_SOSOK=getDbArray($table['s_mbrgroup'],'','*','gid','asc',0,1)?>										<?php while($_S=db_fetch_array($_SOSOK)):?>										<option value="<?php echo $_S['uid']?>"<?php if(strstr($CINFO['perm_g'],'['.$_S['uid'].']')):?> selected<?php endif?>><?php echo $_S['name']?>(<?php echo number_format($_S['num'])?>)</option>										<?php endwhile?>									</select>									<span class="help-block">										<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_permg"><i class="fa fa-question-circle fa-fw"></i>도움말</button>									</span>									<ul id="guide_permg" class="collapse rb-guide">										<li>복수의 그룹을 선택하려면 드래그하거나 <kbd>Ctrl</kbd> 를 누른다음 클릭해 주세요.</li>									</ul>
 								</div>							</div>
-							<div class="form-group">								<label class="col-md-2 control-label"><?php echo _LANG('a0036','site')?></label>								<div class="col-md-10 col-lg-9">									<?php $cachefile = $g['path_page'].$r.'-menus/'.$CINFO['id'].'.txt'?>									<?php $cachetime = file_exists($cachefile) ? implode('',file($cachefile)) : 0?>									<select name="cachetime" class="col-md-12 form-control">										<option value=""><?php echo _LANG('a0037','site')?></option>										<?php for($i = 1; $i < 61; $i++):?>										<option value="<?php echo $i?>"<?php if($cachetime==$i):?> selected="selected"<?php endif?>><?php echo sprintf(_LANG('a0038','site'),$i)?></option>										<?php endfor?>									</select>
-									<span class="help-block">										<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_cache"><i class="fa fa-question-circle fa-fw"></i><?php echo _LANG('a0014','site')?></button>									</span>									<ul id="guide_cache" class="collapse rb-guide">										<li><?php echo _LANG('a0040','site')?></li>										<li class="text-danger"><?php echo _LANG('a0041','site')?></li>									</ul>								</div>							</div>
+							<div class="form-group">								<label class="col-md-2 control-label">캐시적용</label>								<div class="col-md-10 col-lg-9">									<?php $cachefile = $g['path_page'].$r.'-menus/'.$CINFO['id'].'.txt'?>									<?php $cachetime = file_exists($cachefile) ? implode('',file($cachefile)) : 0?>									<select name="cachetime" class="col-md-12 form-control">										<option value="">적용안함</option>										<?php for($i = 1; $i < 61; $i++):?>										<option value="<?php echo $i?>"<?php if($cachetime==$i):?> selected="selected"<?php endif?>><?php echo sprintf('%02d 분',$i)?></option>										<?php endfor?>									</select>
+									<span class="help-block">										<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_cache"><i class="fa fa-question-circle fa-fw"></i>도움말</button>									</span>									<ul id="guide_cache" class="collapse rb-guide">										<li>DB접속이 많거나 위젯을 많이 사용하는 메뉴일 경우 캐시를 적용하면 서버부하를 줄 일 수 있으며 속도를 높일 수 있습니다.</li>										<li class="text-danger">실시간 처리가 요구되는 메뉴일 경우 적용하지 마세요.</li>									</ul>								</div>							</div>
 							<div class="form-group">
-								<label class="col-md-2 col-lg-2 control-label"><?php echo _LANG('a0039','site')?></label>
+								<label class="col-md-2 col-lg-2 control-label">미디어</label>
 								<div class="col-md-10 col-lg-9">
 									<div class="input-group">
 										<input class="form-control" type="text" name="mediaset" id="mediaset" value="<?php echo $CINFO['mediaset']?$CINFO['mediaset']:''?>">
 										<div class="input-group-btn">
-											<button class="btn btn-default rb-modal-photo" type="button" title="<?php echo _LANG('a0004','site')?>" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
+											<button class="btn btn-default rb-modal-photo" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 												<i class="fa fa-photo fa-lg"></i>
 											</button>
-											<button class="btn btn-default rb-modal-video" type="button" title="<?php echo _LANG('a0005','site')?>" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
+											<button class="btn btn-default rb-modal-video" type="button" title="비디오셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 												<i class="glyphicon glyphicon-facetime-video fa-lg"></i>
 											</button>
 										</div>
 									</div>
 									<span class="help-block">
-										<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_mediaset"><i class="fa fa-question-circle fa-fw"></i><?php echo _LANG('a0014','site')?></button>
+										<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_mediaset"><i class="fa fa-question-circle fa-fw"></i>도움말</button>
 									</span>
 									<ul id="guide_mediaset" class="collapse rb-guide">
-										<li><?php echo _LANG('a0042','site')?></li>
-										<li><?php echo _LANG('a0043','site')?></li>
+										<li>여기에 연결시킬 미디어 파일을 지정할 수 있습니다.</li>
+										<li>지정된 미디어는 필요에 따라 사용될 수 있습니다.</li>
 									</ul>
 								</div>
 							</div>
@@ -324,59 +314,61 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 							<?php $_url_1 = $g['s'].'/?r='.$r.'&c='.($vtype?substr($catcode,0,strlen($catcode)-1):$catcode.$CINFO['id'])?>
 							<?php $_url_2 = $g['s'].'/'.$r.'/c/'.($vtype?substr($catcode,0,strlen($catcode)-1):$catcode.$CINFO['id'])?>
 							<div class="form-group">
-								<label class="col-md-2 control-label"><?php echo _LANG('a0044','site')?></label>
+								<label class="col-md-2 control-label">주소</label>
 								<div class="col-md-10 col-lg-9">
 
 									<div class="input-group" style="margin-bottom: 5px">
-										<span class="input-group-addon"><?php echo _LANG('a0045','site')?></span>
+										<span class="input-group-addon">물리주소</span>
 										<input id="_url_m_1_" type="text" class="form-control" value="<?php echo $_url_1?>" readonly>
 										<span class="input-group-btn">
-											<a href="#." class="btn btn-default rb-clipboard hidden-xs" data-tooltip="tooltip" title="<?php echo _LANG('a0047','site')?>" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
-											<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-default" data-tooltip="tooltip" title="<?php echo _LANG('a0048','site')?>">Go!</a>
+											<a href="#." class="btn btn-default rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
+											<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-default" data-tooltip="tooltip" title="접속">Go!</a>
 										</span>
 									</div>
 
 									<div class="input-group">
-										<span class="input-group-addon"><?php echo _LANG('a0046','site')?></span>
+										<span class="input-group-addon">고유주소</span>
 										<input id="_url_m_2_" type="text" class="form-control" value="<?php echo $_url_2?>" readonly>
 										<span class="input-group-btn">
-											<a href="#." class="btn btn-default rb-clipboard hidden-xs" data-tooltip="tooltip" title="<?php echo _LANG('a0047','site')?>" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
-											<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-default" data-tooltip="tooltip" title="<?php echo _LANG('a0048','site')?>">Go!</a>
+											<a href="#." class="btn btn-default rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
+											<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-default" data-tooltip="tooltip" title="접속">Go!</a>
 										</span>
 									</div>
 								</div>
 							</div>
 							<?php endif?>
 
-							<div class="form-group">								<label class="col-md-2 control-label"><?php echo _LANG('a2043','site')?></label>								<div class="col-md-10 col-lg-9">									<div class="panel-group" style="margin-bottom:0;">										<div class="panel panel-default">											<div class="panel-heading">												<h4 class="panel-title">													<a data-toggle="collapse" href="#menu_header" onclick="sessionSetting('sh_site_menu_3','1','','1');">														<?php echo _LANG('a2044','site')?>														<?php if($CINFO['uid']&&($CINFO['imghead']||is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.header.php'))):?><i class="fa fa-check-circle" title="<?php echo _LANG('a0050','site')?>" data-tooltip="tooltip"></i><?php endif?>													</a>												</h4>											</div>
-											<div id="menu_header" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_3']):?> in<?php endif?>">												<div class="panel-body">													<div class="form-group">														<label class="col-md-3 control-label" for="menuheader-InputFile"><?php echo _LANG('a2045','site')?></label>														<div class="col-md-9 col-lg-9">															<input type="file" name="imghead" id="menuheader-InputFile">															<?php if($CINFO['imghead']):?>
+							<div class="form-group">								<label class="col-md-2 control-label">코드확장</label>								<div class="col-md-10 col-lg-9">									<div class="panel-group" style="margin-bottom:0;">										<div class="panel panel-default">											<div class="panel-heading">												<h4 class="panel-title">													<a data-toggle="collapse" href="#menu_header" onclick="sessionSetting('sh_site_menu_3','1','','1');">														문서헤더														<?php if($CINFO['uid']&&($CINFO['imghead']||is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.header.php'))):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>													</a>												</h4>											</div>
+											<div id="menu_header" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_3']):?> in<?php endif?>">												<div class="panel-body">													<div class="form-group">														<label class="col-md-3 control-label" for="menuheader-InputFile">헤더파일</label>														<div class="col-md-9 col-lg-9">															<input type="file" name="imghead" id="menuheader-InputFile">															<?php if($CINFO['imghead']):?>
 															<p class="form-control-static">
-																<a class="btn bnt-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=menu_file_delete&amp;cat=<?php echo $CINFO['uid']?>&amp;dtype=head" onclick="return hrefCheck(this,true,'<?php echo _LANG('a0056','site')?>');"><?php echo _LANG('a0065','site')?></a>
-																<a class="btn btn-link" href="<?php echo $g['s']?>/_var/menu/<?php echo $CINFO['imghead']?>" target="_blank"><?php echo _LANG('a0072','site')?></a>
-															</p>															<?php else:?>															<small class="help-block"><?php echo _LANG('a2046','site')?></small>															<?php endif?>														</div>													</div>													<div class="form-group">														<label class="col-md-3 control-label">															<?php echo _LANG('a2047','site')?>														</label>														<div class="col-md-9 col-lg-9">															<p>																<textarea name="codhead" id="codheadArea" class="form-control" rows="5"><?php if(is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.header.php')) echo htmlspecialchars(implode('',file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.header.php')))?></textarea>															</p>														</div>													</div>												</div>											</div>										</div>
-										<div class="panel panel-default">											<div class="panel-heading">												<h4 class="panel-title">													<a data-toggle="collapse" href="#menu_footer" onclick="sessionSetting('sh_site_menu_4','1','','1');">														<?php echo _LANG('a2048','site')?>														<?php if($CINFO['uid']&&($CINFO['imgfoot']||is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.footer.php'))):?><i class="fa fa-check-circle" title="<?php echo _LANG('a0050','site')?>" data-tooltip="tooltip"></i><?php endif?>													</a>												</h4>											</div>
-											<div id="menu_footer" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_4']):?> in<?php endif?>">												<div class="panel-body">													<div class="form-group">														<label class="col-md-3 control-label" for="menuheader-InputFile"><?php echo _LANG('a2049','site')?></label>														<div class="col-md-9 col-lg-9">															<input type="file" name="imgfoot" id="menufooter-InputFile">															<?php if($CINFO['imgfoot']):?>
+																<a class="btn bnt-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=menu_file_delete&amp;cat=<?php echo $CINFO['uid']?>&amp;dtype=head" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');">삭제</a>
+																<a class="btn btn-link" href="<?php echo $g['s']?>/_var/menu/<?php echo $CINFO['imghead']?>" target="_blank">등록파일 보기</a>
+															</p>															<?php else:?>															<small class="help-block">(gif/jpg/png/swf 가능)</small>															<?php endif?>														</div>													</div>													<div class="form-group">														<label class="col-md-3 control-label">															헤더코드														</label>														<div class="col-md-9 col-lg-9">															<p>																<textarea name="codhead" id="codheadArea" class="form-control" rows="5"><?php if(is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.header.php')) echo htmlspecialchars(implode('',file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.header.php')))?></textarea>															</p>														</div>													</div>												</div>											</div>										</div>
+										<div class="panel panel-default">											<div class="panel-heading">												<h4 class="panel-title">													<a data-toggle="collapse" href="#menu_footer" onclick="sessionSetting('sh_site_menu_4','1','','1');">														문서풋터														<?php if($CINFO['uid']&&($CINFO['imgfoot']||is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.footer.php'))):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>													</a>												</h4>											</div>
+											<div id="menu_footer" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_4']):?> in<?php endif?>">												<div class="panel-body">													<div class="form-group">														<label class="col-md-3 control-label" for="menuheader-InputFile">풋터파일</label>														<div class="col-md-9 col-lg-9">															<input type="file" name="imgfoot" id="menufooter-InputFile">															<?php if($CINFO['imgfoot']):?>
 															<p class="form-control-static">
-																<a class="btn btn-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=menu_file_delete&amp;cat=<?php echo $CINFO['uid']?>&amp;dtype=foot" onclick="return hrefCheck(this,true,'<?php echo _LANG('a0056','site')?>');"><?php echo _LANG('a0065','site')?></a>
-																<a class="btn btn-link" href="<?php echo $g['s']?>/_var/menu/<?php echo $CINFO['imgfoot']?>" target="_blank"><?php echo _LANG('a0072','site')?></a>
-															</p>															<?php else:?>															<small class="help-block"><?php echo _LANG('a2046','site')?></small>															<?php endif?>														</div>													</div>
-													<div class="form-group">														<label class="col-md-3 control-label">															<?php echo _LANG('a2050','site')?>														</label>														<div class="col-md-9 col-lg-9">															<p>																<textarea name="codfoot" id="codfootArea" class="form-control" rows="5"><?php if(is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.footer.php')) echo htmlspecialchars(implode('',file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.footer.php')))?></textarea>															</p>														</div>													</div>
+																<a class="btn btn-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=menu_file_delete&amp;cat=<?php echo $CINFO['uid']?>&amp;dtype=foot" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');">삭제</a>
+																<a class="btn btn-link" href="<?php echo $g['s']?>/_var/menu/<?php echo $CINFO['imgfoot']?>" target="_blank">등록파일 보기</a>
+															</p>															<?php else:?>															<small class="help-block">(gif/jpg/png/swf 가능)</small>															<?php endif?>														</div>													</div>
+													<div class="form-group">														<label class="col-md-3 control-label">															풋터코드														</label>														<div class="col-md-9 col-lg-9">															<p>																<textarea name="codfoot" id="codfootArea" class="form-control" rows="5"><?php if(is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.footer.php')) echo htmlspecialchars(implode('',file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.footer.php')))?></textarea>															</p>														</div>													</div>
 												</div>											</div>										</div>
-										<div class="panel panel-default">											<div class="panel-heading">												<h4 class="panel-title">													<a data-toggle="collapse" href="#menu_addinfo" onclick="sessionSetting('sh_site_menu_5','1','','1');">														<?php echo _LANG('a2051','site')?>
-														<?php if($CINFO['addinfo']):?><i class="fa fa-check-circle" title="<?php echo _LANG('a0050','site')?>" data-tooltip="tooltip"></i><?php endif?>
+										<div class="panel panel-default">											<div class="panel-heading">												<h4 class="panel-title">													<a data-toggle="collapse" href="#menu_addinfo" onclick="sessionSetting('sh_site_menu_5','1','','1');">														부가필드
+														<?php if($CINFO['addinfo']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 													</a>												</h4>											</div>
-											<div id="menu_addinfo" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_5']):?> in<?php endif?>">												<div class="panel-body">													<div class="form-group">														<label class="col-md-3 control-label"><?php echo _LANG('a2051','site')?></label>														<div class="col-md-9 col-lg-9">															<textarea name="addinfo" class="form-control" rows="3"><?php echo htmlspecialchars($CINFO['addinfo'])?></textarea>															<span class="help-block"><?php echo _LANG('a2052','site')?></span>														</div>													</div>												</div>											</div>										</div>
-										<div class="panel panel-default">											<div class="panel-heading">												<h4 class="panel-title">													<a data-toggle="collapse" href="#menu_addattr" onclick="sessionSetting('sh_site_menu_6','1','','1');">														<?php echo _LANG('a2053','site')?>
-														<?php if($_SEO['subject']):?><i class="fa fa-check-circle" title="<?php echo _LANG('a0050','site')?>" data-tooltip="tooltip"></i><?php endif?>
+											<div id="menu_addinfo" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_5']):?> in<?php endif?>">												<div class="panel-body">													<div class="form-group">														<label class="col-md-3 control-label">부가필드</label>														<div class="col-md-9 col-lg-9">															<textarea name="addinfo" class="form-control" rows="3"><?php echo htmlspecialchars($CINFO['addinfo'])?></textarea>															<span class="help-block">이 메뉴에 대해서 추가적인 정보가 필요할 경우 사용하며 필드명은<code>[addinfo]</code> 입니다.</span>														</div>													</div>												</div>											</div>										</div>
+										<div class="panel panel-default">											<div class="panel-heading">												<h4 class="panel-title">													<a data-toggle="collapse" href="#menu_addattr" onclick="sessionSetting('sh_site_menu_6','1','','1');">														속성추가
+														<?php if($_SEO['subject']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 													</a>												</h4>											</div>
-										<div id="menu_addattr" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_6']):?> in<?php endif?>">											<div class="panel-body">												<div class="form-group">													<label class="col-md-3 control-label"><?php echo _LANG('a2054','site')?></label>													<div class="col-md-9 col-lg-9">														<input type="text" name="addattr" class="form-control" placeholder="<?php echo _LANG('a2055','site')?>" value="<?php echo htmlspecialchars($CINFO['addattr'])?>">														<span class="help-block"><?php echo _LANG('a2056','site')?></span>													</div>												</div>											</div>										</div>									</div>								</div>							</div>
+										<div id="menu_addattr" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_6']):?> in<?php endif?>">											<div class="panel-body">												<div class="form-group">													<label class="col-md-3 control-label">추가 속성</label>													<div class="col-md-9 col-lg-9">														<input type="text" name="addattr" class="form-control" placeholder="예: rel=&quot;nofollow&quot; 또는 data-scroll 등" value="<?php echo htmlspecialchars($CINFO['addattr'])?>">														<span class="help-block"><code>&lt;a href="#"  &gt;</code> 태그 내부에 속성으로 추가 됩니다.</span>													</div>												</div>											</div>										</div>									</div>								</div>							</div>
 						</div>					</div>				</div>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-md-12 col-lg-12">
-				<button class="btn btn-primary btn-block btn-lg" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> <?php echo _LANG(($CINFO['uid']?'a2057':'a2058'),'site')?></button>
+				<button class="btn btn-primary btn-block btn-lg" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i>
+					<?php echo $CINFO['uid']?'속성변경':'신규메뉴 등록' ?>
+				 </button>
 			</div>
 		</div>
 	</form>	</div></div>
@@ -387,7 +379,7 @@ $menuType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 var client = new ZeroClipboard($(".rb-clipboard"));
 client.on( "ready", function( readyEvent ) {
 	client.on( "aftercopy", function( event ) {
-		$('.tooltip .tooltip-inner').text('<?php echo _LANG('a0066','site')?>');
+		$('.tooltip .tooltip-inner').text('복사되었습니다');
 	});
 });
 </script>
@@ -446,18 +438,18 @@ $('.form-horizontal').bootstrapValidator({
 			message: 'The menu is not valid',
 			validators: {
 				notEmpty: {
-					message: '<?php echo _LANG('a2059','site')?>'
+					message: '메뉴명을 입력해 주세요.'
 				}
 			}
 		},
 		id: {
 			validators: {
 				notEmpty: {
-					message: '<?php echo _LANG('a2060','site')?>'
+					message: '메뉴코드를 입력해 주세요.'
 				},
 				regexp: {
 					regexp: /^[a-zA-Z0-9\_\-]+$/,
-					message: '<?php echo _LANG('a2061','site')?>'
+					message: '메뉴코드는 영문대소문자/숫자/_/- 만 사용할 수 있습니다.'
 				}
 			}
 		},
@@ -469,12 +461,12 @@ $('.form-horizontal').bootstrapValidator({
 <script>
 function saveCheck(f){
 <?php if(!$SITEN):?>
-	alert('<?php echo _LANG('a2062','site')?>      ');
+	alert('사이트가 등록되지 않았습니다.\n먼저 사이트를 만들어주세요.');
 	return false;
 <?php endif?>  var l1 = f._perm_g;  var n1 = l1.length;  var i;	var s1 = '';
-	for	(i = 0; i < n1; i++)	{		if (l1[i].selected == true && l1[i].value != '')		{			s1 += '['+l1[i].value+']';		}	}	f.perm_g.value = s1;	if (f.id)	{		if (f.id.value == '')		{			alert('<?php echo _LANG('a2060','site')?>      ');			f.id.focus();			return false;		}
-		if (!chkFnameValue(f.id.value))		{			alert('<?php echo _LANG('a2061','site')?>      ');			f.id.focus();			return false;		}	}
-	<?php if($CINFO['menutype']=='1'):?>	if (f.menutype.value == '1')	{		if (f.joint.value == '')		{			alert('<?php echo _LANG('a0067','site')?>      ');			f.joint.focus();			return false;		}	}
+	for	(i = 0; i < n1; i++)	{		if (l1[i].selected == true && l1[i].value != '')		{			s1 += '['+l1[i].value+']';		}	}	f.perm_g.value = s1;	if (f.id)	{		if (f.id.value == '')		{			alert('메뉴코드를 입력해 주세요.');			f.id.focus();			return false;		}
+		if (!chkFnameValue(f.id.value))		{			alert('메뉴코드는 영문대소문자/숫자/_/- 만 사용할 수 있습니다.');			f.id.focus();			return false;		}	}
+	<?php if($CINFO['menutype']=='1'):?>	if (f.menutype.value == '1')	{		if (f.joint.value == '')		{			alert('모듈을 연결해 주세요.');			f.joint.focus();			return false;		}	}
 	<?php endif?>
 
 	if(f.layout_1.value != '0') f.layout.value = f.layout_1.value + '/' + f.layout_1_sub.value;
@@ -488,7 +480,7 @@ function boxDeco(layer1,layer2)
 	$("#"+layer2).addClass("panel-default").removeClass("panel-primary");
 }function docType(n,str)
 {
-	if (confirm('<?php echo _LANG('a0074','site')?>'))
+	if (confirm('정말로 변경하시겠습니까?'))
 	{
 		getId('rb-document-type').innerHTML = str;
 		$('#editBox1').addClass('hidden');
@@ -503,7 +495,7 @@ function boxDeco(layer1,layer2)
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)
 {
-	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?><?php if($CINFO['code']):?>&c=<?php echo $CINFO['code']?><?php endif?>"><?php echo _LANG('a2063','site')?></a></li><li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&front=menu"><?php echo _LANG('a2064','site')?></a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();"><?php echo _LANG('a2065','site')?></a></li>',event);
+	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?><?php if($CINFO['code']):?>&c=<?php echo $CINFO['code']?><?php endif?>">사용자모드 보기</a></li><li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&front=menu">새 메뉴 만들기</a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a></li>',event);
 }
 <?php endif?>
 </script>
