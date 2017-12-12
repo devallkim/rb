@@ -19,8 +19,6 @@ $M = array_merge(getUidData($table['s_mbrid'],$mbruid),getDbData($table['s_mbrda
 	</div>
 </div>
 
-
-
 <!-- timeago -->
 <?php getImport('jquery-timeago','jquery.timeago',false,'js')?>
 <?php getImport('jquery-timeago','locales/jquery.timeago.ko',false,'js')?>

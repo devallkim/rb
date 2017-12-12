@@ -1,4 +1,4 @@
-<?php include getLangFile($g['dir_module'].'language/',$d['admin']['syslang'],'/lang.system.php')?>
+<?php include getLangFile($g['dir_module'].'language/',$d['admin']['syslang'],'/lang.system.php') ?>
 <div class="modal-header">
 	<button type="button" class="close" onclick="hideModal();">&times;</button>
 	<h4 class="modal-title"><i class="fa fa-code fa-lg"></i> <?php echo _LANG('sb001','site')?></h4>
@@ -10,7 +10,6 @@
 	<button type="button" class="btn btn-default" onclick="hideModal();"><?php echo _LANG('s0003','site')?></button>
 	<button type="button" class="btn btn-primary rb-clipboard" data-clipboard-target="rb-widget-code-area" onclick="hideModal();"><?php echo _LANG('sb002','site')?></button>
 </div>
-
 
 <!-- zero-clipboard -->
 <?php getImport('zero-clipboard','ZeroClipboard.min',false,'js') ?>
@@ -32,7 +31,6 @@ function modalSetting()
 }
 modalSetting();
 </script>
-
 
 <style>
 .modal-header .close {font-size:35px;font-weight:normal;}

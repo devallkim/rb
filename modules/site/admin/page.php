@@ -45,7 +45,7 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 					</span>
 				</h4>
 			</div>
-	
+
 			<?php if($SITEN>1):?>
 			<div class="panel-body rb-panel-form" style="border-bottom:#dfdfdf solid 1px;">
 				<select class="form-control" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
@@ -58,11 +58,12 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 
 			<div id="panel-search" class="collapse<?php if($_SESSION['sh_site_page_search']):?> in<?php endif?>">
 				<form role="form" action="<?php echo $g['s']?>/" method="get">
-				<input type="hidden" name="r" value="<?php echo $r?>">
-				<input type="hidden" name="m" value="<?php echo $m?>">
-				<input type="hidden" name="module" value="<?php echo $module?>">
-				<input type="hidden" name="front" value="<?php echo $front?>">
-				<input type="hidden" name="cat" value="<?php echo $cat?>">
+					<input type="hidden" name="r" value="<?php echo $r?>">
+					<input type="hidden" name="m" value="<?php echo $m?>">
+					<input type="hidden" name="module" value="<?php echo $module?>">
+					<input type="hidden" name="front" value="<?php echo $front?>">
+					<input type="hidden" name="cat" value="<?php echo $cat?>">
+
 					<div class="panel-heading rb-search-box">
 						<div class="input-group">
 							<div class="input-group-addon"><small><?php echo _LANG('a3004','site')?></small></div>
@@ -125,21 +126,20 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 	<div id="tab-content-view" class="col-md-7 col-lg-8">
 		<?php if($g['device']):?><a name="site-page-info"></a><?php endif?>
 		<form name="procForm" class="form-horizontal rb-form" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
-		<input type="hidden" name="r" value="<?php echo $r?>">
-		<input type="hidden" name="m" value="<?php echo $module?>">
-		<input type="hidden" name="a" value="regispage">
-		<input type="hidden" name="uid" value="<?php echo $R['uid']?>">
-		<input type="hidden" name="orign_id" value="<?php echo $R['id']?>">
-		<input type="hidden" name="perm_g" value="<?php echo $R['perm_g']?>">
-		<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
-		<input type="hidden" name="layout" value="">
-		<input type="hidden" name="cat" value="<?php echo $cat?>">
-		<input type="hidden" name="recnum" value="<?php echo $recnum?>">
-		<input type="hidden" name="keyw" value="<?php echo $keyw?>">
-		<input type="hidden" name="p" value="<?php echo $p?>">
-		<input type="hidden" name="pagetype" value="<?php echo $R['uid']?$R['pagetype']:3?>">
+			<input type="hidden" name="r" value="<?php echo $r?>">
+			<input type="hidden" name="m" value="<?php echo $module?>">
+			<input type="hidden" name="a" value="regispage">
+			<input type="hidden" name="uid" value="<?php echo $R['uid']?>">
+			<input type="hidden" name="orign_id" value="<?php echo $R['id']?>">
+			<input type="hidden" name="perm_g" value="<?php echo $R['perm_g']?>">
+			<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
+			<input type="hidden" name="layout" value="">
+			<input type="hidden" name="cat" value="<?php echo $cat?>">
+			<input type="hidden" name="recnum" value="<?php echo $recnum?>">
+			<input type="hidden" name="keyw" value="<?php echo $keyw?>">
+			<input type="hidden" name="p" value="<?php echo $p?>">
+			<input type="hidden" name="pagetype" value="<?php echo $R['uid']?$R['pagetype']:3?>">
 
-		
 			<div class="page-header">
 				<h4>
 					<?php if($R['uid']):?>
@@ -197,10 +197,10 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 				<div class="col-md-offset-2 col-lg-offset-2">
 					<div class="help-block">
 						<label class="checkbox-inline">
-							<input type="checkbox" name="ismain" value="1"<?php if($R['ismain']):?> checked<?php endif?>><i></i><span class="glyphicon glyphicon-home"></span> <?php echo _LANG('a3013','site')?> 
+							<input type="checkbox" name="ismain" value="1"<?php if($R['ismain']):?> checked<?php endif?>><i></i><span class="glyphicon glyphicon-home"></span> <?php echo _LANG('a3013','site')?>
 						</label>
 						<label class="checkbox-inline">
-							<input type="checkbox" name="mobile" value="1"<?php if($R['mobile']):?> checked<?php endif?>><i></i><span class="glyphicon glyphicon-phone"></span> <?php echo _LANG('a3014','site')?> 
+							<input type="checkbox" name="mobile" value="1"<?php if($R['mobile']):?> checked<?php endif?>><i></i><span class="glyphicon glyphicon-phone"></span> <?php echo _LANG('a3014','site')?>
 						</label>
 						<p>
 							<?php echo _LANG('a3015','site')?><br>
@@ -260,7 +260,7 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 						<fieldset disabled>
 							<a href="#." class="btn btn-default btn-block"><i class="fa fa-puzzle-piece fa-lg"></i>
 								<?php echo _LANG('a0059','site')?>
-								<small class="text-muted">( <?php echo _LANG('a3022','site')?> )</small>							
+								<small class="text-muted">( <?php echo _LANG('a3022','site')?> )</small>
 							</a>
 						</fieldset>
 						<?php endif?>
@@ -340,7 +340,7 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 											<?php echo _LANG('a0022','site')?><br>
 											<?php echo _LANG('a0023','site')?><br>
 										</small>
-									</div>			
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -353,7 +353,7 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 											<?php echo _LANG('a0024','site')?><br>
 											<?php echo _LANG('a0025','site')?><br>
 										</small>
-									</div>			
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -374,8 +374,8 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 											<?php echo _LANG('a0070','site')?><br>
 											<?php echo _LANG('a0071','site')?><br>
 										</small>
-									</div>			
-								</div>						
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="panel-footer">
@@ -385,7 +385,7 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 						</div>
 					</div>
 				</div>
-			  
+
 				<div class="panel panel-<?php echo $_SESSION['sh_site_page_1']==2?'primary':'default'?>" id="page-settings-advance">
 					<div class="panel-heading">
 						<h4 class="panel-title">
@@ -472,7 +472,7 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 									<li><?php echo _LANG('a3034','site')?></li>
 									</ul>
 								</div>
-							</div>				
+							</div>
 							<div class="form-group">
 								<label class="col-md-2 col-lg-2 control-label"><?php echo _LANG('a0030','site')?></label>
 								<div class="col-md-10 col-lg-9">
@@ -565,7 +565,7 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 											<a href="#." class="btn btn-default rb-clipboard hidden-xs" data-tooltip="tooltip" title="<?php echo _LANG('a0047','site')?>" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
 											<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-default" data-tooltip="tooltip" title="<?php echo _LANG('a0048','site')?>">Go!</a>
 										</span>
-									</div>  
+									</div>
 									<div class="input-group">
 										<span class="input-group-addon"><?php echo _LANG('a0046','site')?></span>
 										<input type="text" id="_url_m_2_" class="form-control" value="<?php echo $_url_2?>">
@@ -590,8 +590,6 @@ $pageType = array('',_LANG('a0001','site'),_LANG('a0002','site'),_LANG('a0003','
 	</div>
 </div>
 
-
-
 <!-- zero-clipboard -->
 <?php getImport('zero-clipboard','ZeroClipboard.min',false,'js') ?>
 <script>
@@ -607,18 +605,18 @@ client.on( "ready", function( readyEvent ) {
 <?php getImport('bootstrap-maxlength','bootstrap-maxlength.min',false,'js')?>
 <script>
 	$('input.rb-title').maxlength({
-        alwaysShow: true,
-        threshold: 10,
-        warningClass: "label label-success",
-        limitReachedClass: "label label-danger",
-    });
+	  alwaysShow: true,
+	  threshold: 10,
+	  warningClass: "label label-success",
+	  limitReachedClass: "label label-danger"
+  });
 
 	$('textarea.rb-description').maxlength({
-        alwaysShow: true,
-        threshold: 10,
-        warningClass: "label label-success",
-        limitReachedClass: "label label-danger",
-    });
+	  alwaysShow: true,
+	  threshold: 10,
+	  warningClass: "label label-success",
+	  limitReachedClass: "label label-danger"
+  });
 </script>
 
 <!-- modal -->
@@ -724,7 +722,7 @@ function saveCheck(f)
 	if(f.layout_1.value != '0') f.layout.value = f.layout_1.value + '/' + f.layout_1_sub.value;
 	else f.layout.value = '';
 
-	getIframeForAction(f);	
+	getIframeForAction(f);
 	//return confirm('<?php echo _LANG('a0049','site')?>        ');
 }
 function boxDeco(layer1,layer2)
@@ -746,7 +744,7 @@ function docType(n,str)
 		$('#editBox2').addClass('hidden');
 		$('#editBox3').addClass('hidden');
 		$('#editBox'+n).removeClass('hidden');
-		getIframeForAction(document.procForm);	
+		getIframeForAction(document.procForm);
 		document.procForm.pagetype.value = n;
 		document.procForm.submit();
 	}
@@ -754,7 +752,7 @@ function docType(n,str)
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)
 {
-	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?><?php if($R['id']):?>&mod=<?php echo $R['id']?><?php endif?>"><?php echo _LANG('a3040','site')?></a></li><li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&front=page"><?php echo _LANG('a3041','site')?></a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();"><?php echo _LANG('a3042','site')?></a></li>',event);	
+	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?><?php if($R['id']):?>&mod=<?php echo $R['id']?><?php endif?>"><?php echo _LANG('a3040','site')?></a></li><li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&front=page"><?php echo _LANG('a3041','site')?></a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();"><?php echo _LANG('a3042','site')?></a></li>',event);
 }
 <?php endif?>
 </script>

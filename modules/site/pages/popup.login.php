@@ -4,7 +4,7 @@
 		<input type="hidden" name="a" value="login">
 		<input type="hidden" name="referer" value="">
 		<input type="hidden" name="isModal" value="Y">
-		
+
 		<div class="form-group">
 			<label class="sr-only" for="username"><?php echo _LANG('s7001','site')?></label>
 			<div class="input-group">
@@ -26,8 +26,6 @@
 	</form>
 </div>
 
-
-
 <!----------------------------------------------------------------------------
 @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
 ----------------------------------------------------------------------------->
@@ -40,9 +38,6 @@
 <div id="_modal_footer" class="hidden">
 	<a href="#" class="btn btn-default btn-block" data-dismiss="modal" aria-hidden="true"><?php echo _LANG('s0003','site')?></a>
 </div>
-	
-
-
 
 <script>
 var bootmsg = '<div class="media"><div class="media-body" style="font-size:12px;">';

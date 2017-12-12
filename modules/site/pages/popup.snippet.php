@@ -1,7 +1,6 @@
 <div id="snippetbox">
-<iframe src="http://docs.kimsq.com/rb2/_snippet/index.php?selectLang=<?php echo $lang['admin']['flag']?>" width="100%" height="600" frameborder="0"></iframe>
+	<iframe src="http://docs.kimsq.com/rb2/_snippet/index.php?selectLang=<?php echo $lang['admin']['flag']?>" width="100%" height="600" frameborder="0"></iframe>
 </div>
-
 
 <script>
 function modalSetting()

@@ -1,4 +1,4 @@
-<?php include getLangFile($g['path_module'].'site/language/',$d['admin']['syslang'],'/lang.system.php')?>
+<?php include getLangFile($g['path_module'].'site/language/',$d['admin']['syslang'],'/lang.system.php') ?>
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#kf" data-toggle="tab">kimsQ</a></li>
 	<li><a href="#glyphicon" data-toggle="tab">Glyphicons</a></li>
@@ -382,4 +382,3 @@ modalSetting();
     background-color: rgba(86,61,124,.1);
 }
 </style>
-

@@ -33,7 +33,7 @@ $_editArray = array(
 
 	<div class="page-header">
 		<h4>
-			<?php echo $_filetype?> - <?php echo $_filesbj?> 
+			<?php echo $_filetype?> - <?php echo $_filesbj?>
 
 			<div class="pull-right rb-top-btnbox">
 				<?php if($wysiwyg=='Y'):?>
@@ -111,81 +111,79 @@ $_editArray = array(
 	</div>
 
 	<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return sourcecheck(this);">
-	<input type="hidden" name="r" value="<?php echo $r?>">
-	<input type="hidden" name="m" value="<?php echo $module?>">
-	<input type="hidden" name="a" value="sourcewrite">
-	<input type="hidden" name="type" value="<?php echo $_mtype?>">
-	<?php if($_mtype=='menu'):?>
-	<input type="hidden" name="uid" value="<?php echo $_HM['uid']?>">
-	<input type="hidden" name="id" value="<?php echo $_HM['id']?>">
-	<?php else:?>
-	<input type="hidden" name="id" value="<?php echo $_HP['id']?>">
-	<?php endif?>
-	<input type="hidden" name="wysiwyg" value="<?php echo $wysiwyg?>">
-	<input type="hidden" name="editFilter" value="<?php echo $d['admin']['editor']?>">
+		<input type="hidden" name="r" value="<?php echo $r?>">
+		<input type="hidden" name="m" value="<?php echo $module?>">
+		<input type="hidden" name="a" value="sourcewrite">
+		<input type="hidden" name="type" value="<?php echo $_mtype?>">
+		<?php if($_mtype=='menu'):?>
+		<input type="hidden" name="uid" value="<?php echo $_HM['uid']?>">
+		<input type="hidden" name="id" value="<?php echo $_HM['id']?>">
+		<?php else:?>
+		<input type="hidden" name="id" value="<?php echo $_HP['id']?>">
+		<?php endif?>
+		<input type="hidden" name="wysiwyg" value="<?php echo $wysiwyg?>">
+		<input type="hidden" name="editFilter" value="<?php echo $d['admin']['editor']?>">
 
-	
-	<?php 
-	if($wysiwyg=='Y'):
-	$__SRC__ = is_file($g['path_page'].$_filekind.'.php') ? htmlspecialchars(implode('',file($g['path_page'].$_filekind.'.php'))) : '';
-	include $g['path_plugin'].$d['admin']['editor'].'/import.php';
-	?>
+		<?php
+		if($wysiwyg=='Y'):
+		$__SRC__ = is_file($g['path_page'].$_filekind.'.php') ? htmlspecialchars(implode('',file($g['path_page'].$_filekind.'.php'))) : '';
+		include $g['path_plugin'].$d['admin']['editor'].'/import.php';
+		?>
 
-	<div class="form-group">
-		<button class="btn btn-primary btn-block btn-lg" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> <?php echo _LANG('a4009','site')?></button>
-	</div>
-	<?php else:?>
-	<div id="tab-edit-area">
 		<div class="form-group">
-			<div class="panel-group" id="accordion">
-				<?php $_i=1;foreach($_editArray as $_key => $_val):?>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#site-code-<?php echo $_key?>" onclick="focusArea('code_<?php echo $_key?>');sessionSetting('sh_sys_page_edit','<?php echo $_key?>','','');">
-								<?php echo $_val[1]?>
-								<?php if(is_file($g['path_page'].$_filekind.$_val[2])):?><i class="fa fa-check-circle" title="<?php echo _LANG('a0050','site')?>" data-tooltip="tooltip"></i><?php endif?>
-							</a>
-						</h4>
-					</div>
-					<div id="site-code-<?php echo $_key?>" class="panel-collapse collapse<?php if(($_key==$_SESSION['sh_sys_page_edit']) || (!$_SESSION['sh_sys_page_edit']&&$_i==1)):?> in<?php endif?>">
-
-						<div class="rb-codeview">
-							<div class="rb-codeview-header">
-								<ol class="breadcrumb pull-left">
-									<li><?php echo _LANG('a4010','site')?> :</li>
-									<li>root</li>
-									<li>pages</li>
-									<?php if($_mtype=='menu'):?>
-									<li>menu</li>
-									<?php endif?>
-									<li class="active"><?php echo str_replace('menu/','',$_filekind).$_val[2]?></li>
-								</ol>
-								<button type="button" class="btn btn-default btn-xs pull-right" data-tooltip="tooltip" title="<?php echo _LANG('a0068','site')?>" onclick="_nowArea='<?php echo $_key?>';editFullSize('tab-edit-area',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
-							</div>
-							<div class="rb-codeview-body">			
-								<textarea name="<?php echo $_key?>" id="code_<?php echo $_key?>" class="form-control" rows="35"><?php if(is_file($g['path_page'].$_filekind.$_val[2])) echo htmlspecialchars(implode('',file($g['path_page'].$_filekind.$_val[2])))?></textarea>
-							</div>	
-							<div class="rb-codeview-footer">
-								<ul class="list-inline">
-									<li><code><?php echo is_file($g['path_page'].$_filekind.$_val[2])?count(file($g['path_page'].$_filekind.$_val[2])):'0'?> lines</code></li>
-									<li><code><?php echo is_file($g['path_page'].$_filekind.$_val[2])?getSizeFormat(@filesize($g['path_page'].$_filekind.$_val[2]),2):'0B'?></code></li>
-									<li class="pull-right"><?php echo _LANG('a4011','site')?></li>
-								</ul>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<?php $_i++;endforeach?>
-			</div>
-		</div>
-		<div class="form-group rb-submit">
 			<button class="btn btn-primary btn-block btn-lg" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> <?php echo _LANG('a4009','site')?></button>
 		</div>
-	</div>
-	<?php endif?>
+		<?php else:?>
+		<div id="tab-edit-area">
+			<div class="form-group">
+				<div class="panel-group" id="accordion">
+					<?php $_i=1;foreach($_editArray as $_key => $_val):?>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#site-code-<?php echo $_key?>" onclick="focusArea('code_<?php echo $_key?>');sessionSetting('sh_sys_page_edit','<?php echo $_key?>','','');">
+									<?php echo $_val[1]?>
+									<?php if(is_file($g['path_page'].$_filekind.$_val[2])):?><i class="fa fa-check-circle" title="<?php echo _LANG('a0050','site')?>" data-tooltip="tooltip"></i><?php endif?>
+								</a>
+							</h4>
+						</div>
+						<div id="site-code-<?php echo $_key?>" class="panel-collapse collapse<?php if(($_key==$_SESSION['sh_sys_page_edit']) || (!$_SESSION['sh_sys_page_edit']&&$_i==1)):?> in<?php endif?>">
 
+							<div class="rb-codeview">
+								<div class="rb-codeview-header">
+									<ol class="breadcrumb pull-left">
+										<li><?php echo _LANG('a4010','site')?> :</li>
+										<li>root</li>
+										<li>pages</li>
+										<?php if($_mtype=='menu'):?>
+										<li>menu</li>
+										<?php endif?>
+										<li class="active"><?php echo str_replace('menu/','',$_filekind).$_val[2]?></li>
+									</ol>
+									<button type="button" class="btn btn-default btn-xs pull-right" data-tooltip="tooltip" title="<?php echo _LANG('a0068','site')?>" onclick="_nowArea='<?php echo $_key?>';editFullSize('tab-edit-area',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
+								</div>
+								<div class="rb-codeview-body">
+									<textarea name="<?php echo $_key?>" id="code_<?php echo $_key?>" class="form-control" rows="35"><?php if(is_file($g['path_page'].$_filekind.$_val[2])) echo htmlspecialchars(implode('',file($g['path_page'].$_filekind.$_val[2])))?></textarea>
+								</div>
+								<div class="rb-codeview-footer">
+									<ul class="list-inline">
+										<li><code><?php echo is_file($g['path_page'].$_filekind.$_val[2])?count(file($g['path_page'].$_filekind.$_val[2])):'0'?> lines</code></li>
+										<li><code><?php echo is_file($g['path_page'].$_filekind.$_val[2])?getSizeFormat(@filesize($g['path_page'].$_filekind.$_val[2]),2):'0B'?></code></li>
+										<li class="pull-right"><?php echo _LANG('a4011','site')?></li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<?php $_i++;endforeach?>
+				</div>
+			</div>
+			<div class="form-group rb-submit">
+				<button class="btn btn-primary btn-block btn-lg" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> <?php echo _LANG('a4009','site')?></button>
+			</div>
+		</div>
+		<?php endif?>
 	</form>
 </div>
 
@@ -292,8 +290,6 @@ function _codefullscreen()
 <!-- @codemirror -->
 <?php endif?>
 
-
-
 <script>
 _nowArea = '';
 function focusArea(xid)
@@ -314,27 +310,9 @@ getId('rb-more-tab-<?php echo $_mtype=='page'?'3':'2'?>').className = 'active';
 </script>
 <?php endif?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php if($type == 'widget'):?>
 <?php $d['page']['widget'] = array()?>
-<?php if(is_file($g['path_page'].$_filekind.'.widget.php')) include $g['path_page'].$_filekind.'.widget.php'?>
+<?php if(is_file($g['path_page'].$_filekind.'.widget.php')) include $g['path_page'].$_filekind.'.widget.php' ?>
 
 <!-- 위젯 꾸미기 -->
 <div id="rb-page-widget">
@@ -343,11 +321,8 @@ getId('rb-more-tab-<?php echo $_mtype=='page'?'3':'2'?>').className = 'active';
 		<h4>
 			<?php echo $_filetype?> <?php echo _LANG('a4012','site')?> - <?php echo $_filesbj?>
 
-
 			<div class="pull-right rb-top-btnbox">
-
 				<a href="#." class="btn btn-default rb-modal-widgetcall" data-toggle="modal" data-target="#modal_window"><i class="fa fa-puzzle-piece fa-lg"></i> <?php echo _LANG('a4013','site')?></a>
-
 				<?php if ($_mtype == 'page'):$_viewpage=RW('mod='.$_HP['id'])?>
 				<!-- 페이지 -->
 				<div class="btn-group rb-btn-view">
@@ -396,19 +371,19 @@ getId('rb-more-tab-<?php echo $_mtype=='page'?'3':'2'?>').className = 'active';
 	</div>
 
 	<form name="procForm" action="<?php echo $g['s']?>/" method="post">
-	<input type="hidden" name="r" value="<?php echo $r?>" />
-	<input type="hidden" name="m" value="<?php echo $module?>">
-	<input type="hidden" name="a" value="widgetwrite">
-	<input type="hidden" name="type" value="<?php echo $_mtype?>">
-	<input type="hidden" name="escapevar" value="">
-	<?php if($_mtype=='menu'):?>
-	<input type="hidden" name="uid" value="<?php echo $_HM['uid']?>">
-	<input type="hidden" name="id" value="<?php echo $_HM['id']?>">
-	<?php else:?>
-	<input type="hidden" name="id" value="<?php echo $_HP['id']?>">
-	<?php endif?>
-	<input type="hidden" name="iframe" value="Y">
-	<input type="hidden" name="mainheight" value="Y">
+		<input type="hidden" name="r" value="<?php echo $r?>" />
+		<input type="hidden" name="m" value="<?php echo $module?>">
+		<input type="hidden" name="a" value="widgetwrite">
+		<input type="hidden" name="type" value="<?php echo $_mtype?>">
+		<input type="hidden" name="escapevar" value="">
+		<?php if($_mtype=='menu'):?>
+		<input type="hidden" name="uid" value="<?php echo $_HM['uid']?>">
+		<input type="hidden" name="id" value="<?php echo $_HM['id']?>">
+		<?php else:?>
+		<input type="hidden" name="id" value="<?php echo $_HP['id']?>">
+		<?php endif?>
+		<input type="hidden" name="iframe" value="Y">
+		<input type="hidden" name="mainheight" value="Y">
 	</form>
 	<div id="workSpace" class="posrel"></div>
 
@@ -442,7 +417,7 @@ function startMove(e)
 {
     if (!MovableItem) return;
     canvas = isIE ? "BODY" : "HTML";
-        activeItem=isIE ? event.srcElement : e.target;  
+        activeItem=isIE ? event.srcElement : e.target;
         offsetx=isIE ? event.clientX : e.clientX;
         offsety=isIE ? event.clientY : e.clientY;
         lastX=parseInt(MovableItem.style.left);
@@ -472,8 +447,8 @@ function moveIt(e)
 
 	if (edge)
 	{
-		MovableItem.style.width = w+'px'; 
-		MovableItem.style.height = h+'px'; 
+		MovableItem.style.width = w+'px';
+		MovableItem.style.height = h+'px';
 		return false;
 	}
 	else
@@ -491,13 +466,13 @@ function puGetScrollXY()
 	{
         scrollYamt = window.pageYOffset;
         scrollXamt = window.pageXOffset;
-    } 
-	else if( document.body && ( document.body.scrollLeft || document.body.scrollTop ) ) 
+    }
+	else if( document.body && ( document.body.scrollLeft || document.body.scrollTop ) )
 	{
         scrollYamt = document.body.scrollTop;
         scrollXamt = document.body.scrollLeft;
-    } 
-	else if( document.documentElement && ( document.documentElement.scrollLeft || document.documentElement.scrollTop ) ) 
+    }
+	else if( document.documentElement && ( document.documentElement.scrollLeft || document.documentElement.scrollTop ) )
 	{
         scrollYamt = document.documentElement.scrollTop;
         scrollXamt = document.documentElement.scrollLeft;
@@ -516,7 +491,7 @@ function createTile(w,h,t,l)
             moveObject[i].style.height = h;
             moveObject[i].style.top = t;
             moveObject[i].style.left = l;
-			
+
 			MovableItem = moveObject[i];
 			getWHTL();
 			return;
@@ -534,7 +509,7 @@ function poplayer(topObject)
 			moveObject[i].style.zIndex = moveObject[i].style.zIndex-1;
 		}
     }
-    
+
 	topObject.style.zIndex = moveObject.length-1;
     topObject.style.border = '#1A62BA solid 1px';
 }
@@ -551,14 +526,14 @@ function getWHTL()
 function widgetAply(layer,e)
 {
 	var keycode = event.keyCode ? event.keyCode : e.which;
-	
+
 	if (keycode == 13)
 	{
 		var w = getId('whtl'+layer+'_w').value;
 		var h = getId('whtl'+layer+'_h').value;
 		var t = getId('whtl'+layer+'_t').value;
 		var l = getId('whtl'+layer+'_l').value;
-		
+
 		moveObject[layer].style.position = 'absolute';
 		moveObject[layer].style.width = parseInt(w) + 'px';
 		moveObject[layer].style.height = parseInt(h) + 'px';
@@ -678,7 +653,7 @@ function setWidgetBox()
 	<?php $i = 0?>
 	<?php foreach($d['page']['widget'] as $_key => $_val):?>
 	<?php $_size = explode('|',$d['page']['widget'][$_key]['size'])?>
-	
+
 	createTile("<?php echo $_size[0]?>","<?php echo $_size[1]?>","<?php echo $_size[2]?>","<?php echo $_size[3]?>");
 
 	<?php $i++; endforeach?>
@@ -688,8 +663,6 @@ setWidgetBox();
 getId('rb-more-tab-<?php echo $_mtype=='page'?'3':'2'?>').className = 'active';
 </script>
 <?php endif?>
-
-
 
 <script>
 $('.rb-modal-widgetcode').on('click',function() {
@@ -714,7 +687,7 @@ $('.rb-modal-widgetcall-modify').on('click',function() {
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)
 {
-	getContext('<li><a href="<?php echo $_viewpage?>"><?php echo _LANG('a4024','site')?></a></li><li><a href="#." onclick="goHref(getId(\'rb-list-back\').href);"><?php echo _LANG('a4025','site')?></a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();"><?php echo _LANG('a4026','site')?></a></li>',event);	
+	getContext('<li><a href="<?php echo $_viewpage?>"><?php echo _LANG('a4024','site')?></a></li><li><a href="#." onclick="goHref(getId(\'rb-list-back\').href);"><?php echo _LANG('a4025','site')?></a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();"><?php echo _LANG('a4026','site')?></a></li>',event);
 }
 <?php endif?>
 </script>

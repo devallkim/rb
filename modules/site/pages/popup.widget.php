@@ -1,4 +1,4 @@
-<?php 
+<?php
 $step_start = 1;
 $pwd_start = $g['path_widget'];
 $g['adm_href'] = $g['s']."/?r=".$r."&amp;system=".$system."&amp;iframe=".$iframe.($dropfield?"&amp;dropfield=".$dropfield:'').($option?"&amp;option=".$option:'').($isWcode?"&amp;isWcode=".$isWcode:'').($isEdit?"&amp;isEdit=".$isEdit:'');
@@ -26,7 +26,7 @@ else {
 
 if (strstr($pwd,'..'))
 {
-    getLink('','',_LANG('sa001','site'),'close');
+  getLink('','',_LANG('sa001','site'),'close');
 }
 if(!is_dir($pwd))
 {
@@ -46,7 +46,7 @@ function getDirexists($dir)
 function getPrintdir( $nTab, $filepath, $files, $state ,$dir_ex)
 {
     global $g,$pwd,$file,$step_start;
-    
+
     if($step_start) { $nTab = $nTab - $step_start; }
 	$css = strstr($pwd,$filepath) ? ' active' : '';
 	$fname1 = getKRtoUTF($files);
@@ -171,7 +171,7 @@ function getWidgetPreviewImg($path)
 	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>><?php echo _LANG('sa005','site')?></a>
 	<?php endif?>
 </div>
-	
+
 
 
 
