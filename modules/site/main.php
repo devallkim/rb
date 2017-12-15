@@ -16,7 +16,6 @@ if ($system)
 	$g['dir_module_mode'] = $g['dir_module_skin'].$system;
 	$g['url_module_mode'] = $g['url_module_skin'].'/'.$system;
 
-	include getLangFile($g['dir_module'].'language/',($_HS['lang']?$_HS['lang']:$d['admin']['syslang']),'/lang.system.php');
 	$g['main'] = $g['dir_module_mode'].'.php';
 }
 else
@@ -58,7 +57,7 @@ else
 			$g['dir_module_mode'] = $g['dir_module_skin'].$_HM['id'];
 			$g['url_module_mode'] = $g['url_module_skin'].'/'.$_HM['id'];
 			$g['main'] = $g['path_page'].$r.'-menus/'.$_HM['id'].'.php';
-			
+
 			if ($g['device'])
 			{
 				if (is_file($g['path_page'].$r.'-menus/'.$_HM['id'].'.mobile.php'))
@@ -115,9 +114,9 @@ else
 			$g['img_module_skin'] = $g['url_module_skin'].'/images';
 			$g['dir_module_mode'] = $g['dir_module_skin'].$_HP['id'];
 			$g['url_module_mode'] = $g['url_module_skin'].'/'.$_HP['id'];
-			
+
 			$g['main'] = $g['path_page'].$r.'-pages/'.$_HP['id'].'.php';
-			
+
 			if ($g['device'])
 			{
 				if (is_file($g['path_page'].$r.'-pages/'.$_HP['id'].'.mobile.php'))
