@@ -1,4 +1,3 @@
-<?php include getLangFile($g['path_module'].'site/language/',$d['admin']['syslang'],'/lang.system.php') ?>
 <ul class="nav nav-tabs">
 	<li class="active"><a href="#kf" data-toggle="tab">kimsQ</a></li>
 	<li><a href="#glyphicon" data-toggle="tab">Glyphicons</a></li>

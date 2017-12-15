@@ -116,7 +116,6 @@ function getWidgetPreviewImg($path)
 
 		<div class="tab-content" style="padding-top:12px">
 			<div class="tab-pane active" id="code">
-				<?php include getLangFile($g['path_widget'].$swidget.'/lang.',$d['admin']['syslang'],'.php') ?>
 				<?php include $g['path_widget'].$swidget.'/admin.php' ?>
 			</div>
 			<div class="tab-pane" id="preview">

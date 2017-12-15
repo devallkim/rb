@@ -10,8 +10,7 @@
 	</div>
 	<div class="content">
 		<?php if($smodule):?>
-		<?php include getLangFile($g['path_module'].$smodule.'/language/',$d['admin']['syslang'],'/lang.joint.php')?>
-		<?php include $g['var_joint_file']?>
+		<?php include $g['var_joint_file'] ?>
 		<?php else:?>
 		<div class="none">
 			<i class="kf kf-module fa-5x"></i><br><br>

@@ -1,4 +1,3 @@
-<?php include getLangFile($g['dir_module'].'language/',$d['admin']['syslang'],'/lang.system.php') ?>
 <div class="modal-header">
 	<button type="button" class="close" onclick="hideModal();">&times;</button>
 	<h4 class="modal-title"><i class="fa fa-code fa-lg"></i> 위젯코드</h4>
