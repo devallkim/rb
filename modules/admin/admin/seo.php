@@ -1,7 +1,7 @@
 <div id="seo-setting">
 
 	<div class="page-header">
-		<h4><?php echo _LANG('','admin')?>SEO 설정 <small>( Technical Search Engine Optimization )</small></h4>
+		<h4>SEO 설정 <small>( Technical Search Engine Optimization )</small></h4>
 	</div>
 
 	<div class="tab-content">
@@ -23,39 +23,39 @@
 			<input type="hidden" name="act" value="robots">
 				<div class="well">
 					<p>
-						<?php echo _LANG('a3006','admin')?><br>
-						<?php echo _LANG('a3007','admin')?>
-						<?php echo _LANG('a3008','admin')?>
+						robots.txt 파일은 웹 크롤러 소프트웨어(예: Googlebot)가 사이트의 특정 페이지를 크롤링하지 못하도록 하는 텍스트 파일입니다.<br>
+						이 파일은 기본적으로 Allow와 Disallow와 같은 명령어 목록으로 구성되어 웹 크롤러가 검색할 수 있는 URL과 검색할 수 없는 URL을 지정합니다.
+						<a href="https://support.google.com/webmasters/answer/6062608?hl=ko" target="_blank">더보기</a>
 					</p>
 				</div>
-				<div class="rb-codeview">			
+				<div class="rb-codeview">
 <?php if(is_file($_SERVER['DOCUMENT_ROOT'].'/robots.txt')):?>
 <textarea name="robotstxt" class="form-control" rows="15">
 <?php readfile($_SERVER['DOCUMENT_ROOT'].'/robots.txt')?>
 </textarea>
 <?php else:?>
 <textarea name="robotstxt" class="form-control" rows="15" onclick="this.value=getId('robotstxt').innerHTML;">
-<?php echo _LANG('a3009','admin')?> 
-<?php echo _LANG('a3010','admin')?> 
-<?php echo _LANG('a3011','admin')?> 
-<?php echo _LANG('a3012','admin')?> 
+robots.txt 파일은 서버의 홈디렉토리 안에 위치해야 합니다.
+여기를 클릭하면 기본값을 불러옵니다.
+킴스큐 설치시 기본폴더명인 rb 를 다른이름으로 변경했을 경우 변경된 이름으로 수정해 주세요.
+rb 폴더를 사용하지 않고 설치하셨을 경우 경로중 /rb 를 제거해 주세요.
 </textarea>
 <div id="robotstxt" class="hidden"><?php readfile('./robots.txt')?></div>
 <?php endif?>
 					<div class="rb-meta">
 						<?php if(is_file($_SERVER['DOCUMENT_ROOT'].'/robots.txt')):?>
-						<?php echo _LANG('a3001','admin')?> : /robots.txt
+						파일위치 : /robots.txt
 						<code><?php echo getSizeFormat(filesize($_SERVER['DOCUMENT_ROOT'].'/robots.txt'),2)?></code>
 						<?php endif?>
-						<span class="pull-right"><?php echo _LANG('a3013','admin')?></span>
+						<span class="pull-right">파일을 편집한 후 저장 버튼을 클릭하면 실시간으로 사용자 페이지에 적용됩니다.</span>
 					</div>
 				</div>
 
 				<div class="rb-submit">
 					<?php if(is_file($_SERVER['DOCUMENT_ROOT'].'/robots.txt')):?>
-					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=seo&amp;act=robots_delete" onclick="return hrefCheck(this,true,'<?php echo _LANG('a3003','admin')?>');" class="btn btn-default"><?php echo _LANG('a3004','admin')?></a>
+					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=seo&amp;act=robots_delete" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');" class="btn btn-default">삭제하기</a>
 					<?php endif?>
-					<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>"><?php echo _LANG('a3005','admin')?></button>
+					<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>">저장하기</button>
 				</div>
 			</form>
 		</div>
@@ -64,15 +64,15 @@
 
 			<div class="well">
 				<p>
-					<strong><?php echo _LANG('a3014','admin')?></strong>
-					<?php echo _LANG('a3015','admin')?><br> 
-					<?php echo _LANG('a3016','admin')?>
-					<?php echo _LANG('a3017','admin')?>
+					<strong>URL Rewrite 설정</strong>
+					간편 URL(영어: clean URL, fancy URL)은 질의어 없이, 경로만 가진 간단한 구조의 URL을 말한다.<br>
+					사용자 친화적 URL(영어: user-friendly URLs), 검색엔진 친화적 URL(영어: search engine friendly url) 또는 간단히 친화적 URL이라고도 한다. 깔끔하지 않은 URL에 비해 기억하기 쉽고, 입력하기 쉽다는 장점이 있다.
+					<a href="http://ko.wikipedia.org/wiki/%EA%B0%84%ED%8E%B8_URL" target="_blank">더보기</a>
 				</p>
 
 				<p>
-					<?php echo _LANG('a3018','admin')?>
-				</p>		
+					파일을 직접 추가하거나 수정하시려면 FTP 클라이언트로 다운로드 받아 백업받은 후 로컬에서 편집 후 업로드 적용할 것을 권장합니다.
+				</p>
 			</div>
 
 			<div class="rb-codeview">
@@ -80,9 +80,9 @@
 <?php readfile('./.htaccess')?>
 </pre>
 				<div class="rb-meta">
-					<?php echo _LANG('a3001','admin')?> : <?php echo $g['s']?>/.htaccess
+					파일위치 : <?php echo $g['s']?>/.htaccess
 					<code><?php echo getSizeFormat(filesize('./.htaccess'),2)?></code>
-					<span class="pull-right"><?php echo _LANG('a3019','admin')?></span>	
+					<span class="pull-right">웹을 통한 편집은 제공하지 않습니다.</span>
 				</div>
 			</div>
 		</div>
@@ -95,17 +95,17 @@
 			<input type="hidden" name="act" value="sitemap_save">
 			<div class="well">
 				<p>
-					<?php echo _LANG('a3020','admin')?><br>
-					<?php echo _LANG('a3021','admin')?><br>
-					<?php echo _LANG('a3022','admin')?><br>
+					Sitemap을 사용하면 검색엔진(Google)이 발견하지 못했을 수도 있는 사이트의 페이지 정보를 검색엔진에 알릴 수 있습니다.<br>
+					간단히 말해서 XML Sitemap은 웹사이트에 있는 페이지의 목록입니다.<br>
+					Sitemap을 만들어 제출하면 검색엔진의 일반적인 크롤링 과정에서 발견되지 않는 URL을 비롯하여 사이트의 모든 페이지 정보를 검색엔진에 알릴 수 있습니다.<br>
 				</p>
 				<p>
-					<?php echo _LANG('a3023','admin')?><br>
-					<?php echo _LANG('a3024','admin')?><br>
+					본 파일은 <a href="http://www.sitemaps.org/ko/" target="_blank">sitemaps.org</a> 사이트에 명시된 바와 같이 Sitemap Protocol 0.9를 따릅니다.<br>
+					따라서 Sitemap Protocol 0.9를 사용하여 만든 Google용 Sitemap은 sitemaps.org의 기준을 채택한 다른 검색엔진과 호환됩니다.<br>
 				</p>
 				<p>
-					<?php echo _LANG('a3025','admin')?><br>
-					<?php echo _LANG('a3026','admin')?>
+					사이트맵을 직접 추가하거나 수정하시려면 <a href="https://support.google.com/webmasters/bin/answer.py?hl=ko&amp;answer=183668" target="_blank">사이트맵을 만드는 방법</a>에 맞게 편집해 주세요.<br>
+					파일용량이 클 경우 다운로드 받아 PC에서 편집할 것을 권장합니다.
 				</p>
 			</div>
 			<div class="rb-codeview">
@@ -115,20 +115,20 @@
 </textarea>
 <?php else:?>
 <textarea name="configdata">
-<?php echo _LANG('a3027','admin')?> 
-<?php echo _LANG('a3028','admin')?> 
-<?php echo _LANG('a3029','admin')?> 
+사이트맵이 존재하지 않습니다.
+새로 만들기 버튼을 클릭하여 사이트맵을 만들어 주세요.
+메뉴를 새로 생성한 경우에 새로 만들기 버튼을 클릭하면 가장 최신의 사이트맵 상태를 유지할 수 있습니다.
 </textarea>
 <?php endif?>
 					<div class="rb-meta">
 						<?php if(is_file('./sitemap.xml')):?>
-						<?php echo _LANG('a3001','admin')?> : <?php echo $g['s']?>/sitemap.xml
+						파일위치 : <?php echo $g['s']?>/sitemap.xml
 						<code><?php echo getSizeFormat(filesize('./sitemap.xml'),2)?></code>
 						<?php endif?>
-						<div class="text-right"><?php echo _LANG('a3030','admin')?></div>
+						<div class="text-right">파일을 편집한 후 저장 버튼을 클릭하면 실시간으로 사용자 페이지에 적용됩니다.</div>
 						<?php if(is_file('./sitemap.xml')):?>
 						<div class="input-group" style="margin-top: 10px">
-							<span class="input-group-addon"><?php echo _LANG('a3001','admin')?></span>
+							<span class="input-group-addon">파일위치</span>
 							<input id="_url_m_1_" type="text" class="form-control" value="<?php echo $g['url_root']?>/sitemap.xml" readonly="">
 							<span class="input-group-btn">
 								<a href="#." class="btn btn-default rb-clipboard hidden-xs" data-tooltip="tooltip" title="Copy" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
@@ -139,17 +139,17 @@
 					</div>
 				</div>
 				<div class="rb-submit">
-					<button type="button" class="btn btn-default btn-lg<?php if($g['device']):?> btn-block<?php endif?>" onclick="sitemap_make(this);"><?php echo _LANG('a3002','admin')?></button>
+					<button type="button" class="btn btn-default btn-lg<?php if($g['device']):?> btn-block<?php endif?>" onclick="sitemap_make(this);">새로 만들기</button>
 					<?php if(is_file('./sitemap.xml')):?>
-					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=seo&amp;act=sitemap_delete" onclick="return hrefCheck(this,true,'<?php echo _LANG('a3003','admin')?>');" class="btn btn-default"><?php echo _LANG('a3004','admin')?></a>
+					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=seo&amp;act=sitemap_delete" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');" class="btn btn-default">삭제하기</a>
 					<?php endif?>
-					<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>"><?php echo _LANG('a3005','admin')?></button>
+					<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>">저장하기</button>
 				</div>
 				<div class="well">
 					<ul>
-						<li><?php echo _LANG('a3031','admin')?></li>
-						<li><?php echo _LANG('a3032','admin')?></li>
-						<li><?php echo _LANG('a3033','admin')?></li>
+						<li><a href="http://www.sitemaps.org/" target="_blank">Sitemap 프로토콜</a>을 기반으로 하여 Sitemap을 만들거나 텍스트 파일 또는 RSS/Atom 피드를 Sitemap으로 제출할 수 있습니다.</li>
+						<li><a href="https://support.google.com/webmasters/bin/answer.py?answer=183668" target="_blank">Sitemap을 만드는 방법</a></li>
+						<li><a href="https://www.google.co.kr/webmasters/" target="_blank">Google 웹마스터 도구</a></li>
 					</ul>
 				</div>
 			</form>
@@ -158,26 +158,26 @@
 		<div class="tab-pane<?php if($_SESSION['sh_admin_seo']=='errorpage'):?> active in<?php endif?>" id="error">
 			<div class="well">
 				<ul>
-					<li><?php echo _LANG('a3034','admin')?></li>
-					<li><?php echo _LANG('a3035','admin')?></li>
-					<li><?php echo _LANG('a3036','admin')?></li>
-					<li><?php echo _LANG('a3037','admin')?></li>
-					<li><?php echo _LANG('a3038','admin')?></li>
+					<li><a href="http://www.htaccessbasics.com/404-custom-error-page/" target="_blank">How to Redirect your 404 error to a Custom Page</a></li>
+					<li><a href="http://stackoverflow.com/questions/19962787/rewrite-url-after-redirecting-404-error-htaccess" target="_blank">Rewrite URL after redirecting 404 error htaccess</a></li>
+					<li><a href="http://www.etnews.com/201312200346" target="_blank">네이버 검색에 잘 걸리는 웹페이지 만들기 비법은?</a></li>
+					<li><a href="http://search-marketing.co.kr/50043928552" target="_blank">검색엔진최적화 - 404 에러페이지 처리</a></li>
+					<li><a href="http://moz.com/blog/are-404-pages-always-bad-for-seo" target="_blank">Are 404 Pages Always Bad for SEO?</a></li>
 				</ul>
 			</div>
 			<hr>
 			<ol>
-				<li><?php echo _LANG('a3039','admin')?></li>
-				<li><?php echo _LANG('a3040','admin')?></li>
+				<li>기본 페이지 목록에 404 Error 페이지 추가 필요</li>
+				<li>.htaccess에 <code>ErrorDocument 404 /errormessages/404.php</code> 형식으로 404페이지 지정 필요.</li>
 			</ol>
 		</div>
 
 		<div class="tab-pane<?php if($_SESSION['sh_admin_seo']=='redirect'):?> active in<?php endif?>" id="301">
 			<div class="well">
 				<ul>
-					<li><?php echo _LANG('a3041','admin')?></li>
-					<li><?php echo _LANG('a3042','admin')?></li>
-					<li><?php echo _LANG('a3043','admin')?></li>
+					<li><a href="http://blog.iolate.kr/162" target="_blank">Permanently Redirect (301)</a></li>
+					<li><a href="http://www.etnews.com/201312200346" target="_blank">사이트나 페이지 변경 시 301 redirect를 사용할 것</a></li>
+					<li><a href="http://www.htaccessbasics.com/how-to-setup-a-301-redirect/" target="_blank">How to setup a 301 Redirect</a></li>
 				</ul>
 			</div>
 		</div>
@@ -200,7 +200,7 @@ client.on( "ready", function( readyEvent ) {});
 }(jQuery))
 function sitemap_make(obj)
 {
-	if (confirm('<?php echo _LANG('a3044','admin')?>    '))
+	if (confirm('정말로 사이트맵을 새로 만드시겠습니까?    '))
 	{
 		getIframeForAction(obj.form);
 		obj.form.act.value = 'sitemap_make';
@@ -210,6 +210,6 @@ function sitemap_make(obj)
 function saveCheck(f)
 {
 	getIframeForAction(f);
-	return confirm('<?php echo _LANG('a0001','admin')?>    ');
+	return confirm('정말로 실행하시겠습니까?    ');
 }
 </script>

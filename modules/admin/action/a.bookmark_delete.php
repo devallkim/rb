@@ -11,7 +11,7 @@ if ($deltype == 'hidden')
 	$bookmark_uid = $bookmark_rcd['uid'];
 	if (!$bookmark_uid)
 	{
-		getLink('','',_LANG('a4001','admin'),'');
+		getLink('','','등록되지 않았거나 이미 삭제된 북마크입니다.','');
 	}
 	getDbDelete($table['s_admpage'],'uid='.$bookmark_uid);
 	?>
@@ -21,7 +21,7 @@ if ($deltype == 'hidden')
 	parent.getId('_bookmark_already_').className = 'btn-group btn-group-sm dropdown hidden';
 	parent.getId('_now_bookmark_<?php echo $bookmark_uid?>').className = 'list-group-item hidden';
 	<?php if(!getDbRows($table['s_admpage'],'memberuid='.$my['uid'])):?>
-	parent.getId('_add_bookmark_').innerHTML = '<a class="list-group-item"><i class="fa fa-fw fa-file-text-o"></i><?php echo _LANG('a4002','admin')?></a>';
+	parent.getId('_add_bookmark_').innerHTML = '<a class="list-group-item"><i class="fa fa-fw fa-file-text-o"></i>등록된 북마크가 없습니다</a>';
 	<?php endif?>
 	</script>
 	<?php

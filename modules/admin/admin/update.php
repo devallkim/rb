@@ -1,4 +1,4 @@
-<?php 
+<?php
 include $g['path_core'].'function/rss.func.php';
 include $g['path_module'].'market/var/var.php';
 $_serverinfo = explode('/',$d['market']['url']);
@@ -12,7 +12,7 @@ $TPG = getTotalPage($_updatelength,$recnum);
 
 <div id="update-body">
 	<div class="page-header">
-	  <h4><?php echo _LANG('a8001','admin')?></h4>
+	  <h4>킴스큐 원격 업데이트</h4>
 	</div>
 
 	<div class="media well">
@@ -20,7 +20,7 @@ $TPG = getTotalPage($_updatelength,$recnum);
 		<span class="fa kf-bi-01"></span> Rb <i><?php echo $d['admin']['version']?></i>
 	  </div>
 	  <div class="media-body hidden-xs">
-		<?php echo _LANG('a8002','admin')?>
+			원격 업데이트를 이용하시면 킴스큐Rb를 항상 최신의 상태로 유지할 수 있습니다. <br>패치 및 업데이트 내용에 따라서 업데이트를 진행해 주세요.
 	  </div>
 	</div>
 
@@ -28,11 +28,11 @@ $TPG = getTotalPage($_updatelength,$recnum);
 		<table class="table table-bordered">
 			<thead>
 				<tr class="active">
-					<th><?php echo _LANG('a8003','admin')?></th>
-					<th><?php echo _LANG('a8004','admin')?></th>
-					<th><?php echo _LANG('a8005','admin')?></th>
-					<th><?php echo _LANG('a8006','admin')?></th>
-					<th><?php echo _LANG('a8007','admin')?></th>
+					<th>버전</th>
+					<th>패치/업데이트</th>
+					<th>적용일자</th>
+					<th>처리여부</th>
+					<th>관리</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -53,12 +53,12 @@ $TPG = getTotalPage($_updatelength,$recnum);
 					<td>
 						<span>
 							<?php if($var1[2]):?>
-							<a href="<?php echo $var1[2]?>" target="_blank" data-tooltip="tooltip" title="<?php echo _LANG('a8008','admin')?>"><?php echo $var1[0]?>_<?php echo $var1[1]?></a>
+							<a href="<?php echo $var1[2]?>" target="_blank" data-tooltip="tooltip" title="업데이트 내역 보기"><?php echo $var1[0]?>_<?php echo $var1[1]?></a>
 							<?php else:?>
-							<a href="#." data-tooltip="tooltip" title="<?php echo _LANG('a8009','admin')?>"><?php echo $var1[0]?>_<?php echo $var1[1]?></a>
+							<a href="#." data-tooltip="tooltip" title="정보가 없는 없데이트입니다"><?php echo $var1[0]?>_<?php echo $var1[1]?></a>
 							<?php endif?>
 							&nbsp;
-							<a href="http://<?php echo $_serverinfo[2]?>/__update/files/v2/<?php echo $var1[1]?>.zip" class="rb-update-download" data-tooltip="tooltip" title="<?php echo _LANG('a8010','admin')?>"><i class="glyphicon glyphicon-download-alt"></i></a>
+							<a href="http://<?php echo $_serverinfo[2]?>/__update/files/v2/<?php echo $var1[1]?>.zip" class="rb-update-download" data-tooltip="tooltip" title="파일 다운로드"><i class="glyphicon glyphicon-download-alt"></i></a>
 						</span>
 					</td>
 					<td>
@@ -66,11 +66,11 @@ $TPG = getTotalPage($_updatelength,$recnum);
 					</td>
 					<td>
 						<button class="btn btn-default disabled">
-							<i class="fa fa-circle-o"></i> <?php echo _LANG('a8011','admin')?> <?php if($_supdate[1]):?>(<?php echo _LANG('a8012','admin')?>)<?php else:?>(<?php echo _LANG('a8013','admin')?>)<?php endif?>
+							<i class="fa fa-circle-o"></i> 완료됨 <?php if($_supdate[1]):?>(수동)<?php else:?>(원격)<?php endif?>
 						</button>
 					</td>
 					<td>
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;a=update&amp;type=delete&amp;ufile=<?php echo $var1[1]?>" title="<?php echo _LANG('a8014','admin')?>" onclick="return hrefCheck(this,true,'<?php echo _LANG('a8015','admin')?>');" class="btn btn-default"><i class="fa fa-times"></i> <?php echo _LANG('a8016','admin')?></a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;a=update&amp;type=delete&amp;ufile=<?php echo $var1[1]?>" title="업데이트기록 제거" onclick="return hrefCheck(this,true,'정말로 업데이트 기록을 제거하시겠습니까?');" class="btn btn-default"><i class="fa fa-times"></i> 기록제거</a>
 					</td>
 				</tr>
 
@@ -83,23 +83,23 @@ $TPG = getTotalPage($_updatelength,$recnum);
 					<td>
 						<span>
 							<?php if($var1[2]):?>
-							<a href="<?php echo $var1[2]?>" target="_blank" data-tooltip="tooltip" title="<?php echo _LANG('a8008','admin')?>"><?php echo $var1[0]?>_<?php echo $var1[1]?></a>
+							<a href="<?php echo $var1[2]?>" target="_blank" data-tooltip="tooltip" title="업데이트 내역 보기"><?php echo $var1[0]?>_<?php echo $var1[1]?></a>
 							<?php else:?>
-							<a href="#." data-tooltip="tooltip" title="<?php echo _LANG('a8009','admin')?>"><?php echo $var1[0]?>_<?php echo $var1[1]?></a>
+							<a href="#." data-tooltip="tooltip" title="정보가 없는 없데이트입니다"><?php echo $var1[0]?>_<?php echo $var1[1]?></a>
 							<?php endif?>
 							&nbsp;
-							<a href="http://<?php echo $_serverinfo[2]?>/__update/files/v2/<?php echo $var1[1]?>.zip" class="rb-update-download" data-tooltip="tooltip" title="<?php echo _LANG('a8010','admin')?>"><i class="glyphicon glyphicon-download-alt"></i></a>
+							<a href="http://<?php echo $_serverinfo[2]?>/__update/files/v2/<?php echo $var1[1]?>.zip" class="rb-update-download" data-tooltip="tooltip" title="파일 다운로드"><i class="glyphicon glyphicon-download-alt"></i></a>
 						</span>
 					</td>
 					<td></td>
 					<td>
 						<button class="btn btn-default disabled">
-							<i class="glyphicon glyphicon-pause"></i> <?php echo _LANG('a8017','admin')?>
-						</button>					
+							<i class="glyphicon glyphicon-pause"></i> 미적용
+						</button>
 					</td>
 					<td>
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;a=update&amp;type=auto&amp;ufile=<?php echo $var1[1]?>" onclick="return hrefCheck(this,true,'<?php echo _LANG('a8018','admin')?>');" class="btn btn-primary"><i class="glyphicon glyphicon-download-alt"></i> <?php echo _LANG('a8019','admin')?></a>
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;a=update&amp;type=manual&amp;ufile=<?php echo $var1[1]?>" onclick="return hrefCheck(this,true,'<?php echo _LANG('a8020','admin')?>');" class="btn btn-primary"><i class="glyphicon glyphicon-import"></i> <?php echo _LANG('a8021','admin')?></a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;a=update&amp;type=auto&amp;ufile=<?php echo $var1[1]?>" onclick="return hrefCheck(this,true,'정말로 업데이트 하시겠습니까?');" class="btn btn-primary"><i class="glyphicon glyphicon-download-alt"></i> 원격 업데이트</a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;a=update&amp;type=manual&amp;ufile=<?php echo $var1[1]?>" onclick="return hrefCheck(this,true,'정말로 수동으로 업데이트 처리하시겠습니까?\n수동 업데이트 처리시 원격업데이트는 건너뜁니다.');" class="btn btn-primary"><i class="glyphicon glyphicon-import"></i> 수동 업데이트</a>
 					</td>
 				</tr>
 
@@ -107,7 +107,7 @@ $TPG = getTotalPage($_updatelength,$recnum);
 				<?php endfor?>
 				<?php if(!$_updatelength):?>
 				<tr>
-				<td colspan="5"><?php echo _LANG('a8022','admin')?></td>
+				<td colspan="5">업데이트 대기리스트가 없습니다.</td>
 				</tr>
 				<?php endif?>
 			</tbody>
@@ -128,16 +128,14 @@ $TPG = getTotalPage($_updatelength,$recnum);
 	<div class="well">
 		<p class="clearfix">
 			<i class="fa fa-question-circle fa-lg"></i>
-			<strong><?php echo _LANG('a8023','admin')?></strong>
+			<strong>원격 업데이트 도움말</strong>
 		</p>
 
 		<ul>
-		<li><?php echo _LANG('a8024','admin')?></li>
-		<li><?php echo _LANG('a8025','admin')?></li>
-		<li><?php echo _LANG('a8026','admin')?></li>
-		<li><?php echo _LANG('a8027','admin')?></li>
+		<li>원격 업데이트는 킴스큐의 코어 및 관련 파일들을 항상 최신의 상태로 유지할 수 있는 시스템입니다.</li>
+		<li>그러나 사용자가 직접 수정하거나 커스터마이징 한 사항이 업데이트 내역에 포함되어 있을 경우 해당사항이 덧씌워 지므로 이 경우 반드시 수작업으로 패치한 후 수동 업데이트를 클릭해 주어야 합니다.</li>
+		<li>정상적으로 업데이트 되지 않았거나 재 업데이트를 원하시면 기록을 제거한 후 재시도해 주세요.</li>
+		<li>이 작업은 데이터의 용량이나 처리내용에 따라서 다소 시간이 걸릴 수 있습니다.</li>
 		</ul>
 	</div>
 </div>
-
-

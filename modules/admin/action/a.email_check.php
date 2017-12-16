@@ -5,7 +5,7 @@ checkAdmin(0);
 
 if ($type == 'ftpbtn')
 {
-	$FTP_CONNECT = ftp_connect($ftp_host,$ftp_port); 
+	$FTP_CONNECT = ftp_connect($ftp_host,$ftp_port);
 	$FTP_CRESULT = ftp_login($FTP_CONNECT,$ftp_user,$ftp_pass);
 
 	if ($FTP_CONNECT && $FTP_CRESULT):
@@ -16,13 +16,13 @@ if ($type == 'ftpbtn')
 		$FTP_PASV = ftp_pasv($FTP_CONNECT, true);
 	}
 	$FTP_CHDIR = ftp_chdir($FTP_CONNECT,$ftp_rb);
-	if (!$FTP_PASV) $_msg = _LANG('a6001','admin');
-	if (!$FTP_CHDIR || substr($ftp_rb,-1)!='/') $_msg = _LANG('a6002','admin');
+	if (!$FTP_PASV) $_msg = 'Passive Mode 를 확인하세요.';
+	if (!$FTP_CHDIR || substr($ftp_rb,-1)!='/') $_msg = '킴스큐 경로를 확인하세요.';
 	if ($FTP_PASV && $FTP_CHDIR):
 	?>
 	<script>
-	alert('<?php echo _LANG('a6003','admin')?>');
-	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i><?php echo _LANG('a1001','admin')?>';
+	alert('정상적으로 FTP 연결이 확인되었습니다.');
+	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>정상';
 	parent.submitFlag = false;
 	parent.document.procForm.a.value = 'config';
 	parent.document.procForm.autosave.value = '1';
@@ -32,8 +32,8 @@ if ($type == 'ftpbtn')
 	</script>
 	<?php else:?>
 	<script>
-	alert('<?php echo _LANG('a6004','admin')?> <?php echo $_msg?>');
-	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i><?php echo _LANG('a1002','admin')?>';
+	alert('FTP 연결이 되지 않았습니다. <?php echo $_msg?>');
+	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>확인요망';
 	parent.submitFlag = false;
 	parent.document.procForm.a.value = 'config';
 	parent.document.procForm.autosave.value = '1';
@@ -44,8 +44,8 @@ if ($type == 'ftpbtn')
 	<?php endif?>
 	<?php else:?>
 	<script>
-	alert('<?php echo _LANG('a6005','admin')?>');
-	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i><?php echo _LANG('a1002','admin')?>';
+	alert('FTP 연결이 되지 않았습니다. FTP정보를 확인해 주세요.');
+	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>확인요망';
 	parent.submitFlag = false;
 	parent.document.procForm.a.value = 'config';
 	parent.document.procForm.autosave.value = '1';
@@ -58,35 +58,35 @@ if ($type == 'ftpbtn')
 }
 else if ($type == 'ftpbtn_uninstall')
 {
-	$FTP_CONNECT = ftp_connect($d['admin']['ftp_host'],$d['admin']['ftp_port']); 
+	$FTP_CONNECT = ftp_connect($d['admin']['ftp_host'],$d['admin']['ftp_port']);
 	$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['admin']['ftp_user'],$pass);
 
 	if ($FTP_CONNECT && $FTP_CRESULT):
 	?>
 	<script>
-	alert('<?php echo _LANG('a6003','admin')?>');
-	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i><?php echo _LANG('a1001','admin')?>';
+	alert('정상적으로 FTP 연결이 확인되었습니다.');
+	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>정상';
 	</script>
 	<?php else:?>
 	<script>
-	alert('<?php echo _LANG('a6005','admin')?>');
-	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i><?php echo _LANG('a1002','admin')?>';
+	alert('FTP 연결이 되지 않았습니다. FTP정보를 확인해 주세요.');
+	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>확인요망';
 	</script>
 	<?php
 	endif;
 }
-else 
+else
 {
 	include $g['path_core'].'function/email.func.php';
 
-	$content = '<h4>'._LANG('a6008','admin').'</h4><br>';
-	$content.= _LANG('a6009','admin').'<br><br>';
+	$content = '<h4>이메일전송 테스트입니다.</h4><br>';
+	$content.= '이 화면을 정상적으로 확인하셨다면 이메일 전송이 정상적으로 동작중입니다.<br><br>';
 
 	if ($type == 'sendmailbtn')
 	{
-		$result = getSendMail($chk_email,$my['email'].'|'.$my['name'],'['.$_HS['name'].']'._LANG('a6008','admin').'(Using Sendmail)',$content,'HTML');
+		$result = getSendMail($chk_email,$my['email'].'|'.$my['name'],'['.$_HS['name'].'] 이메일 전송 테스트입니다.(Using Sendmail)',$content,'HTML');
 	}
-	if ($type == 'smtpbtn') 
+	if ($type == 'smtpbtn')
 	{
 		$d['admin']['smtp_use'] = true;
 		$d['admin']['smtp'] = true;
@@ -97,13 +97,13 @@ else
 		$d['admin']['smtp_user'] = trim($smtp_user);
 		$d['admin']['smtp_pass'] = trim($smtp_pass);
 
-		$result = getSendMail($chk_email,$my['email'].'|'.$my['name'],'['.$_HS['name'].']'._LANG('a6008','admin').'(Using SMTP)',$content,'HTML');
+		$result = getSendMail($chk_email,$my['email'].'|'.$my['name'],'['.$_HS['name'].'] 이메일 전송 테스트입니다.(Using SMTP)',$content,'HTML');
 	}
 	if ($result):
 	?>
 	<script>
-	alert('<?php echo _LANG('a6010','admin')?>');
-	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i><?php echo _LANG('a1001','admin')?>';
+	alert('이메일이 전송되었습니다. 확인해 보세요.');
+	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>정상';
 	parent.submitFlag = false;
 	parent.document.procForm.a.value = 'config';
 	parent.document.procForm.autosave.value = '1';
@@ -113,8 +113,8 @@ else
 	</script>
 	<?php else:?>
 	<script>
-	alert('<?php echo _LANG('a6011','admin')?>');
-	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i><?php echo _LANG('a1002','admin')?>';
+	alert('메일서버가 응답하지 않습니다.');
+	parent.getId('<?php echo $type?>').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>확인요망';
 	parent.submitFlag = false;
 	parent.document.procForm.a.value = 'config';
 	parent.document.procForm.autosave.value = '1';

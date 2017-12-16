@@ -20,5 +20,5 @@ fwrite($fp, "?>");
 fclose($fp);
 @chmod($_ufile,0707);
 
-getLink('reload','parent.',$auto?'':_LANG('aa001','admin'),'');
+getLink('reload','parent.',$auto?'':'스위치 정보가 갱신되었습니다.','');
 ?>

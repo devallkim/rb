@@ -18,9 +18,9 @@
 				<?php $_i++;endwhile?>
 				<?php if(!db_num_rows($ADMPAGE)):?>
 				<li class="rb-none">
-					<?php echo _LANG('ab002','admin')?>
+					등록된 북마크가 없습니다.
 				</li>
-				<?php endif?>	
+				<?php endif?>
 			</ol>
 		</div>
 	</form>
@@ -62,11 +62,11 @@ function actQue(act)
 	{
 		if (j == 0)
 		{
-			alert('<?php echo _LANG('ab009','admin')?>   ');
+			alert('삭제할 북마크를 선택해 주세요.   ');
 		}
-		else 
+		else
 		{
-			if (confirm('<?php echo _LANG('ab010','admin')?>   '))
+			if (confirm('정말로 북마크에서 제외하시겠습니까?   '))
 			{
 				getIframeForAction(f);
 				f.a.value = act;
@@ -98,21 +98,21 @@ function actQue(act)
 
 <div id="_modal_header" class="hidden">
 	<button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
-	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-star-o fa-lg"></i> <?php echo _LANG('ac001','admin')?></h4>
+	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-star-o fa-lg"></i> 북마크 관리</h4>
 </div>
 <div id="_modal_footer" class="hidden">
 	<ul class="list-inline clearfix">
 		<li class="pull-left">
 			<button type="button" class="btn btn-default"<?php if($_i==1):?> disabled<?php endif?> onclick="frames._modal_iframe_modal_window.checkboxChoice('bookmark_pages[]',true);">
-				<?php echo _LANG('ab003','admin')?>
+				전체선택
 			</button>
 			<button type="button" class="btn btn-default"<?php if($_i==1):?> disabled<?php endif?> onclick="frames._modal_iframe_modal_window.checkboxChoice('bookmark_pages[]',false);">
-				<?php echo _LANG('ab004','admin')?>
+				전체취소
 			</button>
 		</li>
 		<li class="pull-right">
 			<button type="button" class="btn btn-primary"<?php if($_i==1):?> disabled<?php endif?> onclick="frames._modal_iframe_modal_window.actQue('bookmark_delete');">
-				<?php echo _LANG('ab005','admin')?>
+				삭제
 			</button>
 		</li>
 	</ul>
@@ -159,43 +159,43 @@ document.body.onresize = document.body.onload = function()
  * Nestable
  */
 
-.dd { 
-    position: relative; 
-    display: block; 
-    margin: 0; 
-    padding: 0; 
-    max-width: 600px; 
-    list-style: none; 
+.dd {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    max-width: 600px;
+    list-style: none;
     line-height: 20px
 }
 
-.dd-list { 
-    display: block; 
-    position: relative; 
-    margin: 0; 
-    padding: 0; 
+.dd-list {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
     list-style: none
 }
 
 .dd-item,
 .dd-empty,
-.dd-placeholder { 
-    display: block; 
+.dd-placeholder {
+    display: block;
     position: relative;
-    margin: 0; 
-    padding: 0; 
-    min-height: 20px; 
+    margin: 0;
+    padding: 0;
+    min-height: 20px;
     line-height: 20px
 }
 
-.dd-handle { 
-    display: block; 
-    height: 35px; 
-    margin: 5px 0; 
-    padding: 5px 10px; 
-    color: #333; 
-    text-decoration: none; 
-    font-weight: bold; 
+.dd-handle {
+    display: block;
+    height: 35px;
+    margin: 5px 0;
+    padding: 5px 10px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
     border: 1px solid #ddd;
     background: #fafafa;
     background: -webkit-linear-gradient(top, #fafafa 0%, #eee 100%);
@@ -210,19 +210,19 @@ document.body.onresize = document.body.onload = function()
 
 
 .dd-placeholder,
-.dd-empty { 
-    margin: 5px 0; 
-    padding: 0; 
-    min-height: 30px; 
-    background: #f2fbff; 
-    border: 1px dashed #b6bcbf; 
-    box-sizing: border-box; 
+.dd-empty {
+    margin: 5px 0;
+    padding: 0;
+    min-height: 30px;
+    background: #f2fbff;
+    border: 1px dashed #b6bcbf;
+    box-sizing: border-box;
     -moz-box-sizing: border-box
 }
 
-.dd-empty { 
-    border: 1px dashed #bbb; 
-    min-height: 100px; 
+.dd-empty {
+    border: 1px dashed #bbb;
+    min-height: 100px;
     background-color: #e5e5e5;
     background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
                       -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
@@ -234,9 +234,9 @@ document.body.onresize = document.body.onload = function()
     background-position: 0 0, 30px 30px;
 }
 
-.dd-dragel { 
-    position: absolute; 
-    pointer-events: none; 
+.dd-dragel {
+    position: absolute;
+    pointer-events: none;
     z-index: 9999
 }
 
@@ -269,13 +269,13 @@ document.body.onresize = document.body.onload = function()
  * Nestable Draggable Handles
  */
 
-.dd3-content { 
-    display: block; 
-    height: 35px; 
-    margin: 5px 0; 
+.dd3-content {
+    display: block;
+    height: 35px;
+    margin: 5px 0;
     line-height: 20px;
-    padding: 6px 10px 4px 40px; 
-    color: #333; 
+    padding: 6px 10px 4px 40px;
+    color: #333;
     border: 1px solid #ddd;
     background: #eee;
     -webkit-border-radius: 3px;
@@ -283,12 +283,12 @@ document.body.onresize = document.body.onload = function()
     box-sizing: border-box; -moz-box-sizing: border-box;
 }
 
-.dd3-content a { 
+.dd3-content a {
     color: #666
 }
 
-.dd3-content:hover { 
-    color: #2ea8e5; 
+.dd3-content:hover {
+    color: #2ea8e5;
     background: #f5f5f5
 }
 
@@ -296,15 +296,15 @@ document.body.onresize = document.body.onload = function()
 
 .dd3-item > button { margin-left: 30px; }
 
-.dd3-handle { 
-	position: absolute; 
-	margin: 0; 
-	left: 0; 
-	top: 0; 
-	cursor: pointer; 
-	width: 30px; 
-	text-indent: 100%; 
-	white-space: nowrap; 
+.dd3-handle {
+	position: absolute;
+	margin: 0;
+	left: 0;
+	top: 0;
+	cursor: pointer;
+	width: 30px;
+	text-indent: 100%;
+	white-space: nowrap;
 	overflow: hidden;
     border: 1px solid #ddd;
     background: #ddd;
@@ -316,30 +316,30 @@ document.body.onresize = document.body.onload = function()
 
 .dd-checkbox {
 	line-height: 28px;
-	position: absolute; 
-	margin: 0; 
-	right: 0; 
-	top: 0; 
-	width: 30px; 
+	position: absolute;
+	margin: 0;
+	right: 0;
+	top: 0;
+	width: 30px;
     padding: 5px 20px 10px 5px
 
 }
 
-.dd3-handle:before { 
+.dd3-handle:before {
     font-family: 'FontAwesome';
-    content: '\f047'; 
-    display: block; 
-    position: absolute; 
-    left: 5px; 
-    top: 6px; 
-    text-align: center; 
-    text-indent: 0; 
-    color: #888; 
-    font-size: 18px; 
+    content: '\f047';
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    text-align: center;
+    text-indent: 0;
+    color: #888;
+    font-size: 18px;
     font-weight: normal
 }
 
-.dd3-handle:hover { 
+.dd3-handle:hover {
     background: #ddd
 }
 
@@ -355,4 +355,3 @@ document.body.onresize = document.body.onload = function()
 }
 
 </style>
-

@@ -27,5 +27,5 @@ if (is_file($g['path_switch'].$switch.'/main.php'))
 
 }
 
-getLink($g['s'].'/?r='.$r.'&m=admin&module=admin&front=switch','parent.',_LANG('a8001','admin'),'');
+getLink($g['s'].'/?r='.$r.'&m=admin&module=admin&front=switch','parent.','삭제 되었습니다.','');
 ?>

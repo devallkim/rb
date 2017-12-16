@@ -7,11 +7,11 @@ if (!$_M['uid']) exit;
 ?>
 
 <ul class="nav nav-tabs" role="tablist">
-	<li<?php if($tab=='profile'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=profile&amp;uid=<?php echo $_M['uid']?>"><?php echo _LANG('ad001','admin')?></a></li>
-	<li<?php if($tab=='info'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=info&amp;uid=<?php echo $_M['uid']?>"><?php echo _LANG('ad002','admin')?></a></li>
-	<li<?php if($tab=='log'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=log&amp;uid=<?php echo $_M['uid']?>"><?php echo _LANG('ad003','admin')?></a></li>
+	<li<?php if($tab=='profile'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=profile&amp;uid=<?php echo $_M['uid']?>">프로필</a></li>
+	<li<?php if($tab=='info'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=info&amp;uid=<?php echo $_M['uid']?>">정보변경</a></li>
+	<li<?php if($tab=='log'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=log&amp;uid=<?php echo $_M['uid']?>">접속기록</a></li>
 	<?php if($my['uid']==1 && $_M['uid']!=1 && $_M['admin']==1):?>
-	<li<?php if($tab=='perm'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=perm&amp;uid=<?php echo $_M['uid']?>"><?php echo _LANG('ad004','admin')?></a></li>
+	<li<?php if($tab=='perm'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=perm&amp;uid=<?php echo $_M['uid']?>">관리제한</a></li>
 	<?php endif?>
 </ul>
 
@@ -24,36 +24,36 @@ if (!$_M['uid']) exit;
 				<br><br>
 				<img alt="User Pic" src="<?php echo $g['s']?>/_var/avatar/<?php echo $_M['photo']?'180.'.$_M['photo']:'180.0.gif'?>" width="120" height="120" class="img-circle">
 			</div>
-			<div class="col-sm-9 col-lg-9"> 
+			<div class="col-sm-9 col-lg-9">
 				<table class="table rb-table-user">
 					<tbody>
 						<tr>
-							<td><?php echo _LANG('ad005','admin')?></td>
+							<td>아이디</td>
 							<td><?php echo $_M['id']?></td>
 						</tr>
 						<tr>
-							<td><?php echo _LANG('ad006','admin')?></td>
+							<td>이름</td>
 							<td><?php echo $_M['name']?></td>
 						</tr>
 						<tr>
-							<td><?php echo _LANG('ad007','admin')?></td>
+							<td>닉네임</td>
 							<td><?php echo $_M['nic']?></td>
 						</tr>
 						<tr>
-							<td><?php echo _LANG('ad008','admin')?></td>
+							<td>이메일</td>
 							<td><a href="mailto:<?php echo $_M['email']?>"><?php echo $_M['email']?></a></td>
 						</tr>
 						<tr>
-							<td><?php echo _LANG('ad009','admin')?></td>
-							<td><?php echo $_M['tel2']?$_M['tel2']:($_M['tel1']?$_M['tel1']:'<small>'._LANG('ad010','admin').'</small>')?></td>
+							<td>연락처</td>
+							<td><?php echo $_M['tel2']?$_M['tel2']:($_M['tel1']?$_M['tel1']:'<small>미등록</small>')?></td>
 						</tr>
 						<tr>
-							<td><?php echo _LANG('ad012','admin')?></td>
-							<td><?php if($_M['last_log']):?><?php echo getDateFormat($_M['last_log'],$lang['admin']['ad011'])?> (<?php echo sprintf(_LANG('ad014','admin'),-getRemainDate($_M['last_log']))?>)<?php else:?><small><?php echo _LANG('ad015','admin')?></small><?php endif?></td>
+							<td>최근접속</td>
+							<td><?php if($_M['last_log']):?><?php echo getDateFormat($_M['last_log'],'Y.m.d H:i')?> (<?php echo sprintf('%d일전',-getRemainDate($_M['last_log']))?>)<?php else:?><small>기록없음</small><?php endif?></td>
 						</tr>
 						<tr>
-							<td><?php echo _LANG('ad013','admin')?></td>
-							<td><?php echo getDateFormat($_M['d_regis'],$lang['admin']['ad011'])?> (<?php echo sprintf(_LANG('ad014','admin'),-getRemainDate($_M['d_regis']))?>)</td>
+							<td>등록일</td>
+							<td><?php echo getDateFormat($_M['d_regis'],'Y.m.d H:i')?> (<?php echo sprintf('%d일전',-getRemainDate($_M['d_regis']))?>)</td>
 						</tr>
 					</tbody>
 				</table>
@@ -75,13 +75,13 @@ if (!$_M['uid']) exit;
 		<input type="hidden" name="check_email" value="1">
 		<input type="submit" style="position:absolute;left:-1000px;">
 		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label"><?php echo _LANG('ad005','admin')?></label>
+			<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 			<div class="col-sm-9">
 				<p class="form-control-static"><?php echo $_M['id']?></p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"><?php echo _LANG('ad016','admin')?></label>
+			<label class="col-sm-2 control-label">비밀번호</label>
 			<div class="col-sm-9">
 				<input type="password" class="form-control" name="pw1" placeholder="">
 			</div>
@@ -93,56 +93,56 @@ if (!$_M['uid']) exit;
 		</div>
 		<hr>
 		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label"><?php echo _LANG('ad017','admin')?></label>
+			<label for="inputEmail3" class="col-sm-2 control-label">프로필</label>
 			<div class="col-sm-9">
 				<div class="media">
 					<span class="pull-left">
 						<img class="media-object img-circle" src="<?php echo $g['s']?>/_var/avatar/<?php echo $_M['photo']?$_M['photo']:'0.gif'?>" alt="" style="width:45px">
 					</span>
 					<div class="media-body">
-						<input type="file" name="upfile" class="hidden" id="rb-upfile-avatar" accept="image/jpg" onchange="getId('rb-photo-btn').innerHTML='<?php echo _LANG('ad018','admin')?>';">
-						<button type="button" class="btn btn-default" onclick="$('#rb-upfile-avatar').click();" id="rb-photo-btn"><?php echo _LANG('ad019','admin')?></button>
+						<input type="file" name="upfile" class="hidden" id="rb-upfile-avatar" accept="image/jpg" onchange="getId('rb-photo-btn').innerHTML='이미지 파일 선택됨';">
+						<button type="button" class="btn btn-default" onclick="$('#rb-upfile-avatar').click();" id="rb-photo-btn">찾아보기</button>
 						<small class="help-block">
-							<?php echo _LANG('ad020','admin')?> 
-							<?php if($_M['photo']):?> <label>( <input type="checkbox" name="avatar_delete" value="1"> <?php echo _LANG('ad021','admin')?> )</label><?php endif?>
+							<code>jpg</code> 파일을 등록해주세요.
+							<?php if($_M['photo']):?> <label>( <input type="checkbox" name="avatar_delete" value="1"> 현재 아바타 삭제 )</label><?php endif?>
 						</small>
 					</div>
 				</div>
-			</div>		
+			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"><?php echo _LANG('ad006','admin')?></label>
+			<label class="col-sm-2 control-label">이름</label>
 			<div class="col-sm-9">
 				<input type="text" class="form-control" name="name" placeholder="" value="<?php echo $_M['name']?>" maxlength="10">
 			</div>
 		</div>
 		<div class="form-group rb-outside">
-			<label class="col-sm-2 control-label"><?php echo _LANG('ad007','admin')?></label>
+			<label class="col-sm-2 control-label">닉네임</label>
 			<div class="col-sm-9">
 				<div class="input-group">
 					<input type="text" class="form-control" name="nic" placeholder="" value="<?php echo $_M['nic']?>" maxlength="20" onchange="sendCheck('rb-nickcheck','nic');">
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" id="rb-nickcheck" onclick="sendCheck('rb-nickcheck','nic');"><?php echo _LANG('ad022','admin')?></button>
+						<button type="button" class="btn btn-default" id="rb-nickcheck" onclick="sendCheck('rb-nickcheck','nic');">중복확인</button>
 					</span>
 				</div>
 			</div>
 		</div>
 		<div class="form-group rb-outside">
-			<label class="col-sm-2 control-label"><?php echo _LANG('ad008','admin')?></label>
+			<label class="col-sm-2 control-label">이메일</label>
 			<div class="col-sm-9">
 				<div class="input-group">
 					<input type="email" class="form-control" name="email" placeholder="" value="<?php echo $_M['email']?>" onchange="sendCheck('rb-emailcheck','email');">
 					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');"><?php echo _LANG('ad022','admin')?></button>
+						<button type="button" class="btn btn-default" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');">중복확인</button>
 					</span>
 				</div>
-				<p class="form-control-static"><small class="text-muted"><?php echo _LANG('ad024','admin')?></small></p>
+				<p class="form-control-static"><small class="text-muted">비밀번호 분실시에 사용됩니다. 정확하게 입력하세요.</small></p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"><?php echo _LANG('ad009','admin')?></label>
+			<label class="col-sm-2 control-label">연락처</label>
 			<div class="col-sm-9">
-				<input type="tel" class="form-control" name="tel2" placeholder="<?php echo _LANG('ad023','admin')?>" value="<?php echo $_M['tel2']?$_M['tel2']:$_M['tel1']?>">
+				<input type="tel" class="form-control" name="tel2" placeholder="예) 010-000-0000" value="<?php echo $_M['tel2']?$_M['tel2']:$_M['tel1']?>">
 			</div>
 		</div>
 		</form>
@@ -175,10 +175,10 @@ if (!$_M['uid']) exit;
 		$NUM = getDbRows($table['s_referer'],$sqlque);
 		$TPG = getTotalPage($NUM,$recnum);
 		?>
-	
+
 		<div id="admin-log">
 			<p>
-				<small><?php echo sprintf(_LANG('ad025','admin'),$NUM)?>  (<?php echo $p?>/<?php echo $TPG?> page<?php if($TPG>1):?>s<?php endif?>)</small>
+				<small><?php echo sprintf('총 %d건',$NUM)?>  (<?php echo $p?>/<?php echo $TPG?> page<?php if($TPG>1):?>s<?php endif?>)</small>
 			</p>
 
 			<form name="searchForm" class="form-horizontal" action="<?php echo $g['s']?>/" method="post">
@@ -195,7 +195,7 @@ if (!$_M['uid']) exit;
 			   <div class="row well well-sm">
 					<div class="col-sm-6">
 						<select name="siteuid" class="form-control input-sm" onchange="this.form.submit();">
-						<option value=""><?php echo _LANG('ad026','admin')?></option>
+						<option value="">전체사이트</option>
 						<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
 						<?php while($S = db_fetch_array($SITES)):?>
 						<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$siteuid):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
@@ -204,11 +204,11 @@ if (!$_M['uid']) exit;
 					</div>
 					<div class="col-sm-6">
 						<div class="input-daterange input-group input-group-sm" id="datepicker">
-							<input type="text" class="form-control" name="d_start" placeholder="<?php echo _LANG('ad027','admin')?>" value="<?php echo $d_start?>">
+							<input type="text" class="form-control" name="d_start" placeholder="시작일 선택" value="<?php echo $d_start?>">
 							<span class="input-group-addon">~</span>
-							<input type="text" class="form-control" name="d_finish" placeholder="<?php echo _LANG('ad028','admin')?>" value="<?php echo $d_finish?>">
+							<input type="text" class="form-control" name="d_finish" placeholder="종료일 선택" value="<?php echo $d_finish?>">
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit"><?php echo _LANG('ad029','admin')?></button>
+								<button class="btn btn-default" type="submit">기간적용</button>
 							</span>
 						</div>
 					</div>
@@ -218,12 +218,12 @@ if (!$_M['uid']) exit;
 			<table class="table table-hover" style="border-bottom:#ccc solid 1px;">
 				<thead>
 					<tr>
-						<th><?php echo _LANG('ad030','admin')?></th>
-						<th><?php echo _LANG('ad031','admin')?></th>
-						<th class="rb-url"><?php echo _LANG('ad032','admin')?></th>
-						<th><?php echo _LANG('ad033','admin')?></th>
-						<th><?php echo _LANG('ad034','admin')?></th>
-						<th><?php echo _LANG('ad035','admin')?></th>
+						<th>번호</th>
+						<th>아이피</th>
+						<th class="rb-url">접속경로</th>
+						<th>브라우저</th>
+						<th>기기</th>
+						<th>날짜</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -244,14 +244,14 @@ if (!$_M['uid']) exit;
 							<?php endif?>
 						</td>
 						<td class="rb-update">
-							<time class="timeago" data-toggle="tooltip" datetime="<?php echo getDateFormat($R['d_regis'],'c')?>" data-tooltip="tooltip" title="<?php echo getDateFormat($R['d_regis'],'Y.m.d H:i')?>"></time>	
+							<time class="timeago" data-toggle="tooltip" datetime="<?php echo getDateFormat($R['d_regis'],'c')?>" data-tooltip="tooltip" title="<?php echo getDateFormat($R['d_regis'],'Y.m.d H:i')?>"></time>
 						</td>
 					</tr>
 					<?php endwhile?>
 				</tbody>
 			</table>
 			<?php if(!$NUM):?>
-			<div class="rb-none"><?php echo _LANG('ad036','admin')?></div>
+			<div class="rb-none">접속기록이 없습니다.</div>
 			<?php endif?>
 
 			<div class="panel-body text-center">
@@ -266,14 +266,14 @@ if (!$_M['uid']) exit;
 						<div class="input-group input-group-sm">
 							<span class="input-group-btn">
 								<select name="where" class="btn btn-default">
-									<option<?php if($where=='ip'):?> selected<?php endif?>><?php echo _LANG('ad031','admin')?></option>
-									<option<?php if($where=='referer'):?> selected<?php endif?>><?php echo _LANG('ad032','admin')?></option>
+									<option<?php if($where=='ip'):?> selected<?php endif?>>아이피</option>
+									<option<?php if($where=='referer'):?> selected<?php endif?>>접속경로</option>
 								</select>
 							</span>
-							<input type="text" name="keyw" class="form-control" placeholder="<?php echo _LANG('ad037','admin')?>" value="<?php echo $keyw?>">
+							<input type="text" name="keyw" class="form-control" placeholder="검색어를 입력해주세요" value="<?php echo $keyw?>">
 							<span class="input-group-btn" style="margin-bottom:0;">
-								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i><?php echo _LANG('ad038','admin')?></button>
-								<button class="btn btn-default" type="button" onclick="this.form.keyw.value='';this.form.submit();"><?php echo _LANG('ad039','admin')?></button>
+								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i>검색</button>
+								<button class="btn btn-default" type="button" onclick="this.form.keyw.value='';this.form.submit();">리셋</button>
 							</span>
 						</div>
 					</div>
@@ -306,7 +306,7 @@ if (!$_M['uid']) exit;
 		jQuery(document).ready(function() {
 			$(".rb-update time").timeago();
 		});
-		</script>   
+		</script>
 		<?php endif?>
 
 
@@ -321,10 +321,10 @@ if (!$_M['uid']) exit;
 			<div class="clearfix">
 				<h5 class="pull-left">
 					<i class="fa fa-warning fa-lg pull-left"></i>
-					<?php echo _LANG('ad040','admin')?>
+					<strong>접근을 제한할 모듈</strong>을 선택해 주세요.
 				</h5>
 				<div class="checkbox pull-right" style="padding-left:20px;">
-					<label><input type="checkbox" id="checkAll-perm"> <?php echo _LANG('ad041','admin')?></label>
+					<label><input type="checkbox" id="checkAll-perm"> 전체선택</label>
 				</div>
 			</div>
 
@@ -369,16 +369,19 @@ if (!$_M['uid']) exit;
 
 <div id="_modal_header" class="hidden">
 	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	<h4 class="modal-title"><small class="label label-<?php echo $_M['now_log']?'primary':'default'?>" data-tooltip="tooltip" title="<?php echo $_M['now_log']?_LANG('ad042','admin'):_LANG('ad043','admin')?>"><?php echo $_M['admin']?($_M['adm_view']?_LANG('ad044','admin'):_LANG('ad045','admin')):_LANG('ad046','admin')?></small> <?php echo sprintf(_LANG('ad047','admin'),$_M['name'])?> </h4>
+	<h4 class="modal-title">
+		<small class="label label-<?php echo $_M['now_log']?'primary':'default'?>" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?>"><?php echo $_M['admin']?($_M['adm_view']?'부관리자':'최고관리자'):'일반회원'?></small>
+		<?php echo sprintf('<strong>%s</strong> 님의 정보',$_M['name'])?>
+	</h4>
 </div>
 <div id="_modal_footer" class="hidden">
 	<?php if($tab=='info'):?>
-	<button type="submit" class="btn btn-primary pull-left" onclick="frames._modal_iframe_modal_window.saveCheck();"><?php echo _LANG('ad048','admin')?></button>
+	<button type="submit" class="btn btn-primary pull-left" onclick="frames._modal_iframe_modal_window.saveCheck();">정보 수정하기</button>
 	<?php endif?>
 	<?php if($tab=='perm'):?>
-	<button type="submit" class="btn btn-primary pull-left" onclick="frames._modal_iframe_modal_window.saveCheck1();"><?php echo _LANG('ad049','admin')?></button>
+	<button type="submit" class="btn btn-primary pull-left" onclick="frames._modal_iframe_modal_window.saveCheck1();">권한 제한하기</button>
 	<?php endif?>
-	<button id="_close_btn_" type="button" class="btn btn-default" data-dismiss="modal"><?php echo _LANG('ad050','admin')?></button>
+	<button id="_close_btn_" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 </div>
 
 
@@ -395,7 +398,7 @@ function sendCheck(id,t)
 
 	if (submitFlag == true)
 	{
-		alert('<?php echo _LANG('ad051','admin')?>');
+		alert('응답을 기다리는 중입니다. 잠시 기다려 주세요.');
 		return false;
 	}
 	if (eval("f1."+t).value == '')
@@ -415,28 +418,28 @@ function saveCheck()
 	var f = document.procForm;
 	if (f.pw1.value != f.pw2.value)
 	{
-		alert('<?php echo _LANG('ad052','admin')?> ');
+		alert('비밀번호가 서로 일치하지 않습니다. ');
 		return false;
 	}
 	if (f.name.value == '')
 	{
-		alert('<?php echo _LANG('ad053','admin')?>   ');
+		alert('이름을 입력해 주세요.   ');
 		f.name.focus();
 		return false;
 	}
 	if (f.nic.value == '')
 	{
-		alert('<?php echo _LANG('ad054','admin')?>   ');
+		alert('닉네임을 입력해 주세요.   ');
 		f.nic.focus();
 		return false;
 	}
 	if (f.email.value == '')
 	{
-		alert('<?php echo _LANG('ad055','admin')?>   ');
+		alert('이메일을 입력해 주세요.   ');
 		f.email.focus();
 		return false;
 	}
-	if (confirm('<?php echo _LANG('ad056','admin')?>    '))
+	if (confirm('정말로 수정하시겠습니까?   '))
 	{
 		getIframeForAction(f);
 		f.submit();
@@ -446,7 +449,7 @@ function saveCheck()
 function saveCheck1()
 {
 	var f = document.permForm;
-	if (confirm('<?php echo _LANG('ad056','admin')?>    '))
+	if (confirm('정말로 수정하시겠습니까?    '))
 	{
 		getIframeForAction(f);
 		f.submit();
@@ -488,7 +491,7 @@ document.body.onresize = document.body.onload = function()
 }
 #admin-log .panel {
 	border: none;
-} 
+}
 
 #admin-log .panel-heading label {
 	line-height: 35px
@@ -498,13 +501,13 @@ document.body.onresize = document.body.onload = function()
 #admin-log .panel-footer {
 	background-color: transparent;
 	padding: 10px 0
-} 
+}
 
 #admin-log .panel-footer .row [class*="col-"] {
     margin-top: 10px
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
 	#admin-log .panel-footer .row {
 	    margin-left: -.5%;
 	    margin-right: -.5%;
@@ -573,7 +576,7 @@ document.body.onresize = document.body.onload = function()
 	margin-bottom: 15px;
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
 	#admin-log .panel-heading .row {
 	    margin-left: -.5%;
 	    margin-right: -.5%;

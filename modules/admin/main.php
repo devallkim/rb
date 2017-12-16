@@ -8,8 +8,8 @@ $module = $module ? $module : 'admin';
 $front  = $front  ? $front  : 'main';
 $MD = getDbData($table['s_module'],"id='".$module."'",'*');
 
-if (!$MD['id']) getLink($g['s'].'/?r='.$r.'&m=admin&module=admin','',_LANG('ex001','admin'),'');
-if ($my['uid']!=1&&strpos('_'.$my['adm_view'],'['.$MD['id'].']')) getLink($g['s'].'/?r='.$r.'&m=site','',_LANG('ex002','admin'),'');
+if (!$MD['id']) getLink($g['s'].'/?r='.$r.'&m=admin&module=admin','','등록되지 않는 모듈입니다.','');
+if ($my['uid']!=1&&strpos('_'.$my['adm_view'],'['.$MD['id'].']')) getLink($g['s'].'/?r='.$r.'&m=site','','접근권한이 없습니다.','');
 
 $d['module']['skin']	= $d['admin']['themepc'];
 $g['dir_module_skin']	= $g['dir_module'].'theme/'.$d['module']['skin'].'/';

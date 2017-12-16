@@ -5,13 +5,13 @@ checkAdmin(0);
 // 제거탭 출력 설정 하지 않은 경우 차단
 if (!$d['admin']['uninstall'])
 {
-	getLink('','',_LANG('a0001','admin'),'');	
+	getLink('','','정상적인 접속이 아닙니다.','');
 }
 
 // FTP 삭제
 if ($d['admin']['ftp_use']&&$d['admin']['ftp'])
 {
-	getLink('','',_LANG('ab001','admin'),'');	
+	getLink('','','죄송합니다. FTP를 이용한 삭제는 아직 지원하지 않습니다.','');
 }
 // NOBODY 삭제
 else {

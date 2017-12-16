@@ -7,7 +7,7 @@
 				<div class="icon">
 				<i class="fa fa-star-o fa-2x"></i>
 				</div>
-				<h4 class="panel-title"><?php echo _LANG('ab001','admin')?></h4>
+				<h4 class="panel-title">북마크 관리</h4>
 			</div>
 			<div class="panel-body">
 				<form action="<?php echo $g['s']?>/" method="post" class="rb-form">
@@ -29,9 +29,9 @@
 							<?php $_i++;endwhile?>
 							<?php if(!db_num_rows($ADMPAGE)):?>
 							<li class="rb-none">
-								<?php echo _LANG('ab002','admin')?>
+								등록된 북마크가 없습니다.
 							</li>
-							<?php endif?>	
+							<?php endif?>
 				        </ol>
 					</div>
 		        </form>
@@ -40,15 +40,15 @@
 				<ul class="list-inline clearfix">
 					<li class="pull-left">
 						<button type="button" class="btn btn-default"<?php if($_i==1):?> disabled<?php endif?> onclick="checkboxChoice('bookmark_pages[]',true);">
-							<?php echo _LANG('ab003','admin')?>
+							전체선택
 						</button>
 						<button type="button" class="btn btn-default"<?php if($_i==1):?> disabled<?php endif?> onclick="checkboxChoice('bookmark_pages[]',false);">
-							<?php echo _LANG('ab004','admin')?>
+							전체취소
 						</button>
 					</li>
 					<li class="pull-right">
 						<button type="button" class="btn btn-primary"<?php if($_i==1):?> disabled<?php endif?> onclick="actQue('bookmark_delete');">
-							<?php echo _LANG('ab005','admin')?>
+							삭제
 						</button>
 					</li>
 				</ul>
@@ -59,11 +59,11 @@
 	<div class="col-sm-7">
 
 		<div class="page-header">
-			<h4><?php echo _LANG('ab006','admin')?></h4>
+			<h4>도움말</h4>
 		</div>
 		<p>
-			<?php echo _LANG('ab007','admin')?><br>
-			<?php echo _LANG('ab008','admin')?><br>
+			즐겨찾는 페이지를 상하로 드래그하면 실시간으로 순서가 변경됩니다.<br>
+			삭제하려면 체크 후 삭제버튼을 클릭해 주세요.<br>
 		</p>
 	</div>
 </div>
@@ -106,11 +106,11 @@ function actQue(act)
 	{
 		if (j == 0)
 		{
-			alert('<?php echo _LANG('ab009','admin')?>   ');
+			alert('삭제할 북마크를 선택해 주세요.   ');
 		}
-		else 
+		else
 		{
-			if (confirm('<?php echo _LANG('ab010','admin')?>   '))
+			if (confirm('정말로 북마크에서 제외하시겠습니까?   '))
 			{
 				getIframeForAction(f);
 				f.a.value = act;
@@ -120,4 +120,3 @@ function actQue(act)
 	}
 }
 </script>
-

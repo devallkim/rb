@@ -8,7 +8,7 @@ $memberuid	= $my['uid'];
 $url		= $g['s'].'/?r='.$r.'&m='.$m.'&module='.$_addmodule.'&front='.$_addfront;
 if(getDbRows($table['s_admpage'],'memberuid='.$memberuid." and url='".$url."'"))
 {
-	getLink('','',_LANG('a3001','admin'),'');
+	getLink('','','이미 등록된 북마크입니다.','');
 }
 
 $maxgid = getDbCnt($table['s_admpage'],'max(gid)','memberuid='.$memberuid);
@@ -29,7 +29,7 @@ $gid = $maxgid + 1;
 getDbInsert($table['s_admpage'],'memberuid,gid,name,url',"'$memberuid','$gid','$name','$url'");
 $bookmark_uid = getDbCnt($table['s_admpage'],'max(uid)','');
 
-if ($_addmodule == 'admin' && $_addfront == 'bookmark') 
+if ($_addmodule == 'admin' && $_addfront == 'bookmark')
 {
 	getLink('reload','parent.','','');
 }

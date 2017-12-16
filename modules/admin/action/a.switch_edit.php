@@ -43,5 +43,5 @@ if (is_file($sfile))
 	fclose($fp);
 	@chmod($_ufile,0707);
 }
-getLink('reload','parent.',_LANG('a9001','admin'),'');
+getLink('reload','parent.','수정 되었습니다.','');
 ?>

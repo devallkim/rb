@@ -6,13 +6,13 @@ $sendsql= 'admin='.($mtype=='admin'?1:0);
 $RCD = getDbArray($table['s_mbrdata'],$sendsql,'*','memberuid','asc',$recnum,$p);
 $NUM = getDbRows($table['s_mbrdata'],$sendsql);
 $TPG = getTotalPage($NUM,$recnum);
-$_authset = array('',_LANG('aa001','admin'),_LANG('aa002','admin'),_LANG('aa003','admin'),_LANG('aa004','admin'));
+$_authset = array('','승인','보류','대기','탈퇴');
 ?>
 
 
 <div id="admin-users">
 	<div class="page-header">
-		<h4><?php echo _LANG('aa005','admin')?></h4>
+		<h4>사용자 정보관리</h4>
 	</div>
 	<form name="listForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return false;">
 	<input type="hidden" name="r" value="<?php echo $r?>">
@@ -25,34 +25,34 @@ $_authset = array('',_LANG('aa001','admin'),_LANG('aa002','admin'),_LANG('aa003'
 			<label class="pull-left">
 				<span class="dropdown">
 					<a href="#" class="btn btn-default rb-username" data-toggle="dropdown">
-						<span><?php echo $mtype=='admin'?_LANG('aa006','admin'):_LANG('aa007','admin')?> <?php echo sprintf(_LANG('aa008','admin'),$NUM)?></span>
+						<span><?php echo $mtype=='admin'?'관리자':'일반회원'?> <?php echo sprintf('%d명',$NUM)?></span>
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-						<li><a href="<?php echo $g['adm_href']?>&amp;mtype=admin"><i class="fa fa-user"></i> <?php echo _LANG('aa006','admin')?></a></li>
-						<li><a href="<?php echo $g['adm_href']?>&amp;mtype=member"><i class="fa fa-user"></i> <?php echo _LANG('aa007','admin')?></a></li>
+						<li><a href="<?php echo $g['adm_href']?>&amp;mtype=admin"><i class="fa fa-user"></i> 관리자</a></li>
+						<li><a href="<?php echo $g['adm_href']?>&amp;mtype=member"><i class="fa fa-user"></i> 일반회원</a></li>
 					</ul>
 				</span>
 			</label>
 
 			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-default"<?php if($p-1<1):?> disabled<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="<?php echo _LANG('aa009','admin')?>" onclick="location.href=getPageGo(<?php echo $p-1?>,0);"><i class="fa fa-chevron-left fa-lg"></i></button>
-				<button type="button" class="btn btn-default"<?php if($p+1>$TPG):?> disabled<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="<?php echo _LANG('aa010','admin')?>" onclick="location.href=getPageGo(<?php echo $p+1?>,0);"><i class="fa fa-chevron-right fa-lg"></i></button>
+				<button type="button" class="btn btn-default"<?php if($p-1<1):?> disabled<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="이전" onclick="location.href=getPageGo(<?php echo $p-1?>,0);"><i class="fa fa-chevron-left fa-lg"></i></button>
+				<button type="button" class="btn btn-default"<?php if($p+1>$TPG):?> disabled<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="다음" onclick="location.href=getPageGo(<?php echo $p+1?>,0);"><i class="fa fa-chevron-right fa-lg"></i></button>
 			</div>
 		</div>
-		
+
 		<div class="table-responsive">
 			<table class="table">
 				<thead>
 					<tr>
 						<th><label><input type="checkbox" id="checkAll-admin-user"></label></th>
-						<th><?php echo _LANG('aa011','admin')?></th>
-						<th><?php echo _LANG('aa012','admin')?></th>
-						<th><?php echo _LANG('aa013','admin')?></th>
-						<th><?php echo _LANG('aa014','admin')?></th>
-						<th><?php echo _LANG('aa015','admin')?></th>
-						<th><?php echo _LANG('aa016','admin')?></th>
-						<th><?php echo _LANG('aa017','admin')?></th>
+						<th>상태</th>
+						<th>구분</th>
+						<th>이름</th>
+						<th>닉네임</th>
+						<th>아이디</th>
+						<th>연락처</th>
+						<th>최근접속</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -69,21 +69,21 @@ $_authset = array('',_LANG('aa001','admin'),_LANG('aa002','admin'),_LANG('aa003'
 						<?php endif?>
 						<td><?php echo $_authset[$R['auth']]?></td>
 						<?php if($R['now_log']):?>
-						<td><small class="label label-primary" data-tooltip="tooltip" title="<?php echo _LANG('aa018','admin')?>"><?php echo $R['admin']?($R['adm_view']?_LANG('aa021','admin'):_LANG('aa020','admin')):_LANG('aa007','admin')?></small></td>
+						<td><small class="label label-primary" data-tooltip="tooltip" title="온라인"><?php echo $R['admin']?($R['adm_view']?'부관리자':'최고관리자'):'일반회원'?></small></td>
 						<?php else:?>
-						<td><small class="label label-default" data-tooltip="tooltip" title="<?php echo _LANG('aa019','admin')?>"><?php echo $R['admin']?($R['adm_view']?_LANG('aa021','admin'):_LANG('aa020','admin')):_LANG('aa007','admin')?></small></td>
+						<td><small class="label label-default" data-tooltip="tooltip" title="오프라인"><?php echo $R['admin']?($R['adm_view']?'부관리자':'최고관리자'):'일반회원'?></small></td>
 						<?php endif?>
 
 						<td><a href="#." data-toggle="modal" data-target="#modal_window" class="rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','');"><?php echo $R['name']?></a></td>
 						<td><?php echo $R['nic']?></td>
 						<td><?php echo $_R['id']?></td>
 						<td><?php echo $R['tel2']?$R['tel2']:$R['tel1']?></td>
-						<td data-tooltip="tooltip" title="<?php echo getDateFormat($R['last_log'],$lang['admin']['aa022'])?>"><?php echo sprintf(_LANG('aa023','admin'),-getRemainDate($R['last_log']))?></td>
+						<td data-tooltip="tooltip" title="<?php echo getDateFormat($R['last_log'],'Y.m.d H:i')?>"><?php echo sprintf('%d일전',-getRemainDate($R['last_log']))?></td>
 						<td>
 						<?php if($my['uid']==1 && $R['admin']):?>
-						<a href="#." data-toggle="modal" data-target="#modal_window" class="btn btn-default btn-xs rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','perm');"<?php if($R['memberuid']==1):?> disabled<?php endif?>><?php echo _LANG('aa024','admin')?></a>
+						<a href="#." data-toggle="modal" data-target="#modal_window" class="btn btn-default btn-xs rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','perm');"<?php if($R['memberuid']==1):?> disabled<?php endif?>>관리제한</a>
 						<?php endif?>
-						<a href="#." data-toggle="modal" data-target="#modal_window" class="btn btn-default btn-xs rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','info');"><?php echo _LANG('aa025','admin')?></a>
+						<a href="#." data-toggle="modal" data-target="#modal_window" class="btn btn-default btn-xs rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','info');">정보변경</a>
 						</td>
 					</tr>
 					<?php endwhile?>
@@ -99,33 +99,33 @@ $_authset = array('',_LANG('aa001','admin'),_LANG('aa002','admin'),_LANG('aa003'
 							<div class="btn-group">
 								<div class="btn-group dropup">
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-										<i class="fa fa-wrench"></i> <?php echo _LANG('aa026','admin')?> <span class="caret"></span>
+										<i class="fa fa-wrench"></i> 관리 <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
-										<li role="presentation" class="dropdown-header"><?php echo _LANG('aa027','admin')?></li>
-										<li><a href="#" onclick="actQue('admin_delete','4');"><?php echo _LANG('aa004','admin')?></a></li>
-										<li><a href="#" onclick="actQue('admin_delete','1');"><?php echo _LANG('aa001','admin')?></a></li>
-										<li><a href="#" onclick="actQue('admin_delete','3');"><?php echo _LANG('aa003','admin')?></a></li>
-										<li><a href="#" onclick="actQue('admin_delete','2');"><?php echo _LANG('aa002','admin')?></a></li>
+										<li role="presentation" class="dropdown-header">회원승인 상태변경</li>
+										<li><a href="#" onclick="actQue('admin_delete','4');">탈퇴</a></li>
+										<li><a href="#" onclick="actQue('admin_delete','1');">승인</a></li>
+										<li><a href="#" onclick="actQue('admin_delete','3');">대기</a></li>
+										<li><a href="#" onclick="actQue('admin_delete','2');">보류</a></li>
 										<li class="divider"></li>
 										<?php if($mtype=='admin'):?>
-										<li><a href="#" onclick="actQue('admin_delete','');"><?php echo _LANG('aa028','admin')?></a></li>
+										<li><a href="#" onclick="actQue('admin_delete','');">관리자에서 제외</a></li>
 										<?php else:?>
-										<li><a href="#" onclick="actQue('admin_delete','A');"><?php echo _LANG('aa029','admin')?></a></li>
+										<li><a href="#" onclick="actQue('admin_delete','A');">관리자로 추가</a></li>
 										<?php endif?>
-										<li><a href="#" onclick="actQue('admin_delete','D');"><span class="text-danger"><?php echo _LANG('aa030','admin')?></span></a></li>
+										<li><a href="#" onclick="actQue('admin_delete','D');"><span class="text-danger">데이터 삭제</span></a></li>
 									</ul>
 								</div>
 							</div>
 						</fieldset>
 					</div>
 					<div class="btn-group">
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-admin-add"><i class="fa fa-plus-circle"></i> <?php echo $mtype=='admin'?_LANG('aa031','admin'):_LANG('aa032','admin')?></button>
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-admin-add"><i class="fa fa-plus-circle"></i> <?php echo $mtype=='admin'?'관리자 추가':'회원 추가'?></button>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 	</form>
 </div>
 
@@ -153,23 +153,23 @@ $_authset = array('',_LANG('aa001','admin'),_LANG('aa002','admin'),_LANG('aa003'
 
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title"><?php echo $mtype=='admin'?_LANG('aa031','admin'):_LANG('aa032','admin')?></h4>
+				<h4 class="modal-title"><?php echo $mtype=='admin'?'관리자 추가':'회원 추가'?></h4>
 			</div>
 			<div class="modal-body">
-	
+
 				<div class="form-group rb-outside">
-					<label for="inputEmail3" class="col-sm-2 control-label"><?php echo _LANG('aa015','admin')?></label>
+					<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="text" class="form-control" name="id" placeholder="<?php echo _LANG('aa033','admin')?>" value="" maxlength="12" autofocus onchange="sendCheck('rb-idcheck','id');">
+							<input type="text" class="form-control" name="id" placeholder="4~12자의 영문(소문자)과 숫자만 사용" value="" maxlength="12" autofocus onchange="sendCheck('rb-idcheck','id');">
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default" id="rb-idcheck" onclick="sendCheck('rb-idcheck','id');"><?php echo _LANG('aa034','admin')?></button>
+								<button type="button" class="btn btn-default" id="rb-idcheck" onclick="sendCheck('rb-idcheck','id');">중복확인</button>
 							</span>
 						</div>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label"><?php echo _LANG('aa035','admin')?></label>
+					<label class="col-sm-2 control-label">비밀번호</label>
 					<div class="col-sm-9">
 						<input type="password" class="form-control" name="pw1" placeholder="">
 					</div>
@@ -181,59 +181,59 @@ $_authset = array('',_LANG('aa001','admin'),_LANG('aa002','admin'),_LANG('aa003'
 				</div>
 				<hr>
 				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label"><?php echo _LANG('aa036','admin')?></label>
+					<label for="inputEmail3" class="col-sm-2 control-label">프로필</label>
 					<div class="col-sm-9">
 						<div class="media">
 							<span class="pull-left">
 								<img class="media-object img-circle" src="<?php echo $g['s']?>/_var/avatar/0.gif" alt="" style="width:45px">
 							</span>
 							<div class="media-body">
-								<input type="file" name="upfile" class="hidden" id="rb-upfile-avatar" accept="image/jpg" onchange="getId('rb-photo-btn').innerHTML='<?php echo _LANG('aa037','admin')?>';">
-								<button type="button" class="btn btn-default" onclick="$('#rb-upfile-avatar').click();" id="rb-photo-btn"><?php echo _LANG('aa038','admin')?></button>
-								<small class="help-block"><?php echo _LANG('aa039','admin')?></small>
+								<input type="file" name="upfile" class="hidden" id="rb-upfile-avatar" accept="image/jpg" onchange="getId('rb-photo-btn').innerHTML='이미지 파일 선택됨';">
+								<button type="button" class="btn btn-default" onclick="$('#rb-upfile-avatar').click();" id="rb-photo-btn">찾아보기</button>
+								<small class="help-block"><code>jpg</code> 파일을 등록해주세요.</small>
 							</div>
 						</div>
-					</div>		
+					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label"><?php echo _LANG('aa013','admin')?></label>
+					<label class="col-sm-2 control-label">이름</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" name="name" placeholder="<?php echo _LANG('aa040','admin')?>" value="<?php echo $regis_name?>" maxlength="10">
+						<input type="text" class="form-control" name="name" placeholder="이름을 입력해주세요" value="<?php echo $regis_name?>" maxlength="10">
 					</div>
 				</div>
 				<div class="form-group rb-outside">
-					<label class="col-sm-2 control-label"><?php echo _LANG('aa014','admin')?></label>
+					<label class="col-sm-2 control-label">닉네임</label>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="text" class="form-control" name="nic" placeholder="<?php echo _LANG('aa041','admin')?>" value="" maxlength="20" onchange="sendCheck('rb-nickcheck','nic');">
+							<input type="text" class="form-control" name="nic" placeholder="닉네임을 입력해주세요" value="" maxlength="20" onchange="sendCheck('rb-nickcheck','nic');">
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default" id="rb-nickcheck" onclick="sendCheck('rb-nickcheck','nic');"><?php echo _LANG('aa034','admin')?></button>
+								<button type="button" class="btn btn-default" id="rb-nickcheck" onclick="sendCheck('rb-nickcheck','nic');">중복확인</button>
 							</span>
 						</div>
 					</div>
 				</div>
 				<div class="form-group rb-outside">
-					<label class="col-sm-2 control-label"><?php echo _LANG('aa042','admin')?></label>
+					<label class="col-sm-2 control-label">이메일</label>
 					<div class="col-sm-9">
 						<div class="input-group">
-							<input type="email" class="form-control" name="email" placeholder="<?php echo _LANG('aa043','admin')?>" value="" onchange="sendCheck('rb-emailcheck','email');">
+							<input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요" value="" onchange="sendCheck('rb-emailcheck','email');">
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');"><?php echo _LANG('aa034','admin')?></button>
+								<button type="button" class="btn btn-default" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');">중복확인</button>
 							</span>
 						</div>
-						<p class="form-control-static"><small class="text-muted"><?php echo _LANG('aa044','admin')?></small></p>
+						<p class="form-control-static"><small class="text-muted">비밀번호 분실시에 사용됩니다. 정확하게 입력하세요.</small></p>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label"><?php echo _LANG('aa016','admin')?></label>
+					<label class="col-sm-2 control-label">연락처</label>
 					<div class="col-sm-9">
-						<input type="tel" class="form-control" name="tel2" placeholder="<?php echo _LANG('aa045','admin')?>" value="">
+						<input type="tel" class="form-control" name="tel2" placeholder="예) 010-000-0000" value="">
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal"><?php echo _LANG('aa046','admin')?></button>
-				<button type="submit" class="btn btn-primary"><?php echo _LANG('aa047','admin')?></button>
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">취소</button>
+				<button type="submit" class="btn btn-primary">등록하기</button>
 			</div>
 		</form>
 		<form name="actionform" action="<?php echo $g['s']?>/" method="post">
@@ -264,11 +264,11 @@ $(document).ready(function() {
             id: {
                 validators: {
                     notEmpty: {
-                        message: '<?php echo _LANG('aa048','admin')?>'
+                        message: '아이디를 입력해주세요.'
                     },
                     regexp: {
                         regexp: /^[a-z0-9]+$/,
-                        message: '<?php echo _LANG('aa049','admin')?>'
+                        message: '4~12자의 영문(소문자)과 숫자만 사용할 수 있습니다.'
                     }
                 }
             },
@@ -276,7 +276,7 @@ $(document).ready(function() {
                 message: 'The password is not valid',
                 validators: {
                     notEmpty: {
-                        message: '<?php echo _LANG('aa050','admin')?>'
+                        message: '비밀번호를 입력해주세요'
                     }
                 }
             },
@@ -285,7 +285,7 @@ $(document).ready(function() {
                 message: 'The password is not valid',
                 validators: {
                     notEmpty: {
-                        message: '<?php echo _LANG('aa051','admin')?>'
+                        message: '비밀번호를 다시 입력해주세요'
                     }
                 }
             },
@@ -293,7 +293,7 @@ $(document).ready(function() {
                 message: 'The name is not valid',
                 validators: {
                     notEmpty: {
-                        message: '<?php echo _LANG('aa052','admin')?>'
+                        message: '이름(실명)을 입력해주세요'
                     }
                 }
             },
@@ -301,7 +301,7 @@ $(document).ready(function() {
                 message: 'The name is not valid',
                 validators: {
                     notEmpty: {
-                        message: '<?php echo _LANG('aa053','admin')?>'
+                        message: '닉네임을 입력해주세요'
                     }
                 }
             },
@@ -309,7 +309,7 @@ $(document).ready(function() {
                 message: '',
                 validators: {
                     notEmpty: {
-                        message: '<?php echo _LANG('aa054','admin')?>'
+                        message: '이메일을 입력해주세요'
                     }
                 }
             },
@@ -335,7 +335,7 @@ function sendCheck(id,t)
 
 	if (submitFlag == true)
 	{
-		alert('<?php echo _LANG('aa055','admin')?>');
+		alert('응답을 기다리는 중입니다. 잠시 기다려 주세요.');
 		return false;
 	}
 	if (eval("f1."+t).value == '')
@@ -354,7 +354,7 @@ function saveCheck(f)
 {
 	if (f.pw1.value != f.pw2.value)
 	{
-		alert('<?php echo _LANG('aa056','admin')?>');
+		alert('비밀번호가 서로 일치하지 않습니다.');
 		return false;
 	}
 	getIframeForAction(f);
@@ -367,7 +367,7 @@ function actQue(flag,ah)
     var n = l.length;
     var i;
 	var j=0;
-	
+
 	if (flag == 'admin_delete')
 	{
 		for	(i = 0; i < n; i++)
@@ -379,11 +379,11 @@ function actQue(flag,ah)
 		}
 		if (!j)
 		{
-			alert('<?php echo _LANG('aa057','admin')?>     ');
+			alert('회원(관리자)을 선택해 주세요.     ');
 			return false;
 		}
 
-		if (confirm('<?php echo _LANG('a0001','admin')?>      '))
+		if (confirm('정말로 실행하시겠습니까?      '))
 		{
 			getIframeForAction(f);
 			f.a.value = flag;

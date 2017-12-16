@@ -1,11 +1,11 @@
 <div id="configbox">
 	<form class="form-horizontal rb-form" role="form">
 		<div class="page-header">
-			<h4><?php echo _LANG('a1001','admin')?></h4>
+			<h4>시스템 환경</h4>
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1002','admin')?></label>
+			<label class="col-md-2 control-label">웹서버</label>
 			<div class="col-md-9">
 				<p class="form-control-static"><?php echo $_SERVER['SERVER_SOFTWARE']?></p>
 			</div>
@@ -49,11 +49,11 @@
 
 
 		<div class="page-header">
-			<h4><?php echo _LANG('a1007','admin')?></h4>
+			<h4>시스템 테마 및 특수기능</h4>
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1008','admin')?></label>
+			<label class="col-md-2 control-label">관리자 테마</label>
 			<div class="col-md-9">
 				<select name="themepc" class="form-control">
 					<?php $dirs = opendir($g['dir_module'].'theme')?>
@@ -67,7 +67,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1009','admin')?></label>
+			<label class="col-md-2 control-label">관리패널 테마</label>
 			<div class="col-md-9">
 				<select name="pannellink" class="form-control">
 					<?php $dirs = opendir($g['path_core'].'engine/adminpanel/theme')?>
@@ -81,49 +81,49 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1010','admin')?></label>
+			<label class="col-md-2 control-label">CSS/JS 캐시</label>
 			<div class="col-md-9">
 				<select name="cache_flag" class="form-control">
-					<option value=""<?php if($d['admin']['cache_flag']==''):?> selected<?php endif?>><?php echo _LANG('a1011','admin')?></option>
-					<option value="totime"<?php if($d['admin']['cache_flag']=='totime'):?> selected<?php endif?>><?php echo _LANG('a1012','admin')?></option>
-					<option value="nhour"<?php if($d['admin']['cache_flag']=='nhour'):?> selected<?php endif?>><?php echo _LANG('a1013','admin')?></option>
-					<option value="today"<?php if($d['admin']['cache_flag']=='today'):?> selected<?php endif?>><?php echo _LANG('a1014','admin')?></option>
-					<option value="month"<?php if($d['admin']['cache_flag']=='month'):?> selected<?php endif?>><?php echo _LANG('a1015','admin')?></option>
-					<option value="year"<?php if($d['admin']['cache_flag']=='year'):?> selected<?php endif?>><?php echo _LANG('a1016','admin')?></option>
+					<option value=""<?php if($d['admin']['cache_flag']==''):?> selected<?php endif?>>브라우져 설정을 따름</option>
+					<option value="totime"<?php if($d['admin']['cache_flag']=='totime'):?> selected<?php endif?>>접속시마다 갱신</option>
+					<option value="nhour"<?php if($d['admin']['cache_flag']=='nhour'):?> selected<?php endif?>>한시간 단위로 갱신</option>
+					<option value="today"<?php if($d['admin']['cache_flag']=='today'):?> selected<?php endif?>>하루 단위로 갱신</option>
+					<option value="month"<?php if($d['admin']['cache_flag']=='month'):?> selected<?php endif?>>한달 단위로 갱신</option>
+					<option value="year"<?php if($d['admin']['cache_flag']=='year'):?> selected<?php endif?>>일년 단위로 갱신</option>
 				</select>
-				<p class="form-control-static"><small class="text-muted"><?php echo _LANG('a1017','admin')?></small></p>
+				<p class="form-control-static"><small class="text-muted">CSS 나 자바스크립트 파일을 수정했을 경우에는 일정기간 접속시마다 갱신되도록 설정해 주세요.</small></p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1018','admin')?></label>
+			<label class="col-md-2 control-label">제거(Uninstall)</label>
 			<div class="col-md-9">
 				<select name="uninstall" class="form-control">
-					<option value=""<?php if(!$d['admin']['uninstall']):?> selected<?php endif?>><?php echo _LANG('a1019','admin')?></option>
-					<option value="1"<?php if($d['admin']['uninstall']):?> selected<?php endif?>><?php echo _LANG('a1020','admin')?></option>
+					<option value=""<?php if(!$d['admin']['uninstall']):?> selected<?php endif?>>출력하지 않음</option>
+					<option value="1"<?php if($d['admin']['uninstall']):?> selected<?php endif?>>출력함</option>
 				</select>
 				<p class="form-control-static">
 					<small class="text-muted">
-						<?php echo _LANG('a1021','admin')?>
+						킴스큐는 전체 파일 및 DB 데이터를 일괄 삭제(Uninstall)할 수 있는 도구를 제공합니다.<br class="hidden-xs">그러나 매우 유의해야 하는 작업이므로 반드시 필요한 경우에만 출력하여 사용하세요.
 					</small>
 				</p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1022','admin')?></label>
+			<label class="col-md-2 control-label">더블클릭 전환</label>
 			<div class="col-md-9">
 				<select name="dblclick" class="form-control">
-					<option value="1"<?php if($d['admin']['dblclick']):?> selected<?php endif?>><?php echo _LANG('a1023','admin')?></option>
-					<option value=""<?php if(!$d['admin']['dblclick']):?> selected<?php endif?>><?php echo _LANG('a1024','admin')?></option>
+					<option value="1"<?php if($d['admin']['dblclick']):?> selected<?php endif?>>사용함</option>
+					<option value=""<?php if(!$d['admin']['dblclick']):?> selected<?php endif?>>사용안함</option>
 				</select>
 				<p class="form-control-static">
 					<small class="text-muted">
-						<?php echo _LANG('a1025','admin')?>
+						메뉴,페이지,모듈등의 페이지에서 화면 더블클릭시 관련 콘텍스트 메뉴를 이용해 화면을 전환할 수 있습니다.
 					</small>
 				</p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1062','admin')?></label>
+			<label class="col-md-2 control-label">소스코드 에디터</label>
 			<div class="col-md-9">
 				<select name="codeeidt" class="form-control">
 					<option value="">TEXTAREA</option>
@@ -137,13 +137,13 @@
 				</select>
 				<p class="form-control-static">
 					<small class="text-muted">
-						<?php echo _LANG('a1063','admin')?>
+						소스코드 편집시 사용할 에디터 테마를 선택해 주세요. <a href="http://codemirror.net/demo/theme.html" target="_blank">테마보기</a>
 					</small>
 				</p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1026','admin')?></label>
+			<label class="col-md-2 control-label">위지위그 에디터</label>
 			<div class="col-md-9">
 				<select name="editor" class="form-control">
 					<?php $dirs = opendir($g['path_plugin'])?>
@@ -155,13 +155,13 @@
 				</select>
 				<p class="form-control-static">
 					<small class="text-muted">
-						<?php echo sprintf(_LANG('a1027','admin'),$g['path_plugin'])?>
+						위지위그 에디터는 플러그인 폴더(%s)에 추가될 수 있습니다.<br class="hidden-xs">에디터를 변경하시려면 플러그인에 추가 후 버젼선택 후에 변경해 주세요.
 					</small>
 				</p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1060','admin')?></label>
+			<label class="col-md-2 control-label">시작모듈</label>
 			<div class="col-md-9">
 				<select name="sysmodule" class="form-control">
 				<?php $MODULESRCD=getDbArray($table['s_module'],"system=0 or id='site'",'*','gid','asc',0,1)?>
@@ -171,13 +171,13 @@
 				</select>
 				<p class="form-control-static">
 					<small class="text-muted">
-						<?php echo _LANG('a1061','admin')?>
+						킴스큐를 구동시키는 기본 모듈이며 모듈을 지정하지 않고 호출시 이 모듈이 기본모듈로서 구동됩니다.<br class="hidden-xs">이 설정은 특별한 경우가 아니면 변경하지 마십시오.
 					</small>
 				</p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1028','admin')?></label>
+			<label class="col-md-2 control-label">시스템 언어</label>
 			<div class="col-md-9">
 				<select name="syslang" class="form-control">
 					<?php if(is_dir($g['path_module'].$module.'/language')):?>
@@ -191,13 +191,13 @@
 				</select>
 				<p class="form-control-static">
 					<small class="text-muted">
-						<?php echo _LANG('a1029','admin')?>
+						이 설정을 이용해서 킴스큐 전체의 언어를 제어합니다.<br class="hidden-xs">개별 사이트나 모듈에서도 사용할 언어를 지정할 수 있습니다.
 					</small>
 				</p>
 			</div>
 		</div>
 		<div class="page-header">
-			<h4><?php echo _LANG('a1030','admin')?></h4>
+			<h4>이메일</h4>
 		</div>
 
 		<div class="form-group">
@@ -207,7 +207,7 @@
 					<label class="btn btn-default<?php if(!$d['admin']['smtp_use']):?> active<?php endif?>" data-toggle="tab" data-target="#mail-sendmail">
 						<input type="radio" name="smtp_use" value=""<?php if(!$d['admin']['smtp_use']):?> checked<?php endif?>> Sendmail
 					</label>
-					<label class="btn btn-default<?php if($d['admin']['smtp_use']=='1'):?> active<?php endif?>" data-toggle="tab" data-target="#mail-smtp" data-tooltip="tooltip" title="<?php echo _LANG('a1031','admin')?>">
+					<label class="btn btn-default<?php if($d['admin']['smtp_use']=='1'):?> active<?php endif?>" data-toggle="tab" data-target="#mail-smtp" data-tooltip="tooltip" title="SMTP 계정이 필요합니다.">
 						<input type="radio" name="smtp_use" value="1"<?php if($d['admin']['smtp_use']=='1'):?> checked<?php endif?>> SMTP
 					</label>
 				</div>
@@ -219,20 +219,20 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label"></label>
 					<div class="col-md-9">
-						<small class="text-muted"><?php echo _LANG('a1032','admin')?></small>
+						<small class="text-muted">호스팅 서버환경에서는 발송메일이 스펨으로 분류되어 차단될 수 있습니다.</small>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-2 control-label"><?php echo _LANG('a1003','admin')?></label>
+					<label class="col-md-2 control-label">시스템 메일</label>
 					<div class="col-md-9">
 						<div class="input-group">
 						<input type="email" name="sysmail" value="<?php echo $d['admin']['sysmail']?$d['admin']['sysmail']:$my['email']?>" class="form-control">
 						<span class="input-group-btn">
-						<button class="btn btn-default" type="button" id="sendmailbtn" onclick="sendCheck(this.id);"><?php if($d['admin']['email']):?><i class="fa fa-info-circle fa-lg fa-fw"></i><?php echo _LANG('a1004','admin')?><?php else:?><?php echo _LANG('a1005','admin')?><?php endif?></button>
+						<button class="btn btn-default" type="button" id="sendmailbtn" onclick="sendCheck(this.id);"><?php if($d['admin']['email']):?><i class="fa fa-info-circle fa-lg fa-fw"></i>정상<?php else:?>이메일 전송확인<?php endif?></button>
 						</span>
 						</div>
-						<p class="form-control-static"><small class="text-muted"><?php echo _LANG('a1006','admin')?></small></p>
+						<p class="form-control-static"><small class="text-muted">입력한 이메일주소로 전송이 되면 메일서버가 정상작동되는 상태입니다.</small></p>
 					</div>
 				</div>
 
@@ -242,7 +242,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">SMTP Server</label>
 					<div class="col-md-9">
-					<input class="form-control" type="text" name="smtp_host" value="<?php echo $d['admin']['smtp_host']?>" placeholder="<?php echo _LANG('a1033','admin')?>">
+					<input class="form-control" type="text" name="smtp_host" value="<?php echo $d['admin']['smtp_host']?>" placeholder="예) smtp.mail.com">
 						<p class="form-control-static"><small class="text-muted"></small></p>
 					</div>
 				</div>
@@ -258,11 +258,11 @@
 					<div class="col-md-offset-2 col-md-9">
 						<div class="checkbox">
 							<label>
-								<input type="checkbox" name="smtp_auth" value="1"<?php if($d['admin']['smtp_auth']):?> checked<?php endif?>><i></i> <?php echo _LANG('a1034','admin')?>
+								<input type="checkbox" name="smtp_auth" value="1"<?php if($d['admin']['smtp_auth']):?> checked<?php endif?>><i></i> SMTP 인증 필요
 							</label>
 						</div>
 						<div>
-							<label><input type="radio" name="smtp_ssl" value=""<?php if(!$d['admin']['smtp_ssl']):?> checked<?php endif?>> <?php echo _LANG('a1035','admin')?></label>
+							<label><input type="radio" name="smtp_ssl" value=""<?php if(!$d['admin']['smtp_ssl']):?> checked<?php endif?>> 일반</label>
 							<label><input type="radio" name="smtp_ssl" value="SSL"<?php if($d['admin']['smtp_ssl']=='SSL'):?> checked<?php endif?>> SSL</label>
 							<label><input type="radio" name="smtp_ssl" value="TLS"<?php if($d['admin']['smtp_ssl']=='TLS'):?> checked<?php endif?>> TLS</label>
 						</div>
@@ -270,38 +270,38 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-2 control-label"><?php echo _LANG('a1036','admin')?></label>
+					<label class="col-md-2 control-label">인증 아이디</label>
 					<div class="col-md-9">
-						<input type="text" class="form-control" name="smtp_user" value="<?php echo $d['admin']['smtp_user']?>" placeholder="<?php echo _LANG('a1036','admin')?>">
+						<input type="text" class="form-control" name="smtp_user" value="<?php echo $d['admin']['smtp_user']?>" placeholder="인증 아이디">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-2 control-label"><?php echo _LANG('a1037','admin')?></label>
+					<label class="col-md-2 control-label">인증 암호</label>
 					<div class="col-md-9">
-						<input type="password" class="form-control" name="smtp_pass" value="<?php echo $d['admin']['smtp_pass']?>" placeholder="<?php echo _LANG('a1037','admin')?>">
+						<input type="password" class="form-control" name="smtp_pass" value="<?php echo $d['admin']['smtp_pass']?>" placeholder="인증 암호">
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="col-md-offset-2 col-md-10">
-					<button type="button" class="btn btn-default" id="smtpbtn" onclick="sendCheck(this.id);"><?php if($d['admin']['smtp']):?><i class="fa fa-info-circle fa-lg fa-fw"></i><?php echo _LANG('a1004','admin')?><?php else:?><?php echo _LANG('a1038','admin')?><?php endif?></button>
-					<p class="form-control-static"><small class="text-muted"><?php echo _LANG('a1039','admin')?></small></p>
+					<button type="button" class="btn btn-default" id="smtpbtn" onclick="sendCheck(this.id);"><?php if($d['admin']['smtp']):?><i class="fa fa-info-circle fa-lg fa-fw"></i>정상<?php else:?>SMTP 연결확인<?php endif?></button>
+					<p class="form-control-static"><small class="text-muted">시스템 대표메일로 전송이 되면 메일서버가 정상 작동되는 상태입니다.</small></p>
 					</div>
 				</div>
 	    	</div>
     	</div>
- 
+
 		<div class="page-header">
 			<h4>FTP </h4>
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-2 control-label"><?php echo _LANG('a1040','admin')?></label>
+			<label class="col-md-2 control-label">FTP 계정</label>
 			<div class="col-md-9">
 				<div class="btn-group" data-toggle="buttons">
 					<label class="btn btn-default<?php if(!$d['admin']['ftp_use']):?> active<?php endif?>" data-toggle="tab" data-target="#ftp-nobody">
-						<input type="radio" name="ftp_use" value=""<?php if(!$d['admin']['ftp_use']):?> checked<?php endif?>> Nobody 
+						<input type="radio" name="ftp_use" value=""<?php if(!$d['admin']['ftp_use']):?> checked<?php endif?>> Nobody
 					</label>
 					<label class="btn btn-default<?php if($d['admin']['ftp_use']=='1'):?> active<?php endif?>" data-toggle="tab" data-target="#ftp-user">
 						<input type="radio" name="ftp_use" value="1"<?php if($d['admin']['ftp_use']=='1'):?> checked<?php endif?>> User
@@ -315,10 +315,10 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label"></label>
 					<div class="col-md-9">
-						<small class="text-muted"><?php echo _LANG('a1041','admin')?></small>
+						<small class="text-muted">일부기능에 제한이 있거나 보안에 취약할 수 있습니다.</small>
 					</div>
 				</div>
-			</div>	
+			</div>
 			<div id="ftp-user" class="tab-pane clearfix<?php if($d['admin']['ftp_use']=='1'):?> active<?php endif?>">
 
 				<div class="form-group">
@@ -334,7 +334,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">FTP Server</label>
 					<div class="col-md-9">
-						<input type="text" class="form-control" name="ftp_host" value="<?php echo $d['admin']['ftp_host']?>" placeholder="<?php echo _LANG('a1042','admin')?>">
+						<input type="text" class="form-control" name="ftp_host" value="<?php echo $d['admin']['ftp_host']?>" placeholder="예) example.kimsq.com  또는 IP adress 입력">
 					</div>
 				</div>
 
@@ -370,14 +370,14 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-2 control-label"><?php echo _LANG('a1043','admin')?></label>
+					<label class="col-md-2 control-label">Rb 경로</label>
 					<div class="col-md-9">
 						<input type="text" class="form-control" name="ftp_rb" value="<?php echo $d['admin']['ftp_rb']?>" placeholder="">
 						<p class="form-control-static">
 							<small class="text-muted">
-								<?php echo _LANG('a1044','admin')?><br>
-								<?php echo _LANG('a1045','admin')?><br>
-								<?php echo _LANG('a1046','admin')?><br>
+								FTP로 접속했을때 처음 접속된 경로부터 킴스큐Rb가 설치된 경로를 입력해 주세요.<br>
+								경로의 처음과 마지막은 반드시 슬래쉬(/)로 끝나야 합니다.<br>
+								보기)<code>/rb/</code> 또는 <code>/www/rb/</code> 또는 <code>/public_html/rb/</code><br>
 							</small>
 						</p>
 					</div>
@@ -385,7 +385,7 @@
 
 				<div class="form-group">
 					<div class="col-md-offset-2 col-md-10">
-						<button type="button" class="btn btn-default" id="ftpbtn" onclick="sendCheck(this.id);"><?php if($d['admin']['ftp']):?><i class="fa fa-info-circle fa-lg fa-fw"></i><?php echo _LANG('a1004','admin')?><?php else:?><?php echo _LANG('a1047','admin')?><?php endif?></button>
+						<button type="button" class="btn btn-default" id="ftpbtn" onclick="sendCheck(this.id);"><?php if($d['admin']['ftp']):?><i class="fa fa-info-circle fa-lg fa-fw"></i>정상<?php else:?>FTP 연결확인<?php endif?></button>
 					</div>
 				</div>
 			</div>
@@ -393,7 +393,7 @@
 		<hr>
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-9">
-				<button class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>" type="submit"><?php echo _LANG('a1048','admin')?></button>
+				<button class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>" type="submit">저장하기</button>
 			</div>
 		</div>
 	</form>
@@ -409,7 +409,7 @@ function sendCheck(id)
 {
 	if (submitFlag == true)
 	{
-		alert('<?php echo _LANG('a1049','admin')?>');
+		alert('응답을 기다리는 중입니다. 잠시 기다려 주세요.');
 		return false;
 	}
 	var f = document.procForm;
@@ -417,7 +417,7 @@ function sendCheck(id)
 	{
 		if (f.sysmail.value == '')
 		{
-			alert('<?php echo _LANG('a1050','admin')?>       ');
+			alert('시스템 이메일 주소를 입력해 주세요.       ');
 			f.email.focus();
 			return false;
 		}
@@ -427,25 +427,25 @@ function sendCheck(id)
 	{
 		if (f.smtp_host.value == '')
 		{
-			alert('<?php echo _LANG('a1051','admin')?>   ');
+			alert('SMTP 서버주소를 입력해 주세요.   ');
 			f.smtp_host.focus();
 			return false;
 		}
 		if (f.smtp_port.value == '')
 		{
-			alert('<?php echo _LANG('a1052','admin')?>    ');
+			alert('SMTP 포트번호를 입력해 주세요.    ');
 			f.smtp_port.focus();
 			return false;
 		}
 		if (f.smtp_user.value == '')
 		{
-			alert('<?php echo _LANG('a1053','admin')?>    ');
+			alert('인증 아이디를 입력해 주세요.    ');
 			f.smtp_user.focus();
 			return false;
 		}
 		if (f.smtp_pass.value == '')
 		{
-			alert('<?php echo _LANG('a1054','admin')?>    ');
+			alert('인증 암호를 입력해 주세요.    ');
 			f.smtp_pass.focus();
 			return false;
 		}
@@ -454,31 +454,31 @@ function sendCheck(id)
 	{
 		if (f.ftp_host.value == '')
 		{
-			alert('<?php echo _LANG('a1055','admin')?>   ');
+			alert('FTP 서버주소를 입력해 주세요.   ');
 			f.ftp_host.focus();
 			return false;
 		}
 		if (f.ftp_port.value == '')
 		{
-			alert('<?php echo _LANG('a1056','admin')?>    ');
+			alert('FTP 포트번호를 입력해 주세요.    ');
 			f.ftp_port.focus();
 			return false;
 		}
 		if (f.ftp_user.value == '')
 		{
-			alert('<?php echo _LANG('a1057','admin')?>     ');
+			alert('FTP 아이디를 입력해 주세요.     ');
 			f.ftp_user.focus();
 			return false;
 		}
 		if (f.ftp_pass.value == '')
 		{
-			alert('<?php echo _LANG('a1058','admin')?>    ');
+			alert('FTP 암호를 입력해 주세요.    ');
 			f.ftp_pass.focus();
 			return false;
 		}
 		if (f.ftp_rb.value == '')
 		{
-			alert('<?php echo _LANG('a1059','admin')?>    ');
+			alert('킴스큐 경로를 입력해 주세요.    ');
 			f.ftp_rb.focus();
 			return false;
 		}
@@ -498,6 +498,6 @@ function ftp_select(obj)
 function saveCheck(f)
 {
 	getIframeForAction(f);
-	return confirm('<?php echo _LANG('a0001','admin')?>     ');
+	return confirm('정말로 실행하시겠습니까?     ');
 }
 </script>

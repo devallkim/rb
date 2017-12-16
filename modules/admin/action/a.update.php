@@ -8,7 +8,7 @@ $_ufile = $g['path_var'].'update/'.$ufile.'.txt';
 if ($type == 'delete')
 {
 	unlink($_ufile);
-	getLink('reload','parent.',_LANG('ac001','admin'),'');
+	getLink('reload','parent.','업데이트 기록이 제거되었습니다.','');
 }
 else if ($type == 'manual')
 {
@@ -16,7 +16,7 @@ else if ($type == 'manual')
 	fwrite($fp,$date['today'].',1');
 	fclose($fp);
 	@chmod($_ufile,0707);
-	getLink('reload','parent.',_LANG('ac002','admin'),'');
+	getLink('reload','parent.','수동 업데이트 처리되었습니다.','');
 }
 else {
 	require $g['path_core'].'opensrc/unzip/ArchiveExtractor.class.php';
@@ -38,7 +38,7 @@ else {
 			break;
 		}
 	}
-	if(!$_includeup) getLink('','',_LANG('ac003','admin'),'');
+	if(!$_includeup) getLink('','','업데이트 파일이 존재하지 않습니다.','');
 	$_updatefile = getUrlData('http://'.$_serverinfo[2].'/__update/files/v2/'.$ufile.'.zip',10);
 	$folder		= './';
 	$extPath  = $g['path_tmp'].'app';
@@ -86,6 +86,6 @@ else {
 		@chmod($_tmpdfile,0707);
 	}
 
-	getLink('reload','parent.',_LANG('ac004','admin'),'');
+	getLink('reload','parent.','업데이트가 완료되었습니다.','');
 }
 ?>

@@ -10,10 +10,10 @@ $nic		= trim($_POST['nic']);
 $nic		= $nic ? $nic : $name;
 $email		= trim($_POST['email']);
 
-if (!$id || !$name) getLink('','',_LANG('a0001','admin'),'');
+if (!$id || !$name) getLink('','','정말로 실행하시겠습니까?','');
 if (!$check_id || !$check_nic || !$check_email)
 {
-	getLink('','',_LANG('a0001','admin'),'');
+	getLink('','','정말로 실행하시겠습니까?','');
 }
 
 $tmpname	= $_FILES['upfile']['tmp_name'];
@@ -63,7 +63,7 @@ if ($uid)
 	{
 		$newPw = getCrypt($pw,$_M['d_regis']);
 	    getDbUpdate($table['s_mbrid'],"pw='".$newPw."'",'uid='.$uid);
-	
+
 	    if ($my['uid'] == $uid)
 	    {
 		   $_SESSION['mbr_pw']  = $newPw;

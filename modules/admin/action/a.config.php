@@ -12,7 +12,7 @@ $fdset['security'] = array('secu_tags','secu_domain','secu_param');
 //제거탭 출력 주의 알림
 if (!$d['admin']['uninstall'] && $uninstall)
 {
-	$_message = _LANG('a5001','admin');
+	$_message = '시스템 도구에서 <strong>제거</strong>(<code>Uninstall</code>) 탭이 출력되도록 설정되었습니다. 이 설정은 매우 위험할 수 있으니 확인하세요.';
 	$_referer = $g['s'].'/?r='.$r.'&m=admin&module=admin';
 	putNotice($my['uid'],$m,0,$_message,$_referer,'');
 }
@@ -57,5 +57,5 @@ parent.document.procForm.autosave.value = '';
 exit;
 endif;
 if ($panel_reload) getLink($g['s'].'/?r='.$r.'&pickmodule='.$m.'&panel=Y','parent.parent.','','');
-else getLink('reload','parent.',_LANG('a5002','admin'),'');
+else getLink('reload','parent.','반영 되었습니다.','');
 ?>

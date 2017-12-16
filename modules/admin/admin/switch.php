@@ -7,21 +7,21 @@ function getSwitchList($pos)
 		if(is_file($GLOBALS['g']['path_switch'].$pos.'/'.$_switch.'/main.php')) $incs[] = array($_switch,$_sites);
 	}
 	$dirh = opendir($GLOBALS['g']['path_switch'].$pos);
-	while(false !== ($folder = readdir($dirh))) 
-	{ 
+	while(false !== ($folder = readdir($dirh)))
+	{
 		$_fins = substr($folder,0,1);
 		if(strpos('_.',$_fins) || isset($GLOBALS['d']['switch'][$pos][$folder])) continue;
 		$incs[] = array($folder,'');
-	} 
+	}
 	closedir($dirh);
 	return $incs;
 }
 $_switchset = array(
-	'start'=>_LANG('a6001','admin'),
-	'top'=>_LANG('a6002','admin'),
-	'head'=>_LANG('a6003','admin'),
-	'foot'=>_LANG('a6004','admin'),
-	'end'=>_LANG('a6005','admin')
+	'start'=>'스타트 스위치',
+	'top'=>'탑 스위치',
+	'head'=>'헤더 스위치',
+	'foot'=>'풋터 스위치',
+	'end'=>'엔드 스우치'
 );
 $TMPST = array();
 $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);
@@ -35,7 +35,7 @@ $SITEN = db_num_rows($SITES);
 				<div class="icon">
 				<i class="fa fa-power-off fa-2x"></i>
 				</div>
-				<h4 class="panel-title"><?php echo _LANG('a6006','admin')?></h4>
+				<h4 class="panel-title">스위치 관리</h4>
 			</div>
 			<div class="panel-body rb-panel-form">
 				<select class="form-control" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&switchdir=<?php echo $switchdir?>&r='+this.value);">
@@ -50,7 +50,7 @@ $SITEN = db_num_rows($SITES);
 			<input type="hidden" name="m" value="<?php echo $module?>">
 			<input type="hidden" name="a" value="switch_order">
 			<input type="hidden" name="auto" value="">
-				
+
 				<?php foreach($_switchset as $_key => $_val):?>
 				<div class="panel-body">
 					<h5><small><?php echo $_val?></small></h5>
@@ -73,20 +73,20 @@ $SITEN = db_num_rows($SITES);
 					</div>
 				</div>
 				<?php endforeach?>
-			
+
 				<div class="panel-footer">
 					<div class="btn-group btn-group-justified">
 						<div class="btn-group">
 							<button type="button" class="btn btn-default rb-modal-add-switch" data-toggle="modal" href="#modal_window">
-								<?php echo _LANG('a6007','admin')?>
+								스위치 추가
 							</button>
 						</div>
 						<div class="btn-group">
 							<button type="submit" class="btn btn-default">
-								<?php echo _LANG('a6008','admin')?>
+								스위치 업데이트
 							</button>
 						</div>
-					</div>	
+					</div>
 				</div>
 
 			</form>
@@ -96,7 +96,7 @@ $SITEN = db_num_rows($SITES);
 		<?php if($switchdir):?>
 
 		<div class="page-header">
-			<h4><?php echo _LANG('a6009','admin')?></h4>
+			<h4>스위치 등록정보</h4>
 		</div>
 
 		<div class="row">
@@ -108,20 +108,20 @@ $SITEN = db_num_rows($SITES);
 			</div>
 			<div class="col-md-10 col-sm-10">
 				<h4 class="media-heading">
-					<strong><?php echo $sinfo[2]?></strong> 
-					<small class="text-muted">(<?php echo $sinfo[0]?>) <span class="label label-default"><?php echo $sinfo[3]?></span></small> 
+					<strong><?php echo $sinfo[2]?></strong>
+					<small class="text-muted">(<?php echo $sinfo[0]?>) <span class="label label-default"><?php echo $sinfo[3]?></span></small>
 				</h4>
-				<p class="text-muted"><small><?php echo _LANG('a6010','admin')?></small></p>
+				<p class="text-muted"><small>선택된 스위치 대한 등록정보입니다.</small></p>
 				<div class="btn-group">
-				  <a class="btn btn-default" data-toggle="collapse" data-target="#_edit_area_" onclick="sessionSetting('sh_admin_switch1','1','','1');"><i class="fa fa-code fa-lg"></i> <?php echo _LANG('a6011','admin')?></a>	
+				  <a class="btn btn-default" data-toggle="collapse" data-target="#_edit_area_" onclick="sessionSetting('sh_admin_switch1','1','','1');"><i class="fa fa-code fa-lg"></i> 편집하기</a>
 				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 				    <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" role="menu">
 					<?php if(is_file($g['path_switch'].$switchdir.'/readme.txt')):?>
-					<li><a href="#." data-toggle="collapse" data-target="#_guide_area_" onclick="sessionSetting('sh_admin_switch2','1','','1');"><?php echo _LANG('a6012','admin')?></a></li>
+					<li><a href="#." data-toggle="collapse" data-target="#_guide_area_" onclick="sessionSetting('sh_admin_switch2','1','','1');">안내문서 보기</a></li>
 					<?php endif?>
-				    <li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=switch_delete&amp;switch=<?php echo $switchdir?>" onclick="return hrefCheck(this,true,'<?php echo _LANG('a6013','admin')?>');"><?php echo _LANG('a6014','admin')?></a></li>
+				    <li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=switch_delete&amp;switch=<?php echo $switchdir?>" onclick="return hrefCheck(this,true,'정말로 삭제시겠습니까?');">삭제하기</a></li>
 				  </ul>
 				</div>
 			</div>
@@ -135,7 +135,7 @@ $SITEN = db_num_rows($SITES);
 		<input type="hidden" name="name" value="<?php echo $sinfo[2]?>">
 
 			<div class="page-header">
-				<h4><?php echo _LANG('a6015','admin')?></h4>
+				<h4>적용 사이트</h4>
 			</div>
 
 			<div class="form-group">
@@ -147,49 +147,49 @@ $SITEN = db_num_rows($SITES);
 					<?php endforeach?>
 				</div>
 			</div>
-			
+
 			<hr>
 
 			<div class="form-group">
 				<div class="col-sm-12">
 					<div class="btn-group">
-						<button type="button" class="btn btn-default" onclick="checkboxChoice('aply_sites[]',true);"><?php echo _LANG('a6016','admin')?></button>
-						<button type="button" class="btn btn-default" onclick="checkboxChoice('aply_sites[]',false);"><?php echo _LANG('a6017','admin')?></button>
+						<button type="button" class="btn btn-default" onclick="checkboxChoice('aply_sites[]',true);">전체선택</button>
+						<button type="button" class="btn btn-default" onclick="checkboxChoice('aply_sites[]',false);">전체취소</button>
 					</div>
 					<div class="btn-group">
-						<button class="btn btn-primary" type="submit"><i class="fa fa-check fa-lg"></i> <?php echo _LANG('a6018','admin')?></button>
+						<button class="btn btn-primary" type="submit"><i class="fa fa-check fa-lg"></i> 저장하기</button>
 					</div>
 				</div>
 			</div>
-			
+
 			<div id="_edit_area_" class="collapse<?php if($_SESSION['sh_admin_switch1']):?> in<?php endif?>">
 				<div class="rb-files">
 					<div class="rb-codeview">
 						<div class="rb-codeview-header">
 							<ol class="breadcrumb pull-left">
-								<li><?php echo _LANG('a6019','admin')?> :</li>
+								<li>파일경로 :</li>
 								<li>root</li>
 								<li>switchs</li>
 								<li><?php echo str_replace('/','</li><li>',$switchdir)?></li>
 								<li class="active">main.php</li>
 							</ol>
-							<button type="button" class="btn btn-default btn-xs pull-right rb-full-screen" data-tooltip="tooltip" title="<?php echo _LANG('a6020','admin')?>" onclick="editFullSize('_edit_area_',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
+							<button type="button" class="btn btn-default btn-xs pull-right rb-full-screen" data-tooltip="tooltip" title="전체화면" onclick="editFullSize('_edit_area_',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
 						</div>
-						<div class="rb-codeview-body">			
+						<div class="rb-codeview-body">
 							<textarea name="switch_code" id="__code__" class="form-control" rows="35"><?php echo implode('',file($g['path_switch'].$switchdir.'/main.php'))?></textarea>
-						</div>	
+						</div>
 						<div class="rb-codeview-footer">
 							<ul class="list-inline">
 								<li><code><?php echo count(file($g['path_switch'].$switchdir.'/main.php'))?> lines</code></li>
 								<li><code><?php echo getSizeFormat(filesize($g['path_switch'].$switchdir.'/main.php'),2)?></code></li>
-								<li class="pull-right"><?php echo _LANG('a6021','admin')?></li>
+								<li class="pull-right">파일을 편집한 후 저장 버튼을 클릭하면 실시간으로 사용자 페이지에 적용됩니다.'</li>
 							</ul>
 						</div>
 					</div>
 				</div>
 
 				<div class="rb-submit clearfix">
-					<button type="submit" class="btn btn-primary"><?php echo _LANG('a6018','admin')?></button>
+					<button type="submit" class="btn btn-primary">저장하기</button>
 				</div>
 			</div>
 
@@ -206,11 +206,11 @@ $SITEN = db_num_rows($SITES);
 
 		<?php else:?>
 		<div class="page-header">
-			<h4><?php echo _LANG('a6022','admin')?></h4>
+			<h4>사용 가이드</h4>
 		</div>
 		<ul class="rb-guide">
-		<li><?php echo _LANG('a6023','admin')?></li>
-		<li><?php echo _LANG('a6024','admin')?></li>
+		<li>스위치는 프로그램의 실행단계를 5개의 구역으로 분리하여 각각의 구역에 실행여부를 온/오프 할 수 있는 응용 프로그램입니다.</li>
+		<li>너무 많은 스위치를 동작시킬 경우 실행속도에 영향을 줄 수 있으니 꼭 필요한 스위치만 사용하세요.</li>
 		</ul>
 
 		<div class="page-header">
@@ -218,19 +218,19 @@ $SITEN = db_num_rows($SITES);
 		</div>
 
 		<dl class="dl-horizontal well">
-		  <dt><?php echo _LANG('a6001','admin')?></dt>
-		  <dd><small class="text-muted">(start)</small> <?php echo _LANG('a6025','admin')?></dd>
-		  <dt><?php echo _LANG('a6002','admin')?></dt>
-		  <dd><small class="text-muted">(top)</small> <?php echo _LANG('a6026','admin')?></dd>
-		  <dt><?php echo _LANG('a6003','admin')?></dt>
-		  <dd><small class="text-muted">(head)</small> <?php echo _LANG('a6027','admin')?></dd>
-		  <dt><?php echo _LANG('a6004','admin')?></dt>
-		  <dd><small class="text-muted">(foot)</small> <?php echo _LANG('a6028','admin')?></dd>
-		  <dt><?php echo _LANG('a6005','admin')?></dt>
-		  <dd><small class="text-muted">(end)</small> <?php echo _LANG('a6029','admin')?></dd>
+		  <dt>스타트 스위치</dt>
+		  <dd><small class="text-muted">(start)</small> 프로그램 시작과 함께 DB연결,주요파일 로드 후 실행됩니다.</dd>
+		  <dt>탑 스위치</dt>
+		  <dd><small class="text-muted">(top)</small> 모듈 및 레이아웃에 대한 정의후 화면출력 직전에 실행됩니다.</dd>
+		  <dt>헤더 스위치</dt>
+		  <dd><small class="text-muted">(head)</small> head 태그를 닫기 직전에 실행됩니다.</dd>
+		  <dt>풋터 스위치</dt>
+		  <dd><small class="text-muted">(foot)</small> body 태그를 닫기 직전에 실행됩니다.</dd>
+		  <dt>엔드 스우치</dt>
+		  <dd><small class="text-muted">(end)</small> 화면출력을 끝내고 실행됩니다.</dd>
 		</dl>
 
-		<p><a class="btn btn-link pull-right" data-toggle="modal" href="#admin-switch-structure"><?php echo _LANG('a6030','admin')?></a></p>
+		<p><a class="btn btn-link pull-right" data-toggle="modal" href="#admin-switch-structure">스위치 실행 스트럭처 보기</a></p>
 		<br>
 		<?php endif?>
 
@@ -321,13 +321,13 @@ function saveCheck(f)
 {
 	if (f.name.value == '')
 	{
-		alert('<?php echo _LANG('a6031','admin')?>   ');
+		alert('스위치명을 입력해 주세요.   ');
 		f.name.focus();
 		return false;
 	}
 
 	getIframeForAction(f);
-	return confirm('<?php echo _LANG('a6032','admin')?>    ');
+	return confirm('정말로 실행하시겠습니까?   ');
 }
 </script>
 
@@ -339,45 +339,45 @@ function saveCheck(f)
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h4 class="modal-title"><?php echo _LANG('a6033','admin')?></h4>
+				<h4 class="modal-title">스위치 실행 스트럭처</h4>
 			</div>
 			<div class="modal-body">
 				<fieldset id="guide_structure">
-<pre>			
-		<i>- <?php echo _LANG('a6034','admin')?> -</i>
-		<i>- <?php echo _LANG('a6035','admin')?> -</i>
-		<i>- <?php echo _LANG('a6036','admin')?> -</i>
+<pre>
+		<i>- 프로그램 시작 -</i>
+		<i>- DB연결 -</i>
+		<i>- 주요파일 로드 -</i>
 
-		<span>[<?php echo _LANG('a6001','admin')?>]</span>
+		<span>[스타트 스위치]</span>
 
-		<i>- <?php echo _LANG('a6037','admin')?> -</i>
-		<i>- <?php echo _LANG('a6038','admin')?> -</i> 
+		<i>- 모듈 정의 -</i>
+		<i>- 레이아웃 정의 -</i>
 
-		<span>[<?php echo _LANG('a6002','admin')?>]</span>
+		<span>[탑 스위치]</span>
 		<fieldset>
-		<legend>[<?php echo _LANG('a6039','admin')?>]</legend>
+		<legend>[화면에 출력되는 부분]</legend>
 		&lt;html&gt;
 		&lt;head&gt;
 
-			<i>- <?php echo _LANG('a6040','admin')?> -</i>
-			<span>[<?php echo _LANG('a6003','admin')?>]</span>
+			<i>- 기초 헤드 -</i>
+			<span>[헤더 스위치]</span>
 
 		&lt;/head&gt;
 		&lt;body&gt;
-			
-			<i>- <?php echo _LANG('a6041','admin')?> -</i>
-			<span>[<?php echo _LANG('a6004','admin')?>]</span>
+
+			<i>- 콘텐츠 영역 -</i>
+			<span>[풋터 스위치]</span>
 
 		&lt;/body&gt;
 		&lt;/html&gt;
 		</fieldset>
-		<span>[<?php echo _LANG('a6005','admin')?>]</span>
+		<span>[엔드 스위치]</span>
 
 </pre>
 				</fieldset>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _LANG('a6042','admin')?></button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

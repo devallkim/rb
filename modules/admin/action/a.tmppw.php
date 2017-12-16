@@ -7,7 +7,7 @@ $_SESSION['_pwemail_'] = $_SESSION['_pwemail_'] + 1;
 include $g['path_core'].'function/email.func.php';
 
 $tmpPw = rand(0,999999);
-$content = '<h4>'.$tmpPw.'</h4><br><b>'._LANG('ad001','admin').'</b>';
+$content = '<h4>'.$tmpPw.'</h4><br><b>임시 패스워드로 로그인 하신 후 반드시 패스워드를 변경해 주세요.</b>';
 
 $firstadmin = getDbData($table['s_mbrdata'],'memberuid=1','name,email');
 $tmpUpdate = getDbUpdate($table['s_mbrdata'],"tmpcode='".$tmpPw."'",'memberuid=1');
@@ -15,13 +15,13 @@ $tmpUpdate = getDbUpdate($table['s_mbrdata'],"tmpcode='".$tmpPw."'",'memberuid=1
 $to = $firstadmin['email'].'|'.$firstadmin['name'];
 $from = $d['admin']['sysmail'];
 
-$result = getSendMail($to,$from,'['.$_HS['name'].']'._LANG('ad000','admin'),$content,'HTML');
+$result = getSendMail($to,$from,'['.$_HS['name'].']요청하신 임시 패스워드입니다.',$content,'HTML');
 
 if ($result)
 {
-	getLink('reload','parent.',_LANG('ad002','admin'),'');
+	getLink('reload','parent.','이메일이 전송되었습니다.','');
 }
 else {
-	getLink('','',_LANG('ad003','admin'),'');
+	getLink('','','이메일이 전송되지 못했습니다.','');
 }
 ?>

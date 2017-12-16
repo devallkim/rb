@@ -1,12 +1,12 @@
 <?php
-$d['amenu']['main']		= _LANG('menu1','admin');
-$d['amenu']['seo']		= _LANG('menu2','admin');
-$d['amenu']['ssl']		= _LANG('menu3','admin');
-$d['amenu']['security']	= _LANG('menu4','admin');
-$d['amenu']['switch']	= _LANG('menu5','admin');
-$d['amenu']['plugin']	= _LANG('menu6','admin');
-$d['amenu']['update']	= _LANG('menu7','admin');
-if($d['admin']['uninstall']) $d['amenu']['uninstall'] = _LANG('menu8','admin');
-$d['amenu']['admin']	= _LANG('menu9','admin');
-$d['amenu']['bookmark']	= _LANG('menu0','admin');
+$d['amenu']['main']		= '환경설정';
+$d['amenu']['seo']		= 'SEO';
+$d['amenu']['ssl']		= 'SSL';
+$d['amenu']['security']	= '보안';
+$d['amenu']['switch']	= '스위치';
+$d['amenu']['plugin']	= '플러그인';
+$d['amenu']['update']	= '업데이트';
+if($d['admin']['uninstall']) $d['amenu']['uninstall'] ='제거';
+$d['amenu']['admin']	= '사용자';
+$d['amenu']['bookmark']	= '북마크';
 ?>

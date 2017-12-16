@@ -1,4 +1,3 @@
-<?php include getLangFile($g['dir_module'].'language/',$d['admin']['syslang'],'/lang.admin-theme-default.php')?>
 <div class="rb-root">
 	<div id="rb-login">
 		<div class="panel panel-default">
@@ -25,7 +24,7 @@
 							<input class="rb-confirm" type="checkbox" name="idpwsave" value="checked" <?php if($_COOKIE['svshop']):?> checked<?php endif?>>Remember me
 						</label>
 						&nbsp;&nbsp;
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=tmppw" onclick="return hrefCheck(this,true,'<?php echo _LANG('tl004','admin')?>');">Forgot password?</a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=tmppw" onclick="return hrefCheck(this,true,'임시 패스워드를 가입하신 이메일로 받으시겠습니까?');">Forgot password?</a>
 					</div>
 				</form>
 			</div>
@@ -60,7 +59,7 @@ $(document).ready(function() {
                 }
             },
             pw: {
-                message: '<?php echo _LANG('tl001','admin')?>',
+                message: '패스워드가 일치하지 않습니다.',
                 validators: {
                     notEmpty: {
                         message: 'The password is required and cannot be empty'
@@ -72,8 +71,8 @@ $(document).ready(function() {
 });
 
 var bootmsg = '<div class="media"><i class="pull-left fa fa-exclamation-circle fa-4x hidden-xs"></i><div class="media-body">';
-	bootmsg+= '<h4 class="media-heading"><?php echo _LANG('tl002','admin')?></h4>';
-	bootmsg+= '<?php echo _LANG('tl003','admin')?>';
+	bootmsg+= '<h4 class="media-heading">로그인 정보를 저장하시겠습니까?</h4>';
+	bootmsg+= '로그인 정보를 저장할 경우 다음접속시 정보를 입력하지 않으셔도 됩니다.<br>그러나, 개인PC가 아닐 경우 타인이 로그인할 수 있습니다.<br>PC를 여러사람이 사용하는 공공장소에서는 체크하지 마세요.';
 	bootmsg+= '</div></div>';
 
 $('.rb-confirm').on('click', function() {

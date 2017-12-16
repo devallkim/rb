@@ -15,18 +15,18 @@ if ($act == 'robots')
 	fwrite($fp, trim(stripslashes($robotstxt)));
 	fclose($fp);
 	@chmod($rfile,0707);
-	
-	getLink('','',_LANG('a7002','admin'),'');
+
+	getLink('','','저장 되었습니다.','');
 }
 if ($act == 'robots_delete')
 {
 	@unlink($_SERVER['DOCUMENT_ROOT'].'/robots.txt');
-	getLink('reload','parent.',_LANG('a7003','admin'),'');
+	getLink('reload','parent.','삭제 되었습니다','');
 }
 if ($act == 'sitemap_delete')
 {
 	@unlink('./sitemap.xml');
-	getLink('reload','parent.',_LANG('a7003','admin'),'');
+	getLink('reload','parent.','삭제 되었습니다','');
 }
 if ($act == 'sitemap_save')
 {
@@ -36,7 +36,7 @@ if ($act == 'sitemap_save')
 	fclose($fp);
 	@chmod($gfile,0707);
 
-	getLink('','',_LANG('a7002','admin'),'');
+	getLink('','','저장 되었습니다','');
 }
 if ($act == 'sitemap_make')
 {
@@ -50,9 +50,9 @@ if ($act == 'sitemap_make')
 		{
 			$code1 = $code.$C['id'].'/';
 			$_code = substr($code1,0,strlen($code1)-1);
-			
+
 			$string .= "<url><loc>".getRWurl('c='.$_code)."</loc></url>\n";
-			
+
 			if ($C['is_child'])
 			{
 				getMenuUrlCode($site,$table,$C['uid'],$C['depth'],$uid,$code1);
@@ -89,7 +89,7 @@ if ($act == 'sitemap_make')
 	fclose($fp);
 	@chmod($gfile,0707);
 
-	getLink('reload','parent.',_LANG('a7004','admin'),'');
+	getLink('reload','parent.','사이트맵이 새로 만들어졌습니다.','');
 }
 exit;
 ?>

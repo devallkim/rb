@@ -4,11 +4,11 @@ function getOpenSrcList()
 	global $g;
 	$incs = array();
 	$dirh = opendir($g['path_plugin']);
-	while(false !== ($folder = readdir($dirh))) 
-	{ 
+	while(false !== ($folder = readdir($dirh)))
+	{
 		if($folder == '.' || $folder == '..') continue;
 		$incs[] = $folder;
-	} 
+	}
 	closedir($dirh);
 	return $incs;
 }
@@ -39,7 +39,7 @@ include $g['path_core'].'function/dir.func.php';
 
 <div id="plugins">
 	<div class="page-header">
-		<h4><?php echo sprintf(_LANG('a7001','admin'),$_openSrcn)?></h4>
+		<h4><?php echo sprintf('플러그인 <span>(총 %d개 / <span id="_sum_size_"></span>)</span>',$_openSrcn)?></h4>
 	</div>
 
 	<form name="pluginForm" action="<?php echo $g['s']?>/" method="post" class="rb-form" onsubmit="return saveCheck(this);">
@@ -53,14 +53,14 @@ include $g['path_core'].'function/dir.func.php';
 				<thead>
 					<tr>
 						<th class="rb-check"></th>
-						<th class="rb-name"><?php echo _LANG('a7002','admin')?></th>
-						<th class="rb-size"><?php echo _LANG('a7003','admin')?></th>
-						<th class="rb-update"><?php echo _LANG('a7004','admin')?></th>
-						<th class="rb-version"><?php echo _LANG('a7005','admin')?></th>
+						<th class="rb-name">플러그인명</th>
+						<th class="rb-size">용량(파일수)</th>
+						<th class="rb-update">등록일</th>
+						<th class="rb-version">적용버전</th>
 					</tr>
 				</thead>
 				<tbody>
-				
+
 					<?php $_sumPluginsSize=0?>
 					<?php foreach($_openSrcs as $_key_):?>
 					<?php $plCtime = filectime($g['path_plugin'].$_key_)?>
@@ -71,7 +71,7 @@ include $g['path_core'].'function/dir.func.php';
 						<td class="rb-name"><i class="fa fa-folder fa-lg"></i> &nbsp;<a><?php echo $_key_?></a></td>
 						<td class="rb-size"><?php echo getSizeFormat($plugins['size'],1)?> (<?php echo $plugins['num']?>)</td>
 						<td class="rb-update">
-							<time class="timeago" data-toggle="tooltip" datetime="<?php echo date('c',$plCtime)?>" data-tooltip="tooltip" title="<?php echo date($lang['admin']['a7006'],$plCtime)?>"></time>	
+							<time class="timeago" data-toggle="tooltip" datetime="<?php echo date('c',$plCtime)?>" data-tooltip="tooltip" title="<?php echo date('Y.m.d H:i',$plCtime)?>"></time>
 						</td>
 						<td class="rb-version">
 							<select name="ov[<?php echo $_key_?>]" class="form-control input-sm">
@@ -95,24 +95,24 @@ include $g['path_core'].'function/dir.func.php';
 		<div class="bottom-action clearfix">
 			<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group hidden-xs">
-					<button type="button" class="btn btn-danger" onclick="deletePlugin('<?php echo $_key_?>','1');"><i class="fa fa-trash-o fa-lg"></i> <?php echo _LANG('a7007','admin')?></button>
+					<button type="button" class="btn btn-danger" onclick="deletePlugin('<?php echo $_key_?>','1');"><i class="fa fa-trash-o fa-lg"></i> 전체삭제</button>
 				</div>
 				<div class="btn-group hidden-xs">
-					<button type="button" class="btn btn-danger" onclick="deletePlugin('<?php echo $_key_?>','2');"><i class="fa fa-trash-o fa-lg"></i> <?php echo _LANG('a7008','admin')?></button>
+					<button type="button" class="btn btn-danger" onclick="deletePlugin('<?php echo $_key_?>','2');"><i class="fa fa-trash-o fa-lg"></i> 버전삭제</button>
 				</div>
 				<div class="btn-group hidden-xs">
-					<button type="button" class="btn btn-default rb-modal-add-plugin" data-toggle="modal" data-target="#modal_window"><i class="fa fa-upload fa-lg"></i> <?php echo _LANG('a7009','admin')?></button>
+					<button type="button" class="btn btn-default rb-modal-add-plugin" data-toggle="modal" data-target="#modal_window"><i class="fa fa-upload fa-lg"></i> 플러그인 추가</button>
 				</div>
-				<button type="submit" class="btn btn-primary pull-right rb-resave"><i class="fa fa-check fa-fw"></i> <?php echo _LANG('a7010','admin')?></button>
+				<button type="submit" class="btn btn-primary pull-right rb-resave"><i class="fa fa-check fa-fw"></i> 버전변경</button>
 			</div>
 		</div>
 
 	</form>
 
 	<div class="well">
-		<?php echo _LANG('a7011','admin')?><br>
-		<?php echo _LANG('a7012','admin')?><br>
-		<span class="hidden-xs"><?php echo _LANG('a7013','admin')?> <code> &lt;?php  getImport('bootstrap-validator','dist/css/bootstrapValidator.min',false,'css') ?&gt;</code></span>
+		킴스큐에서는 오픈소스로 제공되는 다양한 외부 플러그인들이 사용되고 있습니다.<br>
+		현재 사용되고 있는 플러그인들의 최신버젼이나 최적화된 버젼을 동적으로 설정할 수 있습니다.<br>
+		<span class="hidden-xs">삽입코드 예시 <code> &lt;?php  getImport('bootstrap-validator','dist/css/bootstrapValidator.min',false,'css') ?&gt;</code></span>
 	</div>
 </div>
 
@@ -130,7 +130,7 @@ $(document).ready(function()
 		modalSetting('modal_window','<?php echo getModalLink('&amp;m=admin&amp;module=market&amp;front=modal.add&amp;addType=plugin&amp;reload=Y')?>');
 	});
 });
-</script>   
+</script>
 
 <script>
 function deletePlugin(plugin,type)
@@ -150,10 +150,10 @@ function deletePlugin(plugin,type)
 	}
 	if (j == 0)
 	{
-		alert('<?php echo _LANG('a7014','admin')?>   ');
+		alert('삭제할 플러그인을 선택해 주세요.   ');
 		return false;
 	}
-	if (confirm('<?php echo _LANG('a7015','admin')?>   '))
+	if (confirm('사용중인 플러그인을 삭제하면 사이트에 오류가 발생할 수 있습니다.\n그래도 삭제하시겠습니까?   '))
 	{
 		getIframeForAction(f);
 		f.isdelete.value = type;
@@ -163,7 +163,7 @@ function deletePlugin(plugin,type)
 }
 function saveCheck(f)
 {
-	if(confirm('<?php echo _LANG('a0001','admin')?>   '))
+	if(confirm('정말로 실행하시겠습니까?   '))
 	{
 		getIframeForAction(f);
 		return true;
@@ -181,4 +181,3 @@ getId('_sum_size_').innerHTML = '<?php echo getSizeFormat($_sumPluginsSize,2)?>'
 setTimeout("saveCheck1();",100);
 <?php endif?>
 </script>
-
