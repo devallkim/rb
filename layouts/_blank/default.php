@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="<?php echo $lang['admin']['flag']?>">
 <head>
-<?php include $g['dir_layout'].'/_includes/_import.head.php'?>
+<?php include $g['dir_layout'].'/_includes/_import.head.php' ?>
 </head>
 <body id="rb-body" class="lang-<?php echo $lang['admin']['flag']?><?php if($g['device']):?> rb-device-connect<?php endif?>">
 
@@ -12,7 +12,7 @@
 	<?php include __KIMS_CONTENT__ ?>
 	</div>
 
-	<?php include $g['dir_layout'].'/_includes/_import.foot.php'?>
+	<?php include $g['dir_layout'].'/_includes/_import.foot.php' ?>
 </body>
 </html>
 <?php endif?>

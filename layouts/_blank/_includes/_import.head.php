@@ -1,6 +1,5 @@
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="apple-mobile-web-app-capable" content="no">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="robots" content="NOINDEX,NOFOLLOW">
@@ -11,22 +10,19 @@
 <link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">
 
 <!-- bootstrap css -->
-<?php getImport('bootstrap','css/bootstrap.min',false,'css')?>
-
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+<?php getImport('bootstrap','css/bootstrap.min','4.0.0-beta.2','css')?>
 
 <!-- jQuery -->
-<?php getImport('jquery','jquery-'.$d['ov']['jquery'].'.min',false,'js')?>
+<?php getImport('jquery','jquery.min','3.2.1','js')?>
+
+<?php getImport('popper.js','umd/popper.min','1.12.3','js')?>
 
 <!-- bootstrap js -->
-<?php getImport('bootstrap','js/bootstrap.min',false,'js')?>
+<?php getImport('bootstrap','js/bootstrap.min','4.0.0-beta.2','js')?>
 
 <!-- 시스템 폰트 -->
-<?php getImport('font-awesome','css/font-awesome',false,'css')?> 
-<?php getImport('font-kimsq','css/font-kimsq',false,'css')?> 
+<?php getImport('font-awesome','css/font-awesome',false,'css')?>
+<?php getImport('font-kimsq','css/font-kimsq',false,'css')?>
 
 <!-- global css -->
 <link href="<?php echo $g['url_layout']?>/_css/style.css" rel="stylesheet">
@@ -66,4 +62,3 @@ var is_admin= '<?php echo $my['admin']?>';
 
 <!-- bootbox -->
 <?php getImport('bootbox','bootbox',false,'js')?>
-
