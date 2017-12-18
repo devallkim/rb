@@ -21,7 +21,7 @@
 <?php getImport('bootstrap','js/bootstrap.min','4.0.0-beta.2','js')?>
 
 <!-- 시스템 폰트 -->
-<?php getImport('font-awesome','css/font-awesome',false,'css')?>
+<?php getImport('font-awesome','css/font-awesome','4.7.0','css')?>
 <?php getImport('font-kimsq','css/font-kimsq',false,'css')?>
 
 <!-- global css -->
