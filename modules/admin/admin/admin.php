@@ -24,20 +24,20 @@ $_authset = array('','승인','보류','대기','탈퇴');
 		<div class="panel-heading clearfix">
 			<label class="pull-left">
 				<span class="dropdown">
-					<a href="#" class="btn btn-default rb-username" data-toggle="dropdown">
+					<a href="#" class="btn btn-light rb-username" data-toggle="dropdown">
 						<span><?php echo $mtype=='admin'?'관리자':'일반회원'?> <?php echo sprintf('%d명',$NUM)?></span>
 						<span class="caret"></span>
 					</a>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-						<li><a href="<?php echo $g['adm_href']?>&amp;mtype=admin"><i class="fa fa-user"></i> 관리자</a></li>
-						<li><a href="<?php echo $g['adm_href']?>&amp;mtype=member"><i class="fa fa-user"></i> 일반회원</a></li>
-					</ul>
+					<div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+						<a class="dropdown-item" href="<?php echo $g['adm_href']?>&amp;mtype=admin"><i class="fa fa-user"></i> 관리자</a>
+						<a class="dropdown-item" href="<?php echo $g['adm_href']?>&amp;mtype=member"><i class="fa fa-user"></i> 일반회원</a>
+					</div>
 				</span>
 			</label>
 
 			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-default"<?php if($p-1<1):?> disabled<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="이전" onclick="location.href=getPageGo(<?php echo $p-1?>,0);"><i class="fa fa-chevron-left fa-lg"></i></button>
-				<button type="button" class="btn btn-default"<?php if($p+1>$TPG):?> disabled<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="다음" onclick="location.href=getPageGo(<?php echo $p+1?>,0);"><i class="fa fa-chevron-right fa-lg"></i></button>
+				<button type="button" class="btn btn-light"<?php if($p-1<1):?> disabled<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="이전" onclick="location.href=getPageGo(<?php echo $p-1?>,0);"><i class="fa fa-chevron-left fa-lg"></i></button>
+				<button type="button" class="btn btn-light"<?php if($p+1>$TPG):?> disabled<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="다음" onclick="location.href=getPageGo(<?php echo $p+1?>,0);"><i class="fa fa-chevron-right fa-lg"></i></button>
 			</div>
 		</div>
 
@@ -81,9 +81,9 @@ $_authset = array('','승인','보류','대기','탈퇴');
 						<td data-tooltip="tooltip" title="<?php echo getDateFormat($R['last_log'],'Y.m.d H:i')?>"><?php echo sprintf('%d일전',-getRemainDate($R['last_log']))?></td>
 						<td>
 						<?php if($my['uid']==1 && $R['admin']):?>
-						<a href="#." data-toggle="modal" data-target="#modal_window" class="btn btn-default btn-xs rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','perm');"<?php if($R['memberuid']==1):?> disabled<?php endif?>>관리제한</a>
+						<a href="#." data-toggle="modal" data-target="#modal_window" class="btn btn-light btn-xs rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','perm');"<?php if($R['memberuid']==1):?> disabled<?php endif?>>관리제한</a>
 						<?php endif?>
-						<a href="#." data-toggle="modal" data-target="#modal_window" class="btn btn-default btn-xs rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','info');">정보변경</a>
+						<a href="#." data-toggle="modal" data-target="#modal_window" class="btn btn-light btn-xs rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','info');">정보변경</a>
 						</td>
 					</tr>
 					<?php endwhile?>
@@ -98,7 +98,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 						<fieldset id="rb-action-btn" disabled>
 							<div class="btn-group">
 								<div class="btn-group dropup">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+									<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
 										<i class="fa fa-wrench"></i> 관리 <span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
@@ -120,7 +120,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 						</fieldset>
 					</div>
 					<div class="btn-group">
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-admin-add"><i class="fa fa-plus-circle"></i> <?php echo $mtype=='admin'?'관리자 추가':'회원 추가'?></button>
+						<button type="button" class="btn btn-light" data-toggle="modal" data-target="#modal-admin-add"><i class="fa fa-plus-circle"></i> <?php echo $mtype=='admin'?'관리자 추가':'회원 추가'?></button>
 					</div>
 				</div>
 			</div>
@@ -152,79 +152,79 @@ $_authset = array('','승인','보류','대기','탈퇴');
 			<?php endif?>
 
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title"><?php echo $mtype=='admin'?'관리자 추가':'회원 추가'?></h4>
+				<h5 class="modal-title"><?php echo $mtype=='admin'?'관리자 추가':'회원 추가'?></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
 			</div>
 			<div class="modal-body">
 
-				<div class="form-group rb-outside">
+				<div class="form-group form-row rb-outside">
 					<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="text" class="form-control" name="id" placeholder="4~12자의 영문(소문자)과 숫자만 사용" value="" maxlength="12" autofocus onchange="sendCheck('rb-idcheck','id');">
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default" id="rb-idcheck" onclick="sendCheck('rb-idcheck','id');">중복확인</button>
+								<button type="button" class="btn btn-light" id="rb-idcheck" onclick="sendCheck('rb-idcheck','id');">중복확인</button>
 							</span>
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group form-row">
 					<label class="col-sm-2 control-label">비밀번호</label>
 					<div class="col-sm-9">
 						<input type="password" class="form-control" name="pw1" placeholder="">
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-9">
+				<div class="form-group form-row">
+					<div class="offset-sm-2 col-sm-9">
 						<input type="password" class="form-control" name="pw2" placeholder="">
 					</div>
 				</div>
 				<hr>
-				<div class="form-group">
+				<div class="form-group form-row">
 					<label for="inputEmail3" class="col-sm-2 control-label">프로필</label>
 					<div class="col-sm-9">
 						<div class="media">
-							<span class="pull-left">
-								<img class="media-object img-circle" src="<?php echo $g['s']?>/_var/avatar/0.gif" alt="" style="width:45px">
-							</span>
+							<img class="mr-3 img-circle" src="<?php echo $g['s']?>/_var/avatar/0.gif" alt="" style="width:45px">
 							<div class="media-body">
 								<input type="file" name="upfile" class="hidden" id="rb-upfile-avatar" accept="image/jpg" onchange="getId('rb-photo-btn').innerHTML='이미지 파일 선택됨';">
-								<button type="button" class="btn btn-default" onclick="$('#rb-upfile-avatar').click();" id="rb-photo-btn">찾아보기</button>
+								<button type="button" class="btn btn-light btn-sm" onclick="$('#rb-upfile-avatar').click();" id="rb-photo-btn">찾아보기</button>
 								<small class="help-block"><code>jpg</code> 파일을 등록해주세요.</small>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group form-row">
 					<label class="col-sm-2 control-label">이름</label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control" name="name" placeholder="이름을 입력해주세요" value="<?php echo $regis_name?>" maxlength="10">
 					</div>
 				</div>
-				<div class="form-group rb-outside">
+				<div class="form-group form-row rb-outside">
 					<label class="col-sm-2 control-label">닉네임</label>
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="text" class="form-control" name="nic" placeholder="닉네임을 입력해주세요" value="" maxlength="20" onchange="sendCheck('rb-nickcheck','nic');">
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default" id="rb-nickcheck" onclick="sendCheck('rb-nickcheck','nic');">중복확인</button>
+								<button type="button" class="btn btn-light" id="rb-nickcheck" onclick="sendCheck('rb-nickcheck','nic');">중복확인</button>
 							</span>
 						</div>
 					</div>
 				</div>
-				<div class="form-group rb-outside">
+				<div class="form-group form-row rb-outside">
 					<label class="col-sm-2 control-label">이메일</label>
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요" value="" onchange="sendCheck('rb-emailcheck','email');">
 							<span class="input-group-btn">
-								<button type="button" class="btn btn-default" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');">중복확인</button>
+								<button type="button" class="btn btn-light" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');">중복확인</button>
 							</span>
 						</div>
 						<p class="form-control-static"><small class="text-muted">비밀번호 분실시에 사용됩니다. 정확하게 입력하세요.</small></p>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group form-row">
 					<label class="col-sm-2 control-label">연락처</label>
 					<div class="col-sm-9">
 						<input type="tel" class="form-control" name="tel2" placeholder="예) 010-000-0000" value="">
@@ -232,7 +232,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">취소</button>
+				<button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
 				<button type="submit" class="btn btn-primary">등록하기</button>
 			</div>
 		</form>

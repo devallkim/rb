@@ -1,18 +1,3 @@
-#seo-setting {
-
-}
-
-
-#seo-setting .tab-content {
-	border: none;
-	padding: 0 15px 15px 15px;
-	margin-top: 15px
-}
-
-.rb-device-connect #seo-setting .tab-content  {
-	padding: 0 10px 10px 10px;
-}
-
 #seo-setting .rb-codeview {
 	margin-top: 20px;
 	border: 1px solid #ddd;
@@ -73,7 +58,7 @@
  *
  * Name:	Stanley Ng
  * Email: 	stanleyhlng@googlegroups.com
- * 
+ *
  * Reference:
  * http://code.google.com/p/google-code-prettify/source/browse/trunk/src/prettify.css
  */

@@ -1,59 +1,67 @@
-#switch .panel-body {
-   padding: 0 10px 15px;
+#switch .card-body {
+   padding: 15px 10px 15px;
    border-top: 1px dotted #c0c0c0
 }
 
-#switch .panel-body.rb-panel-form {
-    border-top: none;
+#switch .card-body.rb-panel-form {
+  border-top: none;
 }
 
-#switch .panel-body.rb-panel-form select {
-    background-color: #f5f5f5
+#switch .card-body.rb-panel-form .form-control {
+  background-color: #f5f5f5;
+  border-radius: 0
 }
 #switch .rb-eye-close {
 	color: #c0c0c0;
+}
+
+#switch .card-body h5 {
+  font-size: 14px
+}
+#switch .card-body.rb-panel-form small {
+  font-size: 75%;
 }
 
 /**
  * Nestable
  */
 
-.dd { 
-    position: relative; 
-    display: block; 
-    margin: 0; 
-    padding: 0; 
-    list-style: none; 
+.dd {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
     line-height: 20px
 }
 
-.dd-list { 
-    display: block; 
-    position: relative; 
-    margin: 0; 
-    padding: 0; 
+.dd-list {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
     list-style: none
 }
 
 .dd-item,
 .dd-empty,
-.dd-placeholder { 
-    display: block; 
+.dd-placeholder {
+    display: block;
     position: relative;
-    margin: 0; 
-    padding: 0; 
-    min-height: 20px; 
+    margin: 0;
+    padding: 0;
+    min-height: 20px;
     line-height: 20px
 }
 
-.dd-handle { 
-    display: block; 
-    height: 35px; 
-    margin: 5px 0; 
-    padding: 5px 10px; 
-    color: #333; 
-    text-decoration: none; 
-    font-weight: bold; 
+.dd-handle {
+    display: block;
+    height: 35px;
+    margin: 5px 0;
+    padding: 5px 10px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
     border: 1px solid #ddd;
     background: #fafafa;
     background: -webkit-linear-gradient(top, #fafafa 0%, #eee 100%);
@@ -68,19 +76,19 @@
 
 
 .dd-placeholder,
-.dd-empty { 
-    margin: 5px 0; 
-    padding: 0; 
-    min-height: 30px; 
-    background: #f2fbff; 
-    border: 1px dashed #b6bcbf; 
-    box-sizing: border-box; 
+.dd-empty {
+    margin: 5px 0;
+    padding: 0;
+    min-height: 30px;
+    background: #f2fbff;
+    border: 1px dashed #b6bcbf;
+    box-sizing: border-box;
     -moz-box-sizing: border-box
 }
 
-.dd-empty { 
-    border: 1px dashed #bbb; 
-    min-height: 100px; 
+.dd-empty {
+    border: 1px dashed #bbb;
+    min-height: 100px;
     background-color: #e5e5e5;
     background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
                       -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
@@ -92,9 +100,9 @@
     background-position: 0 0, 30px 30px;
 }
 
-.dd-dragel { 
-    position: absolute; 
-    pointer-events: none; 
+.dd-dragel {
+    position: absolute;
+    pointer-events: none;
     z-index: 9999
 }
 
@@ -127,13 +135,13 @@
  * Nestable Draggable Handles
  */
 
-.dd3-content { 
-    display: block; 
-    height: 35px; 
-    margin: 5px 0; 
+.dd3-content {
+    display: block;
+    height: 35px;
+    margin: 5px 0;
     line-height: 20px;
-    padding: 6px 10px 4px 40px; 
-    color: #333; 
+    padding: 6px 10px 4px 40px;
+    color: #333;
     border: 1px solid #ddd;
     background: #eee;
     -webkit-border-radius: 3px;
@@ -141,11 +149,11 @@
     box-sizing: border-box; -moz-box-sizing: border-box;
 }
 
-.dd3-content:hover { 
+.dd3-content:hover {
     background: #f5f5f5
 }
 
-.dd3-content small { 
+.dd3-content small {
     color: #999
 }
 
@@ -165,15 +173,15 @@
 
 .dd3-item > button { margin-left: 30px; }
 
-.dd3-handle { 
-	position: absolute; 
-	margin: 0; 
-	left: 0; 
-	top: 0; 
-	cursor: pointer; 
-	width: 30px; 
-	text-indent: 100%; 
-	white-space: nowrap; 
+.dd3-handle {
+	position: absolute;
+	margin: 0;
+	left: 0;
+	top: 0;
+	cursor: pointer;
+	width: 30px;
+	text-indent: 100%;
+	white-space: nowrap;
 	overflow: hidden;
     border: 1px solid #ddd;
     background: #ddd;
@@ -185,30 +193,30 @@
 
 .dd-checkbox {
 	line-height: 28px;
-	position: absolute; 
-	margin: 0; 
-	right: 0; 
-	top: 0; 
-	width: 30px; 
+	position: absolute;
+	margin: 0;
+	right: 0;
+	top: 0;
+	width: 30px;
     padding: 5px 20px 10px 5px
 
 }
 
-.dd3-handle:before { 
+.dd3-handle:before {
     font-family: 'FontAwesome';
-    content: '\f047'; 
-    display: block; 
-    position: absolute; 
-    left: 5px; 
-    top: 6px; 
-    text-align: center; 
-    text-indent: 0; 
-    color: #888; 
-    font-size: 18px; 
+    content: '\f047';
+    display: block;
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    text-align: center;
+    text-indent: 0;
+    color: #888;
+    font-size: 18px;
     font-weight: normal
 }
 
-.dd3-handle:hover { 
+.dd3-handle:hover {
     background: #ddd
 }
 
@@ -306,7 +314,7 @@
 }
 
 #switch .rb-codeview-footer {
-    border-top: 1px solid #ddd; 
+    border-top: 1px solid #ddd;
     padding: 10px;
     background-color: #e8e8e8;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#e8e8e8));

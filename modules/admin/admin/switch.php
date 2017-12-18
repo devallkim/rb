@@ -21,7 +21,7 @@ $_switchset = array(
 	'top'=>'탑 스위치',
 	'head'=>'헤더 스위치',
 	'foot'=>'풋터 스위치',
-	'end'=>'엔드 스우치'
+	'end'=>'엔드 스위치'
 );
 $TMPST = array();
 $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);
@@ -29,16 +29,13 @@ $SITEN = db_num_rows($SITES);
 ?>
 
 <div class="row" id="switch">
-	<div class="col-sm-4 col-lg-3 rb-aside">
-		<div class="panel panel-default">
-			<div class="panel-heading rb-icon">
-				<div class="icon">
-				<i class="fa fa-power-off fa-2x"></i>
-				</div>
-				<h4 class="panel-title">스위치 관리</h4>
+	<div class="col-sm-4 col-lg-3">
+		<div class="card">
+			<div class="card-header">
+				<i class="fa fa-power-off fa-lg fa-fw"></i> 스위치 관리
 			</div>
-			<div class="panel-body rb-panel-form">
-				<select class="form-control" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&switchdir=<?php echo $switchdir?>&r='+this.value);">
+			<div class="rb-panel-form">
+				<select class="form-control border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&switchdir=<?php echo $switchdir?>&r='+this.value);">
 				<?php while($S = db_fetch_array($SITES)):$TMPST[]=array($S['name'],$S['id'])?>
 				<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
 				<?php endwhile?>
@@ -46,13 +43,13 @@ $SITEN = db_num_rows($SITES);
 			</div>
 
 			<form action="<?php echo $g['s']?>/" method="post" class="rb-form" onsubmit="return orderCheck(this);">
-			<input type="hidden" name="r" value="<?php echo $r?>">
-			<input type="hidden" name="m" value="<?php echo $module?>">
-			<input type="hidden" name="a" value="switch_order">
-			<input type="hidden" name="auto" value="">
+				<input type="hidden" name="r" value="<?php echo $r?>">
+				<input type="hidden" name="m" value="<?php echo $module?>">
+				<input type="hidden" name="a" value="switch_order">
+				<input type="hidden" name="auto" value="">
 
 				<?php foreach($_switchset as $_key => $_val):?>
-				<div class="panel-body">
+				<div class="card-body">
 					<h5><small><?php echo $_val?></small></h5>
 					<div class="dd" id="nestable-<?php echo $_key?>">
 						<ol class="dd-list">
@@ -62,7 +59,7 @@ $SITEN = db_num_rows($SITES);
 							<div class="dd-handle dd3-handle"></div>
 							<div class="dd3-content"><a href="<?php echo $g['adm_href']?>&amp;switchdir=<?php echo $_key.'/'.$_switch[0]?>"><?php echo $_switch[2]?></a> <small>(<?php echo $_switch[0]?>)</small></div>
 							<div class="dd-checkbox">
-								<input type="checkbox" name="switchmembers_<?php echo $_key?>[]" value="<?php echo $_switch[0]?>" checked class="hidden"><i class="glyphicon glyphicon-eye-<?php echo strstr($_switch[1],'['.$r.']')?'open':'close rb-eye-close'?>"></i>
+								<input type="checkbox" name="switchmembers_<?php echo $_key?>[]" value="<?php echo $_switch[0]?>" checked class="d-none"><i class="fa fa-eye<?php echo strstr($_switch[1],'['.$r.']')?'':'-slash rb-eye-close'?>"></i>
 							</div>
 						</li>
 						<?php $_i++;endforeach?>
@@ -74,15 +71,15 @@ $SITEN = db_num_rows($SITES);
 				</div>
 				<?php endforeach?>
 
-				<div class="panel-footer">
-					<div class="btn-group btn-group-justified">
+				<div class="card-footer">
+					<div class="btn-group">
 						<div class="btn-group">
-							<button type="button" class="btn btn-default rb-modal-add-switch" data-toggle="modal" href="#modal_window">
+							<button type="button" class="btn btn-light rb-modal-add-switch" data-toggle="modal" href="#modal_window">
 								스위치 추가
 							</button>
 						</div>
 						<div class="btn-group">
-							<button type="submit" class="btn btn-default">
+							<button type="submit" class="btn btn-light">
 								스위치 업데이트
 							</button>
 						</div>
@@ -92,12 +89,10 @@ $SITEN = db_num_rows($SITES);
 			</form>
 		</div>
 	</div>
-	<div class="col-sm-8 col-lg-9 rb-main">
+	<div class="col-sm-8 col-lg-9">
 		<?php if($switchdir):?>
 
-		<div class="page-header">
-			<h4>스위치 등록정보</h4>
-		</div>
+		<h4>스위치 등록정보</h4>
 
 		<div class="row">
 			<div class="col-md-2 col-sm-2 text-center">
@@ -113,8 +108,8 @@ $SITEN = db_num_rows($SITES);
 				</h4>
 				<p class="text-muted"><small>선택된 스위치 대한 등록정보입니다.</small></p>
 				<div class="btn-group">
-				  <a class="btn btn-default" data-toggle="collapse" data-target="#_edit_area_" onclick="sessionSetting('sh_admin_switch1','1','','1');"><i class="fa fa-code fa-lg"></i> 편집하기</a>
-				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				  <a class="btn btn-light" data-toggle="collapse" data-target="#_edit_area_" onclick="sessionSetting('sh_admin_switch1','1','','1');"><i class="fa fa-code fa-lg"></i> 편집하기</a>
+				  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
 				    <span class="caret"></span>
 				  </button>
 				  <ul class="dropdown-menu" role="menu">
@@ -128,15 +123,13 @@ $SITEN = db_num_rows($SITES);
 		</div>
 
 		<form name="procForm" class="form-horizontal" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
-		<input type="hidden" name="r" value="<?php echo $r?>">
-		<input type="hidden" name="m" value="<?php echo $module?>">
-		<input type="hidden" name="a" value="switch_edit">
-		<input type="hidden" name="switch" value="<?php echo $switchdir?>">
-		<input type="hidden" name="name" value="<?php echo $sinfo[2]?>">
+			<input type="hidden" name="r" value="<?php echo $r?>">
+			<input type="hidden" name="m" value="<?php echo $module?>">
+			<input type="hidden" name="a" value="switch_edit">
+			<input type="hidden" name="switch" value="<?php echo $switchdir?>">
+			<input type="hidden" name="name" value="<?php echo $sinfo[2]?>">
 
-			<div class="page-header">
-				<h4>적용 사이트</h4>
-			</div>
+			<h4>적용 사이트</h4>
 
 			<div class="form-group">
 				<div class="col-lg-12">
@@ -153,8 +146,8 @@ $SITEN = db_num_rows($SITES);
 			<div class="form-group">
 				<div class="col-sm-12">
 					<div class="btn-group">
-						<button type="button" class="btn btn-default" onclick="checkboxChoice('aply_sites[]',true);">전체선택</button>
-						<button type="button" class="btn btn-default" onclick="checkboxChoice('aply_sites[]',false);">전체취소</button>
+						<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',true);">전체선택</button>
+						<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',false);">전체취소</button>
 					</div>
 					<div class="btn-group">
 						<button class="btn btn-primary" type="submit"><i class="fa fa-check fa-lg"></i> 저장하기</button>
@@ -173,7 +166,7 @@ $SITEN = db_num_rows($SITES);
 								<li><?php echo str_replace('/','</li><li>',$switchdir)?></li>
 								<li class="active">main.php</li>
 							</ol>
-							<button type="button" class="btn btn-default btn-xs pull-right rb-full-screen" data-tooltip="tooltip" title="전체화면" onclick="editFullSize('_edit_area_',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
+							<button type="button" class="btn btn-light btn-xs pull-right rb-full-screen" data-tooltip="tooltip" title="전체화면" onclick="editFullSize('_edit_area_',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
 						</div>
 						<div class="rb-codeview-body">
 							<textarea name="switch_code" id="__code__" class="form-control" rows="35"><?php echo implode('',file($g['path_switch'].$switchdir.'/main.php'))?></textarea>
@@ -205,33 +198,33 @@ $SITEN = db_num_rows($SITES);
 
 
 		<?php else:?>
-		<div class="page-header">
-			<h4>사용 가이드</h4>
-		</div>
-		<ul class="rb-guide">
-		<li>스위치는 프로그램의 실행단계를 5개의 구역으로 분리하여 각각의 구역에 실행여부를 온/오프 할 수 있는 응용 프로그램입니다.</li>
-		<li>너무 많은 스위치를 동작시킬 경우 실행속도에 영향을 줄 수 있으니 꼭 필요한 스위치만 사용하세요.</li>
+
+		<h4>사용 가이드</h4>
+
+		<ul class="list-unstyled">
+			<li>스위치는 프로그램의 실행단계를 5개의 구역으로 분리하여 각각의 구역에 실행여부를 온/오프 할 수 있는 응용 프로그램입니다.</li>
+			<li>너무 많은 스위치를 동작시킬 경우 실행속도에 영향을 줄 수 있으니 꼭 필요한 스위치만 사용하세요.</li>
 		</ul>
 
-		<div class="page-header">
-			<h4>요소별 실행위치</h4>
-		</div>
 
-		<dl class="dl-horizontal well">
-		  <dt>스타트 스위치</dt>
-		  <dd><small class="text-muted">(start)</small> 프로그램 시작과 함께 DB연결,주요파일 로드 후 실행됩니다.</dd>
-		  <dt>탑 스위치</dt>
-		  <dd><small class="text-muted">(top)</small> 모듈 및 레이아웃에 대한 정의후 화면출력 직전에 실행됩니다.</dd>
-		  <dt>헤더 스위치</dt>
-		  <dd><small class="text-muted">(head)</small> head 태그를 닫기 직전에 실행됩니다.</dd>
-		  <dt>풋터 스위치</dt>
-		  <dd><small class="text-muted">(foot)</small> body 태그를 닫기 직전에 실행됩니다.</dd>
-		  <dt>엔드 스우치</dt>
-		  <dd><small class="text-muted">(end)</small> 화면출력을 끝내고 실행됩니다.</dd>
+		<h4 class="mt-5">요소별 실행위치</h4>
+
+		<dl class="row border p-3 bg-light">
+		  <dt class="col-sm-2">스타트 스위치</dt>
+		  <dd class="col-sm-9"><small class="text-muted">(start)</small> 프로그램 시작과 함께 DB연결,주요파일 로드 후 실행됩니다.</dd>
+		  <dt class="col-sm-2">탑 스위치</dt>
+		  <dd class="col-sm-9"><small class="text-muted">(top)</small> 모듈 및 레이아웃에 대한 정의후 화면출력 직전에 실행됩니다.</dd>
+		  <dt class="col-sm-2">헤더 스위치</dt>
+		  <dd class="col-sm-9"><small class="text-muted">(head)</small> head 태그를 닫기 직전에 실행됩니다.</dd>
+		  <dt class="col-sm-2">풋터 스위치</dt>
+		  <dd class="col-sm-9"><small class="text-muted">(foot)</small> body 태그를 닫기 직전에 실행됩니다.</dd>
+		  <dt class="col-sm-2">엔드 스우치</dt>
+		  <dd class="col-sm-9"><small class="text-muted">(end)</small> 화면출력을 끝내고 실행됩니다.</dd>
 		</dl>
 
-		<p><a class="btn btn-link pull-right" data-toggle="modal" href="#admin-switch-structure">스위치 실행 스트럭처 보기</a></p>
-		<br>
+		<p class="text-right">
+			<a class="btn btn-light" data-toggle="modal" href="#admin-switch-structure">스위치 실행 스트럭처 보기</a>
+		</p>
 		<?php endif?>
 
 	</div>
@@ -377,7 +370,7 @@ function saveCheck(f)
 				</fieldset>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

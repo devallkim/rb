@@ -15,14 +15,17 @@ $TPG = getTotalPage($_updatelength,$recnum);
 	  <h4>킴스큐 원격 업데이트</h4>
 	</div>
 
-	<div class="media well">
-	  <div class="pull-left version">
-		<span class="fa kf-bi-01"></span> Rb <i><?php echo $d['admin']['version']?></i>
-	  </div>
-	  <div class="media-body hidden-xs">
-			원격 업데이트를 이용하시면 킴스큐Rb를 항상 최신의 상태로 유지할 수 있습니다. <br>패치 및 업데이트 내용에 따라서 업데이트를 진행해 주세요.
-	  </div>
+	<div class="alert alert-info">
+		<div class="media">
+			<div class="mr-3 align-self-center version">
+				Rb <i><?php echo $d['admin']['version']?></i>
+			</div>
+			<div class="media-body">
+				원격 업데이트를 이용하시면 킴스큐Rb를 항상 최신의 상태로 유지할 수 있습니다. <br>패치 및 업데이트 내용에 따라서 업데이트를 진행해 주세요.
+			</div>
+		</div>
 	</div>
+
 
 	<div class="update-info table-responsive">
 		<table class="table table-bordered">
@@ -65,12 +68,12 @@ $TPG = getTotalPage($_updatelength,$recnum);
 						<span><?php echo getDateFormat($_supdate[0],'Y.m.d')?></span>
 					</td>
 					<td>
-						<button class="btn btn-default disabled">
+						<button class="btn btn-light disabled">
 							<i class="fa fa-circle-o"></i> 완료됨 <?php if($_supdate[1]):?>(수동)<?php else:?>(원격)<?php endif?>
 						</button>
 					</td>
 					<td>
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;a=update&amp;type=delete&amp;ufile=<?php echo $var1[1]?>" title="업데이트기록 제거" onclick="return hrefCheck(this,true,'정말로 업데이트 기록을 제거하시겠습니까?');" class="btn btn-default"><i class="fa fa-times"></i> 기록제거</a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;a=update&amp;type=delete&amp;ufile=<?php echo $var1[1]?>" title="업데이트기록 제거" onclick="return hrefCheck(this,true,'정말로 업데이트 기록을 제거하시겠습니까?');" class="btn btn-light"><i class="fa fa-times"></i> 기록제거</a>
 					</td>
 				</tr>
 
@@ -93,7 +96,7 @@ $TPG = getTotalPage($_updatelength,$recnum);
 					</td>
 					<td></td>
 					<td>
-						<button class="btn btn-default disabled">
+						<button class="btn btn-light disabled">
 							<i class="glyphicon glyphicon-pause"></i> 미적용
 						</button>
 					</td>

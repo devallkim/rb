@@ -20,3 +20,9 @@ function editFullSize(id,obj)
 		}
 	}
 }
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+	$('.js-tooltip').tooltip()
+})

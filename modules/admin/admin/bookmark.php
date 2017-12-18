@@ -2,14 +2,11 @@
 
 	<div class="col-sm-5">
 
-		<div class="panel panel-default">
-			<div class="panel-heading rb-icon">
-				<div class="icon">
-				<i class="fa fa-star-o fa-2x"></i>
-				</div>
-				<h4 class="panel-title">북마크 관리</h4>
+		<div class="card">
+			<div class="card-header rb-icon">
+				<i class="fa fa-star-o fa-lg fa-fw"></i> 북마크 관리
 			</div>
-			<div class="panel-body">
+			<div class="card-body p-2">
 				<form action="<?php echo $g['s']?>/" method="post" class="rb-form">
 				<input type="hidden" name="r" value="<?php echo $r?>">
 				<input type="hidden" name="m" value="<?php echo $module?>">
@@ -22,7 +19,7 @@
 				                <div class="dd-handle dd3-handle"></div>
 				                <div class="dd3-content"><a href="<?php echo $R['url']?>"><?php echo $R['name']?></a></div>
 				                <div class="dd-checkbox">
-									<input type="checkbox" class="hidden" name="bookmark_pages_order[]" value="<?php echo $R['uid']?>" checked>
+									<input type="checkbox" class="d-none" name="bookmark_pages_order[]" value="<?php echo $R['uid']?>" checked>
 									<input type="checkbox" name="bookmark_pages[]" value="<?php echo $R['uid']?>"><i></i>
 								</div>
 				            </li>
@@ -36,29 +33,26 @@
 					</div>
 		        </form>
 			</div>
-			<div class="panel-footer">
-				<ul class="list-inline clearfix">
-					<li class="pull-left">
-						<button type="button" class="btn btn-default"<?php if($_i==1):?> disabled<?php endif?> onclick="checkboxChoice('bookmark_pages[]',true);">
-							전체선택
-						</button>
-						<button type="button" class="btn btn-default"<?php if($_i==1):?> disabled<?php endif?> onclick="checkboxChoice('bookmark_pages[]',false);">
-							전체취소
-						</button>
-					</li>
-					<li class="pull-right">
-						<button type="button" class="btn btn-primary"<?php if($_i==1):?> disabled<?php endif?> onclick="actQue('bookmark_delete');">
-							삭제
-						</button>
-					</li>
-				</ul>
+			<div class="card-footer">
+
+				<button type="button" class="btn btn-light"<?php if($_i==1):?> disabled<?php endif?> onclick="checkboxChoice('bookmark_pages[]',true);">
+					전체선택
+				</button>
+				<button type="button" class="btn btn-light"<?php if($_i==1):?> disabled<?php endif?> onclick="checkboxChoice('bookmark_pages[]',false);">
+					전체취소
+				</button>
+
+				<button type="button" class="btn btn-danger"<?php if($_i==1):?> disabled<?php endif?> onclick="actQue('bookmark_delete');">
+					삭제
+				</button>
+
 			</div>
 		</div>
 	</div>
 
 	<div class="col-sm-7">
 
-		<div class="page-header">
+		<div class="page-header mt-2">
 			<h4>도움말</h4>
 		</div>
 		<p>

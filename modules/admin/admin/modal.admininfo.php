@@ -6,23 +6,40 @@ $_M=array_merge($_R1,$_R2);
 if (!$_M['uid']) exit;
 ?>
 
-<ul class="nav nav-tabs" role="tablist">
-	<li<?php if($tab=='profile'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=profile&amp;uid=<?php echo $_M['uid']?>">프로필</a></li>
-	<li<?php if($tab=='info'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=info&amp;uid=<?php echo $_M['uid']?>">정보변경</a></li>
-	<li<?php if($tab=='log'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=log&amp;uid=<?php echo $_M['uid']?>">접속기록</a></li>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<li class="nav-item">
+		<a class="nav-link<?php if($tab=='profile'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=profile&amp;uid=<?php echo $_M['uid']?>">
+			프로필
+		</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link<?php if($tab=='info'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=info&amp;uid=<?php echo $_M['uid']?>">
+			정보변경
+		</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link<?php if($tab=='log'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=log&amp;uid=<?php echo $_M['uid']?>">
+			접속기록
+		</a>
+	</li>
+
 	<?php if($my['uid']==1 && $_M['uid']!=1 && $_M['admin']==1):?>
-	<li<?php if($tab=='perm'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=perm&amp;uid=<?php echo $_M['uid']?>">관리제한</a></li>
+	<li class="nav-item">
+		<a class="nav-link<?php if($tab=='perm'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=perm&amp;uid=<?php echo $_M['uid']?>">
+			관리제한
+		</a>
+	</li>
 	<?php endif?>
 </ul>
 
 <div class="tab-content">
-	<div class="tab-pane active">
+	<div class="tab-pane fade show active">
 
 		<?php if($tab=='profile'):?>
 		<div class="row">
 			<div class="col-sm-3 col-lg-3 text-center">
 				<br><br>
-				<img alt="User Pic" src="<?php echo $g['s']?>/_var/avatar/<?php echo $_M['photo']?'180.'.$_M['photo']:'180.0.gif'?>" width="120" height="120" class="img-circle">
+				<img alt="User Pic" src="<?php echo $g['s']?>/_var/avatar/<?php echo $_M['photo']?'180.'.$_M['photo']:'180.0.gif'?>" width="120" height="120" class="rounded-circle">
 			</div>
 			<div class="col-sm-9 col-lg-9">
 				<table class="table rb-table-user">
@@ -64,87 +81,85 @@ if (!$_M['uid']) exit;
 
 		<?php if($tab=='info'):?>
 		<form name="procForm" class="form-horizontal" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" onsubmit="return saveCheck(this);">
-		<input type="hidden" name="r" value="<?php echo $r?>">
-		<input type="hidden" name="m" value="<?php echo $module?>">
-		<input type="hidden" name="a" value="admin_member_add">
-		<input type="hidden" name="id" value="<?php echo $_M['id']?>">
-		<input type="hidden" name="uid" value="<?php echo $_M['uid']?>">
-		<input type="hidden" name="avatar" value="<?php echo $_M['photo']?>">
-		<input type="hidden" name="check_id" value="1">
-		<input type="hidden" name="check_nic" value="1">
-		<input type="hidden" name="check_email" value="1">
-		<input type="submit" style="position:absolute;left:-1000px;">
-		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
-			<div class="col-sm-9">
-				<p class="form-control-static"><?php echo $_M['id']?></p>
+			<input type="hidden" name="r" value="<?php echo $r?>">
+			<input type="hidden" name="m" value="<?php echo $module?>">
+			<input type="hidden" name="a" value="admin_member_add">
+			<input type="hidden" name="id" value="<?php echo $_M['id']?>">
+			<input type="hidden" name="uid" value="<?php echo $_M['uid']?>">
+			<input type="hidden" name="avatar" value="<?php echo $_M['photo']?>">
+			<input type="hidden" name="check_id" value="1">
+			<input type="hidden" name="check_nic" value="1">
+			<input type="hidden" name="check_email" value="1">
+			<input type="submit" style="position:absolute;left:-1000px;">
+			<div class="form-group form-row">
+				<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
+				<div class="col-sm-9">
+					<p class="form-control-static"><?php echo $_M['id']?></p>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">비밀번호</label>
-			<div class="col-sm-9">
-				<input type="password" class="form-control" name="pw1" placeholder="">
+			<div class="form-group form-row">
+				<label class="col-sm-2 control-label">비밀번호</label>
+				<div class="col-sm-9">
+					<input type="password" class="form-control" name="pw1" placeholder="">
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-9">
-				<input type="password" class="form-control" name="pw2" placeholder="">
+			<div class="form-group form-row">
+				<div class="offset-sm-2 col-sm-9">
+					<input type="password" class="form-control" name="pw2" placeholder="">
+				</div>
 			</div>
-		</div>
-		<hr>
-		<div class="form-group">
-			<label for="inputEmail3" class="col-sm-2 control-label">프로필</label>
-			<div class="col-sm-9">
-				<div class="media">
-					<span class="pull-left">
-						<img class="media-object img-circle" src="<?php echo $g['s']?>/_var/avatar/<?php echo $_M['photo']?$_M['photo']:'0.gif'?>" alt="" style="width:45px">
-					</span>
-					<div class="media-body">
-						<input type="file" name="upfile" class="hidden" id="rb-upfile-avatar" accept="image/jpg" onchange="getId('rb-photo-btn').innerHTML='이미지 파일 선택됨';">
-						<button type="button" class="btn btn-default" onclick="$('#rb-upfile-avatar').click();" id="rb-photo-btn">찾아보기</button>
-						<small class="help-block">
-							<code>jpg</code> 파일을 등록해주세요.
-							<?php if($_M['photo']):?> <label>( <input type="checkbox" name="avatar_delete" value="1"> 현재 아바타 삭제 )</label><?php endif?>
-						</small>
+			<hr>
+			<div class="form-group form-row">
+				<label for="inputEmail3" class="col-sm-2 control-label">프로필</label>
+				<div class="col-sm-9">
+					<div class="media">
+						<img class="mr-3 rounded-circle" src="<?php echo $g['s']?>/_var/avatar/<?php echo $_M['photo']?$_M['photo']:'0.gif'?>" alt="" style="width:45px">
+						<div class="media-body">
+							<input type="file" name="upfile" class="hidden" id="rb-upfile-avatar" accept="image/jpg" onchange="getId('rb-photo-btn').innerHTML='이미지 파일 선택됨';">
+							<button type="button" class="btn btn-light" onclick="$('#rb-upfile-avatar').click();" id="rb-photo-btn">찾아보기</button>
+							<small class="help-block">
+								<code>jpg</code> 파일을 등록해주세요.
+								<?php if($_M['photo']):?> <label>( <input type="checkbox" name="avatar_delete" value="1"> 현재 아바타 삭제 )</label><?php endif?>
+							</small>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">이름</label>
-			<div class="col-sm-9">
-				<input type="text" class="form-control" name="name" placeholder="" value="<?php echo $_M['name']?>" maxlength="10">
-			</div>
-		</div>
-		<div class="form-group rb-outside">
-			<label class="col-sm-2 control-label">닉네임</label>
-			<div class="col-sm-9">
-				<div class="input-group">
-					<input type="text" class="form-control" name="nic" placeholder="" value="<?php echo $_M['nic']?>" maxlength="20" onchange="sendCheck('rb-nickcheck','nic');">
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" id="rb-nickcheck" onclick="sendCheck('rb-nickcheck','nic');">중복확인</button>
-					</span>
+			<div class="form-group form-row">
+				<label class="col-sm-2 control-label">이름</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" name="name" placeholder="" value="<?php echo $_M['name']?>" maxlength="10">
 				</div>
 			</div>
-		</div>
-		<div class="form-group rb-outside">
-			<label class="col-sm-2 control-label">이메일</label>
-			<div class="col-sm-9">
-				<div class="input-group">
-					<input type="email" class="form-control" name="email" placeholder="" value="<?php echo $_M['email']?>" onchange="sendCheck('rb-emailcheck','email');">
-					<span class="input-group-btn">
-						<button type="button" class="btn btn-default" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');">중복확인</button>
-					</span>
+			<div class="form-group form-row rb-outside">
+				<label class="col-sm-2 control-label">닉네임</label>
+				<div class="col-sm-9">
+					<div class="input-group">
+						<input type="text" class="form-control" name="nic" placeholder="" value="<?php echo $_M['nic']?>" maxlength="20" onchange="sendCheck('rb-nickcheck','nic');">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-light" id="rb-nickcheck" onclick="sendCheck('rb-nickcheck','nic');">중복확인</button>
+						</span>
+					</div>
 				</div>
-				<p class="form-control-static"><small class="text-muted">비밀번호 분실시에 사용됩니다. 정확하게 입력하세요.</small></p>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">연락처</label>
-			<div class="col-sm-9">
-				<input type="tel" class="form-control" name="tel2" placeholder="예) 010-000-0000" value="<?php echo $_M['tel2']?$_M['tel2']:$_M['tel1']?>">
+			<div class="form-group form-row rb-outside">
+				<label class="col-sm-2 control-label">이메일</label>
+				<div class="col-sm-9">
+					<div class="input-group">
+						<input type="email" class="form-control" name="email" placeholder="" value="<?php echo $_M['email']?>" onchange="sendCheck('rb-emailcheck','email');">
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-light" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');">중복확인</button>
+						</span>
+					</div>
+					<p class="form-control-static"><small class="text-muted">비밀번호 분실시에 사용됩니다. 정확하게 입력하세요.</small></p>
+				</div>
 			</div>
-		</div>
+			<div class="form-group form-row">
+				<label class="col-sm-2 control-label">연락처</label>
+				<div class="col-sm-9">
+					<input type="tel" class="form-control" name="tel2" placeholder="예) 010-000-0000" value="<?php echo $_M['tel2']?$_M['tel2']:$_M['tel1']?>">
+				</div>
+			</div>
 		</form>
 		<form name="actionform" action="<?php echo $g['s']?>/" method="post">
 			<input type="hidden" name="r" value="<?php echo $r?>">
@@ -182,14 +197,14 @@ if (!$_M['uid']) exit;
 			</p>
 
 			<form name="searchForm" class="form-horizontal" action="<?php echo $g['s']?>/" method="post">
-			<input type="hidden" name="r" value="<?php echo $r?>">
-			<input type="hidden" name="m" value="<?php echo $m?>">
-			<input type="hidden" name="module" value="<?php echo $module?>">
-			<input type="hidden" name="front" value="<?php echo $front?>">
-			<input type="hidden" name="tab" value="<?php echo $tab?>">
-			<input type="hidden" name="uid" value="<?php echo $_M['uid']?>">
-			<input type="hidden" name="p" value="<?php echo $p?>">
-			<input type="hidden" name="iframe" value="<?php echo $iframe?>">
+				<input type="hidden" name="r" value="<?php echo $r?>">
+				<input type="hidden" name="m" value="<?php echo $m?>">
+				<input type="hidden" name="module" value="<?php echo $module?>">
+				<input type="hidden" name="front" value="<?php echo $front?>">
+				<input type="hidden" name="tab" value="<?php echo $tab?>">
+				<input type="hidden" name="uid" value="<?php echo $_M['uid']?>">
+				<input type="hidden" name="p" value="<?php echo $p?>">
+				<input type="hidden" name="iframe" value="<?php echo $iframe?>">
 
 			<div class="panel-heading">
 			   <div class="row well well-sm">
@@ -208,7 +223,7 @@ if (!$_M['uid']) exit;
 							<span class="input-group-addon">~</span>
 							<input type="text" class="form-control" name="d_finish" placeholder="종료일 선택" value="<?php echo $d_finish?>">
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit">기간적용</button>
+								<button class="btn btn-light" type="submit">기간적용</button>
 							</span>
 						</div>
 					</div>
@@ -265,15 +280,15 @@ if (!$_M['uid']) exit;
 					<div class="col-sm-12">
 						<div class="input-group input-group-sm">
 							<span class="input-group-btn">
-								<select name="where" class="btn btn-default">
+								<select name="where" class="btn btn-light">
 									<option<?php if($where=='ip'):?> selected<?php endif?>>아이피</option>
 									<option<?php if($where=='referer'):?> selected<?php endif?>>접속경로</option>
 								</select>
 							</span>
 							<input type="text" name="keyw" class="form-control" placeholder="검색어를 입력해주세요" value="<?php echo $keyw?>">
 							<span class="input-group-btn" style="margin-bottom:0;">
-								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i>검색</button>
-								<button class="btn btn-default" type="button" onclick="this.form.keyw.value='';this.form.submit();">리셋</button>
+								<button class="btn btn-light" type="submit"><i class="fa fa-search"></i>검색</button>
+								<button class="btn btn-light" type="button" onclick="this.form.keyw.value='';this.form.submit();">리셋</button>
 							</span>
 						</div>
 					</div>
@@ -348,40 +363,25 @@ if (!$_M['uid']) exit;
 </div>
 
 
+<!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!----------------------------------------------------------------------------
-@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
-
-<div id="_modal_header" class="hidden">
-	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	<h4 class="modal-title">
-		<small class="label label-<?php echo $_M['now_log']?'primary':'default'?>" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?>"><?php echo $_M['admin']?($_M['adm_view']?'부관리자':'최고관리자'):'일반회원'?></small>
+<div id="_modal_header" hidden>
+	<h5 class="modal-title">
+		<small class="badge badge-<?php echo $_M['now_log']?'primary':'default'?>" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?>"><?php echo $_M['admin']?($_M['adm_view']?'부관리자':'최고관리자'):'일반회원'?></small>
 		<?php echo sprintf('<strong>%s</strong> 님의 정보',$_M['name'])?>
-	</h4>
+	</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </div>
-<div id="_modal_footer" class="hidden">
+<div id="_modal_footer" hidden>
 	<?php if($tab=='info'):?>
-	<button type="submit" class="btn btn-primary pull-left" onclick="frames._modal_iframe_modal_window.saveCheck();">정보 수정하기</button>
+	<button type="submit" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.saveCheck();">정보 수정하기</button>
 	<?php endif?>
 	<?php if($tab=='perm'):?>
-	<button type="submit" class="btn btn-primary pull-left" onclick="frames._modal_iframe_modal_window.saveCheck1();">권한 제한하기</button>
+	<button type="submit" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.saveCheck1();">권한 제한하기</button>
 	<?php endif?>
-	<button id="_close_btn_" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	<button id="_close_btn_" type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
 </div>
 
 
@@ -468,8 +468,8 @@ function modalSetting()
 
 	parent.getId('_modal_header_modal_window').innerHTML = getId('_modal_header').innerHTML;
 	parent.getId('_modal_header_modal_window').className = 'modal-header';
-	parent.getId('_modal_body_modal_window').style.padding = '0';
-	parent.getId('_modal_body_modal_window').style.margin = '0';
+	// parent.getId('_modal_body_modal_window').style.padding = '0';
+	// parent.getId('_modal_body_modal_window').style.margin = '0';
 
 	parent.getId('_modal_footer_modal_window').innerHTML = getId('_modal_footer').innerHTML;
 	parent.getId('_modal_footer_modal_window').className = 'modal-footer';

@@ -1,31 +1,49 @@
 <div class="rb-root">
 	<div id="rb-login">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h1 class="panel-title"><a href="<?php echo $g['r']?>/"><i class="kf-bi-01"></i></a> <small>Admin Mode</small></h1>
+		<div class="card">
+			<div class="card-header">
+				<h1>
+					<a href="<?php echo $g['r']?>/">
+						<i class="kf-bi-01"></i>
+					</a>
+					<small>관리자 모드</small>
+				</h1>
 			</div>
-			<div class="panel-body">
-				<form class="loginForm" role="form" name="loginform" action="<?php echo $g['s']?>/" method="post" onsubmit="return loginCheck(this);">
+			<div class="card-body">
+				<form class="loginForm" role="form" name="loginform" action="<?php echo $g['s']?>/" method="post" onsubmit="return loginCheck(this);" novalidate>
 					<input type="hidden" name="r" value="<?php echo $r?>">
 					<input type="hidden" name="a" value="login">
 					<input type="hidden" name="referer" value="<?php echo $referer ? $referer : $_SERVER['HTTP_REFERER']?>">
 					<input type="hidden" name="usertype" value="admin">
 					<div class="form-group">
-						<label for="id" class="control-label">Email or UserID </label>
-						<input type="text" name="id"  class="form-control input-lg" id="id" placeholder="" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',0)?>" required>
+						<label for="id" class="control-label">아이디 또는 이메일</label>
+						<input type="text" name="id"  class="form-control input-lg" id="id" placeholder="" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',0)?>" autofocus required autocapitalize="off" autocorrect="off" tabindex="1">
 					</div>
 					<div class="form-group">
-						<label for="pw" class="control-label">Password</label>
-						<input type="password" name="pw" class="form-control input-lg" id="pw" placeholder="" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',1)?>" required>
+						<label for="pw" class="control-label">패스워드</label>
+						<input type="password" name="pw" class="form-control input-lg" id="pw" placeholder="" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',1)?>" required tabindex="2">
 					</div>
-					<button type="submit" class="btn btn-primary">Log in</button>
-					<div class="checkbox">
-						<label>
-							<input class="rb-confirm" type="checkbox" name="idpwsave" value="checked" <?php if($_COOKIE['svshop']):?> checked<?php endif?>>Remember me
-						</label>
-						&nbsp;&nbsp;
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=tmppw" onclick="return hrefCheck(this,true,'임시 패스워드를 가입하신 이메일로 받으시겠습니까?');">Forgot password?</a>
+
+					<label class="custom-control custom-checkbox" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true">
+					  <input type="checkbox" name="idpwsave" value="checked" class="custom-control-input">
+					  <span class="custom-control-indicator"></span>
+					  <span class="custom-control-description">로그인 상태 유지</span>
+					</label>
+
+					<div class="collapse" id="collapseExample" style="">
+					  <div class="alert alert-danger f12 mb-3">
+					    개인정보 보호를 위해, 개인 PC에서만 사용해 주세요.
+					  </div>
 					</div>
+
+					<button type="submit" class="btn btn-primary btn-block">로그인</button>
+
+					<p class="mt-3">
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=tmppw" onclick="return hrefCheck(this,true,'임시 패스워드를 가입하신 이메일로 받으시겠습니까?');">
+							<small>비밀번호를 잊으셨나요?</small>
+						</a>
+					</p>
+
 				</form>
 			</div>
 		</div>
