@@ -29,26 +29,25 @@ if (is_file($g['layvarfile'])) include $g['layvarfile'];
 $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag']]:'';
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $lang['admin']['flag']?>">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="NOINDEX,NOFOLLOW">
 <title><?php echo _LANG('p001','admin')?> (Rb V <?php echo $d['admin']['version']?>)</title>
 
-<?php getImport('bootstrap','css/bootstrap.min',false,'css')?>
-<?php getImport('bootstrap','css/bootstrap-theme.min',false,'css')?>
+<?php getImport('bootstrap','css/bootstrap.min','4.0.0-beta.2','css')?>
 
-<?php getImport('jquery','jquery-'.$d['ov']['jquery'].'.min',false,'js')?>
-<?php getImport('bootstrap','js/bootstrap.min',false,'js')?>
+<?php getImport('jquery','jquery.min','3.2.1','js')?>
+<?php getImport('popper.js','umd/popper.min','1.12.3','js')?>
+<?php getImport('bootstrap','js/bootstrap.min','4.0.0-beta.2','js')?>
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['s']?>/_core/images/ico/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">
 
 <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
-<?php getImport('font-awesome','css/font-awesome',false,'css')?> 
-<?php getImport('font-kimsq','css/font-kimsq',false,'css')?> 
+<?php getImport('font-awesome','css/font-awesome','4.7.0','css')?>
+<?php getImport('font-kimsq','css/font-kimsq',false,'css')?>
 
 <link href="<?php echo $g['s']?>/_core/engine/adminpanel/main.css" rel="stylesheet">
 <link href="<?php echo $g['s']?>/_core/engine/adminpanel/theme/<?php echo $d['admin']['pannellink']?>" rel="stylesheet">
@@ -69,13 +68,13 @@ var is_admin= '<?php echo $my['admin']?>';
 <div class="container-fluid rb-fixed-sidebar<?php if($_COOKIE['_tabShow1']):?> rb-minified-sidebar<?php endif?><?php if($_COOKIE['_tabShow2']):?> rb-hidden-system-admin<?php endif?><?php if($_COOKIE['_tabShow3']):?> rb-hidden-system-site<?php endif?>">
 	<div class="rb-system-sidebar rb-system-admin rb-inverse" role="navigation">
 		<div class="rb-icons">
-			<span class="rb-icon-hide" title="<?php echo $_COOKIE['_tabShow2']?_LANG('p002','admin'):_LANG('p003','admin')?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span> 
+			<span class="rb-icon-hide" title="<?php echo $_COOKIE['_tabShow2']?_LANG('p002','admin'):_LANG('p003','admin')?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
 			<span class="rb-icon-minify" title="<?php echo $_COOKIE['_tabShow1']?_LANG('p004','admin'):_LANG('p005','admin')?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
 		</div>
 		<div class="login-info">
 			<span class="dropdown">
 				<a href="#" class="rb-username" data-toggle="dropdown">
-					<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="img-circle"> 
+					<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="img-circle">
 					<span><?php echo $my[$_HS['nametype']]?></span>
 					<small id="rb-notification-name"></small>
 					<span class="caret"></span>
@@ -147,7 +146,7 @@ var is_admin= '<?php echo $my['admin']?>';
 							<?php if(is_file($d['afile'])) include $d['afile']?>
 							<li id="sidebar-quick-<?php echo $_SM1['id']?>" class="list-group-item panel">
 								<a<?php if(!is_file($d['afile'])):?> href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=<?php echo $_SM1['id']?>" target="_ADMPNL_"<?php else:?> data-toggle="collapse" data-parent="#sidebar-quick-tree" href="#sidebar-quick-tree-<?php echo $_SM1['id']?>"<?php endif?> class="collapsed" onclick="_quickSelect('<?php echo $_SM1['id']?>');">
-									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'glyphicon glyphicon-th-large'?>"></i> 
+									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'glyphicon glyphicon-th-large'?>"></i>
 									<span class="menu-item-parent"><?php echo $_SM1['name']?></span>
 									<?php if(is_file($d['afile'])):?><b class="collapse-sign"><em class="fa rb-icon"></em></b><?php endif?>
 								</a>
@@ -173,7 +172,7 @@ var is_admin= '<?php echo $my['admin']?>';
 							<?php if(strpos('_'.$my['adm_view'],'['.$_SM1['id'].']')) continue?>
 							<li id="sidebar-modules-<?php echo $_SM1['id']?>" class="list-group-item panel">
 								<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=<?php echo $_SM1['id']?>" target="_ADMPNL_" class="collapsed" onclick="_moduleSelect('<?php echo $_SM1['id']?>');">
-									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'glyphicon glyphicon-th-large'?>"></i> 
+									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'glyphicon glyphicon-th-large'?>"></i>
 									<span class="menu-item-parent"><?php echo $_SM1['name']?></span>
 								</a>
 							</li>
@@ -188,14 +187,14 @@ var is_admin= '<?php echo $my['admin']?>';
 							<li id="sidebar-sites-<?php echo $S['id']?>" class="list-group-item<?php if($r==$S['id']):?> active<?php endif?>">
 								<span class="pull-right rb-blank"><a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=N" target="_blank" class="btn btn-link btn-sm"><i class="fa fa-share" data-tooltip="tooltip" title="<?php echo _LANG('p030','admin')?>"></i></a></span>
 								<a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=Y" class="rb-inframe">
-									<i class="<?php echo $S['icon']?$S['icon']:'glyphicon glyphicon-home'?>"></i> 
+									<i class="<?php echo $S['icon']?$S['icon']:'glyphicon glyphicon-home'?>"></i>
 									<span class="menu-item-parent"><?php echo $S['name']?></span>
 									<?php if($S['s004']==2):?><span class="badge pull-right inbox-badge"><i class="fa fa-lock"></i></span><?php endif?>
 									<?php if($S['s004']==3):?><span class="badge pull-right inbox-badge"><i class="fa fa-lock"></i></span><?php endif?>
 								</a>
 							</li>
 							<?php endforeach?>
-						</ul>	
+						</ul>
 					</nav>
 				</div>
 			</div>
@@ -264,7 +263,7 @@ var is_admin= '<?php echo $my['admin']?>';
 									<div class="form-group">
 										<label><?php echo _LANG('p037','admin')?></label>
 										<input type="text" class="form-control" name="id" value="<?php echo $_HS['id']?>">
-									</div>									
+									</div>
 									<div class="form-group">
 										<label><?php echo _LANG('p036','admin')?></label>
 										<input type="text" class="form-control" name="title" value="<?php echo $_HS['title']?>">
@@ -396,7 +395,7 @@ var is_admin= '<?php echo $my['admin']?>';
 											<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=domain&amp;selsite=<?php echo $_HS['uid']?>&amp;type=makedomain" target="_ADMPNL_"><?php echo _LANG('p050','admin')?></a></li>
 											<?php endif?>
 										</ul>
-									</div>	
+									</div>
 									<div class="form-group">
 										<label><?php echo _LANG('p051','admin')?></label>
 										<select name="open" class="form-control">
@@ -404,7 +403,7 @@ var is_admin= '<?php echo $my['admin']?>';
 										<option value="2"<?php if($_HS['s004']=='2'):?> selected="selected"<?php endif?>><?php echo _LANG('p053','admin')?></option>
 										<option value="3"<?php if($_HS['s004']=='3'):?> selected="selected"<?php endif?>><?php echo _LANG('p054','admin')?></option>
 										</select>
-									</div>		
+									</div>
 									<button type="submit" class="btn btn-primary btn-block"><?php echo _LANG('p038','admin')?></button>
 								</div>
 							</div>
@@ -440,7 +439,7 @@ var is_admin= '<?php echo $my['admin']?>';
 							<div id="layout-settings-<?php echo $__i?>-body" class="panel-collapse collapse<?php echo $_i==1?' in':''?>">
 								<div class="panel-body">
 									<p><?php echo $_val[1]?></p>
-									
+
 									<?php if(count($_val[2])):?>
 									<?php foreach($_val[2] as $_v):?>
 									<div class="form-group">
@@ -451,7 +450,7 @@ var is_admin= '<?php echo $my['admin']?>';
 										<?php if($_v[1]=='hidden'):?>
 										<input type="hidden" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>">
 										<?php endif?>
-										
+
 										<?php if($_v[1]=='input'):?>
 										<input type="text" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo stripslashes($d['layout'][$_key.'_'.$_v[0]])?>">
 										<?php endif?>
@@ -504,7 +503,7 @@ var is_admin= '<?php echo $my['admin']?>';
 										<div style="padding:3px 0 0 2px;"><input type="checkbox" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>_del" value="1"> <?php echo _LANG('p059','admin')?></div>
 										<?php endif?>
 										<?php endif?>
-										
+
 										<?php if($_v[1]=='textarea'):?>
 										<textarea type="text" rows="<?php echo $_v[3]?>" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>"><?php echo stripslashes($d['layout'][$_key.'_'.$_v[0]])?></textarea>
 										<?php endif?>
@@ -671,7 +670,7 @@ var is_admin= '<?php echo $my['admin']?>';
 			<div class="login-info">
 				<span class="dropdown" style="top:5px;">
 					<a href="#" class="rb-username" data-toggle="dropdown">
-						<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="img-circle"> 
+						<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="img-circle">
 						<span style="width:105px;overflow:hidden;color:#666;">
 							<span>
 								<?php echo $my[$_HS['nametype']]?>
@@ -698,7 +697,7 @@ var is_admin= '<?php echo $my['admin']?>';
 				<?php if(strpos('_'.$my['adm_view'],'['.$_SM1['id'].']')) continue?>
 				<li style="padding-top:5px;padding-bottom:4px;<?php if($_i<$_dmnum):?>border-bottom:#dfdfdf solid 1px;<?php endif?>">
 					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=<?php echo $_SM1['id']?>" target="_ADMPNL_">
-						<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'fa-th-large'?>"></i> 
+						<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'fa-th-large'?>"></i>
 						<span class="menu-item-parent"><?php echo $_SM1['name']?></span>
 					</a>
 				</li>
@@ -737,12 +736,12 @@ var _mediasetField='';
 $(document).ready(function(){
 	$(".rb-system-admin .rb-icon-minify").click(function(){
 		$(".container-fluid").toggleClass("rb-minified-sidebar");
-		if ($(".container-fluid").hasClass("rb-minified-sidebar")) 
-		{ 
-			$(".rb-system-sidebar .rb-icon-minify").attr("data-original-title", "<?php echo _LANG('p004','admin')?>"); 
-		} else 
-		{ 
-			$(".rb-system-sidebar .rb-icon-minify").attr("data-original-title", "<?php echo _LANG('p005','admin')?>");	 
+		if ($(".container-fluid").hasClass("rb-minified-sidebar"))
+		{
+			$(".rb-system-sidebar .rb-icon-minify").attr("data-original-title", "<?php echo _LANG('p004','admin')?>");
+		} else
+		{
+			$(".rb-system-sidebar .rb-icon-minify").attr("data-original-title", "<?php echo _LANG('p005','admin')?>");
 		}
 		if(getCookie('_tabShow1')=='') setCookie('_tabShow1',1,1);
 		else setCookie('_tabShow1','',1);
@@ -750,28 +749,28 @@ $(document).ready(function(){
 
 	$(".rb-system-admin .rb-icon-hide").click(function(){
 		$(".container-fluid").toggleClass("rb-hidden-system-admin");
-		if ($(".container-fluid").hasClass("rb-hidden-system-admin")) 
-		{ 
-			$(".rb-system-sidebar .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p002','admin')?>"); 
+		if ($(".container-fluid").hasClass("rb-hidden-system-admin"))
+		{
+			$(".rb-system-sidebar .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p002','admin')?>");
 		}
-		else 
-		{ 
-			$(".rb-system-sidebar .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p003','admin')?>");	 
-		} 
+		else
+		{
+			$(".rb-system-sidebar .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p003','admin')?>");
+		}
 		if(getCookie('_tabShow2')=='') setCookie('_tabShow2',1,1);
 		else setCookie('_tabShow2','',1);
 	});
 
 	$(".rb-system-site .rb-icon-hide").click(function(){
 		$(".container-fluid").toggleClass("rb-hidden-system-site");
-		
-		if ($(".container-fluid").hasClass("rb-hidden-system-site")) 
-		{ 
-			$(".rb-system-site .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p002','admin')?>"); 
+
+		if ($(".container-fluid").hasClass("rb-hidden-system-site"))
+		{
+			$(".rb-system-site .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p002','admin')?>");
 		}
-		else 
-		{ 
-			$(".rb-system-site .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p003','admin')?>");	 
+		else
+		{
+			$(".rb-system-site .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p003','admin')?>");
 		}
 		if(getCookie('_tabShow3')=='') setCookie('_tabShow3',1,1);
 		else setCookie('_tabShow3','',1);
@@ -938,22 +937,22 @@ function _deviceshape(n)
 	$("#"+_nowSelectedDevice).click();
 }
 function _quickSelect(id)
-{	
+{
 	$("#sidebar-quick .list-group-item").removeClass("active");
 	$("#sidebar-quick-"+id).addClass("active");
 }
 function _quickSelect1(id,_k)
-{	
+{
 	$("#sidebar-quick-tree-"+id+" li").removeClass("active");
 	$("#sidebar-quick-tree-"+id+"-"+_k).addClass("active");
 }
 function _siteSelect(id)
-{	
+{
 	$(".rb-device-bottom li").removeClass("active");
 	$("#bottombar-sites-"+id).addClass("active");
 }
 function _moduleSelect(id)
-{	
+{
 	$("#sidebar-modules .list-group-item").removeClass("active");
 	$("#sidebar-modules-"+id).addClass("active");
 }
