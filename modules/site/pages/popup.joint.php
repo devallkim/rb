@@ -27,8 +27,8 @@
 ----------------------------------------------------------------------------->
 
 <div id="_modal_header" class="hidden">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title"><i class="kf-module kf-lg"></i> 모듈 연결하기</h4>
+  <h4 class="modal-title"><i class="kf-module kf-lg"></i> 모듈 연결하기</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 </div>
 
 <div id="_modal_footer" class="hidden">

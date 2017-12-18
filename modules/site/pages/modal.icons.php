@@ -282,15 +282,15 @@
 
 
 
-<!----------------------------------------------------------------------------
-@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
+<!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
-<div id="_modal_header" class="hidden">
-	<button aria-hidden="true" data-dismiss="modal" class="close rb-close-white" type="button">&times;</button>
+<div id="_modal_header" hidden>
 	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-flag"></i> 아이콘 갤러리</h4>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </div>
-<div id="_modal_footer" class="hidden">
+<div id="_modal_footer" hidden>
 	<button type="button" class="btn btn-default" aria-hidden="true" data-dismiss="modal">닫기</button>
 </div>
 
