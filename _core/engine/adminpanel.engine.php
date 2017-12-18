@@ -34,7 +34,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="NOINDEX,NOFOLLOW">
-<title><?php echo _LANG('p001','admin')?> (Rb V <?php echo $d['admin']['version']?>)</title>
+<title>킴스큐 관리모드 (Rb V <?php echo $d['admin']['version']?>)</title>
 
 <?php getImport('bootstrap','css/bootstrap.min','4.0.0-beta.2','css')?>
 
@@ -45,7 +45,6 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['s']?>/_core/images/ico/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">
 
-<link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 <?php getImport('font-awesome','css/font-awesome','4.7.0','css')?>
 <?php getImport('font-kimsq','css/font-kimsq',false,'css')?>
 
@@ -53,12 +52,12 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 <link href="<?php echo $g['s']?>/_core/engine/adminpanel/theme/<?php echo $d['admin']['pannellink']?>" rel="stylesheet">
 
 <script>
-var rooturl = '<?php echo $g['url_root']?>';
-var rootssl = '<?php echo $g['ssl_root']?>';
-var raccount= '<?php echo $r?>';
-var moduleid= '<?php echo $m?>';
-var memberid= '<?php echo $my['id']?>';
-var is_admin= '<?php echo $my['admin']?>';
+	var rooturl = '<?php echo $g['url_root']?>';
+	var rootssl = '<?php echo $g['ssl_root']?>';
+	var raccount= '<?php echo $r?>';
+	var moduleid= '<?php echo $m?>';
+	var memberid= '<?php echo $my['id']?>';
+	var is_admin= '<?php echo $my['admin']?>';
 </script>
 
 <script src="<?php echo $g['s']?>/_core/js/sys.js<?php echo $g['wcache']?>"></script>
@@ -68,8 +67,8 @@ var is_admin= '<?php echo $my['admin']?>';
 <div class="container-fluid rb-fixed-sidebar<?php if($_COOKIE['_tabShow1']):?> rb-minified-sidebar<?php endif?><?php if($_COOKIE['_tabShow2']):?> rb-hidden-system-admin<?php endif?><?php if($_COOKIE['_tabShow3']):?> rb-hidden-system-site<?php endif?>">
 	<div class="rb-system-sidebar rb-system-admin rb-inverse" role="navigation">
 		<div class="rb-icons">
-			<span class="rb-icon-hide" title="<?php echo $_COOKIE['_tabShow2']?_LANG('p002','admin'):_LANG('p003','admin')?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
-			<span class="rb-icon-minify" title="<?php echo $_COOKIE['_tabShow1']?_LANG('p004','admin'):_LANG('p005','admin')?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
+			<span class="rb-icon-hide" title="<?php echo $_COOKIE['_tabShow2']?'고정하기':'숨기기'?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
+			<span class="rb-icon-minify" title="<?php echo $_COOKIE['_tabShow1']?'펼치기':'접기'?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
 		</div>
 		<div class="login-info">
 			<span class="dropdown">
@@ -80,56 +79,56 @@ var is_admin= '<?php echo $my['admin']?>';
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-profile"><i class="fa fa-user"></i> <?php echo _LANG('p006','admin')?></a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-log"><i class="fa fa-clock-o"></i> <?php echo _LANG('p007','admin')?></a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-notification"><i class="kf kf-notify"></i> <?php echo _LANG('p008','admin')?> <small id="rb-notification-badge" class="badge pull-right"></small></a></li>
+					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-profile"><i class="fa fa-user"></i> 프로필관리</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-log"><i class="fa fa-clock-o"></i> 접속기록</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-notification"><i class="kf kf-notify"></i> 알림 <small id="rb-notification-badge" class="badge pull-right"></small></a></li>
 					<li class="divider"></li>
-					<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=logout"><i class="fa fa-sign-out"></i> <?php echo _LANG('p009','admin')?></a></li>
+					<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
 				</ul>
 			</span>
 		</div>
 		<div class="tabs-below">
 			<div class="rb-buttons rb-content-padded">
 				<div class="btn-toolbar" role="toolbar">
-					<div class="btn-group" title="<?php echo _LANG('p010','admin')?>" data-tooltip="tooltip">
+					<div class="btn-group" title="만들기" data-tooltip="tooltip">
 						<button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus fa-2x"></i></button>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;type=makesite" target="_ADMPNL_"><i class="fa fa-home"></i> <?php echo _LANG('p011','admin')?></a></li>
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;front=menu" target="_ADMPNL_"><i class="fa fa-sitemap"></i> <?php echo _LANG('p012','admin')?></a></li>
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;front=page" target="_ADMPNL_"><i class="fa fa-file-text-o"></i> <?php echo _LANG('p013','admin')?></a></li>
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=clear_wcache" target="_ACTION_"><i class="fa fa-refresh"></i> <?php echo _LANG('p014','admin')?></a></li>
+							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;type=makesite" target="_ADMPNL_"><i class="fa fa-home"></i> 새 사이트</a></li>
+							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;front=menu" target="_ADMPNL_"><i class="fa fa-sitemap"></i> 새 메뉴</a></li>
+							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;front=page" target="_ADMPNL_"><i class="fa fa-file-text-o"></i> 새 페이지</a></li>
+							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=clear_wcache" target="_ACTION_"><i class="fa fa-refresh"></i> 캐시 재생성</a></li>
 						</ul>
 					</div>
-					<div class="btn-group" title="<?php echo _LANG('p015','admin')?>" data-tooltip="tooltip">
+					<div class="btn-group" title="미디어셋" data-tooltip="tooltip">
 						<button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-photo fa-2x"></i></button>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-photo"><i class="fa fa-photo"></i> <?php echo _LANG('p016','admin')?></a></li>
-							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-video"><i class="glyphicon glyphicon-facetime-video"></i> <?php echo _LANG('p017','admin')?></a></li>
-							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-widgetcode"><i class="fa fa-puzzle-piece"></i> <?php echo _LANG('p018','admin')?></a></li>
-							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-snippet"><i class="fa fa-scissors" style="width:12px"></i> <?php echo _LANG('p076','admin')?></a></li>
+							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-photo"><i class="fa fa-photo"></i> 포토셋</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-video"><i class="glyphicon glyphicon-facetime-video"></i> 비디오셋</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-widgetcode"><i class="fa fa-puzzle-piece"></i> 위젯코드</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-snippet"><i class="fa fa-scissors" style="width:12px"></i> 스니핏</a></li>
 						</ul>
 					</div>
 					<div class="btn-group">
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=dashboard" target="_ADMPNL_" class="btn btn-link" title="<?php echo _LANG('p019','admin')?>" data-tooltip="tooltip"><i class="fa fa-dashboard fa-2x"></i></a>
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>" target="_ADMPNL_" class="btn btn-link" title="<?php echo _LANG('p020','admin')?>" data-tooltip="tooltip"><i class="fa fa-home fa-2x"></i></a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=dashboard" target="_ADMPNL_" class="btn btn-link" title="대시보드" data-tooltip="tooltip"><i class="fa fa-dashboard fa-2x"></i></a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>" target="_ADMPNL_" class="btn btn-link" title="홈페이지" data-tooltip="tooltip"><i class="fa fa-home fa-2x"></i></a>
 					</div>
 				</div>
 			</div>
 			<div class="rb-buttons rb-content-padded">
 				<div class="btn-group">
-					<a data-toggle="modal" data-target="#modal_window" class="btn btn-default rb-modal-add-package" style="width:170px"><i class="fa fa-plus-circle fa-lg"></i> <?php echo _LANG('p021','admin')?></a>
+					<a data-toggle="modal" data-target="#modal_window" class="btn btn-default rb-modal-add-package" style="width:170px"><i class="fa fa-plus-circle fa-lg"></i> 패키지 설치</a>
 					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu pull-right" role="menu">
-						<li role="presentation" class="dropdown-header"><?php echo _LANG('p022','admin')?></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-module"><?php echo _LANG('p023','admin')?></a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-layout"><?php echo _LANG('p024','admin')?></a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-widget"><?php echo _LANG('p025','admin')?></a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-switch"><?php echo _LANG('p026','admin')?></a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-plugin"><?php echo _LANG('p027','admin')?></a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-dashboard"><?php echo _LANG('p028','admin')?></a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-etc"><?php echo _LANG('p029','admin')?></a></li>
+						<li role="presentation" class="dropdown-header">확장요소 추가하기</li>
+						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-module">모듈</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-layout">레이아웃</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-widget">위젯</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-switch">스위치</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-plugin">플러그인</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-dashboard">대시보드</a></li>
+						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-etc">기타자료</a></li>
 					</ul>
 				</div>
 			</div>
@@ -143,7 +142,7 @@ var is_admin= '<?php echo $my['admin']?>';
 							<?php if(strpos('_'.$my['adm_view'],'['.$_SM1['id'].']')) continue?>
 							<?php include getLangFile($g['path_module'].$_SM1['id'].'/language/',$d['admin']['syslang'],'/lang.admin-menu.php')?>
 							<?php $d['afile']=$g['path_module'].$_SM1['id'].'/admin/var/var.menu.php'?>
-							<?php if(is_file($d['afile'])) include $d['afile']?>
+							<?php if(is_file($d['afile'])) include $d['afile'] ?>
 							<li id="sidebar-quick-<?php echo $_SM1['id']?>" class="list-group-item panel">
 								<a<?php if(!is_file($d['afile'])):?> href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=<?php echo $_SM1['id']?>" target="_ADMPNL_"<?php else:?> data-toggle="collapse" data-parent="#sidebar-quick-tree" href="#sidebar-quick-tree-<?php echo $_SM1['id']?>"<?php endif?> class="collapsed" onclick="_quickSelect('<?php echo $_SM1['id']?>');">
 									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'glyphicon glyphicon-th-large'?>"></i>
@@ -185,7 +184,7 @@ var is_admin= '<?php echo $my['admin']?>';
 						<ul class="list-group">
 							<?php foreach($_SITES['list'] as $S):?>
 							<li id="sidebar-sites-<?php echo $S['id']?>" class="list-group-item<?php if($r==$S['id']):?> active<?php endif?>">
-								<span class="pull-right rb-blank"><a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=N" target="_blank" class="btn btn-link btn-sm"><i class="fa fa-share" data-tooltip="tooltip" title="<?php echo _LANG('p030','admin')?>"></i></a></span>
+								<span class="pull-right rb-blank"><a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=N" target="_blank" class="btn btn-link btn-sm"><i class="fa fa-share" data-tooltip="tooltip" title="새창"></i></a></span>
 								<a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=Y" class="rb-inframe">
 									<i class="<?php echo $S['icon']?$S['icon']:'glyphicon glyphicon-home'?>"></i>
 									<span class="menu-item-parent"><?php echo $S['name']?></span>
@@ -199,9 +198,9 @@ var is_admin= '<?php echo $my['admin']?>';
 				</div>
 			</div>
 			<ul class="nav nav-tabs nav-justified" role="tablist">
-				<li<?php if(!$_COOKIE['sideBottomTab']||$_COOKIE['sideBottomTab']=='quick'):?> class="active"<?php endif?>><a href="#sidebar-quick" role="tab" data-toggle="tab" title="<?php echo _LANG('p031','admin')?>" data-tooltip="tooltip" onclick="_cookieSetting('sideBottomTab','quick');"><i class="kf kf-bi-05 fa-2x"></i></a></li>
-				<li<?php if($_COOKIE['sideBottomTab']=='modules'):?> class="active"<?php endif?>><a href="#sidebar-modules" role="tab" data-toggle="tab" title="<?php echo _LANG('p032','admin')?>" data-tooltip="tooltip"><i class="kf kf-module fa-2x" onclick="_cookieSetting('sideBottomTab','modules');"></i></a></li>
-				<li<?php if($_COOKIE['sideBottomTab']=='sites'):?> class="active"<?php endif?>><a href="#sidebar-sites" role="tab" data-toggle="tab" title="<?php echo _LANG('p033','admin')?>" data-tooltip="tooltip" onclick="_cookieSetting('sideBottomTab','sites');"><i class="kf kf-home fa-2x"></i></a></li>
+				<li<?php if(!$_COOKIE['sideBottomTab']||$_COOKIE['sideBottomTab']=='quick'):?> class="active"<?php endif?>><a href="#sidebar-quick" role="tab" data-toggle="tab" title="퀵패널" data-tooltip="tooltip" onclick="_cookieSetting('sideBottomTab','quick');"><i class="kf kf-bi-05 fa-2x"></i></a></li>
+				<li<?php if($_COOKIE['sideBottomTab']=='modules'):?> class="active"<?php endif?>><a href="#sidebar-modules" role="tab" data-toggle="tab" title="모듈패널" data-tooltip="tooltip"><i class="kf kf-module fa-2x" onclick="_cookieSetting('sideBottomTab','modules');"></i></a></li>
+				<li<?php if($_COOKIE['sideBottomTab']=='sites'):?> class="active"<?php endif?>><a href="#sidebar-sites" role="tab" data-toggle="tab" title="사이트패널" data-tooltip="tooltip" onclick="_cookieSetting('sideBottomTab','sites');"><i class="kf kf-home fa-2x"></i></a></li>
 			</ul>
 		</div>
 	</div>
@@ -225,7 +224,7 @@ var is_admin= '<?php echo $my['admin']?>';
 	<div class="rb-system-sidebar rb-system-site rb-default" role="application">
 		<div class="rb-opener"><i class="fa fa-caret-left fa-lg"></i></div>
 		<div class="rb-panel-top">
-			<span class="rb-icon-hide" title="<?php echo $_COOKIE['_tabShow3']?_LANG('p002','admin'):_LANG('p003','admin')?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
+			<span class="rb-icon-hide" title="<?php echo $_COOKIE['_tabShow3']?'고정하기':'숨기기'?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
 		</div>
 		<div class="rb-content-padded">
 			<ul class="nav nav-tabs" role="tablist">
@@ -250,26 +249,26 @@ var is_admin= '<?php echo $my['admin']?>';
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-01-body">
-										<i></i><?php echo _LANG('p034','admin')?>
+										<i></i>기본정보
 									</a>
 								</h4>
 							</div>
 							<div id="site-settings-01-body" class="panel-collapse collapse in">
 								<div class="panel-body">
 									<div class="form-group">
-										<label><?php echo _LANG('p035','admin')?></label>
+										<label>사이트 라벨</label>
 										<input type="text" class="form-control" name="name" value="<?php echo $_HS['name']?>">
 									</div>
 									<div class="form-group">
-										<label><?php echo _LANG('p037','admin')?></label>
+										<label>사이트 코드</label>
 										<input type="text" class="form-control" name="id" value="<?php echo $_HS['id']?>">
 									</div>
 									<div class="form-group">
-										<label><?php echo _LANG('p036','admin')?></label>
+										<label>타이틀 구성</label>
 										<input type="text" class="form-control" name="title" value="<?php echo $_HS['title']?>">
-										<span class="help-block"><small><?php echo _LANG('p039','admin')?></small></span>
+										<span class="help-block"><small>입력된 내용은 브라우저의 타이틀로 사용됩니다.<br>치환코드는 매뉴얼을 참고하세요.</small></span>
 									</div>
-									<button type="submit" class="btn btn-primary btn-block"><?php echo _LANG('p038','admin')?></button>
+									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
 								</div>
 							</div>
 						</div>
@@ -277,13 +276,13 @@ var is_admin= '<?php echo $my['admin']?>';
 						<div class="panel panel-default" id="site-settings-02">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-02-body"><i></i><?php echo _LANG('p040','admin')?></a>
+									<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-02-body"><i></i>레이아웃</a>
 								</h4>
 							</div>
 							<div id="site-settings-02-body" class="panel-collapse collapse">
 								<div class="panel-body">
 									<div class="form-group">
-										<label><?php echo _LANG('p041','admin')?></label>
+										<label>기본</label>
 										<div id="rb-layout-select">
 											<select class="form-control" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','');">
 												<?php $_layoutExp1=explode('/',$_HS['layout'])?>
@@ -309,10 +308,10 @@ var is_admin= '<?php echo $my['admin']?>';
 										</div>
 									</div>
 									<div class="form-group">
-										<label><?php echo _LANG('p042','admin')?></label>
+										<label>모바일 전용</label>
 										<div id="rb-mlayout-select">
 											<select class="form-control" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','');">
-												<option value="0"><?php echo _LANG('p043','admin')?></option>
+												<option value="0">사용안함</option>
 												<?php $_layoutExp2=explode('/',$_HS['m_layout'])?>
 												<?php $dirs = opendir($g['path_layout'])?>
 												<?php while(false !== ($tpl = readdir($dirs))):?>
@@ -324,7 +323,7 @@ var is_admin= '<?php echo $my['admin']?>';
 										</div>
 										<div id="rb-mlayout-select2" style="margin-top:5px;">
 											<select class="form-control" name="m_layout_1_sub"<?php if(!$_HS['m_layout']):?> disabled<?php endif?>>
-												<?php if(!$_HS['m_layout']):?><option><?php echo _LANG('p044','admin')?></option><?php endif?>
+												<?php if(!$_HS['m_layout']):?><option>서브 레이아웃</option><?php endif?>
 												<?php $dirs1 = opendir($g['path_layout'].$_layoutExp2[0])?>
 												<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
@@ -334,7 +333,7 @@ var is_admin= '<?php echo $my['admin']?>';
 											</select>
 										</div>
 									</div>
-									<button type="submit" class="btn btn-primary btn-block"><?php echo _LANG('p038','admin')?></button>
+									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
 								</div>
 							</div>
 						</div>
@@ -342,16 +341,16 @@ var is_admin= '<?php echo $my['admin']?>';
 						<div class="panel panel-default" id="site-settings-03">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-03-body"><i></i><?php echo _LANG('p045','admin')?></a>
+									<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-03-body"><i></i>메인페이지</a>
 								</h4>
 							</div>
 							<div id="site-settings-03-body" class="panel-collapse collapse">
 								<div class="panel-body">
 									<div class="form-group">
-										<label><?php echo _LANG('p042','admin')?></label>
+										<label>모바일 전용</label>
 										<select name="startpage" class="form-control">
-										<option><?php echo _LANG('p047','admin')?></option>
-										<option disabled><i class="fa fa-edit"></i><?php echo _LANG('p046','admin')?> ↓</option>
+										<option>레이아웃에 포함된 메인페이지</option>
+										<option disabled><i class="fa fa-edit"></i>페이지 리스트 ↓</option>
 										<?php $PAGES1 = getDbArray($table['s_page'],'site='.$s.' and ismain=1','*','uid','asc',0,1)?>
 										<?php while($S = db_fetch_array($PAGES1)):?>
 										<option value="<?php echo $S['uid']?>"<?php if($_HS['startpage']==$S['uid']):?> selected<?php endif?>><?php echo $S['name']?>(<?php echo $S['id']?>)</option>
@@ -359,17 +358,17 @@ var is_admin= '<?php echo $my['admin']?>';
 										</select>
 									</div>
 									<div class="form-group">
-										<label><?php echo _LANG('p042','admin')?></label>
+										<label>모바일 전용</label>
 										<select name="m_startpage" class="form-control">
-										<option><?php echo _LANG('p047','admin')?></option>
-										<option disabled><i class="fa fa-edit"></i><?php echo _LANG('p046','admin')?> ↓</option>
+										<option>레이아웃에 포함된 메인페이지</option>
+										<option disabled><i class="fa fa-edit"></i>페이지 리스트 ↓</option>
 										<?php $PAGES2 = getDbArray($table['s_page'],'site='.$s.' and mobile=1','*','uid','asc',0,1)?>
 										<?php while($S = db_fetch_array($PAGES2)):?>
 										<option value="<?php echo $S['uid']?>"<?php if($_HS['m_startpage']==$S['uid']):?> selected<?php endif?>><?php echo $S['name']?>(<?php echo $S['id']?>)</option>
 										<?php endwhile?>
 										</select>
 									</div>
-									<button type="submit" class="btn btn-primary btn-block"><?php echo _LANG('p038','admin')?></button>
+									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
 								</div>
 							</div>
 						</div>
@@ -377,13 +376,13 @@ var is_admin= '<?php echo $my['admin']?>';
 						<div class="panel panel-default" id="site-settings-04">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-04-body"><i></i><?php echo _LANG('p048','admin')?></a>
+									<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-04-body"><i></i>고급설정</a>
 								</h4>
 							</div>
 							<div id="site-settings-04-body" class="panel-collapse collapse">
 								<div class="panel-body">
 									<div class="form-group">
-										<label><?php echo _LANG('p049','admin')?></label>
+										<label>도메인</label>
 										<ul>
 											<?php $DOMAINS = getDbArray($table['s_domain'],'site='.$_HS['uid'],'*','gid','asc',0,1)?>
 											<?php $DOMAINN = db_num_rows($DOMAINS)?>
@@ -392,19 +391,19 @@ var is_admin= '<?php echo $my['admin']?>';
 											<li><a href="http://<?php echo $D['name']?>" target="_blank"><?php echo $D['name']?></a></li>
 											<?php endwhile?>
 											<?php else:?>
-											<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=domain&amp;selsite=<?php echo $_HS['uid']?>&amp;type=makedomain" target="_ADMPNL_"><?php echo _LANG('p050','admin')?></a></li>
+											<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=domain&amp;selsite=<?php echo $_HS['uid']?>&amp;type=makedomain" target="_ADMPNL_">연결된 도메인이 없습니다.</a></li>
 											<?php endif?>
 										</ul>
 									</div>
 									<div class="form-group">
-										<label><?php echo _LANG('p051','admin')?></label>
+										<label>서비스 상태</label>
 										<select name="open" class="form-control">
-										<option value="1"<?php if($_HS['s004']=='1'):?> selected="selected"<?php endif?>><?php echo _LANG('p052','admin')?></option>
-										<option value="2"<?php if($_HS['s004']=='2'):?> selected="selected"<?php endif?>><?php echo _LANG('p053','admin')?></option>
-										<option value="3"<?php if($_HS['s004']=='3'):?> selected="selected"<?php endif?>><?php echo _LANG('p054','admin')?></option>
+										<option value="1"<?php if($_HS['s004']=='1'):?> selected="selected"<?php endif?>>정상서비스</option>
+										<option value="2"<?php if($_HS['s004']=='2'):?> selected="selected"<?php endif?>>관리자오픈</option>
+										<option value="3"<?php if($_HS['s004']=='3'):?> selected="selected"<?php endif?>>정지</option>
 										</select>
 									</div>
-									<button type="submit" class="btn btn-primary btn-block"><?php echo _LANG('p038','admin')?></button>
+									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
 								</div>
 							</div>
 						</div>
@@ -412,19 +411,19 @@ var is_admin= '<?php echo $my['admin']?>';
 					</form>
 
 					<div class="well rb-tab-pane-bottom">
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site" target="_ADMPNL_" class="btn btn-default btn-block"><?php echo _LANG('p055','admin')?></a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site" target="_ADMPNL_" class="btn btn-default btn-block">자세히</a>
 					</div>
 				</div>
 
 				<div class="tab-pane<?php if($_COOKIE['rightAdmTab']=='layout'):?> active<?php endif?><?php if(!$_HS['uid']):?> hidden<?php endif?>" id="layout-settings">
 					<form action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" target="_ACTION_" onsubmit="return _layoutInfoSaveCheck(this);">
-					<input type="hidden" name="r" value="<?php echo $r?>">
-					<input type="hidden" name="m" value="site">
-					<input type="hidden" name="a" value="regislayoutpanel">
-					<input type="hidden" name="site_uid" value="<?php echo $_HS['uid']?>">
-					<input type="hidden" name="layout" value="<?php echo $_nowlayuotdir?>">
-					<input type="hidden" name="themelang1" value="<?php echo $g['themelang1']?>">
-					<input type="hidden" name="themelang2" value="<?php echo $d['admin']['syslang']=='DEFAULT'||!is_file($g['themelang2'])?'':$g['themelang2']?>">
+						<input type="hidden" name="r" value="<?php echo $r?>">
+						<input type="hidden" name="m" value="site">
+						<input type="hidden" name="a" value="regislayoutpanel">
+						<input type="hidden" name="site_uid" value="<?php echo $_HS['uid']?>">
+						<input type="hidden" name="layout" value="<?php echo $_nowlayuotdir?>">
+						<input type="hidden" name="themelang1" value="<?php echo $g['themelang1']?>">
+						<input type="hidden" name="themelang2" value="<?php echo $d['admin']['syslang']=='DEFAULT'||!is_file($g['themelang2'])?'':$g['themelang2']?>">
 
 					<div class="panel-group rb-scrollbar" id="layout-settings-panels">
 						<?php $_i=1;foreach($d['layout']['dom'] as $_key => $_val):$__i=sprintf('%02d',$_i)?>
@@ -475,18 +474,18 @@ var is_admin= '<?php echo $my['admin']?>';
 
 										<?php if($_v[1]=='mediaset'):?>
 										<div class="input-group">
-											<input type="text" class="form-control rb-modal-photo-drop" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="<?php echo _LANG('p056','admin')?>" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
+											<input type="text" class="form-control rb-modal-photo-drop" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="선택된 사진" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 											<span class="input-group-btn">
-												<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-default rb-modal-photo-drop" type="button" title="<?php echo _LANG('p016','admin')?>" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="glyphicon glyphicon-picture"></i></button>
+												<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-default rb-modal-photo-drop" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="glyphicon glyphicon-picture"></i></button>
 											</span>
 										</div>
 										<?php endif?>
 
 										<?php if($_v[1]=='videoset'):?>
 										<div class="input-group">
-											<input type="text" class="form-control rb-modal-video-drop" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="<?php echo _LANG('p057','admin')?>" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
+											<input type="text" class="form-control rb-modal-video-drop" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="선택된 비디오" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 											<span class="input-group-btn">
-												<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-default rb-modal-video-drop" type="button" title="<?php echo _LANG('p017','admin')?>" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="glyphicon glyphicon-facetime-video"></i></button>
+												<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-default rb-modal-video-drop" type="button" title="비디오셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="glyphicon glyphicon-facetime-video"></i></button>
 											</span>
 										</div>
 										<?php endif?>
@@ -494,13 +493,13 @@ var is_admin= '<?php echo $my['admin']?>';
 										<?php if($_v[1]=='file'):?>
 										<div class="input-group">
 											<input type="text" class="form-control" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>_name" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();">
-											<input type="file" class="hidden" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" onchange="getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>_name').value='<?php echo _LANG('p058','admin')?>';">
+											<input type="file" class="hidden" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" onchange="getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>_name').value='파일 선택됨';">
 											<span class="input-group-btn">
 												<button class="btn btn-default" type="button" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();"><i class="glyphicon glyphicon-picture"></i></button>
 											</span>
 										</div>
 										<?php if($d['layout'][$_key.'_'.$_v[0]]):?>
-										<div style="padding:3px 0 0 2px;"><input type="checkbox" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>_del" value="1"> <?php echo _LANG('p059','admin')?></div>
+										<div style="padding:3px 0 0 2px;"><input type="checkbox" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>_del" value="1"> 현재파일 삭제</div>
 										<?php endif?>
 										<?php endif?>
 
@@ -537,7 +536,7 @@ var is_admin= '<?php echo $my['admin']?>';
 									</div>
 									<?php endforeach?>
 
-									<button type="submit" class="btn btn-primary btn-block"><?php echo _LANG('p038','admin')?></button>
+									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
 									<?php endif?>
 
 								</div>
@@ -549,24 +548,24 @@ var is_admin= '<?php echo $my['admin']?>';
 						<div class="panel panel-primary" id="layout-settings-01">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-01-body"><i></i><?php echo _LANG('p060','admin')?></a>
+									<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-01-body"><i></i>레이아웃 설정 안내</a>
 								</h4>
 							</div>
 							<div id="layout-settings-01-body" class="panel-collapse collapse in">
 								<div class="panel-body">
-									<p><?php echo _LANG('p061','admin')?></p>
+									<p>현재 사이트에 지정된 레이아웃은 별도의 설정을 지원하지 않습니다.</p>
 								</div>
 							</div>
 						</div>
 						<div class="panel panel-default" id="layout-settings-02">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-02-body"><i></i><?php echo _LANG('p062','admin')?></a>
+									<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-02-body"><i></i>레이아웃 분기설정</a>
 								</h4>
 							</div>
 							<div id="layout-settings-02-body" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p><?php echo _LANG('p063','admin')?></p>
+									<p>현재 사이트에 기본 레이아웃과 모바일 전용레이아웃을 지정했을 경우 두 레이아웃을 구분하여 설정할 수 있습니다.</p>
 								</div>
 							</div>
 						</div>
@@ -575,10 +574,10 @@ var is_admin= '<?php echo $my['admin']?>';
 
 					<div class="well rb-tab-pane-bottom">
 						<div class="form-group">
-							<label class="sr-only"><small><?php echo _LANG('p064','admin')?></small></label>
+							<label class="sr-only"><small>레이아웃 선택</small></label>
 							<select class="form-control" onchange="layoutChange(this);">
-								<option value=""><?php echo _LANG('p065','admin')?></option>
-								<?php if($_HS['m_layout']):?><option value="1"<?php if($_SESSION['setLayoutKind']):?> selected<?php endif?>><?php echo _LANG('p066','admin')?></option><?php endif?>
+								<option value="">기본 레이아웃 설정</option>
+								<?php if($_HS['m_layout']):?><option value="1"<?php if($_SESSION['setLayoutKind']):?> selected<?php endif?>>모바일 전용 레이아웃 설정</option><?php endif?>
 							</select>
 						</div>
 					</div>
@@ -601,10 +600,10 @@ var is_admin= '<?php echo $my['admin']?>';
 					<fieldset id="deviceshape"<?php if(!$_COOKIE['rightemulTab'] || $_COOKIE['rightemulTab'] == 'desktop'):?> disabled<?php endif?>>
 						<div class="btn-group clearfix btn-group-justified" data-toggle="buttons">
 							<label id="deviceshape_1" class="btn btn-default<?php if(!$_COOKIE['rightemulDir'] || $_COOKIE['rightemulDir'] == '1'):?> active<?php endif?>" title="Potrait" onclick="_deviceshape(1);">
-								<input type="radio" name="deviceshape"><i class="fa fa-rotate-left fa-lg"></i> <?php echo _LANG('p068','admin')?>
+								<input type="radio" name="deviceshape"><i class="fa fa-rotate-left fa-lg"></i> 세로방향
 							</label>
 							<label id="deviceshape_2" class="btn btn-default<?php if($_COOKIE['rightemulDir'] == '2'):?> active<?php endif?>" title="Landscape" onclick="_deviceshape(2);">
-								<input type="radio" name="deviceshape"> <i class="fa fa-rotate-right fa-lg"></i> <?php echo _LANG('p067','admin')?>
+								<input type="radio" name="deviceshape"> <i class="fa fa-rotate-right fa-lg"></i> 가로방향
 							</label>
 						</div>
 					</fieldset>
@@ -613,9 +612,9 @@ var is_admin= '<?php echo $my['admin']?>';
 					    <table class="table table-striped table-hover">
 					        <thead>
 					            <tr>
-					                <th class="rb-name"><?php echo _LANG('p069','admin')?></th>
-					                <th class="rb-brand"><?php echo _LANG('p070','admin')?></th>
-					                <th class="rb-viewport"><?php echo _LANG('p071','admin')?></th>
+					                <th class="rb-name">기기명</th>
+					                <th class="rb-brand">제조사</th>
+					                <th class="rb-viewport">화면크기</th>
 					            </tr>
 					        </thead>
 					        <tbody>
@@ -639,8 +638,8 @@ var is_admin= '<?php echo $my['admin']?>';
 								<fieldset>
 									<div class="checkbox">
 										<label>
-											<input type="checkbox"<?php if($g['mobile']):?> checked<?php endif?> onclick="viewbyMobileDevice(this);"> <i></i><small><?php echo _LANG('p072','admin')?></small>
-											<span class="fa fa-question-circle" style="position:relative;" data-popover="popover" title="<?php echo _LANG('p073','admin')?>" data-content="<small><?php echo _LANG('p074','admin')?></small>"></span>
+											<input type="checkbox"<?php if($g['mobile']):?> checked<?php endif?> onclick="viewbyMobileDevice(this);"> <i></i><small>모바일 디바이스 접속</small>
+											<span class="fa fa-question-circle" style="position:relative;" data-popover="popover" title="[도움말] 모바일 디바이스 접속이란?" data-content="<small>모바일 기기로 접속한 것으로 가정하여 사이트를 보여줍니다. 사이트 설정에서 모바일 분기설정을 적용하면 모바일 전용 레이아웃, 시작페이지, 메뉴가 적용 됩니다.</small>"></span>
 										</label>
 									</div>
 								</fieldset>
@@ -654,7 +653,7 @@ var is_admin= '<?php echo $my['admin']?>';
 								</div>
 							</li>
 							<li class="list-group-item">
-								<small><i class="fa fa-info-circle fa-4x pull-left"></i><?php echo _LANG('p075','admin')?></small>
+								<small><i class="fa fa-info-circle fa-4x pull-left"></i>기기별 기본 브라우저의 실제크기 화면을 제공합니다. 기기 또는 운영체제별 특성은 실제 기기를 통해 확인하세요.</small>
 							</li>
 						</ul>
 					</div>
@@ -679,10 +678,10 @@ var is_admin= '<?php echo $my['admin']?>';
 						</span>
 					</a>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-profile"><i class="fa fa-user" style="padding-top:3px;padding-bottom:3px;"></i> <?php echo _LANG('p006','admin')?></a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-log"><i class="fa fa-clock-o" style="padding-top:3px;padding-bottom:3px;"></i> <?php echo _LANG('p007','admin')?></a></li>
+					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-profile"><i class="fa fa-user" style="padding-top:3px;padding-bottom:3px;"></i> 프로필관리</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-log"><i class="fa fa-clock-o" style="padding-top:3px;padding-bottom:3px;"></i> 접속기록</a></li>
 					<li class="divider"></li>
-					<li style="padding-bottom:3px;"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=logout"><i class="fa fa-sign-out"></i> <?php echo _LANG('p009','admin')?></a></li>
+					<li style="padding-bottom:3px;"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
 					</ul>
 				</span>
 			</div>
@@ -738,10 +737,10 @@ $(document).ready(function(){
 		$(".container-fluid").toggleClass("rb-minified-sidebar");
 		if ($(".container-fluid").hasClass("rb-minified-sidebar"))
 		{
-			$(".rb-system-sidebar .rb-icon-minify").attr("data-original-title", "<?php echo _LANG('p004','admin')?>");
+			$(".rb-system-sidebar .rb-icon-minify").attr("data-original-title", "펼치기");
 		} else
 		{
-			$(".rb-system-sidebar .rb-icon-minify").attr("data-original-title", "<?php echo _LANG('p005','admin')?>");
+			$(".rb-system-sidebar .rb-icon-minify").attr("data-original-title", "접기");
 		}
 		if(getCookie('_tabShow1')=='') setCookie('_tabShow1',1,1);
 		else setCookie('_tabShow1','',1);
@@ -751,11 +750,11 @@ $(document).ready(function(){
 		$(".container-fluid").toggleClass("rb-hidden-system-admin");
 		if ($(".container-fluid").hasClass("rb-hidden-system-admin"))
 		{
-			$(".rb-system-sidebar .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p002','admin')?>");
+			$(".rb-system-sidebar .rb-icon-hide").attr("data-original-title", "고정하기");
 		}
 		else
 		{
-			$(".rb-system-sidebar .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p003','admin')?>");
+			$(".rb-system-sidebar .rb-icon-hide").attr("data-original-title", "숨기기");
 		}
 		if(getCookie('_tabShow2')=='') setCookie('_tabShow2',1,1);
 		else setCookie('_tabShow2','',1);
@@ -766,11 +765,11 @@ $(document).ready(function(){
 
 		if ($(".container-fluid").hasClass("rb-hidden-system-site"))
 		{
-			$(".rb-system-site .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p002','admin')?>");
+			$(".rb-system-site .rb-icon-hide").attr("data-original-title", "고정하기");
 		}
 		else
 		{
-			$(".rb-system-site .rb-icon-hide").attr("data-original-title", "<?php echo _LANG('p003','admin')?>");
+			$(".rb-system-site .rb-icon-hide").attr("data-original-title", "숨기기");
 		}
 		if(getCookie('_tabShow3')=='') setCookie('_tabShow3',1,1);
 		else setCookie('_tabShow3','',1);
