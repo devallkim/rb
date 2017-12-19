@@ -70,7 +70,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 	<div id="catinfo" class="col-sm-7 col-md-8 col-lg-8">		<form class="form-horizontal rb-form" name="procForm" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" onsubmit="return saveCheck(this);">			<input type="hidden" name="r" value="<?php echo $r?>">			<input type="hidden" name="m" value="<?php echo $module?>">			<input type="hidden" name="a" value="regismenu">			<input type="hidden" name="cat" value="<?php echo $CINFO['uid']?>">
 			<input type="hidden" name="code" value="<?php echo $code?>">			<input type="hidden" name="vtype" value="<?php echo $vtype?>">			<input type="hidden" name="depth" value="<?php echo intval($CINFO['depth'])?>">			<input type="hidden" name="parent" value="<?php echo intval($CINFO['uid'])?>">			<input type="hidden" name="perm_g" value="<?php echo $CINFO['perm_g']?>">			<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
 			<input type="hidden" name="layout" value="">
-			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:3?>">			<div class="page-header mt-3">				<h4>					<?php if($is_regismode):?>					<?php if($vtype == 'sub'):?>서브메뉴 만들기<?php else:?>최상위 메뉴 만들기<?php endif?>					<?php else:?>					메뉴 등록정보
+			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:3?>">			<div class="page-header mt-2">				<h4>					<?php if($is_regismode):?>					<?php if($vtype == 'sub'):?>서브메뉴 만들기<?php else:?>최상위 메뉴 만들기<?php endif?>					<?php else:?>					메뉴 등록정보
 					<div class="pull-right rb-top-btnbox hidden-xs">
 						<a href="<?php echo $g['adm_href']?>" class="btn btn-light"><i class="fa fa-plus"></i> 상위메뉴 새 메뉴</a>
 						<div class="btn-group rb-btn-view">

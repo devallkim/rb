@@ -14,5 +14,5 @@ fwrite($fp,$_nameinfo);
 fclose($fp);
 @chmod($_namefile,0707);
 
-getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&searchfile='.$searchfile.'&autoCheck=Y','parent.',_LANG('a2001','search'),'');
+getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&searchfile='.$searchfile.'&autoCheck=Y','parent.','반영 되었습니다.','');
 ?>

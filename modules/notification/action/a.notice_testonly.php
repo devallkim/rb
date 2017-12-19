@@ -17,7 +17,7 @@ $target		: 연결할 URL의 링크 TARGET (새창으로 연결하려면 _blank)
 
 ********************************************************************************/
 
-putNotice($my['uid'],$m,$my['uid'],_LANG('a3001','notification'),'','');
+putNotice($my['uid'],$m,$my['uid'],'실시간 테스트 알림입니다. 관리자는 <code>html</code> 태그를 사용할 수 있습니다. 자세한 전송방법은 매뉴얼을 참고하세요.','','');
 
 getLink('reload','parent.','','');
 ?>

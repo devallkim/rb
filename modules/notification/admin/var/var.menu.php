@@ -1,4 +1,4 @@
 <?php
-$d['amenu']['config'] = _LANG('menu1','notification');
-$d['amenu']['main'] = _LANG('menu2','notification');
+$d['amenu']['config'] = '환경설정';
+$d['amenu']['main'] = '알림로그';
 ?>

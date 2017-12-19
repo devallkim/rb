@@ -20,14 +20,14 @@ if (is_uploaded_file($tmpname))
 {
 	if ($fileExt != 'zip' || substr($realname,0,10) != 'rb_plugin_')
 	{
-		getLink('reload','parent.',_LANG('a6001','market'),'');
+		getLink('reload','parent.','킴스큐 공식 플러그인 파일이 아닙니다.','');
 	}
 
 	move_uploaded_file($tmpname,$saveFile);
 
 	require $g['path_core'].'opensrc/unzip/ArchiveExtractor.class.php';
 	require $g['path_core'].'function/dir.func.php';
-	
+
 	$extractor = new ArchiveExtractor();
 	$extractor -> extractArchive($saveFile,$extPath1);
 	unlink($saveFile);
@@ -42,12 +42,12 @@ if (is_uploaded_file($tmpname))
 
 	if (!$plVersion)
 	{
-		$dirh = opendir($plfldPath); 
-		while(false !== ($filename = readdir($dirh))) 
-		{ 
+		$dirh = opendir($plfldPath);
+		while(false !== ($filename = readdir($dirh)))
+		{
 			if($filename == '.' || $filename == '..' || is_file($plfldPath.'/'.$filename)) continue;
 			$plVersion = $filename;
-		} 
+		}
 		closedir($dirh);
 	}
 
@@ -71,7 +71,7 @@ if (is_uploaded_file($tmpname))
 	}
 }
 else {
-	getLink('','',_LANG('a6002','market'),'');
+	getLink('','','플러그인 파일을 선택해 주세요.','');
 }
 
 ?>
@@ -83,6 +83,6 @@ pt.location.href = gx;
 </script>
 <?php
 exit;
-//if ($reload == 'Y') getLink('reload',"parent.parent.",sprintf(_LANG('a6003','market'),$plFolder.' - v.'.$plVersion),'');
-//else getLink('',"parent.parent.$('#modal_window').modal('hide');",sprintf(_LANG('a6003','market'),$plFolder.' - v.'.$plVersion),'');
+//if ($reload == 'Y') getLink('reload',"parent.parent.",sprintf('플러그인[%s]이 추가되었습니다.',$plFolder.' - v.'.$plVersion),'');
+//else getLink('',"parent.parent.$('#modal_window').modal('hide');",sprintf('플러그인[%s]이 추가되었습니다.',$plFolder.' - v.'.$plVersion),'');
 ?>

@@ -1,5 +1,5 @@
 <?php
-$d['amenu']['main'] = _LANG('menu1','module');
-$d['amenu']['update'] = _LANG('menu2','module');
-$d['amenu']['plugin'] = _LANG('menu3','module');
+$d['amenu']['main'] = '등록정보';
+$d['amenu']['update'] = '업데이트';
+$d['amenu']['plugin'] = '익스텐션';
 ?>

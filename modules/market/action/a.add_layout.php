@@ -23,14 +23,14 @@ if (is_uploaded_file($tmpname))
 {
 	if ($fileExt != 'zip' || substr($realname,0,10) != 'rb_layout_')
 	{
-		getLink('reload','parent.',_LANG('a3001','market'),'');
+		getLink('reload','parent.','킴스큐 공식 레이아웃 파일이 아닙니다.','');
 	}
 
 	move_uploaded_file($tmpname,$saveFile);
 
 	require $g['path_core'].'opensrc/unzip/ArchiveExtractor.class.php';
 	require $g['path_core'].'function/dir.func.php';
-	
+
 	$extractor = new ArchiveExtractor();
 	$extractor -> extractArchive($saveFile,$extPath1);
 	unlink($saveFile);
@@ -42,7 +42,7 @@ if (is_uploaded_file($tmpname))
 	@chmod($extPath,0707);
 }
 else {
-	getLink('','',_LANG('a3002','market'),'');
+	getLink('','','레이아웃 파일을 선택해 주세요.','');
 }
 
 ?>
@@ -54,6 +54,6 @@ pt.location.href = gx;
 </script>
 <?php
 exit;
-//if ($reload == 'Y') getLink('reload',"parent.parent.",_LANG('a3003','market'),'');
-//else getLink('',"parent.parent.$('#modal_window').modal('hide');",_LANG('a3003','market'),'');
+//if ($reload == 'Y') getLink('reload',"parent.parent.",'레이아웃이 추가되었습니다.','');
+//else getLink('',"parent.parent.$('#modal_window').modal('hide');",'레이아웃이 추가되었습니다.','');
 ?>

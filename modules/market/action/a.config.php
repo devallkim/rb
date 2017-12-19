@@ -14,5 +14,5 @@ fclose($fp);
 @chmod($_tmpdfile,0707);
 
 
-getLink('reload','parent.',_LANG('a1001','market'),'');
+getLink('reload','parent.','입력하신 내용이 적용되었습니다.','');
 ?>

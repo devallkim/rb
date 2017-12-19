@@ -1,14 +1,13 @@
 <div class="row" id="layout-code">
 	<div class="col-sm-4 col-md-4 col-lg-3">
-		<div class="panel panel-default">
-			<div class="panel-heading rb-icon">
-				<div class="icon">
-					<i class="fa kf kf-layout fa-2x"></i>
-				</div>
-				<h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapmetane"><?php echo _LANG('a1001','layout')?></a></h4>
+		<div class="card">
+			<div class="card-header">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapmetane">
+					<i class="fa kf kf-layout fa-lg fa-fw"></i> 레이아웃
+				</a>
 			</div>
-			<div class="panel-collapse collapse in" id="collapmetane">
-				<div class="panel-body">
+			<div class="panel-collapse collapse show" id="collapmetane">
+				<div class="card-body">
 					<div style="min-height:250px">
 						<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
 						<div class="rb-tree">
@@ -41,8 +40,8 @@
 					</div>
 				</div>
 
-				<div class="panel-footer">
-					<a class="btn btn-default btn-block rb-modal-add-layout" data-toggle="modal" href="#modal_window"><?php echo _LANG('a1002','layout')?></a>
+				<div class="card-footer">
+					<a class="btn btn-light btn-block rb-modal-add-layout" data-toggle="modal" href="#modal_window">레이아웃 추가</a>
 				</div>
 			</div>
 		</div>
@@ -50,54 +49,65 @@
 
 	<a name="__code__"></a>
 	<div class="col-sm-8 col-md-8 col-lg-9">
-		<div class="page-header">
+		<div class="page-header mt-2">
 			<h4>
-				<?php echo getFolderName($g['path_layout'].$layout)?> <small>( <?php echo $layout?> )</small> <span class="label label-primary"><?php echo $_sublayout?></span>
+				<?php echo getFolderName($g['path_layout'].$layout)?> <small>( <?php echo $layout?> )</small>
+				<span class="badge badge-primary"><?php echo $_sublayout?></span>
 
 				<div class="pull-right rb-top-btnbox hidden-xs">
 					<div class="btn-group rb-btn-view">
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=layout_delete&amp;numSub=<?php echo $numSub[$layout]?>&amp;layout=<?php echo $layout?>&amp;sublayout=<?php echo $sublayout?>" class="btn btn-default" onclick="return hrefCheck(this,true,'<?php echo _LANG('a1003','layout')?>');"><?php echo _LANG('a1004','layout')?></a>
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=layout_delete&amp;numSub=<?php echo $numSub[$layout]?>&amp;layout=<?php echo $layout?>&amp;sublayout=<?php echo $sublayout?>" class="btn btn-light" onclick="return hrefCheck(this,true,'현재 사용중인 레이아웃을 삭제하면 중대한 오류가 발생합니다.\n사용중인 레이아웃인지 다시한번 확인해 주세요.\n정말로 삭제하시겠습니까?');">삭제</a>
+						<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="sr-only">Toggle Dropdown</span>
 						</button>
-						<ul class="dropdown-menu pull-right" role="menu">
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=layout_delete&amp;numSub=1&amp;layout=<?php echo $layout?>&amp;sublayout=<?php echo $sublayout?>" onclick="return hrefCheck(this,true,'<?php echo _LANG('a1003','layout')?>');"><?php echo _LANG('a1004','layout')?> (<?php echo getFolderName($g['path_layout'].$layout)?>)</a></li>
-						</ul>
+						<div class="dropdown-menu dropdown-menu-right" role="menu">
+							<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=layout_delete&amp;numSub=1&amp;layout=<?php echo $layout?>&amp;sublayout=<?php echo $sublayout?>" onclick="return hrefCheck(this,true,'현재 사용중인 레이아웃을 삭제하면 중대한 오류가 발생합니다.\n사용중인 레이아웃인지 다시한번 확인해 주세요.\n정말로 삭제하시겠습니까?');">
+								삭제 (<?php echo getFolderName($g['path_layout'].$layout)?>)
+							</a>
+						</div>
 					</div>
 
 					<div class="btn-group rb-btn-view">
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=layout_delete&amp;numCopy=1&amp;layout=<?php echo $layout?>&amp;sublayout=<?php echo $sublayout?>" class="btn btn-default" onclick="return hrefCheck(this,true,'<?php echo _LANG('a1010','layout')?>');"><?php echo _LANG('a1009','layout')?></a>
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=layout_delete&amp;numCopy=1&amp;layout=<?php echo $layout?>&amp;sublayout=<?php echo $sublayout?>" class="btn btn-light" onclick="return hrefCheck(this,true,'정말로 복사하시겠습니까?');">복사</a>
+						<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="sr-only">Toggle Dropdown</span>
 						</button>
-						<ul class="dropdown-menu pull-right" role="menu">
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=layout_delete&amp;numCopy=2&amp;layout=<?php echo $layout?>" onclick="return hrefCheck(this,true,'<?php echo _LANG('a1010','layout')?>');"><?php echo _LANG('a1009','layout')?> (<?php echo getFolderName($g['path_layout'].$layout)?>)</a></li>
-						</ul>
+						<div class="dropdown-menu dropdown-menu-right" role="menu">
+							<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=layout_delete&amp;numCopy=2&amp;layout=<?php echo $layout?>" onclick="return hrefCheck(this,true,'정말로 복사하시겠습니까?');">
+								복사 (<?php echo getFolderName($g['path_layout'].$layout)?>)
+							</a>
+						</div>
 					</div>
 
 				</div>
 			</h4>
 		</div>
 		<ul class="nav nav-tabs rb-nav-tabs" role="tablist">
-			<li<?php if(!$selfile&&($_SESSION['sh_layout_tab']=='tab_php'||!$_SESSION['sh_layout_tab'])):$_etcfile=$sublayout?> class="active"<?php endif?>><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&layout=<?php echo $layout?>&sublayout=<?php echo $sublayout?>&etcfile=<?php echo $sublayout?>#__code__" onmousedown="sessionSetting('sh_layout_tab','tab_php','','');">Layout</a></li>
-			<li<?php if(!$selfile&&$_SESSION['sh_layout_tab']=='tab_css'):$_etcfile=$_sublayout.'.css'?> class="active"<?php endif?>><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&layout=<?php echo $layout?>&sublayout=<?php echo $sublayout?>&etcfile=<?php echo $_sublayout?>.css#__code__" onmousedown="sessionSetting('sh_layout_tab','tab_css','','');">CSS</a></li>
-			<li<?php if(!$selfile&&$_SESSION['sh_layout_tab']=='tab_js'):$_etcfile=$_sublayout.'.js'?> class="active"<?php endif?>><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&layout=<?php echo $layout?>&sublayout=<?php echo $sublayout?>&etcfile=<?php echo $_sublayout?>.js#__code__" onmousedown="sessionSetting('sh_layout_tab','tab_js','','');">Javascript</a></li>
-			<li style="border:#ccc solid 1px;padding:5px;">
-				<select class="form-control" onchange="location.href='<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&layout=<?php echo $layout?>&sublayout=<?php echo $sublayout?>&selfile=Y&etcfile='+this.value+'#__code__';">
-				<option value="">Others</option>
-				<?php $dirs = opendir($g['path_layout'].$layout.'/')?>
-				<?php while(false !== ($tpl = readdir($dirs))):?>
-				<?php if(substr($tpl,0,1) != '_' || $tpl == '_images' || is_file($g['path_layout'].$layout.'/'.$tpl))continue?>
-				<?php $dirs1 = opendir($g['path_layout'].$layout.'/'.$tpl)?>
-				<optgroup label="<?php echo $tpl?>" style="background:#333;color:#fff;">
-				<?php while(false !== ($tpl1 = readdir($dirs1))):?>
-				<?php if(!strstr($tpl1,'.php')&&!strstr($tpl1,'.css')&&!strstr($tpl1,'.js'))continue?>
-				<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($etcfile==$tpl.'/'.$tpl1):?> selected<?php endif?> style="background:#fff;color:#000;"><?php echo $tpl1?></option>
-				<?php endwhile?>
-				<?php closedir($dirs1)?>
-				</optgroup>
-				<?php endwhile?>
-				<?php closedir($dirs)?>
+			<li class="nav-item">
+				<a class="nav-link<?php if(!$selfile&&($_SESSION['sh_layout_tab']=='tab_php'||!$_SESSION['sh_layout_tab'])):$_etcfile=$sublayout?> active<?php endif?>" href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&layout=<?php echo $layout?>&sublayout=<?php echo $sublayout?>&etcfile=<?php echo $sublayout?>#__code__" onmousedown="sessionSetting('sh_layout_tab','tab_php','','');">Layout</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link<?php if(!$selfile&&$_SESSION['sh_layout_tab']=='tab_css'):$_etcfile=$_sublayout.'.css'?> active<?php endif?>" href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&layout=<?php echo $layout?>&sublayout=<?php echo $sublayout?>&etcfile=<?php echo $_sublayout?>.css#__code__" onmousedown="sessionSetting('sh_layout_tab','tab_css','','');">CSS</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link<?php if(!$selfile&&$_SESSION['sh_layout_tab']=='tab_js'):$_etcfile=$_sublayout.'.js'?> active<?php endif?>" href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&layout=<?php echo $layout?>&sublayout=<?php echo $sublayout?>&etcfile=<?php echo $_sublayout?>.js#__code__" onmousedown="sessionSetting('sh_layout_tab','tab_js','','');">Javascript</a>
+			</li>
+			<li class="nav-item ml-auto">
+				<select class="form-control custom-select" onchange="location.href='<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&layout=<?php echo $layout?>&sublayout=<?php echo $sublayout?>&selfile=Y&etcfile='+this.value+'#__code__';">
+					<option value="">Others</option>
+					<?php $dirs = opendir($g['path_layout'].$layout.'/')?>
+					<?php while(false !== ($tpl = readdir($dirs))):?>
+					<?php if(substr($tpl,0,1) != '_' || $tpl == '_images' || is_file($g['path_layout'].$layout.'/'.$tpl))continue?>
+					<?php $dirs1 = opendir($g['path_layout'].$layout.'/'.$tpl)?>
+					<optgroup label="<?php echo $tpl?>" style="background:#333;color:#fff;">
+					<?php while(false !== ($tpl1 = readdir($dirs1))):?>
+					<?php if(!strstr($tpl1,'.php')&&!strstr($tpl1,'.css')&&!strstr($tpl1,'.js'))continue?>
+					<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($etcfile==$tpl.'/'.$tpl1):?> selected<?php endif?> style="background:#fff;color:#000;"><?php echo $tpl1?></option>
+					<?php endwhile?>
+					<?php closedir($dirs1)?>
+					</optgroup>
+					<?php endwhile?>
+					<?php closedir($dirs)?>
 				</select>
 			</li>
 		</ul>
@@ -118,17 +128,17 @@
 						<div class="rb-codeview">
 							<div class="rb-codeview-header">
 								<ol class="breadcrumb pull-left">
-									<li><?php echo _LANG('a1005','layout')?> :</li>
+									<li>파일경로 :</li>
 									<li>root</li>
 									<li>layouts</li>
 									<li><?php echo $layout?></li>
 									<li><?php echo str_replace('/','</li><li class="active">',$etcfile)?></li>
 								</ol>
-								<button type="button" class="btn btn-default btn-xs pull-right" data-tooltip="tooltip" title="<?php echo _LANG('a1006','layout')?>" onclick="editFullSize('tab-edit-area',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
+								<button type="button" class="btn btn-light btn-xs pull-right" data-tooltip="tooltip" title="전체화면" onclick="editFullSize('tab-edit-area',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
 							</div>
-							<div class="rb-codeview-body">			
+							<div class="rb-codeview-body">
 								<textarea name="code" id="__code__" class="form-control" rows="35"><?php if(is_file($codfile)) echo htmlspecialchars(implode('',file($codfile)))?></textarea>
-							</div>	
+							</div>
 							<div class="input-group hidden-xs">
 								<span class="input-group-addon"><small>Layout Name</small></span>
 								<input type="text" name="name" value="<?php echo getFolderName($g['path_layout'].$layout)?>" class="form-control">
@@ -143,13 +153,13 @@
 								<ul class="list-inline">
 									<li><code><?php echo is_file($codfile) ? count(file($g['path_layout'].$layout.'/'.$etcfile)).' lines':'0 line'?></code></li>
 									<li><code><?php echo is_file($codfile) ? getSizeFormat(@filesize($g['path_layout'].$layout.'/'.$etcfile),2) : '0 Byte'?></code></li>
-									<li class="pull-right"><?php echo _LANG('a1007','layout')?></li>
+									<li class="pull-right">파일을 편집한 후 저장 버튼을 클릭하면 실시간으로 사용자 페이지에 적용됩니다.</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="rb-submit">
-						<button type="submit" class="btn btn-primary<?php if($g['device']):?> btn-block<?php endif?>"><?php echo _LANG('a1008','layout')?></button>
+						<button type="submit" class="btn btn-primary<?php if($g['device']):?> btn-block<?php endif?>">저장하기</button>
 					</div>
 				</form>
 			</div>

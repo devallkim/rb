@@ -30,7 +30,7 @@ else {
 	$R = getDbData($table['s_domain'],"name='".$name."'",'*');
 	if ($R['uid'])
 	{
-		getLink('','',_LANG('a1001','domain'),'');
+		getLink('','','이미 등록된 도메인입니다.','');
 	}
 
 	$MAXC = getDbCnt($table['s_domain'],'max(gid)','depth='.($depth+1).' and parent='.$parent);
@@ -45,7 +45,7 @@ else {
 		getDbUpdate($table['s_domain'],'is_child=1','uid='.$parent);
 	}
 
-	db_query("OPTIMIZE TABLE ".$table['s_domain'],$DB_CONNECT); 
+	db_query("OPTIMIZE TABLE ".$table['s_domain'],$DB_CONNECT);
 
 	getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.($parent?'&cat='.$parent:'').($code?'&code='.$code:''),'parent.','','');
 }

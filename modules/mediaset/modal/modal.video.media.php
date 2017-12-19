@@ -37,7 +37,7 @@ else {
 	if ($where && $keyw)
 	{
 		if (strstr('[mbruid]',$where)) $_WHERE .= " and ".$where."='".$keyw."'";
-		else $_WHERE .= getSearchSql($where,$keyw,$ikeyword,'or');	
+		else $_WHERE .= getSearchSql($where,$keyw,$ikeyword,'or');
 	}
 	$RCD = getDbArray($table['s_upload'],$_WHERE,'*',$sort,$orderby,$recnum,$p);
 	$NUM = getDbRows($table['s_upload'],$_WHERE);
@@ -76,25 +76,25 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 <input type="hidden" name="category" value="<?php echo $_album?>">
 <input type="hidden" name="mediaset" value="Y">
 <input type="hidden" name="ablum_type" value="2">
-<input name="upfiles[]" type="file" accept="video/mp4" id="filefiled" class="hidden" onchange="getFiles();">
+<input name="upfiles[]" type="file" accept="video/mp4" id="filefiled" class="d-none" onchange="getFiles();">
 </form>
 <iframe name="_upload_iframe_" width="1" height="1" frameborder="0" scrolling="no"></iframe>
 
 <div id="photobox">
-	
+
 	<div class="category-box">
 
 		<div class="list-group rb-list-group">
-			<a href="<?php echo $g['base_href']?>" class="list-group-item<?php if(!$album):?> active<?php endif?>"><?php echo _LANG('m2000','mediaset')?><span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid'].' and type=2')?></span></a>
-			<a href="<?php echo $g['base_href']?>&album=none" class="list-group-item<?php if($album=='none'):?> active<?php endif?>"><?php echo _LANG('m0001','mediaset')?><span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid']." and type=2 and name='none'")?></span></a>
-			
+			<a href="<?php echo $g['base_href']?>" class="list-group-item<?php if(!$album):?> active<?php endif?>">전체 동영상<span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid'].' and type=2')?></span></a>
+			<a href="<?php echo $g['base_href']?>&album=none" class="list-group-item<?php if($album=='none'):?> active<?php endif?>">미분류<span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid']." and type=2 and name='none'")?></span></a>
+
 			<?php $_TMP_CT = array()?>
 			<?php $_CT_RCD = getDbArray($table['s_uploadcat'],'mbruid='.$my['uid']." and type=2 and name<>'none' and name<>'trash'",'*','gid','asc',0,1)?>
 			<?php while($_CT=db_fetch_array($_CT_RCD)):$_TMP_CT[]=$_CT?>
 			<a href="<?php echo $g['base_href']?>&album=<?php echo $_CT['uid']?>" class="list-group-item<?php if($album==$_CT['uid']):?> active<?php endif?>"><?php echo $_CT['name']?><span class="badge"><?php echo $_CT['r_num']?></span></a></li>
 			<?php endwhile?>
 
-			<a href="<?php echo $g['base_href']?>&album=trash" class="list-group-item<?php if($album=='trash'):?> active<?php endif?>"><?php echo _LANG('m0002','mediaset')?><span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid']." and type=2 and name='trash'")?></span></a>
+			<a href="<?php echo $g['base_href']?>&album=trash" class="list-group-item<?php if($album=='trash'):?> active<?php endif?>">휴지통<span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid']." and type=2 and name='trash'")?></span></a>
 		</div>
 		<div class="list-group">
 			<form action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_" onsubmit="return AddAlbumRcheck(this);">
@@ -103,9 +103,9 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<input type="hidden" name="a" value="category_add">
 			<input type="hidden" name="ablum_type" value="2">
 			<div class="input-group">
-				<input type="text" name="name" class="form-control" placeholder="<?php echo _LANG('m0003','mediaset')?>">
+				<input type="text" name="name" class="form-control" placeholder="추가할 분류">
 				<span class="input-group-btn">
-				<input type="submit" class="btn btn-default" value="<?php echo _LANG('m0004','mediaset')?>">
+				<input type="submit" class="btn btn-light" value="추가">
 				</span>
 			</div>
 			</form>
@@ -121,45 +121,45 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 		<?php if(!$dfiles):?>
 		<div class="btn-toolbar well well-sm">
 			<div class="btn-group">
-				<button type="button" class="btn btn-default" title="<?php echo _LANG('m0005','mediaset')?>" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','true');"><i class="fa fa-check-square-o fa-lg"></i></button>
-				<button type="button" class="btn btn-default" title="<?php echo _LANG('m0006','mediaset')?>" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','false');"><i class="fa fa-minus-square-o fa-lg"></i></button>
-				<button type="button" class="btn btn-default" title="<?php echo _LANG('m0002','mediaset')?>" data-tooltip="tooltip" onclick="deleteCheck(1,'');"><i class="fa fa-trash-o fa-lg"></i></button>
+				<button type="button" class="btn btn-light" title="전체선택" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','true');"><i class="fa fa-check-square-o fa-lg"></i></button>
+				<button type="button" class="btn btn-light" title="선택해제" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','false');"><i class="fa fa-minus-square-o fa-lg"></i></button>
+				<button type="button" class="btn btn-light" title="휴지통" data-tooltip="tooltip" onclick="deleteCheck(1,'');"><i class="fa fa-trash-o fa-lg"></i></button>
 
 				<div class="btn-group">
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					<i class="fa fa-folder fa-lg"></i> <?php echo _LANG('m0007','mediaset')?>
+					<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+					<i class="fa fa-folder fa-lg"></i> 옮기기
 					<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-					<li><a href="#." onclick="deleteCheck('move','0');"><i class="fa fa-folder"></i> <?php echo _LANG('m0001','mediaset')?></a></li>
+					<li><a href="#." onclick="deleteCheck('move','0');"><i class="fa fa-folder"></i> 미분류</a></li>
 					<?php foreach($_TMP_CT as $_CT):?>
 					<li><a href="#." onclick="deleteCheck('move','<?php echo $_CT['uid']?>');"><i class="fa fa-folder"></i> <?php echo $_CT['name']?></a></li>
 					<?php endforeach?>
 					<li class="divider"></li>
-					<li><a href="#." onclick="deleteCheck('delete','');"><i class="fa fa-times fa-lg"></i> <?php echo _LANG('m0008','mediaset')?></a></li>
+					<li><a href="#." onclick="deleteCheck('delete','');"><i class="fa fa-times fa-lg"></i> 영구삭제</a></li>
 					</ul>
 				</div>
 			</div>
 
 			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-default"<?php if($p-1<1):?> disabled="disabled"<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="<?php echo _LANG('m0030','mediaset')?>" onclick="location.href=getPageGo(<?php echo $p-1?>,0);"><i class="fa fa-chevron-left fa-lg"></i></button>
-				<button type="button" class="btn btn-default"<?php if($p+1>$TPG):?> disabled="disabled"<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="<?php echo _LANG('m0031','mediaset')?>" onclick="location.href=getPageGo(<?php echo $p+1?>,0);"><i class="fa fa-chevron-right fa-lg"></i></button>
+				<button type="button" class="btn btn-light"<?php if($p-1<1):?> disabled="disabled"<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="이전" onclick="location.href=getPageGo(<?php echo $p-1?>,0);"><i class="fa fa-chevron-left fa-lg"></i></button>
+				<button type="button" class="btn btn-light"<?php if($p+1>$TPG):?> disabled="disabled"<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="다음" onclick="location.href=getPageGo(<?php echo $p+1?>,0);"><i class="fa fa-chevron-right fa-lg"></i></button>
 			</div>
 
 			<div class="btn-group pull-right">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><?php echo number_format($NUM)?><?php echo _LANG('m0012','mediaset')?> (<?php echo $p?>/<?php echo sprintf(_LANG('m0011','mediaset'),$TPG)?>)</button>
+				<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"><?php echo number_format($NUM)?>개 (<?php echo $p?>/<?php echo sprintf('%s 페이지',$TPG)?>)</button>
 				<ul class="dropdown-menu" role="menu">
-				<li<?php if($p==1):?> class="active"<?php endif?>><a href="#." onclick="location.href=getPageGo(1,0);"><?php echo _LANG('m0009','mediaset')?></a></li>
+				<li<?php if($p==1):?> class="active"<?php endif?>><a href="#." onclick="location.href=getPageGo(1,0);">첫 페이지</a></li>
 				<?php for($i=2;$i<$TPG;$i++):?>
-				<li<?php if($p==$i):?> class="active"<?php endif?>><a href="#." onclick="location.href=getPageGo(<?php echo $i?>,0);"><?php echo sprintf(_LANG('m0011','mediaset'),$i)?></a></li>
+				<li<?php if($p==$i):?> class="active"<?php endif?>><a href="#." onclick="location.href=getPageGo(<?php echo $i?>,0);"><?php echo sprintf('%s 페이지',$i)?></a></li>
 				<?php endfor?>
 				<?php if($TPG>1):?>
-				<li<?php if($p==$TPG):?> class="active"<?php endif?>><a href="#." onclick="location.href=getPageGo(<?php echo $TPG?>,0);"><?php echo _LANG('m0010','mediaset')?></a></li>
+				<li<?php if($p==$TPG):?> class="active"<?php endif?>><a href="#." onclick="location.href=getPageGo(<?php echo $TPG?>,0);">마지막 페이지</a></li>
 				<?php else:?>
-				<li class="disabled"><a><?php echo _LANG('m0010','mediaset')?></a></li>
+				<li class="disabled"><a>마지막 페이지</a></li>
 				<?php endif?>
 				</ul>
-			</div> 
+			</div>
 		</div>
 		<?php endif?>
 
@@ -185,19 +185,19 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 				<?php endif?>
 
 				<div class="btn-group">
-					<button class="btn btn-default" type="button" title="<?php echo _LANG('m0013','mediaset')?>:<?php if($val['type']>0):?><?php echo _LANG('m2001','mediaset')?><?php else:?><?php echo _LANG('m2002','mediaset')?><?php endif?>" data-tooltip="tooltip">
+					<button class="btn btn-light" type="button" title="형식:<?php if($val['type']>0):?>내부 동영상<?php else:?>외부 동영상<?php endif?>" data-tooltip="tooltip">
 					<i class="<?php if($val['type']>0):?>glyphicon glyphicon-cloud-upload<?php else:?>fa fa-link<?php endif?> fa-lg"></i>
 					</button>
 
-					<button class="btn btn-default" type="button" title="<?php echo _LANG('m0014','mediaset')?>" onclick="location.href='<?php echo $g['s']?>/?r=<?php echo $g['base_href']?>&file_uid=<?php echo $val['uid']?>&tab=file_info&album=<?php echo $album?>';">
+					<button class="btn btn-light" type="button" title="수정" onclick="location.href='<?php echo $g['s']?>/?r=<?php echo $g['base_href']?>&file_uid=<?php echo $val['uid']?>&tab=file_info&album=<?php echo $album?>';">
 					<i class="fa fa-edit fa-lg"></i>
 					</button>
 
-					<button class="btn btn-default" type="button" title="<?php echo _LANG('m0015','mediaset')?>" onclick="location.href='<?php echo $g['s']?>/?r=<?php echo $g['base_href']?>&file_uid=<?php echo $val['uid']?>&tab=file_info&autoplay=Y&album=<?php echo $album?>';">
+					<button class="btn btn-light" type="button" title="보기" onclick="location.href='<?php echo $g['s']?>/?r=<?php echo $g['base_href']?>&file_uid=<?php echo $val['uid']?>&tab=file_info&autoplay=Y&album=<?php echo $album?>';">
 					<i class="glyphicon glyphicon-play-circle fa-lg"></i>
 					</button>
 
-					<button class="btn btn-default" type="button" title="<?php echo _LANG('m0016','mediaset')?>" onclick="deleteCheck(0,<?php echo $val['uid']?>);">
+					<button class="btn btn-light" type="button" title="삭제" onclick="deleteCheck(0,<?php echo $val['uid']?>);">
 					<i class="fa fa-trash-o fa-lg"></i>
 					</button>
 				</div>
@@ -205,11 +205,11 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<?php endforeach?>
 		</ul>
 		</form>
-		
+
 		<?php else:?>
 		<div class="alert alert-success">
 		<span class="glyphicon glyphicon-info-sign"></span>
-		<?php echo _LANG('m2003','mediaset')?>
+			비디오셋에 등록된 동영상이 없습니다.
 		</div>
 		<?php endif?>
 	</div>
@@ -219,12 +219,12 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 <div id="infobox">
 	<?php if($outlink=='Y'):?>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="#"><?php echo _LANG('m2004','mediaset')?></a></li>
+		<li class="active"><a href="#">동영상 추가</a></li>
 	</ul>
 	<div class="infobox-body">
 		<div class="pic-info1">
 			<div id="_vod_play_layer_" class="media-pic">
-				
+
 			</div>
 
 			<form name="_upload_form1_" action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_">
@@ -238,7 +238,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 			<div class="panel-body">
 				<div class="form-group">
-					<label><?php echo _LANG('m2005','mediaset')?></label>
+					<label>유투브소스 (Embed Code)</label>
 					<textarea name="src" id="_vod_embed_code_" class="form-control" rows="4"><?php echo $_R['src']?></textarea>
 				</div>
 			</div>
@@ -246,8 +246,8 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 		</div>
 		<div class="pic-submit1">
 			<div class="text-center">
-				<button type="button" class="btn btn-default" onclick="getVodPreview();" style="margin-bottom:3px;"><?php echo _LANG('m2006','mediaset')?></button>
-				<button type="button" class="btn btn-primary" onclick="getVodSave();"><?php echo _LANG('m2007','mediaset')?></button>
+				<button type="button" class="btn btn-light" onclick="getVodPreview();" style="margin-bottom:3px;">동영상 불러오기</button>
+				<button type="button" class="btn btn-primary" onclick="getVodSave();">동영상 저장하기</button>
 			</div>
 		</div>
 	</div>
@@ -256,10 +256,10 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 	<ul class="nav nav-tabs">
 		<?php if($dropfield=='editor'):?>
-		<li<?php if($file_uid):?> class="active"<?php endif?>><a href="<?php echo $g['base_href']?>&file_uid=<?php echo $file_uid?>&tab=file_info&album=<?php echo $album?>"><?php echo _LANG('m2008','mediaset')?></a></li>
-		<li<?php if(!$file_uid):?> class="active"<?php endif?>><a href="<?php echo $g['base_href']?>&album=<?php echo $album?>"><?php echo _LANG('m0017','mediaset')?></a></li>
+		<li<?php if($file_uid):?> class="active"<?php endif?>><a href="<?php echo $g['base_href']?>&file_uid=<?php echo $file_uid?>&tab=file_info&album=<?php echo $album?>">동영상 정보</a></li>
+		<li<?php if(!$file_uid):?> class="active"<?php endif?>><a href="<?php echo $g['base_href']?>&album=<?php echo $album?>">삽입하기</a></li>
 		<?php else:?>
-		<li<?php if($file_uid):?> class="active"<?php endif?>><a href="<?php echo $g['base_href']?>&file_uid=<?php echo $file_uid?>&tab=file_info&album=<?php echo $album?>"><?php echo _LANG('m2008','mediaset')?></a></li>
+		<li<?php if($file_uid):?> class="active"<?php endif?>><a href="<?php echo $g['base_href']?>&file_uid=<?php echo $file_uid?>&tab=file_info&album=<?php echo $album?>">동영상 정보</a></li>
 		<?php endif?>
 	</ul>
 
@@ -284,61 +284,62 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			</div>
 
 			<form name="captionForm" action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_">
-			<input type="hidden" name="r" value="<?php echo $r?>">
-			<input type="hidden" name="m" value="<?php echo $m?>">
-			<input type="hidden" name="a" value="caption_regis_vod">
-			<input type="hidden" name="uid" value="<?php echo $_R['uid']?>">
-			<div class="panel-body">
+				<input type="hidden" name="r" value="<?php echo $r?>">
+				<input type="hidden" name="m" value="<?php echo $m?>">
+				<input type="hidden" name="a" value="caption_regis_vod">
+				<input type="hidden" name="uid" value="<?php echo $_R['uid']?>">
 
-				<div class="form-group">
-					<label>Video Name</label>
-					<input type="text" class="form-control" name="name" value="<?php echo $_R['name']?>">
+				<div class="panel-body">
+
+					<div class="form-group">
+						<label>Video Name</label>
+						<input type="text" class="form-control" name="name" value="<?php echo $_R['name']?>">
+					</div>
+					<div class="form-group">
+						<label>Alt Text</label>
+						<input type="text" class="form-control" name="alt" value="<?php echo $_R['alt']?>">
+					</div>
+					<div class="form-group">
+						<label>Caption</label>
+						<textarea class="form-control" name="caption" rows="3"><?php echo $_R['caption']?></textarea>
+					</div>
+					<div class="form-group">
+						<label>Description</label>
+						<textarea class="form-control" name="description" rows="3"><?php echo $_R['description']?></textarea>
+					</div>
+					<?php if(!$_R['type']):?>
+					<div class="form-group">
+						<label>유투브소스 (Embed Code)</label>
+						<textarea name="src" id="_vod_embed_code_" class="form-control" rows="4"><?php echo $_R['src']?></textarea>
+					</div>
+					<?php endif?>
+					<div class="form-group">
+						<label class="control-label">License</label>
+						<select name="license" class="selectpicker show-tick show-menu-arrow scrollMe" data-width="100%" data-style="btn btn-light" data-size="auto">
+							<option value="0"<?php if($_R['license']==0):?> selected<?php endif?>>None (All rights reserved)</option>
+							<option value="1"<?php if($_R['license']==1):?> selected<?php endif?>>저작자표시-비영리-동일조건변경허락 Creative Commons</option>
+							<option value="2"<?php if($_R['license']==2):?> selected<?php endif?>>저작자표시-비영리 Creative Commons</option>
+							<option value="3"<?php if($_R['license']==3):?> selected<?php endif?>>저작자표시-비영리-변경금지 Creative Commons</option>
+							<option value="4"<?php if($_R['license']==4):?> selected<?php endif?>>저작자표시 Creative Commons</option>
+							<option value="5"<?php if($_R['license']==5):?> selected<?php endif?>>저작자표시-동일조건변경허락 Creative Commons</option>
+							<option value="6"<?php if($_R['license']==6):?> selected<?php endif?>>저작자표시-변경금지 Creative Commons</option>
+						</select>
+					</div>
 				</div>
-				<div class="form-group">
-					<label>Alt Text</label>
-					<input type="text" class="form-control" name="alt" value="<?php echo $_R['alt']?>">
-				</div>
-				<div class="form-group">
-					<label>Caption</label>
-					<textarea class="form-control" name="caption" rows="3"><?php echo $_R['caption']?></textarea>
-				</div>
-				<div class="form-group">
-					<label>Description</label>
-					<textarea class="form-control" name="description" rows="3"><?php echo $_R['description']?></textarea>
-				</div>
-				<?php if(!$_R['type']):?>
-				<div class="form-group">
-					<label><?php echo _LANG('m2005','mediaset')?></label>
-					<textarea name="src" id="_vod_embed_code_" class="form-control" rows="4"><?php echo $_R['src']?></textarea>
-				</div>
-				<?php endif?>
-				<div class="form-group">
-					<label class="control-label">License</label>
-					<select name="license" class="selectpicker show-tick show-menu-arrow scrollMe" data-width="100%" data-style="btn btn-default" data-size="auto">
-						<option value="0"<?php if($_R['license']==0):?> selected<?php endif?>><?php echo _LANG('m0036','mediaset')?></option>
-						<option value="1"<?php if($_R['license']==1):?> selected<?php endif?>><?php echo _LANG('m0037','mediaset')?></option>
-						<option value="2"<?php if($_R['license']==2):?> selected<?php endif?>><?php echo _LANG('m0038','mediaset')?></option>
-						<option value="3"<?php if($_R['license']==3):?> selected<?php endif?>><?php echo _LANG('m0039','mediaset')?></option>
-						<option value="4"<?php if($_R['license']==4):?> selected<?php endif?>><?php echo _LANG('m0040','mediaset')?></option>
-						<option value="5"<?php if($_R['license']==5):?> selected<?php endif?>><?php echo _LANG('m0041','mediaset')?></option>
-						<option value="6"<?php if($_R['license']==6):?> selected<?php endif?>><?php echo _LANG('m0042','mediaset')?></option>
-					</select>
-				</div>
-			</div>
 			</form>
 		</div>
 		<div class="pic-submit">
 			<div class="text-center">
-				<button type="button" class="btn btn-primary" onclick="infoCheck();"><?php echo _LANG('m0018','mediaset')?></button>
+				<button type="button" class="btn btn-primary" onclick="infoCheck();">정보수정</button>
 			</div>
 		</div>
 	</div>
 	<?php else:?>
 	<div class="layoutbox-body">
-		
+
 		<div class="selectbox">
-			<select class="selectpicker show-tick show-menu-arrow scrollMe" data-width="100%" data-style="btn btn-default" data-size="auto" onchange="frames._template_iframe_.location.href='<?php echo $g['url_module']?>/modal/template/'+this.value;">
-			<option value="video-base.html"><?php echo _LANG('m0033','mediaset')?></option>
+			<select class="selectpicker show-tick show-menu-arrow scrollMe" data-width="100%" data-style="btn btn-light" data-size="auto" onchange="frames._template_iframe_.location.href='<?php echo $g['url_module']?>/modal/template/'+this.value;">
+			<option value="video-base.html">템플릿 선택하기</option>
 			<option data-divider="true"></option>
 			<?php $tdir = $g['dir_module'].'modal/template/'?>
 			<?php $dirs = opendir($tdir)?>
@@ -353,10 +354,10 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 		<div class="iframebox">
 			<iframe name="_template_iframe_" src="<?php echo $g['dir_module']?>/modal/template/video-base.html" width="100%" height="100%" frameborder="0"></iframe>
 		</div>
-		
+
 		<div class="optionbox">
 			<div class="text-center">
-				<button type="button" class="btn btn-primary" onclick="templateCheck();"><?php echo _LANG('m0017','mediaset')?></button>
+				<button type="button" class="btn btn-primary" onclick="templateCheck();">삽입하기</button>
 			</div>
 		</div>
 
@@ -367,41 +368,39 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 <?php endif?>
 
 
-<!----------------------------------------------------------------------------
-@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
+<!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
 <div id="_modal_header" class="hidden">
     <button type="button" class="close rb-close-white" style="position:absolute;right:15px;z-index:1;" data-dismiss="modal" aria-hidden="true">&times;</button>
 
 	<ul class="nav nav-tabs" style="position:relative;left:5px;margin-bottom:-20px;z-index:0;">
 		<?php if(!$dfiles && !$dropfield):?>
-		<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&iframe=Y&mdfile=modal.photo.media&dropfield=<?php echo $dropfield?>&dropfiles=<?php echo $dropfiles?>" target="_modal_iframe_modal_window"><?php echo _LANG('m0034','mediaset')?></a></li>
+		<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&iframe=Y&mdfile=modal.photo.media&dropfield=<?php echo $dropfield?>&dropfiles=<?php echo $dropfiles?>" target="_modal_iframe_modal_window">포토셋</a></li>
 		<?php endif?>
-		<li class="active"><a href="#"><?php echo _LANG('m0035','mediaset')?></a></li>
+		<li class="active"><a href="#">비디오셋</a></li>
 	</ul>
 </div>
 
 <div id="_modal_footer" class="hidden">
-	<button type="button" class="btn btn-primary pull-left" <?php if($album!='trash'):?>onclick="frames._modal_iframe_modal_window.getId('filefiled').click();"<?php else:?>disabled<?php endif?>><i class="fa fa-cloud-upload fa-lg"></i> <?php echo _LANG('m2009','mediaset')?></button>
-	<button type="button" class="btn btn-primary pull-left" <?php if($album!='trash'):?>onclick="frames._modal_iframe_modal_window.vodAdd();"<?php else:?>disabled<?php endif?>><i class="fa fa-link fa-lg"></i> <?php echo _LANG('m2010','mediaset')?></button>
+	<button type="button" class="btn btn-primary pull-left" <?php if($album!='trash'):?>onclick="frames._modal_iframe_modal_window.getId('filefiled').click();"<?php else:?>disabled<?php endif?>><i class="fa fa-cloud-upload fa-lg"></i> PC동영상</button>
+	<button type="button" class="btn btn-primary pull-left" <?php if($album!='trash'):?>onclick="frames._modal_iframe_modal_window.vodAdd();"<?php else:?>disabled<?php endif?>><i class="fa fa-link fa-lg"></i> 외부동영상</button>
 
 	<?php if($album>0):?>
-	<button type="button" class="btn btn-default pull-left" onclick="frames._modal_iframe_modal_window.catDelete();"><?php echo _LANG('m0019','mediaset')?></button>
+	<button type="button" class="btn btn-light pull-left" onclick="frames._modal_iframe_modal_window.catDelete();">분류삭제</button>
 	<?php endif?>
 	<?php if($NUM>1):?>
 	<?php if($album>0):?>
-	<button type="button" class="btn btn-default pull-left" onclick="frames._modal_iframe_modal_window.orderCheck();"><?php echo _LANG('m0020','mediaset')?></button>
+	<button type="button" class="btn btn-light pull-left" onclick="frames._modal_iframe_modal_window.orderCheck();">순서변경</button>
 	<?php endif?>
 	<?php endif?>
 
 	<?php if($NUM&&$album=='trash'):?>
-	<button type="button" class="btn btn-default pull-left" onclick="frames._modal_iframe_modal_window.deleteCheck(3,'');"><?php echo _LANG('m0021','mediaset')?></button>
+	<button type="button" class="btn btn-light pull-left" onclick="frames._modal_iframe_modal_window.deleteCheck(3,'');">휴지통비우기</button>
 	<?php endif?>
 
-	<button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_"><?php echo _LANG('m0022','mediaset')?></button>
+	<button type="button" class="btn btn-light" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_">닫기</button>
 	<?php if($dropfield&&$dropfield!='editor'):?>
-	<button type="button" class="btn btn-danger" onclick="frames._modal_iframe_modal_window.fieldDrop();"><?php echo _LANG('m0023','mediaset')?></button>
+	<button type="button" class="btn btn-danger" onclick="frames._modal_iframe_modal_window.fieldDrop();">적용하기</button>
 	<?php endif?>
 </div>
 
@@ -426,7 +425,7 @@ function getVodPreview()
 {
 	if (getId('_vod_embed_code_').value.indexOf('<iframe') == -1)
 	{
-		alert('<?php echo _LANG('m2011','mediaset')?>   ');
+		alert('유투브 iframe 소스를 입력해주세요.   ');
 		getId('_vod_embed_code_').focus();
 		return false;
 	}
@@ -440,10 +439,10 @@ function getVodSave()
 {
 	if (isGetVod == false)
 	{
-		alert('<?php echo _LANG('m2012','mediaset')?>   ');
+		alert('동영상을 불러온 후 저장해 주세요.  ');
 		return false;
 	}
-	//if (confirm('<?php echo _LANG('m0032','mediaset')?>    '))
+	//if (confirm('정말로 저장하시겠습니까?    '))
 	//{
 		var f = document._upload_form1_;
 		f.submit();
@@ -490,7 +489,7 @@ function fieldDrop()
 	}
 	if (!j)
 	{
-		alert('<?php echo _LANG('m2013','mediaset')?>   ');
+		alert('동영상을 선택해 주세요.   ');
 		return false;
 	}
 	parent.getId('<?php echo $dropfield?>').value <?php if(!$dfiles):?>+<?php endif?>= s;
@@ -500,7 +499,7 @@ function AddAlbumRcheck(f)
 {
 	if (f.name.value == '')
 	{
-		alert('<?php echo _LANG('m0024','mediaset')?>   ');
+		alert('분류명을 입력해 주세요.   ');
 		f.name.focus();
 		return false;
 	}
@@ -508,9 +507,9 @@ function AddAlbumRcheck(f)
 }
 function catDelete()
 {
-	if (confirm('<?php echo _LANG('m0025','mediaset')?>   '))
+	if (confirm('정말로 삭제하시겠습니까?   '))
 	{
-		var f = document._upload_form_;	
+		var f = document._upload_form_;
 		f.a.value = 'category_delete';
 		f.submit();
 	}
@@ -543,7 +542,7 @@ function deleteCheck(x,uid)
 
 	if (x == 3)
 	{
-		if (confirm('<?php echo _LANG('m0026','mediaset')?>'))
+		if (confirm('정말로 휴지통을 비우시겠습니까?'))
 		{
 			f.a.value = 'files_empty_vod';
 			f.submit();
@@ -569,10 +568,10 @@ function deleteCheck(x,uid)
 	{
 		if (!j)
 		{
-			alert('<?php echo _LANG('m2014','mediaset')?>');
+			alert('이동할 동영상을 선택해 주세요.');
 			return false;
 		}
-		if (confirm('<?php echo _LANG('m0027','mediaset')?>'))
+		if (confirm('정말로 이동하시겠습니까?'))
 		{
 			f.a.value = 'files_delete_vod';
 			f.dtype.value = x;
@@ -584,10 +583,10 @@ function deleteCheck(x,uid)
 	{
 		if (!j)
 		{
-			alert('<?php echo _LANG('m2015','mediaset')?>');
+			alert('영구삭제할 동영상을 선택해 주세요.');
 			return false;
 		}
-		if (confirm('<?php echo _LANG('m0025','mediaset')?>'))
+		if (confirm('정말로 삭제하시겠습니까?'))
 		{
 			f.a.value = 'files_delete_vod';
 			f.dtype.value = x;
@@ -598,10 +597,10 @@ function deleteCheck(x,uid)
 
 		if (!j)
 		{
-			alert('<?php echo _LANG('m2016','mediaset')?>');
+			alert('삭제할 동영상을 선택해 주세요.');
 			return false;
 		}
-		if (confirm('<?php echo _LANG('m0025','mediaset')?>'))
+		if (confirm('정말로 삭제하시겠습니까?'))
 		{
 			f.a.value = 'files_delete_vod';
 			f.submit();
@@ -615,7 +614,7 @@ function orderCheck()
     var l = document.getElementsByName('photomembers[]');
     var n = l.length;
     var i;
-	if (confirm('<?php echo _LANG('m0028','mediaset')?>'))
+	if (confirm('정말로 변경하시겠습니까?'))
 	{
 		for (i = 0; i < n; i++)
 		{
@@ -641,7 +640,7 @@ function templateCheck()
 
 	if(ifr.select_tpl == '')
 	{
-		alert('<?php echo _LANG('m0029','mediaset')?>  ');
+		alert('적용할 템플릿을 선택해 주세요.  ');
 		return false;
 	}
 
@@ -687,7 +686,7 @@ function templateCheck()
 
 		if(!j)
 		{
-			alert('<?php echo _LANG('m2017','mediaset')?>  ');
+			alert('적용할 동영상을 선택해 주세요.  ');
 			return false;
 		}
 	}
@@ -737,11 +736,7 @@ modalSetting();
 $('.selectpicker').selectpicker();
 </script>
 
-<!----------------------------------------------------------------------------
-//부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
-
-
+<!-- 부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
 <style>
 <?php $_gapAdj = strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')||strpos($_SERVER['HTTP_USER_AGENT'],'Firefox')||strpos($_SERVER['HTTP_USER_AGENT'],'rv:1')?true:false?>

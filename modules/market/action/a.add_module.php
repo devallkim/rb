@@ -23,19 +23,19 @@ if (is_uploaded_file($tmpname))
 {
 	if ($fileExt != 'zip' || substr($realname,0,10) != 'rb_module_')
 	{
-		getLink('reload','parent.',_LANG('a2001','market'),'');
+		getLink('reload','parent.','킴스큐 공식 모듈 파일이 아닙니다.','');
 	}
 
 	if (is_file($g['path_module'].$plFolder.'/main.php'))
 	{
-		getLink('','',sprintf(_LANG('a2002','market'),$plFolder),'');
+		getLink('','',sprintf('이미 동일한 코드의 모듈(%s)이 존재합니다.',$plFolder),'');
 	}
 
 	move_uploaded_file($tmpname,$saveFile);
 
 	require $g['path_core'].'opensrc/unzip/ArchiveExtractor.class.php';
 	require $g['path_core'].'function/dir.func.php';
-	
+
 	$extractor = new ArchiveExtractor();
 	$extractor -> extractArchive($saveFile,$extPath1);
 	unlink($saveFile);
@@ -47,7 +47,7 @@ if (is_uploaded_file($tmpname))
 	@chmod($extPath,0707);
 }
 else {
-	getLink('','',_LANG('a2003','market'),'');
+	getLink('','','모듈 파일을 선택해 주세요.','');
 }
 
 $module		= $plFolder;
@@ -55,8 +55,8 @@ $_tmptable2 = $table;
 $table		= array();
 $table_db	= $g['path_module'].$module.'/_setting/db.table.php';
 $table_sc	= $g['path_module'].$module.'/_setting/db.schema.php';
-if(is_file($table_db)) 
-{	
+if(is_file($table_db))
+{
 	$_tmptable1 = array();
 	$_tmptfile  = $g['path_var'].'table.info.php';
 	include $table_db;
@@ -93,6 +93,6 @@ pt.location.href = gx;
 </script>
 <?php
 exit;
-//if ($reload == 'Y') getLink('reload',"parent.parent.",_LANG('a2004','market'),'');
-//else getLink('',"parent.parent.$('#modal_window').modal('hide');",_LANG('a2004','market'),'');
+//if ($reload == 'Y') getLink('reload',"parent.parent.",'모듈이 추가되었습니다.','');
+//else getLink('',"parent.parent.$('#modal_window').modal('hide');",'모듈이 추가되었습니다.','');
 ?>

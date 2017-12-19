@@ -18,5 +18,5 @@ fclose($fp);
 @chmod($_ufile,0707);
 
 if ($autoCheck) exit;
-getLink('reload','parent.',$auto?'':_LANG('a3001','search'),'');
+getLink('reload','parent.',$auto?'':'정보가 갱신되었습니다.','');
 ?>

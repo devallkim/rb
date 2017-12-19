@@ -20,5 +20,5 @@ fclose($fp);
 @chmod($_tmpdfile,0707);
 
 
-getLink('reload','parent.',_LANG('a1001','notification'),'');
+getLink('reload','parent.','반영 되었습니다.','');
 ?>

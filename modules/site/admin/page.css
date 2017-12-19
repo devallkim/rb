@@ -21,18 +21,6 @@
 	padding-bottom: 0
 }
 
-#rb-body .row,
-#rb-body .xrow {
-	margin-right: -5px;
-	margin-left: -5px;
-}
-
-#rb-body .col-sm-6,
-#rb-body .col-sm-12 {
-    padding-right: 5px;
-    padding-left: 5px;
-}
-
 .rb-advance {
     border-top: 1px solid #EFEFEF;
     padding-top: 5px;
@@ -179,7 +167,7 @@
     }
 
 	#page-settings .panel-body {
-		padding-left:0; 
+		padding-left:0;
 		padding-right:0;
 	}
 }

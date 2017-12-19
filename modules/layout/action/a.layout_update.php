@@ -52,5 +52,5 @@ if ($newLayout && $newLayout != $layout && !is_dir($g['path_layout'].$newLayout)
 	$_layout = $newLayout;
 }
 
-getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&layout='.$_layout.'&sublayout='.$_sublayout,'parent.',sprintf(_LANG('a1001','layout'),$codeFile),'');
+getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&layout='.$_layout.'&sublayout='.$_sublayout,'parent.',sprintf('[%s] 파일이 수정되었습니다.',$codeFile),'');
 ?>

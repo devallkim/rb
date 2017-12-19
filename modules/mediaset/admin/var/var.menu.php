@@ -1,4 +1,4 @@
 <?php
-$d['amenu']['config'] = _LANG('menu1','mediaset');
-$d['amenu']['main'] = _LANG('menu2','mediaset');
+$d['amenu']['config'] = '환경설정';
+$d['amenu']['main'] = '파일관리';
 ?>

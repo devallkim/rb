@@ -30,7 +30,7 @@ function chkEmailAddr(email)
 	return true;
 }
 //오픈윈도우
-function OpenWindow(url) 
+function OpenWindow(url)
 {
 	setCookie('TmpCode','',1);
 	window.open(url,'','width=100px,height=100px,status=no,scrollbars=no,toolbar=no');
@@ -46,11 +46,11 @@ function isLogin()
 	return true;
 }
 //쿠키세팅
-function setCookie(name,value,expiredays) 
-{ 
-	var todayDate = new Date(); 
-	todayDate.setDate( todayDate.getDate() + expiredays ); 
-	document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";" 
+function setCookie(name,value,expiredays)
+{
+	var todayDate = new Date();
+	todayDate.setDate( todayDate.getDate() + expiredays );
+	document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
 }
 //쿠키추출
 function getCookie( name )
@@ -60,7 +60,7 @@ function getCookie( name )
 	while ( x <= document.cookie.length )
 	{
 		var y = (x+nameOfCookie.length);
-		if ( document.cookie.substring( x, y ) == nameOfCookie ) 
+		if ( document.cookie.substring( x, y ) == nameOfCookie )
 		{
 			if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 ) endOfCookie = document.cookie.length;
 			return unescape( document.cookie.substring( y, endOfCookie ) );
@@ -84,42 +84,42 @@ function getFileExt(file)
 	var arr = file.split('.');
 	return arr[arr.length-1];
 }
-function getOfs(id) 
+function getOfs(id)
 {
     var obj = new Object();
-	var box = id.getBoundingClientRect(); 
-	obj.left = box.left + (document.documentElement.scrollLeft || document.body.scrollLeft); 
-	obj.top = box.top + (document.documentElement.scrollTop || document.body.scrollTop); 
-	obj.width = box.right - box.left; 
+	var box = id.getBoundingClientRect();
+	obj.left = box.left + (document.documentElement.scrollLeft || document.body.scrollLeft);
+	obj.top = box.top + (document.documentElement.scrollTop || document.body.scrollTop);
+	obj.width = box.right - box.left;
 	obj.height = box.bottom - box.top;
-    return obj; 
+    return obj;
 }
 //은,는,이,가 - getJosa(str,"은는")
-function getJosa(str, tail) 
-{ 
-    strTemp = str.substr(str.length - 1); 
-    return ((strTemp.charCodeAt(0) - 16) % 28 != 0) ? str + tail.substr(0, 1) : str + tail.substr(1, 1); 
+function getJosa(str, tail)
+{
+    strTemp = str.substr(str.length - 1);
+    return ((strTemp.charCodeAt(0) - 16) % 28 != 0) ? str + tail.substr(0, 1) : str + tail.substr(1, 1);
 }
 //타입비교 (비교문자 , 비교형식 ; ex: getTypeCheck(string , "1234567890") )
 function getTypeCheck(s, spc)
 {
 	var i;
-	for(i=0; i< s.length; i++) 
+	for(i=0; i< s.length; i++)
 	if (spc.indexOf(s.substring(i, i+1)) < 0) return false;
-    
+
 	return true;
 }
 //콤마삽입 (number_format)
-function commaSplit(srcNumber) 
-{ 
-	var txtNumber = '' + srcNumber; 
-	var rxSplit = new RegExp('([0-9])([0-9][0-9][0-9][,.])'); 
-	var arrNumber = txtNumber.split('.'); 
-	arrNumber[0] += '.'; 
-	do arrNumber[0] = arrNumber[0].replace(rxSplit, '$1,$2'); 
-	while (rxSplit.test(arrNumber[0])); 
-	if (arrNumber.length > 1) return arrNumber.join(''); 
-	else return arrNumber[0].split('.')[0]; 
+function commaSplit(srcNumber)
+{
+	var txtNumber = '' + srcNumber;
+	var rxSplit = new RegExp('([0-9])([0-9][0-9][0-9][,.])');
+	var arrNumber = txtNumber.split('.');
+	arrNumber[0] += '.';
+	do arrNumber[0] = arrNumber[0].replace(rxSplit, '$1,$2');
+	while (rxSplit.test(arrNumber[0]));
+	if (arrNumber.length > 1) return arrNumber.join('');
+	else return arrNumber[0].split('.')[0];
 }
 function priceFormat(obj)
 {
@@ -146,9 +146,9 @@ function getJeolsa(price,_round)
 {
 	return price - (price%(_round*10));
 }
-function filterNum(str) 
-{ 
-	return str.replace(/^\$|,/g, ""); 
+function filterNum(str)
+{
+	return str.replace(/^\$|,/g, "");
 }
 //페이징처리
 function getPageLink(lnum,p,tpage,img)
@@ -212,14 +212,14 @@ function getPageLink(lnum,p,tpage,img)
 }
 //페이지클릭
 function getPageGo(n,wp)
-{ 
+{
 	var v   = wp != '' ? wp : 'p';
 	var p   = getUriString(v);
 	var que = location.href.replace('&'+v+'='+p,'');
 		que = que.indexOf('?') != -1 ? que : que + '?';
 		que = que.replace('&mod=view&uid=' + getUriString('uid') , '');
 	var xurl = que.split('#');
-	return xurl[0].indexOf('?') != -1 ?  xurl[0] + '&'+v+'=' + n : xurl[0] + '?'+v+'=' + n; 
+	return xurl[0].indexOf('?') != -1 ?  xurl[0] + '&'+v+'=' + n : xurl[0] + '?'+v+'=' + n;
 }
 //파라미터값
 function getUriString(param)
@@ -251,7 +251,7 @@ function getDateFormat(date , type)
 	var ck;
 	var rtstr = "";
 	var j = 0;
-	for(var i = 0; i < type.length; i++) 
+	for(var i = 0; i < type.length; i++)
 	{
 		if(type.substring(i,i+1) == 'x')
 		{
@@ -294,10 +294,10 @@ function checkKeycode(e)
 	else if (e) return e.which;
 }
 //AJAX-Request
-function getHttprequest(URL,f) 
-{ 
+function getHttprequest(URL,f)
+{
 	var xmlhttp = null;
-	if(window.XMLHttpRequest) xmlhttp = new XMLHttpRequest(); 
+	if(window.XMLHttpRequest) xmlhttp = new XMLHttpRequest();
 	else {try{xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");}catch(e1){try{xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}catch(e2){return false;}}}
 	if (xmlhttp)
 	{
@@ -310,12 +310,12 @@ function getHttprequest(URL,f)
 				if ((f[i].type=='radio'||f[i].type=='checkbox')&&f[i].checked==false) continue;
 				iParam += '&' + f[i].name + '=' + encodeURIComponent(f[i].value);
 			}
-			xmlhttp.open("POST", URL, false); 
+			xmlhttp.open("POST", URL, false);
 			xmlhttp.setRequestHeader("Content-Type","multipart/form-data;application/x-www-form-urlencoded;charset=utf-8");
 			xmlhttp.send(iParam);
 		}
 		else {
-			xmlhttp.open("GET", URL, false); 
+			xmlhttp.open("GET", URL, false);
 			xmlhttp.send(null);
 		}
 		if (xmlhttp.readyState==4 && xmlhttp.status == 200 && xmlhttp.statusText=='OK') return xmlhttp.responseText;

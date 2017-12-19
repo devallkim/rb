@@ -15,14 +15,14 @@ if (is_uploaded_file($tmpname))
 {
 	if ($fileExt != 'zip' || substr($realname,0,7) != 'rb_etc_')
 	{
-		getLink('reload','parent.',_LANG('a8001','market'),'');
+		getLink('reload','parent.','킴스큐 공식 기타자료 파일이 아닙니다.','');
 	}
 
 	move_uploaded_file($tmpname,$saveFile);
 
 	require $g['path_core'].'opensrc/unzip/ArchiveExtractor.class.php';
 	require $g['path_core'].'function/dir.func.php';
-	
+
 	$extractor = new ArchiveExtractor();
 	$extractor -> extractArchive($saveFile,$extPath1);
 	unlink($saveFile);
@@ -32,7 +32,7 @@ if (is_uploaded_file($tmpname))
 	@chmod($extPath,0707);
 }
 else {
-	getLink('','',_LANG('a8002','market'),'');
+	getLink('','','기타자료 파일을 선택해 주세요.','');
 }
 
 ?>
@@ -44,6 +44,6 @@ pt.location.href = gx;
 </script>
 <?php
 exit;
-//if ($reload == 'Y') getLink('reload',"parent.parent.",_LANG('a8003','market'),'');
-//else getLink('',"parent.parent.$('#modal_window').modal('hide');",_LANG('a8003','market'),'');
+//if ($reload == 'Y') getLink('reload',"parent.parent.",'기타자료가 추가되었습니다.','');
+//else getLink('',"parent.parent.$('#modal_window').modal('hide');",'기타자료가 추가되었습니다.','');
 ?>

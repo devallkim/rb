@@ -1,7 +1,7 @@
 <?php
-$d['amenu']['config']	= _LANG('menu1','market');
-$d['amenu']['main']		= _LANG('menu2','market');
-//$d['amenu']['request']= _LANG('menu3','market');
-//$d['amenu']['brand']	= _LANG('menu4','market');
-//$d['amenu']['buyer']	= _LANG('menu5','market');
+$d['amenu']['config']	= '설정';
+$d['amenu']['main']		= '마켓';
+// $d['amenu']['request']= '맞춤상품';
+// $d['amenu']['brand']	= '브랜드샵';
+// $d['amenu']['buyer']	= '구매내역';
 ?>

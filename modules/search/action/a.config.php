@@ -21,5 +21,5 @@ fwrite($fp,trim(stripslashes($searchlist)));
 fclose($fp);
 @chmod($_tmpdfile,0707);
 
-getLink('reload','parent.',_LANG('a1001','search'),'');
+getLink('reload','parent.','반영 되었습니다.','');
 ?>

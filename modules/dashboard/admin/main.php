@@ -26,12 +26,12 @@ if(is_file($_mywidget)) include $_mywidget;
 	<?php if($_lastupdate[0] && !$_isnewversion):?>
 	<div id="rb-update-alert" class="alert alert-danger fade in">
 		<?php if($_lastupdate[2]):?>
-		<a href="<?php echo $_lastupdate[2]?>" class="alert-link" target="_blank" title="<?php echo _LANG('a1001','dashboard')?>" data-tooltip="tooltip">Rb <?php echo $_lastupdate[0]?></a>
+		<a href="<?php echo $_lastupdate[2]?>" class="alert-link" target="_blank" title="업데이트 내용보기" data-tooltip="tooltip">Rb <?php echo $_lastupdate[0]?></a>
 		<?php else:?>
-		<a href="#." class="alert-link" title="<?php echo _LANG('a1002','dashboard')?>" data-tooltip="tooltip">Rb <?php echo $_lastupdate[0]?></a>
+		<a href="#." class="alert-link" title="정보가 없는 업데이트입니다." data-tooltip="tooltip">Rb <?php echo $_lastupdate[0]?></a>
 		<?php endif?>
-		<?php echo _LANG('a1003','dashboard')?> 
-		<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=admin&amp;front=update" class="alert-link"><?php echo _LANG('a1004','dashboard')?></a>
+		업데이트가 있습니다.
+		<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=admin&amp;front=update" class="alert-link">지금 업데이트 하시겠습니까?</a>
 	</div>
 	<?php endif?>
 
@@ -40,22 +40,22 @@ if(is_file($_mywidget)) include $_mywidget;
 		<?php $_i=0;foreach($d['admwidget'] as $_key => $_val):?>
 		<?php if(!is_file($g['path_module'].$module.'/widgets/'.$_key.'/main.php'))continue?>
 		<?php if($_val=='true'):?>
-		<?php include getLangFile($g['path_module'].$module.'/widgets/'.$_key.'/lang.',$d['admin']['syslang'],'.php')?>
-		<?php include $g['path_module'].$module.'/widgets/'.$_key.'/var.php'?>
+		<?php include getLangFile($g['path_module'].$module.'/widgets/'.$_key.'/lang.',$d['admin']['syslang'],'.php') ?>
+		<?php include $g['path_module'].$module.'/widgets/'.$_key.'/var.php' ?>
 		<div class="col-md-<?php echo $d['admdash']['col']?> col-lg-<?php echo $d['admdash']['col']?>">
-			<link href="<?php echo $g['s']?>/modules/<?php echo $module?>/widgets/<?php echo $_key?>/main.css" rel="stylesheet"> 
-			<div class="panel panel-default<?php if($_SESSION['sh-dash-'.$_key]):?> rb-bottom-none<?php endif?>">
-				<div class="panel-heading">
+			<link href="<?php echo $g['s']?>/modules/<?php echo $module?>/widgets/<?php echo $_key?>/main.css" rel="stylesheet">
+			<div class="card<?php if($_SESSION['sh-dash-'.$_key]):?> rb-bottom-none<?php endif?>">
+				<div class="card-header">
 					<a class="rb-collapse btn btn-link" data-toggle="collapse" data-target="#wedget-<?php echo $_key?>">
-						<i onclick="checkArrow(this);" title="<?php echo _LANG('a1009','dashboard')?>" data-tooltip="tooltip">×</i>
-						<i onclick="checkArrow(this);" title="<?php echo _LANG('a1010','dashboard')?>" data-tooltip="tooltip"><?php echo $_SESSION['sh-dash-'.$_key]?'▼':'▲'?></i>
+						<i onclick="checkArrow(this);" title="숨기기" data-tooltip="tooltip">×</i>
+						<i onclick="checkArrow(this);" title="접기/펼치기" data-tooltip="tooltip"><?php echo $_SESSION['sh-dash-'.$_key]?'▼':'▲'?></i>
 					</a>
-					<h3 class="panel-title"><?php echo $d['admdash']['title']?></h3>
+					<?php echo $d['admdash']['title']?>
 				</div>
-				<div class="collapse<?php if(!$_SESSION['sh-dash-'.$_key]):?> in<?php endif?>" id="wedget-<?php echo $_key?>">
+				<div class="collapse<?php if(!$_SESSION['sh-dash-'.$_key]):?> in<?php endif?>" id="wedget-<?php echo $_key ?>">
 
-					<?php include $g['path_module'].$module.'/widgets/'.$_key.'/main.php'?>
-					<?php if($d['admdash']['more']):?>
+					<?php include $g['path_module'].$module.'/widgets/'.$_key.'/main.php' ?>
+					<?php if($d['admdash']['more']): ?>
 					<div class="panel-footer rb-more"><a href="<?php echo $d['admdash']['more']?>">more</a></div>
 					<?php endif?>
 				</div>
@@ -64,19 +64,19 @@ if(is_file($_mywidget)) include $_mywidget;
 		<?php $_i++;endif?>
 		<?php endforeach?>
 
-		<div id="rb-guide-wrapper" class="rb-guide-wrapper<?php if($_i):?> hidden<?php endif?>">
+		<div id="rb-guide-wrapper" class="rb-guide-wrapper<?php if($_i):?> d-none<?php endif?>">
 			<div class="rb-guide-wrapper-inner">
 				<div class="container">
 					<h1>
 						<i class="kf kf-widget fa-5x text-muted"></i>
 						<br>
 						<br>
-						<?php echo _LANG('a1005','dashboard')?>
+						설정된 위젯이 없습니다.
 					</h1>
 					<p class="text-muted">
-						<?php echo _LANG('a1006','dashboard')?>
+						위젯을 이용해서 '.$my['name'].'님만의 대시보드를 꾸며보세요.
 						<br class="hidden-xs">
-						<?php echo _LANG('a1007','dashboard')?>
+						자주 사용하는 위젯을 원하는 위치에 진열할 수 있습니다.
 						<br class="hidden-xs">
 					</p>
 					<p>
@@ -84,7 +84,7 @@ if(is_file($_mywidget)) include $_mywidget;
 						<br>
 						<a id="rb-dashboard-edit-btn" class="btn btn-primary rb-modal-dashboard" href="#." data-toggle="modal" data-target="#modal_window">
 							<i class="glyphicon glyphicon-ok"></i>
-							<?php echo _LANG('a1008','dashboard')?>
+							대시보드 꾸미기
 						</a>
 					</p>
 				</div>
@@ -131,7 +131,7 @@ function checkArrow(obj)
 		for (i = 0; i < wn-1; i++)
 		{
 			if (wd.children[i].className.indexOf('hidden') != -1) j++;
-		}		
+		}
 		if (wn-1 == j)
 		{
 			$('#rb-guide-wrapper').removeClass('hidden');

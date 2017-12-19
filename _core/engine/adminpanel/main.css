@@ -12,9 +12,9 @@
  *
  * 1 - Reset 초기화
  * 2 - Structure 구조
- * 3 - System Admin Sidebar 시스템 사이드바 
+ * 3 - System Admin Sidebar 시스템 사이드바
  * 4 - System Main 메인
- * 5 - 3rdparty-settings Sidebar 참여자 사이드바 
+ * 5 - 3rdparty-settings Sidebar 참여자 사이드바
  * 6 - Footer 풋터
  * ----------------------------------------------------------------------------
  */
@@ -24,9 +24,11 @@
  * 1 - Reset 초기화
  * ----------------------------------------------------------------------------
  */
-/**
 
 
+ body {
+   font-size: 14px
+ }
 
 
 /**
@@ -73,7 +75,7 @@
 
 /**
 
- * 3 - System Admin Sidebar 시스템 사이드바 
+ * 3 - System Admin Sidebar 시스템 사이드바
  * ----------------------------------------------------------------------------
  */
 
@@ -372,7 +374,7 @@
 .rb-minified-sidebar .rb-system-admin #rb-notification-name {
 	position: absolute;
 	top: -12px;
-	left: 13px;	
+	left: 13px;
 }
 /* hide-sidebar > .rb-system-admin  */
 
@@ -435,8 +437,15 @@
 }
 
 .rb-hidden-system-site .rb-system-site:hover {
+    /*right  : 0;*/
+    /*z-index: 99999;*/
+}
+.rb-hidden-system-site .rb-system-site.open {
     right  : 0;
     z-index: 99999;
+}
+.rb-hidden-system-site .rb-system-site.open .fa-caret-left:before {
+  content: "\f0da";
 }
 
 .rb-hidden-system-admin .rb-system-admin .rb-icon-minify,
@@ -614,7 +623,7 @@
 }
 
 .rb-system-sidebar .rb-content-padded {
-    padding: 15px 10px;
+  padding: 9px 10px;
 }
 
 .rb-system-admin nav ul li.active.open>a:before {
@@ -650,6 +659,10 @@
     white-space    : nowrap;
 }
 
+.rb-system-admin .rb-buttons .dropdown-toggle::after {
+  display: none
+}
+
 
 /* rb-fixed-sidebar */
 
@@ -662,7 +675,7 @@
 .rb-fixed-sidebar .rb-system-admin .tab-content {
     -webkit-overflow-scrolling: touch;
     height                    : 100%;
-	max-height                : calc(100vh - 255px); 
+	max-height                : calc(100vh - 255px);
     max-height                : -moz-calc(100vh - 255px);
     max-height                : -webkit-calc(100vh - 255px);
     overflow-x                : hidden;
@@ -719,8 +732,8 @@
 
 }
 
-.rb-system-admin .nav-tabs > li.active > a, 
-.rb-system-admin .nav-tabs > li.active > a:hover, 
+.rb-system-admin .nav-tabs > li.active > a,
+.rb-system-admin .nav-tabs > li.active > a:hover,
 .rb-system-admin .nav-tabs > li.active > a:focus {
     border-bottom-color: transparent;
     border-right       : 1px solid transparent;
@@ -743,8 +756,8 @@
     width              : 220px;
 }
 
-.rb-system-admin .tabs-below > .nav-tabs > li.active > a, 
-.rb-system-admin .tabs-below > .nav-tabs > li.active > a:hover, 
+.rb-system-admin .tabs-below > .nav-tabs > li.active > a,
+.rb-system-admin .tabs-below > .nav-tabs > li.active > a:hover,
 .rb-system-admin .tabs-below > .nav-tabs > li.active > a:focus {
     background-color: transparent;
     border-bottom   : 2px solid transparent;
@@ -888,7 +901,7 @@
 
 /* Mac OS Hack */
 .mac-os .rb-system-admin .tab-content {
-    width: 107%;
+    /*width: 107%;*/
 }
 
 
@@ -968,13 +981,13 @@
     cursor: pointer;
 }
 
-#emuldevices .rb-brand, 
+#emuldevices .rb-brand,
 #emuldevices .rb-viewport {
     text-align: center;
     text-transform:capitalize;
 }
 
-#emuldevices .table tbody tr.active td, 
+#emuldevices .table tbody tr.active td,
 #emuldevices .table tbody tr.active th {
     color: #fff;
     background-color: #428bca;
@@ -1079,7 +1092,7 @@ body, html {
     -webkit-transition: 250ms cubic-bezier(0.1,.57,.1,1);
             transition: 250ms cubic-bezier(0.1,.57,.1,1);
     -webkit-transform: translate(0px,0) translateZ(0px);
-        -ms-transform: translate(0px,0) translateZ(0px);   
+        -ms-transform: translate(0px,0) translateZ(0px);
             transform: translate(0px,0) translateZ(0px);
 }
 
@@ -1118,19 +1131,36 @@ body, html {
 
 /* rb-icon */
 
-.rb-system-site .panel-title i {
+.rb-system-site .card + .card {
+  margin-top: 5px;
+}
+
+.rb-system-site .card-header {
+  padding: 10px 15px;
+  /*border-bottom: 1px solid transparent;*/
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.rb-system-site .card-header a {
+  display: block;
+  color: inherit;
+}
+.rb-system-site .card-header a:hover {
+  text-decoration: none
+}
+.rb-system-site .card-header i {
     font-family: FontAwesome;
     margin-left: -5px;
     margin-right: 5px;
     font-style: normal;
 }
 
-.rb-system-site .panel-title i:before {
+.rb-system-site .card-header i:before {
     float: right;
     content: "\f0d7"
 }
 
-.rb-system-site .panel-title .collapsed i:before {
+.rb-system-site .card-header .collapsed i:before {
     float: right;
     content: "\f0da"
 }
@@ -1174,11 +1204,11 @@ body, html {
     margin-bottom: 15px;
 }
 
-.rb-system-site .btn-group {
-    display: block
+.rb-system-site .btn-group label {
+  margin-bottom: 0
 }
 
-.rb-system-site .rb-device-buttons .btn-default {
+.rb-system-site .rb-device-buttons .btn-light {
     color: #666
 }
 
@@ -1225,15 +1255,15 @@ body, html {
 
 
 /*테마*/
-.rb-system-site .btn-default.active {
+.rb-system-site .btn-light.active {
     background-color: #2d6ca2;
     border-color: #2b669a;
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0,0,0,.2);
 }
 
-.rb-system-site fieldset[disabled] .btn-default,
-.rb-system-site fieldset[disabled] .btn-default.active {
+.rb-system-site fieldset[disabled] .btn-light,
+.rb-system-site fieldset[disabled] .btn-light.active {
     background-color: #eee;
     color: #999;
     text-shadow: none;
@@ -1282,8 +1312,8 @@ body, html {
             transition: all .2s
 }
 
-#site-preview.desktop, 
-#site-preview.tablet, 
+#site-preview.desktop,
+#site-preview.tablet,
 #site-preview.mobile {
     background: #ADADAD;
 }
@@ -1339,7 +1369,7 @@ body, html {
 .rb-devices-change {
     min-height: 10px;
     background-image: none;
-    background-color: #ADADAD; 
+    background-color: #ADADAD;
     border-color: #999;
 }
 
@@ -1416,11 +1446,11 @@ body, html {
 }
 
 /* ------------------ modal close --------------------*/
-.rb-close-white { 
-    color: #fff; 
-    text-shadow: 0 1px 0 #ffffff; 
-    opacity: 1; 
-    filter: alpha(opacity=100); 
+.rb-close-white {
+    color: #fff;
+    text-shadow: 0 1px 0 #ffffff;
+    opacity: 1;
+    filter: alpha(opacity=100);
     line-height: 30px;
 }
 

@@ -2,9 +2,9 @@
 <div id="modal-package-install">
 	<div class="modal-body">
 		<ul>
-			<li<?php if($package_step==1):?> class="active"<?php endif?>><span class="badge">Step 1</span> <span><?php echo _LANG('a4001','market')?></span></li>
-			<li<?php if($package_step==2):?> class="active"<?php endif?>><span class="badge">Step 2</span> <span><?php echo _LANG('a4002','market')?></span></li>
-			<li<?php if($package_step==3):?> class="active"<?php endif?>><span class="badge">Step 3</span> <span><?php echo _LANG('a4003','market')?></span></li>
+			<li<?php if($package_step==1):?> class="active"<?php endif?>><span class="badge badge-secondary">Step 1</span> <span><?php echo '패키지 업로드'?></span></li>
+			<li<?php if($package_step==2):?> class="active"<?php endif?>><span class="badge badge-secondary">Step 2</span> <span><?php echo '설치하기'?></span></li>
+			<li<?php if($package_step==3):?> class="active"<?php endif?>><span class="badge badge-secondary">Step 3</span> <span><?php echo '완료'?></span></li>
 		</ul>
 
 		<div class="tab-content">
@@ -19,15 +19,15 @@
 						<div class="col-sm-4 text-center rb-icon">
 							<i class="fa fa-upload fa-3x"></i>
 							<h4 class="text-center text-muted">
-								<?php echo _LANG('a4004','market')?>
+								패키지 파일을<br>업로드 해주세요.
 							</h4>
-						</div>           
+						</div>
 						<div class="col-sm-8">
 							<div class="attach well form-horizontal">
 								<div class="row">
 									<div class="col-sm-3">
 										<input type="file" name="upfile" id="packageupfile" class="hidden" onchange="progressbar();">
-										<button type="button" class="btn btn-default" id="fileselectbtn" onclick="$('#packageupfile').click();"><?php echo _LANG('a4005','market')?></button>
+										<button type="button" class="btn btn-light" id="fileselectbtn" onclick="$('#packageupfile').click();">파일선택</button>
 									</div>
 									<div class="col-sm-9" style="padding-top:7px">
 										<div class="progress progress-striped active hidden" id="progress-bar">
@@ -37,9 +37,9 @@
 								</div>
 							</div>
 							<ul>
-							<li><?php echo _LANG('a4006','market')?></li>
-							<li><?php echo _LANG('a4007','market')?></li>
-							<li><?php echo _LANG('a4008','market')?></li>
+							<li>킴스큐에서 제공하는 공식 패키지만 업로드할 수 있습니다.</li>
+							<li>파일형식은 <small><strong>rb_package_패키지명.zip</strong></small> 이어야 합니다.</li>
+							<li>패키지 설치시 이미 같은명칭의 폴더나 파일이 존재할 경우 덧씌워지니 주의하세요.</li>
 							</ul>
 						</div>
 					</div>
@@ -48,17 +48,17 @@
 			<?php endif?>
 
 			<?php if($package_step==2):?>
-			<?php include $g['path_tmp'].'app/'.$package_folder.'/_settings/var.php'?>
+			<?php include $g['path_tmp'].'app/'.$package_folder.'/_settings/var.php' ?>
 			<div id="tab2">
 				<div class="row">
 					<div class="col-sm-4 text-center rb-icon">
 						<i class="fa fa-cube fa-3x"></i>
 						<h4 class="text-center text-muted">
-							<?php echo _LANG('a4009','market')?>
+							패키지를 적용할 준비가<br>완료 되었습니다.
 						</h4>
-					</div>           
+					</div>
 					<div class="col-sm-8">
-						<form name="_upload_form_" action="<?php echo $g['s']?>/" method="post" class="form-horizontal" role="form">
+						<form name="_upload_form_" action="<?php echo $g['s']?>/" method="post" role="form">
 							<input type="hidden" name="r" value="<?php echo $r?>">
 							<input type="hidden" name="m" value="<?php echo $module?>">
 							<input type="hidden" name="a" value="add_package">
@@ -66,38 +66,38 @@
 							<input type="hidden" name="package_folder" value="<?php echo $package_folder?>">
 
 							<div class="well">
-								<div class="form-group">
-									<label for="" class="col-sm-3 control-label"><?php echo _LANG('a4010','market')?></label>
+								<div class="form-group form-row">
+									<label for="" class="col-sm-3 control-label">패키지명</label>
 									<div class="col-sm-9">
 										<p class="form-control-static">
-											<?php echo $d['package']['name']?>							
+											<?php echo $d['package']['name']?>
 										</p>
 									</div>
 								</div>
-								<div class="form-group">
-									<label for="" class="col-sm-3 control-label"><?php echo _LANG('a4011','market')?></label>
+								<div class="form-group form-row">
+									<label for="" class="col-sm-3 control-label">적용사이트</label>
 									<div class="col-sm-8">
 										<select name="siteuid" class="form-control">
-											<option value=""><?php echo _LANG('a4012','market')?></option>
+											<option value="">신규생성 후 적용</option>
 											<option value="">-------------------------------</option>
 											<?php $_SITES_ALL = getDbArray($table['s_site'],'','*','gid','asc',0,1)?>
 											<?php while($_R = db_fetch_array($_SITES_ALL)):?>
 											<option value="<?php echo $_R['uid']?>"><?php echo $_R['name']?></option>
 											<?php endwhile?>
 										</select>
-										<span class="help-block"><?php echo _LANG('a4013','market')?></span>
+										<span class="help-block">운영중인 사이트에는 적용하지 마십시오.</span>
 									</div>
 								</div>
 							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<a class="collapsed" data-toggle="collapse" href="#package-options" onclick="detailCheck();"><i class="fa fa-cog"></i> <?php echo _LANG('a4014','market')?><span class="pull-right"></span></a>
+							<div class="card">
+								<div class="card-header">
+									<a class="collapsed" data-toggle="collapse" href="#package-options" onclick="detailCheck();"><i class="fa fa-cog"></i> 설치옵션 및 세부내용<span class="pull-right"></span></a>
 								</div>
 
 
-								<div class="panel-body collapse" id="package-options">
-									<div class="form-group">
-										<label class="col-sm-3 control-label"><?php echo _LANG('a4015','market')?></label>
+								<div class="card-body collapse" id="package-options">
+									<div class="form-group form-row">
+										<label class="col-sm-3 control-label">설치옵션</label>
 										<div class="col-sm-9">
 											<?php foreach($d['package']['execute'] as $_key => $_val):?>
 											<div class="checkbox">
@@ -110,8 +110,8 @@
 										</div>
 									</div>
 									<?php if(is_file($g['path_tmp'].'app/'.$package_folder.'/_settings/readme.txt')):?>
-									<div class="form-group">
-										<label class="col-sm-3 control-label"><?php echo _LANG('a4016','market')?></label>
+									<div class="form-group form-row">
+										<label class="col-sm-3 control-label">설치내용</label>
 										<div class="col-sm-9">
 											<?php readfile($g['path_tmp'].'app/'.$package_folder.'/_settings/readme.txt')?>
 										</div>
@@ -133,15 +133,17 @@
 					<div class="col-sm-4 text-center rb-icon">
 						<i class="fa fa-home fa-3x"></i>
 						<h4 class="text-center text-muted">
-							<?php echo _LANG('a4017','market')?>
+							설치가 완료 되었습니다.
 						</h4>
-					</div>           
+					</div>
 					<div class="col-sm-8">
 						<div class="text-center">
 							<br><br>
-							<a href="<?php echo $g['s']?>/?r=<?php echo $siteid?>&amp;panel=Y" class="btn btn-primary btn-lg" target="_top"><i class="fa fa-share"></i> <?php echo _LANG('a4018','market')?></a>
+							<a href="<?php echo $g['s']?>/?r=<?php echo $siteid?>&amp;panel=Y" class="btn btn-primary btn-lg" target="_top">
+								<i class="fa fa-share"></i> 사이트 접속하기
+							</a>
 							<br><br>
-							<hr><?php echo sprintf(_LANG('a4019','market'),urldecode($package_name),urldecode($site_name))?>
+							<hr><?php echo sprintf('%s 패키지가<br><strong>%s</strong>에 설치 완료 되었습니다.',urldecode($package_name),urldecode($site_name))?>
 						</div>
 					</div>
 				</div>
@@ -153,30 +155,30 @@
 </div>
 
 
-<!----------------------------------------------------------------------------
-@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
+<!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
-<div id="_modal_header" class="hidden">
-    <button type="button" class="close" onclick="frames._modal_iframe_modal_window.mClose();">&times;</button>
-    <h4 class="modal-title"><i class="fa fa-plus-circle fa-lg"></i> Install KimsQ Package</h4>
+<div id="_modal_header" hidden>
+    <h5 class="modal-title"><i class="fa fa-plus-circle fa-lg"></i> Rb 패키지 설치</h5>
+		<button type="button" class="close" onclick="frames._modal_iframe_modal_window.mClose();">
+			<span aria-hidden="true">&times;</span>
+		</button>
 </div>
-<div id="_modal_footer" class="hidden">
+<div id="_modal_footer" hidden>
 	<?php if($package_step==3):?>
-	<button type="button" class="btn btn-default pull-left" disabled><?php echo _LANG('a4997','market')?></button>
-	<button type="button" class="btn btn-primary" disabled><?php echo _LANG('a4999','market')?></button>
+	<button type="button" class="btn btn-light pull-left" disabled>취소</button>
+	<button type="button" class="btn btn-primary" disabled>완료</button>
 	<?php else:?>
-	<button type="button" class="btn btn-default pull-left" onclick="frames._modal_iframe_modal_window.mClose();"><?php echo _LANG('a4997','market')?></button>
+	<button type="button" class="btn btn-light pull-left" onclick="frames._modal_iframe_modal_window.mClose();">취소</button>
 	<?php if($package_step==2):?>
-	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.install();" id="afterChooseFileNext"><?php echo _LANG('a4998','market')?></button>
+	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.install();" id="afterChooseFileNext">다음</button>
 	<?php endif?>
 	<?php if($package_step==1):?>
-	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.getFiles();" id="afterChooseFileNext" disabled><?php echo _LANG('a4998','market')?></button>
+	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.getFiles();" id="afterChooseFileNext" disabled>다음</button>
 	<?php endif?>
 	<?php endif?>
 </div>
 
-	
+
 <script>
 var _per = 0;
 function progressbar()
@@ -219,7 +221,7 @@ function getFiles()
 	var f = document._upload_form_;
 	if (f.upfile.value == '')
 	{
-		alert('<?php echo _LANG('a3024','market')?>   ');
+		alert('파일이 선택되지 않았습니다.   ');
 		return false;
 	}
 	getIframeForAction(f);
@@ -318,7 +320,7 @@ document.body.onresize = document.body.onload = function()
 }
 
 #modal-package-install .list-group {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 #modal-package-install .rb-icon {
@@ -339,7 +341,7 @@ document.body.onresize = document.body.onload = function()
 }
 
 #modal-package-install .pager {
-    margin: 0; 
+    margin: 0;
 }
 
 

@@ -9,7 +9,7 @@ $NT_DATA = explode('|',$my['noticeconf']);
 <?php if($NT_DATA[2] && !$_SESSION['sh_notify_auto_del']):?>
 <div class="alert alert-danger alert-dismissible" style="margin:0;border:0;border-radius:0;" role="alert">
 	<button type="button" class="close" data-dismiss="alert" onclick="sessionSetting('sh_notify_auto_del','1','','');"><span aria-hidden="true">&times;</span></button>
-	<strong><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&iframe=Y&system=popup.notification&callMod=config" class="alert-link">Warning!</a></strong> <?php echo _LANG('a5001','notification')?>
+	<strong><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&iframe=Y&system=popup.notification&callMod=config" class="alert-link">Warning!</a></strong> 자동삭제 설정되어 있습니다.
 </div>
 <?php endif?>
 <?php $RCD = getDbArray($table['s_notice'],'mbruid='.$my['uid'].($callMod=='view'?'':" and d_read=''"),'*','uid','desc',($recnum?$recnum:10),$p)?>
@@ -19,7 +19,7 @@ $NT_DATA = explode('|',$my['noticeconf']);
 <div class="list-group-item media">
 	<div class="pull-left">
 		<?php if($R['frommbr']):?>
-		<a href="#." id='_rb-popover-from-<?php echo $_i?>' data-placement="right" data-popover="popover" data-content="<div id='rb-popover-from-<?php echo $_i?>'><script>getPopover('member','<?php echo $R['mbruid']?>','rb-popover-from-<?php echo $_i?>')</script></div>"><img src="<?php echo $g['s']?>/_var/avatar/<?php echo $M['photo']?$M['photo']:'0.gif'?>" width="33" height="33" alt="<?php echo _LANG('a5002','notification')?><?php echo $M['nic']?>" class="media-object img-circle"></a>
+		<a href="#." id='_rb-popover-from-<?php echo $_i?>' data-placement="right" data-popover="popover" data-content="<div id='rb-popover-from-<?php echo $_i?>'><script>getPopover('member','<?php echo $R['mbruid']?>','rb-popover-from-<?php echo $_i?>')</script></div>"><img src="<?php echo $g['s']?>/_var/avatar/<?php echo $M['photo']?$M['photo']:'0.gif'?>" width="33" height="33" alt="프로필 사진<?php echo $M['nic']?>" class="media-object img-circle"></a>
 		<?php else:?>
 		<i class="glyphicon glyphicon-info-sign fa-3x"></i>
 		<?php endif?>
@@ -28,16 +28,16 @@ $NT_DATA = explode('|',$my['noticeconf']);
 		<div class="rb-message">
 			<?php echo $R['message']?>
 			<?php if($R['referer']):?>
-			<a href="<?php echo $R['referer']?>" target="<?php echo $R['target']=='_blank'?$R['target']:'_ADMPNL_'?>" onclick="parent.getId('_close_btn_').click();"><?php echo _LANG('a5003','notification')?> &raquo;</a>
+			<a href="<?php echo $R['referer']?>" target="<?php echo $R['target']=='_blank'?$R['target']:'_ADMPNL_'?>" onclick="parent.getId('_close_btn_').click();">더보기 &raquo;</a>
 			<?php endif?>
 		</div>
 		<div class="rb-time">
 			<?php if($R['frommbr']):?>From <?php echo $M['nic']?> <?php endif?>
-			<?php echo getDateFormat($R['d_regis'],_LANG('a5004','notification'))?>
+			<?php echo getDateFormat($R['d_regis'],'n월 j일 A g시 i분')?>
 			<?php if($callMod=='view'):?>
 			<div class="btn-toolbar pull-right">
 				<div class="btn-group btn-group-xs">
-					<label id="noti-<?php echo $R['uid']?>" class="btn btn-default" title="<?php echo _LANG('a5005','notification')?>" data-tooltip="tooltip">
+					<label id="noti-<?php echo $R['uid']?>" class="btn btn-light" title="선택" data-tooltip="tooltip">
 						<input type="checkbox" name="noti_members[]" value="<?php echo $R['uid']?>|<?php echo $R['frommbr']?>|<?php echo $R['frommodule']?>" class="hidden" onclick="noti_check_child(this);">
 						<i class="glyphicon glyphicon-ok"></i>
 					</label>
@@ -55,13 +55,13 @@ $NT_DATA = explode('|',$my['noticeconf']);
 		<i class="glyphicon glyphicon-info-sign fa-3x"></i>
 	</div>
 	<div class="media-body">
-		<?php echo sprintf(_LANG('a5006','notification'),$my[$_HS['nametype']])?><br>
+		<?php echo sprintf('<strong>%s</strong>님, 새 알림이 없습니다.<br>알림을 이용하시면 새로운 정보를 실시간으로 받아볼 수 있습니다.',$my[$_HS['nametype']])?><br>
 		<div class="rb-time">
-			<?php echo getDateFormat($date['totime'],_LANG('a5004','notification'))?>
+			<?php echo getDateFormat($date['totime'],'n월 j일 A g시 i분')?>
 		</div>
 	</div>
 </div>
-<?php 
+<?php
 endif;
 $not_readnum = getDbRows($table['s_notice'],'mbruid='.$my['uid']." and d_read=''");
 if($my['num_notice'] != $not_readnum) getDbUpdate($table['s_mbrdata'],'num_notice='.$not_readnum,'memberuid='.$my['uid']);
@@ -80,7 +80,7 @@ if($my['num_notice'] != $not_readnum) getDbUpdate($table['s_mbrdata'],'num_notic
 <script>
 parent.pushNotification(<?php echo $not_readnum?>);
 </script>
-<?php 
+<?php
 endif;
 exit;
 ?>

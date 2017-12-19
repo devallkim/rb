@@ -67,69 +67,72 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 <div class="container-fluid rb-fixed-sidebar<?php if($_COOKIE['_tabShow1']):?> rb-minified-sidebar<?php endif?><?php if($_COOKIE['_tabShow2']):?> rb-hidden-system-admin<?php endif?><?php if($_COOKIE['_tabShow3']):?> rb-hidden-system-site<?php endif?>">
 	<div class="rb-system-sidebar rb-system-admin rb-inverse" role="navigation">
 		<div class="rb-icons">
-			<span class="rb-icon-hide" title="<?php echo $_COOKIE['_tabShow2']?'고정하기':'숨기기'?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
-			<span class="rb-icon-minify" title="<?php echo $_COOKIE['_tabShow1']?'펼치기':'접기'?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
+			<span class="rb-icon-hide js-tooltip" title="<?php echo $_COOKIE['_tabShow2']?'고정하기':'숨기기'?>"><i class="fa rb-icon"></i></span>
+			<span class="rb-icon-minify js-tooltip" title="<?php echo $_COOKIE['_tabShow1']?'펼치기':'접기'?>"><i class="fa rb-icon"></i></span>
 		</div>
 		<div class="login-info">
 			<span class="dropdown">
 				<a href="#" class="rb-username" data-toggle="dropdown">
-					<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="img-circle">
+					<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="rounded-circle">
 					<span><?php echo $my[$_HS['nametype']]?></span>
 					<small id="rb-notification-name"></small>
 					<span class="caret"></span>
 				</a>
-				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-profile"><i class="fa fa-user"></i> 프로필관리</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-log"><i class="fa fa-clock-o"></i> 접속기록</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-notification"><i class="kf kf-notify"></i> 알림 <small id="rb-notification-badge" class="badge pull-right"></small></a></li>
-					<li class="divider"></li>
-					<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
-				</ul>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-profile"><i class="fa fa-user"></i> 프로필관리</a></li>
+					<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-log"><i class="fa fa-clock-o"></i> 접속기록</a></li>
+					<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-notification">
+						<i class="kf kf-notify"></i> 알림 <small id="rb-notification-badge" class="badge badge-light pull-right"></small>
+					</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=logout"><i class="fa fa-sign-out"></i> 로그아웃</a>
+				</div>
 			</span>
 		</div>
 		<div class="tabs-below">
 			<div class="rb-buttons rb-content-padded">
 				<div class="btn-toolbar" role="toolbar">
-					<div class="btn-group" title="만들기" data-tooltip="tooltip">
+					<div class="dropdown js-tooltip" title="만들기">
 						<button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus fa-2x"></i></button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;type=makesite" target="_ADMPNL_"><i class="fa fa-home"></i> 새 사이트</a></li>
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;front=menu" target="_ADMPNL_"><i class="fa fa-sitemap"></i> 새 메뉴</a></li>
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;front=page" target="_ADMPNL_"><i class="fa fa-file-text-o"></i> 새 페이지</a></li>
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=clear_wcache" target="_ACTION_"><i class="fa fa-refresh"></i> 캐시 재생성</a></li>
-						</ul>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;type=makesite" target="_ADMPNL_"><i class="fa fa-home"></i> 새 사이트</a>
+							<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;front=menu" target="_ADMPNL_"><i class="fa fa-sitemap"></i> 새 메뉴</a>
+							<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site&amp;front=page" target="_ADMPNL_"><i class="fa fa-file-text-o"></i> 새 페이지</a>
+							<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=clear_wcache" target="_ACTION_"><i class="fa fa-refresh"></i> 캐시 재생성</a>
+						</div>
 					</div>
-					<div class="btn-group" title="미디어셋" data-tooltip="tooltip">
+
+					<div class="dropdown js-tooltip" title="미디어셋">
 						<button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-photo fa-2x"></i></button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-photo"><i class="fa fa-photo"></i> 포토셋</a></li>
-							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-video"><i class="glyphicon glyphicon-facetime-video"></i> 비디오셋</a></li>
-							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-widgetcode"><i class="fa fa-puzzle-piece"></i> 위젯코드</a></li>
-							<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-snippet"><i class="fa fa-scissors" style="width:12px"></i> 스니핏</a></li>
-						</ul>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-photo"><i class="fa fa-photo"></i> 포토셋</a>
+							<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-video"><i class="fa fa-video-camera"></i> 비디오셋</a>
+							<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-widgetcode"><i class="fa fa-puzzle-piece"></i> 위젯코드</a>
+							<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-snippet"><i class="fa fa-scissors" style="width:12px"></i> 스니핏</a>
+						</div>
 					</div>
 					<div class="btn-group">
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=dashboard" target="_ADMPNL_" class="btn btn-link" title="대시보드" data-tooltip="tooltip"><i class="fa fa-dashboard fa-2x"></i></a>
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>" target="_ADMPNL_" class="btn btn-link" title="홈페이지" data-tooltip="tooltip"><i class="fa fa-home fa-2x"></i></a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=dashboard" target="_ADMPNL_" class="btn btn-link js-tooltip" title="대시보드"><i class="fa fa-dashboard fa-2x"></i></a>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>" target="_ADMPNL_" class="btn btn-link js-tooltip" title="홈페이지"><i class="fa fa-home fa-2x"></i></a>
 					</div>
 				</div>
 			</div>
 			<div class="rb-buttons rb-content-padded">
 				<div class="btn-group">
-					<a data-toggle="modal" data-target="#modal_window" class="btn btn-default rb-modal-add-package" style="width:170px"><i class="fa fa-plus-circle fa-lg"></i> 패키지 설치</a>
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-						<span class="caret"></span>
+					<a data-toggle="modal" data-target="#modal_window" class="btn btn-light rb-modal-add-package" style="width:170px"><i class="fa fa-plus-circle fa-lg"></i> 패키지 설치</a>
+					<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+						<i class="fa fa-caret-down" aria-hidden="true"></i>
 					</button>
-					<ul class="dropdown-menu pull-right" role="menu">
-						<li role="presentation" class="dropdown-header">확장요소 추가하기</li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-module">모듈</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-layout">레이아웃</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-widget">위젯</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-switch">스위치</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-plugin">플러그인</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-dashboard">대시보드</a></li>
-						<li><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-add-etc">기타자료</a></li>
-					</ul>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+						<h6 class="dropdown-header">확장요소 추가하기</h6>
+						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-module">모듈</a>
+						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-layout">레이아웃</a>
+						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-widget">위젯</a>
+						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-switch">스위치</a>
+						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-plugin">플러그인</a>
+						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-dashboard">대시보드</a>
+						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-etc">기타자료</a>
+					</div>
 				</div>
 			</div>
 
@@ -145,7 +148,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 							<?php if(is_file($d['afile'])) include $d['afile'] ?>
 							<li id="sidebar-quick-<?php echo $_SM1['id']?>" class="list-group-item panel">
 								<a<?php if(!is_file($d['afile'])):?> href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=<?php echo $_SM1['id']?>" target="_ADMPNL_"<?php else:?> data-toggle="collapse" data-parent="#sidebar-quick-tree" href="#sidebar-quick-tree-<?php echo $_SM1['id']?>"<?php endif?> class="collapsed" onclick="_quickSelect('<?php echo $_SM1['id']?>');">
-									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'glyphicon glyphicon-th-large'?>"></i>
+									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'fa fa-th-large'?>"></i>
 									<span class="menu-item-parent"><?php echo $_SM1['name']?></span>
 									<?php if(is_file($d['afile'])):?><b class="collapse-sign"><em class="fa rb-icon"></em></b><?php endif?>
 								</a>
@@ -171,7 +174,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 							<?php if(strpos('_'.$my['adm_view'],'['.$_SM1['id'].']')) continue?>
 							<li id="sidebar-modules-<?php echo $_SM1['id']?>" class="list-group-item panel">
 								<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=<?php echo $_SM1['id']?>" target="_ADMPNL_" class="collapsed" onclick="_moduleSelect('<?php echo $_SM1['id']?>');">
-									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'glyphicon glyphicon-th-large'?>"></i>
+									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'fa fa-th-large'?>"></i>
 									<span class="menu-item-parent"><?php echo $_SM1['name']?></span>
 								</a>
 							</li>
@@ -184,9 +187,9 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 						<ul class="list-group">
 							<?php foreach($_SITES['list'] as $S):?>
 							<li id="sidebar-sites-<?php echo $S['id']?>" class="list-group-item<?php if($r==$S['id']):?> active<?php endif?>">
-								<span class="pull-right rb-blank"><a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=N" target="_blank" class="btn btn-link btn-sm"><i class="fa fa-share" data-tooltip="tooltip" title="새창"></i></a></span>
+								<span class="pull-right rb-blank"><a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=N" target="_blank" class="btn btn-link btn-sm js-tooltip"><i class="fa fa-share" title="새창"></i></a></span>
 								<a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=Y" class="rb-inframe">
-									<i class="<?php echo $S['icon']?$S['icon']:'glyphicon glyphicon-home'?>"></i>
+									<i class="<?php echo $S['icon']?$S['icon']:'fa fa-home'?>"></i>
 									<span class="menu-item-parent"><?php echo $S['name']?></span>
 									<?php if($S['s004']==2):?><span class="badge pull-right inbox-badge"><i class="fa fa-lock"></i></span><?php endif?>
 									<?php if($S['s004']==3):?><span class="badge pull-right inbox-badge"><i class="fa fa-lock"></i></span><?php endif?>
@@ -197,10 +200,22 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 					</nav>
 				</div>
 			</div>
-			<ul class="nav nav-tabs nav-justified" role="tablist">
-				<li<?php if(!$_COOKIE['sideBottomTab']||$_COOKIE['sideBottomTab']=='quick'):?> class="active"<?php endif?>><a href="#sidebar-quick" role="tab" data-toggle="tab" title="퀵패널" data-tooltip="tooltip" onclick="_cookieSetting('sideBottomTab','quick');"><i class="kf kf-bi-05 fa-2x"></i></a></li>
-				<li<?php if($_COOKIE['sideBottomTab']=='modules'):?> class="active"<?php endif?>><a href="#sidebar-modules" role="tab" data-toggle="tab" title="모듈패널" data-tooltip="tooltip"><i class="kf kf-module fa-2x" onclick="_cookieSetting('sideBottomTab','modules');"></i></a></li>
-				<li<?php if($_COOKIE['sideBottomTab']=='sites'):?> class="active"<?php endif?>><a href="#sidebar-sites" role="tab" data-toggle="tab" title="사이트패널" data-tooltip="tooltip" onclick="_cookieSetting('sideBottomTab','sites');"><i class="kf kf-home fa-2x"></i></a></li>
+			<ul class="nav nav-tabs nav-fill" role="tablist">
+				<li class="nav-item">
+					<a href="#sidebar-quick" class="nav-link js-tooltip<?php if(!$_COOKIE['sideBottomTab']||$_COOKIE['sideBottomTab']=='quick'):?> active<?php endif?>" role="tab" data-toggle="tab" title="퀵패널" onclick="_cookieSetting('sideBottomTab','quick');">
+						<i class="kf kf-bi-05 fa-2x"></i>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#sidebar-modules" role="tab" data-toggle="tab" title="모듈패널" class="nav-link js-tooltip<?php if($_COOKIE['sideBottomTab']=='modules'):?> active<?php endif?>">
+						<i class="kf kf-module fa-2x" onclick="_cookieSetting('sideBottomTab','modules');"></i>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#sidebar-sites" role="tab" data-toggle="tab" title="사이트패널" class="nav-link js-tooltip<?php if($_COOKIE['sideBottomTab']=='sites'):?> active<?php endif?>" onclick="_cookieSetting('sideBottomTab','sites');">
+						<i class="kf kf-home fa-2x"></i>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -222,15 +237,28 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 	</div>
 
 	<div class="rb-system-sidebar rb-system-site rb-default" role="application">
-		<div class="rb-opener"><i class="fa fa-caret-left fa-lg"></i></div>
+		<div class="rb-opener" role="button"><i class="fa fa-caret-left fa-lg"></i></div>
 		<div class="rb-panel-top">
-			<span class="rb-icon-hide" title="<?php echo $_COOKIE['_tabShow3']?'고정하기':'숨기기'?>" data-tooltip="tooltip"><i class="fa rb-icon"></i></span>
+			<span class="rb-icon-hide js-tooltip" title="<?php echo $_COOKIE['_tabShow3']?'고정하기':'숨기기'?>"><i class="fa rb-icon"></i></span>
 		</div>
 		<div class="rb-content-padded">
-			<ul class="nav nav-tabs" role="tablist">
-				<li<?php if($_COOKIE['rightAdmTab']=='site'||!$_COOKIE['rightAdmTab']):?> class="active"<?php endif?>><a href="#site-settings" role="tab" data-toggle="tab" onclick="_cookieSetting('rightAdmTab','site');">Site</a></li>
-				<li<?php if($_COOKIE['rightAdmTab']=='layout'):?> class="active"<?php endif?>><a href="#layout-settings" role="tab" data-toggle="tab" onclick="_cookieSetting('rightAdmTab','layout');">Layout</a></li>
-				<li<?php if($_COOKIE['rightAdmTab']=='emulator'):?> class="active"<?php endif?>><a href="#device-emulator" role="tab" data-toggle="tab" onclick="_cookieSetting('rightAdmTab','emulator');">Emulator</a></li>
+
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a class="nav-link<?php if($_COOKIE['rightAdmTab']=='site'||!$_COOKIE['rightAdmTab']):?> active<?php endif?>" href="#site-settings" role="tab" data-toggle="tab" onclick="_cookieSetting('rightAdmTab','site');">
+						사이트
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link<?php if($_COOKIE['rightAdmTab']=='layout'):?> active<?php endif?>" href="#layout-settings" role="tab" data-toggle="tab" onclick="_cookieSetting('rightAdmTab','layout');">
+						레이아웃
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link<?php if($_COOKIE['rightAdmTab']=='emulator'):?> active<?php endif?>" href="#device-emulator" role="tab" data-toggle="tab" onclick="_cookieSetting('rightAdmTab','emulator');">
+						애뮬레이터
+					</a>
+				</li>
 			</ul>
 
 			<div class="tab-content" style="padding-top:15px;">
@@ -245,46 +273,40 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 					<input type="hidden" name="referer" value="">
 
 					<div class="panel-group rb-scrollbar" id="site-settings-panels">
-						<div class="panel panel-primary" id="site-settings-01">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-01-body">
-										<i></i>기본정보
-									</a>
-								</h4>
+						<div class="card border-primary" id="site-settings-01">
+							<div class="card-header bg-primary text-white">
+								<a data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-01-body">
+									<i></i>기본정보
+								</a>
 							</div>
-							<div id="site-settings-01-body" class="panel-collapse collapse in">
-								<div class="panel-body">
-									<div class="form-group">
-										<label>사이트 라벨</label>
-										<input type="text" class="form-control" name="name" value="<?php echo $_HS['name']?>">
-									</div>
-									<div class="form-group">
-										<label>사이트 코드</label>
-										<input type="text" class="form-control" name="id" value="<?php echo $_HS['id']?>">
-									</div>
-									<div class="form-group">
-										<label>타이틀 구성</label>
-										<input type="text" class="form-control" name="title" value="<?php echo $_HS['title']?>">
-										<span class="help-block"><small>입력된 내용은 브라우저의 타이틀로 사용됩니다.<br>치환코드는 매뉴얼을 참고하세요.</small></span>
-									</div>
-									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
+							<div class="card-body panel-collapse collapse show" id="site-settings-01-body">
+								<div class="form-group">
+									<label>사이트 라벨</label>
+									<input type="text" class="form-control" name="name" value="<?php echo $_HS['name']?>">
 								</div>
+								<div class="form-group">
+									<label>사이트 코드</label>
+									<input type="text" class="form-control" name="id" value="<?php echo $_HS['id']?>">
+								</div>
+								<div class="form-group">
+									<label>타이틀 구성</label>
+									<input type="text" class="form-control" name="title" value="<?php echo $_HS['title']?>">
+									<span class="help-block"><small>입력된 내용은 브라우저의 타이틀로 사용됩니다.<br>치환코드는 매뉴얼을 참고하세요.</small></span>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block">저장하기</button>
 							</div>
 						</div>
 
-						<div class="panel panel-default" id="site-settings-02">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-02-body"><i></i>레이아웃</a>
-								</h4>
+						<div class="card panel-default" id="site-settings-02">
+							<div class="card-header">
+								<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-02-body"><i></i>레이아웃</a>
 							</div>
 							<div id="site-settings-02-body" class="panel-collapse collapse">
-								<div class="panel-body">
+								<div class="card-body">
 									<div class="form-group">
 										<label>기본</label>
 										<div id="rb-layout-select">
-											<select class="form-control" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','');">
+											<select class="form-control custom-select" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','');">
 												<?php $_layoutExp1=explode('/',$_HS['layout'])?>
 												<?php $dirs = opendir($g['path_layout'])?>
 												<?php $_i=0;while(false !== ($tpl = readdir($dirs))):?>
@@ -297,7 +319,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 											</select>
 										</div>
 										<div id="rb-layout-select2" style="margin-top:5px;">
-											<select class="form-control" name="layout_1_sub"<?php if(!$_layoutExp1[0]):?> disabled<?php endif?>>
+											<select class="form-control custom-select" name="layout_1_sub"<?php if(!$_layoutExp1[0]):?> disabled<?php endif?>>
 												<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
 												<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
@@ -310,7 +332,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<div class="form-group">
 										<label>모바일 전용</label>
 										<div id="rb-mlayout-select">
-											<select class="form-control" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','');">
+											<select class="form-control custom-select" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','');">
 												<option value="0">사용안함</option>
 												<?php $_layoutExp2=explode('/',$_HS['m_layout'])?>
 												<?php $dirs = opendir($g['path_layout'])?>
@@ -322,7 +344,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 											</select>
 										</div>
 										<div id="rb-mlayout-select2" style="margin-top:5px;">
-											<select class="form-control" name="m_layout_1_sub"<?php if(!$_HS['m_layout']):?> disabled<?php endif?>>
+											<select class="form-control custom-select" name="m_layout_1_sub"<?php if(!$_HS['m_layout']):?> disabled<?php endif?>>
 												<?php if(!$_HS['m_layout']):?><option>서브 레이아웃</option><?php endif?>
 												<?php $dirs1 = opendir($g['path_layout'].$_layoutExp2[0])?>
 												<?php while(false !== ($tpl1 = readdir($dirs1))):?>
@@ -338,17 +360,15 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 							</div>
 						</div>
 
-						<div class="panel panel-default" id="site-settings-03">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-03-body"><i></i>메인페이지</a>
-								</h4>
+						<div class="card panel-default" id="site-settings-03">
+							<div class="card-header">
+								<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-03-body"><i></i>메인페이지</a>
 							</div>
 							<div id="site-settings-03-body" class="panel-collapse collapse">
-								<div class="panel-body">
+								<div class="card-body">
 									<div class="form-group">
 										<label>모바일 전용</label>
-										<select name="startpage" class="form-control">
+										<select name="startpage" class="form-control custom-select">
 										<option>레이아웃에 포함된 메인페이지</option>
 										<option disabled><i class="fa fa-edit"></i>페이지 리스트 ↓</option>
 										<?php $PAGES1 = getDbArray($table['s_page'],'site='.$s.' and ismain=1','*','uid','asc',0,1)?>
@@ -359,7 +379,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									</div>
 									<div class="form-group">
 										<label>모바일 전용</label>
-										<select name="m_startpage" class="form-control">
+										<select name="m_startpage" class="form-control custom-select">
 										<option>레이아웃에 포함된 메인페이지</option>
 										<option disabled><i class="fa fa-edit"></i>페이지 리스트 ↓</option>
 										<?php $PAGES2 = getDbArray($table['s_page'],'site='.$s.' and mobile=1','*','uid','asc',0,1)?>
@@ -373,14 +393,12 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 							</div>
 						</div>
 
-						<div class="panel panel-default" id="site-settings-04">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-04-body"><i></i>고급설정</a>
-								</h4>
+						<div class="card panel-default" id="site-settings-04">
+							<div class="card-header">
+								<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-04-body"><i></i>고급설정</a>
 							</div>
 							<div id="site-settings-04-body" class="panel-collapse collapse">
-								<div class="panel-body">
+								<div class="card-body">
 									<div class="form-group">
 										<label>도메인</label>
 										<ul>
@@ -397,7 +415,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									</div>
 									<div class="form-group">
 										<label>서비스 상태</label>
-										<select name="open" class="form-control">
+										<select name="open" class="form-control custom-select">
 										<option value="1"<?php if($_HS['s004']=='1'):?> selected="selected"<?php endif?>>정상서비스</option>
 										<option value="2"<?php if($_HS['s004']=='2'):?> selected="selected"<?php endif?>>관리자오픈</option>
 										<option value="3"<?php if($_HS['s004']=='3'):?> selected="selected"<?php endif?>>정지</option>
@@ -410,8 +428,8 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 					</div>
 					</form>
 
-					<div class="well rb-tab-pane-bottom">
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site" target="_ADMPNL_" class="btn btn-default btn-block">자세히</a>
+					<div class="bg-light rb-tab-pane-bottom">
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site" target="_ADMPNL_" class="btn btn-light btn-block">자세히</a>
 					</div>
 				</div>
 
@@ -427,144 +445,134 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 					<div class="panel-group rb-scrollbar" id="layout-settings-panels">
 						<?php $_i=1;foreach($d['layout']['dom'] as $_key => $_val):$__i=sprintf('%02d',$_i)?>
-						<div class="panel panel-<?php echo $_i==1?'primary':'default'?>" id="layout-settings-<?php echo $__i?>">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-<?php echo $__i?>-body">
-										<i></i><?php echo $_val[0]?>
-									</a>
-								</h4>
+						<div class="card<?php echo $_i==1?' boder-primary':''?>" id="layout-settings-<?php echo $__i?>">
+							<div class="card-header<?php echo $_i==1?' bg-primary text-white':''?>">
+								<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-<?php echo $__i?>-body">
+									<i></i><?php echo $_val[0]?>
+								</a>
 							</div>
-							<div id="layout-settings-<?php echo $__i?>-body" class="panel-collapse collapse<?php echo $_i==1?' in':''?>">
-								<div class="panel-body">
-									<p><?php echo $_val[1]?></p>
+							<div class="card-body panel-collapse collapse<?php echo $_i==1?' show':''?>" id="layout-settings-<?php echo $__i?>-body">
+								<p><?php echo $_val[1]?></p>
 
-									<?php if(count($_val[2])):?>
-									<?php foreach($_val[2] as $_v):?>
-									<div class="form-group">
-										<?php if($_v[1]!='hidden'):?>
-										<label><?php echo $_v[2]?></label>
-										<?php endif?>
+								<?php if(count($_val[2])):?>
+								<?php foreach($_val[2] as $_v):?>
+								<div class="form-group">
+									<?php if($_v[1]!='hidden'):?>
+									<label><?php echo $_v[2]?></label>
+									<?php endif?>
 
-										<?php if($_v[1]=='hidden'):?>
-										<input type="hidden" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>">
-										<?php endif?>
+									<?php if($_v[1]=='hidden'):?>
+									<input type="hidden" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>">
+									<?php endif?>
 
-										<?php if($_v[1]=='input'):?>
-										<input type="text" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo stripslashes($d['layout'][$_key.'_'.$_v[0]])?>">
-										<?php endif?>
+									<?php if($_v[1]=='input'):?>
+									<input type="text" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo stripslashes($d['layout'][$_key.'_'.$_v[0]])?>">
+									<?php endif?>
 
-										<?php if($_v[1]=='color'):?>
-										<div class="input-group">
-											<input type="text" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>">
-											<span class="input-group-btn">
-												<button class="btn btn-default" type="button" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="getColorLayer(getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>').value.replace('#',''),'layout_<?php echo $_key?>_<?php echo $_v[0]?>');"><i class="glyphicon glyphicon-tint"></i></button>
-											</span>
-										</div>
-										<?php endif?>
-
-										<?php if($_v[1]=='date'):?>
-										<div class="input-group input-daterange">
-											<input type="text" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>">
-											<span class="input-group-btn">
-												<button class="btn btn-default" type="button" onclick="getCalCheck('<?php echo $_key?>_<?php echo $_v[0]?>');"><i class="glyphicon glyphicon-calendar"></i></button>
-											</span>
-										</div>
-										<?php endif?>
-
-										<?php if($_v[1]=='mediaset'):?>
-										<div class="input-group">
-											<input type="text" class="form-control rb-modal-photo-drop" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="선택된 사진" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
-											<span class="input-group-btn">
-												<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-default rb-modal-photo-drop" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="glyphicon glyphicon-picture"></i></button>
-											</span>
-										</div>
-										<?php endif?>
-
-										<?php if($_v[1]=='videoset'):?>
-										<div class="input-group">
-											<input type="text" class="form-control rb-modal-video-drop" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="선택된 비디오" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
-											<span class="input-group-btn">
-												<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-default rb-modal-video-drop" type="button" title="비디오셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="glyphicon glyphicon-facetime-video"></i></button>
-											</span>
-										</div>
-										<?php endif?>
-
-										<?php if($_v[1]=='file'):?>
-										<div class="input-group">
-											<input type="text" class="form-control" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>_name" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();">
-											<input type="file" class="hidden" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" onchange="getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>_name').value='파일 선택됨';">
-											<span class="input-group-btn">
-												<button class="btn btn-default" type="button" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();"><i class="glyphicon glyphicon-picture"></i></button>
-											</span>
-										</div>
-										<?php if($d['layout'][$_key.'_'.$_v[0]]):?>
-										<div style="padding:3px 0 0 2px;"><input type="checkbox" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>_del" value="1"> 현재파일 삭제</div>
-										<?php endif?>
-										<?php endif?>
-
-										<?php if($_v[1]=='textarea'):?>
-										<textarea type="text" rows="<?php echo $_v[3]?>" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>"><?php echo stripslashes($d['layout'][$_key.'_'.$_v[0]])?></textarea>
-										<?php endif?>
-
-										<?php if($_v[1]=='select'):?>
-										<select name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" class="form-control">
-											<?php $_sk=explode(',',$_v[3])?>
-											<?php foreach($_sk as $_sa):?>
-											<?php $_sa1=explode('=',$_sa)?>
-											<option value="<?php echo $_sa1[1]?>"<?php if($d['layout'][$_key.'_'.$_v[0]] == $_sa1[1]):?> selected<?php endif?>><?php echo $_sa1[0]?></option>
-											<?php endforeach?>
-										</select>
-										<?php endif?>
-
-										<?php if($_v[1]=='radio'):?>
-										<?php $_sk=explode(',',$_v[3])?>
-										<?php foreach($_sk as $_sa):?>
-										<?php $_sa1=explode('=',$_sa)?>
-										<label class="rb-rabel"><input type="radio" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $_sa1[1]?>"<?php if($d['layout'][$_key.'_'.$_v[0]] == $_sa1[1]):?> checked<?php endif?>> <?php echo $_sa1[0]?></label>
-										<?php endforeach?>
-										<?php endif?>
-
-										<?php if($_v[1]=='checkbox'):?>
-										<?php $_sk=explode(',',$_v[3])?>
-										<?php foreach($_sk as $_sa):?>
-										<?php $_sa1=explode('=',$_sa)?>
-										<label class="rb-rabel"><input type="checkbox" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>_chk[]" value="<?php echo $_sa1[1]?>"<?php if(strstr($d['layout'][$_key.'_'.$_v[0]],$_sa1[1])):?> checked<?php endif?>> <?php echo $_sa1[0]?></label>
-										<?php endforeach?>
-										<?php endif?>
-
+									<?php if($_v[1]=='color'):?>
+									<div class="input-group">
+										<input type="text" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>">
+										<span class="input-group-btn">
+											<button class="btn btn-light" type="button" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="getColorLayer(getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>').value.replace('#',''),'layout_<?php echo $_key?>_<?php echo $_v[0]?>');"><i class="fa fa-tint"></i></button>
+										</span>
 									</div>
-									<?php endforeach?>
+									<?php endif?>
 
-									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
+									<?php if($_v[1]=='date'):?>
+									<div class="input-group input-daterange">
+										<input type="text" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>">
+										<span class="input-group-btn">
+											<button class="btn btn-light" type="button" onclick="getCalCheck('<?php echo $_key?>_<?php echo $_v[0]?>');"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+									<?php endif?>
+
+									<?php if($_v[1]=='mediaset'):?>
+									<div class="input-group">
+										<input type="text" class="form-control rb-modal-photo-drop js-tooltip" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="선택된 사진" data-toggle="modal" data-target="#modal_window">
+										<span class="input-group-btn">
+											<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-light rb-modal-photo-drop js-tooltip" type="button" title="포토셋" data-toggle="modal" data-target="#modal_window"><i class="fa fa-picture-o"></i></button>
+										</span>
+									</div>
+									<?php endif?>
+
+									<?php if($_v[1]=='videoset'):?>
+									<div class="input-group">
+										<input type="text" class="form-control rb-modal-video-drop js-tooltip" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="선택된 비디오" data-toggle="modal" data-target="#modal_window">
+										<span class="input-group-btn">
+											<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-light rb-modal-video-drop js-tooltip" type="button" title="비디오셋" data-toggle="modal" data-target="#modal_window"><i class="fa fa-video-camera"></i></button>
+										</span>
+									</div>
+									<?php endif?>
+
+									<?php if($_v[1]=='file'):?>
+									<div class="input-group">
+										<input type="text" class="form-control" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>_name" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();">
+										<input type="file" class="hidden" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" onchange="getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>_name').value='파일 선택됨';">
+										<span class="input-group-btn">
+											<button class="btn btn-light" type="button" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();"><i class="fa fa-picture-o"></i></button>
+										</span>
+									</div>
+									<?php if($d['layout'][$_key.'_'.$_v[0]]):?>
+									<div style="padding:3px 0 0 2px;"><input type="checkbox" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>_del" value="1"> 현재파일 삭제</div>
+									<?php endif?>
+									<?php endif?>
+
+									<?php if($_v[1]=='textarea'):?>
+									<textarea type="text" rows="<?php echo $_v[3]?>" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>"><?php echo stripslashes($d['layout'][$_key.'_'.$_v[0]])?></textarea>
+									<?php endif?>
+
+									<?php if($_v[1]=='select'):?>
+									<select name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" class="form-control custom-select">
+										<?php $_sk=explode(',',$_v[3])?>
+										<?php foreach($_sk as $_sa):?>
+										<?php $_sa1=explode('=',$_sa)?>
+										<option value="<?php echo $_sa1[1]?>"<?php if($d['layout'][$_key.'_'.$_v[0]] == $_sa1[1]):?> selected<?php endif?>><?php echo $_sa1[0]?></option>
+										<?php endforeach?>
+									</select>
+									<?php endif?>
+
+									<?php if($_v[1]=='radio'):?>
+									<?php $_sk=explode(',',$_v[3])?>
+									<?php foreach($_sk as $_sa):?>
+									<?php $_sa1=explode('=',$_sa)?>
+									<label class="rb-rabel"><input type="radio" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $_sa1[1]?>"<?php if($d['layout'][$_key.'_'.$_v[0]] == $_sa1[1]):?> checked<?php endif?>> <?php echo $_sa1[0]?></label>
+									<?php endforeach?>
+									<?php endif?>
+
+									<?php if($_v[1]=='checkbox'):?>
+									<?php $_sk=explode(',',$_v[3])?>
+									<?php foreach($_sk as $_sa):?>
+									<?php $_sa1=explode('=',$_sa)?>
+									<label class="rb-rabel"><input type="checkbox" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>_chk[]" value="<?php echo $_sa1[1]?>"<?php if(strstr($d['layout'][$_key.'_'.$_v[0]],$_sa1[1])):?> checked<?php endif?>> <?php echo $_sa1[0]?></label>
+									<?php endforeach?>
 									<?php endif?>
 
 								</div>
+								<?php endforeach?>
+
+								<button type="submit" class="btn btn-primary btn-block">저장하기</button>
+								<?php endif?>
+
 							</div>
 						</div>
 						<?php $_i++;endforeach?>
 
 						<?php if($_i==1):?>
-						<div class="panel panel-primary" id="layout-settings-01">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-01-body"><i></i>레이아웃 설정 안내</a>
-								</h4>
+						<div class="card border-primary" id="layout-settings-01">
+							<div class="card-header">
+								<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-01-body"><i></i>레이아웃 설정 안내</a>
 							</div>
-							<div id="layout-settings-01-body" class="panel-collapse collapse in">
-								<div class="panel-body">
-									<p>현재 사이트에 지정된 레이아웃은 별도의 설정을 지원하지 않습니다.</p>
-								</div>
+							<div class="card-body panel-collapse collapse show" id="layout-settings-01-body">
+								<p>현재 사이트에 지정된 레이아웃은 별도의 설정을 지원하지 않습니다.</p>
 							</div>
 						</div>
-						<div class="panel panel-default" id="layout-settings-02">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-02-body"><i></i>레이아웃 분기설정</a>
-								</h4>
+						<div class="card panel-default" id="layout-settings-02">
+							<div class="card-header">
+								<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-02-body"><i></i>레이아웃 분기설정</a>
 							</div>
 							<div id="layout-settings-02-body" class="panel-collapse collapse">
-								<div class="panel-body">
+								<div class="card-body">
 									<p>현재 사이트에 기본 레이아웃과 모바일 전용레이아웃을 지정했을 경우 두 레이아웃을 구분하여 설정할 수 있습니다.</p>
 								</div>
 							</div>
@@ -572,10 +580,10 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 						<?php endif?>
 					</div>
 
-					<div class="well rb-tab-pane-bottom">
+					<div class="bg-light rb-tab-pane-bottom">
 						<div class="form-group">
 							<label class="sr-only"><small>레이아웃 선택</small></label>
-							<select class="form-control" onchange="layoutChange(this);">
+							<select class="form-control custom-select" onchange="layoutChange(this);">
 								<option value="">기본 레이아웃 설정</option>
 								<?php if($_HS['m_layout']):?><option value="1"<?php if($_SESSION['setLayoutKind']):?> selected<?php endif?>>모바일 전용 레이아웃 설정</option><?php endif?>
 							</select>
@@ -585,31 +593,31 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 				</div>
 
 				<div class="tab-pane<?php if($_COOKIE['rightAdmTab']=='emulator'):?> active<?php endif?>" id="device-emulator">
-					<div class="btn-group rb-device-buttons clearfix" data-toggle="buttons">
-						<label class="btn btn-default rb-btn-desktop<?php if($_COOKIE['rightemulTab']=='desktop'||!$_COOKIE['rightemulTab']):?> active<?php endif?>" title="Desktop" data-toggle="tooltip">
-							<input type="radio" name="options" id="rightemulTab_desktop" checked> <i class="fa fa-desktop fa-3x"></i><br>Desktop
+					<div class="btn-group rb-device-buttons w-100" data-toggle="buttons">
+						<label class="btn btn-light rb-btn-desktop js-tooltip<?php if($_COOKIE['rightemulTab']=='desktop'||!$_COOKIE['rightemulTab']):?> active<?php endif?>" title="Desktop">
+							<input type="radio" name="options" id="rightemulTab_desktop" checked> <i class="fa fa-desktop fa-2x"></i><br>Desktop
 						</label>
-						<label class="btn btn-default rb-btn-tablet<?php if($_COOKIE['rightemulTab']=='tablet'):?> active<?php endif?>" title="Tablet" data-toggle="tooltip">
-							<input type="radio" name="options" id="rightemulTab_tablet"> <i class="fa fa-tablet fa-3x"></i><br>Tablet
+						<label class="btn btn-light rb-btn-tablet js-tooltip<?php if($_COOKIE['rightemulTab']=='tablet'):?> active<?php endif?>" title="Tablet">
+							<input type="radio" name="options" id="rightemulTab_tablet"> <i class="fa fa-tablet fa-2x"></i><br>Tablet
 						</label>
-						<label class="btn btn-default rb-btn-mobile<?php if($_COOKIE['rightemulTab']=='mobile'):?> active<?php endif?>" title="Mobile" data-toggle="tooltip">
-							<input type="radio" name="options" id="rightemulTab_mobile"> <i class="fa fa-mobile fa-3x"></i><br>phone
+						<label class="btn btn-light rb-btn-mobile js-tooltip<?php if($_COOKIE['rightemulTab']=='mobile'):?> active<?php endif?>" title="Mobile">
+							<input type="radio" name="options" id="rightemulTab_mobile"> <i class="fa fa-mobile fa-2x"></i><br>phone
 						</label>
 					</div>
 
 					<fieldset id="deviceshape"<?php if(!$_COOKIE['rightemulTab'] || $_COOKIE['rightemulTab'] == 'desktop'):?> disabled<?php endif?>>
-						<div class="btn-group clearfix btn-group-justified" data-toggle="buttons">
-							<label id="deviceshape_1" class="btn btn-default<?php if(!$_COOKIE['rightemulDir'] || $_COOKIE['rightemulDir'] == '1'):?> active<?php endif?>" title="Potrait" onclick="_deviceshape(1);">
+						<div class="btn-group w-100 nav-justified" data-toggle="buttons">
+							<label id="deviceshape_1" class="btn btn-light w-50<?php if(!$_COOKIE['rightemulDir'] || $_COOKIE['rightemulDir'] == '1'):?> active<?php endif?>" title="Potrait" onclick="_deviceshape(1);">
 								<input type="radio" name="deviceshape"><i class="fa fa-rotate-left fa-lg"></i> 세로방향
 							</label>
-							<label id="deviceshape_2" class="btn btn-default<?php if($_COOKIE['rightemulDir'] == '2'):?> active<?php endif?>" title="Landscape" onclick="_deviceshape(2);">
+							<label id="deviceshape_2" class="btn btn-light w-50<?php if($_COOKIE['rightemulDir'] == '2'):?> active<?php endif?>" title="Landscape" onclick="_deviceshape(2);">
 								<input type="radio" name="deviceshape"> <i class="fa fa-rotate-right fa-lg"></i> 가로방향
 							</label>
 						</div>
 					</fieldset>
 
 					<div class="rb-scrollbar" id="emuldevices">
-					    <table class="table table-striped table-hover">
+					    <table class="table table-sm table-striped table-hover">
 					        <thead>
 					            <tr>
 					                <th class="rb-name">기기명</th>
@@ -623,7 +631,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 								<?php if(!$_firstPhone[0]&&$_val[3]=='phone'){$_firstPhone[0]=$_i;$_firstPhone[1]=$_scSize[0];$_firstPhone[2]=$_scSize[1];}?>
 								<?php if(!$_firstTablet[0]&&$_val[3]=='tablet'){$_firstTablet[0]=$_i;$_firstTablet[1]=$_scSize[1];$_firstTablet[2]=$_scSize[0];}?>
 					            <tr id="emdevice_<?php echo $_i?>" onclick="_emuldevice(this,'<?php echo $_val[2]?>','<?php echo $_val[3]?>');">
-					                <td class="rb-name" title="<?php echo $_val[3]?>" data-tooltip="tooltip"><?php echo $_val[0]?></td>
+					                <td class="rb-name js-tooltip" title="<?php echo $_val[3]?>"><?php echo $_val[0]?></td>
 					                <td class="rb-brand"><?php echo $_val[1]?></td>
 					                <td class="rb-viewport"><?php echo $_scSize[0]?><var>x</var><?php echo $_scSize[1]?></td>
 					            </tr>
@@ -632,7 +640,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 					    </table>
 					</div>
 
-					<div class="well rb-tab-pane-bottom rb-form">
+					<div class="bg-light rb-tab-pane-bottom rb-form">
 						<ul class="list-group">
 							<li class="list-group-item">
 								<fieldset>
@@ -648,7 +656,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 								<div class="input-group input-group-sm">
 									<input id="outlink_url" type="text" class="form-control" placeholder="http://" onkeypress="getOuturl(0);">
 									<span class="input-group-btn">
-										<button class="btn btn-default" type="button" data-tooltip="tooltip" title="Go" onclick="getOuturl(1);">Go!</button>
+										<button class="btn btn-light js-tooltip" type="button" title="Go" onclick="getOuturl(1);">Go!</button>
 									</span>
 								</div>
 							</li>
@@ -663,13 +671,13 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 	</div>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom visible-xs" style="border-top:#efefef solid 1px;">
+<nav class="navbar navbar-default fixed-bottom d-sm-none" style="border-top:#efefef solid 1px;">
 	<div class="container">
 		<div class="btn-group">
 			<div class="login-info">
 				<span class="dropdown" style="top:5px;">
 					<a href="#" class="rb-username" data-toggle="dropdown">
-						<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="img-circle">
+						<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="rounded-circle">
 						<span style="width:105px;overflow:hidden;color:#666;">
 							<span>
 								<?php echo $my[$_HS['nametype']]?>
@@ -713,7 +721,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 				<?php $_i=0;foreach($_SITES['list'] as $S):?>
 				<li id="bottombar-sites-<?php echo $S['id']?>"<?php if($r==$S['id']):?> class="active<?php endif?>">
 					<a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=Y" style="padding-top:7px;padding-bottom:6px;<?php if($_i<$_smnum):?>border-bottom:#dfdfdf solid 1px;<?php endif?>">
-						<i class="<?php echo $S['icon']?$S['icon']:'glyphicon glyphicon-home'?>"></i> &nbsp;
+						<i class="<?php echo $S['icon']?$S['icon']:'fa fa-home'?>"></i> &nbsp;
 						<span class="menu-item-parent" style="position:absolute;width:100px;overflow:hidden;"><?php echo $S['name']?></span>
 					</a>
 				</li>
@@ -721,7 +729,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 				</ul>
 				<?php endif?>
 				<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=dashboard&amp;front=mobile.shortcut" target="_ADMPNL_" class="btn btn-link" style="font-size:22px;top:2px;">
-					<i class="glyphicon glyphicon-th"></i>
+					<i class="fa fa-th"></i>
 				</a>
 			</div>
 		</div>
@@ -733,6 +741,18 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 <script>
 var _mediasetField='';
 $(document).ready(function(){
+
+	$('.js-tooltip').tooltip()
+
+	$(".rb-system-site .rb-opener").click(function(){
+		$('.rb-system-site').toggleClass('open')
+	});
+
+	$('iframe').contents().find('#content-main').click(function(){
+		console.log('dd')
+		$('.rb-system-site').removeClass('open')
+	});
+
 	$(".rb-system-admin .rb-icon-minify").click(function(){
 		$(".container-fluid").toggleClass("rb-minified-sidebar");
 		if ($(".container-fluid").hasClass("rb-minified-sidebar"))
@@ -775,19 +795,7 @@ $(document).ready(function(){
 		else setCookie('_tabShow3','',1);
 	});
 
-	$('body').tooltip({
-		selector: '[data-tooltip=tooltip]',
-		placement : 'auto',
-		html: 'true',
-		container: 'body'
-	});
-	$('body').popover({
-		selector: '[data-popover=popover]',
-		placement : 'auto',
-		html: 'true',
-		trigger: 'hover',
-		container: 'body',
-	});
+
 	if(navigator.userAgent.indexOf("Mac") > 0) {
 		$("body").addClass("mac-os");
 	}
@@ -999,95 +1007,19 @@ function _small_modal_close_()
 {
 	$('.bs-example-modal-sm').modal('s003');
 }
-$('#site-settings-01-body').on('show.bs.collapse', function () {
-  $("#site-settings-01").addClass("panel-primary").removeClass("panel-default");
+
+// 사이트 패널 활성 스타일 적용
+$('.rb-system-site .panel-collapse').on('show.bs.collapse', function () {
+	var card = $(this).closest('.card')
+	card.addClass("border-primary");
+	card.find('.card-header').addClass("bg-primary text-white");
+});
+$('.rb-system-site .panel-collapse').on('hide.bs.collapse', function () {
+	var card = $(this).closest('.card')
+	card.removeClass("border-primary");
+	card.find('.card-header').removeClass("bg-primary text-white");
 });
 
-$('#site-settings-01-body').on('hide.bs.collapse', function () {
-  $("#site-settings-01").addClass("panel-default").removeClass("panel-primary");
-});
-
-$('#site-settings-02-body').on('show.bs.collapse', function () {
-  $("#site-settings-02").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#site-settings-02-body').on('hide.bs.collapse', function () {
-  $("#site-settings-02").addClass("panel-default").removeClass("panel-primary");
-});
-
-
-$('#site-settings-03-body').on('show.bs.collapse', function () {
-  $("#site-settings-03").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#site-settings-03-body').on('hide.bs.collapse', function () {
-  $("#site-settings-03").addClass("panel-default").removeClass("panel-primary");
-});
-
-$('#site-settings-04-body').on('show.bs.collapse', function () {
-  $("#site-settings-04").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#site-settings-04-body').on('hide.bs.collapse', function () {
-  $("#site-settings-04").addClass("panel-default").removeClass("panel-primary");
-});
-
-$('#layout-settings-01-body').on('show.bs.collapse', function () {
-  $("#layout-settings-01").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#layout-settings-01-body').on('hide.bs.collapse', function () {
-  $("#layout-settings-01").addClass("panel-default").removeClass("panel-primary");
-});
-
-$('#layout-settings-02-body').on('show.bs.collapse', function () {
-  $("#layout-settings-02").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#layout-settings-02-body').on('hide.bs.collapse', function () {
-  $("#layout-settings-02").addClass("panel-default").removeClass("panel-primary");
-});
-
-$('#layout-settings-03-body').on('show.bs.collapse', function () {
-  $("#layout-settings-03").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#layout-settings-03-body').on('hide.bs.collapse', function () {
-  $("#layout-settings-03").addClass("panel-default").removeClass("panel-primary");
-});
-
-$('#layout-settings-04-body').on('show.bs.collapse', function () {
-  $("#layout-settings-04").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#layout-settings-04-body').on('hide.bs.collapse', function () {
-  $("#layout-settings-04").addClass("panel-default").removeClass("panel-primary");
-});
-
-$('#layout-settings-05-body').on('show.bs.collapse', function () {
-  $("#layout-settings-05").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#layout-settings-05-body').on('hide.bs.collapse', function () {
-  $("#layout-settings-05").addClass("panel-default").removeClass("panel-primary");
-});
-
-
-$('#layout-settings-06-body').on('show.bs.collapse', function () {
-  $("#layout-settings-06").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#layout-settings-06-body').on('hide.bs.collapse', function () {
-  $("#layout-settings-06").addClass("panel-default").removeClass("panel-primary");
-});
-
-$('#layout-settings-07-body').on('show.bs.collapse', function () {
-  $("#layout-settings-07").addClass("panel-primary").removeClass("panel-default");
-});
-
-$('#layout-settings-07-body').on('hide.bs.collapse', function () {
-  $("#layout-settings-07").addClass("panel-default").removeClass("panel-primary");
-});
 </script>
 
 <?php if($d['layout']['date']):?>
@@ -1115,6 +1047,6 @@ function getCalCheck(layer)
 <div id="_action_layer_"></div>
 <div id="_hidden_layer_"></div>
 <div id="_overLayer_"></div>
-<iframe id="_ACTION_" name="_ACTION_" class="hidden"></iframe>
+<iframe id="_ACTION_" name="_ACTION_" hidden></iframe>
 </body>
 </html>

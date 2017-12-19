@@ -1,10 +1,10 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-if (!$uid) getLink('','',_LANG('a0002','mediaset'),'');
+if (!$uid) getLink('','','잘못된 접근입니다.','');
 $R = getUidData($table['s_upload'],$uid);
-if (!$R['uid']) getLink('','',_LANG('a0003','mediaset'),'');
-if (!$my['admin'] && $my['uid'] != $R['mbruid']) getLink('','',_LANG('a0004','mediaset'),'');
+if (!$R['uid']) getLink('','','없는 파일입니다.','');
+if (!$my['admin'] && $my['uid'] != $R['mbruid']) getLink('','','권한이 없습니다.','');
 
 $name = trim($name);
 $name = str_replace('.'.$R['ext'],'',$name).'.'.$R['ext'];
@@ -18,5 +18,5 @@ else $src = $R['src'];
 
 getDbUpdate($table['s_upload'],"hidden='".$hidden."',name='".$name."',alt='".$alt."',caption='".$caption."',description='".$description."',src='".$src."',linkto='".$linkto."',license='".$license."',d_update='".$date['totime']."',linkurl='".$linkurl."'",'uid='.$R['uid']);
 
-getLink('reload','parent.',_LANG('a0005','mediaset'),'');
+getLink('reload','parent.','수정 되었습니다.','');
 ?>

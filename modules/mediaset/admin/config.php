@@ -2,117 +2,117 @@
 
 <div id="configbox">
 
-	<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);" class="form-horizontal">
+	<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
 		<input type="hidden" name="r" value="<?php echo $r?>">
 		<input type="hidden" name="m" value="<?php echo $module?>">
 		<input type="hidden" name="a" value="config">
 		<input type="hidden" name="ftp_connect" value="<?php echo $d['mediaset']['use_fileserver']?>">
 
 		<div class="page-header">
-			<h4><?php echo _LANG('a1001','mediaset')?></h4>
+			<h4>파일첨부 설정</h4>
 		</div>
 
 		<div class="form-group">
-			<label class="col-sm-2 control-label"><?php echo _LANG('a1002','mediaset')?></label>
+			<label class="col-sm-2 control-label">일반파일 첨부</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxnum_file" value="<?php echo $d['mediaset']['maxnum_file']?>" class="form-control">
-							<span class="input-group-addon"><?php echo _LANG('a1003','mediaset')?></span>
+							<span class="input-group-addon">개</span>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxsize_file" value="<?php echo $d['mediaset']['maxsize_file']?>" class="form-control">
-							<span class="input-group-addon"><?php echo _LANG('a1004','mediaset')?></span>
+							<span class="input-group-addon">MB이내</span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"><?php echo _LANG('a1005','mediaset')?></label>
+			<label class="col-sm-2 control-label">사진파일 첨부</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxnum_img" value="<?php echo $d['mediaset']['maxnum_img']?>" class="form-control">
-							<span class="input-group-addon"><?php echo _LANG('a1003','mediaset')?></span>
+							<span class="input-group-addon">개</span>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxsize_img" value="<?php echo $d['mediaset']['maxsize_img']?>" class="form-control">
-							<span class="input-group-addon"><?php echo _LANG('a1004','mediaset')?></span>
+							<span class="input-group-addon">MB이내</span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"><?php echo _LANG('a1006','mediaset')?></label>
+			<label class="col-sm-2 control-label">동영상파일 첨부</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxnum_vod" value="<?php echo $d['mediaset']['maxnum_vod']?>" class="form-control">
-							<span class="input-group-addon"><?php echo _LANG('a1003','mediaset')?></span>
+							<span class="input-group-addon">개</span>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxsize_vod" value="<?php echo $d['mediaset']['maxsize_vod']?>" class="form-control">
-							<span class="input-group-addon"><?php echo _LANG('a1004','mediaset')?></span>
+							<span class="input-group-addon">MB이내</span>
 						</div>
 					</div>
 				</div>
-				<p class="form-control-static text-muted"><?php echo sprintf(_LANG('a1007','mediaset'),str_replace('M','',ini_get('upload_max_filesize')))?></p>
+				<p class="form-control-static text-muted"><?php echo sprintf('현재 서버에서 허용하고 있는 1회 최대 첨부용량은 <code>%sMB</code>입니다.',str_replace('M','',ini_get('upload_max_filesize')))?></p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"><?php echo _LANG('a1008','mediaset')?></label>
+			<label class="col-sm-2 control-label">썸네일 사이즈</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="thumbsize" value="<?php echo $d['mediaset']['thumbsize']?>" class="form-control">
-							<span class="input-group-addon"><?php echo _LANG('a1009','mediaset')?></span>
+							<span class="input-group-addon">픽셀</span>
 						</div>
 					</div>
 				</div>
 				<p class="form-control-static text-muted">
-					<?php echo _LANG('a1010','mediaset')?><br>
-					<?php echo _LANG('a1011','mediaset')?>
+					사진파일 업로드시 썸네일이 생성됩니다. 이때 생성할 썸네일의 가로사이즈를 지정해 주세요.<br>
+					세로사이즈는 가로사이즈의 비율에 맞춰 자동으로 조정됩니다.
 				</p>
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"><?php echo _LANG('a1012','mediaset')?></label>
+			<label class="col-sm-2 control-label">업로드할 서버</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
 						<select name="use_fileserver" class="form-control" onchange="serverChange(this);">
-						<option value=""<?php if(!$d['mediaset']['use_fileserver']):?> selected<?php endif?>><?php echo _LANG('a1013','mediaset')?></option>
-						<option value="1"<?php if($d['mediaset']['use_fileserver']):?> selected<?php endif?>><?php echo _LANG('a1014','mediaset')?></option>
+						<option value=""<?php if(!$d['mediaset']['use_fileserver']):?> selected<?php endif?>>현재서버</option>
+						<option value="1"<?php if($d['mediaset']['use_fileserver']):?> selected<?php endif?>>원격서버</option>
 						</select>
 					</div>
 				</div>
 				<p class="form-control-static text-muted">
-					<?php echo _LANG('a1015','mediaset')?>
+					원격서버로 지정하면 파일 전용서버로 업로드할 수 있습니다.
 				</p>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>"><?php echo _LANG('a1016','mediaset')?></button>
+				<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>">저장하기</button>
 			</div>
 		</div>
 
-		<div id="use_fileserver"<?php if(!$d['mediaset']['use_fileserver']):?> class="hidden"<?php endif?>>
+		<div id="use_fileserver"<?php if(!$d['mediaset']['use_fileserver']):?> class="d-none"<?php endif?>>
 			<div class="page-header">
-				<h4><?php echo _LANG('a1017','mediaset')?></h4>
+				<h4>파일서버 설정</h4>
 			</div>
 
 
@@ -129,7 +129,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">FTP Server</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" name="ftp_host" value="<?php echo $d['mediaset']['ftp_host']?>" placeholder="<?php echo _LANG('a1018','mediaset')?>">
+					<input type="text" class="form-control" name="ftp_host" value="<?php echo $d['mediaset']['ftp_host']?>" placeholder="예) example.kimsq.com  또는 IP adress 입력">
 				</div>
 			</div>
 
@@ -165,28 +165,28 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label"><?php echo _LANG('a1019','mediaset')?></label>
+				<label class="col-sm-2 control-label">첨부할 폴더</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="ftp_folder" value="<?php echo $d['mediaset']['ftp_folder']?>" placeholder="">
 					<p class="form-control-static">
 						<small class="text-muted">
-							<?php echo _LANG('a1020','mediaset')?><br>
-							<?php echo _LANG('a1021','mediaset')?><br>
-							<?php echo _LANG('a1022','mediaset')?><br>
+							FTP접속시 최상위폴더로 부터 실제 첨부할 폴더의 서버경로를 지정해 주세요.<br>
+							경로의 처음과 마지막은 반드시 슬래쉬(/)로 끝나야 합니다.<br>
+							보기)<code>/www/myfolder/</code> 또는 <code>/public_html/myfolder/</code>
 						</small>
 					</p>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label"><?php echo _LANG('a1023','mediaset')?></label>
+				<label class="col-sm-2 control-label">URL 경로</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="ftp_urlpath" value="<?php echo $d['mediaset']['ftp_urlpath']?>" placeholder="">
 					<p class="form-control-static">
 						<small class="text-muted">
-							<?php echo _LANG('a1024','mediaset')?><br>
-							<?php echo _LANG('a1025','mediaset')?><br>
-							<?php echo _LANG('a1026','mediaset')?>
+							첨부폴더를 웹상에서 접근할 수 있는 URL주소를 http://포함하여 입력해 주세요.<br>
+							경로의 마지막은 반드시 슬래쉬(/)로 끝나야 합니다.<br>
+							보기)<code>http://www.kimsq.com/myfolder/</code>
 						</small>
 					</p>
 				</div>
@@ -194,8 +194,8 @@
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="button" class="btn btn-default" id="ftpbtn" onclick="sendCheck(this.id);"><?php if($d['mediaset']['ftp']):?><i class="fa fa-info-circle fa-lg fa-fw"></i><?php echo _LANG('a1027','mediaset')?><?php else:?><?php echo _LANG('a1028','mediaset')?><?php endif?></button>
-					<button type="submit" class="btn btn-primary<?php if($g['device']):?> btn-block<?php endif?>"><?php echo _LANG('a1016','mediaset')?></button>
+					<button type="button" class="btn btn-light" id="ftpbtn" onclick="sendCheck(this.id);"><?php if($d['mediaset']['ftp']):?><i class="fa fa-info-circle fa-lg fa-fw"></i>정상<?php else:?>FTP 연결확인<?php endif?></button>
+					<button type="submit" class="btn btn-primary<?php if($g['device']):?> btn-block<?php endif?>">저장하기</button>
 				</div>
 			</div>
 		</div>
@@ -221,44 +221,44 @@ function sendCheck(id)
 {
 	if (submitFlag == true)
 	{
-		alert('<?php echo _LANG('a1029','mediaset')?>');
+		alert('응답을 기다리는 중입니다. 잠시 기다려 주세요.');
 		return false;
 	}
 	var f = document.procForm;
 
 	if (f.ftp_host.value == '')
 	{
-		alert('<?php echo _LANG('a1030','mediaset')?>   ');
+		alert('FTP 서버주소를 입력해 주세요.   ');
 		f.ftp_host.focus();
 		return false;
 	}
 	if (f.ftp_port.value == '')
 	{
-		alert('<?php echo _LANG('a1031','mediaset')?>    ');
+		alert('FTP 포트번호를 입력해 주세요.    ');
 		f.ftp_port.focus();
 		return false;
 	}
 	if (f.ftp_user.value == '')
 	{
-		alert('<?php echo _LANG('a1032','mediaset')?>     ');
+		alert('FTP 아이디를 입력해 주세요.    ');
 		f.ftp_user.focus();
 		return false;
 	}
 	if (f.ftp_pass.value == '')
 	{
-		alert('<?php echo _LANG('a1033','mediaset')?>    ');
+		alert('FTP 암호를 입력해 주세요.    ');
 		f.ftp_pass.focus();
 		return false;
 	}
 	if (f.ftp_folder.value == '')
 	{
-		alert('<?php echo _LANG('a1034','mediaset')?>    ');
+		alert('첨부할 폴더경로를 입력해 주세요.    ');
 		f.ftp_folder.focus();
 		return false;
 	}
 	if (f.ftp_urlpath.value == '')
 	{
-		alert('<?php echo _LANG('a1035','mediaset')?>    ');
+		alert('URL 접속주소를 입력해 주세요.    ');
 		f.ftp_urlpath.focus();
 		return false;
 	}
@@ -274,48 +274,48 @@ function saveCheck(f)
 	{
 		if (f.ftp_host.value == '')
 		{
-			alert('<?php echo _LANG('a1030','mediaset')?>   ');
+			alert('FTP 서버주소를 입력해 주세요.   ');
 			f.ftp_host.focus();
 			return false;
 		}
 		if (f.ftp_port.value == '')
 		{
-			alert('<?php echo _LANG('a1031','mediaset')?>    ');
+			alert('FTP 포트번호를 입력해 주세요.    ');
 			f.ftp_port.focus();
 			return false;
 		}
 		if (f.ftp_user.value == '')
 		{
-			alert('<?php echo _LANG('a1032','mediaset')?>     ');
+			alert('FTP 아이디를 입력해 주세요.    ');
 			f.ftp_user.focus();
 			return false;
 		}
 		if (f.ftp_pass.value == '')
 		{
-			alert('<?php echo _LANG('a1033','mediaset')?>    ');
+			alert('FTP 암호를 입력해 주세요.   ');
 			f.ftp_pass.focus();
 			return false;
 		}
 		if (f.ftp_folder.value == '')
 		{
-			alert('<?php echo _LANG('a1034','mediaset')?>    ');
+			alert('첨부할 폴더경로를 입력해 주세요.    ');
 			f.ftp_folder.focus();
 			return false;
 		}
 		if (f.ftp_urlpath.value == '')
 		{
-			alert('<?php echo _LANG('a1035','mediaset')?>    ');
+			alert('URL 접속주소를 입력해 주세요.    ');
 			f.ftp_urlpath.focus();
 			return false;
 		}
 	}
 	if (f.ftp_connect.value == '')
 	{
-		alert('<?php echo _LANG('a1036','mediaset')?>   ');
+		alert('FTP가 연결되는지 확인해 주세요.   ');
 		return false;
 	}
 	getIframeForAction(f);
-	return confirm('<?php echo _LANG('a1037','mediaset')?>         ');
+	return confirm('정말로 실행하시겠습니까?         ');
 }
 function ftp_select(obj)
 {

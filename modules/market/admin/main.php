@@ -1,4 +1,4 @@
-<?php 
+<?php
 include $g['path_module'].$module.'/var/var.php';
 if($d['market']['url']):
 include $g['path_core'].'function/rss.func.php';
@@ -9,6 +9,6 @@ $marketData = $marketData[0];
 echo $marketData;
 else:?>
 <div class="noconfig">
-<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=config"><?php echo _LANG('a2001','market')?></a>
+<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=config">마켓 접속주소를 등록해 주세요.</a>
 </div>
 <?php endif?>

@@ -26,5 +26,5 @@ fwrite($fp, "?>");
 fclose($fp);
 @chmod($_tmpdfile,0707);
 
-getLink('reload','parent.',_LANG('a0006','mediaset'),'');
+getLink('reload','parent.','갱신 되었습니다.','');
 ?>

@@ -1,7 +1,7 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-if (!$my['uid']) getLink('','',_LANG('a0001','mediaset'),'');
+if (!$my['uid']) getLink('','','정상적인 접근이 아닙니다.','');
 
 if (!getDbRows($table['s_uploadcat'],'mbruid='.$my['uid'].' and type='.$ablum_type))
 {

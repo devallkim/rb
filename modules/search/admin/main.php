@@ -3,11 +3,11 @@ function getSearchFileList($folder)
 {
 	$incs = array();
 	$dirh = opendir($folder);
-	while(false !== ($files = readdir($dirh))) 
-	{ 
+	while(false !== ($files = readdir($dirh)))
+	{
 		if(substr($files,-4)!='.php') continue;
 		$incs[] = str_replace('.php','',$files);
-	} 
+	}
 	closedir($dirh);
 	return $incs;
 }
@@ -25,23 +25,19 @@ $SITEN = db_num_rows($SITES);
 <div class="row" id="search-body">
 	<div class="col-sm-4 col-lg-3 rb-aside">
 		<div class="panel-group" id="accordion">
-			<div class="panel panel-default">
-				<div class="panel-heading rb-icon">
-					<div class="icon">
-					<i class="fa fa-search fa-2x"></i>
-					</div>
-					<h4 class="panel-title">
-						<a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
-							<?php echo _LANG('a1001','search')?>
-						</a>
-					</h4>
+			<div class="card">
+				<div class="card-header rb-icon">
+					<a class="accordion-toggle collapsed" data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
+						<i class="fa fa-search fa-lg fa-fw"></i>
+						통합검색 지원모듈
+					</a>
 				</div>
-				
-				<div class="panel-collapse collapse" id="collapseOne">
+
+				<div class="panel-collapse collapse show" id="collapseOne">
 					<?php $_i=0;while($MD = db_fetch_array($MODULE_LIST)):?>
 					<?php $forsearching_folder=$g['path_module'].$MD['id'].'/for-searching'?>
 					<?php if(!is_dir($forsearching_folder)) continue?>
-					<div class="panel-body">
+					<div class="card-body">
 						<h5><small><i class="<?php echo $MD['icon']?>"></i> <?php echo $MD['name']?> (<?php echo $MD['id']?>)</small></h5>
 						<div class="dd">
 							<ol class="dd-list">
@@ -62,39 +58,35 @@ $SITEN = db_num_rows($SITES);
 					</div>
 					<?php $_i++;endwhile?>
 					<?php if(!$_i):?>
-					<div class="panel-body rb-none">
-						<?php echo _LANG('a1002','search')?>
+					<div class="card-body rb-none">
+						통합검색 지원모듈이 없습니다.
 					</div>
 					<?php endif?>
 				</div>
 			</div>
 
-			<div class="panel panel-default">
-				<div class="panel-heading rb-icon">
-					<div class="icon">
-						<i class="fa fa-retweet fa-2x"></i>
-					</div>
-					<h4 class="panel-title">
-						<a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
-							<?php echo _LANG('a1003','search')?>
-						</a>
-					</h4>
+			<div class="card">
+				<div class="card-header">
+					<a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+						<i class="fa fa-retweet fa-lg fa-fw"></i>
+						출력옵션 및 순서조정
+					</a>
 				</div>
-				<div class="panel-body rb-panel-form">
-					<select class="form-control" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&searchfile=<?php echo $searchfile?>&r='+this.value);">
+				<div class="card-body rb-panel-form">
+					<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&searchfile=<?php echo $searchfile?>&r='+this.value);">
 					<?php while($S = db_fetch_array($SITES)):$TMPST[]=array($S['name'],$S['id'])?>
 					<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
 					<?php endwhile?>
 					</select>
 				</div>
-				<div class="panel-collapse collapse in" id="collapseTwo">
+				<div class="panel-collapse collapse" id="collapseTwo">
 					<form role="form" action="<?php echo $g['s']?>/" method="post">
 					<input type="hidden" name="r" value="<?php echo $r?>">
 					<input type="hidden" name="m" value="<?php echo $module?>">
 					<input type="hidden" name="a" value="order">
 					<input type="hidden" name="auto" value="">
 					<input type="hidden" name="autoCheck" value="<?php echo $autoCheck?>">
-						<div class="panel-body">
+						<div class="card-body">
 							<div class="dd" id="nestable-menu">
 								<ol class="dd-list">
 									<?php $_i=0;if(count($d['search_order'])):foreach($d['search_order'] as $_key => $_val):?>
@@ -103,7 +95,7 @@ $SITEN = db_num_rows($SITES);
 										<div class="dd-handle dd3-handle"></div>
 										<div class="dd3-content"><a href="<?php echo $g['adm_href']?>&amp;searchfile=<?php echo $PAGESET[$_key]['moduleid'].'/'.$PAGESET[$_key]['filename']?>" title="<?php echo $PAGESET[$_key]['filename']?>.php" data-tooltip="tooltip"><?php echo $PAGESET[$_key]['filerename']?></a> <small title="<?php echo $PAGESET[$_key]['modulename']?>" data-tooltip="tooltip">(<?php echo $PAGESET[$_key]['moduleid']?>)</small></div>
 										<div class="dd-checkbox">
-											<input type="checkbox" name="searchmembers[]" value="<?php echo $PAGESET[$_key]['moduleid']?>_<?php echo $PAGESET[$_key]['filename']?>|<?php echo $PAGESET[$_key]['filerename']?>|<?php echo $PAGESET[$_key]['site']?>|<?php echo $PAGESET[$_key]['filepath']?>" checked class="hidden"><i class="glyphicon glyphicon-eye-<?php echo strstr($PAGESET[$_key]['site'],'['.$r.']')?'open':'close rb-eye-close'?>"></i>
+											<input type="checkbox" name="searchmembers[]" value="<?php echo $PAGESET[$_key]['moduleid']?>_<?php echo $PAGESET[$_key]['filename']?>|<?php echo $PAGESET[$_key]['filerename']?>|<?php echo $PAGESET[$_key]['site']?>|<?php echo $PAGESET[$_key]['filepath']?>" checked class="d-none"><i class="glyphicon glyphicon-eye-<?php echo strstr($PAGESET[$_key]['site'],'['.$r.']')?'open':'close rb-eye-close'?>"></i>
 										</div>
 									</li>
 									<?php $_i++;endforeach;$_nowOrderNum=$_i;endif?>
@@ -121,8 +113,8 @@ $SITEN = db_num_rows($SITES);
 							</div>
 						</div>
 						<?php if(!$_i):?>
-						<div class="panel-body rb-none">
-							<?php echo _LANG('a1004','search')?>
+						<div class="card-body rb-none">
+							등록된 검색페이지가 없습니다.
 						</div>
 						<?php endif?>
 					</form>
@@ -141,40 +133,42 @@ $SITEN = db_num_rows($SITES);
 
 		<div class="page-header">
 			<h4>
-				<?php echo _LANG('a1005','search')?>
+				등록정보 및 사이트 지정
 				<div class="pull-right rb-top-btnbox hidden-xs">
-					<a href="<?php echo $g['adm_href']?>" class="btn btn-default"><i class="glyphicon glyphicon-cog"></i> <?php echo _LANG('a1006','search')?></a>
+					<a href="<?php echo $g['adm_href']?>" class="btn btn-light"><i class="glyphicon glyphicon-cog"></i> 통합검색 설정</a>
 					<div class="btn-group rb-btn-view">
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>" class="btn btn-default"><?php echo _LANG('a1007','search')?></a>
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>" class="btn btn-light">접속하기</a>
+						<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="sr-only">Toggle Dropdown</span>
 						</button>
-						<ul class="dropdown-menu pull-right" role="menu">
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>" target="_blank"><i class="glyphicon glyphicon-new-window"></i> <?php echo _LANG('a1008','search')?></a></li>
-						</ul>
+						<div class="dropdown-menu dropdown-menu-right" role="menu">
+							<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>" target="_blank">
+								<i class="fa fa-external-link"></i> 새창으로 보기
+							</a>
+						</div>
 					</div>
 				</div>
 			</h4>
 		</div>
 
-		<form name="procForm" class="form-horizontal" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return procCheck(this);">
-		<input type="hidden" name="r" value="<?php echo $r?>">
-		<input type="hidden" name="m" value="<?php echo $module?>">
-		<input type="hidden" name="a" value="search_edit">
-		<input type="hidden" name="namefile" value="<?php echo $_searchfl?>">
-		<input type="hidden" name="searchfile" value="<?php echo $searchfile?>">
+		<form name="procForm" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return procCheck(this);">
+			<input type="hidden" name="r" value="<?php echo $r?>">
+			<input type="hidden" name="m" value="<?php echo $module?>">
+			<input type="hidden" name="a" value="search_edit">
+			<input type="hidden" name="namefile" value="<?php echo $_searchfl?>">
+			<input type="hidden" name="searchfile" value="<?php echo $searchfile?>">
 
-			<div class="form-group">
-				<label class="col-sm-2 control-label"><?php echo _LANG('a1009','search')?></label>
+			<div class="form-group form-row">
+				<label class="col-sm-2 control-label">검색명칭</label>
 				<div class="col-sm-9">
 					<input type="text" name="name" value="<?php echo $_names[0]?$_names[0]:$_searchfl?>" class="form-control">
 					<p class="form-control-static text-muted">
-						<small><?php echo _LANG('a1010','search')?></small>
+						<small>이 파일의 검색페이지 명칭을 적절한 용어로 지정해 주세요.</small>
 					</p>
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label"><?php echo _LANG('a1011','search')?></label>
+			<div class="form-group form-row">
+				<label class="col-sm-2 control-label">출력사이트</label>
 				<div class="col-sm-9">
 					<?php foreach($TMPST as $_val):?>
 					<label class="checkbox-inline rb-no-indent">
@@ -184,15 +178,15 @@ $SITEN = db_num_rows($SITES);
 				</div>
 			</div>
 			<hr>
-			<div class="form-group">
+			<div class="form-group form-row">
 				<label class="col-sm-2 control-label"></label>
 				<div class="col-sm-9">
 					<div class="btn-group">
-						<button type="button" class="btn btn-default" onclick="checkboxChoice('aply_sites[]',true);"><?php echo _LANG('a1012','search')?></button>
-						<button type="button" class="btn btn-default" onclick="checkboxChoice('aply_sites[]',false);"><?php echo _LANG('a1013','search')?></button>
+						<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',true);">전체선택</button>
+						<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',false);">전체취소</button>
 					</div>
 					<div class="btn-group">
-						<button class="btn btn-primary" type="submit" id="rb-submit-button"><i class="fa fa-check fa-lg"></i> <?php echo _LANG('a1014','search')?></button>
+						<button class="btn btn-primary" type="submit" id="rb-submit-button"><i class="fa fa-check fa-lg"></i> 저장하기</button>
 					</div>
 				</div>
 			</div>
@@ -202,30 +196,32 @@ $SITEN = db_num_rows($SITES);
 		<?php else:?>
 		<div class="page-header">
 			<h4>
-				<?php echo _LANG('a1006','search')?>
+				검색범위
 				<div class="pull-right rb-top-btnbox hidden-xs">
 					<div class="btn-group rb-btn-view">
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>" class="btn btn-default"><?php echo _LANG('a1007','search')?></a>
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>" class="btn btn-light">전체</a>
+						<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<span class="sr-only">Toggle Dropdown</span>
 						</button>
-						<ul class="dropdown-menu pull-right" role="menu">
-							<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>" target="_blank"><i class="glyphicon glyphicon-new-window"></i> <?php echo _LANG('a1008','search')?></a></li>
-						</ul>
+						<div class="dropdown-menu dropdown-menu-right" role="menu">
+							<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>" target="_blank">
+								<i class="fa fa-external-link"></i> 최근 3년
+							</a>
+						</div>
 					</div>
-				</div>			
+				</div>
 			</h4>
 		</div>
 
-		<form name="saveForm" class="form-horizontal" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
+		<form name="saveForm" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
 			<input type="hidden" name="m" value="<?php echo $module?>">
 			<input type="hidden" name="a" value="config">
 			<input type="hidden" name="layout" value="">
 
-			<div class="form-group">
-				<label class="col-sm-2 control-label"><?php echo _LANG('a1015','search')?></label>
+			<div class="form-group form-row">
+				<label class="col-sm-2 control-label">검색테마</label>
 				<div class="col-sm-9">
-					<select class="form-control" name="theme">
+					<select class="form-control custom-select" name="theme">
 						<?php $dirs = opendir($g['path_module'].$module.'/themes')?>
 						<?php while(false !== ($theme = readdir($dirs))):?>
 						<?php if(strpos('_..',$theme))continue?>
@@ -236,59 +232,59 @@ $SITEN = db_num_rows($SITES);
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label class="col-sm-2 control-label"><?php echo _LANG('a1016','search')?></label>
+			<div class="form-group form-row">
+				<label class="col-sm-2 control-label">검색범위</label>
 				<div class="col-sm-9">
-					<select name="term" class="form-control">
-						<option value="360"<?php if($d['search']['term']==360):?> selected="selected"<?php endif?>><?php echo _LANG('a1017','search')?></option>
-						<option value="36"<?php if($d['search']['term']==36):?> selected="selected"<?php endif?>><?php echo _LANG('a1018','search')?></option>
-						<option value="24"<?php if($d['search']['term']==24):?> selected="selected"<?php endif?>><?php echo _LANG('a1019','search')?></option>
-						<option value="12"<?php if($d['search']['term']==12):?> selected="selected"<?php endif?>><?php echo _LANG('a1020','search')?></option>
-						<option value="6"<?php if($d['search']['term']==6):?> selected="selected"<?php endif?>><?php echo _LANG('a1021','search')?></option>
-						<option value="3"<?php if($d['search']['term']==3):?> selected="selected"<?php endif?>><?php echo _LANG('a1022','search')?></option>
-						<option value="1"<?php if($d['search']['term']==1):?> selected="selected"<?php endif?>><?php echo _LANG('a1023','search')?></option>
+					<select name="term" class="form-control custom-select">
+						<option value="360"<?php if($d['search']['term']==360):?> selected="selected"<?php endif?>>전체</option>
+						<option value="36"<?php if($d['search']['term']==36):?> selected="selected"<?php endif?>>최근 3년</option>
+						<option value="24"<?php if($d['search']['term']==24):?> selected="selected"<?php endif?>>최근 2년</option>
+						<option value="12"<?php if($d['search']['term']==12):?> selected="selected"<?php endif?>>최근 1년</option>
+						<option value="6"<?php if($d['search']['term']==6):?> selected="selected"<?php endif?>>최근 6개월</option>
+						<option value="3"<?php if($d['search']['term']==3):?> selected="selected"<?php endif?>>최근 3개월</option>
+						<option value="1"<?php if($d['search']['term']==1):?> selected="selected"<?php endif?>>최근 한달</option>
 					</select>
 					<p class="form-control-static text-muted">
-						<small><?php echo _LANG('a1024','search')?></small>
+						<small>검색양에 따라 처리속도가 느려질 수 있습니다. 적절한 기간을 지정해 주세요.</small>
 					</p>
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label class="col-sm-2 control-label"><?php echo _LANG('a1025','search')?></label>
+			<div class="form-group form-row">
+				<label class="col-sm-2 control-label">검색 결과수</label>
 				<div class="col-sm-9">
 					<div class="input-group" style="width:250px">
-						<span class="input-group-addon"><?php echo _LANG('a1026','search')?></span>
+						<span class="input-group-addon">통합검색시</span>
 						<input type="text" name="num1" size="5" value="<?php echo $d['search']['num1']?>" class="form-control">
-						<span class="input-group-addon"><?php echo _LANG('a1027','search')?></span>
+						<span class="input-group-addon">개</span>
 					</div>
 					<div class="input-group" style="width:250px;margin-top:10px">
-						<span class="input-group-addon"><?php echo _LANG('a1028','search')?></span>
+						<span class="input-group-addon">세부검색시</span>
 						<input type="text" name="num2" size="5" value="<?php echo $d['search']['num2']?>" class="form-control">
-						<span class="input-group-addon"><?php echo _LANG('a1027','search')?></span>
+						<span class="input-group-addon">개</span>
 					</div>
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label class="col-sm-2 control-label"><?php echo _LANG('a1029','search')?></label>
+			<div class="form-group form-row">
+				<label class="col-sm-2 control-label">외부검색</label>
 				<div class="col-sm-9">
 					<textarea name="searchlist" class="form-control" rows="6"><?php echo trim(implode('',file($g['path_module'].$module.'/var/search.list.txt')))?></textarea>
 					<p class="form-control-static text-muted">
-						<small><?php echo _LANG('a1030','search')?></small>
+						<small>검색엔진명과 검색URL을 콤마(,)로 구분해서 등록해 주세요. 외부검색을 이용해 검색어를 선택된 검색엔진으로 연결해 줍니다.</small>
 					</p>
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label class="col-md-2 control-label"><?php echo _LANG('a1031','search')?></label>
+			<div class="form-group form-row">
+				<label class="col-md-2 control-label">레이아웃</label>
 				<div class="col-md-10 col-lg-9">
 
-					<div class="row">
+					<div class="form-row">
 						<div class="col-sm-6" id="rb-layout-select">
-							<select class="form-control" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','');">
+							<select class="form-control custom-select" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','');">
 								<?php $_layoutHexp=explode('/',$_HS['layout'])?>
-								<option value="0"><?php echo _LANG('a1032','search')?>(<?php echo getFolderName($g['path_layout'].$_layoutHexp[0])?>)</option>
+								<option value="0">사이트 레이아웃(<?php echo getFolderName($g['path_layout'].$_layoutHexp[0])?>)</option>
 								<?php $_layoutExp1=explode('/',$d['search']['layout'])?>
 								<?php $dirs = opendir($g['path_layout'])?>
 								<?php while(false !== ($tpl = readdir($dirs))):?>
@@ -299,8 +295,8 @@ $SITEN = db_num_rows($SITES);
 							</select>
 						</div>
 						<div class="col-sm-6" id="rb-layout-select2">
-							<select class="form-control" name="layout_1_sub"<?php if(!$d['search']['layout']):?> disabled<?php endif?>>
-								<?php if(!$R['m_layout']):?><option><?php echo _LANG('a1033','search')?></option><?php endif?>
+							<select class="form-control custom-select" name="layout_1_sub"<?php if(!$d['search']['layout']):?> disabled<?php endif?>>
+								<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
 								<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
 								<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 								<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
@@ -313,10 +309,10 @@ $SITEN = db_num_rows($SITES);
 				</div>
 			</div>
 
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-9">
+			<div class="form-group form-row">
+				<div class="offset-sm-2 col-sm-9">
 					<hr>
-					<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>" id="rb-submit-button"><?php echo _LANG('a1034','search')?></button>
+					<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>" id="rb-submit-button">확인</button>
 				</div>
 			</div>
 
@@ -351,20 +347,20 @@ function procCheck(f)
 {
 	if (f.name.value == '')
 	{
-		alert('<?php echo _LANG('a1035','search')?>   ');
+		alert('검색 페이지명을 입력해 주세요.   ');
 		f.name.focus();
 		return false;
 	}
 
 	getIframeForAction(f);
-	return confirm('<?php echo _LANG('a1036','search')?>   ');
+	return confirm('정말로 실행하시겠습니까?  ');
 }
 function saveCheck(f)
 {
 	if(f.layout_1.value != '0') f.layout.value = f.layout_1.value + '/' + f.layout_1_sub.value;
 	else f.layout.value = '';
 	getIframeForAction(f);
-	return confirm('<?php echo _LANG('a1036','search')?>   ');
+	return confirm('정말로 실행하시겠습니까?   ');
 }
 <?php if($_nowOrderNum != count($d['search_order']) || $autoCheck=='Y'):?>
 setTimeout("orderUpdate();",100);
@@ -373,8 +369,7 @@ setTimeout("orderUpdate();",100);
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)
 {
-	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $module?>"><?php echo _LANG('a1037','search')?></a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();"><?php echo _LANG('a1038','search')?></a></li>',event);	
+	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $module?>">사용자모드 보기</a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a></li>',event);
 }
 <?php endif?>
 </script>
-

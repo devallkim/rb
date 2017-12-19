@@ -26,22 +26,22 @@ if ($package_step == 1)
 	{
 		if ($fileExt != 'zip' || substr($realname,0,11) != 'rb_package_')
 		{
-			getLink('reload','parent.',_LANG('a9001','market'),'');
+			getLink('reload','parent.','킴스큐 공식 패키지 파일이 아닙니다.','');
 		}
-		
+
 		mkdir($extPath1,0707);
 		@chmod($extPath1,0707);
 		move_uploaded_file($tmpname,$saveFile);
 
 		require $g['path_core'].'opensrc/unzip/ArchiveExtractor.class.php';
 		require $g['path_core'].'function/dir.func.php';
-		
+
 		$extractor = new ArchiveExtractor();
 		$extractor -> extractArchive($saveFile,$extPath1);
 		unlink($saveFile);
 	}
 	else {
-		getLink('','',_LANG('a9002','market'),'');
+		getLink('','','패키지 파일을 선택해 주세요.','');
 	}
 
 	getLink($g['s'].'/?r='.$r.'&iframe=Y&m=admin&module='.$m.'&front=modal.package&package_step=2&package_folder='.$realname,'parent.','','');
@@ -63,14 +63,14 @@ if ($package_step == 2)
 			while($_M = db_fetch_array($_MENUS))
 			{
 				@unlink($g['path_var'].'menu/'.$_M['imghead']);
-				@unlink($g['path_var'].'menu/'.$_M['imgfoot']);	
-				
+				@unlink($g['path_var'].'menu/'.$_M['imgfoot']);
+
 				getDbDelete($table['s_seo'],'rel=1 and parent='.$_M['uid']);
 			}
 
 			getDbDelete($table['s_menu'],'site='.$S['uid']);
-			db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT); 
-			db_query("OPTIMIZE TABLE ".$table['s_seo'],$DB_CONNECT); 
+			db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT);
+			db_query("OPTIMIZE TABLE ".$table['s_seo'],$DB_CONNECT);
 			DirDelete($g['path_page'].$S['id'].'-menus');
 		}
 		//기존페이지삭제
@@ -83,8 +83,8 @@ if ($package_step == 2)
 			}
 
 			getDbDelete($table['s_page'],'site='.$S['uid']);
-			db_query("OPTIMIZE TABLE ".$table['s_page'],$DB_CONNECT); 
-			db_query("OPTIMIZE TABLE ".$table['s_seo'],$DB_CONNECT); 
+			db_query("OPTIMIZE TABLE ".$table['s_page'],$DB_CONNECT);
+			db_query("OPTIMIZE TABLE ".$table['s_seo'],$DB_CONNECT);
 			DirDelete($g['path_page'].$S['id'].'-pages');
 		}
 
@@ -103,7 +103,7 @@ if ($package_step == 2)
 		$QVAL = "'".$gid."','".$id."','".$name."','{subject} | {site}','0','glyphicon glyphicon-home','".$d['package']['layout']."','0','".$d['package']['layout_mobile']."','0','','1','','nic','0','0','0','1','',''";
 		getDbInsert($table['s_site'],$QKEY,$QVAL);
 		$LASTUID = getDbCnt($table['s_site'],'max(uid)','');
-		db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT); 
+		db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT);
 		getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'0','$LASTUID','','','','ALL',''");
 
 		$vfile = $g['path_var'].'sitephp/'.$LASTUID.'.php';
@@ -156,9 +156,9 @@ if ($package_step == 2)
 	//모듈설치
 	if (is_dir($g['path_tmp'].'app/'.$package_folder.'/modules'))
 	{
-		$dirh = opendir($g['path_tmp'].'app/'.$package_folder.'/modules'); 
-		while(false !== ($filename = readdir($dirh))) 
-		{ 
+		$dirh = opendir($g['path_tmp'].'app/'.$package_folder.'/modules');
+		while(false !== ($filename = readdir($dirh)))
+		{
 			if($filename == '.' || $filename == '..') continue;
 			if(is_file($g['path_module'].$filename.'/main.php')) continue;
 
@@ -167,8 +167,8 @@ if ($package_step == 2)
 			$table		= array();
 			$table_db	= $g['path_tmp'].'app/'.$package_folder.'/modules/'.$module.'/_setting/db.table.php';
 			$table_sc	= $g['path_tmp'].'app/'.$package_folder.'/modules/'.$module.'/_setting/db.schema.php';
-			if(is_file($table_db)) 
-			{	
+			if(is_file($table_db))
+			{
 				$_tmptable1 = array();
 				$_tmptfile  = $g['path_var'].'table.info.php';
 				include $table_db;
@@ -194,29 +194,29 @@ if ($package_step == 2)
 			$QKEY = "gid,system,hidden,mobile,name,id,tblnum,icon,d_regis";
 			$QVAL = "'".($maxgid+1)."','0','0','1','".getFolderName($g['path_tmp'].'app/'.$package_folder.'/modules/'.$module)."','$module','".count($table)."','kf-module','".$date['totime']."'";
 			getDbInsert($_tmptable2['s_module'],$QKEY,$QVAL);
-		} 
+		}
 		closedir($dirh);
 	}
 
 	//플러그인설치
 	if (is_dir($g['path_tmp'].'app/'.$package_folder.'/plugins'))
 	{
-		$dirh = opendir($g['path_tmp'].'app/'.$package_folder.'/plugins'); 
-		while(false !== ($filename = readdir($dirh))) 
-		{ 
+		$dirh = opendir($g['path_tmp'].'app/'.$package_folder.'/plugins');
+		while(false !== ($filename = readdir($dirh)))
+		{
 			if($filename == '.' || $filename == '..') continue;
 			if (is_dir($g['path_plugin'].$filename)) continue;
 
 			if (!$d['ov'][$filename])
 			{
 				$plVersion = '';
-				$dirh1 = opendir($g['path_tmp'].'app/'.$package_folder.'/plugins/'.$filename); 
-				while(false !== ($filename1 = readdir($dirh1))) 
-				{ 
+				$dirh1 = opendir($g['path_tmp'].'app/'.$package_folder.'/plugins/'.$filename);
+				while(false !== ($filename1 = readdir($dirh1)))
+				{
 					if($filename1 == '.' || $filename1 == '..' || is_file($g['path_tmp'].'app/'.$package_folder.'/plugins/'.$filename.'/'.$filename1)) continue;
 					if(is_dir($g['path_plugin'].$filename.'/'.$filename1)) continue;
 					$plVersion = $filename1;
-				} 
+				}
 				closedir($dirh1);
 
 				$_tmpdfile = $g['path_var'].'plugin.var.php';
@@ -231,7 +231,7 @@ if ($package_step == 2)
 				fclose($fp);
 				@chmod($_tmpdfile,0707);
 			}
-		} 
+		}
 		closedir($dirh);
 	}
 
@@ -242,8 +242,8 @@ if ($package_step == 2)
 	{
 		if (is_dir($g['path_tmp'].'app/'.$package_folder.'/switches/'.$_key))
 		{
-			$dirh1 = opendir($g['path_tmp'].'app/'.$package_folder.'/switches/'.$_key); 
-			while(false !== ($filename1 = readdir($dirh1))) 
+			$dirh1 = opendir($g['path_tmp'].'app/'.$package_folder.'/switches/'.$_key);
+			while(false !== ($filename1 = readdir($dirh1)))
 			{
 				if($filename1 == '.' || $filename1 == '..') continue;
 				if(is_dir($g['path_switch'].$_key.'/'.$filename1)) continue;

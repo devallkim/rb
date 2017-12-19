@@ -19,7 +19,7 @@ if ($filekind)
 	}
 	else if ($filekind == 2)
 	{
-		if ($filetype == 2) $sqlque .= ' and type=0'; 
+		if ($filetype == 2) $sqlque .= ' and type=0';
 		else $sqlque .= ' and (type=0 or type=5)';
 	}
 	else
@@ -43,7 +43,7 @@ if ($fserver)
 if ($where && $keyw)
 {
 	if (strstr('[mbruid]',$where)) $sqlque .= " and ".$where."='".$keyw."'";
-	else $sqlque .= getSearchSql($where,$keyw,$ikeyword,'or');	
+	else $sqlque .= getSearchSql($where,$keyw,$ikeyword,'or');
 }
 $RCD = getDbArray($table['s_upload'],$sqlque,'*',$sort,$orderby,$recnum,$p);
 $NUM = getDbRows($table['s_upload'],$sqlque);
@@ -60,12 +60,12 @@ $TPG = getTotalPage($NUM,$recnum);
 
 		<div class="rb-heading well well-sm">
 			<div class="form-group">
-				<label class="col-sm-1 control-label"><?php echo _LANG('a2001','mediaset')?></label>
+				<label class="col-sm-1 control-label">필터</label>
 				<div class="col-sm-10">
 					<div class="row">
 						<div class="col-sm-3">
 							<select name="siteuid" class="form-control input-sm" onchange="this.form.submit();">
-							<option value=""><?php echo _LANG('a2002','mediaset')?></option>
+							<option value="">사이트(전체)</option>
 							<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
 							<?php while($S = db_fetch_array($SITES)):?>
 							<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$siteuid):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
@@ -74,55 +74,55 @@ $TPG = getTotalPage($NUM,$recnum);
 						</div>
 						<div class="col-sm-3">
 							<select name="filekind" class="form-control input-sm" onchange="this.form.submit();">
-							<option value=""><?php echo _LANG('a2003','mediaset')?></option>
-							<option value="1"<?php if($filekind==1):?> selected<?php endif?>><?php echo _LANG('a2004','mediaset')?></option>
-							<option value="2"<?php if($filekind==2):?> selected<?php endif?>><?php echo _LANG('a2005','mediaset')?></option>
-							<option value="3"<?php if($filekind==3):?> selected<?php endif?>><?php echo _LANG('a2006','mediaset')?></option>
+								<option value="">파일종류(전체)</option>
+								<option value="1"<?php if($filekind==1):?> selected<?php endif?>>사진</option>
+								<option value="2"<?php if($filekind==2):?> selected<?php endif?>>동영상</option>
+								<option value="3"<?php if($filekind==3):?> selected<?php endif?>>기타</option>
 							</select>
 						</div>
 						<div class="col-sm-3">
 							<select name="filetype" class="form-control input-sm" onchange="this.form.submit();">
-							<option value=""><?php echo _LANG('a2007','mediaset')?><?php echo _LANG('a2008','mediaset')?></option>
-							<option value="1"<?php if($filetype==1):?> selected<?php endif?>><?php echo _LANG('a2008','mediaset')?></option>
-							<option value="2"<?php if($filetype==2):?> selected<?php endif?>><?php echo _LANG('a2009','mediaset')?></option>
+							<option value="">첨부방식(전체)</option>
+							<option value="1"<?php if($filetype==1):?> selected<?php endif?>>직접첨부</option>
+							<option value="2"<?php if($filetype==2):?> selected<?php endif?>>외부링크</option>
 							</select>
 						</div>
 						<div class="col-sm-3">
 							<select name="fserver" class="form-control input-sm" onchange="this.form.submit();">
-							<option value=""><?php echo _LANG('a2010','mediaset')?></option>
-							<option value="1"<?php if($fserver==1):?> selected<?php endif?>><?php echo _LANG('a2011','mediaset')?></option>
-							<option value="2"<?php if($fserver==2):?> selected<?php endif?>><?php echo _LANG('a2012','mediaset')?></option>
+							<option value="">첨부서버(전체)</option>
+							<option value="1"<?php if($fserver==1):?> selected<?php endif?>>현재서버</option>
+							<option value="2"<?php if($fserver==2):?> selected<?php endif?>>원격서버</option>
 							</select>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div id="search-more" class="collapse<?php if($_SESSION['sh_mediaset']):?> in<?php endif?>">
+			<div id="search-more" class="collapse<?php if($_SESSION['sh_mediaset']):?> show<?php endif?>">
 
 				<div class="form-group">
-					<label class="col-sm-1 control-label"><?php echo _LANG('a2013','mediaset')?></label>
+					<label class="col-sm-1 control-label">기간</label>
 					<div class="col-sm-10">
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="input-daterange input-group input-group-sm" id="datepicker">
-									<input type="text" class="form-control" name="d_start" placeholder="<?php echo _LANG('a2014','mediaset')?>" value="<?php echo $d_start?>">
+									<input type="text" class="form-control" name="d_start" placeholder="시작일 선택" value="<?php echo $d_start?>">
 									<span class="input-group-addon">~</span>
-									<input type="text" class="form-control" name="d_finish" placeholder="<?php echo _LANG('a2015','mediaset')?>" value="<?php echo $d_finish?>">
+									<input type="text" class="form-control" name="d_finish" placeholder="종료일 선택" value="<?php echo $d_finish?>">
 									<span class="input-group-btn">
-										<button class="btn btn-default" type="submit"><?php echo _LANG('a2016','mediaset')?></button>
+										<button class="btn btn-light" type="submit">기간적용</button>
 									</span>
 								</div>
 							</div>
 							<div class="col-sm-3 hidden-xs">
 								<span class="input-group-btn">
-									<button class="btn btn-default" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>','<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>');"><?php echo _LANG('a2017','mediaset')?></button>
-									<button class="btn btn-default" type="button" onclick="dropDate('<?php echo getDateFormat($date['today'],'Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');"><?php echo _LANG('a2018','mediaset')?></button>
-									<button class="btn btn-default" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-7,substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');"><?php echo _LANG('a2019','mediaset')?></button>
-									<button class="btn btn-default" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');"><?php echo _LANG('a2020','mediaset')?></button>
-									<button class="btn btn-default" type="button" onclick="dropDate('<?php echo getDateFormat(substr($date['today'],0,6).'01','Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');"><?php echo _LANG('a2021','mediaset')?></button>
-									<button class="btn btn-default" type="button" onclick="dropDate('<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>01','<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>31');"><?php echo _LANG('a2022','mediaset')?></button>
-									<button class="btn btn-default" type="button" onclick="dropDate('','');"><?php echo _LANG('a2023','mediaset')?></button>
+									<button class="btn btn-light" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>','<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>');">어제</button>
+									<button class="btn btn-light" type="button" onclick="dropDate('<?php echo getDateFormat($date['today'],'Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">오늘</button>
+									<button class="btn btn-light" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-7,substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">일주</button>
+									<button class="btn btn-light" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">한달</button>
+									<button class="btn btn-light" type="button" onclick="dropDate('<?php echo getDateFormat(substr($date['today'],0,6).'01','Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">당월</button>
+									<button class="btn btn-light" type="button" onclick="dropDate('<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>01','<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>31');">전월</button>
+									<button class="btn btn-light" type="button" onclick="dropDate('','');">전체</button>
 								</span>
 							</div>
 						</div>
@@ -130,32 +130,32 @@ $TPG = getTotalPage($NUM,$recnum);
 				</div>
 
 				<div class="form-group hidden-xs">
-					<label class="col-sm-1 control-label"><?php echo _LANG('a2024','mediaset')?></label>
+					<label class="col-sm-1 control-label">정렬</label>
 					<div class="col-sm-10">
 						<div class="btn-toolbar">
 							<div class="btn-group btn-group-sm" data-toggle="buttons">
-								<label class="btn btn-default<?php if($sort=='gid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="gid" name="sort"<?php if($sort=='gid'):?> checked<?php endif?>> <?php echo _LANG('a2025','mediaset')?>
+								<label class="btn btn-light<?php if($sort=='gid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="gid" name="sort"<?php if($sort=='gid'):?> checked<?php endif?>> 등록일
 								</label>
-								<label class="btn btn-default<?php if($sort=='down'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="down" name="sort"<?php if($sort=='down'):?> checked<?php endif?>> <?php echo _LANG('a2026','mediaset')?>
+								<label class="btn btn-light<?php if($sort=='down'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="down" name="sort"<?php if($sort=='down'):?> checked<?php endif?>> 다운로드
 								</label>
-								<label class="btn btn-default<?php if($sort=='size'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="size" name="sort"<?php if($sort=='size'):?> checked<?php endif?>> <?php echo _LANG('a2027','mediaset')?>
+								<label class="btn btn-light<?php if($sort=='size'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="size" name="sort"<?php if($sort=='size'):?> checked<?php endif?>> 사이즈
 								</label>
-								<label class="btn btn-default<?php if($sort=='width'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="width" name="sort"<?php if($sort=='width'):?> checked<?php endif?>> <?php echo _LANG('a2028','mediaset')?>
+								<label class="btn btn-light<?php if($sort=='width'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="width" name="sort"<?php if($sort=='width'):?> checked<?php endif?>> 가로
 								</label>
-								<label class="btn btn-default<?php if($sort=='height'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="height" name="sort"<?php if($sort=='height'):?> checked<?php endif?>> <?php echo _LANG('a2029','mediaset')?>
+								<label class="btn btn-light<?php if($sort=='height'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="height" name="sort"<?php if($sort=='height'):?> checked<?php endif?>> 세로
 								</label>
 							</div>
 							<div class="btn-group btn-group-sm" data-toggle="buttons">
-								<label class="btn btn-default<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i> <?php echo _LANG('a2030','mediaset')?>
+								<label class="btn btn-light<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i> 역순
 								</label>
-								<label class="btn btn-default<?php if($orderby=='asc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="asc" name="orderby"<?php if($orderby=='asc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-asc"></i> <?php echo _LANG('a2031','mediaset')?>
+								<label class="btn btn-light<?php if($orderby=='asc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="asc" name="orderby"<?php if($orderby=='asc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-asc"></i> 정순
 								</label>
 							</div>
 						</div>
@@ -163,36 +163,36 @@ $TPG = getTotalPage($NUM,$recnum);
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-1 control-label"><?php echo _LANG('a2032','mediaset')?></label>
+					<label class="col-sm-1 control-label">검색</label>
 					<div class="col-sm-10">
 						<div class="input-group input-group-sm">
 							<span class="input-group-btn hidden-xs" style="width:165px">
-								<select name="where" class="form-control btn btn-default">
-									<option value="name"<?php if($where=='name'):?> selected="selected"<?php endif?>><?php echo _LANG('a2033','mediaset')?></option>
-									<option value="caption"<?php if($where=='caption'):?> selected="selected"<?php endif?>><?php echo _LANG('a2034','mediaset')?></option>
-									<option value="ext"<?php if($where=='ext'):?> selected="selected"<?php endif?>><?php echo _LANG('a2035','mediaset')?></option>
-									<option value="mbruid"<?php if($where=='mbruid'):?> selected="selected"<?php endif?>><?php echo _LANG('a2036','mediaset')?></option>
+								<select name="where" class="form-control btn btn-light">
+									<option value="name"<?php if($where=='name'):?> selected="selected"<?php endif?>>파일명</option>
+									<option value="caption"<?php if($where=='caption'):?> selected="selected"<?php endif?>>캡션</option>
+									<option value="ext"<?php if($where=='ext'):?> selected="selected"<?php endif?>>확장자</option>
+									<option value="mbruid"<?php if($where=='mbruid'):?> selected="selected"<?php endif?>>회원UID</option>
 								</select>
 							</span>
 							<input type="text" name="keyw" value="<?php echo stripslashes($keyw)?>" class="form-control">
 							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit"><?php echo _LANG('a2032','mediaset')?></button>
+								<button class="btn btn-light" type="submit">검색</button>
 							</span>
 						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="col-sm-1 control-label"><?php echo _LANG('a2037','mediaset')?></label>
+					<label class="col-sm-1 control-label">출력</label>
 					<div class="col-sm-10">
 						<div class="row">
 							<div class="col-sm-2">
 								<select name="recnum" onchange="this.form.submit();" class="form-control input-sm">
-									<option value="20"<?php if($recnum==20):?> selected="selected"<?php endif?>><?php echo sprintf(_LANG('a2038','mediaset'),20)?></option>
-									<option value="35"<?php if($recnum==35):?> selected="selected"<?php endif?>><?php echo sprintf(_LANG('a2038','mediaset'),35)?></option>
-									<option value="50"<?php if($recnum==50):?> selected="selected"<?php endif?>><?php echo sprintf(_LANG('a2038','mediaset'),50)?></option>
-									<option value="75"<?php if($recnum==75):?> selected="selected"<?php endif?>><?php echo sprintf(_LANG('a2038','mediaset'),75)?></option>
-									<option value="90"<?php if($recnum==90):?> selected="selected"<?php endif?>><?php echo sprintf(_LANG('a2038','mediaset'),90)?></option>
+									<option value="20"<?php if($recnum==20):?> selected="selected"<?php endif?>><?php echo sprintf('%d개',20)?></option>
+									<option value="35"<?php if($recnum==35):?> selected="selected"<?php endif?>><?php echo sprintf('%d개',35)?></option>
+									<option value="50"<?php if($recnum==50):?> selected="selected"<?php endif?>><?php echo sprintf('%d개',50)?></option>
+									<option value="75"<?php if($recnum==75):?> selected="selected"<?php endif?>><?php echo sprintf('%d개',75)?></option>
+									<option value="90"<?php if($recnum==90):?> selected="selected"<?php endif?>><?php echo sprintf('%d개',90)?></option>
 								</select>
 							</div>
 							<div class="col-sm-2">
@@ -205,8 +205,8 @@ $TPG = getTotalPage($NUM,$recnum);
 
 			<div class="form-group">
 				<div class="col-sm-offset-1 col-sm-10">
-					<button type="button" class="btn btn-link rb-advance<?php if(!$_SESSION['sh_mediaset']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#search-more" onclick="sessionSetting('sh_mediaset','1','','1');"><?php echo _LANG('a2039','mediaset')?> <small></small></button>
-					<a href="<?php echo $g['adm_href']?>" class="btn btn-link"><?php echo _LANG('a2040','mediaset')?></a>
+					<button type="button" class="btn btn-link rb-advance<?php if(!$_SESSION['sh_mediaset']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#search-more" onclick="sessionSetting('sh_mediaset','1','','1');">고급검색 <small></small></button>
+					<a href="<?php echo $g['adm_href']?>" class="btn btn-link">초기화</a>
 				</div>
 			</div>
 
@@ -216,7 +216,7 @@ $TPG = getTotalPage($NUM,$recnum);
 
 	<div class="page-header">
 		<h4>
-			<small><?php echo number_format($NUM)?> <?php echo _LANG('a2041','mediaset')?> ( <?php echo $p?>/<?php echo $TPG.($TPG>1?'pages':'page')?> )</small>
+			<small><?php echo number_format($NUM)?> 개 ( <?php echo $p?>/<?php echo $TPG.($TPG>1?'pages':'page')?> )</small>
 		</h4>
 	</div>
 
@@ -231,14 +231,14 @@ $TPG = getTotalPage($NUM,$recnum);
 				<thead>
 					<tr>
 						<th><label data-tooltip="tooltip" title="선택"><input type="checkbox" class="checkAll-file-user"></label></th>
-						<th><?php echo _LANG('a2042','mediaset')?></th>
-						<th class="rb-left"><?php echo _LANG('a2043','mediaset')?></th>
-						<th><?php echo _LANG('a2044','mediaset')?></th>
-						<th><?php echo _LANG('a2045','mediaset')?></th>
-						<th><?php echo _LANG('a2046','mediaset')?></th>
-						<th><?php echo _LANG('a2047','mediaset')?></th>
-						<th><?php echo _LANG('a2048','mediaset')?></th>
-						<th><?php echo _LANG('a2049','mediaset')?></th>
+						<th>번호</th>
+						<th class="rb-left">파일명</th>
+						<th>소유자</th>
+						<th>서버</th>
+						<th>폴더</th>
+						<th>사이즈</th>
+						<th>다운</th>
+						<th>날짜</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -259,27 +259,27 @@ $TPG = getTotalPage($NUM,$recnum);
 					<?php $M=getDbData($table['s_mbrdata'],'memberuid='.$R['mbruid'],'memberuid,name,nic')?>
 					<td><a href="#." id='_rb-popover-<?php echo $_i?>' data-placement="auto" data-popover="popover" data-content="<div id='rb-popover-<?php echo $_i?>'><script>getPopover('member','<?php echo $M['memberuid']?>','rb-popover-<?php echo $_i?>')</script></div>"><?php echo $M[$_HS['nametype']]?></a></td>
 					<?php else:?>
-					<td><?php echo _LANG('a2051','mediaset')?></td>
+					<td>비회원</td>
 					<?php endif?>
 					<td><?php echo getDomain($R['url'])?></td>
 					<td><?php echo $R['folder']?></td>
 					<td><?php echo $R['size']?getSizeFormat($R['size'],1):''?></td>
 					<td>
-						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=download&amp;uid=<?php echo $R['uid']?>" target="_action_frame_<?php echo $m?>" title="<?php echo _LANG('a2052','mediaset')?>" data-tooltip="tooltip">
+						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=download&amp;uid=<?php echo $R['uid']?>" target="_action_frame_<?php echo $m?>" title="다운로드" data-tooltip="tooltip">
 						<?php echo $R['size']?$R['down']:''?>
 						</a>
 					</td>
 					<td class="rb-update">
-						<time class="timeago" data-toggle="tooltip" datetime="<?php echo getDateFormat($R['d_regis'],'c')?>" data-tooltip="tooltip" title="<?php echo getDateFormat($R['d_regis'],$lang['mediaset']['a2053'])?>"></time>	
+						<time class="timeago" data-toggle="tooltip" datetime="<?php echo getDateFormat($R['d_regis'],'c')?>" data-tooltip="tooltip" title="<?php echo getDateFormat($R['d_regis'],'Y.m.d H:i')?>"></time>
 					</td>
-				</tr> 
-				<?php $_i++;endwhile?> 
+				</tr>
+				<?php $_i++;endwhile?>
 				</tbody>
 			</table>
 		</div>
 
 		<?php if(!$NUM):?>
-		<div class="rb-none"><?php echo _LANG('a2054','mediaset')?></div>
+		<div class="rb-none">첨부파일이 없습니다.</div>
 		<?php endif?>
 
 		<div class="rb-footer clearfix">
@@ -288,11 +288,11 @@ $TPG = getTotalPage($NUM,$recnum);
 				<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
 				<?php //echo getPageLink(5,$p,$TPG,'')?>
 				</ul>
-			</div>	
+			</div>
 
 			<div>
-				<button type="button" onclick="chkFlag('upfile_members[]');checkboxCheck();" class="btn btn-default btn-sm"><?php echo _LANG('a2055','mediaset')?></button>
-				<button type="button" onclick="actCheck('multi_delete');" class="btn btn-default btn-sm" id="rb-action-btn" disabled><?php echo _LANG('a2056','mediaset')?></button>
+				<button type="button" onclick="chkFlag('upfile_members[]');checkboxCheck();" class="btn btn-light btn-sm">선택/해제</button>
+				<button type="button" onclick="actCheck('multi_delete');" class="btn btn-light btn-sm" id="rb-action-btn" disabled>삭제</button>
 			</div>
 		</div>
 	</form>
@@ -378,12 +378,12 @@ function actCheck(act)
 	}
 	if (!j)
 	{
-		alert('<?php echo _LANG('a2058','mediaset')?>      ');
+		alert('선택된 파일이 없습니다.      ');
 		return false;
 	}
 	if (act == 'multi_delete')
 	{
-		if (confirm('<?php echo _LANG('a2059','mediaset')?>        '))
+		if (confirm('정말로 삭제 하시겠습니까?       '))
 		{
 			getIframeForAction(f);
 			f.a.value = act;
@@ -394,5 +394,3 @@ function actCheck(act)
 	return false;
 }
 </script>
-
-

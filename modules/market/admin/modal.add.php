@@ -1,33 +1,33 @@
 <?php
 $addExtensionSet = array
 (
-	'module' => array(_LANG('a3001','market'),$g['path_module'],'rb_module_'._LANG('a3008','market').'.zip'),
-	'layout' => array(_LANG('a3002','market'),$g['path_layout'],'rb_layout_'._LANG('a3009','market').'.zip'),
-	'widget' => array(_LANG('a3003','market'),$g['path_widget'],'rb_widget_'._LANG('a3010','market').'.zip'),
-	'switch' => array(_LANG('a3004','market'),$g['path_switch'],'rb_switch_'._LANG('a3011','market').'.zip'),
-	'plugin' => array(_LANG('a3005','market'),$g['path_plugin'],'rb_plugin_'._LANG('a3012','market').'.zip'),
-	'dashboard' => array(_LANG('a3006','market'),$g['path_module'].'dashboard/widgets','rb_dashboard_'._LANG('a3013','market').'.zip'),
-	'etc' => array(_LANG('a3007','market'),'/root/','rb_etc_'._LANG('a3014','market').'.zip'),
+	'module' => array('모듈',$g['path_module'],'rb_module_모듈폴더명.zip'),
+	'layout' => array('레이아웃',$g['path_layout'],'rb_layout_레이아웃폴더명.zip'),
+	'widget' => array('위젯',$g['path_widget'],'rb_widget_위젯분류폴더명_위젯폴더명.zip'),
+	'switch' => array('스위치',$g['path_switch'],'rb_switch_스위치종류_스위치폴더명.zip'),
+	'plugin' => array('플러그인',$g['path_plugin'],'rb_plugin_플러그인폴더명_버전.zip'),
+	'dashboard' => array('대시보드',$g['path_module'].'dashboard/widgets','rb_dashboard_대시보드폴더명.zip'),
+	'etc' => array('기타자료','/root/','rb_etc_자료명.zip'),
 );
 ?>
 
-
 <form name="_upload_form_" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data">
-<input type="hidden" name="r" value="<?php echo $r?>">
-<input type="hidden" name="m" value="<?php echo $module?>">
-<input type="hidden" name="a" value="add_<?php echo $addType?>">
-<input type="hidden" name="reload" value="<?php echo $reload?>">
+	<input type="hidden" name="r" value="<?php echo $r?>">
+	<input type="hidden" name="m" value="<?php echo $module?>">
+	<input type="hidden" name="a" value="add_<?php echo $addType?>">
+	<input type="hidden" name="reload" value="<?php echo $reload?>">
+
 	<div class="modal-body">
 
-		<div class="attach well form-horizontal">
+		<div class="attach bg-light form-horizontal">
 			<div class="row">
 				<div class="col-sm-2">
 					<input type="file" name="upfile" id="packageupfile" class="hidden" onchange="progressbar();">
-					<button type="button" class="btn btn-default" id="fileselectbtn" onclick="$('#packageupfile').click();"><?php echo _LANG('a3015','market')?></button>
+					<button type="button" class="btn btn-light" id="fileselectbtn" onclick="$('#packageupfile').click();">파일선택</button>
 				</div>
 				<div class="col-sm-10" style="padding-top:7px">
 					<div id="uplocation">
-						<code><?php echo _LANG('a3016','market')?> : <?php echo str_replace('./','/root/',$addExtensionSet[$addType][1])?></code>
+						<code>업로드 위치 : <?php echo str_replace('./','/root/',$addExtensionSet[$addType][1])?></code>
 					</div>
 					<div class="progress progress-striped active hidden" id="progress-bar">
 						<div class="progress-bar" role="progressbar" aria-valuemax="100"></div>
@@ -36,10 +36,10 @@ $addExtensionSet = array
 			</div>
 		</div>
 		<ul>
-			<li><?php echo sprintf(_LANG('a3017','market'),$addExtensionSet[$addType][0])?></li>
-			<li><?php echo sprintf(_LANG('a3018','market'),$addExtensionSet[$addType][2])?></li>
-			<li><?php echo _LANG('a3019','market')?></li>
-			<li><?php echo sprintf(_LANG('a3020','market'),$addExtensionSet[$addType][0])?></li>
+			<li><?php echo sprintf('킴스큐에서 제공하는 공식 %s만 업로드할 수 있습니다.',$addExtensionSet[$addType][0])?></li>
+			<li><?php echo sprintf('파일형식은 <small><strong>%s</strong></small> 이어야 합니다.',$addExtensionSet[$addType][2])?></li>
+			<li><?php echo 'FTP로 직접 추가하시려면 매뉴얼에 따라 추가해 주세요.'?></li>
+			<li><?php echo sprintf('이미 같은명칭의 %s 폴더가 존재할 경우 덧씌워지니 주의하세요.',$addExtensionSet[$addType][0])?></li>
 		</ul>
 	</div>
 </form>
@@ -47,17 +47,19 @@ $addExtensionSet = array
 
 
 
-<!----------------------------------------------------------------------------
-@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
+<!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
-<div id="_modal_header" class="hidden">
-	<button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
-	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-upload fa-lg"></i> <?php echo sprintf(_LANG('a3021','market'),$addExtensionSet[$addType][0])?></h4>
+<div id="_modal_header" hidden>
+	<h5 class="modal-title" id="myModalLabel">
+		<i class="fa fa-upload fa-lg"></i> <?php echo sprintf('%s 추가',$addExtensionSet[$addType][0])?>
+	</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </div>
-<div id="_modal_footer" class="hidden">
-	<button class="btn btn-default pull-left" data-dismiss="modal" type="button"><?php echo _LANG('a3022','market')?></button>
-	<button class="btn btn-primary" type="button" onclick="frames._modal_iframe_modal_window.getFiles();" id="afterChooseFileNext" disabled><?php echo _LANG('a3023','market')?></button>
+<div id="_modal_footer" hidden>
+	<button class="btn btn-light pull-left" data-dismiss="modal" type="button">취소</button>
+	<button class="btn btn-primary" type="button" onclick="frames._modal_iframe_modal_window.getFiles();" id="afterChooseFileNext" disabled>추가하기</button>
 </div>
 
 
@@ -87,7 +89,7 @@ function getFiles()
 	var f = document._upload_form_;
 	if (f.upfile.value == '')
 	{
-		alert('<?php echo _LANG('a3024','market')?>   ');
+		alert('파일이 선택되지 않았습니다.   ');
 		return false;
 	}
 	getIframeForAction(f);

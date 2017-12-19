@@ -141,7 +141,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 			<input type="hidden" name="p" value="<?php echo $p?>">
 			<input type="hidden" name="pagetype" value="<?php echo $R['uid']?$R['pagetype']:3?>">
 
-			<div class="page-header">
+			<div class="page-header mt-2">
 				<h4>
 					<?php if($R['uid']):?>
 					페이지 등록정보

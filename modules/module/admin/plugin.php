@@ -15,28 +15,27 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 
 <div class="row">
 	<div class="col-md-5 col-lg-4" id="tab-content-list">
-		<div class="panel panel-default">
-			<div class="panel-heading rb-icon">
-				<div class="icon">
-					<i class="fa kf kf-module fa-2x"></i>
-				</div>
-				<h4 class="dropdown panel-title">
-					<a><?php echo _LANG('a0001','module')?></a>
-					<span class="pull-right">
-						<button type="button" class="btn btn-default btn-xs<?php if(!$_SESSION['sh_site_page_search']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#panel-search" data-tooltip="tooltip" title="<?php echo _LANG('a0002','module')?>" onclick="sessionSetting('sh_module_search','1','','1');getSearchFocus();"><i class="glyphicon glyphicon-search"></i></button>
-					</span>
-				</h4>
+		<div class="card">
+			<div class="card-header">
+				<i class="fa kf kf-module fa-lg fa-fw"></i>
+				전체모듈
+				<span class="pull-right">
+					<button type="button" class="btn btn-light btn-sm<?php if(!$_SESSION['sh_site_page_search']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#panel-search" data-tooltip="tooltip" title="검색필터" onclick="sessionSetting('sh_module_search','1','','1');getSearchFocus();">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
 			</div>
-			<div id="panel-search" class="collapse<?php if($_SESSION['sh_module_search']):?> in<?php endif?>">
+			<div id="panel-search" class="collapse<?php if($_SESSION['sh_module_search']):?> show<?php endif?>">
 				<form role="form" action="<?php echo $g['s']?>/" method="get">
-				<input type="hidden" name="r" value="<?php echo $r?>">
-				<input type="hidden" name="m" value="<?php echo $m?>">
-				<input type="hidden" name="module" value="<?php echo $module?>">
-				<input type="hidden" name="front" value="<?php echo $front?>">
-				<input type="hidden" name="id" value="<?php echo $id?>">
-					<div class="panel-heading rb-search-box">
+					<input type="hidden" name="r" value="<?php echo $r?>">
+					<input type="hidden" name="m" value="<?php echo $m?>">
+					<input type="hidden" name="module" value="<?php echo $module?>">
+					<input type="hidden" name="front" value="<?php echo $front?>">
+					<input type="hidden" name="id" value="<?php echo $id?>">
+
+					<div class="card-header rb-search-box">
 						<div class="input-group">
-							<div class="input-group-addon"><small><?php echo _LANG('a0003','module')?></small></div>
+							<div class="input-group-addon"><small>출력수</small></div>
 							<div class="input-group-btn">
 								<select class="form-control" name="recnum" onchange="this.form.submit();">
 								<option value="15"<?php if($recnum==15):?> selected<?php endif?>>15</option>
@@ -48,25 +47,25 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 						</div>
 					</div>
 					<div class="rb-keyword-search">
-						<input type="text" name="keyw" class="form-control" value="<?php echo $keyw?>" placeholder="<?php echo _LANG('a0004','module')?>">
+						<input type="text" name="keyw" class="form-control" value="<?php echo $keyw?>" placeholder="모듈명,아이디 검색">
 					</div>
 				</form>
 			</div>
 
-			<div class="panel-collapse collapse in" id="collapmetane">
+			<div class="panel-collapse collapse show" id="collapmetane">
 				<table id="module-list" class="table">
 					<thead>
 						<tr>
-							<td class="rb-name"><span><?php echo _LANG('a0005','module')?></span></td>
-							<td class="rb-id"><span><?php echo _LANG('a0006','module')?></span></td>
-							<td class="rb-time"><span><?php echo _LANG('a0007','module')?></span></td>
+							<td class="rb-name"><span>모듈명</span></td>
+							<td class="rb-id"><span>아이디</span></td>
+							<td class="rb-time"><span>등록일</span></td>
 						</tr>
 					</thead>
 					<tbody>
 						<?php while($_R = db_fetch_array($RCD)):?>
 						<tr<?php if($id==$_R['id']):?> class="active1"<?php endif?> onclick="goHref('<?php echo $g['adm_href']?>&amp;recnum=<?php echo $recnum?>&amp;p=<?php echo $p?>&amp;id=<?php echo $_R['id']?>&amp;keyw=<?php echo urlencode($keyw)?>#page-info');">
 							<td class="rb-name">
-								<i class="kf <?php echo $_R['icon']?$_R['icon']:'kf-'.$_R['id']?>"></i> 
+								<i class="kf <?php echo $_R['icon']?$_R['icon']:'kf-'.$_R['id']?>"></i>
 								<?php echo $_R['name']?>
 								<?php if(!$_R['hidden']):?><small><small class="glyphicon glyphicon-eye-open"></small></small><?php endif?>
 							</td>
@@ -78,7 +77,7 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 						<?php endwhile?>
 					</tbody>
 				</table>
-			
+
 				<?php if($TPG>1):?>
 				<div class="panel-footer rb-panel-footer">
 					<ul class="pagination">
@@ -94,8 +93,8 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 	<?php if(!$R['id']) $R=getDbData($table['s_module'],"id='site'",'*')?>
 	<?php if($g['device']):?><a name="page-info"></a><?php endif?>
 	<div class="col-md-7 col-lg-8" id="tab-content-view">
-		<div class="page-header">
-			<h4><?php echo _LANG('a3001','module')?></h4>
+		<div class="page-header mt-2">
+			<h4>모듈 익스텐션 정보</h4>
 		</div>
 
 		<div class="row">
@@ -108,18 +107,18 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 				</div>
 			</div>
 			<div class="col-md-10 col-sm-10">
-				<h4 class="media-heading">
-					<strong><?php echo $R['name']?></strong> 
+				<h4 class="mb-2">
+					<strong><?php echo $R['name']?></strong>
 				</h4>
-				<button type="button" class="btn btn-default" style="margin:10px 0"><span class="label label-default">1.1.0</span> 최신 업데이트가 없습니다.</button>
+				<button type="button" class="btn btn-light mb-2"><span class="badge badge-secondary">1.1.0</span> 최신 업데이트가 없습니다.</button>
 				<p class="text-muted"><small>선택된 모듈에 대한 플러그인 정보입니다.</small></p>
 			</div>
 		</div>
 
 		<hr>
 
-	
-		<?php 
+
+		<?php
 		include $g['path_core'].'function/rss.func.php';
 		include $g['path_module'].'market/var/var.php';
 		$_serverinfo = explode('/',$d['market']['url']);
@@ -129,7 +128,7 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 		$recnum	=  10;
 		$TPG = getTotalPage($_updatelength,$recnum);
 		?>
-	
+
 		<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
@@ -163,10 +162,10 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 
 						<td><?php echo getDateFormat($_supdate[0],$lang['module']['date1'])?></td>
 						<td>
-							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_plugin&amp;extension_path=./modules/<?php echo $id?>/&amp;type=download&amp;ufile=<?php echo $var1[0]?>.<?php echo $var1[5]?>" onclick="return hrefCheck(this,true,'정말로 다운로드 받으시겠습니까?');" class="btn btn-default">다운로드</a>
+							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_plugin&amp;extension_path=./modules/<?php echo $id?>/&amp;type=download&amp;ufile=<?php echo $var1[0]?>.<?php echo $var1[5]?>" onclick="return hrefCheck(this,true,'정말로 다운로드 받으시겠습니까?');" class="btn btn-light">다운로드</a>
 						</td>
 						<td>
-							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_plugin&amp;extension_path=./modules/<?php echo $id?>/&amp;type=delete&amp;ufile=<?php echo $var1[0]?>.<?php echo $var1[5]?>" title="테마 제거" onclick="return hrefCheck(this,true,'정말로 이 테마를 제거하시겠습니까?');" class="btn btn-default">테마제거</a>
+							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_plugin&amp;extension_path=./modules/<?php echo $id?>/&amp;type=delete&amp;ufile=<?php echo $var1[0]?>.<?php echo $var1[5]?>" title="테마 제거" onclick="return hrefCheck(this,true,'정말로 이 테마를 제거하시겠습니까?');" class="btn btn-light">테마제거</a>
 						</td>
 					</tr>
 
@@ -181,10 +180,10 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 
 						<td><span class="label label-default">미설치</span></td>
 						<td>
-							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_plugin&amp;extension_path=./modules/<?php echo $id?>/&amp;type=download&amp;ufile=<?php echo $var1[0]?>.<?php echo $var1[5]?>" onclick="return hrefCheck(this,true,'정말로 다운로드 받으시겠습니까?');" class="btn btn-default">다운로드</a>
+							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_plugin&amp;extension_path=./modules/<?php echo $id?>/&amp;type=download&amp;ufile=<?php echo $var1[0]?>.<?php echo $var1[5]?>" onclick="return hrefCheck(this,true,'정말로 다운로드 받으시겠습니까?');" class="btn btn-light">다운로드</a>
 						</td>
 						<td>
-							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_plugin&amp;extension_path=./modules/<?php echo $id?>/&amp;type=install&amp;ufile=<?php echo $var1[0]?>.<?php echo $var1[5]?>" onclick="return hrefCheck(this,true,'정말로 설치 하시겠습니까?');" class="btn btn-default">원격설치</a>
+							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_plugin&amp;extension_path=./modules/<?php echo $id?>/&amp;type=install&amp;ufile=<?php echo $var1[0]?>.<?php echo $var1[5]?>" onclick="return hrefCheck(this,true,'정말로 설치 하시겠습니까?');" class="btn btn-light">원격설치</a>
 						</td>
 					</tr>
 
