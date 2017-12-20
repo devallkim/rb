@@ -429,7 +429,7 @@
 
 .rb-hidden-system-site .rb-system-site {
     /*z-index:903;*/
-    right: -299px;
+    right: -300px;
 }
 
 .rb-hidden-system-site .rb-system-main {
@@ -437,8 +437,8 @@
 }
 
 .rb-hidden-system-site .rb-system-site:hover {
-    /*right  : 0;*/
-    /*z-index: 99999;*/
+    right  : 0;
+    z-index: 99999;
 }
 .rb-hidden-system-site .rb-system-site.open {
     right  : 0;
