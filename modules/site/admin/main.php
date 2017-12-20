@@ -23,7 +23,7 @@ if ($R['uid']){	$DOMAINS = getDbArray($table['s_domain'],'site='.$R['uid'],'*'
 	<div class="collapse" id="site-info">		<div class="form-group row rb-outside">			<label class="col-sm-2 col-form-label">코드</label>			<div class="col-sm-10">				<div class="input-group input-group-lg">					<input class="form-control" placeholder="미입력 시 자동으로 부여됩니다." type="text" name="id" value="<?php echo $R['id']?>">					<span class="input-group-btn">						<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-tooltip="tooltip" title="모바일 전용" data-target="#guide_sitecode"><i class="fa fa-question fa-lg text-muted"></i></button>					</span>				</div>				<ul id="guide_sitecode" class="collapse rb-guide">					<li>단일 도메인으로 복수의 사이트를 운영할 수 있습니다.</li>					<li>사이트별로 계정아이디를 등록합니다.(영문대/소문자+숫자+_ 조합으로 등록할 수 있습니다)</li>					<li>영문사이트 서비스 연결 예제 : <code>kimsq.com/rb/kr</code> , <code>kimsq.com/rb/en</code></li>
 				</ul>			</div>		</div>	</div>
 	<div class="page-header clearfix">		<h4 class="pull-left">			레이아웃		</h4>		<div class="form-check pull-right">			<label class="form-check-label">				<input class="form-check-input" type="checkbox" value="" data-toggle="collapse" data-target="#layout-mobile"<?php if($R['m_layout']):?> checked<?php endif?>><i></i>모바일용 별도 레이아웃 사용			</label>		</div>	</div>
-	<div class="form-group row">		<label class="col-sm-2 col-form-label">기본</label>		<div class="col-sm-10">			<div class="form-row">				<div class="col-sm-6" id="rb-layout-select">					<select class="form-control custom-select form-control-lg" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','custom-select form-control-lg');">
+	<div class="form-group form-row">		<label class="col-sm-2 col-form-label">기본</label>		<div class="col-sm-10">			<div class="form-row">				<div class="col-sm-6" id="rb-layout-select">					<select class="form-control custom-select form-control-lg" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','custom-select form-control-lg');">
 						<?php $_layoutExp1=explode('/',$R['layout'])?>						<?php $dirs = opendir($g['path_layout'])?>						<?php $_i=0;while(false !== ($tpl = readdir($dirs))):?>						<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 						<?php if(!$_i&&!$R['layout']) $_layoutExp1[0] = $tpl?>						<option value="<?php echo $tpl?>"<?php if($_layoutExp1[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>						<?php $_i++;endwhile?>						<?php closedir($dirs)?>					</select>				</div>				<div class="col-sm-6" id="rb-layout-select2">					<select class="form-control custom-select form-control-lg" name="layout_1_sub"<?php if(!$_layoutExp1[0]):?> disabled<?php endif?>>						<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
 						<?php while(false !== ($tpl1 = readdir($dirs1))):?>
@@ -31,26 +31,52 @@ if ($R['uid']){	$DOMAINS = getDbArray($table['s_domain'],'site='.$R['uid'],'*'
 						<option value="<?php echo $tpl1?>"<?php if($_layoutExp1[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
 						<?php endwhile?>
 						<?php closedir($dirs1)?>					</select>				</div>			</div>		</div>	</div>
-	<div class="form-group row collapse<?php if($R['m_layout']):?> in<?php endif?>" id="layout-mobile">		<label class="col-sm-2 col-form-label">모바일 전용</label>		<div class="col-sm-9">			<div class="form-row">				<div class="col-sm-6" id="rb-mlayout-select">					<select class="form-control custom-select form-control-lg" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','input-lg');">
-						<option value="0">사용안함(기본 레이아웃 적용)</option>						<?php $_layoutExp2=explode('/',$R['m_layout'])?>
-						<?php $dirs = opendir($g['path_layout'])?>
-						<?php while(false !== ($tpl = readdir($dirs))):?>
-						<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
-						<option value="<?php echo $tpl?>"<?php if($_layoutExp2[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
-						<?php endwhile?>
-						<?php closedir($dirs)?>					</select>				</div>
-				<div class="col-sm-6" id="rb-mlayout-select2">					<select class="form-control custom-select form-control-lg" name="m_layout_1_sub"<?php if(!$R['m_layout']):?> disabled<?php endif?>>
-						<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
-						<?php $dirs1 = opendir($g['path_layout'].$_layoutExp2[0])?>
-						<?php while(false !== ($tpl1 = readdir($dirs1))):?>
-						<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-						<option value="<?php echo $tpl1?>"<?php if($_layoutExp2[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
-						<?php endwhile?>
-						<?php closedir($dirs1)?>
-					</select>				</div>			</div>
-			<span class="help-block">				<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_mobile"><i class="fa fa-question-circle fa-fw"></i>도움말</button>			</span>
-			<ul id="guide_mobile" class="collapse rb-guide">				<li>모바일기기로 접속시 출력할 사이트 레이아웃(UI)을 지정합니다.</li>				<li>모바일 전용 레이아웃을 지정하지 않으면 모바일 기기로 접속시 기본 레이아웃으로 적용됩니다.</li>
-				<li>모바일 기기에 대해 정의하려면 디바이스 설정 을 이용하세요. <a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=device">more</a></li>			</ul>		</div>	</div>
+	<div class="collapse<?php if($R['m_layout']):?> show<?php endif?>" id="layout-mobile">
+
+		<div class="form-group form-row">
+			<label class="col-sm-2 col-form-label">모바일 전용</label>
+			<div class="col-sm-10">
+				<div class="form-row">
+					<div class="col-sm-6" id="rb-mlayout-select">
+						<select class="form-control custom-select form-control-lg" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','input-lg');">
+								<option value="0">사용안함(기본 레이아웃 적용)</option>
+							<?php $_layoutExp2=explode('/',$R['m_layout'])?>
+								<?php $dirs = opendir($g['path_layout'])?>
+								<?php while(false !== ($tpl = readdir($dirs))):?>
+								<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
+								<option value="<?php echo $tpl?>"<?php if($_layoutExp2[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
+								<?php endwhile?>
+								<?php closedir($dirs)?>
+						</select>
+					</div>
+
+						<div class="col-sm-6" id="rb-mlayout-select2">
+						<select class="form-control custom-select form-control-lg" name="m_layout_1_sub"<?php if(!$R['m_layout']):?> disabled<?php endif?>>
+								<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+								<?php $dirs1 = opendir($g['path_layout'].$_layoutExp2[0])?>
+								<?php while(false !== ($tpl1 = readdir($dirs1))):?>
+								<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
+								<option value="<?php echo $tpl1?>"<?php if($_layoutExp2[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
+								<?php endwhile?>
+								<?php closedir($dirs1)?>
+							</select>
+					</div>
+				</div>
+
+					<span class="help-block">
+					<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_mobile"><i class="fa fa-question-circle fa-fw"></i>도움말</button>
+				</span>
+
+					<ul id="guide_mobile" class="collapse rb-guide">
+					<li>모바일기기로 접속시 출력할 사이트 레이아웃(UI)을 지정합니다.</li>
+					<li>모바일 전용 레이아웃을 지정하지 않으면 모바일 기기로 접속시 기본 레이아웃으로 적용됩니다.</li>
+						<li>모바일 기기에 대해 정의하려면 디바이스 설정 을 이용하세요. <a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=device">more</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
 	<div class="collapse<?php if($_SESSION['sh_site_main_1']):?> in<?php endif?>" id="site-advance"><!-- 고급설정 레이어 -->
 		<div class="page-header clearfix">
 			<h4 class="pull-left">메인 페이지</h4>

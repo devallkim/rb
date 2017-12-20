@@ -68,17 +68,18 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 
 <form name="_upload_form_" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" target="_upload_iframe_">
-<input type="hidden" name="r" value="<?php echo $r?>">
-<input type="hidden" name="m" value="<?php echo $m?>">
-<input type="hidden" name="a" value="upload">
-<input type="hidden" name="saveDir" value="<?php echo $g['path_file']?>">
-<input type="hidden" name="gparam" value="<?php echo $gparam?>">
-<input type="hidden" name="category" value="<?php echo $_album?>">
-<input type="hidden" name="mediaset" value="Y">
-<input type="hidden" name="ablum_type" value="1">
+	<input type="hidden" name="r" value="<?php echo $r?>">
+	<input type="hidden" name="m" value="<?php echo $m?>">
+	<input type="hidden" name="a" value="upload">
+	<input type="hidden" name="saveDir" value="<?php echo $g['path_file']?>">
+	<input type="hidden" name="gparam" value="<?php echo $gparam?>">
+	<input type="hidden" name="category" value="<?php echo $_album?>">
+	<input type="hidden" name="mediaset" value="Y">
+	<input type="hidden" name="ablum_type" value="1">
 
-<input name="upfiles[]" type="file" multiple="true" accept="image/*" id="filefiled" class="hidden" onchange="getFiles();">
+	<input name="upfiles[]" type="file" multiple="true" accept="image/*" id="filefiled" class="hidden" onchange="getFiles();">
 </form>
+
 <iframe name="_upload_iframe_" width="1" height="1" frameborder="0" scrolling="no"></iframe>
 
 <div id="photobox">
@@ -122,7 +123,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 		<?php if($NUM):?>
 		<?php if(!$dfiles):?>
-		<div class="btn-toolbar well well-sm">
+		<div class="btn-toolbar border well-sm">
 			<div class="btn-group">
 				<button type="button" class="btn btn-light" title="전체선택" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','true');"><i class="fa fa-check-square-o fa-lg"></i></button>
 				<button type="button" class="btn btn-light" title="선택해제" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','false');"><i class="fa fa-minus-square-o fa-lg"></i></button>
@@ -394,18 +395,30 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 <!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
-<div id="_modal_header" class="hidden">
-    <button type="button" class="close rb-close-white" style="position:absolute;right:15px;z-index:1;" data-dismiss="modal" aria-hidden="true">&times;</button>
+<div id="_modal_header" hidden>
 
 	<ul class="nav nav-tabs" style="position:relative;left:5px;margin-bottom:-20px;z-index:0;">
-		<li class="active"><a href="#">포토셋</a></li>
+		<li class="nav-item">
+			<a href="#" class="nav-link active">
+				포토셋
+			</a>
+		</li>
 		<?php if(!$dfiles && !$dropfield):?>
-		<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&iframe=Y&mdfile=modal.video.media&dropfield=<?php echo $dropfield?>&dropfiles=<?php echo $dropfiles?>" target="_modal_iframe_modal_window">비디오셋</a></li>
+		<li class="nav-item">
+			<a class="nav-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&iframe=Y&mdfile=modal.video.media&dropfield=<?php echo $dropfield?>&dropfiles=<?php echo $dropfiles?>" target="_modal_iframe_modal_window">
+				비디오셋
+			</a>
+		</li>
 		<?php endif?>
 	</ul>
+
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+
 </div>
 
-<div id="_modal_footer" class="hidden">
+<div id="_modal_footer" hidden>
 	<?php if(!$dfiles):?>
 	<button type="button" class="btn btn-primary pull-left" <?php if($album!='trash'):?>onclick="frames._modal_iframe_modal_window.getId('filefiled').click();"<?php else:?>disabled<?php endif?>><i class="fa fa-cloud-upload fa-lg"></i> PC사진</button>
 	<button type="button" class="btn btn-primary pull-left" <?php if($album!='trash'):?>onclick="frames._modal_iframe_modal_window.picAdd();"<?php else:?>disabled<?php endif?>><i class="fa fa-link fa-lg"></i> 외부사진</button>
@@ -767,7 +780,7 @@ function modalSetting()
 {
 	parent.getId('modal_window_dialog_modal_window').style.position = 'absolute';
 	parent.getId('modal_window_dialog_modal_window').style.display = 'block';
-	parent.getId('modal_window_dialog_modal_window').style.width = '100%';
+	parent.$('#modal_window_dialog_modal_window').css('max-width','100%');
 	parent.getId('modal_window_dialog_modal_window').style.padding = '0 20px 0 20px';
 	parent.getId('modal_window_dialog_modal_window').style.top = '0';
 	parent.getId('modal_window_dialog_modal_window').style.left = '0';

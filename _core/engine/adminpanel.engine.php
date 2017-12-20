@@ -744,15 +744,6 @@ $(document).ready(function(){
 
 	$('.js-tooltip').tooltip()
 
-	$(".rb-system-site .rb-opener").click(function(){
-		$('.rb-system-site').toggleClass('open')
-	});
-
-	$('iframe').contents().find('#content-main').click(function(){
-		console.log('dd')
-		$('.rb-system-site').removeClass('open')
-	});
-
 	$(".rb-system-admin .rb-icon-minify").click(function(){
 		$(".container-fluid").toggleClass("rb-minified-sidebar");
 		if ($(".container-fluid").hasClass("rb-minified-sidebar"))
