@@ -59,7 +59,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 
 
 
-				<div  style="height: calc(100vh - 12.15rem);">
+				<div  style="height: calc(100vh - 16.8rem);">
 
 					<div id="panel-search" class="collapse<?php if($_SESSION['sh_site_page_search']):?> show<?php endif?>">
 						<form role="form" action="<?php echo $g['s']?>/" method="get">

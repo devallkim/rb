@@ -1,3 +1,7 @@
+body {
+	background-color: #343a40
+}
+
 /*************** theme ******************/
 
 .form-control,
@@ -118,6 +122,12 @@
   display: block;
   background-color: #343a40;
   min-height: 100%;
+	border-right: 1px solid #222;
+}
+
+.rb-hidden-system-admin .rb-system-sidebar.rb-inverse,
+.rb-minified-sidebar .rb-system-sidebar.rb-inverse {
+	box-shadow: 1px 0 3px rgba(0, 0, 0, 0.5);
 }
 
 .rb-system-admin .btn-toolbar .btn {
@@ -151,6 +161,10 @@
 .rb-system-sidebar.rb-inverse nav ul li.open>a,
 .rb-system-sidebar.rb-inverse nav ul li.open>a b {
   color: #fff!important;
+}
+
+.rb-system-admin nav > ul li.active ul li.active >a {
+	background-color: #222
 }
 
 .rb-system-sidebar.rb-inverse nav ul li:hover,
@@ -317,6 +331,21 @@
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
 
+.rb-system-sidebar.rb-system-site {
+	background-color: #343a40;
+	border-left: 1px solid #222;
+}
+.rb-system-site .rb-panel-top {
+  background-color: #343a40;
+  border-bottom: 1px solid #222;
+	color: #eee
+
+}
+.rb-system-site .rb-icon-hide {
+	color: #eee
+}
+
+
 
 /* tabs-below */
 
@@ -372,4 +401,67 @@
   background-color: transparent;
   border-color: transparent;
   border: none;
+}
+
+.rb-system-main {
+	background-color: #343a40
+}
+.rb-system-site .rb-content-padded {
+   padding: 0;
+}
+.nav-tabs {
+  border-bottom: 1px solid transparent;
+}
+.nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.nav-tabs .nav-link.active {
+  color: #eee;
+  background-color: inherit;
+  border-color: transparent;
+}
+.rb-system-site .card {
+	background-color: inherit;
+	color: #eee
+}
+.rb-system-site .form-control {
+	background-color: #1f2227;
+	color: #abafb5;
+	border-color: #1b1e24
+}
+.rb-system-site .form-control:focus {
+	color: #abafb5;
+	background-color: #1f2227;
+	border-color: #5792ef;
+	border-width: 1px;
+	outline: 0;
+	box-shadow: none;
+}
+.bg-light {
+  background-color: rgba(0,0,0,.03)!important;
+}
+.btn.btn-light {
+	background-color: #393f4a;
+	background-image: none;
+	color: #9ea6b3!important;
+	border-color: #181a1e
+}
+.btn.btn-block {
+  border-radius: 4rem;
+}
+.btn-outline-primary {
+  color: #ccc;
+  border-color: #ccc;
+}
+.rb-hidden-system-site .rb-system-site .rb-opener {
+	background-color: inherit;
+	border-bottom-left-radius: 2px;
+	border-top-left-radius: 2px;
+	box-shadow: -1px 0 2px rgba(0, 0, 0, 0.5);
+	color: #9ea6b3;
+	display: block;
+	left: -20px;
+	padding: 0 5px;
 }

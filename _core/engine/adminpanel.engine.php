@@ -76,7 +76,6 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 					<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="rounded-circle">
 					<span><?php echo $my[$_HS['nametype']]?></span>
 					<small id="rb-notification-name"></small>
-					<span class="caret"></span>
 				</a>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-profile"><i class="fa fa-user"></i> 프로필관리</a></li>
@@ -119,7 +118,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 			</div>
 			<div class="rb-buttons rb-content-padded">
 				<div class="btn-group">
-					<a data-toggle="modal" data-target="#modal_window" class="btn btn-light rb-modal-add-package" style="width:170px"><i class="fa fa-plus-circle fa-lg"></i> 패키지 설치</a>
+					<a data-toggle="modal" data-target="#modal_window" class="btn btn-light rb-modal-add-package" style="width:165px"><i class="fa fa-plus-circle fa-lg"></i> 패키지 설치</a>
 					<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-caret-down" aria-hidden="true"></i>
 					</button>

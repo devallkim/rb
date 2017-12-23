@@ -35,7 +35,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 						</div>
 						<?php endif?>
 
-						<div class="card-body" style="height: calc(100vh - 12.15rem);">
+						<div class="card-body" style="height: calc(100vh - 14.5rem);">
 							<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
 							<?php $_treeOptions=array('site'=>$s,'table'=>$table['s_menu'],'dispNum'=>true,'dispHidden'=>false,'dispCheckbox'=>false,'allOpen'=>false,'bookmark'=>'site-menu-info')?>
 							<?php $_treeOptions['link'] = $g['adm_href'].'&amp;cat='?>

@@ -1,12 +1,35 @@
+html {
+  scrollbar-face-color: #646464;
+  scrollbar-base-color: #646464;
+  scrollbar-3dlight-color: #646464;
+  scrollbar-highlight-color: #646464;
+  scrollbar-track-color: #000;
+  scrollbar-arrow-color: #000;
+  scrollbar-shadow-color: #646464;
+  scrollbar-dark-shadow-color: #646464;
+}
+
+::-webkit-scrollbar { width: 8px; height: 3px;}
+::-webkit-scrollbar-button {  background-color: #666; }
+::-webkit-scrollbar-track {  background-color: #646464;}
+::-webkit-scrollbar-track-piece { background-color: #000;}
+::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
+::-webkit-scrollbar-corner { background-color: #646464;}}
+::-webkit-resizer { background-color: #666;}
+
 /* ------------------ 공통사항 --------------------*/
 body {
 	padding-top: 3.5rem;
-	background-color: #fff;
+	background-color: #272c32 !important;
 	padding: 0;
 	font-family: 'Open Sans', '돋움', dotum, sans-serif;
 	font-size: 16px;
 	line-height: 24px;
-	color: #2f2936
+	color: #ccc
+}
+
+label {
+	color: #ccc
 }
 
 #rb-body.lang-ko {
@@ -17,7 +40,7 @@ body {
 	font-family: 'Open Sans', Helvetica, Arial, 'Liberation Sans', sans-serif;
 }
 
-#rb-body .btn {
+.btn {
 	border-radius: 0px;
 	font-size: 14px;
 }
@@ -27,7 +50,7 @@ body {
 }
 
 .navbar {
-	border-bottom: 1px solid rgba(0,0,0,.125);
+	border-bottom: 1px solid #222;
 	background-color: #fff
 }
 
@@ -94,7 +117,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  border-right: 1px solid rgba(0,0,0,.125);
+  border-right: 1px solid #222;
 }
 
 .sidebar .nav {
@@ -137,7 +160,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 20px;
-	font-weight: 600;
+	font-weight: 300;
 	line-height: 1;
 }
 .h2, h2 {
@@ -152,7 +175,7 @@ h1, h2, h3, h4, h5, h6 {
 .page-header {
   padding-bottom: 9px;
   margin: 40px 0px 20px;
-  border-bottom: 1px solid rgb(238, 238, 238)
+  border-bottom: 1px solid #222
 }
 
 .page-header h1, .page-header h2, .page-header h3, .page-headerh4, .page-header h5, .page-header h6 {
@@ -160,7 +183,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card {
-	background: #fff;
+	background-color: inherit;
 	border: 1px solid #e2dee6;
 	border-radius: 3px;
 	margin: 0 0 20px;
@@ -170,8 +193,10 @@ h1, h2, h3, h4, h5, h6 {
 .card-header {
 	font-weight: 600;
 	line-height: 1;
-	background: #fbfbfc;
+	/*background: #fbfbfc;*/
+	border-bottom: 1px solid #222
 }
+
 
 .subnav-item {
   position: relative;
@@ -197,10 +222,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /*color*/
 .muted-link {
-  color: #586069 !important;
+  color: #ccc !important;
 }
 .muted-link:hover {
-  color: #0366d6 !important;
+  color: #eee !important;
   text-decoration: none;
 }
 .text-gray {
@@ -228,7 +253,35 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #eaecef !important;
 }
 
+/*form*/
+.custom-select {
+background-color: #343b43 !important;
+background: inherit url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' v…'0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E) no-repeat right .75rem center;
+}
 
+.form-control {
+	background-color: #1f2227;
+	color: #abafb5;
+	border-color: #1b1e24
+}
+.form-control:focus {
+	color: #abafb5;
+	background-color: #1f2227;
+	border-color: #5792ef;
+	border-width: 1px;
+	outline: 0;
+	box-shadow: none;
+}
+
+.btn.btn-light {
+	background-color: #343b43;
+	color: #757a87
+}
+
+.btn-outline-primary {
+  color: #ccc;
+  border-color: #ccc;
+}
 
 /* ------------------ table --------------------*/
 #rb-body .table {
@@ -248,11 +301,24 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-/*theme*/
+/*comment*/
 .form-control,
 .input-group-lg>.form-control {
 	border-radius: 0
 }
+
+.border-default {
+	border-color: #222
+}
+
+.btn.btn-block {
+	border-radius: 4rem
+}
+
+.breadcrumb {
+	background-color: transparent
+}
+
 
 /* ------------------ Rb smart form --------------------*/
 .rb-form .checkbox,
@@ -326,16 +392,7 @@ h1, h2, h3, h4, h5, h6 {
 		-webkit-transition: opacity .1s;
 }
 
-.rb-form .checkbox,
-.rb-form .checkbox-inline,
-.rb-form .radio,
-.rb-form .radio-inline {
-	margin-bottom: 4px;
-	padding-left: 23px;
-	line-height: 25px;
-	color: #404040;
-	cursor: pointer;
-}
+
 
 .rb-form .checkbox i,
 .rb-form .checkbox-inline i,
@@ -609,14 +666,14 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Apple SD Gothic Neo',Dotum,'돋움',sans-serif;
 }
 .btn-light {
-  color: #24292e;
+  color: #ccc;
   user-select: none;
-  background-color: #eff3f6;
-  background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-color: #444;
+  /*background-image: linear-gradient(-180deg, #444 0%, #222 90%);*/
   background-repeat: repeat-x;
   background-position: -1px -1px;
   background-size: 110% 110%;
-  border: 1px solid rgba(27,31,35,0.2);
+  border: 1px solid #222;
   border-radius: 0.25em;
   white-space: nowrap;
   vertical-align: middle;
@@ -706,4 +763,15 @@ h1, h2, h3, h4, h5, h6 {
   background-image: none;
   border-color: rgba(27,31,35,0.2);
   box-shadow: none;
+}
+
+
+/*유틸리티*/
+.bg-dark {
+  background-color: #272c32!important;
+}
+
+/*tree*/
+.rb-tree .rb-active {
+  color: rgb(0, 123, 255);
 }
