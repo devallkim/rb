@@ -293,7 +293,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<input type="text" class="form-control" name="title" value="<?php echo $_HS['title']?>">
 									<span class="help-block"><small>입력된 내용은 브라우저의 타이틀로 사용됩니다.<br>치환코드는 매뉴얼을 참고하세요.</small></span>
 								</div>
-								<button type="submit" class="btn btn-primary btn-block">저장하기</button>
+								<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
 							</div>
 						</div>
 
@@ -355,7 +355,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 											</select>
 										</div>
 									</div>
-									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
+									<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
 								</div>
 							</div>
 						</div>
@@ -388,7 +388,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 										<?php endwhile?>
 										</select>
 									</div>
-									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
+									<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
 								</div>
 							</div>
 						</div>
@@ -421,7 +421,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 										<option value="3"<?php if($_HS['s004']=='3'):?> selected="selected"<?php endif?>>정지</option>
 										</select>
 									</div>
-									<button type="submit" class="btn btn-primary btn-block">저장하기</button>
+									<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
 								</div>
 							</div>
 						</div>
@@ -551,7 +551,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 								</div>
 								<?php endforeach?>
 
-								<button type="submit" class="btn btn-primary btn-block">저장하기</button>
+								<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
 								<?php endif?>
 
 							</div>

@@ -116,13 +116,7 @@
 
 .rb-system-sidebar.rb-inverse {
   display: block;
-  background-color: #222222;
-  background: -moz-linear-gradient(left, #222222 93%, #111111 100%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(93%, #222222), color-stop(100%, #111111));
-  background: -webkit-linear-gradient(left, #222222 93%, #111111 100%);
-  background: -o-linear-gradient(left, #222222 93%, #111111 100%);
-  background: -ms-linear-gradient(left, #222222 93%, #111111 100%);
-  background: linear-gradient(to right, #222222 93%, #111111 100%);
+  background-color: #343a40;
   min-height: 100%;
 }
 
@@ -137,22 +131,12 @@
 .rb-system-admin .btn-toolbar .btn:active {
   color: #428BCA
 }
-
-.rb-system-sidebar.rb-inverse .rb-buttons {
-  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
-  border-bottom: 1px solid #525151;
-}
-
 .rb-system-sidebar.rb-inverse .rb-buttons .rb-content-padded {
   border-bottom: 1px solid #1A1817;
 }
 
 .rb-system-sidebar.rb-inverse .rb-buttons .rb-inner {
   border-bottom: 1px solid #1A1817;
-}
-
-.rb-system-sidebar.rb-inverse nav .list-group-item:hover {
-  background-color: #080808
 }
 
 .rb-system-sidebar.rb-inverse nav ul li a:focus {
@@ -196,15 +180,15 @@
 }
 
 .rb-system-sidebar.rb-inverse nav ul ul {
-  background: rgba(69, 69, 69, .7);
+  /*background: rgba(69, 69, 69, .7);*/
 }
 
 .rb-system-sidebar.rb-inverse nav ul .active ul {
-  background: rgba(69, 69, 69, 1);
+  /*background: rgba(69, 69, 69, 1);*/
 }
 
 .rb-system-sidebar.rb-inverse nav>ul>li>ul::before {
-  border-left: 1px solid #7A7A7A;
+  border-left: 1px dotted #7A7A7A;
 }
 
 .rb-system-sidebar.rb-inverse nav > ul li.active>a.collapsed:before {
@@ -220,7 +204,7 @@
 }
 
 .rb-system-sidebar.rb-inverse nav>ul ul li::before {
-  border-top: 1px solid #7A7A7A;
+  border-top: 1px dotted #7A7A7A;
 }
 
 .rb-system-sidebar.rb-inverse nav>ul>li>a>i>em {
@@ -232,11 +216,6 @@
 
 /*login-info*/
 
-.rb-system-sidebar.rb-inverse .login-info {
-  color: #fff;
-  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
-  border-bottom: 1px solid #525151
-}
 
 .rb-system-sidebar.rb-inverse .login-info a.rb-username {
   color: #a8a8a8;
@@ -246,9 +225,6 @@
   color: #fff
 }
 
-.rb-system-sidebar.rb-inverse .login-info>span {
-  border-bottom: 1px solid #1A1817
-}
 
 .rb-minified-sidebar .rb-system-sidebar.rb-inverse .login-info {
   border-bottom: 1px solid #181818

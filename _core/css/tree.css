@@ -16,7 +16,7 @@
 }
 
 
-.rb-tree li::before, 
+.rb-tree li::before,
 .rb-tree li::after {
 	content: '';
 	left: -15px;
@@ -25,7 +25,7 @@
 }
 
 .rb-tree li:before {
-	border-left: 1px solid #ccc;
+	border-left: 1px dotted #ccc;
 	bottom: 50px;
 	height: 100%;
 	top: -8px;
@@ -37,13 +37,13 @@
 }
 
 .rb-tree li:after {
-	border-top: 1px solid #ccc;
+	border-top: 1px dotted #ccc;
 	height: 20px;
 	top: 11px;
 	width: 15px;
 }
 
-.rb-tree a.rb-branch, 
+.rb-tree a.rb-branch,
 .rb-tree a.rb-leaf {
 	color: #969494
 }

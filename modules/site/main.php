@@ -1,6 +1,5 @@
 <?php
 if(!defined('__KIMS__')) exit;
-
 if ($system)
 {
 	if (strpos('[popup.joint][popup.widget]',$system))
@@ -15,7 +14,6 @@ if ($system)
 	$g['img_module_skin'] = $g['url_module_skin'].'/images';
 	$g['dir_module_mode'] = $g['dir_module_skin'].$system;
 	$g['url_module_mode'] = $g['url_module_skin'].'/'.$system;
-
 	$g['main'] = $g['dir_module_mode'].'.php';
 }
 else
@@ -57,7 +55,6 @@ else
 			$g['dir_module_mode'] = $g['dir_module_skin'].$_HM['id'];
 			$g['url_module_mode'] = $g['url_module_skin'].'/'.$_HM['id'];
 			$g['main'] = $g['path_page'].$r.'-menus/'.$_HM['id'].'.php';
-
 			if ($g['device'])
 			{
 				if (is_file($g['path_page'].$r.'-menus/'.$_HM['id'].'.mobile.php'))
@@ -68,7 +65,6 @@ else
 			$d['page']['cctime'] = $g['path_page'].$r.'-menus/'.$_HM['id'].'.txt';
 			$d['page']['source'] = $g['main'];
 		}
-
 		$_SEO = getDbData($table['s_seo'],'rel=1 and parent='.$_HM['uid'],'*');
 		if ($_SEO['uid'])
 		{
@@ -77,16 +73,13 @@ else
 			$g['meta_des'] = $_SEO['description'];
 			$g['meta_bot'] = $_SEO['classification'];
 			$g['meta_img'] = getMetaImage($_SEO['image_src']);
-
 		}
 		else {
 			$g['meta_tit']   = $_HM['name'];
 		}
 	}
-
 	if ($_HP['uid'])
 	{
-
 		if (!$my['admin'])
 		{
 			if ($_HP['perm_l'] > $my['level'] || strpos('_'.$_HP['perm_g'],'['.$my['sosok'].']'))
@@ -94,7 +87,6 @@ else
 				getLink($g['s'].'/?r='.$r.'&system=guide.perm&_page='.$_HP['uid'],'','','');
 			}
 		}
-
 		if ($_HP['pagetype'] == 1)
 		{
 			getLink($g['s'].'/?r='.$r,'','','');
@@ -114,9 +106,7 @@ else
 			$g['img_module_skin'] = $g['url_module_skin'].'/images';
 			$g['dir_module_mode'] = $g['dir_module_skin'].$_HP['id'];
 			$g['url_module_mode'] = $g['url_module_skin'].'/'.$_HP['id'];
-
 			$g['main'] = $g['path_page'].$r.'-pages/'.$_HP['id'].'.php';
-
 			if ($g['device'])
 			{
 				if (is_file($g['path_page'].$r.'-pages/'.$_HP['id'].'.mobile.php'))
@@ -127,7 +117,6 @@ else
 			$d['page']['cctime'] = $g['path_page'].$r.'-pages/'.$_HP['id'].'.txt';
 			$d['page']['source'] = $g['main'];
 		}
-
 		if($_HP['linkedmenu'])
 		{
 			$_CA = explode('/',$_HP['linkedmenu']);
@@ -142,7 +131,6 @@ else
 			}
 			$g['location'] .= ' &gt; <a href="'.RW('mod='.$_HP['id']).'">'.$_HP['name'].'</a>';
 		}
-
 		$_SEO = getDbData($table['s_seo'],'rel=2 and parent='.$_HP['uid'],'*');
 		if ($_SEO['uid'])
 		{
@@ -157,7 +145,6 @@ else
 			$g['meta_key']   = $_HP['name'].','.$_HP['name'];
 		}
 	}
-
 	if(!is_file($g['main']))
 	{
 		if ($_HM['uid'])

@@ -573,9 +573,9 @@
     bottom  : 0;
     content : "";
     display : block;
-    left    : 23px;
+    left    : 17px;
     position: absolute;
-    top     : 0;
+    top     : -8px;
     z-index : 1;
 }
 
@@ -633,9 +633,9 @@
 .rb-system-admin nav>ul ul li:before {
     content : "";
     display : block;
-    left    : 23px;
+    left    : 19px;
     position: absolute;
-    top     : 20px;
+    top     : 17px;
     width   : 8px;
     z-index : 1;
 }
@@ -913,7 +913,7 @@
     line-height: 50px;
     margin-top : -30px;
     position   : absolute;
-    top        : 50%;
+    top        : 10%;
     width      : 21px;
 }
 

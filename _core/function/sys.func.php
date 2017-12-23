@@ -185,9 +185,9 @@ function getExt($name)
 	return $nx[count($nx)-1];
 }
 //이미지추출
-function getImgs($code,$type) 
-{  
-	$erg = '/src[ =]+[\'"]([^\'"]+\.(?:'.$type.'))[\'"]/i';  
+function getImgs($code,$type)
+{
+	$erg = '/src[ =]+[\'"]([^\'"]+\.(?:'.$type.'))[\'"]/i';
 	preg_match_all($erg, $code, $mtc, PREG_PATTERN_ORDER);
 	return $mtc[1];
 }
@@ -238,7 +238,7 @@ function getDeviceKind($agent,$type)
 {
 	if (!$type) return 'desktop';
 	if ($type == 'ipad' || (strstr($agent,'android')&&!strstr($agent,'mobile'))) return 'tablet';
-	return 'phone';   
+	return 'phone';
 }
 //모바일접속체크
 function isMobileConnect($agent)
@@ -402,7 +402,7 @@ function getTreeMenu($conf,$code,$depth,$parent,$tmpcode)
 				if($C['reject']) $tree.= '<i class="glyphicon glyphicon-ban-circle" title="'._LANG('fs003','admin').'" data-tooltip="tooltip"></i>';
 			}
 
-			$tree.= '<ul id="'.$id.'-'.$_i.'-'.$C['uid'].'" class="collapse'.($conf['allOpen']||$topen?' in':'').'">';
+			$tree.= '<ul id="'.$id.'-'.$_i.'-'.$C['uid'].'" class="collapse'.($conf['allOpen']||$topen?' show':'').'">';
 			$tree.= getTreeMenu($conf,$code,$C['depth'],$C['uid'],$rcode);
 			$tree.= '</ul>';
 		}
@@ -448,7 +448,7 @@ function getLocation($loc)
 				$_cod .= $_val['id'].'/';
 				$_loc .= '<li><a href="'.RW('c='.substr($_cod,0,strlen($_cod)-1)).'">'.$_val['name'].'</a></li>';
 			}
-			$_loc .= '<li class="active">'.$_HM['name'].'</li>';		
+			$_loc .= '<li class="active">'.$_HM['name'].'</li>';
 		}
 		else if ($_HP['uid'])
 		{
@@ -464,11 +464,11 @@ function getLocation($loc)
 					$_loc .= '<li><a href="'.RW('c='.substr($_cod,0,strlen($_cod)-1)).'">'.$_val['name'].'</a></li>';
 				}
 			}
-			$_loc .= '<li class="active">'.$_HP['name'].'</li>';					
+			$_loc .= '<li class="active">'.$_HP['name'].'</li>';
 		}
 		else if ($g['push_location'])
 		{
-			$_loc .= $g['push_location'];								
+			$_loc .= $g['push_location'];
 		}
 		return $_loc;
 	}
@@ -480,7 +480,7 @@ function getPageTitile()
 	$title = str_replace('{site}',$_HS['name'],$_HS['title']);
 	$title = str_replace('{location}',getLocation($g['location']),$title);
 	if ($_HM['uid']) $title = str_replace('{subject}',$_HM['name'],$title);
-	else if ($_HP['uid']) $title = str_replace('{subject}',$_HP['name'],$title); 
+	else if ($_HP['uid']) $title = str_replace('{subject}',$_HP['name'],$title);
 	else $title = $_HS['name'];
 	return $title;
 }

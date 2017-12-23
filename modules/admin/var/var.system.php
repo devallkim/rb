@@ -1,7 +1,7 @@
 <?php
-$d['admin']['version'] = "2.1.0";
-$d['admin']['themepc'] = "default";
-$d['admin']['pannellink'] = "default.css";
+$d['admin']['version'] = "hotfix_2.1.0";
+$d['admin']['themepc'] = "kimsq-dark";
+$d['admin']['pannellink'] = "kimsq-dark.css";
 $d['admin']['cache_flag'] = "";
 $d['admin']['smtp_host'] = "";
 $d['admin']['smtp_port'] = "465";
@@ -32,7 +32,7 @@ $d['admin']['secu_flash'] = "";
 $d['admin']['secu_domain'] = "youtube.com,vimeo.com,";
 $d['admin']['secu_param'] = ";a=,&a=,?a=,m=admin,system=,";
 $d['admin']['smtp_ssl'] = "";
-$d['admin']['uninstall'] = "";
+$d['admin']['uninstall'] = "1";
 $d['admin']['dblclick'] = "1";
 $d['admin']['editor'] = "summernote";
 $d['admin']['syslang'] = "DEFAULT";
