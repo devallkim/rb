@@ -10,10 +10,8 @@ $_authset = array('','승인','보류','대기','탈퇴');
 ?>
 
 
-<div id="admin-users">
-	<div class="page-header">
-		<h4>사용자 정보관리</h4>
-	</div>
+<div id="admin-users" class="p-4">
+	<h3>사용자 정보관리</h3>
 	<form name="listForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return false;">
 	<input type="hidden" name="r" value="<?php echo $r?>">
 	<input type="hidden" name="m" value="<?php echo $module?>">

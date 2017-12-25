@@ -37,7 +37,7 @@ $_openSrcn = count($_openSrcs);
 include $g['path_core'].'function/dir.func.php';
 ?>
 
-<div id="plugins">
+<div id="plugins" class="p-4">
 	<div class="page-header">
 		<h4><?php echo sprintf('플러그인 <span>(총 %d개 / <span id="_sum_size_"></span>)</span>',$_openSrcn)?></h4>
 	</div>
@@ -74,7 +74,7 @@ include $g['path_core'].'function/dir.func.php';
 							<time class="timeago" data-toggle="tooltip" datetime="<?php echo date('c',$plCtime)?>" data-tooltip="tooltip" title="<?php echo date('Y.m.d H:i',$plCtime)?>"></time>
 						</td>
 						<td class="rb-version">
-							<select name="ov[<?php echo $_key_?>]" class="form-control input-sm">
+							<select name="ov[<?php echo $_key_?>]" class="form-control custom-select">
 								<?php $incs = array()?>
 								<?php $dirh = opendir($g['path_plugin'].$_key_)?>
 								<?php while(false !== ($version = readdir($dirh))):?>

@@ -1,4 +1,4 @@
-<div id="seo-setting">
+<div id="seo-setting" class="p-4">
 
 	<h3>SEO 설정</h3>
 

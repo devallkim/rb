@@ -1,4 +1,4 @@
-<div id="configbox">
+<div id="configbox" class="p-4">
 
 	<form class="form-horizontal" role="form" name="sendForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return sslCheck(this);">
 		<input type="hidden" name="r" value="<?php echo $r?>">
@@ -6,9 +6,7 @@
 		<input type="hidden" name="a" value="config">
 		<input type="hidden" name="act" value="security">
 
-		<div class="page-header">
-			<h4>보안설정</h4>
-		</div>
+		<h3>보안설정</h3>
 
 		<div class="form-group row">
 			<label class="col-md-2 col-form-label">에디터 제한태그</label>
@@ -44,11 +42,8 @@
 			</div>
 		</div>
 		<hr>
-		<div class="form-group row">
-			<div class="col-md-offset-2 col-md-9">
-				<button class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>" type="submit">정보변경</button>
-			</div>
-		</div>
+
+		<button class="btn btn-outline-primary btn-block btn-lg" type="submit">정보변경</button>
 
 	</form>
 </div>

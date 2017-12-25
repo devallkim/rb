@@ -48,8 +48,8 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 				</div>
 
 				<?php if($SITEN>1):?>
-				<div class="card-body">
-					<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
+				<div class="">
+					<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
 						<?php while($S = db_fetch_array($SITES)):?>
 						<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
 						<?php endwhile?>
@@ -96,10 +96,10 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 						<tbody>
 							<?php $pageTypeIcon=array('','fa-link','fa-puzzle-piece','fa-pencil')?>
 							<?php while($PR = db_fetch_array($PAGES)):?>
-							<tr<?php if($uid==$PR['uid']):?> class="active1"<?php endif?> data-tooltip="tooltip" title="[<?php echo $PR['category']?>] <?php echo $PR['name']?>">
+							<tr<?php if($uid==$PR['uid']):?> class="table-active"<?php endif?> data-tooltip="tooltip" title="[<?php echo $PR['category']?>] <?php echo $PR['name']?>">
 								<td onclick="goHref('<?php echo $g['adm_href']?>&amp;uid=<?php echo $PR['uid']?>&amp;recnum=<?php echo $recnum?>&amp;p=<?php echo $p?>&amp;cat=<?php echo urlencode($cat)?>&amp;keyw=<?php echo urlencode($keyw)?>#site-page-info');">
 									<a href="#.">
-										<span class="badge badge-secondary">
+										<span class="badge badge-dark badge-pill">
 											<i class="fa <?php echo $pageTypeIcon[$PR['pagetype']]?> fa-lg"></i>
 										</span>
 										<?php echo getStrCut($PR['name'],14,'..')?>
@@ -167,20 +167,20 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 					</h4>
 				</div>
 
-				<div class="form-group form-row rb-outside">
-					<label class="col-md-2 mt-3 control-label">페이지명</label>
-					<div class="col-md-10">
+				<div class="form-group row rb-outside">
+					<label class="col-lg-2 col-form-label text-lg-right">페이지명</label>
+					<div class="col-lg-10 col-xl-9">
 						<div class="input-group input-group-lg">
 							<?php if($R['uid']):?>
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" data-tooltip="tooltip" title="문서의 형식">
 									<span id="rb-document-type"><?php echo $pageType[$R['pagetype']]?></span> <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#" onclick="docType(3,'<?php echo $pageType[3]?>');"><i class="fa fa-code"></i> <?php echo $pageType[3]?></a></li>
-									<li><a href="#" onclick="docType(2,'<?php echo $pageType[2]?>');"><i class="fa fa-puzzle-piece fa-lg"></i> <?php echo $pageType[2]?></a></li>
-									<li><a href="#" onclick="docType(1,'<?php echo $pageType[1]?>');"><i class="kf kf-module"></i> <?php echo $pageType[1]?></a></li>
-								</ul>
+								<div class="dropdown-menu" role="menu">
+									<a class="dropdown-item" href="#" onclick="docType(3,'<?php echo $pageType[3]?>');"><i class="fa fa-code"></i> <?php echo $pageType[3]?></a>
+									<a class="dropdown-item" href="#" onclick="docType(2,'<?php echo $pageType[2]?>');"><i class="fa fa-puzzle-piece fa-lg"></i> <?php echo $pageType[2]?></a>
+									<a class="dropdown-item" href="#" onclick="docType(1,'<?php echo $pageType[1]?>');"><i class="kf kf-module"></i> <?php echo $pageType[1]?></a>
+								</div>
 							</span>
 							<?php endif?>
 							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $R['name']?>"<?php if(!$R['uid'] && !$g['device']):?> autofocus<?php endif?>>
@@ -199,43 +199,52 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 				</div>
 
 				<div id="guide_startpage" class="collapse">
-					<div class="offset-md-2">
-						<div class="help-block">
-							<label class="checkbox-inline">
-								<input type="checkbox" name="ismain" value="1"<?php if($R['ismain']):?> checked<?php endif?>><i></i><span class="fa fa-home"></span> 메인 페이지
+					<div class="row">
+						<div class="col-lg-10 col-xl-9 offset-lg-2">
+
+
+							<label class="custom-control custom-checkbox">
+							  <input type="checkbox" class="custom-control-input" name="ismain" value="1"<?php if($R['ismain']):?> checked<?php endif?>>
+							  <span class="custom-control-indicator"></span>
+							  <span class="custom-control-description"><span class="fa fa-home"></span> 메인 페이지</span>
 							</label>
-							<label class="checkbox-inline">
-								<input type="checkbox" name="mobile" value="1"<?php if($R['mobile']):?> checked<?php endif?>><i></i><span class="glyphicon glyphicon-phone"></span> 모바일 페이지
+							<label class="custom-control custom-checkbox">
+							  <input type="checkbox" class="custom-control-input" name="mobile" value="1"<?php if($R['mobile']):?> checked<?php endif?>>
+							  <span class="custom-control-indicator"></span>
+							  <span class="custom-control-description"><span class="fa fa-mobile"></span> 모바일 페이지</span>
 							</label>
-							<p>
+
+							<small class="form-text text-muted mb-3">
 								보기) 메인화면,로그인,회원가입,마이페이지,통합검색,이용약관,고객센터<br>
 								메인 페이지는 사이트 속성중 메인 페이지로 지정할 수 있습니다.<br>
-								메인화면으로 사용할 페이지일 경우 메인 페이지에 체크해 주세요.<br><br>
-							</p>
+								메인화면으로 사용할 페이지일 경우 메인 페이지에 체크해 주세요.
+							</small>
 						</div>
 					</div>
 
-					<div class="form-group form-row rb-outside">
-						<label class="col-md-2 control-label">코드</label>
-						<div class="col-md-10">
+					<div class="form-group row rb-outside">
+						<label class="col-lg-2 col-form-label text-lg-right">코드</label>
+						<div class="col-lg-10 col-xl-9">
 							<div class="input-group">
 								<input class="form-control" type="text" name="id" value="<?php echo $R['id']?$R['id']:'p'.$date['tohour']?>" maxlength="20" placeholder="">
 								<span class="input-group-btn">
 									<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_pagecode" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg"></i></button>
 								</span>
 							</div>
-							<div id="guide_pagecode" class="collapse help-block">
-								페이지 호출시에 사용되는 코드이므로 가급적 페이지명을 잘 표현할 수 있는 영어로 입력해주세요.<br>
-								영문대소문자/숫자/_/- 조합으로 등록할 수 있습니다.<br>
-								보기) 페이지호출주소 : <code>./?mod=페이지코드</code><br>
+							<div id="guide_pagecode" class="collapse">
+								<small class="form-text text-muted">
+									페이지 호출시에 사용되는 코드이므로 가급적 페이지명을 잘 표현할 수 있는 영어로 입력해주세요.<br>
+									영문대소문자/숫자/_/- 조합으로 등록할 수 있습니다.<br>
+									보기) 페이지호출주소 : <code>./?mod=페이지코드</code>
+								</small>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="form-group tab-content<?php if(!$R['uid']):?> d-none<?php endif?>">
-					<div class="form-group form-row<?php if($R['pagetype']!=3):?> d-none<?php endif?>" id="editBox3">
-						<div class="offset-md-2 col-md-10">
+					<div class="form-group row<?php if($R['pagetype']!=3):?> d-none<?php endif?>" id="editBox3">
+						<div class="col-lg-10 col-xl-9 offset-lg-2">
 							<fieldset<?php if($R['pagetype']!=3):?> disabled<?php endif?>>
 								<div class="btn-group btn-group-justified" data-toggle="buttons">
 									<a class="btn btn-light rb-modal-code">
@@ -246,17 +255,17 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 									</a>
 								</div>
 							</fieldset>
-							<span class="help-block text-muted">
+							<span class="form-text text-muted mt-2">
 								<ul class="list-unstyled">
-									<li>직접꾸미기는 소스코드를 직접 편집하거나 위지위그 에디터를 이용할 수 있습니다.</li>
-									<li>소스코드로 작성한 페이지를 위지위그로 편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
-									<?php if($R['pagetype']!=3):?><li>페이지 속성을 변경한 후에 활성화 됩니다.</li><?php endif?>
+									<li><small>직접꾸미기는 소스코드를 직접 편집하거나 위지위그 에디터를 이용할 수 있습니다.</small></li>
+									<li><small>소스코드로 작성한 페이지를 위지위그로 편집하면 소스코드가 변형될 수 있으니 유의하세요.</small></li>
+									<?php if($R['pagetype']!=3):?><li><small>페이지 속성을 변경한 후에 활성화 됩니다.</small></li><?php endif?>
 								</ul>
 							</span>
 						</div>
 					</div>
-					<div class="form-group form-row<?php if($R['pagetype']!=2):?> d-none<?php endif?>" id="editBox2">
-						<div class="offset-md-2 col-md-10">
+					<div class="form-group row<?php if($R['pagetype']!=2):?> d-none<?php endif?>" id="editBox2">
+						<div class="col-lg-10 col-xl-9 offset-lg-2">
 							<?php if($R['pagetype']==2):?>
 							<fieldset>
 								<a href="#." class="btn btn-light btn-block rb-modal-widget"><i class="fa fa-puzzle-piece fa-lg"></i> 위젯으로 꾸미기</a>
@@ -271,8 +280,8 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 							<?php endif?>
 						</div>
 					</div>
-					<div class="form-group form-row<?php if($R['pagetype']!=1):?> d-none<?php endif?>" id="editBox1">
-						<div class="offset-md-2 col-md-10">
+					<div class="form-group row<?php if($R['pagetype']!=1):?> d-none<?php endif?>" id="editBox1">
+						<div class="col-lg-10 col-xl-9 offset-lg-2">
 							<fieldset>
 								<div class="input-group">
 									<input type="text" name="joint" id="jointf" value="<?php echo $R['joint']?>" class="form-control">
@@ -282,29 +291,29 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 									</span>
 								</div>
 							</fieldset>
-							<span class="help-block text-muted">
+							<small class="form-text text-muted mt-2">
 								<ul class="list-unstyled">
 									<li>이 페이지에 연결시킬 모듈이 있을 경우 모듈연결을 클릭한 후 선택해 주세요.</li>
 									<li>모듈 연결주소가 지정되면 이 메뉴를 호출시 해당 연결주소의 모듈이 출력됩니다.</li>
 									<li>접근권한은 연결된 모듈의 권한설정을 따릅니다.</li>
 								</ul>
-							</span>
+							</small>
 						</div>
 					</div>
 				</div>
 
 				<div class="panel-group" id="page-settings">
-					<div class="card border-<?php echo $_SESSION['sh_site_page_1']==1?'primary':'default'?>" id="page-settings-meta">
-						<div class="card-header">
-							<a data-toggle="collapse" data-parent="#page-settings" href="#page-settings-meta-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-meta').className.indexOf('default')==-1?'':'1','','');boxDeco('page-settings-meta','page-settings-advance');">
+					<div class="card" id="page-settings-meta">
+						<div class="card-header px-2">
+							<a class="muted-link d-block" data-toggle="collapse" data-parent="#page-settings" href="#page-settings-meta-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-meta').className.indexOf('default')==-1?'':'1','','');">
 								<i class="fa fa-caret-right fa-fw"></i>메타설정
 							</a>
 						</div>
 						<div id="page-settings-meta-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==1):?> show<?php endif?>">
 							<div class="card-body">
-								<div class="form-group  form-row rb-outside">
-									<label class="col-md-2 control-label">타이틀</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row rb-outside">
+									<label class="col-lg-2 col-form-label text-lg-right">타이틀</label>
+									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
 											<input type="text" class="form-control rb-title" name="title" value="<?php echo $_SEO['title']?>" maxlength="60" placeholder="50-60자 내에서 작성해 주세요.">
 											<span class="input-group-btn">
@@ -318,11 +327,11 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										</div>
 									</div>
 								</div>
-								<div class="form-group form-row rb-outside">
-									<label class="col-md-2 control-label">설명</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row rb-outside">
+									<label class="col-lg-2 col-form-label text-lg-right">설명</label>
+									<div class="col-lg-10 col-xl-9">
 										<textarea name="description" class="form-control rb-description_" rows="5" placeholder="150-160자 내에서 작성해 주세요."><?php echo $_SEO['description']?></textarea>
-										<div class="help-text"><small class="text-muted"><a href="#guide_description" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>
+										<a class="badge badge-pill badge-dark mt-2" href="#guide_description" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a>
 										<div class="collapse" id="guide_description">
 											<small class="help-block">
 												<code>&lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.<br>
@@ -332,11 +341,11 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										</div>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 control-label">키워드</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">키워드</label>
+									<div class="col-lg-10 col-xl-9">
 										<input name="keywords" class="form-control" placeholder="콤마(,)로 구분하여 입력해 주세요." value="<?php echo $_SEO['keywords']?>">
-										<div class="help-text"><small class="text-muted"><a href="#guide_keywords" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>
+										<a class="badge badge-pill badge-dark mt-2" href="#guide_keywords" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a>
 										<div class="help-block collapse" id="guide_keywords">
 											<small>
 												<code>&lt;meta name=&quot;keywords&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.<br>
@@ -346,11 +355,11 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										</div>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 control-label">크롤링</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">크롤링</label>
+									<div class="col-lg-10 col-xl-9">
 										<input name="classification" class="form-control" placeholder="" value="<?php echo $_SEO['uid']?$_SEO['classification']:'ALL'?>">
-										<div class="help-text"><small class="text-muted"><a href="#guide_classification" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>
+										<a class="badge badge-pill badge-dark mt-2" href="#guide_classification" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a>
 										<div class="help-block collapse" id="guide_classification">
 											<small class="help-block">
 												<code>&lt;meta name=&quot;robots&quot; content=&quot;&quot;&gt;</code> 내부에 삽입됩니다.<br>
@@ -359,9 +368,9 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										</div>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 control-label">메타이미지</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">메타이미지</label>
+									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
 											<input class="form-control rb-modal-photo-drop" onmousedown="_mediasetField='meta_image_src&dfiles='+this.value;" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window" type="text" name="image_src" id="meta_image_src" value="<?php echo $_SEO['image_src']?$_SEO['image_src']:''?>">
 											<div class="input-group-btn">
@@ -371,7 +380,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 											</div>
 										</div>
 
-										<div class="help-text"><small class="text-muted"><a href="#guide_image_src" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a></small></div>
+										<a class="badge badge-pill badge-dark mt-2" href="#guide_image_src" data-toggle="collapse" ><i class="fa fa-question-circle fa-fw"></i>도움말</a>
 										<div class="help-block collapse" id="guide_image_src">
 											<small class="help-block">
 												이미지를 등록하시면 소셜미디어에 이 이미지를 포함하여 전송할 수 있습니다.<br>
@@ -389,17 +398,17 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 						</div>
 					</div>
 
-					<div class="card border-<?php echo $_SESSION['sh_site_page_1']==2?'primary':'default'?>" id="page-settings-advance">
-						<div class="card-header">
-							<a data-toggle="collapse" data-parent="#page-settings" href="#page-settings-advance-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-advance').className.indexOf('default')==-1?'':'2','','');boxDeco('page-settings-advance','page-settings-meta');">
+					<div class="card" id="page-settings-advance">
+						<div class="card-header px-2">
+							<a class="muted-link d-block" data-toggle="collapse" data-parent="#page-settings" href="#page-settings-advance-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-advance').className.indexOf('default')==-1?'':'2','','');">
 								<i class="fa fa-caret-right fa-fw"></i>고급설정
 							</a>
 						</div>
 						<div id="page-settings-advance-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==2):?> show<?php endif?>">
 							<div class="card-body">
-								<div class="form-group form-row">
-									<label class="col-md-2 control-label">레이아웃</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">레이아웃</label>
+									<div class="col-lg-10 col-xl-9">
 
 										<div class="form-row">
 											<div class="col-sm-6" id="rb-layout-select">
@@ -429,24 +438,24 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										</div>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 col-lg-2 control-label">분류</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">분류</label>
+									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
 											<input class="form-control" type="text" name="category" value="<?php echo $R['category']?$R['category']:$_cats[0]?>">
 											<div class="input-group-btn">
 												<button class="btn btn-light dropdown-toggle" data-toggle="dropdown" type="button">
 													<span class="caret"></span>
 												</button>
-												<ul class="dropdown-menu pull-right">
+												<div class="dropdown-menu dropdown-menu-right">
 													<?php foreach($_cats as $_val):?>
-													<li><a href="#." onclick="document.procForm.category.value=this.innerHTML;"><?php echo $_val?></a></li>
+													<a class="dropdown-item" href="#." onclick="document.procForm.category.value=this.innerHTML;"><?php echo $_val?></a>
 													<?php endforeach?>
 													<?php if(count($_cats)):?>
-													<li class="divider"></li>
+													<div class="dropdown-divider"></div>
 													<?php endif?>
-													<li><a href="#." onclick="document.procForm.category.value='';document.procForm.category.focus();">직접입력</a></li>
-												</ul>
+													<a class="dropdown-item" href="#." onclick="document.procForm.category.value='';document.procForm.category.focus();">직접입력</a>
+												</div>
 											</div>
 										</div>
 										<ul class="rb-guide" style="border-top:0;">
@@ -456,27 +465,25 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										</ul>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 control-label">소속메뉴</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">소속메뉴</label>
+									<div class="col-lg-10 col-xl-9">
 										<select class="form-control custom-select" name="linkedmenu">
 										<option value="">사용안함</option>
 										<?php include $g['path_core'].'function/menu1.func.php'?>
 										<?php $cat=$R['linkedmenu']?>
 										<?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
 										</select>
-										<span class="help-block">
-											<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_sosok"><i class="fa fa-question-circle fa-fw"></i>도움말</button>
-										</span>
-										<ul id="guide_sosok" class="collapse rb-guide">
-										<li>이 페이지의 소속메뉴가 종종 필요할 수 있습니다.</li>
-										<li>특정메뉴의 서브페이지로 사용되기를 원할경우 지정해 주세요.</li>
+										<a class="badge badge-pill badge-dark mt-2" data-toggle="collapse" href="#guide_sosok"><i class="fa fa-question-circle fa-fw"></i>도움말</a>
+										<ul id="guide_sosok" class="collapse">
+											<li>이 페이지의 소속메뉴가 종종 필요할 수 있습니다.</li>
+											<li>특정메뉴의 서브페이지로 사용되기를 원할경우 지정해 주세요.</li>
 										</ul>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 col-lg-2 control-label">허용등급</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">허용등급</label>
+									<div class="col-lg-10 col-xl-9">
 										<select class="form-control custom-select" name="perm_l">
 										<option value="">전체허용</option>
 										<?php $_LEVEL=getDbArray($table['s_mbrlevel'],'','*','uid','asc',0,1)?>
@@ -486,9 +493,9 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										</select>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 control-label">차단그룹</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">차단그룹</label>
+									<div class="col-lg-10 col-xl-9">
 										<select class="form-control custom-select" name="_perm_g" multiple size="5">
 										<option value=""<?php if(!$R['perm_g']):?> selected="selected"<?php endif?>>차단안함</option>
 										<?php $_SOSOK=getDbArray($table['s_mbrgroup'],'','*','gid','asc',0,1)?>
@@ -496,17 +503,15 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										<option value="<?php echo $_S['uid']?>"<?php if(strstr($R['perm_g'],'['.$_S['uid'].']')):?> selected<?php endif?>><?php echo $_S['name']?>(<?php echo number_format($_S['num'])?>)</option>
 										<?php endwhile?>
 										</select>
-										<span class="help-block">
-											<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_permg"><i class="fa fa-question-circle fa-fw"></i>도움말</button>
-										</span>
-										<ul id="guide_permg" class="collapse rb-guide">
-										<li>복수의 그룹을 선택하려면 드래그하거나 <kbd>Ctrl</kbd> 를 누른다음 클릭해 주세요.</li>
+										<a class="badge badge-pill badge-dark mt-2" data-toggle="collapse" href="#guide_permg"><i class="fa fa-question-circle fa-fw"></i>도움말</a>
+										<ul id="guide_permg" class="collapse">
+											<li>복수의 그룹을 선택하려면 드래그하거나 <kbd>Ctrl</kbd> 를 누른다음 클릭해 주세요.</li>
 										</ul>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 control-label">캐시적용</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">캐시적용</label>
+									<div class="col-lg-10 col-xl-9">
 										<?php $cachefile = $g['path_page'].$r.'-pages/'.$R['id'].'.txt'?>
 										<?php $cachetime = file_exists($cachefile) ? implode('',file($cachefile)) : 0?>
 										<select name="cachetime" class="form-control custom-select">
@@ -515,18 +520,16 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										<option value="<?php echo $i?>"<?php if($cachetime==$i):?> selected="selected"<?php endif?>><?php echo sprintf('%02d 분',$i)?></option>
 										<?php endfor?>
 										</select>
-										<span class="help-block">
-											<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_cache"><i class="fa fa-question-circle fa-fw"></i>도움말</button>
-										</span>
-										<ul id="guide_cache" class="collapse rb-guide">
-										<li>DB접속이 많거나 위젯을 많이 사용하는 메뉴일 경우 캐시를 적용하면 서버부하를 줄 일 수 있으며 속도를 높일 수 있습니다.</li>
-										<li class="text-danger">실시간 처리가 요구되는 메뉴일 경우 적용하지 마세요.</li>
+										<a class="badge badge-pill badge-dark mt-2" data-toggle="collapse" href="#guide_cache"><i class="fa fa-question-circle fa-fw"></i>도움말</a>
+										<ul id="guide_cache" class="collapse">
+											<li>DB접속이 많거나 위젯을 많이 사용하는 메뉴일 경우 캐시를 적용하면 서버부하를 줄 일 수 있으며 속도를 높일 수 있습니다.</li>
+											<li class="text-danger">실시간 처리가 요구되는 메뉴일 경우 적용하지 마세요.</li>
 										</ul>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 col-lg-2 control-label">미디어</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">미디어</label>
+									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
 											<input class="form-control" type="text" name="mediaset" id="mediaset" value="<?php echo $R['mediaset']?$R['mediaset']:''?>">
 											<div class="input-group-btn">
@@ -538,27 +541,25 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 												</button>
 											</div>
 										</div>
-										<span class="help-block">
-											<button type="button" class="btn btn-link" data-toggle="collapse" data-target="#guide_mediaset"><i class="fa fa-question-circle fa-fw"></i>도움말</button>
-										</span>
-										<ul id="guide_mediaset" class="collapse rb-guide">
-										<li>여기에 연결시킬 미디어 파일을 지정할 수 있습니다.</li>
-										<li>지정된 미디어는 필요에 따라 사용될 수 있습니다.</li>
+										<a class="badge badge-pill badge-dark mt-2" data-toggle="collapse" href="#guide_mediaset"><i class="fa fa-question-circle fa-fw"></i>도움말</a>
+										<ul id="guide_mediaset" class="collapse">
+											<li>여기에 연결시킬 미디어 파일을 지정할 수 있습니다.</li>
+											<li>지정된 미디어는 필요에 따라 사용될 수 있습니다.</li>
 										</ul>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label class="col-md-2 col-lg-2 control-label">부가필드</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">부가필드</label>
+									<div class="col-lg-10 col-xl-9">
 										<textarea name="extra" class="form-control" rows="3"><?php echo htmlspecialchars($R['extra'])?></textarea>
 									</div>
 								</div>
 								<?php if($R['uid']):?>
 								<?php $_url_1 = $g['s'].'/index.php?r='.$r.'&mod='.$R['id']?>
 								<?php $_url_2 = $g['s'].'/'.$r.'/p/'.$R['id']?>
-								<div class="form-group form-row">
-									<label class="col-md-2 col-lg-2 control-label">주소</label>
-									<div class="col-md-10 col-lg-9">
+								<div class="form-group row">
+									<label class="col-lg-2 col-form-label text-lg-right">주소</label>
+									<div class="col-lg-10 col-xl-9">
 										<div class="input-group" style="margin-bottom: 5px">
 											<span class="input-group-addon">물리주소</span>
 											<input type="text" id="_url_m_1_" class="form-control" value="<?php echo $_url_1?>">
@@ -582,7 +583,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 						</div>
 					</div>
 				</div>
-				<div class="form-group form-row">
+				<div class="form-group row">
 					<div class="col-md-12 col-lg-12">
 						<button class="btn btn-outline-primary btn-block btn-lg" id="rb-submit-button" type="submit">
 							<?php echo $R['uid']?'속성변경':'신규페이지 등록' ?>

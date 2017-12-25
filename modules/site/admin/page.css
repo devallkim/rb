@@ -55,9 +55,7 @@
 }
 
 #page-settings {
-	padding-top: 15px;
-	margin-top: 40px;
-	border-top: 1px solid #EFEFEF
+	margin-top: 30px;
 }
 
 #page-settings .panel-default {
@@ -93,7 +91,6 @@
 	text-decoration: none;
 }
 .table tbody tr:hover {
-	background: #efefef;
 	cursor: pointer;
 }
 .table tbody td small {

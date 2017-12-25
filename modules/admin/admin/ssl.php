@@ -1,4 +1,4 @@
-<form class="form-horizontal" role="form" name="sendForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return sslCheck(this);">
+<form class="p-4" role="form" name="sendForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return sslCheck(this);">
 	<input type="hidden" name="r" value="<?php echo $r?>">
 	<input type="hidden" name="m" value="<?php echo $module?>">
 	<input type="hidden" name="a" value="config">
@@ -10,23 +10,21 @@
 		<label class="col-md-2 col-form-label">SSL 적용</label>
 		<div class="col-md-10">
 
-			<div class="form-check form-check-inline">
-			  <label class="form-check-label">
-					<input class="form-check-input" type="radio" name="ssl_type" value=""<?php if(!$d['admin']['ssl_type']):?> checked<?php endif?>> 적용안함
-			  </label>
-			</div>
-
-			<div class="form-check form-check-inline">
-			  <label class="form-check-label">
-					<input class="form-check-input" type="radio" name="ssl_type" value="2"<?php if($d['admin']['ssl_type']==2):?> checked<?php endif?>> 코드값 적용
-			  </label>
-			</div>
-
-			<div class="form-check form-check-inline">
-			  <label class="form-check-label">
-					<input class="form-check-input" type="radio" name="ssl_type" value="1"<?php if($d['admin']['ssl_type']==1):?> checked<?php endif?> onclick="alert('[주의] 아래의 안내사항을 확인하셨나요?');"> 전체사이트 적용
-			  </label>
-			</div>
+			<label class="custom-control custom-radio">
+			  <input type="radio" class="custom-control-input" name="ssl_type" value=""<?php if(!$d['admin']['ssl_type']):?> checked<?php endif?>>
+			  <span class="custom-control-indicator"></span>
+			  <span class="custom-control-description">적용안함</span>
+			</label>
+			<label class="custom-control custom-radio">
+			  <input type="radio" class="custom-control-input" name="ssl_type" value="2"<?php if($d['admin']['ssl_type']==2):?> checked<?php endif?>>
+			  <span class="custom-control-indicator"></span>
+			  <span class="custom-control-description">코드값 적용</span>
+			</label>
+			<label class="custom-control custom-radio">
+			  <input type="radio" class="custom-control-input" name="ssl_type" value="1"<?php if($d['admin']['ssl_type']==1):?> checked<?php endif?> onclick="alert('[주의] 아래의 안내사항을 확인하셨나요?');">
+			  <span class="custom-control-indicator"></span>
+			  <span class="custom-control-description">전체사이트 적용</span>
+			</label>
 
 			<small id="ssl_guide" class="form-text text-muted">
 				보안서버가 설치되지 않은 상태에서 전체사이트 적용을 체크하시면 사이트에 접속할 수 없게 됩니다.<br>
@@ -82,13 +80,8 @@
 		</div>
 	</div>
 
-	<hr>
 
-	<div class="form-group row">
-		<div class="col-md-offset-2 col-md-9">
-			<button class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>" type="submit">정보변경</button>
-		</div>
-	</div>
+	<button class="btn btn-outline-primary btn-block btn-lg my-5" type="submit">정보변경</button>
 
 </form>
 

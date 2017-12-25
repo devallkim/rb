@@ -10,10 +10,8 @@ $recnum	=  10;
 $TPG = getTotalPage($_updatelength,$recnum);
 ?>
 
-<div id="update-body">
-	<div class="page-header">
-	  <h4>킴스큐 원격 업데이트</h4>
-	</div>
+<div id="update-body" class="p-4">
+	<h3>킴스큐 원격 업데이트</h3>
 
 	<div class="alert alert-info">
 		<div class="media">

@@ -1,21 +1,22 @@
+@charset "utf-8";
 html {
   scrollbar-face-color: #646464;
   scrollbar-base-color: #646464;
   scrollbar-3dlight-color: #646464;
   scrollbar-highlight-color: #646464;
-  scrollbar-track-color: #000;
-  scrollbar-arrow-color: #000;
-  scrollbar-shadow-color: #646464;
-  scrollbar-dark-shadow-color: #646464;
+  scrollbar-track-color: #262c31;
+  scrollbar-arrow-color: #262c31;
+  scrollbar-shadow-color: #353c44;
+  scrollbar-dark-shadow-color: #353c44;
 }
 
-::-webkit-scrollbar { width: 8px; height: 3px;}
+::-webkit-scrollbar { width: 7px; height: 3px;}
 ::-webkit-scrollbar-button {  background-color: #666; }
 ::-webkit-scrollbar-track {  background-color: #646464;}
-::-webkit-scrollbar-track-piece { background-color: #000;}
+::-webkit-scrollbar-track-piece { background-color: #262c31;}
 ::-webkit-scrollbar-thumb { height: 50px; background-color: #666; border-radius: 3px;}
-::-webkit-scrollbar-corner { background-color: #646464;}}
-::-webkit-resizer { background-color: #666;}
+::-webkit-scrollbar-corner { background-color: #353c44;}}
+::-webkit-resizer { background-color: red;}
 
 /* ------------------ 공통사항 --------------------*/
 body {
@@ -24,12 +25,16 @@ body {
 	padding: 0;
 	font-family: 'Open Sans', '돋움', dotum, sans-serif;
 	font-size: 16px;
-	line-height: 24px;
+	line-height: 1.3rem;
 	color: #ccc
 }
 
 label {
 	color: #ccc
+}
+
+code {
+  background: transparent
 }
 
 #rb-body.lang-ko {
@@ -110,7 +115,7 @@ label {
 
 .sidebar {
   position: fixed;
-  top: 3.5rem;
+  top: 3.28rem;
   bottom: 0;
   left: 0;
   z-index: 1000;
@@ -184,7 +189,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .card {
 	background-color: inherit;
-	border: 1px solid #e2dee6;
 	border-radius: 3px;
 	margin: 0 0 20px;
 	box-shadow: 0 1px 0 rgba(0,0,0,.03);
@@ -256,10 +260,24 @@ h1, h2, h3, h4, h5, h6 {
 /*form*/
 .custom-select {
 background-color: #343b43 !important;
-background: inherit url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' v…'0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E) no-repeat right .75rem center;
+display: inline-block;
+max-width: 100%;
+height: calc(2.25rem + 2px);
+padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+line-height: 1.5;
+color: #495057;
+vertical-align: middle;
+background: #343b43 url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#abafb5' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+background-size: 8px 10px;
+border: 1px solid #ced4da;
+border-radius: 0.25rem;
+-webkit-appearance: none;
+   -moz-appearance: none;
+        appearance: none;
 }
 
-.form-control {
+.form-control,
+.form-control[readonly] {
 	background-color: #1f2227;
 	color: #abafb5;
 	border-color: #1b1e24
@@ -273,6 +291,10 @@ background: inherit url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www
 	box-shadow: none;
 }
 
+.form-control[readonly] {
+	color: #999;
+}
+
 .btn.btn-light {
 	background-color: #343b43;
 	color: #757a87
@@ -281,6 +303,12 @@ background: inherit url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www
 .btn-outline-primary {
   color: #ccc;
   border-color: #ccc;
+}
+
+.input-group-addon {
+  background-color: #343b43;
+  color: #999;
+  border: 1px solid #222;
 }
 
 /* ------------------ table --------------------*/
@@ -316,152 +344,10 @@ background: inherit url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www
 }
 
 .breadcrumb {
-	background-color: transparent
+	background-color:  #343b43;
 }
 
 
-/* ------------------ Rb smart form --------------------*/
-.rb-form .checkbox,
-.rb-form .checkbox-inline,
-.rb-form .radio,
-.rb-form .radio-inline  {
-	position: relative;
-	font-weight: 400;
-}
-
-.rb-form .checkbox i,
-.rb-form .checkbox-inline i,
-.rb-form .radio i,
-.rb-form .radio-inline i {
-	border-color: #BDBDBD;
-	transition: border-color .3s;
-	-o-transition: border-color .3s;
-	-ms-transition: border-color .3s;
-	-moz-transition: border-color .3s;
-	-webkit-transition: border-color .3s;
-}
-
-.rb-form .checkbox input,
-.rb-form .checkbox-inline input,
-.rb-form .radio input,
-.rb-form .radio-inline input {
-	position: absolute;
-	left: -9999px;
-}
-
-.rb-form .checkbox input:checked+i,
-.rb-form .checkbox-inline input:checked+i,
-.rb-form .radio input:checked+i,
-.rb-form .radio-inline input:checked+i {
-	border-color: #3276B1;
-}
-
-.rb-form .checkbox input:checked+i:after,
-.rb-form .checkbox-inline input:checked+i:after,
-.rb-form .radio input:checked+i:after,
-.rb-form .radio-inline input:checked+i:after {
-	opacity: 1;
-}
-
-.rb-form .checkbox-inline input+i:after,
-.rb-form .checkbox input+i:after {
-	content: '\f00c';
-	top: -2px;
-	left: 0;
-	width: 15px;
-	height: 15px;
-	font: 400 16px/19px FontAwesome;
-	text-align: center;
-}
-
-.rb-form .checkbox input+i:after,
-.rb-form .checkbox-inline input+i:after {
-	color: #3276B1;
-}
-
-.rb-form .checkbox input+i:after,
-.rb-form .checkbox-inline input+i:after,
-.rb-form .radio input+i:after,
-.rb-form .radio-inline input+i:after {
-	position: absolute;
-	opacity: 0;
-		transition: opacity .1s;
-		-o-transition: opacity .1s;
-		-ms-transition: opacity .1s;
-		-moz-transition: opacity .1s;
-		-webkit-transition: opacity .1s;
-}
-
-
-
-.rb-form .checkbox i,
-.rb-form .checkbox-inline i,
-.rb-form .radio i,
-.rb-form .radio-inline i {
-	position: absolute;
-	top: 4px;
-	left: 0;
-	display: block;
-	width: 17px;
-	height: 17px;
-	outline: 0;
-	border-width: 1px;
-	border-style: solid;
-	background: #FFF;
-}
-
-.rb-form .radio label,
-.rb-form .radio-inline label,
-.rb-form .checkbox label,
-.rb-form .checkbox-inline label {
-	padding-left: 0;
-}
-
-.rb-form.form-horizontal .radio,
-.rb-form.form-horizontal .checkbox,
-.rb-form.form-horizontal .radio-inline,
-.rb-form.form-horizontal .checkbox-inline {
-	padding-top: 0;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.rb-form .checkbox:hover i,
-.rb-form .checkbox-inline:hover i,
-.rb-form .radio:hover i,
-.rb-form .radio-inline:hover i {
-    border-color: #5d98cc;
-}
-
-.rb-form .radio i ,
-.rb-form .radio-inline i {
-	border-radius: 50%;
-}
-
-.rb-form .radio input+i:after,
-.rb-form .radio-inline input+i:after {
-	content: '';
-	top: 3px;
-	left: 3px;
-	width: 9px;
-	height: 9px;
-	border-radius: 50%;
-}
-
-.rb-form .radio input+i:after,
-.rb-form .radio-inline input+i:after {
-	background-color: #3276B1;
-}
-
-.rb-form .radio-inline+.radio-inline,
-.rb-form .checkbox-inline+.checkbox-inline {
-	margin-left: 20px;
-}
-
-.rb-help-btn:active,
-.rb-help-btn.active {
-	background-color: #eee !important;
-}
 /* ------------------ 즐겨찾기 --------------------*/
 
 
@@ -641,6 +527,26 @@ background: inherit url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www
 
 
 /*테마*/
+/*content*/
+
+/*table*/
+.table td, .table th {
+  border-top: 1px solid #222;
+}
+.table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+
+/*component*/
+
+/*badge*/
+.badge-dark {
+  font-weight: 300;
+  color: #999;
+}
+
+/*button*/
 .btn {
   position: relative;
   display: inline-block;
@@ -763,6 +669,23 @@ background: inherit url(data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www
   background-image: none;
   border-color: rgba(27,31,35,0.2);
   box-shadow: none;
+}
+
+
+/*form*/
+
+.col-form-label {
+  color: #9ea6b3
+}
+.custom-checkbox,
+.custom-radio {
+  line-height: 1.85rem;
+}
+.custom-checkbox .custom-control-indicator {
+  border-radius: .15rem;
+}
+.custom-control-indicator {
+  background-color: #3a4049;
 }
 
 

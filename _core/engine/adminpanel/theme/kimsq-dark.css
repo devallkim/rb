@@ -164,7 +164,7 @@ body {
 }
 
 .rb-system-admin nav > ul li.active ul li.active >a {
-	background-color: #222
+	background-color: #272c32
 }
 
 .rb-system-sidebar.rb-inverse nav ul li:hover,
@@ -429,7 +429,7 @@ body {
 .rb-system-site .form-control {
 	background-color: #1f2227;
 	color: #abafb5;
-	border-color: #1b1e24
+	border-color: #272c31
 }
 .rb-system-site .form-control:focus {
 	color: #abafb5;
@@ -464,4 +464,22 @@ body {
 	display: block;
 	left: -20px;
 	padding: 0 5px;
+}
+
+.rb-system-site .custom-select {
+	background-color: #384047 !important;
+	display: inline-block;
+	max-width: 100%;
+	height: calc(2.25rem + 2px);
+	padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+	line-height: 1.5;
+	/*color: #495057;*/
+	vertical-align: middle;
+	background: #384047 url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#abafb5' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+	background-size: 8px 10px;
+	border: 1px solid #272c32;
+	border-radius: 0.15rem;
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+	        appearance: none;
 }

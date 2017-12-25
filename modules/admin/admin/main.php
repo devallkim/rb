@@ -1,4 +1,4 @@
-<div id="configbox">
+<div id="configbox" class="p-4">
 
 
 	<div class="card mb-4">
@@ -48,7 +48,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 					    <label>관리자 테마</label>
-							<select name="themepc" class="form-control">
+							<select name="themepc" class="form-control custom-select">
 								<?php $dirs = opendir($g['dir_module'].'theme')?>
 								<?php while(false !== ($tpl = readdir($dirs))):?>
 								<?php if($tpl=='.' || $tpl == '..')continue?>
@@ -60,7 +60,7 @@
 
 						<div class="form-group">
 					    <label>관리패널 테마</label>
-							<select name="pannellink" class="form-control">
+							<select name="pannellink" class="form-control custom-select">
 								<?php $dirs = opendir($g['path_core'].'engine/adminpanel/theme')?>
 								<?php while(false !== ($tpl = readdir($dirs))):?>
 								<?php if($tpl=='.' || $tpl == '..')continue?>
@@ -72,7 +72,7 @@
 
 						<div class="form-group">
 							<label>CSS/JS 캐시</label>
-							<select name="cache_flag" class="form-control">
+							<select name="cache_flag" class="form-control custom-select">
 								<option value=""<?php if($d['admin']['cache_flag']==''):?> selected<?php endif?>>브라우져 설정을 따름</option>
 								<option value="totime"<?php if($d['admin']['cache_flag']=='totime'):?> selected<?php endif?>>접속시마다 갱신</option>
 								<option value="nhour"<?php if($d['admin']['cache_flag']=='nhour'):?> selected<?php endif?>>한시간 단위로 갱신</option>
@@ -85,7 +85,7 @@
 
 						<div class="form-group">
 							<label>제거(Uninstall)</label>
-							<select name="uninstall" class="form-control">
+							<select name="uninstall" class="form-control custom-select">
 								<option value=""<?php if(!$d['admin']['uninstall']):?> selected<?php endif?>>출력하지 않음</option>
 								<option value="1"<?php if($d['admin']['uninstall']):?> selected<?php endif?>>출력함</option>
 							</select>
@@ -96,7 +96,7 @@
 
 						<div class="form-group">
 							<label>더블클릭 전환</label>
-							<select name="dblclick" class="form-control">
+							<select name="dblclick" class="form-control custom-select">
 								<option value="1"<?php if($d['admin']['dblclick']):?> selected<?php endif?>>사용함</option>
 								<option value=""<?php if(!$d['admin']['dblclick']):?> selected<?php endif?>>사용안함</option>
 							</select>
@@ -109,7 +109,7 @@
 
 						<div class="form-group">
 							<label>소스코드 에디터</label>
-							<select name="codeeidt" class="form-control">
+							<select name="codeeidt" class="form-control custom-select">
 								<option value="">TEXTAREA</option>
 								<?php $dirs = opendir($g['path_plugin'].'codemirror/'.$d['ov']['codemirror'].'/theme')?>
 								<?php while(false !== ($tpl = readdir($dirs))):?>
@@ -126,7 +126,7 @@
 
 						<div class="form-group">
 							<label>위지위그 에디터</label>
-							<select name="editor" class="form-control">
+							<select name="editor" class="form-control custom-select">
 								<?php $dirs = opendir($g['path_plugin'])?>
 								<?php while(false !== ($tpl = readdir($dirs))):?>
 								<?php if(!is_file($g['path_plugin'].$tpl.'/import.php'))continue?>
@@ -141,11 +141,11 @@
 
 						<div class="form-group">
 							<label>시작모듈</label>
-							<select name="sysmodule" class="form-control">
-							<?php $MODULESRCD=getDbArray($table['s_module'],"system=0 or id='site'",'*','gid','asc',0,1)?>
-							<?php while($_MDR=db_fetch_array($MODULESRCD)):?>
-							<option value="<?php echo $_MDR['id']?>"<?php if($d['admin']['sysmodule']==$_MDR['id']):?> selected<?php endif?>><?php echo $_MDR['name']?>(<?php echo $_MDR['id']?>)</option>
-							<?php endwhile?>
+							<select name="sysmodule" class="form-control custom-select">
+								<?php $MODULESRCD=getDbArray($table['s_module'],"system=0 or id='site'",'*','gid','asc',0,1)?>
+								<?php while($_MDR=db_fetch_array($MODULESRCD)):?>
+								<option value="<?php echo $_MDR['id']?>"<?php if($d['admin']['sysmodule']==$_MDR['id']):?> selected<?php endif?>><?php echo $_MDR['name']?>(<?php echo $_MDR['id']?>)</option>
+								<?php endwhile?>
 							</select>
 							<small class="form-text text-muted">
 								킴스큐를 구동시키는 기본 모듈이며 모듈을 지정하지 않고 호출시 이 모듈이 기본모듈로서 구동됩니다. 이 설정은 특별한 경우가 아니면 변경하지 마십시오.
@@ -154,7 +154,7 @@
 
 						<div class="form-group">
 							<label>시스템 언어</label>
-							<select name="syslang" class="form-control">
+							<select name="syslang" class="form-control custom-select">
 								<?php if(is_dir($g['path_module'].$module.'/language')):?>
 								<?php $dirs = opendir($g['path_module'].$module.'/language')?>
 								<?php while(false !== ($tpl = readdir($dirs))):?>
@@ -336,7 +336,7 @@
 		</div><!-- /.card -->
 
 
-		<button class="mt-3 btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>" type="submit">저장하기</button>
+		<button class="mt-3 btn btn-outline-primary btn-block btn-lg" type="submit">저장하기</button>
 
 	</form>
 </div>
