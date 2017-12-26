@@ -5,6 +5,7 @@ checkAdmin(0);
 
 $id = trim($id);
 $name = trim($name);
+$label = trim($label);
 $title = trim($title);
 $headercode = trim($headercode);
 $footercode = trim($footercode);
@@ -25,7 +26,7 @@ if ($site_uid)
 		exit;
 	}
 
-	$QVAL = "id='$id',name='$name',title='$title',titlefix='$titlefix',icon='$icon',layout='$layout',startpage='$startpage',m_layout='$m_layout',m_startpage='$m_startpage',lang='$sitelang',open='$open',dtd='$dtd',nametype='$nametype',timecal='$timecal',rewrite='$rewrite',buffer='$buffer',usescode='$usescode',headercode='$headercode',footercode='$footercode'";
+	$QVAL = "id='$id',name='$name',label='$label',title='$title',titlefix='$titlefix',icon='$icon',layout='$layout',startpage='$startpage',m_layout='$m_layout',m_startpage='$m_startpage',lang='$sitelang',open='$open',dtd='$dtd',nametype='$nametype',timecal='$timecal',rewrite='$rewrite',buffer='$buffer',usescode='$usescode',headercode='$headercode',footercode='$footercode'";
 	getDbUpdate($table['s_site'],$QVAL,'uid='.$site_uid);
 
 	$_SEO = getDbData($table['s_seo'],'uid='.(int)$seouid,'uid');

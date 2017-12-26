@@ -22,9 +22,9 @@ KEY gid(gid),
 KEY system(system),
 KEY hidden(hidden),
 KEY mobile(mobile),
-KEY id(id)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY id(id)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_module'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_module'],$DB_CONNECT);
 }
 
 //관리자즐겨찾는페이지
@@ -39,9 +39,9 @@ gid			INT				DEFAULT '0'		NOT NULL,
 name		VARCHAR(200)	DEFAULT ''		NOT NULL,
 url			VARCHAR(200)	DEFAULT ''		NOT NULL,
 KEY memberuid(memberuid),
-KEY gid(gid)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY gid(gid)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_admpage'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_admpage'],$DB_CONNECT);
 }
 
 //모바일
@@ -53,9 +53,9 @@ CREATE TABLE ".$table['s_mobile']." (
 usemobile	TINYINT			DEFAULT '0'		NOT NULL,
 startsite	INT				DEFAULT '0'		NOT NULL,
 startdomain	VARCHAR(50)		DEFAULT ''		NOT NULL
-) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_mobile'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_mobile'],$DB_CONNECT);
 }
 
 //도메인
@@ -75,9 +75,9 @@ KEY gid(gid),
 KEY parent(parent),
 KEY depth(depth),
 KEY name(name),
-KEY site(site)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY site(site)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_domain'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_domain'],$DB_CONNECT);
 }
 
 //사이트
@@ -90,6 +90,7 @@ uid			INT				PRIMARY KEY		NOT NULL AUTO_INCREMENT,
 gid			INT				DEFAULT '0'		NOT NULL,
 id			VARCHAR(20)		DEFAULT ''		NOT NULL,
 name		VARCHAR(50)		DEFAULT ''		NOT NULL,
+label		VARCHAR(50)		DEFAULT ''		NOT NULL,
 title		VARCHAR(100)	DEFAULT ''		NOT NULL,
 titlefix	TINYINT			DEFAULT '0'		NOT NULL,
 icon		VARCHAR(50)		DEFAULT ''		NOT NULL,
@@ -109,9 +110,9 @@ headercode	TEXT			NOT NULL,
 footercode	TEXT			NOT NULL,
 KEY gid(gid),
 KEY id(id),
-KEY open(open)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY open(open)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT);
 }
 
 //메뉴
@@ -151,9 +152,9 @@ KEY parent(parent),
 KEY depth(depth),
 KEY id(id),
 KEY mobile(mobile),
-KEY hidden(hidden)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY hidden(hidden)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT);
 }
 
 //페이지
@@ -189,9 +190,9 @@ KEY category(category),
 KEY linkedmenu(linkedmenu),
 KEY d_regis(d_regis),
 KEY d_update(d_update),
-KEY member(member)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY member(member)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_page'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_page'],$DB_CONNECT);
 }
 
 
@@ -218,9 +219,9 @@ height		INT				DEFAULT '0'		NOT NULL,
 scroll		TINYINT			DEFAULT '0'		NOT NULL,
 type		TINYINT			DEFAULT '0'		NOT NULL,
 dispage		TEXT			DEFAULT ''		NOT NULL,
-KEY hidden(hidden)) ENGINE=".$DB['type']." CHARSET=UTF8");                    
+KEY hidden(hidden)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_popup'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_popup'],$DB_CONNECT);
 }
 
 //회원아이디데이터
@@ -234,9 +235,9 @@ site		INT				DEFAULT '0'		NOT NULL,
 id			VARCHAR(50)		DEFAULT ''		NOT NULL,
 pw			VARCHAR(250)	DEFAULT ''		NOT NULL,
 KEY site(site),
-KEY id(id)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY id(id)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_mbrid'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_mbrid'],$DB_CONNECT);
 }
 
 //회원기본데이터
@@ -315,9 +316,9 @@ KEY smail(smail),
 KEY point(point),
 KEY usepoint(usepoint),
 KEY now_log(now_log),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_mbrdata'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_mbrdata'],$DB_CONNECT);
 }
 
 //회원기업데이터
@@ -345,9 +346,9 @@ KEY comp_num(comp_num),
 KEY comp_type(comp_type),
 KEY comp_name(comp_name),
 KEY comp_ceo(comp_ceo),
-KEY comp_addr0(comp_addr0)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY comp_addr0(comp_addr0)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_mbrcomp'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_mbrcomp'],$DB_CONNECT);
 }
 
 //접속카운트
@@ -362,9 +363,9 @@ date		CHAR(8)			DEFAULT ''		NOT NULL,
 hit			INT				DEFAULT '0'		NOT NULL,
 page		INT				DEFAULT '0'		NOT NULL,
 KEY site(site),
-KEY date(date)) ENGINE=".$DB['type']." CHARSET=UTF8");                    
+KEY date(date)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_counter'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_counter'],$DB_CONNECT);
 }
 
 //접속레퍼러
@@ -382,9 +383,9 @@ agent		VARCHAR(200)	DEFAULT ''		NOT NULL,
 d_regis		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY site(site),
 KEY mbruid(mbruid),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                    
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_referer'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_referer'],$DB_CONNECT);
 }
 
 //브라우져
@@ -400,9 +401,9 @@ browser		VARCHAR(10)		DEFAULT ''		NOT NULL,
 hit			INT				DEFAULT '0'		NOT NULL,
 KEY site(site),
 KEY date(date),
-KEY browser(browser)) ENGINE=".$DB['type']." CHARSET=UTF8");                    
+KEY browser(browser)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_browser'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_browser'],$DB_CONNECT);
 }
 
 //내부키워드
@@ -418,9 +419,9 @@ keyword		VARCHAR(50)		DEFAULT ''		NOT NULL,
 hit			INT				DEFAULT '0'		NOT NULL,
 KEY site(site),
 KEY date(date),
-KEY keyword(keyword)) ENGINE=".$DB['type']." CHARSET=UTF8");                    
+KEY keyword(keyword)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_inkey'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_inkey'],$DB_CONNECT);
 }
 
 //외부키워드
@@ -442,9 +443,9 @@ etc			INT				DEFAULT '0'		NOT NULL,
 total		INT				DEFAULT '0'		NOT NULL,
 KEY site(site),
 KEY date(date),
-KEY keyword(keyword)) ENGINE=".$DB['type']." CHARSET=UTF8");                    
+KEY keyword(keyword)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_outkey'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_outkey'],$DB_CONNECT);
 }
 
 //첨부파일데이터
@@ -493,9 +494,9 @@ KEY fileonly(fileonly),
 KEY type(type),
 KEY ext(ext),
 KEY name(name),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_upload'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_upload'],$DB_CONNECT);
 }
 
 //첨부파일카테고리데이터
@@ -519,9 +520,9 @@ KEY gid(gid),
 KEY site(site),
 KEY mbruid(mbruid),
 KEY type(type),
-KEY hidden(hidden)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY hidden(hidden)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_uploadcat'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_uploadcat'],$DB_CONNECT);
 }
 
 //댓글데이터
@@ -569,9 +570,9 @@ KEY hidden(hidden),
 KEY notice(notice),
 KEY mbruid(mbruid),
 KEY subject(subject),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_comment'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_comment'],$DB_CONNECT);
 }
 
 //한줄의견데이터
@@ -603,9 +604,9 @@ KEY parent(parent),
 KEY parentmbr(parentmbr),
 KEY hidden(hidden),
 KEY mbruid(mbruid),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_oneline'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_oneline'],$DB_CONNECT);
 }
 
 //일별수량
@@ -627,9 +628,9 @@ download	INT				DEFAULT '0'		NOT NULL,
 mbrjoin		INT				DEFAULT '0'		NOT NULL,
 mbrout		INT				DEFAULT '0'		NOT NULL,
 KEY date(date),
-KEY site(site)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY site(site)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_numinfo'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_numinfo'],$DB_CONNECT);
 }
 
 //태그
@@ -645,9 +646,9 @@ keyword		VARCHAR(50)		DEFAULT ''		NOT NULL,
 hit			INT				DEFAULT '0'		NOT NULL,
 KEY site(site),
 KEY date(date),
-KEY keyword(keyword)) ENGINE=".$DB['type']." CHARSET=UTF8");                    
+KEY keyword(keyword)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_tag'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_tag'],$DB_CONNECT);
 }
 
 
@@ -673,9 +674,9 @@ KEY site(site),
 KEY type(type),
 KEY parent(parent),
 KEY parentmbr(parentmbr),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_trackback'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_trackback'],$DB_CONNECT);
 }
 
 //회원레벨테이블
@@ -691,9 +692,9 @@ num			INT				DEFAULT '0'		NOT NULL,
 login		INT				DEFAULT '0'		NOT NULL,
 post		INT				DEFAULT '0'		NOT NULL,
 comment		INT				DEFAULT '0'		NOT NULL,
-KEY gid(gid)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY gid(gid)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_mbrlevel'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_mbrlevel'],$DB_CONNECT);
 }
 //회원그룹테이블
 $_tmp = db_query( "select count(*) from ".$table['s_mbrgroup'], $DB_CONNECT );
@@ -705,9 +706,9 @@ uid			INT				PRIMARY KEY		NOT NULL AUTO_INCREMENT,
 name		VARCHAR(30)		DEFAULT ''		NOT NULL,
 gid			TINYINT			DEFAULT '0'		NOT NULL,
 num			INT				DEFAULT	'0'		NOT NULL,
-KEY gid(gid)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY gid(gid)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_mbrgroup'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_mbrgroup'],$DB_CONNECT);
 }
 //포인트테이블
 $_tmp = db_query( "select count(*) from ".$table['s_point'], $DB_CONNECT );
@@ -723,9 +724,9 @@ content		TEXT			NOT NULL,
 d_regis		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY my_mbruid(my_mbruid),
 KEY by_mbruid(by_mbruid),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_point'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_point'],$DB_CONNECT);
 }
 //적립금테이블
 $_tmp = db_query( "select count(*) from ".$table['s_cash'], $DB_CONNECT );
@@ -741,9 +742,9 @@ content		TEXT			NOT NULL,
 d_regis		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY my_mbruid(my_mbruid),
 KEY by_mbruid(by_mbruid),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_cash'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_cash'],$DB_CONNECT);
 }
 //예치금테이블
 $_tmp = db_query( "select count(*) from ".$table['s_money'], $DB_CONNECT );
@@ -759,9 +760,9 @@ content		TEXT			NOT NULL,
 d_regis		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY my_mbruid(my_mbruid),
 KEY by_mbruid(by_mbruid),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_money'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_money'],$DB_CONNECT);
 }
 //쪽지테이블
 $_tmp = db_query( "select count(*) from ".$table['s_paper'], $DB_CONNECT );
@@ -784,9 +785,9 @@ KEY my_mbruid(my_mbruid),
 KEY by_mbruid(by_mbruid),
 KEY inbox(inbox),
 KEY d_regis(d_regis),
-KEY d_read(d_read)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_read(d_read)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_paper'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_paper'],$DB_CONNECT);
 }
 //친구테이블
 $_tmp = db_query( "select count(*) from ".$table['s_friend'], $DB_CONNECT );
@@ -803,9 +804,9 @@ d_regis		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY rel(rel),
 KEY my_mbruid(my_mbruid),
 KEY by_mbruid(by_mbruid),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_friend'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_friend'],$DB_CONNECT);
 }
 //스크랩테이블
 $_tmp = db_query( "select count(*) from ".$table['s_scrap'], $DB_CONNECT );
@@ -820,9 +821,9 @@ subject		VARCHAR(200)	DEFAULT ''		NOT NULL,
 url			VARCHAR(250)	DEFAULT ''		NOT NULL,
 d_regis		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY mbruid(mbruid),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_scrap'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_scrap'],$DB_CONNECT);
 }
 
 //캐릭터테이블
@@ -837,9 +838,9 @@ gid			INT				DEFAULT '0'		NOT NULL,
 photo		VARCHAR(100)	DEFAULT ''		NOT NULL,
 d_regis		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY mbruid(mbruid),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_userpic'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_userpic'],$DB_CONNECT);
 }
 
 //SNS테이블
@@ -858,9 +859,9 @@ KEY st(st),
 KEY sf(sf),
 KEY sm(sg),
 KEY sy(sd),
-KEY sn(sn)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY sn(sn)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_mbrsns'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_mbrsns'],$DB_CONNECT);
 }
 //SEO테이블
 $_tmp = db_query( "select count(*) from ".$table['s_seo'], $DB_CONNECT );
@@ -880,9 +881,9 @@ replyto		VARCHAR(50)		DEFAULT ''		NOT NULL,
 language	CHAR(2)			DEFAULT ''		NOT NULL,
 build		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY rel(rel),
-KEY parent(parent)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY parent(parent)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_seo'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_seo'],$DB_CONNECT);
 }
 //확장로그
 $_tmp = db_query( "select count(*) from ".$table['s_xtralog'], $DB_CONNECT );
@@ -897,9 +898,9 @@ score1		TEXT			NOT NULL,
 score2		TEXT			NOT NULL,
 report		TEXT			NOT NULL,
 KEY module(module),
-KEY parent(parent)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY parent(parent)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_xtralog'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_xtralog'],$DB_CONNECT);
 }
 //알림데이터
 $_tmp = db_query( "select count(*) from ".$table['s_notice'], $DB_CONNECT );
@@ -920,8 +921,8 @@ KEY uid(uid),
 KEY mbruid(mbruid),
 KEY site(site),
 KEY frommbr(frommbr),
-KEY d_read(d_read)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_read(d_read)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_notice'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_notice'],$DB_CONNECT);
 }
 ?>

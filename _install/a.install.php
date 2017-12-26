@@ -77,19 +77,19 @@ fclose($fp);
 $DB['type'] = $dbtype;
 $DB['head'] = $dbhead;
 
-if (is_file($_tmptfile)) 
+if (is_file($_tmptfile))
 {
 	include_once $_tmptfile;
 	$_oldtable = $table;
 }
 
-$dirh = opendir($g['path_module']); 
-while(false !== ($_file = readdir($dirh))) 
-{ 
+$dirh = opendir($g['path_module']);
+while(false !== ($_file = readdir($dirh)))
+{
 	if($_file == '.' || $_file == '..') continue;
 
-	if(is_file($g['path_module'].$_file.'/_setting/db.table.php')) 
-	{	
+	if(is_file($g['path_module'].$_file.'/_setting/db.table.php'))
+	{
 		$table = array();
 		$module= $_file;
 		include $g['path_module'].$_file.'/_setting/db.table.php';
@@ -104,7 +104,7 @@ while(false !== ($_file = readdir($dirh)))
 		$moduledir[$_file] = array($_file,0);
 	}
 	DirMake($g['path_module'].$_file.'/update');
-} 
+}
 closedir($dirh);
 
 $fp = fopen($_tmptfile,'w');
@@ -132,9 +132,9 @@ foreach($mdlarray as $_val)
 {
 	$new_modulename = $g['path_module'].$moduledir[$_val][0].'/language/'.$sitelang.'/name.module.txt';
 
-	$QUE = "insert into ".$table['s_module']." 
-	(gid,system,hidden,mobile,name,id,tblnum,icon,d_regis,lang) 
-	values 
+	$QUE = "insert into ".$table['s_module']."
+	(gid,system,hidden,mobile,name,id,tblnum,icon,d_regis,lang)
+	values
 	('".$gid."','1','".(strstr('[market][admin][site][layout]','['.$_val.']')?0:1)."','1','".($sitelang&&is_file($new_modulename)?implode('',file($new_modulename)):getFolderName($g['path_module'].$moduledir[$_val][0]))."','".$moduledir[$_val][0]."','".$moduledir[$_val][1]."','kf-".($_val=='site'?'home':($_val=='mediaset'?'upload':($_val=='notification'?'notify':$_val)))."','".$date['totime']."','')";
 	db_query($QUE,$DB_CONNECT);
 	$gid++;
@@ -144,10 +144,10 @@ $siteid = $siteid ? $siteid : 'home';
 $layout = 'default/default.php';
 $m_layout = 'mobile/default.php';
 
-$QKEY = "gid,id,name,title,titlefix,icon,layout,startpage,m_layout,m_startpage,lang,open,dtd,nametype,timecal,rewrite,buffer,usescode,headercode,footercode";
-$QVAL = "'0','".$siteid."','$sitename','{subject} | {site}','0','','$layout','0','$m_layout','0','','1','','nic','0','$rewrite','0','1','',''";
+$QKEY = "gid,id,name,label,title,titlefix,icon,layout,startpage,m_layout,m_startpage,lang,open,dtd,nametype,timecal,rewrite,buffer,usescode,headercode,footercode";
+$QVAL = "'0','".$siteid."','$sitename','$sitename','{subject} | {site}','0','','$layout','0','$m_layout','0','','1','','nic','0','$rewrite','0','1','',''";
 getDbInsert($table['s_site'],$QKEY,$QVAL);
-db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT);
 $S = getDbData($table['s_site'],"id='".$siteid."'",'*');
 $LASTUID = $S['uid'];
 getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'0','$LASTUID','','','','ALL',''");
@@ -169,7 +169,7 @@ $pagesarray = array
 
 foreach($pagesarray as $_key => $_val)
 {
-	$QUE = "insert into ".$table['s_page']." 
+	$QUE = "insert into ".$table['s_page']."
 	(site,pagetype,ismain,mobile,id,category,name,perm_g,perm_l,layout,joint,hit,d_regis,d_update,mediaset)
 	values
 	('$LASTUID','$_val[1]','0','0','$_key','"._LANG('a007','install')."','$_val[0]','','0','$_val[2]','','0','".$date['totime']."','','0')";
@@ -197,7 +197,7 @@ $cellphone = $tel_1 && $tel_2 && $tel_3 ? $tel_1.'-'.$tel_2.'-'.$tel_3 : '';
 $birth1 = $birth_1 ? $birth_1 : 0;
 $birth2 = $birth_2 && $birth_3 ? $birth_2.$birth_3 : 0;
 
-$QUE = "insert into ".$table['s_mbrdata']." 
+$QUE = "insert into ".$table['s_mbrdata']."
 (memberuid,site,auth,mygroup,level,comp,admin,adm_view,
 email,name,nic,grade,photo,home,sex,birth1,birth2,birthtype,tel1,tel2,zip,
 addr0,addr1,addr2,job,marr1,marr2,sms,mailing,smail,point,usepoint,money,cash,num_login,pw_q,pw_a,now_log,last_log,last_pw,is_paper,d_regis,tmpcode,sns,noticeconf,num_notice,addfield)

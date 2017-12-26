@@ -76,8 +76,8 @@ include $g['path_root'].'_install/rss.func.php';
 		<iframe name="download_frame" width="0" height="0" frameborder="0" scrolling="no"></iframe>
 	</body>
 </html>
-<?php 
-exit; 
+<?php
+exit;
 endif;
 $g['s'] = str_replace('/index.php','',$_SERVER['SCRIPT_NAME']);
 $g['url_root'] = 'http'.($_SERVER['HTTPS']=='on'?'s':'').'://'.$_SERVER['HTTP_HOST'].$g['s'];
@@ -94,12 +94,9 @@ require $g['path_core'].'function/sys.func.php';
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<title><?php echo _LANG('i007','install')?></title>
 		<?php getImport('bootstrap','css/bootstrap.min',false,'css')?>
-		<?php getImport('font-awesome','css/font-awesome',false,'css')?> 
+		<?php getImport('font-awesome','css/font-awesome',false,'css')?>
 		<?php getImport('font-kimsq','css/font-kimsq',false,'css')?>
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
+
 		<script>
 		var mbrclick= false;
 		var rooturl = '<?php echo $g['url_root']?>';
@@ -166,7 +163,7 @@ require $g['path_core'].'function/sys.func.php';
 
 								<!-- 데이터베이스 -->
 								<div id="step-2-body" class="hidden">
-		
+
 									<div class="page-header visible-xs">
 										<h3><i class="fa kf-dbmanager fa-lg fa-fw"></i> <?php echo _LANG('i015','install')?></h3>
 									</div>
@@ -203,7 +200,7 @@ require $g['path_core'].'function/sys.func.php';
 												<input class="form-control" type="password" name="dbpass" value="<?php echo $_SESSION['_live_dbpass']?>" id="password">
 											</div>
 										</div>
-									</div>	
+									</div>
 									<div id="db-info-well" class="well">
 										<i class="fa fa-info-circle fa-2x pull-left fa-border"></i>
 										<small>
@@ -250,9 +247,9 @@ require $g['path_core'].'function/sys.func.php';
 										<?php echo _LANG('i031','install')?>
 										</small>
 									</div>
-								</div>							
+								</div>
 
-							
+
 								<!-- 사용자 등록 -->
 								<div id="step-3-body" class="hidden">
 
@@ -276,7 +273,7 @@ require $g['path_core'].'function/sys.func.php';
 											<div class="col-sm-8">
 												<input class="form-control" type="email" name="email" value="<?php echo $_SESSION['_live_email']?>" placeholder="">
 											</div>
-										</div>		
+										</div>
 										<div class="form-group">
 											<label class="col-sm-3 control-label"><?php echo _LANG('i037','install')?></label>
 											<div class="col-sm-8">
