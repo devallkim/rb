@@ -32,10 +32,10 @@ $TPG = getTotalPage($NUM,$recnum);
 		<input type="hidden" name="module" value="<?php echo $module?>">
 		<input type="hidden" name="front" value="<?php echo $front?>">
 
-		<div class="bg-light border rounded p-3 mb-4">
+		<div class="p-3 mb-4">
 
 			<div class="form-group row">
-				<label class="col-md-1 col-form-label text-md-right">필터</label>
+				<label class="col-md-1 col-form-label">필터</label>
 				<div class="col-md-11 col-lg-10">
 					<div class="form-row">
 						<div class="col-sm-4">

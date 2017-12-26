@@ -187,7 +187,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 							<?php endif?>
 							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $R['name']?>"<?php if(!$R['uid'] && !$g['device']):?> autofocus<?php endif?>>
 							<span class="input-group-btn">
-								<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_startpage" data-tooltip="tooltip" title="페이지 형식지정"><i class="kf-admin" style="width:10px;"></i></button>
+								<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_startpage" data-tooltip="tooltip" title="페이지 형식지정"><i class="fa fa-cog fa-lg"></i></button>
 							</span>
 							<?php if($R['uid']):?>
 							<span class="input-group-btn">

@@ -311,7 +311,7 @@ $SITEN = db_num_rows($SITES);
 
 				<div class="row">
 					<div class="col-lg-10 offset-lg-2 col-xl-9 offset-xl-2">
-						<button type="submit" class="btn btn-outline-primary btn-lg my-4<?php if($g['device']):?> btn-block<?php endif?>" id="rb-submit-button">확인</button>
+						<button type="submit" class="btn btn-outline-primary btn-lg my-4 btn-block" id="rb-submit-button">확인</button>
 					</div>
 				</div>
 

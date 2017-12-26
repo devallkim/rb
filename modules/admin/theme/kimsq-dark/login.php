@@ -36,7 +36,7 @@
 					  </div>
 					</div>
 
-					<button type="submit" class="btn btn-primary btn-block">로그인</button>
+					<button type="submit" class="btn btn-light btn-block">로그인</button>
 
 					<p class="mt-3">
 						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=tmppw" onclick="return hrefCheck(this,true,'임시 패스워드를 가입하신 이메일로 받으시겠습니까?');">

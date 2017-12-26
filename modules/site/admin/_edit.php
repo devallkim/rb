@@ -29,7 +29,7 @@ $_editArray = array(
 );
 ?>
 <!-- 직접 꾸미기 -->
-<div id="rb-page-source">
+<div id="rb-page-source" class="p-4">
 
 	<div class="page-header">
 		<h4>

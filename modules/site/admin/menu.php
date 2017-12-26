@@ -213,6 +213,8 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 								<a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>&amp;vtype=sub" class="btn btn-light" data-tooltip="tooltip" title="서브메뉴 만들기">
 									<i class="fa fa-share fa-rotate-90 fa-lg"></i>
 								</a>
+							</span>
+							<span class="input-group-btn">
 								<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletemenu&amp;cat=<?php echo $cat?>&amp;parent=<?php echo $delparent?>&amp;code=<?php echo substr($catcode,0,strlen($catcode)-1)?>" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');" class="btn btn-light" data-tooltip="tooltip" title="메뉴삭제">
 									<i class="fa fa-trash-o fa-lg"></i>
 								</a>
@@ -291,6 +293,8 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 										<input type="text" name="joint" id="jointf" value="<?php echo $CINFO['joint']?>" class="form-control">
 										<span class="input-group-btn">
 											<button class="btn btn-light rb-modal-module" type="button" title="모듈연결" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="fa fa-link fa-lg"></i></button>
+										</span>
+										<span class="input-group-btn">
 											<button class="btn btn-light" type="button" title="미리보기" data-tooltip="tooltip" onclick="getId('jointf').value!=''?window.open(getId('jointf').value):alert('모듈연결 주소를 등록해 주세요.');">Go!</button>
 										</span>
 									</div>
