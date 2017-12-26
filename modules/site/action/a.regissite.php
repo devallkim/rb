@@ -70,9 +70,10 @@ else {
 
 	$MAXC = getDbCnt($table['s_site'],'max(gid)','');
 	$gid = $MAXC + 1;
+	$name = $name?trim($name):trim($label);
 
-	$QKEY = "gid,id,name,title,titlefix,icon,layout,startpage,m_layout,m_startpage,lang,open,dtd,nametype,timecal,rewrite,buffer,usescode,headercode,footercode";
-	$QVAL = "'$gid','$id','$name','$title','$titlefix','$icon','$layout','$startpage','$m_layout','$m_startpage','$sitelang','$open','$dtd','$nametype','$timecal','$rewrite','$buffer','$usescode','$headercode','$footercode'";
+	$QKEY = "gid,id,name,label,title,titlefix,icon,layout,startpage,m_layout,m_startpage,lang,open,dtd,nametype,timecal,rewrite,buffer,usescode,headercode,footercode";
+	$QVAL = "'$gid','$id','$name','$label','$title','$titlefix','$icon','$layout','$startpage','$m_layout','$m_startpage','$sitelang','$open','$dtd','$nametype','$timecal','$rewrite','$buffer','$usescode','$headercode','$footercode'";
 	getDbInsert($table['s_site'],$QKEY,$QVAL);
 	$LASTUID = getDbCnt($table['s_site'],'max(uid)','');
 	db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT);
