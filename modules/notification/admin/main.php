@@ -22,11 +22,9 @@ $TPG = getTotalPage($NUM,$recnum);
 ?>
 
 
-<div id="notification">
+<div id="notification" class="p-4">
 
-	<div class="page-header">
-		<h4>알림 로그</h4>
-	</div>
+	<h4>알림 로그</h4>
 
 	<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="form-horizontal">
 		<input type="hidden" name="r" value="<?php echo $r?>">
@@ -34,35 +32,35 @@ $TPG = getTotalPage($NUM,$recnum);
 		<input type="hidden" name="module" value="<?php echo $module?>">
 		<input type="hidden" name="front" value="<?php echo $front?>">
 
-		<div class="rb-heading well well-sm">
+		<div class="bg-light border rounded p-3 mb-4">
 
-			<div class="form-group">
-				<label class="col-sm-1 control-label">필터</label>
-				<div class="col-sm-10">
-					<div class="row">
+			<div class="form-group row">
+				<label class="col-md-1 col-form-label text-md-right">필터</label>
+				<div class="col-md-11 col-lg-10">
+					<div class="form-row">
 						<div class="col-sm-4">
-							<select name="siteuid" class="form-control input-sm" onchange="this.form.submit();">
-							<option value="">사이트(전체)</option>
-							<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
-							<?php while($S = db_fetch_array($SITES)):?>
-							<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$siteuid):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
-							<?php endwhile?>
+							<select name="siteuid" class="form-control custom-select" onchange="this.form.submit();">
+								<option value="">사이트(전체)</option>
+								<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
+								<?php while($S = db_fetch_array($SITES)):?>
+								<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$siteuid):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
+								<?php endwhile?>
 							</select>
 						</div>
 						<div class="col-sm-4">
-							<select name="moduleid" class="form-control input-sm" onchange="this.form.submit();">
-							<option value="">모듈(전체)</option>
-							<?php $MODULES = getDbArray($table['s_module'],'','*','gid','asc',0,$p)?>
-							<?php while($MD = db_fetch_array($MODULES)):?>
-							<option value="<?php echo $MD['id']?>"<?php if($MD['id']==$moduleid):?> selected<?php endif?>><?php echo $MD['name']?> (<?php echo $MD['id']?>)</option>
-							<?php endwhile?>
+							<select name="moduleid" class="form-control custom-select" onchange="this.form.submit();">
+								<option value="">모듈(전체)</option>
+								<?php $MODULES = getDbArray($table['s_module'],'','*','gid','asc',0,$p)?>
+								<?php while($MD = db_fetch_array($MODULES)):?>
+								<option value="<?php echo $MD['id']?>"<?php if($MD['id']==$moduleid):?> selected<?php endif?>><?php echo $MD['name']?> (<?php echo $MD['id']?>)</option>
+								<?php endwhile?>
 							</select>
 						</div>
 						<div class="col-sm-4">
-							<select name="isread" class="form-control input-sm" onchange="this.form.submit();">
-							<option value="">상태(전체)</option>
-							<option value="1"<?php if($isread==1):?> selected<?php endif?>>확인</option>
-							<option value="2"<?php if($isread==2):?> selected<?php endif?>>미확인</option>
+							<select name="isread" class="form-control custom-select" onchange="this.form.submit();">
+								<option value="">상태(전체)</option>
+								<option value="1"<?php if($isread==1):?> selected<?php endif?>>확인</option>
+								<option value="2"<?php if($isread==2):?> selected<?php endif?>>미확인</option>
 							</select>
 						</div>
 					</div>
@@ -70,12 +68,12 @@ $TPG = getTotalPage($NUM,$recnum);
 			</div>
 
 			<div id="search-more" class="collapse<?php if($_SESSION['sh_noti']):?> show<?php endif?>">
-				<div class="form-group">
-					<label class="col-sm-1 control-label">정렬</label>
-					<div class="col-sm-10">
+				<div class="form-group row">
+					<label class="col-md-1 col-form-label text-md-right">정렬</label>
+					<div class="col-md-11 col-lg-10">
 
 						<div class="btn-toolbar">
-							<div class="btn-group btn-group-sm" data-toggle="buttons">
+							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-light<?php if($sort=='uid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 									<input type="radio" value="uid" name="sort"<?php if($sort=='uid'):?> checked<?php endif?>> 알림일
 								</label>
@@ -84,7 +82,7 @@ $TPG = getTotalPage($NUM,$recnum);
 								</label>
 							</div>
 
-							<div class="btn-group btn-group-sm" data-toggle="buttons">
+							<div class="btn-group ml-2" data-toggle="buttons">
 								<label class="btn btn-light<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 									<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i> 역순
 								</label>
@@ -96,12 +94,12 @@ $TPG = getTotalPage($NUM,$recnum);
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label class="col-sm-1 control-label">검색</label>
-					<div class="col-sm-10">
+				<div class="form-group row">
+					<label class="col-md-1 col-form-label text-md-right">검색</label>
+					<div class="col-md-11 col-lg-10">
 						<div class="input-group">
-							<span class="input-group-btn hidden-xs" style="width: 120px">
-								<select name="where" class="form-control btn btn-light">
+							<span class="input-group-btn" style="width: 120px">
+								<select name="where" class="form-control custom-select">
 									<option value="message"<?php if($where=='message'):?> selected="selected"<?php endif?>>메시지</option>
 									<option value="referer"<?php if($where=='referer'):?> selected="selected"<?php endif?>>URL</option>
 								</select>
@@ -114,10 +112,10 @@ $TPG = getTotalPage($NUM,$recnum);
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label class="col-sm-1 control-label">출력수</label>
-					<div class="col-sm-3">
-						<select name="recnum" onchange="this.form.submit();" class="form-control">
+				<div class="form-group row">
+					<label class="col-md-1 col-form-label text-md-right">출력수</label>
+					<div class="col-md-11 col-lg-10">
+						<select name="recnum" onchange="this.form.submit();" class="form-control custom-select">
 							<?php for($i=30;$i<=300;$i=$i+30):?>
 							<option value="<?php echo $i?>"<?php if($i==$recnum):?> selected="selected"<?php endif?>><?php echo sprintf('%d 개',$i)?></option>
 							<?php endfor?>
@@ -126,12 +124,12 @@ $TPG = getTotalPage($NUM,$recnum);
 				</div>
 			</div>
 
-			<div class="form-group">
-				<div class="col-sm-offset-1 col-sm-10">
-					<button type="button" class="btn btn-link rb-advance<?php if(!$_SESSION['sh_noti']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#search-more" onclick="sessionSetting('sh_noti','1','','1');">고급검색 <small></small></button>
-					<a href="<?php echo $g['adm_href']?>" class="btn btn-link">초기화</a>
-					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=notice_testonly" onclick="return hrefCheck(this,true,'정말로 테스트 알림을 보내시겠습니까?     ');" class="btn btn-link">테스트 알림</a>
-					<a href="#." class="btn btn-link rb-notifications-modal" role="button" data-toggle="modal" data-target="#modal_window">내알림 보기</a>
+			<div class="row">
+				<div class="col-md-11 col-lg-10 offset-md-1">
+					<button type="button" class="btn btn-light rb-advance<?php if(!$_SESSION['sh_noti']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#search-more" onclick="sessionSetting('sh_noti','1','','1');">고급검색 <small></small></button>
+					<a href="<?php echo $g['adm_href']?>" class="btn btn-light">초기화</a>
+					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=notice_testonly" onclick="return hrefCheck(this,true,'정말로 테스트 알림을 보내시겠습니까?     ');" class="btn btn-light">테스트 알림</a>
+					<a href="#." class="btn btn-light rb-notifications-modal" role="button" data-toggle="modal" data-target="#modal_window">내알림 보기</a>
 				</div>
 			</div>
 
@@ -146,7 +144,12 @@ $TPG = getTotalPage($NUM,$recnum);
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<tr>
-					<th><label data-tooltip="tooltip" title="번호"><input type="checkbox" class="checkAll-noti-user"></label></th>
+					<th>
+						<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input checkAll-noti-user">
+						  <span class="custom-control-indicator"></span>
+						</label>
+					</th>
 					<th>번호</th>
 					<th>보낸사람</th>
 					<th>받는사람</th>
@@ -159,7 +162,12 @@ $TPG = getTotalPage($NUM,$recnum);
 				<?php $SM1=$R['mbruid']?getDbData($table['s_mbrdata'],'memberuid='.$R['mbruid'],'name,nic'):array()?>
 				<?php $SM2=$R['frommbr']?getDbData($table['s_mbrdata'],'memberuid='.$R['frommbr'],'name,nic'):array()?>
 				<tr>
-					<td><input type="checkbox" name="noti_members[]" value="<?php echo $R['uid']?>" class="rb-noti-user" onclick="checkboxCheck();"></td>
+					<td>
+						<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input rb-noti-user" name="noti_members[]" value="<?php echo $R['uid']?>" onclick="checkboxCheck();">
+						  <span class="custom-control-indicator"></span>
+						</label>
+					</td>
 					<td><?php echo $NUM-((($p-1)*$recnum)+$_rec++)?></td>
 					<td>
 						<?php if($SM2['name']):?>
@@ -182,11 +190,11 @@ $TPG = getTotalPage($NUM,$recnum);
 						<?php endif?>
 					</td>
 					<td class="rb-update">
-						<time class="timeago" data-toggle="tooltip" datetime="<?php echo getDateFormat($R['d_regis'],'c')?>" data-tooltip="tooltip" title="<?php echo getDateFormat($R['d_regis'],$lang['notification']['a2040'])?>"></time>
+						<time class="timeago" data-toggle="tooltip" datetime="<?php echo getDateFormat($R['d_regis'],'c')?>" data-tooltip="tooltip" title="<?php echo getDateFormat($R['d_regis'],'Y.m.d H:i')?>"></time>
 					</td>
 					<td class="rb-update">
 						<?php if($R['d_read']):?>
-						<time class="timeago" data-toggle="tooltip" datetime="<?php echo getDateFormat($R['d_read'],'c')?>" data-tooltip="tooltip" title="<?php echo getDateFormat($R['d_read'],$lang['notification']['a2040'])?>"></time>
+						<time class="timeago" data-toggle="tooltip" datetime="<?php echo getDateFormat($R['d_read'],'c')?>" data-tooltip="tooltip" title="<?php echo getDateFormat($R['d_read'],'Y.m.d H:i')?>"></time>
 						<?php else:?>
 						<span class="label label-primary">미확인</span>
 						<?php endif?>
@@ -208,8 +216,8 @@ $TPG = getTotalPage($NUM,$recnum);
 				</ul>
 			</div>
 			<div>
-				<button type="button" onclick="chkFlag('noti_members[]');checkboxCheck();" class="btn btn-light btn-sm">선택/해제</button>
-				<button type="button" onclick="actCheck('multi_delete');" class="btn btn-light btn-sm" id="rb-action-btn" disabled>삭제</button>
+				<button type="button" onclick="chkFlag('noti_members[]');checkboxCheck();" class="btn btn-light">선택/해제</button>
+				<button type="button" onclick="actCheck('multi_delete');" class="btn btn-light" id="rb-action-btn" disabled>삭제</button>
 			</div>
 		</div>
 	</form>

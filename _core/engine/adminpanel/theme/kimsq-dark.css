@@ -336,7 +336,7 @@ body {
 	border-left: 1px solid #222;
 }
 .rb-system-site .rb-panel-top {
-  background-color: #343a40;
+  background-color: #272c32;
   border-bottom: 1px solid #222;
 	color: #eee
 
@@ -344,7 +344,6 @@ body {
 .rb-system-site .rb-icon-hide {
 	color: #eee
 }
-
 
 
 /* tabs-below */
@@ -406,21 +405,58 @@ body {
 .rb-system-main {
 	background-color: #343a40
 }
+
+.rb-system-site {
+	color: #999;
+}
+.rb-system-site .list-group-item {
+	line-height: 1.2
+}
+
+.rb-system-site .custom-control-description {
+	line-height: 1.9
+}
+
 .rb-system-site .rb-content-padded {
    padding: 0;
+}
+.rb-system-site .nav-tabs .nav-link {
+  border-radius: 0;
+	background-color: #272c32;
+	color: #999
 }
 .nav-tabs {
   border-bottom: 1px solid transparent;
 }
-.nav-tabs .nav-link {
-  border: 1px solid transparent;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+.nav-tabs .nav-item {
+	width: 33.3%
 }
+.nav-tabs .nav-link {
+	padding: .5rem;
+	border-right: 1px solid #222;
+  border-bottom: 1px solid #222;
+}
+.nav-tabs .nav-link:hover {
+	border-color: #222;
+	border-top-color: transparent;
+	border-left-color: transparent
+}
+
 .nav-tabs .nav-link.active {
   color: #eee;
   background-color: inherit;
-  border-color: transparent;
+  border: 1px solid #222;
+	border-top: 0;
+	border-bottom: 0
+}
+.nav-tabs .nav-link.active:first-child {
+	border-left: 0
+}
+
+.rb-system-site fieldset[disabled] .btn-light,
+.rb-system-site fieldset[disabled] .btn-light.active {
+	background-image: none;
+	background-color: inherit
 }
 .rb-system-site .card {
 	background-color: inherit;
@@ -482,4 +518,25 @@ body {
 	-webkit-appearance: none;
 	   -moz-appearance: none;
 	        appearance: none;
+}
+.rb-system-site .table td, .rb-system-site .table th {
+  border-top: 1px solid #222;
+}
+.rb-system-site .table {
+	color: #999
+}
+.table thead th {
+  border-bottom: 1px solid #222;
+}
+#emuldevices {
+  left: 0;
+}
+#emuldevices .table th:first-child,
+#emuldevices .table td:first-child {
+	padding-left: 15px
+}
+#emuldevices .table tbody tr.active td,
+#emuldevices .table tbody tr.active th {
+	color: #fff;
+	background-color: #007bff;
 }

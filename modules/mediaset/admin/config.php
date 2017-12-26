@@ -1,6 +1,6 @@
 <?php include $g['path_module'].$module.'/var/var.php' ?>
 
-<div id="configbox">
+<div id="configbox" class="p-4">
 
 	<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
 		<input type="hidden" name="r" value="<?php echo $r?>">
@@ -8,12 +8,10 @@
 		<input type="hidden" name="a" value="config">
 		<input type="hidden" name="ftp_connect" value="<?php echo $d['mediaset']['use_fileserver']?>">
 
-		<div class="page-header">
-			<h4>파일첨부 설정</h4>
-		</div>
+		<h4>파일첨부 설정</h4>
 
-		<div class="form-group">
-			<label class="col-sm-2 control-label">일반파일 첨부</label>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label text-sm-right">일반파일 첨부</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
@@ -31,8 +29,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">사진파일 첨부</label>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label text-sm-right">사진파일 첨부</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
@@ -50,8 +48,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">동영상파일 첨부</label>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label text-sm-right">동영상파일 첨부</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
@@ -67,11 +65,11 @@
 						</div>
 					</div>
 				</div>
-				<p class="form-control-static text-muted"><?php echo sprintf('현재 서버에서 허용하고 있는 1회 최대 첨부용량은 <code>%sMB</code>입니다.',str_replace('M','',ini_get('upload_max_filesize')))?></p>
+				<small class="form-text text-muted"><?php echo sprintf('현재 서버에서 허용하고 있는 1회 최대 첨부용량은 <code>%sMB</code>입니다.',str_replace('M','',ini_get('upload_max_filesize')))?></small>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">썸네일 사이즈</label>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label text-sm-right">썸네일 사이즈</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
@@ -81,34 +79,30 @@
 						</div>
 					</div>
 				</div>
-				<p class="form-control-static text-muted">
+				<small class="form-text text-muted">
 					사진파일 업로드시 썸네일이 생성됩니다. 이때 생성할 썸네일의 가로사이즈를 지정해 주세요.<br>
 					세로사이즈는 가로사이즈의 비율에 맞춰 자동으로 조정됩니다.
-				</p>
+				</small>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">업로드할 서버</label>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label text-sm-right">업로드할 서버</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
-						<select name="use_fileserver" class="form-control" onchange="serverChange(this);">
-						<option value=""<?php if(!$d['mediaset']['use_fileserver']):?> selected<?php endif?>>현재서버</option>
-						<option value="1"<?php if($d['mediaset']['use_fileserver']):?> selected<?php endif?>>원격서버</option>
+						<select name="use_fileserver" class="form-control custom-select" onchange="serverChange(this);">
+							<option value=""<?php if(!$d['mediaset']['use_fileserver']):?> selected<?php endif?>>현재서버</option>
+							<option value="1"<?php if($d['mediaset']['use_fileserver']):?> selected<?php endif?>>원격서버</option>
 						</select>
 					</div>
 				</div>
-				<p class="form-control-static text-muted">
+				<small class="form-text text-muted">
 					원격서버로 지정하면 파일 전용서버로 업로드할 수 있습니다.
-				</p>
+				</small>
 			</div>
 		</div>
 
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>">저장하기</button>
-			</div>
-		</div>
+		<button type="submit" class="btn btn-outline-primary btn-lg my-4<?php if($g['device']):?> btn-block<?php endif?>">저장하기</button>
 
 		<div id="use_fileserver"<?php if(!$d['mediaset']['use_fileserver']):?> class="d-none"<?php endif?>>
 			<div class="page-header">
@@ -117,7 +111,7 @@
 
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">FTP Type</label>
+				<label class="col-sm-2 col-form-label">FTP Type</label>
 				<div class="col-sm-9">
 					<select name="ftp_type" class="form-control" onchange="ftp_select(this);">
 					<option value=""<?php if(!$d['mediaset']['ftp_type']):?> selected<?php endif?>>FTP</option>
@@ -127,14 +121,14 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">FTP Server</label>
+				<label class="col-sm-2 col-form-label">FTP Server</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="ftp_host" value="<?php echo $d['mediaset']['ftp_host']?>" placeholder="예) example.kimsq.com  또는 IP adress 입력">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">FTP Port</label>
+				<label class="col-sm-2 col-form-label">FTP Port</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="ftp_port" value="<?php echo $d['mediaset']['ftp_port']?$d['mediaset']['ftp_port']:'21'?>" placeholder="" style="width:100px;">
 				</div>
@@ -151,44 +145,40 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">FTP ID</label>
+				<label class="col-sm-2 col-form-label">FTP ID</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="ftp_user" value="<?php echo $d['mediaset']['ftp_user']?>" placeholder="FTP ID">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Password</label>
+				<label class="col-sm-2 col-form-label">Password</label>
 				<div class="col-sm-9">
 					<input type="password" class="form-control" name="ftp_pass" value="<?php echo $d['mediaset']['ftp_pass']?>" placeholder="Password">
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">첨부할 폴더</label>
+				<label class="col-sm-2 col-form-label">첨부할 폴더</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="ftp_folder" value="<?php echo $d['mediaset']['ftp_folder']?>" placeholder="">
-					<p class="form-control-static">
-						<small class="text-muted">
-							FTP접속시 최상위폴더로 부터 실제 첨부할 폴더의 서버경로를 지정해 주세요.<br>
-							경로의 처음과 마지막은 반드시 슬래쉬(/)로 끝나야 합니다.<br>
-							보기)<code>/www/myfolder/</code> 또는 <code>/public_html/myfolder/</code>
-						</small>
-					</p>
+					<small class="form-text text-muted">
+						FTP접속시 최상위폴더로 부터 실제 첨부할 폴더의 서버경로를 지정해 주세요.<br>
+						경로의 처음과 마지막은 반드시 슬래쉬(/)로 끝나야 합니다.<br>
+						보기)<code>/www/myfolder/</code> 또는 <code>/public_html/myfolder/</code>
+					</small>
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label">URL 경로</label>
+				<label class="col-sm-2 col-form-label">URL 경로</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="ftp_urlpath" value="<?php echo $d['mediaset']['ftp_urlpath']?>" placeholder="">
-					<p class="form-control-static">
-						<small class="text-muted">
-							첨부폴더를 웹상에서 접근할 수 있는 URL주소를 http://포함하여 입력해 주세요.<br>
-							경로의 마지막은 반드시 슬래쉬(/)로 끝나야 합니다.<br>
-							보기)<code>http://www.kimsq.com/myfolder/</code>
-						</small>
-					</p>
+					<small class="form-text text-muted">
+						첨부폴더를 웹상에서 접근할 수 있는 URL주소를 http://포함하여 입력해 주세요.<br>
+						경로의 마지막은 반드시 슬래쉬(/)로 끝나야 합니다.<br>
+						보기)<code>http://www.kimsq.com/myfolder/</code>
+					</small>
 				</div>
 			</div>
 

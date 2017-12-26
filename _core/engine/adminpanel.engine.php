@@ -242,7 +242,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 		</div>
 		<div class="rb-content-padded">
 
-			<ul class="nav nav-tabs">
+			<ul class="nav nav-tabs nav-fill">
 				<li class="nav-item">
 					<a class="nav-link<?php if($_COOKIE['rightAdmTab']=='site'||!$_COOKIE['rightAdmTab']):?> active<?php endif?>" href="#site-settings" role="tab" data-toggle="tab" onclick="_cookieSetting('rightAdmTab','site');">
 						사이트
@@ -592,20 +592,20 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 				</div>
 
 				<div class="tab-pane<?php if($_COOKIE['rightAdmTab']=='emulator'):?> active<?php endif?>" id="device-emulator">
-					<div class="btn-group rb-device-buttons w-100" data-toggle="buttons">
+					<div class="btn-group rb-device-buttons w-100 px-2" data-toggle="buttons">
 						<label class="btn btn-light rb-btn-desktop js-tooltip<?php if($_COOKIE['rightemulTab']=='desktop'||!$_COOKIE['rightemulTab']):?> active<?php endif?>" title="Desktop">
-							<input type="radio" name="options" id="rightemulTab_desktop" checked> <i class="fa fa-desktop fa-2x"></i><br>Desktop
+							<input type="radio" name="options" id="rightemulTab_desktop" checked> <i class="fa fa-desktop fa-2x"></i><br>데스크탑
 						</label>
 						<label class="btn btn-light rb-btn-tablet js-tooltip<?php if($_COOKIE['rightemulTab']=='tablet'):?> active<?php endif?>" title="Tablet">
-							<input type="radio" name="options" id="rightemulTab_tablet"> <i class="fa fa-tablet fa-2x"></i><br>Tablet
+							<input type="radio" name="options" id="rightemulTab_tablet"> <i class="fa fa-tablet fa-2x"></i><br>태블릿
 						</label>
 						<label class="btn btn-light rb-btn-mobile js-tooltip<?php if($_COOKIE['rightemulTab']=='mobile'):?> active<?php endif?>" title="Mobile">
-							<input type="radio" name="options" id="rightemulTab_mobile"> <i class="fa fa-mobile fa-2x"></i><br>phone
+							<input type="radio" name="options" id="rightemulTab_mobile"> <i class="fa fa-mobile fa-2x"></i><br>폰
 						</label>
 					</div>
 
 					<fieldset id="deviceshape"<?php if(!$_COOKIE['rightemulTab'] || $_COOKIE['rightemulTab'] == 'desktop'):?> disabled<?php endif?>>
-						<div class="btn-group w-100 nav-justified" data-toggle="buttons">
+						<div class="btn-group w-100 nav-justified px-2" data-toggle="buttons">
 							<label id="deviceshape_1" class="btn btn-light w-50<?php if(!$_COOKIE['rightemulDir'] || $_COOKIE['rightemulDir'] == '1'):?> active<?php endif?>" title="Potrait" onclick="_deviceshape(1);">
 								<input type="radio" name="deviceshape"><i class="fa fa-rotate-left fa-lg"></i> 세로방향
 							</label>
@@ -616,7 +616,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 					</fieldset>
 
 					<div class="rb-scrollbar" id="emuldevices">
-					    <table class="table table-sm table-striped table-hover">
+					    <table class="table table-sm table-striped table-hover mb-0">
 					        <thead>
 					            <tr>
 					                <th class="rb-name">기기명</th>
@@ -643,12 +643,15 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 						<ul class="list-group">
 							<li class="list-group-item">
 								<fieldset>
-									<div class="checkbox">
-										<label>
-											<input type="checkbox"<?php if($g['mobile']):?> checked<?php endif?> onclick="viewbyMobileDevice(this);"> <i></i><small>모바일 디바이스 접속</small>
+
+									<label class="custom-control custom-checkbox mb-0">
+									  <input type="checkbox" class="custom-control-input"<?php if($g['mobile']):?> checked<?php endif?> onclick="viewbyMobileDevice(this);">
+									  <span class="custom-control-indicator"></span>
+									  <span class="custom-control-description">
+											모바일 디바이스 접속
 											<span class="fa fa-question-circle" style="position:relative;" data-popover="popover" title="[도움말] 모바일 디바이스 접속이란?" data-content="<small>모바일 기기로 접속한 것으로 가정하여 사이트를 보여줍니다. 사이트 설정에서 모바일 분기설정을 적용하면 모바일 전용 레이아웃, 시작페이지, 메뉴가 적용 됩니다.</small>"></span>
-										</label>
-									</div>
+										</span>
+									</label>
 								</fieldset>
 							</li>
 							<li class="list-group-item">

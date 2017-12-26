@@ -1,15 +1,13 @@
 <?php include $g['path_module'].$module.'/var/var.php' ?>
 
-<div id="configbox">
+<div id="configbox" class="p-4">
 
 	<form name="procForm" action="<?php echo $g['s']?>/" method="post" target="_action_frame_<?php echo $m ?>" onsubmit="return saveCheck(this);" class="form-horizontal">
 		<input type="hidden" name="r" value="<?php echo $r ?>">
 		<input type="hidden" name="m" value="<?php echo $module ?>">
 		<input type="hidden" name="a" value="config">
 
-		<div class="page-header">
-			<h4>큐마켓 연결설정</h4>
-		</div>
+		<h4>큐마켓 연결설정</h4>
 
 		<div class="form-group form-row">
 			<label class="col-sm-2 control-label">큐마켓 URL</label>

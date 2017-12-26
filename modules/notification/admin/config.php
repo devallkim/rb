@@ -1,30 +1,28 @@
 <?php include $g['path_module'].$module.'/var/var.php' ?>
 
-<div id="configbox">
+<div id="configbox" class="p-4">
 
 	<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);" class="form-horizontal">
 		<input type="hidden" name="r" value="<?php echo $r ?>">
 		<input type="hidden" name="m" value="<?php echo $module ?>">
 		<input type="hidden" name="a" value="config">
 
-		<div class="page-header">
-			<h4>알림 설정</h4>
-		</div>
+		<h4>알림 설정</h4>
 
-		<div class="form-group">
-			<label class="col-sm-2 control-label">알림간격</label>
-			<div class="col-sm-10">
-				<select name="sec" class="form-control">
+		<div class="form-group row">
+			<label class="col-lg-2 col-form-label text-lg-right">알림간격</label>
+			<div class="col-lg-10 col-xl-9">
+				<select name="sec" class="form-control custom-select">
 					<?php for($i = 10; $i < 61; $i=$i+5):?>
 					<option value="<?php echo $i?>"<?php if($d['ntfc']['sec']==$i):?> selected<?php endif?>><?php echo sprintf('%d 초',$i)?></option>
 					<?php endfor?>
 				</select>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">알림갯수처리</label>
-			<div class="col-sm-10">
-				<select name="num" class="form-control">
+		<div class="form-group row">
+			<label class="col-lg-2 col-form-label text-lg-right">알림갯수처리</label>
+			<div class="col-lg-10 col-xl-9">
+				<select name="num" class="form-control custom-select">
 					<option value="10"<?php if($d['ntfc']['num']==10):?> selected<?php endif?>><?php echo sprintf('%d 개 이상일 경우',10)?> +10</option>
 					<option value="50"<?php if($d['ntfc']['num']==50):?> selected<?php endif?>><?php echo sprintf('%d 개 이상일 경우',50)?> +50</option>
 					<option value="99"<?php if($d['ntfc']['num']==99):?> selected<?php endif?>><?php echo sprintf('%d 개 이상일 경우',99)?> +99</option>
@@ -33,26 +31,28 @@
 				</select>
 			</div>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">알림차단 모듈</label>
-			<div class="col-sm-10">
+		<div class="form-group row">
+			<label class="col-lg-2 col-form-label text-lg-right">알림차단 모듈</label>
+			<div class="col-lg-10 col-xl-9">
 
 				<?php $_MODULES=getDbArray($table['s_module'],'','*','gid','asc',0,1)?>
 				<?php while($_MD=db_fetch_array($_MODULES)):?>
-				<label class="rb-label">
-					<input type="checkbox" name="module_members[]" value="<?php echo $_MD['id']?>"<?php if(strstr($d['ntfc']['cut_modules'],'['.$_MD['id'].']')):?> checked<?php endif?>> <i></i><strong><?php echo $_MD['name']?></strong> <small class="text-muted">(<?php echo $_MD['id']?>)</small>
+				<label class="custom-control custom-checkbox">
+				  <input type="checkbox" class="custom-control-input" name="module_members[]" value="<?php echo $_MD['id']?>"<?php if(strstr($d['ntfc']['cut_modules'],'['.$_MD['id'].']')):?> checked<?php endif?>>
+				  <span class="custom-control-indicator"></span>
+				  <span class="custom-control-description"><?php echo $_MD['name']?> <small class="text-muted">(<?php echo $_MD['id']?>)</small></span>
 				</label>
 				<?php endwhile?>
 
-				<p class="form-control-static text-muted">
+				<small class="form-text text-muted">
 					알림을 원천적으로 차단할 모듈을 선택해주세요.
-				</p>
+				</small>
 			</div>
 		</div>
 
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>">저장하기</button>
+		<div class="row">
+			<div class="col-lg-10 offset-lg-2 col-xl-9 offset-xl-2">
+				<button type="submit" class="btn btn-outline-primary btn-lg my-4<?php if($g['device']):?> btn-block<?php endif?>">저장하기</button>
 			</div>
 		</div>
 	</form>

@@ -4,10 +4,13 @@ body {
 }
 
 body {
-  background-color: #EEEEEE !important;
+  background-color: #343a40 !important;
   font-family: 'Open Sans', "돋움", dotum, '나눔고딕', 'Nanum Gothic', sans-serif, FontAwesome, kimsq !important;
+  color: #ccc
 }
-
+a {
+  color: #ccc
+}
 .rb-root {
   display: table;
   height: 100%;
@@ -24,19 +27,19 @@ body {
 
 #rb-login .card {
   margin: 0 auto 15px;
-  background-color: #fbfbfb;
-  border: 1px solid #AAA;
-  border-bottom: 1px solid #888;
+  color: #ccc;
+  background-color: rgb(39, 44, 50);
+  border: 1px solid #222;
   border-radius: 3px;
-  color: #444;
-  box-shadow: 0px 2px 2px #AAA;
+  color: #999;
+  box-shadow: 0px 2px 2px #222;
 }
 #rb-login .card-header h1 {
 	margin-bottom: 0;
 	font-size: 18px
 }
 #rb-login .card-header a {
-	color: #444
+	color: #ccc
 }
 #rb-login .card-header a:hover {
 	text-decoration: none
@@ -64,7 +67,11 @@ body {
   font-size: 90%;
 }
 
-
+.form-control, .form-control[readonly] {
+  background-color: rgb(31, 34, 39);
+  color: rgb(171, 175, 181);
+  border-color: rgb(27, 30, 36);
+}
 /*반응형 설정*/
 
 @media (min-width: 481px) {
@@ -75,7 +82,7 @@ body {
 
 @media (max-width: 480px) {
   body {
-    background-color: #fff !important
+    /*background-color: #fff !important*/
   }
   #rb-login {
     padding: 0;
@@ -87,7 +94,7 @@ body {
     background-color: inherit;
   }
   #rb-login .card-footer {
-    background-color: transparent;
+    /*background-color: transparent;*/
   }
   #rb-login h1 {
     font-size: 20px

@@ -68,7 +68,7 @@
 {
 	#rb-dashboard .collapse {
 		max-height: 10000px;
-	}	
+	}
 }
 #rb-dashboard .panel-heading {
 	position: relative;
@@ -124,7 +124,6 @@
 	display: table;
 	width: 100%;
 	text-align: center;
-	border-bottom: #ccc solid 1px;
 }
 
 #rb-dashboard .rb-guide-wrapper-inner {
@@ -147,6 +146,3 @@
 #rb-dashboard .rb-guide-wrapper-inner h3 {
 	font-family: 'verdana';
 }
-
-
-

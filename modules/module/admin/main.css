@@ -370,7 +370,6 @@
 	text-decoration: none;
 }
 .table tbody tr:hover {
-	background: #efefef;
 	cursor: pointer;
 }
 .table tbody td small {
@@ -401,17 +400,7 @@
 	text-align:center;
 	color:#999;
 }
-.table .active1 td {
-	background-color: #428BCA;
-}
-.table .active1 td,
-.table .active1 td small,
-.table .active1 .rb-time {
-	color: #fff;
-}
-.rb-search-box {
-	background-color: #f5f5f5;
-}
+
 .rb-search-box .input-group {
 	width: 190px;
 }

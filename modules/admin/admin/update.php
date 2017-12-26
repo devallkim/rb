@@ -13,7 +13,7 @@ $TPG = getTotalPage($_updatelength,$recnum);
 <div id="update-body" class="p-4">
 	<h3>킴스큐 원격 업데이트</h3>
 
-	<div class="alert alert-info">
+	<div class="bg-light border rounded p-3">
 		<div class="media">
 			<div class="mr-3 align-self-center version">
 				Rb <i><?php echo $d['admin']['version']?></i>
@@ -25,8 +25,8 @@ $TPG = getTotalPage($_updatelength,$recnum);
 	</div>
 
 
-	<div class="update-info table-responsive">
-		<table class="table table-bordered">
+	<div class="update-info table-responsive mt-4">
+		<table class="table">
 			<thead>
 				<tr class="active">
 					<th>버전</th>
@@ -126,17 +126,17 @@ $TPG = getTotalPage($_updatelength,$recnum);
 	</div>
 
 
-	<div class="well">
+	<div class="bg-light border rounded p-4">
 		<p class="clearfix">
 			<i class="fa fa-question-circle fa-lg"></i>
 			<strong>원격 업데이트 도움말</strong>
 		</p>
 
-		<ul>
-		<li>원격 업데이트는 킴스큐의 코어 및 관련 파일들을 항상 최신의 상태로 유지할 수 있는 시스템입니다.</li>
-		<li>그러나 사용자가 직접 수정하거나 커스터마이징 한 사항이 업데이트 내역에 포함되어 있을 경우 해당사항이 덧씌워 지므로 이 경우 반드시 수작업으로 패치한 후 수동 업데이트를 클릭해 주어야 합니다.</li>
-		<li>정상적으로 업데이트 되지 않았거나 재 업데이트를 원하시면 기록을 제거한 후 재시도해 주세요.</li>
-		<li>이 작업은 데이터의 용량이나 처리내용에 따라서 다소 시간이 걸릴 수 있습니다.</li>
+		<ul class="mb-0 text-muted">
+			<li>원격 업데이트는 킴스큐의 코어 및 관련 파일들을 항상 최신의 상태로 유지할 수 있는 시스템입니다.</li>
+			<li>그러나 사용자가 직접 수정하거나 커스터마이징 한 사항이 업데이트 내역에 포함되어 있을 경우 해당사항이 덧씌워 지므로 이 경우 반드시 수작업으로 패치한 후 수동 업데이트를 클릭해 주어야 합니다.</li>
+			<li>정상적으로 업데이트 되지 않았거나 재 업데이트를 원하시면 기록을 제거한 후 재시도해 주세요.</li>
+			<li>이 작업은 데이터의 용량이나 처리내용에 따라서 다소 시간이 걸릴 수 있습니다.</li>
 		</ul>
 	</div>
 </div>

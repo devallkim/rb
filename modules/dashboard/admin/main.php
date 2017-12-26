@@ -66,23 +66,20 @@ if(is_file($_mywidget)) include $_mywidget;
 
 		<div id="rb-guide-wrapper" class="rb-guide-wrapper<?php if($_i):?> d-none<?php endif?>">
 			<div class="rb-guide-wrapper-inner">
-				<div class="container">
-					<h1>
-						<i class="kf kf-widget fa-5x text-muted"></i>
-						<br>
-						<br>
+				<div class="container-fluid py-5">
+					<h1 class="h3">
+						<i class="kf kf-widget fa-4x text-muted pb-3 d-block"></i>
 						설정된 위젯이 없습니다.
 					</h1>
-					<p class="text-muted">
+					<small class="text-muted">
 						위젯을 이용해서 <?php echo $my['name'] ?>님만의 대시보드를 꾸며보세요.
 						<br class="hidden-xs">
 						자주 사용하는 위젯을 원하는 위치에 진열할 수 있습니다.
-						<br class="hidden-xs">
-					</p>
+					</small>
 					<p>
 						<br>
 						<br>
-						<a id="rb-dashboard-edit-btn" class="btn btn-primary rb-modal-dashboard" href="#." data-toggle="modal" data-target="#modal_window">
+						<a id="rb-dashboard-edit-btn" class="btn btn-outline-primary rb-modal-dashboard" href="#." data-toggle="modal" data-target="#modal_window">
 							<i class="glyphicon glyphicon-ok"></i>
 							대시보드 꾸미기
 						</a>

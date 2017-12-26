@@ -50,7 +50,7 @@ $NUM = getDbRows($table['s_upload'],$sqlque);
 $TPG = getTotalPage($NUM,$recnum);
 ?>
 
-<div id="uplist">
+<div id="uplist" class="p-4">
 
 	<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="form-horizontal">
 		<input type="hidden" name="r" value="<?php echo $r?>">
@@ -58,22 +58,22 @@ $TPG = getTotalPage($NUM,$recnum);
 		<input type="hidden" name="module" value="<?php echo $module?>">
 		<input type="hidden" name="front" value="<?php echo $front?>">
 
-		<div class="rb-heading well well-sm">
-			<div class="form-group">
-				<label class="col-sm-1 control-label">필터</label>
-				<div class="col-sm-10">
-					<div class="row">
+		<div class="border rounded p-3 mb-4 bg-light">
+			<div class="form-group row">
+				<label class="col-md-1 col-form-label text-md-center">필터</label>
+				<div class="col-md-11 col-lg-10">
+					<div class="form-row">
 						<div class="col-sm-3">
-							<select name="siteuid" class="form-control input-sm" onchange="this.form.submit();">
-							<option value="">사이트(전체)</option>
-							<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
-							<?php while($S = db_fetch_array($SITES)):?>
-							<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$siteuid):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
-							<?php endwhile?>
+							<select name="siteuid" class="form-control custom-select" onchange="this.form.submit();">
+								<option value="">사이트(전체)</option>
+								<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
+								<?php while($S = db_fetch_array($SITES)):?>
+								<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$siteuid):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
+								<?php endwhile?>
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<select name="filekind" class="form-control input-sm" onchange="this.form.submit();">
+							<select name="filekind" class="form-control custom-select" onchange="this.form.submit();">
 								<option value="">파일종류(전체)</option>
 								<option value="1"<?php if($filekind==1):?> selected<?php endif?>>사진</option>
 								<option value="2"<?php if($filekind==2):?> selected<?php endif?>>동영상</option>
@@ -81,14 +81,14 @@ $TPG = getTotalPage($NUM,$recnum);
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<select name="filetype" class="form-control input-sm" onchange="this.form.submit();">
+							<select name="filetype" class="form-control custom-select" onchange="this.form.submit();">
 							<option value="">첨부방식(전체)</option>
 							<option value="1"<?php if($filetype==1):?> selected<?php endif?>>직접첨부</option>
 							<option value="2"<?php if($filetype==2):?> selected<?php endif?>>외부링크</option>
 							</select>
 						</div>
 						<div class="col-sm-3">
-							<select name="fserver" class="form-control input-sm" onchange="this.form.submit();">
+							<select name="fserver" class="form-control custom-select" onchange="this.form.submit();">
 							<option value="">첨부서버(전체)</option>
 							<option value="1"<?php if($fserver==1):?> selected<?php endif?>>현재서버</option>
 							<option value="2"<?php if($fserver==2):?> selected<?php endif?>>원격서버</option>
@@ -100,22 +100,22 @@ $TPG = getTotalPage($NUM,$recnum);
 
 			<div id="search-more" class="collapse<?php if($_SESSION['sh_mediaset']):?> show<?php endif?>">
 
-				<div class="form-group">
-					<label class="col-sm-1 control-label">기간</label>
-					<div class="col-sm-10">
-						<div class="row">
-							<div class="col-sm-4">
-								<div class="input-daterange input-group input-group-sm" id="datepicker">
+				<div class="form-group row">
+					<label class="col-md-1 col-form-label text-md-center">기간</label>
+					<div class="col-md-11 col-lg-10">
+						<div class="form-row">
+							<div class="col-sm-6">
+								<div class="input-daterange input-group" id="datepicker">
 									<input type="text" class="form-control" name="d_start" placeholder="시작일 선택" value="<?php echo $d_start?>">
-									<span class="input-group-addon">~</span>
+									<span class="input-group-addon px-2 text-muted border-0" style="background-color: transparent">~</span>
 									<input type="text" class="form-control" name="d_finish" placeholder="종료일 선택" value="<?php echo $d_finish?>">
 									<span class="input-group-btn">
 										<button class="btn btn-light" type="submit">기간적용</button>
 									</span>
 								</div>
 							</div>
-							<div class="col-sm-3 hidden-xs">
-								<span class="input-group-btn">
+							<div class="col-sm-6">
+								<span class="button-group">
 									<button class="btn btn-light" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>','<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>');">어제</button>
 									<button class="btn btn-light" type="button" onclick="dropDate('<?php echo getDateFormat($date['today'],'Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">오늘</button>
 									<button class="btn btn-light" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-7,substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">일주</button>
@@ -129,11 +129,11 @@ $TPG = getTotalPage($NUM,$recnum);
 					</div>
 				</div>
 
-				<div class="form-group hidden-xs">
-					<label class="col-sm-1 control-label">정렬</label>
-					<div class="col-sm-10">
+				<div class="form-group row">
+					<label class="col-md-1 col-form-label text-md-center">정렬</label>
+					<div class="col-md-11 col-lg-10">
 						<div class="btn-toolbar">
-							<div class="btn-group btn-group-sm" data-toggle="buttons">
+							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-light<?php if($sort=='gid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 									<input type="radio" value="gid" name="sort"<?php if($sort=='gid'):?> checked<?php endif?>> 등록일
 								</label>
@@ -150,7 +150,7 @@ $TPG = getTotalPage($NUM,$recnum);
 									<input type="radio" value="height" name="sort"<?php if($sort=='height'):?> checked<?php endif?>> 세로
 								</label>
 							</div>
-							<div class="btn-group btn-group-sm" data-toggle="buttons">
+							<div class="btn-group ml-2" data-toggle="buttons">
 								<label class="btn btn-light<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 									<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i> 역순
 								</label>
@@ -162,12 +162,12 @@ $TPG = getTotalPage($NUM,$recnum);
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label class="col-sm-1 control-label">검색</label>
-					<div class="col-sm-10">
-						<div class="input-group input-group-sm">
-							<span class="input-group-btn hidden-xs" style="width:165px">
-								<select name="where" class="form-control btn btn-light">
+				<div class="form-group row">
+					<label class="col-md-1 col-form-label text-md-center">검색</label>
+					<div class="col-md-10 col-lg-10">
+						<div class="input-group">
+							<span class="input-group-btn">
+								<select name="where" class="form-control custom-select">
 									<option value="name"<?php if($where=='name'):?> selected="selected"<?php endif?>>파일명</option>
 									<option value="caption"<?php if($where=='caption'):?> selected="selected"<?php endif?>>캡션</option>
 									<option value="ext"<?php if($where=='ext'):?> selected="selected"<?php endif?>>확장자</option>
@@ -182,12 +182,12 @@ $TPG = getTotalPage($NUM,$recnum);
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label class="col-sm-1 control-label">출력</label>
-					<div class="col-sm-10">
+				<div class="form-group row">
+					<label class="col-md-1 col-form-label text-md-center">출력</label>
+					<div class="col-md-11 col-lg-10">
 						<div class="row">
 							<div class="col-sm-2">
-								<select name="recnum" onchange="this.form.submit();" class="form-control input-sm">
+								<select name="recnum" onchange="this.form.submit();" class="form-control custom-select">
 									<option value="20"<?php if($recnum==20):?> selected="selected"<?php endif?>><?php echo sprintf('%d개',20)?></option>
 									<option value="35"<?php if($recnum==35):?> selected="selected"<?php endif?>><?php echo sprintf('%d개',35)?></option>
 									<option value="50"<?php if($recnum==50):?> selected="selected"<?php endif?>><?php echo sprintf('%d개',50)?></option>
@@ -203,10 +203,10 @@ $TPG = getTotalPage($NUM,$recnum);
 				</div>
 			</div>
 
-			<div class="form-group">
-				<div class="col-sm-offset-1 col-sm-10">
-					<button type="button" class="btn btn-link rb-advance<?php if(!$_SESSION['sh_mediaset']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#search-more" onclick="sessionSetting('sh_mediaset','1','','1');">고급검색 <small></small></button>
-					<a href="<?php echo $g['adm_href']?>" class="btn btn-link">초기화</a>
+			<div class="row">
+				<div class="offset-sm-1 col-sm-10">
+					<button type="button" class="btn btn-link muted-link rb-advance<?php if(!$_SESSION['sh_mediaset']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#search-more" onclick="sessionSetting('sh_mediaset','1','','1');">고급검색 <small></small></button>
+					<a href="<?php echo $g['adm_href']?>" class="btn btn-link muted-link">초기화</a>
 				</div>
 			</div>
 
@@ -214,10 +214,8 @@ $TPG = getTotalPage($NUM,$recnum);
 	</form>
 
 
-	<div class="page-header">
-		<h4>
-			<small><?php echo number_format($NUM)?> 개 ( <?php echo $p?>/<?php echo $TPG.($TPG>1?'pages':'page')?> )</small>
-		</h4>
+	<div class="mb-2">
+		<small><?php echo number_format($NUM)?> 개 ( <?php echo $p?>/<?php echo $TPG.($TPG>1?'pages':'page')?> )</small>
 	</div>
 
 	<form name="listForm" action="<?php echo $g['s']?>/" method="post">
@@ -291,8 +289,8 @@ $TPG = getTotalPage($NUM,$recnum);
 			</div>
 
 			<div>
-				<button type="button" onclick="chkFlag('upfile_members[]');checkboxCheck();" class="btn btn-light btn-sm">선택/해제</button>
-				<button type="button" onclick="actCheck('multi_delete');" class="btn btn-light btn-sm" id="rb-action-btn" disabled>삭제</button>
+				<button type="button" onclick="chkFlag('upfile_members[]');checkboxCheck();" class="btn btn-light">선택/해제</button>
+				<button type="button" onclick="actCheck('multi_delete');" class="btn btn-light" id="rb-action-btn" disabled>삭제</button>
 			</div>
 		</div>
 	</form>

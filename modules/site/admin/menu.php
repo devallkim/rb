@@ -15,7 +15,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 ?>
 <div class="container-fluid">
 	<div id="catebody" class="row">
-		<nav id="category" class="col-md-4 col-lg-3 d-none d-sm-block sidebar">
+		<nav id="category" class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
 			<div class="panel-group" id="accordion">
 				<div class="card">
 					<a class="card-header accordion-toggle muted-link" data-toggle="collapse" data-parent="#accordion" href="#collapmetane">
@@ -119,7 +119,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 			</div>
 		</nav>
 
-	<div id="catinfo" class="col-md-8 ml-sm-auto col-lg-9 pt-3">
+	<div id="catinfo" class="col-sm-8 col-md-8 ml-sm-auto col-xl-9 pt-3">
 			<form class="form-horizontal rb-form" name="procForm" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" onsubmit="return saveCheck(this);">
 				<input type="hidden" name="r" value="<?php echo $r?>">
 				<input type="hidden" name="m" value="<?php echo $module?>">
@@ -148,7 +148,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 										<span class="caret"></span>
 									</button>
 									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="<?php echo RW('c='.$CINFO['code'])?>" target="_blank"><i class="glyphicon glyphicon-new-window"></i> 새창으로 보기</a>
+										<a class="dropdown-item" href="<?php echo RW('c='.$CINFO['code'])?>" target="_blank">
+											<i class="fa fa-external-link"></i>  새창으로 보기
+										</a>
 									</div>
 								</div>
 							</div>
@@ -778,13 +780,10 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 						</div>
 				</div>
 
-				<div class="form-group form-row">
-					<div class="col-md-12 col-lg-9 offset-lg-2">
-						<button class="btn btn-outline-primary btn-block btn-lg" id="rb-submit-button" type="submit">
-							<?php echo $CINFO['uid']?'속성변경':'신규메뉴 등록' ?>
-						 </button>
-					</div>
-				</div>
+				<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit">
+					<?php echo $CINFO['uid']?'속성변경':'신규메뉴 등록' ?>
+				</button>
+
 			</form>
 		</div>
 	</div>

@@ -15,15 +15,6 @@
 }
 
 
-#notification .row  {
-	margin-right: -5px;
-	margin-left: -5px;
-}
-#notification .row  [class*="col-"] {
-	padding-right: 5px !important;
-	padding-left: 5px !important;
-}
-
 #notification .pagination {
 	margin: 0
 }

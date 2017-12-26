@@ -23,7 +23,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-4 col-lg-3 d-none d-sm-block sidebar">
+		<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
 			<div class="card">
 				<div class="card-header p-1 d-flex justify-content-between">
 					<div class="dropdown">
@@ -128,7 +128,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 			</div>
 		</div>
 
-		<div id="tab-content-view" class="col-md-8 ml-sm-auto col-lg-9 pt-3">
+		<div id="tab-content-view" class="col-sm-8 col-md-8 ml-sm-auto col-xl-9 pt-3">
 			<?php if($g['device']):?><a name="site-page-info"></a><?php endif?>
 			<form name="procForm" class="form-horizontal rb-form" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
 				<input type="hidden" name="r" value="<?php echo $r?>">
@@ -156,9 +156,11 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 								<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
 									<span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu pull-right" role="menu">
-									<li><a href="<?php echo RW('mod='.$R['id'])?>" target="_blank"><i class="glyphicon glyphicon-new-window"></i> 새창으로 보기</a></li>
-								</ul>
+								<div class="dropdown-menu dropdown-menu-right" role="menu">
+									<a class="dropdown-item" href="<?php echo RW('mod='.$R['id'])?>" target="_blank">
+										<i class="fa fa-external-link"></i> 새창으로 보기
+									</a>
+								</div>
 							</div>
 						</div>
 						<?php else:?>
@@ -583,13 +585,9 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 						</div>
 					</div>
 				</div>
-				<div class="form-group row">
-					<div class="col-md-12 col-lg-12">
-						<button class="btn btn-outline-primary btn-block btn-lg" id="rb-submit-button" type="submit">
-							<?php echo $R['uid']?'속성변경':'신규페이지 등록' ?>
-						</button>
-					</div>
-				</div>
+				<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit">
+					<?php echo $R['uid']?'속성변경':'신규페이지 등록' ?>
+				</button>
 			</form>
 		</div>
 	</div>

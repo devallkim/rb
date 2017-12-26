@@ -386,6 +386,19 @@ border-radius: 0.25rem;
     color: #777
 }
 
+.rb-box {
+  position: relative;
+  background-color: #444;
+  border-radius: 6px;
+  text-align: center;
+  padding: 8px;
+  margin: 4px;
+  width: 70px;
+  height: 65px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px #222 !important;
+}
+
 
 /* ------------------ 풀사이즈 편집 --------------------*/
 .rb-fullsize {
@@ -460,11 +473,7 @@ border-radius: 0.25rem;
 #rb-body.rb-device-connect .rb-navbar-nav {
 	margin-top: 36px;
 }
-#rb-body.rb-device-connect .rb-navbar-nav,
-#rb-body.rb-device-connect .tab-content {
-	margin-left: -15px;
-	margin-right: -15px;
-}
+
 #rb-body.rb-device-connect .mobile-tabs li {
 	width: 33.3333%;
 }
@@ -535,6 +544,10 @@ border-radius: 0.25rem;
 }
 .table tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table .table-active td {
+  color: #eee
 }
 
 
@@ -693,8 +706,21 @@ border-radius: 0.25rem;
 .bg-dark {
   background-color: #272c32!important;
 }
+.bg-light {
+  background-color: #323842!important;
+}
+
+.border {
+  border: 1px solid #222!important;
+}
 
 /*tree*/
+.rb-tree li:before {
+  border-left: 1px solid #666 !important;
+}
+.rb-tree li:after {
+  border-top: 1px solid #666 !important;
+}
 .rb-tree .rb-active {
   color: rgb(0, 123, 255);
 }

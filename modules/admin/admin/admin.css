@@ -1,6 +1,6 @@
 #admin-users .panel {
 	border: none;
-} 
+}
 
 #admin-users .panel-heading label {
 	line-height: 35px
@@ -10,13 +10,13 @@
 #admin-users .panel-footer {
 	background-color: transparent;
 	padding: 10px 0
-} 
+}
 
 #admin-users .panel-footer .row [class*="col-"] {
     margin-top: 10px
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
 	#admin-users .panel-footer .row {
 	    margin-left: -.5%;
 	    margin-right: -.5%;
@@ -30,28 +30,12 @@
 	}
 }
 
-#admin-users .table thead tr {
-	border-left: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-}
-
-#admin-users .table th {
-	font-weight: normal;
-	font-size: 12px;
-	border-bottom: 1px solid #ddd;
-	color: #777
-}
-
 #admin-users .table th label,
 #admin-users .table th input {
 	margin: 0;
 	padding: 0
 }
 
-#admin-users .badge {
-	font-weight: normal;
-	font-size: 11px;
-}
 
 .form-horizontal .has-feedback.rb-outside .form-control-feedback {
         right: -925px;
@@ -71,5 +55,3 @@
 .table td {
 	text-align: center;
 }
-
-

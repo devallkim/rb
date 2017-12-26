@@ -3,7 +3,7 @@
 }
 
 #plugins td {
-	line-height: 30px
+	vertical-align: middle;
 }
 
 .rb-files .rb-check {
@@ -17,39 +17,19 @@
 	box-sizing: border-box;
 	width: 100%;
 	border-radius: 3px;
-	background: #f8f8f8;
 	font-size: 13px;
 	margin-bottom: 0;
-	border: 1px solid #d8d8d8;
 }
 
-.rb-files table .check {
-	width: 10px;
-}
-.rb-files table .check label {
-	margin-bottom: 0;
-}
+
 .rb-files .table > thead > tr > th {
-    background-color: #F5F5F5;
     border-bottom: 0;
 	height: 35px;
-}
-.rb-files table tr  {
-	background-color: #F8F8F8
-}
-.rb-files table tbody tr:hover  {
-	background-color: #f5f5f5
 }
 .rb-files table th,
 .rb-files table td  {
 	text-align: left;
 	padding: 8px 15px;
-}
-
-.rb-files table td .fa-folder,
-.rb-files table a {
-	color: #428bca;
-	font-weight:bold;
 }
 
 .bottom-action .btn-toolbar {

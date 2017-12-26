@@ -370,7 +370,6 @@
 	text-decoration: none;
 }
 .table tbody tr:hover {
-	background: #efefef;
 	cursor: pointer;
 }
 .table tbody td small {
