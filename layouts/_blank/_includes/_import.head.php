@@ -64,12 +64,12 @@ $.notifyDefaults({
   },
   allow_dismiss: false,
   offset: 20,
-  type: "dark",
+  type: "success",
   timer: 100,
   delay: 1500,
   animate: {
-    enter: "animated fadeInUp",
-    exit: "animated fadeOutDown"
+    enter: "animated fadeInDown",
+    exit: "animated fadeOutUp"
   }
 });
 </script>
