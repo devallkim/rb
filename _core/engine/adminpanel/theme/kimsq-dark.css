@@ -548,3 +548,38 @@ body {
 	color: #fff;
 	background-color: #007bff;
 }
+
+
+/*utility*/
+/*color*/
+.muted-link {
+  color: #ccc !important;
+}
+.muted-link:hover {
+  color: #eee !important;
+  text-decoration: none;
+}
+.text-gray {
+  color: #586069 !important;
+}
+.text-gray-light {
+  color: #959da5 !important;
+}
+.text-gray-dark {
+  color: #24292e !important;
+}
+.link-gray {
+  color: #586069 !important;
+}
+.link-gray-dark {
+  color: #24292e !important;
+}
+.link-gray-dark:hover {
+  color: #0366d6 !important;
+}
+.border-top {
+  border-top: 1px #e1e4e8 solid !important;
+}
+.border-gray-light {
+  border-color: #eaecef !important;
+}

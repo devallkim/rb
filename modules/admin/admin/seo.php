@@ -28,10 +28,10 @@
 					<input type="hidden" name="a" value="seo">
 					<input type="hidden" name="act" value="robots">
 
-					<div class="bg-light border rounded p-3 text-muted">
-						robots.txt 파일은 웹 크롤러 소프트웨어(예: Googlebot)가 사이트의 특정 페이지를 크롤링하지 못하도록 하는 텍스트 파일입니다.<br>
+					<div class="bg-light rounded p-3 text-muted">
+						<small>robots.txt 파일은 웹 크롤러 소프트웨어(예: Googlebot)가 사이트의 특정 페이지를 크롤링하지 못하도록 하는 텍스트 파일입니다.<br>
 						이 파일은 기본적으로 Allow와 Disallow와 같은 명령어 목록으로 구성되어 웹 크롤러가 검색할 수 있는 URL과 검색할 수 없는 URL을 지정합니다.
-						<a class="alert-link" href="https://support.google.com/webmasters/answer/6062608?hl=ko" target="_blank">더보기</a>
+						<a href="https://support.google.com/webmasters/answer/6062608?hl=ko" target="_blank">더보기</a></small>
 					</div>
 
 
@@ -72,16 +72,17 @@
 
 			<div class="tab-pane<?php if($_SESSION['sh_admin_seo']=='rewrite'):?> active in<?php endif?>" id="rewrite">
 
-				<div class="bg-light border rounded p-3 text-muted">
+				<div class="bg-light rounded p-3 text-muted">
 					<p>
-						<strong>URL Rewrite 설정</strong>
+						<strong class="d-block">URL Rewrite 설정</strong>
+						<small>
 						간편 URL(영어: clean URL, fancy URL)은 질의어 없이, 경로만 가진 간단한 구조의 URL을 말한다.<br>
 						사용자 친화적 URL(영어: user-friendly URLs), 검색엔진 친화적 URL(영어: search engine friendly url) 또는 간단히 친화적 URL이라고도 한다. 깔끔하지 않은 URL에 비해 기억하기 쉽고, 입력하기 쉽다는 장점이 있다.
-						<a href="http://ko.wikipedia.org/wiki/%EA%B0%84%ED%8E%B8_URL" target="_blank">더보기</a>
+						<a href="http://ko.wikipedia.org/wiki/%EA%B0%84%ED%8E%B8_URL" target="_blank">더보기</a></small>
 					</p>
 
 					<p class="mb-0">
-						파일을 직접 추가하거나 수정하시려면 FTP 클라이언트로 다운로드 받아 백업받은 후 로컬에서 편집 후 업로드 적용할 것을 권장합니다.
+						<small>파일을 직접 추가하거나 수정하시려면 FTP 클라이언트로 다운로드 받아 백업받은 후 로컬에서 편집 후 업로드 적용할 것을 권장합니다.</small>
 					</p>
 				</div>
 
@@ -101,19 +102,22 @@
 				<input type="hidden" name="m" value="<?php echo $module?>">
 				<input type="hidden" name="a" value="seo">
 				<input type="hidden" name="act" value="sitemap_save">
-				<div class="bg-light border rounded p-3 text-muted">
+				<div class="bg-light rounded p-3 text-muted">
 					<p>
+						<small>
 						Sitemap을 사용하면 검색엔진(Google)이 발견하지 못했을 수도 있는 사이트의 페이지 정보를 검색엔진에 알릴 수 있습니다.<br>
 						간단히 말해서 XML Sitemap은 웹사이트에 있는 페이지의 목록입니다.<br>
-						Sitemap을 만들어 제출하면 검색엔진의 일반적인 크롤링 과정에서 발견되지 않는 URL을 비롯하여 사이트의 모든 페이지 정보를 검색엔진에 알릴 수 있습니다.<br>
+						Sitemap을 만들어 제출하면 검색엔진의 일반적인 크롤링 과정에서 발견되지 않는 URL을 비롯하여 사이트의 모든 페이지 정보를 검색엔진에 알릴 수 있습니다.</small>
 					</p>
 					<p>
+						<small>
 						본 파일은 <a href="http://www.sitemaps.org/ko/" target="_blank">sitemaps.org</a> 사이트에 명시된 바와 같이 Sitemap Protocol 0.9를 따릅니다.<br>
-						따라서 Sitemap Protocol 0.9를 사용하여 만든 Google용 Sitemap은 sitemaps.org의 기준을 채택한 다른 검색엔진과 호환됩니다.<br>
+						따라서 Sitemap Protocol 0.9를 사용하여 만든 Google용 Sitemap은 sitemaps.org의 기준을 채택한 다른 검색엔진과 호환됩니다.</small>
 					</p>
 					<p class="mb-0">
+						<small>
 						사이트맵을 직접 추가하거나 수정하시려면 <a href="https://support.google.com/webmasters/bin/answer.py?hl=ko&amp;answer=183668" target="_blank">사이트맵을 만드는 방법</a>에 맞게 편집해 주세요.<br>
-						파일용량이 클 경우 다운로드 받아 PC에서 편집할 것을 권장합니다.
+						파일용량이 클 경우 다운로드 받아 PC에서 편집할 것을 권장합니다.</small>
 					</p>
 				</div>
 				<div class="rb-codeview">
@@ -160,7 +164,8 @@
 			</div>
 
 			<div class="tab-pane<?php if($_SESSION['sh_admin_seo']=='errorpage'):?> active in<?php endif?>" id="error">
-				<div class="bg-light border rounded p-3">
+				<div class="bg-light rounded p-3">
+					<small>
 					<ul class="mb-0">
 						<li><a class="muted-link" href="http://www.htaccessbasics.com/404-custom-error-page/" target="_blank">How to Redirect your 404 error to a Custom Page</a></li>
 						<li><a class="muted-link" href="http://stackoverflow.com/questions/19962787/rewrite-url-after-redirecting-404-error-htaccess" target="_blank">Rewrite URL after redirecting 404 error htaccess</a></li>
@@ -168,21 +173,24 @@
 						<li><a class="muted-link" href="http://search-marketing.co.kr/50043928552" target="_blank">검색엔진최적화 - 404 에러페이지 처리</a></li>
 						<li><a class="muted-link" href="http://moz.com/blog/are-404-pages-always-bad-for-seo" target="_blank">Are 404 Pages Always Bad for SEO?</a></li>
 					</ul>
+					</small>
 				</div>
-				<hr>
-				<ol>
+
+				<ol class="mt-4">
 					<li>기본 페이지 목록에 404 Error 페이지 추가 필요</li>
 					<li>.htaccess에 <code>ErrorDocument 404 /errormessages/404.php</code> 형식으로 404페이지 지정 필요.</li>
 				</ol>
 			</div>
 
 			<div class="tab-pane<?php if($_SESSION['sh_admin_seo']=='redirect'):?> active in<?php endif?>" id="301">
-				<div class="bg-light border rounded p-3">
+				<div class="bg-light rounded p-3">
+					<small>
 					<ul class="mb-0">
 						<li><a class="muted-link" href="http://blog.iolate.kr/162" target="_blank">Permanently Redirect (301)</a></li>
 						<li><a class="muted-link" href="http://www.etnews.com/201312200346" target="_blank">사이트나 페이지 변경 시 301 redirect를 사용할 것</a></li>
 						<li><a class="muted-link" href="http://www.htaccessbasics.com/how-to-setup-a-301-redirect/" target="_blank">How to setup a 301 Redirect</a></li>
 					</ul>
+					</small>
 				</div>
 			</div>
 	</div>

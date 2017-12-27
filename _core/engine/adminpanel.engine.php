@@ -281,6 +281,10 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 							<div class="card-body panel-collapse collapse show" id="site-settings-01-body">
 								<div class="form-group">
 									<label>사이트 라벨</label>
+									<input type="text" class="form-control" name="label" value="<?php echo $_HS['label']?>">
+								</div>
+								<div class="form-group">
+									<label>사이트 명</label>
 									<input type="text" class="form-control" name="name" value="<?php echo $_HS['name']?>">
 								</div>
 								<div class="form-group">
@@ -290,7 +294,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 								<div class="form-group">
 									<label>타이틀 구성</label>
 									<input type="text" class="form-control" name="title" value="<?php echo $_HS['title']?>">
-									<span class="help-block"><small>입력된 내용은 브라우저의 타이틀로 사용됩니다.<br>치환코드는 매뉴얼을 참고하세요.</small></span>
+									<span class="form-text text-muted"><small>입력된 내용은 브라우저의 타이틀로 사용됩니다. 치환코드는 매뉴얼을 참고하세요.</small></span>
 								</div>
 								<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
 							</div>
@@ -408,7 +412,11 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 											<li><a href="http://<?php echo $D['name']?>" target="_blank"><?php echo $D['name']?></a></li>
 											<?php endwhile?>
 											<?php else:?>
-											<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=domain&amp;selsite=<?php echo $_HS['uid']?>&amp;type=makedomain" target="_ADMPNL_">연결된 도메인이 없습니다.</a></li>
+											<li>
+												<a class="muted-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=domain&amp;selsite=<?php echo $_HS['uid']?>&amp;type=makedomain" target="_ADMPNL_">
+													연결된 도메인이 없습니다.
+												</a>
+											</li>
 											<?php endif?>
 										</ul>
 									</div>

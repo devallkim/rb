@@ -48,7 +48,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 				</div>
 
 				<?php if($SITEN>1):?>
-				<div class="">
+				<div class="border border-primary">
 					<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
 						<?php while($S = db_fetch_array($SITES)):?>
 						<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>

@@ -553,6 +553,24 @@ border-radius: 0.25rem;
 
 /*component*/
 
+/*list-group*/
+.list-group-item {
+  background-color: transparent;
+  color: #999
+}
+.list-group-item.active {
+  z-index: 2;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.085);
+  border-color: transparent;
+}
+.list-group-item-action:focus, .list-group-item-action:hover {
+  color: #ccc;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+
 /*badge*/
 .badge-dark {
   font-weight: 300;
@@ -718,7 +736,7 @@ border-radius: 0.25rem;
 }
 
 .border {
-  border: 1px solid #222!important;
+  border: 1px solid #222;
 }
 
 /*tree*/
@@ -733,4 +751,13 @@ border-radius: 0.25rem;
 }
 .sidebar .rb-tree a {
   color: #ccc;
+}
+
+
+/*기본 모듈개별*/
+#catebody .dd-item .dd-handle {
+  background-color: rgba(255,255,255,.03);
+  color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  box-shadow: 0 1px 0 rgba(0,0,0,.03);
 }

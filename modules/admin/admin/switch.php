@@ -72,18 +72,14 @@ $SITEN = db_num_rows($SITES);
 					</div>
 					<?php endforeach?>
 
-					<div class="card-footer">
-						<div class="btn-group">
-							<div class="btn-group">
-								<button type="button" class="btn btn-light rb-modal-add-switch" data-toggle="modal" href="#modal_window">
-									스위치 추가
-								</button>
-							</div>
-							<div class="btn-group">
-								<button type="submit" class="btn btn-light">
-									스위치 업데이트
-								</button>
-							</div>
+					<div class="card-footer p-2">
+						<div class="btn-group w-100">
+							<button type="button" class="btn btn-light rb-modal-add-switch w-50" data-toggle="modal" href="#modal_window">
+								스위치 추가
+							</button>
+							<button type="submit" class="btn btn-light w-50">
+								스위치 업데이트
+							</button>
 						</div>
 					</div>
 
@@ -208,19 +204,20 @@ $SITEN = db_num_rows($SITES);
 
 
 			<h4 class="mt-5">요소별 실행위치</h4>
-
-			<dl class="row border p-3 bg-light mx-0">
-			  <dt class="col-sm-2">스타트 스위치</dt>
-			  <dd class="col-sm-9"><small class="text-muted">(start)</small> 프로그램 시작과 함께 DB연결,주요파일 로드 후 실행됩니다.</dd>
-			  <dt class="col-sm-2">탑 스위치</dt>
-			  <dd class="col-sm-9"><small class="text-muted">(top)</small> 모듈 및 레이아웃에 대한 정의후 화면출력 직전에 실행됩니다.</dd>
-			  <dt class="col-sm-2">헤더 스위치</dt>
-			  <dd class="col-sm-9"><small class="text-muted">(head)</small> head 태그를 닫기 직전에 실행됩니다.</dd>
-			  <dt class="col-sm-2">풋터 스위치</dt>
-			  <dd class="col-sm-9"><small class="text-muted">(foot)</small> body 태그를 닫기 직전에 실행됩니다.</dd>
-			  <dt class="col-sm-2">엔드 스위치</dt>
-			  <dd class="col-sm-9"><small class="text-muted">(end)</small> 화면출력을 끝내고 실행됩니다.</dd>
-			</dl>
+			<small>
+				<dl class="row border p-3 bg-light mx-0">
+				  <dt class="col-sm-2">스타트 스위치</dt>
+				  <dd class="col-sm-9"><small class="text-muted">(start)</small> 프로그램 시작과 함께 DB연결,주요파일 로드 후 실행됩니다.</dd>
+				  <dt class="col-sm-2">탑 스위치</dt>
+				  <dd class="col-sm-9"><small class="text-muted">(top)</small> 모듈 및 레이아웃에 대한 정의후 화면출력 직전에 실행됩니다.</dd>
+				  <dt class="col-sm-2">헤더 스위치</dt>
+				  <dd class="col-sm-9"><small class="text-muted">(head)</small> head 태그를 닫기 직전에 실행됩니다.</dd>
+				  <dt class="col-sm-2">풋터 스위치</dt>
+				  <dd class="col-sm-9"><small class="text-muted">(foot)</small> body 태그를 닫기 직전에 실행됩니다.</dd>
+				  <dt class="col-sm-2">엔드 스위치</dt>
+				  <dd class="col-sm-9"><small class="text-muted">(end)</small> 화면출력을 끝내고 실행됩니다.</dd>
+				</dl>
+			</small>
 
 			<p class="text-right">
 				<a class="btn btn-light" data-toggle="modal" href="#admin-switch-structure">스위치 실행 스트럭처 보기</a>

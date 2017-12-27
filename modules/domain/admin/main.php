@@ -35,7 +35,7 @@ if ($is_regismode)
 
 					<div class="card-body">
 
-						<div style="height: calc(100vh - 11rem);">
+						<div style="height: calc(100vh - 13rem);">
 							<?php if($ISCAT):?>
 							<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
 							<?php $_treeOptions=array('table'=>$table['s_domain'])?>
@@ -48,7 +48,7 @@ if ($is_regismode)
 							<?php endif?>
 
 						</div>
-
+						<a href="<?php echo $g['adm_href']?>&amp;type=makedomain" class="btn btn-outline-primary btn-block">1차 도메인 추가</a>
 					</div>
 				  </div>
 				</div>
@@ -120,11 +120,11 @@ if ($is_regismode)
 				<div class="page-header mt-0">
 					<h4>
 						<?php if($is_regismode):?>
-							<?php if($vtype == 'sub'):?>2차 도메인 등록<?php else:?>1차 도메인 등록<?php endif?>
+							<?php if($vtype == 'sub'):?>2차 도메인 추가<?php else:?>1차 도메인 추가<?php endif?>
 						<?php else:?>
-							도메인 등록정보
+							도메인 연결정보
 						<?php endif?>
-						<a href="<?php echo $g['adm_href']?>&amp;type=makedomain" class="pull-right btn btn-light">1차 도메인 등록</a>
+
 					</h4>
 				</div>
 
@@ -147,7 +147,7 @@ if ($is_regismode)
 					<div class="col-lg-10 col-xl-9">
 						<p class="pt-2">
 							<?php for ($i = 0; $i < $ctnum-1; $i++):$subcode=$subcode.($i?'/'.$ctarr[$i]['uid']:$ctarr[$i]['uid'])?>
-							<a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $ctarr[$i]['uid']?>&amp;code=<?php echo $subcode?>"><?php echo $ctarr[$i]['name']?></a>
+							<a class="muted-link" href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $ctarr[$i]['uid']?>&amp;code=<?php echo $subcode?>"><?php echo $ctarr[$i]['name']?></a>
 							<?php if($i < $ctnum-2):?> &gt; <?php endif?>
 							<?php $delparent=$ctarr[$i]['uid'];endfor?>
 							<?php if(!$delparent):?>최상위 도메인<?php endif?>
@@ -176,7 +176,7 @@ if ($is_regismode)
 						</a>
 					  </span>
 					</div>
-					<small class="form-text text-muted">
+					<small class="form-text text-muted mt-2">
 						1차 도메인을 삭제하면 소속된 2차 도메인 모두 삭제됩니다.
 					</small>
 
@@ -218,11 +218,12 @@ if ($is_regismode)
 
 				<div class="form-group row">
 					<div class="offset-lg-2 col-lg-9">
-						<button type="submit" class="btn btn-outline-primary btn-lg<?php if($g['device']):?> btn-block<?php endif?>"><?php echo $is_fcategory?'속성 변경':'등록'?></button>
-						<?php if($vtype=='sub'):?><button type="button" class="btn btn-light btn-lg<?php if($g['device']):?> btn-block<?php endif?>" onclick="history.back();" />등록취소</button><?php endif?>
-						<?php if($cat):?><button type="button" class="btn btn-light btn-lg<?php if($g['device']):?> btn-block<?php endif?>" onclick="window.open('http://<?php echo $CINFO['name']?>');"><i class="fa fa-share fa-fw fa-lg"></i> 접속하기</button><?php endif?>
 
-						<div class="bg-light border rounded p-3 mt-4 text-muted">
+						<button type="submit" class="btn btn-outline-primary btn-lg btn-block"><?php echo $is_fcategory?'속성 변경':'추가'?></button>
+						<?php if($vtype=='sub'):?><button type="button" class="btn btn-light btn-lg btn-block" onclick="history.back();" />취소</button><?php endif?>
+						<?php if($cat):?><button type="button" class="btn btn-light btn-lg btn-block" onclick="window.open('http://<?php echo $CINFO['name']?>');"><i class="fa fa-share fa-fw fa-lg"></i> 접속하기</button><?php endif?>
+
+						<div class="p-3 mt-4 text-muted">
 							<small>
 								<ul class="list-unstyled mb-0">
 									<li>도메인 공급업체를 통해 <a href="#.">네임서버 설정</a>과 <a href="#.">웹서버 설정</a>이 필요합니다.</li>

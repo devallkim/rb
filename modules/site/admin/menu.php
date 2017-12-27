@@ -23,19 +23,18 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 						메뉴구조
 					</a>
 
-					<div class="panel-collapse collapse show" id="collapmetane">
-						<?php if($ISCAT):?>
-						<?php if($SITEN>1):?>
-						<div class="rb-panel-form" >
+					<div class="panel-collapse collapse show" id="collapmetane" style="height: calc(100vh - 8.53rem);">
+
+						<div class="border border-primary">
 							<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
 								<?php while($S = db_fetch_array($SITES)):?>
 								<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
 								<?php endwhile?>
 							</select>
 						</div>
-						<?php endif?>
 
-						<div class="card-body" style="height: calc(100vh - 14.5rem);">
+						<?php if($ISCAT):?>
+						<div class="card-body">
 							<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
 							<?php $_treeOptions=array('site'=>$s,'table'=>$table['s_menu'],'dispNum'=>true,'dispHidden'=>false,'dispCheckbox'=>false,'allOpen'=>false,'bookmark'=>'site-menu-info')?>
 							<?php $_treeOptions['link'] = $g['adm_href'].'&amp;cat='?>
@@ -57,7 +56,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 							</div>
 						</div>
 						<?php else: ?>
-						<div class="text-center p-5 text-muted" style="height: calc(100vh - 8.53rem);">등록된 메뉴가 없습니다.</div>
+						<div class="text-center p-5 text-muted">등록된 메뉴가 없습니다.</div>
 						<?php endif?>
 
 					</div>
