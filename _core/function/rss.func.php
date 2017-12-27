@@ -6,20 +6,26 @@ function getUrlData($url,$sec)
 	$port = $URL_parsed['port'];
 	$path = $URL_parsed['path'];
 	$query= $URL_parsed['query'];
+	$scheme= $URL_parsed['scheme'];
 
 	if (!$host) $host = $_SERVER['HTTP_HOST'];
-	if (!$port) $port = 80;
 
-    $out = "GET ".$path.'?'.$query." HTTP/1.1\r\n";
-    $out .= "Host: ".$host."\r\n";
-    $out .= "Connection: Close\r\n\r\n";
+  $out = "GET ".$path.'?'.$query." HTTP/1.1\r\n";
+  $out .= "Host: ".$host."\r\n";
+  $out .= "Connection: Close\r\n\r\n";
 
-	$fp = fsockopen($host,$port,$errno,$errstr,$sec);
+	if ($scheme == 'https') {
+		if (!$port) $port = 443;
+		$fp = fsockopen('ssl://'.$host,$port,$errno,$errstr,$sec);
+	} else {
+		if (!$port) $port = 80;
+		$fp = fsockopen($host,$port,$errno,$errstr,$sec);
+	}
 
-	if (!$fp) 
+	if (!$fp)
 	{
 		return false;
-	} 
+	}
 	else
 	{
 		fputs($fp, $out);
