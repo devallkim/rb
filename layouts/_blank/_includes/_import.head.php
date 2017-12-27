@@ -24,6 +24,15 @@
 <?php getImport('font-awesome','css/font-awesome','4.7.0','css')?>
 <?php getImport('font-kimsq','css/font-kimsq',false,'css')?>
 
+<!-- is-loading : https://github.com/hekigan/is-loading-->
+<?php getImport('is-loading','jquery.isloading.min','1.0.6','js')?>
+
+<!-- js-cookie : https://github.com/js-cookie/js-cookie -->
+<?php getImport('js-cookie','js.cookie.min','2.2.0','js')?>
+
+<!-- bootstrap-notify : https://github.com/mouse0270/bootstrap-notify  -->
+<?php getImport('bootstrap-notify','bootstrap-notify.min','3.1.3','js')?>
+
 <!-- global css -->
 <link href="<?php echo $g['url_layout']?>/_css/style.css" rel="stylesheet">
 
@@ -46,6 +55,23 @@ var raccount= '<?php echo $r?>';
 var moduleid= '<?php echo $m?>';
 var memberid= '<?php echo $my['id']?>';
 var is_admin= '<?php echo $my['admin']?>';
+
+// 알림 기본 셋팅값 정의
+$.notifyDefaults({
+  placement: {
+    from: "top",
+    align: "right"
+  },
+  allow_dismiss: false,
+  offset: 20,
+  type: "dark",
+  timer: 100,
+  delay: 1500,
+  animate: {
+    enter: "animated fadeInUp",
+    exit: "animated fadeOutDown"
+  }
+});
 </script>
 
 <script src="<?php echo $g['s']?>/_core/js/sys.js<?php echo $g['wcache']?>"></script>
