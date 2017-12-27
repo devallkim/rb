@@ -189,7 +189,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 								<span class="pull-right rb-blank"><a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=N" target="_blank" class="btn btn-link btn-sm js-tooltip"><i class="fa fa-share" title="새창"></i></a></span>
 								<a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;panel=Y" class="rb-inframe">
 									<i class="<?php echo $S['icon']?$S['icon']:'fa fa-home'?>"></i>
-									<span class="menu-item-parent"><?php echo $S['name']?></span>
+									<span class="menu-item-parent"><?php echo $S['label']?></span>
 									<?php if($S['s004']==2):?><span class="badge pull-right inbox-badge"><i class="fa fa-lock"></i></span><?php endif?>
 									<?php if($S['s004']==3):?><span class="badge pull-right inbox-badge"><i class="fa fa-lock"></i></span><?php endif?>
 								</a>
