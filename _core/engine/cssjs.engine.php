@@ -20,6 +20,7 @@ var memberid= '<?php echo $my['id']?>';
 var is_admin= '<?php echo $my['admin']?>';
 </script>
 
+<link href="<?php echo $g['s']?>/_core/css/sys.css<?php echo $g['wcache']?>" rel="stylesheet">
 <script src="<?php echo $g['s']?>/_core/js/sys.js<?php echo $g['wcache']?>"></script>
 
 <?php foreach ($g['cssset'] as $_key => $_val):?>
