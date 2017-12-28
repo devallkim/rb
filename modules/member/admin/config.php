@@ -280,6 +280,14 @@
 										<small class="form-text text-muted">사용을 제한하려는 아이디를 콤마(,)로 구분해서 입력해 주세요.</small>
 									</div>
 								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group error">
+										<label>가입제한 이메일</label>
+										<textarea class="form-control" name="join_cutemail" rows="4"><?php echo $d['member']['join_cutemail']?></textarea>
+										<small class="form-text text-muted">사용을 제한하려는 이메일을 콤마(,)로 구분해서 @URL형식 입력해 주세요.(예: @email.com,@myhome.com)</small>
+									</div>
+								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-12">

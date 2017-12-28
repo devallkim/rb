@@ -20,6 +20,7 @@ fwrite($fp, "\$d['member']['join_point'] = \"".$join_point."\";\n");
 fwrite($fp, "\$d['member']['join_pointmsg'] = \"".$join_pointmsg."\";\n");
 fwrite($fp, "\$d['member']['join_cutid'] = \"".$join_cutid."\";\n");
 fwrite($fp, "\$d['member']['join_cutnic'] = \"".$join_cutnic."\";\n");
+fwrite($fp, "\$d['member']['join_cutemail'] = \"".$join_cutemail."\";\n");
 fwrite($fp, "\$d['member']['join_email'] = \"".$join_email."\";\n");
 fwrite($fp, "\$d['member']['join_email_send'] = \"".$join_email_send."\";\n");
 
