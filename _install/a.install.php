@@ -214,7 +214,7 @@ foreach ($groupset as $_val)
 	getDbInsert($table['s_mbrgroup'],'gid,name,num',"'".$i."','"._LANG('a010','install').$_val."','".(!$i?1:0)."'");
 	$i++;
 }
-for ($i = 1; $i < 101; $i++) getDbInsert($table['s_mbrlevel'],'gid,name,num,login,post,comment',"'".($i==20?1:0)."','"._LANG('a011','install').$i."','".($i==1?1:0)."','0','0','0'");
+for ($i = 1; $i < 101; $i++) getDbInsert($table['s_mbrlevel'],'gid,name,num,login,post,comment',"'".($i==10?1:0)."','"._LANG('a011','install').$i."','".($i==1?1:0)."','0','0','0'");
 
 $_tmpdfile = $g['path_module'].'admin/var/var.system.php';
 include $_tmpdfile;
