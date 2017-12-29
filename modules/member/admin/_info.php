@@ -1,7 +1,5 @@
-
 <link href="<?php echo $g['s']?>/_core/css/github-markdown.css" rel="stylesheet">
-<!-- https://github.com/taknakamu/jquery-markdown -->
-<script src="http://labozen.kimsq.co.kr/jquery.markdown.js" charset="utf-8"></script>
+<?php getImport('jquery-markdown','jquery.markdown','0.0.10','js')?>
 
 <?php @include $g['path_module'].$module.'/var/var.moduleinfo.php' ?>
 
@@ -33,11 +31,8 @@
 	<div class="pb-5">
 		<h2>라이센스</h2>
 		<textarea class="form-control" rows="10"><?php readfile($g['path_module'].$module.'/LICENSE')?></textarea>
-
 	</div>
 </article>
-
-
 
 <script type="text/javascript">
 	$(".markdown-body .readme").markdown();
