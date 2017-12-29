@@ -28,7 +28,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 						<div class="border border-primary">
 							<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
 								<?php while($S = db_fetch_array($SITES)):?>
-								<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
+								<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
 								<?php endwhile?>
 							</select>
 						</div>
@@ -195,7 +195,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 						<?php if($is_fcategory):?>
 						<div class="input-group input-group-lg">
 								<?php if($CINFO['uid']):?>
-								<span class="input-group-btn">
+								<span class="input-group-append">
 									<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" data-tooltip="tooltip" title="문서의 형식">
 										<span id="rb-document-type"><?php echo $menuType[$CINFO['menutype']]?></span> <span class="caret"></span>
 									</button>
@@ -208,12 +208,12 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 								<?php endif?>
 
 								<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$cat && !$g['device']):?> autofocus<?php endif?>>
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>&amp;vtype=sub" class="btn btn-light" data-tooltip="tooltip" title="서브메뉴 만들기">
 									<i class="fa fa-share fa-rotate-90 fa-lg"></i>
 								</a>
 							</span>
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletemenu&amp;cat=<?php echo $cat?>&amp;parent=<?php echo $delparent?>&amp;code=<?php echo substr($catcode,0,strlen($catcode)-1)?>" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');" class="btn btn-light" data-tooltip="tooltip" title="메뉴삭제">
 									<i class="fa fa-trash-o fa-lg"></i>
 								</a>
@@ -224,7 +224,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 
 						<div class="input-group input-group-lg">
 							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$g['device']):?> autofocus<?php endif?>>
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_new" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg text-muted"></i></button>
 							</span>
 						</div>
@@ -290,10 +290,10 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 								<fieldset>
 									<div class="input-group">
 										<input type="text" name="joint" id="jointf" value="<?php echo $CINFO['joint']?>" class="form-control">
-										<span class="input-group-btn">
+										<span class="input-group-append">
 											<button class="btn btn-light rb-modal-module" type="button" title="모듈연결" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="fa fa-link fa-lg"></i></button>
 										</span>
-										<span class="input-group-btn">
+										<span class="input-group-append">
 											<button class="btn btn-light" type="button" title="미리보기" data-tooltip="tooltip" onclick="getId('jointf').value!=''?window.open(getId('jointf').value):alert('모듈연결 주소를 등록해 주세요.');">Go!</button>
 										</span>
 									</div>
@@ -367,7 +367,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 											<div class="col-lg-10 col-xl-9">
 												<div class="input-group">
 													<input type="text" class="form-control rb-title" name="title" value="<?php echo $_SEO['title']?>" maxlength="60" placeholder="50-60자 내에서 작성해 주세요.">
-													<span class="input-group-btn">
+													<span class="input-group-append">
 														<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_title" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg text-muted"></i></button>
 													</span>
 												</div>
@@ -428,7 +428,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 												<div class="col-lg-10 col-xl-9">
 													<div class="input-group">
 														<input class="form-control rb-modal-photo-drop" onmousedown="_mediasetField='meta_image_src&dfiles='+this.value;" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window" type="text" name="image_src" id="meta_image_src" value="<?php echo $_SEO['image_src']?$_SEO['image_src']:''?>">
-														<div class="input-group-btn">
+														<div class="input-group-append">
 															<button class="btn btn-light rb-modal-photo1" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 																<i class="fa fa-photo fa-lg"></i>
 															</button>
@@ -499,7 +499,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 										<div class="form-group row">
 										<label class="col-lg-2 col-form-label text-lg-right">메뉴옵션</label>
 										<div class="col-lg-10 col-xl-9">
-											<div class="btn-group btn-group-justified" data-toggle="buttons">
+											<div class="btn-group btn-group-toggle btn-group-justified" data-toggle="buttons">
 												<label class="btn btn-light<?php if($CINFO['mobile']||!$CINFO['uid']):?> active<?php endif?>">
 													<input type="checkbox" name="mobile" value="1"<?php if($CINFO['mobile']||!$CINFO['uid']):?> checked<?php endif?>>
 													<span class="glyphicon glyphicon-phone"></span>
@@ -604,7 +604,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 											<div class="col-lg-10 col-xl-9">
 												<div class="input-group">
 													<input class="form-control" type="text" name="mediaset" id="mediaset" value="<?php echo $CINFO['mediaset']?$CINFO['mediaset']:''?>">
-													<div class="input-group-btn">
+													<div class="input-group-append">
 														<button class="btn btn-light rb-modal-photo" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 															<i class="fa fa-photo fa-lg"></i>
 														</button>
@@ -630,18 +630,22 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 											<div class="col-lg-10 col-xl-9">
 
 												<div class="input-group" style="margin-bottom: 5px">
-													<span class="input-group-addon">물리주소</span>
+													<div class="input-group-prepend">
+														<span class="input-group-text">물리주소</span>
+													</div>
 													<input id="_url_m_1_" type="text" class="form-control" value="<?php echo $_url_1?>" readonly>
-													<span class="input-group-btn">
+													<span class="input-group-append">
 														<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
 														<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 													</span>
 												</div>
 
 												<div class="input-group">
-													<span class="input-group-addon">고유주소</span>
+													<div class="input-group-prepend">
+														<span class="input-group-text">고유주소</span>
+													</div>
 													<input id="_url_m_2_" type="text" class="form-control" value="<?php echo $_url_2?>" readonly>
-													<span class="input-group-btn">
+													<span class="input-group-append">
 														<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
 														<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 													</span>

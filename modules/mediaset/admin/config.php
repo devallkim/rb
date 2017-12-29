@@ -17,13 +17,17 @@
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxnum_file" value="<?php echo $d['mediaset']['maxnum_file']?>" class="form-control">
-							<span class="input-group-addon">개</span>
+							<div class="input-group-append">
+						    <span class="input-group-text">개</span>
+						  </div>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxsize_file" value="<?php echo $d['mediaset']['maxsize_file']?>" class="form-control">
-							<span class="input-group-addon">MB이내</span>
+							<div class="input-group-append">
+						    <span class="input-group-text">MB이내</span>
+						  </div>
 						</div>
 					</div>
 				</div>
@@ -36,13 +40,17 @@
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxnum_img" value="<?php echo $d['mediaset']['maxnum_img']?>" class="form-control">
-							<span class="input-group-addon">개</span>
+							<div class="input-group-append">
+						    <span class="input-group-text">개</span>
+						  </div>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxsize_img" value="<?php echo $d['mediaset']['maxsize_img']?>" class="form-control">
-							<span class="input-group-addon">MB이내</span>
+							<div class="input-group-append">
+						    <span class="input-group-text">MB이내</span>
+						  </div>
 						</div>
 					</div>
 				</div>
@@ -55,13 +63,17 @@
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxnum_vod" value="<?php echo $d['mediaset']['maxnum_vod']?>" class="form-control">
-							<span class="input-group-addon">개</span>
+							<div class="input-group-append">
+						    <span class="input-group-text">개</span>
+						  </div>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="maxsize_vod" value="<?php echo $d['mediaset']['maxsize_vod']?>" class="form-control">
-							<span class="input-group-addon">MB이내</span>
+							<div class="input-group-append">
+						    <span class="input-group-text">MB이내</span>
+						  </div>
 						</div>
 					</div>
 				</div>
@@ -75,7 +87,9 @@
 					<div class="col-sm-3">
 						<div class="input-group">
 							<input type="text" name="thumbsize" value="<?php echo $d['mediaset']['thumbsize']?>" class="form-control">
-							<span class="input-group-addon">픽셀</span>
+							<div class="input-group-append">
+						    <span class="input-group-text">픽셀</span>
+						  </div>
 						</div>
 					</div>
 				</div>

@@ -51,7 +51,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 				<div class="border border-primary">
 					<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
 						<?php while($S = db_fetch_array($SITES)):?>
-						<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
+						<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
 						<?php endwhile?>
 					</select>
 				</div>
@@ -174,7 +174,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 					<div class="col-lg-10 col-xl-9">
 						<div class="input-group input-group-lg">
 							<?php if($R['uid']):?>
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" data-tooltip="tooltip" title="문서의 형식">
 									<span id="rb-document-type"><?php echo $pageType[$R['pagetype']]?></span> <span class="caret"></span>
 								</button>
@@ -186,11 +186,11 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 							</span>
 							<?php endif?>
 							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $R['name']?>"<?php if(!$R['uid'] && !$g['device']):?> autofocus<?php endif?>>
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_startpage" data-tooltip="tooltip" title="페이지 형식지정"><i class="fa fa-cog fa-lg"></i></button>
 							</span>
 							<?php if($R['uid']):?>
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletepage&amp;uid=<?php echo $R['uid']?>" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');" class="btn btn-light" data-tooltip="tooltip" title="삭제">
 								<i class="fa fa-trash-o fa-lg"></i>
 								</a>
@@ -204,17 +204,15 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 					<div class="row">
 						<div class="col-lg-10 col-xl-9 offset-lg-2">
 
+							<div class="custom-control custom-checkbox custom-control-inline">
+							  <input type="checkbox" class="custom-control-input" id="ismain" name="ismain" value="1"<?php if($R['ismain']):?> checked<?php endif?>>
+							  <label class="custom-control-label" for="ismain"><span class="fa fa-home"></span> 메인 페이지</label>
+							</div>
 
-							<label class="custom-control custom-checkbox">
-							  <input type="checkbox" class="custom-control-input" name="ismain" value="1"<?php if($R['ismain']):?> checked<?php endif?>>
-							  <span class="custom-control-indicator"></span>
-							  <span class="custom-control-description"><span class="fa fa-home"></span> 메인 페이지</span>
-							</label>
-							<label class="custom-control custom-checkbox">
-							  <input type="checkbox" class="custom-control-input" name="mobile" value="1"<?php if($R['mobile']):?> checked<?php endif?>>
-							  <span class="custom-control-indicator"></span>
-							  <span class="custom-control-description"><span class="fa fa-mobile"></span> 모바일 페이지</span>
-							</label>
+							<div class="custom-control custom-checkbox custom-control-inline">
+							  <input type="checkbox" class="custom-control-input" id="mobile" name="mobile" value="1"<?php if($R['mobile']):?> checked<?php endif?>>
+							  <label class="custom-control-label" for="mobile"><span class="fa fa-mobile"></span> 모바일 페이지</label>
+							</div>
 
 							<small class="form-text text-muted mb-3">
 								보기) 메인화면,로그인,회원가입,마이페이지,통합검색,이용약관,고객센터<br>
@@ -229,7 +227,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 						<div class="col-lg-10 col-xl-9">
 							<div class="input-group">
 								<input class="form-control" type="text" name="id" value="<?php echo $R['id']?$R['id']:'p'.$date['tohour']?>" maxlength="20" placeholder="">
-								<span class="input-group-btn">
+								<span class="input-group-append">
 									<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_pagecode" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg"></i></button>
 								</span>
 							</div>
@@ -287,7 +285,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 							<fieldset>
 								<div class="input-group">
 									<input type="text" name="joint" id="jointf" value="<?php echo $R['joint']?>" class="form-control">
-									<span class="input-group-btn">
+									<span class="input-group-append">
 										<button class="btn btn-light rb-modal-module" type="button" title="모듈연결" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window"><i class="fa fa-link fa-lg"></i></button>
 										<button class="btn btn-light" type="button" title="미리보기" data-tooltip="tooltip" onclick="getId('jointf').value!=''?window.open(getId('jointf').value):alert('모듈연결 주소를 등록해 주세요.');">Go!</button>
 									</span>
@@ -318,7 +316,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
 											<input type="text" class="form-control rb-title" name="title" value="<?php echo $_SEO['title']?>" maxlength="60" placeholder="50-60자 내에서 작성해 주세요.">
-											<span class="input-group-btn">
+											<span class="input-group-append">
 												<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_title" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg text-muted"></i></button>
 											</span>
 										</div>
@@ -375,7 +373,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
 											<input class="form-control rb-modal-photo-drop" onmousedown="_mediasetField='meta_image_src&dfiles='+this.value;" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window" type="text" name="image_src" id="meta_image_src" value="<?php echo $_SEO['image_src']?$_SEO['image_src']:''?>">
-											<div class="input-group-btn">
+											<div class="input-group-append">
 												<button class="btn btn-light rb-modal-photo1" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 													<i class="fa fa-photo fa-lg"></i>
 												</button>
@@ -445,7 +443,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
 											<input class="form-control" type="text" name="category" value="<?php echo $R['category']?$R['category']:$_cats[0]?>">
-											<div class="input-group-btn">
+											<div class="input-group-append">
 												<button class="btn btn-light dropdown-toggle" data-toggle="dropdown" type="button">
 													<span class="caret"></span>
 												</button>
@@ -534,7 +532,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
 											<input class="form-control" type="text" name="mediaset" id="mediaset" value="<?php echo $R['mediaset']?$R['mediaset']:''?>">
-											<div class="input-group-btn">
+											<div class="input-group-append">
 												<button class="btn btn-light rb-modal-photo" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 													<i class="fa fa-photo fa-lg"></i>
 												</button>
@@ -565,7 +563,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										<div class="input-group" style="margin-bottom: 5px">
 											<span class="input-group-addon">물리주소</span>
 											<input type="text" id="_url_m_1_" class="form-control" value="<?php echo $_url_1?>">
-											<span class="input-group-btn">
+											<span class="input-group-append">
 												<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
 												<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 											</span>
@@ -573,7 +571,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										<div class="input-group">
 											<span class="input-group-addon">고유주소</span>
 											<input type="text" id="_url_m_2_" class="form-control" value="<?php echo $_url_2?>">
-											<span class="input-group-btn">
+											<span class="input-group-append">
 												<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
 												<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 											</span>

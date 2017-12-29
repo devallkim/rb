@@ -2,16 +2,16 @@
 	<div class="row mt-4">
 		<div class="col-md-6">
 			<div class="panel-group" id="accordion">
-				<div class="card border-dark">
+				<div class="card border-0">
 					<form name="sosokForm" action="<?php echo $g['s']?>/" method="post" target="_action_frame_<?php echo $m?>" onsubmit="return regisCheck(this);">
 					<input type="hidden" name="r" value="<?php echo $r?>" />
 					<input type="hidden" name="m" value="<?php echo $module?>" />
 					<input type="hidden" name="a" value="sosok_regis" />
-					<div class="card-header bg-light">
+					<div class="card-header">
 						<i class="fa fa-arrows-h fa-lg fa-fw"></i> 회원그룹 <span class="badge badge-light">Group</span>
 					</div>
 					<div class="panel-collapse collapse show" id="collapseOne">
-						<div class="py-2 bg-light">
+						<div class="py-2">
 							<ul class="mb-0 small text-muted">
 							  <li>회원관리에 필요한 그룹을 신규등록 및 그룹명을 변경할 수 있습니다.</li>
 							  <li>순서를 변경하실 경우 드래그해서 위치를 변경하신 후 저장하시면 됩니다.</li>
@@ -36,7 +36,7 @@
 								<?php endwhile?>
 							</ul>
 						</div>
-						<div class="card-footer bg-light p-2">
+						<div class="card-footer p-2">
 							<div class="btn-group w-100">
 								<button type="submit" class="btn btn-light w-50">그룹명/순서 변경</button>
 								<a href="#" class="btn btn-light w-50" id="btn-new-group" data-toggle="modal" data-target="#modal-group-add"><i class="fa fa-plus"></i> 새 그룹 추가</a>
@@ -91,7 +91,7 @@
 	   <!-- 회원등급 시작 -->
 		<div class="col-md-6 col-lg-6 pl-0">
 			<div class="card border-dark">
-				<div class="card-header bg-light border-bottom-0">
+				<div class="card-header border-bottom-0">
 					<i class="fa fa-arrows-v fa-lg fa-fw"></i> 회원등급 <span class="badge badge-light">Level</span>
 				</div>
 				<?php $levelnum = getDbData($table['s_mbrlevel'],'gid=1','*')?>
@@ -109,7 +109,7 @@
 							<col width="15%"></col>
 							<col width="15%"></col>
 						</colgroup>
-						<thead class="bg-light">
+						<thead>
 							<tr>
 								<th rowspan="2">등급</th>
 								<th rowspan="2">회원수</th>
@@ -138,7 +138,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="card-footer bg-light p-2">
+				<div class="card-footer p-2">
 					<div class="form-group mb-0">
 						<label class="sr-only" for="levelnum">사용할 등급수</label>
 						<div class="input-group">

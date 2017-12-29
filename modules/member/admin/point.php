@@ -30,110 +30,101 @@ $TPG = getTotalPage($NUM,$recnum);
 
 		<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
 
+			<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="p-3">
+				<input type="hidden" name="r" value="<?php echo $r?>">
+				<input type="hidden" name="m" value="<?php echo $m?>">
+				<input type="hidden" name="module" value="<?php echo $module?>">
+				<input type="hidden" name="front" value="<?php echo $front?>">
+				<input type="hidden" name="type" value="<?php echo $type?>">
+
+				<div class="form-group">
+			    <label>기간</label>
+					<span class="input-daterange" id="datepicker">
+						<div class="input-group input-group-sm mb-1">
+							<div class="input-group-prepend">
+								<span class="input-group-text">시작일</span>
+							</div>
+						  <input type="text" class="form-control" name="d_start" placeholder="선택" value="<?php echo $d_start?>">
+						</div>
+						<div class="input-group input-group-sm mb-2">
+							<div class="input-group-prepend">
+								<span class="input-group-text">종료일</span>
+							</div>
+						  <input type="text" class="form-control" name="d_finish" placeholder="선택" value="<?php echo $d_finish?>">
+						</div>
+					</span>
+
+					<button class="btn btn-light btn-block mb-2" type="submit">기간적용</button>
+					<div class="btn-group">
+						<button class="btn btn-light" onclick="dropDate('2017/12/27','2017/12/27');">어제</button>
+						<button class="btn btn-light" onclick="dropDate('2017/12/28','2017/12/28');">오늘</button>
+						<button class="btn btn-light" onclick="dropDate('2017/12/21','2017/12/28');">일주</button>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-light" onclick="dropDate('2017/11/28','2017/12/28');">한달</button>
+						<button class="btn btn-light" onclick="dropDate('2017/12/01','2017/12/28');">당월</button>
+						<button class="btn btn-light" onclick="dropDate('2017/11/01','2017/11/31');">전월</button>
+						<button class="btn btn-light" onclick="dropDate('','');">전체</button>
+					</div>
+			  </div>
+
+				<hr>
+
+				<div class="form-group mb-3">
+			    <label>검색</label>
+
+					<select name="where" class="form-control custom-select mb-2">
+						<option value="content"<?php if($where=='content'):?> selected="selected"<?php endif?>>내용</option>
+						<option value="my_mbruid"<?php if($where=='my_mbruid'):?> selected="selected"<?php endif?>>회원코드</option>
+					</select>
+
+			    <input type="text" class="form-control mb-2" name="keyw" value="<?php echo stripslashes($keyw)?>" placeholder="검색어 입력">
+					<button class="btn btn-light btn-block" type="submit">검색</button>
+			  </div>
+
+				<hr>
+
+
+				<div class="form-group">
+			    <label>필터</label>
+					<select name="flag" class="form-control custom-select" onchange="this.form.submit();">
+						<option value="">&nbsp;+ 구분</option>
+						<option value="+"<?php if($flag=='+'):?> selected="selected"<?php endif?>>획득</option>
+						<option value="-"<?php if($flag=='-'):?> selected="selected"<?php endif?>>사용</option>
+					</select>
+
+					<div class="btn-group btn-group-sm btn-group-toggle w-100 mt-2" data-toggle="buttons">
+						<label class="btn btn-light w-50<?php if($sort=='uid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+							<input type="radio" value="uid" name="sort"<?php if($sort=='uid'):?> checked<?php endif?>> 등록일
+						</label>
+						 <label class="btn btn-light w-50<?php if($sort=='price'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+							<input type="radio" value="price" name="sort"<?php if($sort=='price'):?> checked<?php endif?>>금액
+						</label>
+					</div>
+
+					<div class="btn-group btn-group-sm btn-group-toggle w-100 mt-2" data-toggle="buttons">
+						<label class="btn btn-light w-50<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+							<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i> 내림차순
+						</label>
+						<label class="btn btn-light w-50<?php if($orderby=='asc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+							<input type="radio" value="asc" name="orderby"<?php if($orderby=='asc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-asc"></i> 오름차순
+						</label>
+					</div>
+
+
+			  </div>
+
+				<hr>
+
+				<a href="<?php echo $g['adm_href']?>" class="btn btn-light btn-block">검색조건 초기화</a>
+
+			</form>
+
+
+
+
 		</div><!-- /.sidebar -->
 		<div class="col-sm-8 col-md-8 ml-sm-auto col-xl-9 pt-3">
-
-			<!-- 검색폼 -->
-			<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="form-horizontal rb-form">
-				 <input type="hidden" name="r" value="<?php echo $r?>">
-				 <input type="hidden" name="m" value="<?php echo $m?>">
-				 <input type="hidden" name="module" value="<?php echo $module?>">
-				 <input type="hidden" name="front" value="<?php echo $front?>">
-				 <input type="hidden" name="type" value="<?php echo $type?>">
-
-				 <div class="rb-heading well well-sm search-area">
-				 	 	 <div class="form-group row">
-								<label class="col-sm-1 control-label">기간</label>
-								<div class="col-sm-10">
-									<div class="row">
-										<div class="col-sm-4">
-											<div class="input-daterange input-group" id="datepicker">
-												<input type="text" class="form-control" name="d_start" placeholder="시작일 선택" value="<?php echo $d_start?>">
-												<span class="input-group-addon">~</span>
-												<input type="text" class="form-control" name="d_finish" placeholder="종료일 선택" value="<?php echo $d_finish?>">
-												<span class="input-group-btn">
-													<button class="btn btn-light" type="submit">기간적용</button>
-												</span>
-											</div>
-										</div>
-										<div class="col-sm-3">
-											<span class="btn-group">
-												<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>','<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>');">어제</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo getDateFormat($date['today'],'Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">오늘</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-7,substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">일주</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">한달</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo getDateFormat(substr($date['today'],0,6).'01','Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">당월</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>01','<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>31');">전월</button>
-												<button class="btn btn-light" onclick="dropDate('','');">전체</button>
-											</span>
-										</div>
-									</div>
-								</div>
-						</div>
-				 	 	 <!-- 고급검색 시작 -->
-				 	 	 <div id="search-more" class="collapse<?php if($_SESSION['sh_mbrlist']):?> show<?php endif?>">
-							 <div class="form-group row">
-								<label class="col-sm-1 control-label">필터</label>
-								<div class="col-sm-10">
-									<div class="form-row">
-										 <div class="col-sm-2">
-												<select name="flag" class="form-control custom-select" onchange="this.form.submit();">
-													<option value="">&nbsp;+ 구분</option>
-													<option value="+"<?php if($flag=='+'):?> selected="selected"<?php endif?>>획득</option>
-													<option value="-"<?php if($flag=='-'):?> selected="selected"<?php endif?>>사용</option>
-												</select>
-										  </div>
-										  <div class="col-sm-8">
-										  	   <div class="btn-toolbar">
-														<div class="btn-group" data-toggle="buttons">
-															<label class="btn btn-light<?php if($sort=='uid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-																<input type="radio" value="uid" name="sort"<?php if($sort=='uid'):?> checked<?php endif?>> 등록일
-															</label>
-															 <label class="btn btn-light<?php if($sort=='price'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-																<input type="radio" value="price" name="sort"<?php if($sort=='price'):?> checked<?php endif?>>금액
-															</label>
-														</div>
-														<div class="btn-group ml-2" data-toggle="buttons">
-															<label class="btn btn-light<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-																<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i>역순
-															</label>
-															<label class="btn btn-light<?php if($orderby=='asc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-																<input type="radio" value="asc" name="orderby"<?php if($orderby=='asc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-asc"></i>정순
-															</label>
-														</div>
-													</div>
-										  </div>
-									</div>
-								</div>
-							</div>
-			           <div class="form-group row">
-			  				    <label class="col-sm-1 control-label">검색</label>
-								 <div class="col-sm-8">
-									<div class="input-group">
-										<span class="input-group-btn" style="width:165px">
-											<select name="where" class="form-control custom-select">
-												<option value="content"<?php if($where=='content'):?> selected="selected"<?php endif?>>내용</option>
-												<option value="my_mbruid"<?php if($where=='my_mbruid'):?> selected="selected"<?php endif?>>회원코드</option>
-											</select>
-										</span>
-										<input type="text" name="keyw" value="<?php echo stripslashes($keyw)?>" class="form-control">
-										<span class="input-group-btn">
-											<button class="btn btn-light" type="submit">검색</button>
-										</span>
-									</div>
-								</div>
-						</div>
-					</div> <!-- 고급검색 -->
-						<div class="form-group row">
-							<div class="col-sm-offset-1 col-sm-10">
-								<button type="button" class="btn btn-link rb-advance<?php if(!$_SESSION['sh_mbrlist']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#search-more" onclick="sessionSetting('sh_mbrlist','1','','1');">고급검색<small></small></button>
-								<a href="<?php echo $g['adm_href']?>" class="btn btn-link">초기화</a>
-							</div>
-						</div>
-
-				</div>
-			</form>
-			<!-- //검색폼 -->
 
 			<div class="card table-responsive">
 				<div class="card-header border-bottom-0">

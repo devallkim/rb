@@ -123,6 +123,7 @@ if ($_join_menu == 3)
 }
 
 $_SESSION['_join_menu'] = $_join_menu;
+setrawcookie('member_config_result', rawurlencode('success'));  // 성공여부 cookie 저장
 
 getLink('reload','parent.','','');
 ?>

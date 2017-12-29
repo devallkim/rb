@@ -271,11 +271,11 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 			<div class="form-group row">
 				<label class="col-lg-2 col-form-label text-lg-right"></label>
 				<div class="col-lg-10 col-xl-9">
-					<label class="custom-control custom-checkbox">
-					  <input type="checkbox" class="custom-control-input" name="hidden" value="1"<?php if($R['hidden']):?> checked="checked"<?php endif?>>
-					  <span class="custom-control-indicator"></span>
-					  <span class="custom-control-description">퀵패널에서 제외</span>
-					</label>
+
+					<div class="custom-control custom-checkbox">
+					  <input type="checkbox" class="custom-control-input" id="hidden" name="hidden" value="1"<?php if($R['hidden']):?> checked="checked"<?php endif?>>
+					  <label class="custom-control-label" for="hidden">퀵패널에서 제외</label>
+					</div>
 				</div>
 			</div>
 

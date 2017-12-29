@@ -73,7 +73,7 @@ $TPG = getTotalPage($NUM,$recnum);
 					<div class="col-md-11 col-lg-10">
 
 						<div class="btn-toolbar">
-							<div class="btn-group" data-toggle="buttons">
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
 								<label class="btn btn-light<?php if($sort=='uid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 									<input type="radio" value="uid" name="sort"<?php if($sort=='uid'):?> checked<?php endif?>> 알림일
 								</label>
@@ -82,7 +82,7 @@ $TPG = getTotalPage($NUM,$recnum);
 								</label>
 							</div>
 
-							<div class="btn-group ml-2" data-toggle="buttons">
+							<div class="btn-group btn-group-toggle ml-2" data-toggle="buttons">
 								<label class="btn btn-light<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 									<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i> 역순
 								</label>
@@ -98,14 +98,14 @@ $TPG = getTotalPage($NUM,$recnum);
 					<label class="col-md-1 col-form-label text-md-right">검색</label>
 					<div class="col-md-11 col-lg-10">
 						<div class="input-group">
-							<span class="input-group-btn" style="width: 120px">
+							<div class="input-group-prepend" style="width: 120px">
 								<select name="where" class="form-control custom-select">
 									<option value="message"<?php if($where=='message'):?> selected="selected"<?php endif?>>메시지</option>
 									<option value="referer"<?php if($where=='referer'):?> selected="selected"<?php endif?>>URL</option>
 								</select>
-							</span>
+							</div>
 							<input type="text" name="keyw" value="<?php echo stripslashes($keyw)?>" class="form-control">
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<button class="btn btn-light" type="submit">검색</button>
 							</span>
 						</div>
@@ -145,10 +145,12 @@ $TPG = getTotalPage($NUM,$recnum);
 			<table class="table table-striped">
 				<tr>
 					<th>
-						<label class="custom-control custom-checkbox">
-						  <input type="checkbox" class="custom-control-input checkAll-noti-user">
-						  <span class="custom-control-indicator"></span>
-						</label>
+
+						<div class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input checkAll-noti-user" id="checkAll-noti-user">
+						  <label class="custom-control-label" for="checkAll-noti-user"></label>
+						</div>
+
 					</th>
 					<th>번호</th>
 					<th>보낸사람</th>
@@ -163,10 +165,10 @@ $TPG = getTotalPage($NUM,$recnum);
 				<?php $SM2=$R['frommbr']?getDbData($table['s_mbrdata'],'memberuid='.$R['frommbr'],'name,nic'):array()?>
 				<tr>
 					<td>
-						<label class="custom-control custom-checkbox">
-						  <input type="checkbox" class="custom-control-input rb-noti-user" name="noti_members[]" value="<?php echo $R['uid']?>" onclick="checkboxCheck();">
-						  <span class="custom-control-indicator"></span>
-						</label>
+						<div class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input checkAll-noti-user" id="noti_members_<?php echo $R['uid']?>" name="noti_members[]" value="<?php echo $R['uid']?>" onclick="checkboxCheck();">
+						  <label class="custom-control-label" for="noti_members_<?php echo $R['uid']?>"></label>
+						</div>
 					</td>
 					<td><?php echo $NUM-((($p-1)*$recnum)+$_rec++)?></td>
 					<td>

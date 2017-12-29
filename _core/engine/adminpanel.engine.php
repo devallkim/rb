@@ -479,7 +479,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<?php if($_v[1]=='color'):?>
 									<div class="input-group">
 										<input type="text" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>">
-										<span class="input-group-btn">
+										<span class="input-group-append">
 											<button class="btn btn-light" type="button" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="getColorLayer(getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>').value.replace('#',''),'layout_<?php echo $_key?>_<?php echo $_v[0]?>');"><i class="fa fa-tint"></i></button>
 										</span>
 									</div>
@@ -488,7 +488,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<?php if($_v[1]=='date'):?>
 									<div class="input-group input-daterange">
 										<input type="text" class="form-control" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>">
-										<span class="input-group-btn">
+										<span class="input-group-append">
 											<button class="btn btn-light" type="button" onclick="getCalCheck('<?php echo $_key?>_<?php echo $_v[0]?>');"><i class="fa fa-calendar"></i></button>
 										</span>
 									</div>
@@ -497,7 +497,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<?php if($_v[1]=='mediaset'):?>
 									<div class="input-group">
 										<input type="text" class="form-control rb-modal-photo-drop js-tooltip" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="선택된 사진" data-toggle="modal" data-target="#modal_window">
-										<span class="input-group-btn">
+										<span class="input-group-append">
 											<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-light rb-modal-photo-drop js-tooltip" type="button" title="포토셋" data-toggle="modal" data-target="#modal_window"><i class="fa fa-picture-o"></i></button>
 										</span>
 									</div>
@@ -506,7 +506,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<?php if($_v[1]=='videoset'):?>
 									<div class="input-group">
 										<input type="text" class="form-control rb-modal-video-drop js-tooltip" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>&dfiles='+this.value;" title="선택된 비디오" data-toggle="modal" data-target="#modal_window">
-										<span class="input-group-btn">
+										<span class="input-group-append">
 											<button onmousedown="_mediasetField='layout_<?php echo $_key?>_<?php echo $_v[0]?>';" class="btn btn-light rb-modal-video-drop js-tooltip" type="button" title="비디오셋" data-toggle="modal" data-target="#modal_window"><i class="fa fa-video-camera"></i></button>
 										</span>
 									</div>
@@ -516,7 +516,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<div class="input-group">
 										<input type="text" class="form-control" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>_name" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();">
 										<input type="file" class="hidden" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" onchange="getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>_name').value='파일 선택됨';">
-										<span class="input-group-btn">
+										<span class="input-group-append">
 											<button class="btn btn-light" type="button" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();"><i class="fa fa-picture-o"></i></button>
 										</span>
 									</div>
@@ -600,7 +600,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 				</div>
 
 				<div class="tab-pane<?php if($_COOKIE['rightAdmTab']=='emulator'):?> active<?php endif?>" id="device-emulator">
-					<div class="btn-group rb-device-buttons w-100 px-2" data-toggle="buttons">
+					<div class="btn-group btn-group-toggle rb-device-buttons w-100 px-2" data-toggle="buttons">
 						<label class="btn btn-light rb-btn-desktop <?php if($_COOKIE['rightemulTab']=='desktop'||!$_COOKIE['rightemulTab']):?> active<?php endif?>" title="Desktop">
 							<input type="radio" name="options" id="rightemulTab_desktop" checked> <i class="fa fa-desktop fa-2x"></i><br>데스크탑
 						</label>
@@ -613,7 +613,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 					</div>
 
 					<fieldset id="deviceshape"<?php if(!$_COOKIE['rightemulTab'] || $_COOKIE['rightemulTab'] == 'desktop'):?> disabled<?php endif?>>
-						<div class="btn-group w-100 nav-justified px-2" data-toggle="buttons">
+						<div class="btn-group btn-group-toggle w-100 nav-justified px-2" data-toggle="buttons">
 							<label id="deviceshape_1" class="btn btn-light w-50<?php if(!$_COOKIE['rightemulDir'] || $_COOKIE['rightemulDir'] == '1'):?> active<?php endif?>" title="Potrait" onclick="_deviceshape(1);">
 								<input type="radio" name="deviceshape"><i class="fa fa-rotate-left fa-lg"></i> 세로방향
 							</label>
@@ -649,13 +649,12 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 					<div class="bg-light rb-tab-pane-bottom rb-form">
 						<ul class="list-group">
-							<li class="list-group-item">
+							<li class="list-group-item py-2">
 								<fieldset>
 
 									<label class="custom-control custom-checkbox mb-0">
 									  <input type="checkbox" class="custom-control-input"<?php if($g['mobile']):?> checked<?php endif?> onclick="viewbyMobileDevice(this);">
-									  <span class="custom-control-indicator"></span>
-									  <span class="custom-control-description">
+									  <span class="custom-control-label">
 											모바일 디바이스 접속
 											<span class="fa fa-question-circle" data-toggle="popover" title="[도움말] 모바일 디바이스 접속이란?" data-content="<small>모바일 기기로 접속한 것으로 가정하여 사이트를 보여줍니다. 사이트 설정에서 모바일 분기설정을 적용하면 모바일 전용 레이아웃, 시작페이지, 메뉴가 적용 됩니다.</small>"></span>
 										</span>
@@ -665,7 +664,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 							<li class="list-group-item">
 								<div class="input-group input-group-sm">
 									<input id="outlink_url" type="text" class="form-control" placeholder="http://" onkeypress="getOuturl(0);">
-									<span class="input-group-btn">
+									<span class="input-group-append">
 										<button class="btn btn-light js-tooltip" type="button" title="Go" onclick="getOuturl(1);">Go!</button>
 									</span>
 								</div>

@@ -256,7 +256,7 @@
 
 .rb-minified-sidebar .rb-system-admin nav ul>li>a {
     display: block;
-    padding: 10px 11px;
+    padding: 10px 11px !important;
 }
 
 .rb-minified-sidebar .rb-system-admin nav>ul>li>a .fa.fa-fw {
@@ -512,7 +512,17 @@
     position       : relative;
     text-decoration: none!important;
 }
+#sidebar-modules .list-group-item a {
+  padding: .4rem .7rem;
+  font-size: 12px;
+}
 
+#sidebar-modules .list-group-item a i {
+  min-width: 1.2rem
+}
+#sidebar-modules nav > ul li.active>a.collapsed:before {
+  content: none
+}
 #sidebar-sites .list-group-item .rb-inframe {
     width: 80%;
     padding-right: 0;
@@ -965,12 +975,12 @@
 
 #emuldevices {
     position: absolute;
-    top: 230px;
+    top: 218px;
     bottom: 175px;
     left: 7px;
     right: 0;
     padding-right: 0;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     overflow: auto;
 }
 

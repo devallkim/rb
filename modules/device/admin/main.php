@@ -16,7 +16,7 @@ $R = getDbData($table['s_mobile'],'','*');
 				<li class="list-inline-item"><i class="fa fa-mobile fa-4x"></i></li>
 				<li class="list-inline-item"><h2>모바일 기기로 접속 시</h2></li>
 			</ul>
-			<div class="nav btn-group  w-100" data-toggle="buttons">
+			<div class="nav btn-group btn-group-toggle  w-100" data-toggle="buttons">
 				<a href="#usemobile-00" class="btn btn-light<?php if(!$R['usemobile']):?> active<?php endif?>" style="width: 33.3%;" data-toggle="tab">
 					<input type="radio" name="usemobile" value="0"<?php if(!$R['usemobile']):?> checked="checked"<?php endif?>> 사이트별 적용
 				</a>
@@ -28,14 +28,16 @@ $R = getDbData($table['s_mobile'],'','*');
 				</a>
 			</div>
 			<div class="tab-content">
-				<div class="tab-pane bg-light border rounded p-4 text-muted fade<?php if(!$R['usemobile']):?> show active<?php endif?>" id="usemobile-00">
+				<div class="tab-pane bg-light rounded p-4 text-muted fade<?php if(!$R['usemobile']):?> show active<?php endif?>" id="usemobile-00">
 					모바일 기기로 접속 시 사이트별로 모바일 모드를 적용할 수 있습니다.
 				</div>
 				<div class="tab-pane text-muted fade<?php if($R['usemobile']==2):?> show active<?php endif?>" id="usemobile-02">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-lg fa-fw kf kf-domain"></i></span>
+					<div class="input-group input-group-lg">
+						<div class="input-group-prepend">
+					    <span class="input-group-text"><i class="fa fa-lg fa-fw kf kf-domain"></i></span>
+					  </div>
 						<select name="startdomain" class="form-control custom-select">
-							<option value="">모바일 기기로 접속 시 연결할 도메인을 선택 하세요</option>
+							<option value="">연결할 도메인을 선택 하세요</option>
 							<?php $SITES = getDbArray($table['s_domain'],'','*','gid','asc',0,$p)?>
 							<?php while($S = db_fetch_array($SITES)):?>
 							<option value="http://<?php echo $S['name']?>"<?php if('http://'.$S['name']==$R['startdomain']):?> selected<?php endif?>>ㆍ<?php echo $S['name']?></option>
@@ -51,10 +53,12 @@ $R = getDbData($table['s_mobile'],'','*');
 					</small>
 				</div>
 				<div class="tab-pane text-muted fade<?php if($R['usemobile']==1):?> show active<?php endif?>" id="usemobile-01">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-lg fa-fw kf kf-home"></i></span>
+					<div class="input-group input-group-lg">
+						<div class="input-group-prepend">
+					    <span class="input-group-text"><i class="fa fa-lg fa-fw kf kf-home"></i></span>
+					  </div>
 						<select name="startsite" class="form-control custom-select">
-							<option value="">모바일 기기로 접속 시 연결할 사이트를 선택하세요.</option>
+							<option value="">연결할 사이트를 선택하세요.</option>
 							<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
 							<?php while($S = db_fetch_array($SITES)):?>
 							<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$R['startsite']):?> selected<?php endif?>>ㆍ<?php echo $S['name']?></option>

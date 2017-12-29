@@ -8,4 +8,5 @@ $d['amenu']['update']	= '업데이트';
 $d['amenu']['seo']		= 'SEO';
 $d['amenu']['ssl']		= 'SSL';
 $d['amenu']['bookmark']	= '북마크';
+if($d['admin']['uninstall']) $d['amenu']['uninstall'] ='제거';
 ?>

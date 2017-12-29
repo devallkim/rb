@@ -1,5 +1,5 @@
 <?php
-$d['admin']['version'] = "hotfix_2.1.0";
+$d['admin']['version'] = "2.2.0-alpha";
 $d['admin']['themepc'] = "kimsq-dark";
 $d['admin']['pannellink'] = "kimsq-dark.css";
 $d['admin']['cache_flag'] = "";

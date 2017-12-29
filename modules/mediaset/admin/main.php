@@ -109,7 +109,7 @@ $TPG = getTotalPage($NUM,$recnum);
 									<input type="text" class="form-control" name="d_start" placeholder="시작일 선택" value="<?php echo $d_start?>">
 									<span class="input-group-addon px-2 text-muted border-0" style="background-color: transparent">~</span>
 									<input type="text" class="form-control" name="d_finish" placeholder="종료일 선택" value="<?php echo $d_finish?>">
-									<span class="input-group-btn">
+									<span class="input-group-append">
 										<button class="btn btn-light" type="submit">기간적용</button>
 									</span>
 								</div>
@@ -133,7 +133,7 @@ $TPG = getTotalPage($NUM,$recnum);
 					<label class="col-md-1 col-form-label text-md-center">정렬</label>
 					<div class="col-md-11 col-lg-10">
 						<div class="btn-toolbar">
-							<div class="btn-group" data-toggle="buttons">
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
 								<label class="btn btn-light<?php if($sort=='gid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 									<input type="radio" value="gid" name="sort"<?php if($sort=='gid'):?> checked<?php endif?>> 등록일
 								</label>
@@ -150,7 +150,7 @@ $TPG = getTotalPage($NUM,$recnum);
 									<input type="radio" value="height" name="sort"<?php if($sort=='height'):?> checked<?php endif?>> 세로
 								</label>
 							</div>
-							<div class="btn-group ml-2" data-toggle="buttons">
+							<div class="btn-group btn-group-toggle ml-2" data-toggle="buttons">
 								<label class="btn btn-light<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 									<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i> 역순
 								</label>
@@ -166,7 +166,7 @@ $TPG = getTotalPage($NUM,$recnum);
 					<label class="col-md-1 col-form-label text-md-center">검색</label>
 					<div class="col-md-10 col-lg-10">
 						<div class="input-group">
-							<span class="input-group-btn">
+							<span class="input-group-prepend">
 								<select name="where" class="form-control custom-select">
 									<option value="name"<?php if($where=='name'):?> selected="selected"<?php endif?>>파일명</option>
 									<option value="caption"<?php if($where=='caption'):?> selected="selected"<?php endif?>>캡션</option>
@@ -175,7 +175,7 @@ $TPG = getTotalPage($NUM,$recnum);
 								</select>
 							</span>
 							<input type="text" name="keyw" value="<?php echo stripslashes($keyw)?>" class="form-control">
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<button class="btn btn-light" type="submit">검색</button>
 							</span>
 						</div>

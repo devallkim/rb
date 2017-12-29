@@ -10,21 +10,18 @@
 		<label class="col-md-2 col-form-label">SSL 적용</label>
 		<div class="col-md-10">
 
-			<label class="custom-control custom-radio">
-			  <input type="radio" class="custom-control-input" name="ssl_type" value=""<?php if(!$d['admin']['ssl_type']):?> checked<?php endif?>>
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description">적용안함</span>
-			</label>
-			<label class="custom-control custom-radio">
-			  <input type="radio" class="custom-control-input" name="ssl_type" value="2"<?php if($d['admin']['ssl_type']==2):?> checked<?php endif?>>
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description">코드값 적용</span>
-			</label>
-			<label class="custom-control custom-radio">
-			  <input type="radio" class="custom-control-input" name="ssl_type" value="1"<?php if($d['admin']['ssl_type']==1):?> checked<?php endif?> onclick="alert('[주의] 아래의 안내사항을 확인하셨나요?');">
-			  <span class="custom-control-indicator"></span>
-			  <span class="custom-control-description">전체사이트 적용</span>
-			</label>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" class="custom-control-input" id="ssl_type_0" name="ssl_type" value=""<?php if(!$d['admin']['ssl_type']):?> checked<?php endif?>>
+			  <label class="custom-control-label" for="ssl_type_0">적용안함</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" class="custom-control-input" id="ssl_type_2" name="ssl_type" value="2"<?php if($d['admin']['ssl_type']==2):?> checked<?php endif?>>
+			  <label class="custom-control-label" for="ssl_type_2">코드값 적용</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline">
+			  <input type="radio" class="custom-control-input" id="ssl_type_1" name="ssl_type" value="1"<?php if($d['admin']['ssl_type']==1):?> checked<?php endif?> onclick="alert('[주의] 아래의 안내사항을 확인하셨나요?');">
+			  <label class="custom-control-label" for="ssl_type_1">전체사이트 적용</label>
+			</div>	
 
 			<small id="ssl_guide" class="form-text text-muted">
 				보안서버가 설치되지 않은 상태에서 전체사이트 적용을 체크하시면 사이트에 접속할 수 없게 됩니다.<br>

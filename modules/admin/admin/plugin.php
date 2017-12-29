@@ -67,9 +67,8 @@ include $g['path_core'].'function/dir.func.php';
 					<?php $_sumPluginsSize+=$plugins['size']?>
 					<tr>
 						<td class="rb-check">
-							<label class="custom-control custom-checkbox mt-2">
-							  <input type="checkbox" class="custom-control-input" name="pluginmembers[]" value="<?php echo $_key_?>">
-							  <span class="custom-control-indicator"></span>
+							<label class="form-check mt-2">
+							  <input type="checkbox" class="form-check-input position-static" name="pluginmembers[]" value="<?php echo $_key_?>">
 							</label>
 						</td>
 						<td class="rb-name"><i class="fa fa-folder fa-lg"></i> &nbsp;<a><?php echo $_key_?></a></td>

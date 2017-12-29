@@ -16,10 +16,10 @@ function getUrlData($url,$sec)
 
 	$fp = fsockopen($host,$port,$errno,$errstr,$sec);
 
-	if (!$fp) 
+	if (!$fp)
 	{
 		return false;
-	} 
+	}
 	else
 	{
 		fputs($fp, $out);

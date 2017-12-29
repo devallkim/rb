@@ -100,14 +100,14 @@ $xmin1	= substr($date['totime'],10,2);
 
 				 <div id="accordion" role="tablist">
 	 			  <div class="card">
-	 			    <div class="card-header" role="tab" id="headingOne">
-	 						<a class="collapsed d-block muted-link clearfix" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+	 			    <div class="card-header p-0" role="tab">
+	 						<a class="d-block muted-link<?php if($_SESSION['member_main_collapse']!='search'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse_search" aria-expanded="true" aria-controls="collapse_search" onclick="sessionSetting('member_main_collapse','search','','');">
 								검색
-								<i class="fa fa-search fa-lg pull-right" aria-hidden="true"></i>
+								<span class="badge badge-pill badge-info pull-right"><?php echo stripslashes($keyw)?></span>
 	 						</a>
 	 			    </div>
 
-	 			    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+	 			    <div id="collapse_search" class="collapse<?php if($_SESSION['member_main_collapse']=='search'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
 	 			      <div class="card-body">
 
 								<div class="form-group">
@@ -129,66 +129,89 @@ $xmin1	= substr($date['totime'],10,2);
 	 			    </div>
 	 			  </div>
 	 			  <div class="card">
-	 			    <div class="card-header" role="tab" id="headingTwo">
-	 						<a class="collapsed d-block muted-link " data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+	 			    <div class="card-header p-0" role="tab">
+	 						<a class="d-block muted-link<?php if($_SESSION['member_main_collapse']!='sort'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse_sort" aria-expanded="false" aria-controls="collapse_sort" onclick="sessionSetting('member_main_collapse','sort','','');">
 								정렬
-								<i class="fa fa-sort-amount-desc pull-right"></i>
+
+								<span class="badge badge-pill badge-dark pull-right">
+									<?php echo $orderby=='desc'?'내림차순':'오름차순'?>
+								</span>
+
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sort=='mygroup'): ?>그룹순<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sort=='level'): ?>등급순<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sort=='point'): ?>보유 포인트순<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sort=='usepoint'): ?>사용 포인트순<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sort=='cash'): ?>보유 적립금순<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sort=='money'): ?>보유 예치금순<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sort=='last_log'): ?>최근 접속순<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sort=='birth1'): ?>나이순<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sort=='birth2'): ?>생년월일순<?php endif; ?></span>
+
 	 						</a>
 	 			    </div>
-	 			    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-	 			      <div class="card-body">
+	 			    <div id="collapse_sort" class="collapse<?php if($_SESSION['member_main_collapse']=='sort'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
+	 			      <div class="card-body btn-group-toggle">
 
-								<div class="btn-group btn-group-sm pull-right" data-toggle="buttons">
-									<label class="btn btn-light mb-0<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i>역순
+								<label class="btn btn-light mb-1<?php if($sort=='memberuid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="memberuid" name="sort"<?php if($sort=='memberuid'):?> checked<?php endif?>> 가입일
+								</label>
+								 <label class="btn btn-light mb-1<?php if($sort=='mygroup'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="mygroup" name="sort"<?php if($sort=='mygroup'):?> checked<?php endif?>>그룹
+								</label>
+								<label class="btn btn-light mb-1<?php if($sort=='level'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="level" name="sort"<?php if($sort=='level'):?> checked<?php endif?>>등급
+								</label>
+								<label class="btn btn-light mb-1<?php if($sort=='point'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="point" name="sort"<?php if($sort=='point'):?> checked<?php endif?>> 보유포인트
+								</label>
+								<label class="btn btn-light mb-1<?php if($sort=='usepoint'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="usepoint" name="sort"<?php if($sort=='usepoint'):?> checked<?php endif?>> 사용포인트
+								</label>
+								<label class="btn btn-light mb-1<?php if($sort=='cash'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="cash" name="sort"<?php if($sort=='cash'):?> checked<?php endif?>> 보유적립금
+								</label>
+								<label class="btn btn-light mb-1<?php if($sort=='money'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="money" name="sort"<?php if($sort=='money'):?> checked<?php endif?>> 보유예치금
+								</label>
+								<label class="btn btn-light mb-1<?php if($sort=='last_log'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="last_log" name="sort"<?php if($sort=='last_log'):?> checked<?php endif?>> 최근접속
+								</label>
+								<label class="btn btn-light mb-1<?php if($sort=='birth1'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="birth1" name="sort"<?php if($sort=='birth1'):?> checked<?php endif?>> 나이
+								</label>
+								<label class="btn btn-light mb-1<?php if($sort=='birth2'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+									<input type="radio" value="birth2" name="sort"<?php if($sort=='birth2'):?> checked<?php endif?>> 생년월일
+								</label>
+
+								<div class="btn-group btn-group-sm btn-group-toggle w-100 mt-2" data-toggle="buttons">
+									<label class="btn btn-light mb-0 w-50<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+										<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i>내림차순
 									</label>
-									<label class="btn btn-light mb-0<?php if($orderby=='asc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="asc" name="orderby"<?php if($orderby=='asc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-asc"></i>정순
+									<label class="btn btn-light mb-0 w-50<?php if($orderby=='asc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+										<input type="radio" value="asc" name="orderby"<?php if($orderby=='asc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-asc"></i>오름차순
 									</label>
 								</div>
 
-								<label class="btn btn-light<?php if($sort=='memberuid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="memberuid" name="sort"<?php if($sort=='memberuid'):?> checked<?php endif?>> 가입일
-								</label>
-								 <label class="btn btn-light<?php if($sort=='mygroup'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="mygroup" name="sort"<?php if($sort=='mygroup'):?> checked<?php endif?>>그룹
-								</label>
-								<label class="btn btn-light<?php if($sort=='level'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="level" name="sort"<?php if($sort=='level'):?> checked<?php endif?>>등급
-								</label>
-								<label class="btn btn-light<?php if($sort=='point'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="point" name="sort"<?php if($sort=='point'):?> checked<?php endif?>> 보유포인트
-								</label>
-								<label class="btn btn-light<?php if($sort=='usepoint'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="usepoint" name="sort"<?php if($sort=='usepoint'):?> checked<?php endif?>> 사용포인트
-								</label>
-								<label class="btn btn-light<?php if($sort=='cash'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="cash" name="sort"<?php if($sort=='cash'):?> checked<?php endif?>> 보유적립금
-								</label>
-								<label class="btn btn-light<?php if($sort=='money'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="money" name="sort"<?php if($sort=='money'):?> checked<?php endif?>> 보유예치금
-								</label>
-								<label class="btn btn-light<?php if($sort=='last_log'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="last_log" name="sort"<?php if($sort=='last_log'):?> checked<?php endif?>> 최근접속
-								</label>
-								<label class="btn btn-light<?php if($sort=='birth1'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="birth1" name="sort"<?php if($sort=='birth1'):?> checked<?php endif?>> 나이
-								</label>
-								<label class="btn btn-light<?php if($sort=='birth2'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-									<input type="radio" value="birth2" name="sort"<?php if($sort=='birth2'):?> checked<?php endif?>> 생년월일
-								</label>
 
 	 			      </div>
 	 			    </div>
 	 			  </div>
 	 			  <div class="card">
-	 			    <div class="card-header" role="tab" id="headingThree">
-	 						<a class="d-block muted-link collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+	 			    <div class="card-header p-0" role="tab">
+	 						<a class="d-block muted-link<?php if($_SESSION['member_main_collapse']!='filter'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse_filter" aria-expanded="false" aria-controls="collapse_filter" onclick="sessionSetting('member_main_collapse','filter','','');">
 	 							필터링
-								<i class="fa fa-filter fa-lg pull-right" aria-hidden="true"></i>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($now_log): ?>현재접속<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($auth): ?>인증<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($mygroup): ?>그룹<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($level): ?>등급<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sex): ?>성별<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($addr0): ?>지역<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($mailing): ?>메일<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($sms): ?>문자<?php endif; ?></span>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($marr1): ?>결혼<?php endif; ?></span>
 	 						</a>
 	 			    </div>
-	 			    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+	 			    <div id="collapse_filter" class="collapse<?php if($_SESSION['member_main_collapse']=='filter'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
 	 			      <div class="card-body">
 
 								<div class="form-row">
@@ -275,39 +298,36 @@ $xmin1	= substr($date['totime'],10,2);
 								</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	 			      </div>
 	 			    </div>
 	 			  </div>
 					<div class="card">
-	 			    <div class="card-header" role="tab" id="heading4">
-	 						<a class="d-block muted-link collapsed" data-toggle="collapse" href="#collapse4" aria-expanded="false" aria-controls="collapseThree">
+	 			    <div class="card-header p-0" role="tab">
+	 						<a class="d-block muted-link<?php if($_SESSION['member_main_collapse']!='term'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse_term" aria-expanded="false" aria-controls="collapse_term" onclick="sessionSetting('member_main_collapse','term','','');">
 	 							기간별 보기
-								<i class="fa fa-calendar-check-o fa-lg pull-right" aria-hidden="true"></i>
+								<span class="badge badge-pill badge-info pull-right mr-1"><?php if($d_start || $d_finish): ?>설정됨<?php endif; ?></span>
 	 						</a>
 	 			    </div>
-	 			    <div id="collapse4" class="collapse" role="tabpanel" aria-labelledby="collapse4" data-parent="#accordion">
+	 			    <div id="collapse_term" class="collapse<?php if($_SESSION['member_main_collapse']=='term'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
 	 			      <div class="card-body">
 
+
 								<div class="input-daterange mb-2" id="datepicker">
-									<input type="text" class="form-control mb-2" name="d_start" placeholder="시작일 선택" value="<?php echo $d_start?>">
-									<input type="text" class="form-control mb-2" name="d_finish" placeholder="종료일 선택" value="<?php echo $d_finish?>">
+									<div class="input-group input-group-sm mb-1">
+										<div class="input-group-prepend">
+											<span class="input-group-text">시작일</span>
+										</div>
+									  <input type="text" class="form-control" name="d_start" placeholder="선택" value="<?php echo $d_start?>">
+									</div>
+									<div class="input-group input-group-sm mb-2">
+										<div class="input-group-prepend">
+											<span class="input-group-text">종료일</span>
+										</div>
+									  <input type="text" class="form-control" name="d_finish" placeholder="선택" value="<?php echo $d_finish?>">
+									</div>
 									<button class="btn btn-outline-primary btn-block btn-lg" type="submit">검색</button>
 								</div>
+
 
 								<hr>
 								<div class="btn-group mb-1">
@@ -316,13 +336,14 @@ $xmin1	= substr($date['totime'],10,2);
 									<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-7,substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">일주</button>
 								</div>
 
-								<div class="btn-group">
+								<div class="btn-group mb-1">
 									<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">한달</button>
 									<button class="btn btn-light" onclick="dropDate('<?php echo getDateFormat(substr($date['today'],0,6).'01','Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">당월</button>
 									<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>01','<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>31');">전월</button>
+									<button class="btn btn-light" onclick="dropDate('','');">전체</button>
 								</div>
 
-								<button class="btn btn-light" onclick="dropDate('','');">전체</button>
+
 
 
 	 			      </div>
@@ -339,219 +360,6 @@ $xmin1	= substr($date['totime'],10,2);
 
 
 
-				 <div class="rb-heading well well-sm search-area d-none">
-				 	 <div class="form-group">
-				 	 	  <label>사이트</label>
-
-							<div class="row">
-									 <div class="col-sm-3">
-
-									 </div>
-									 <div class="">
-
-										 <label class="custom-control custom-checkbox">
-											 <input type="checkbox" class="custom-control-input" name="wideview" value="Y" onclick="this.form.submit();" <?php if($wideview=='Y'):?>checked<?php endif?>>
-											 <span class="custom-control-indicator"></span>
-											 <span class="custom-control-description">와이드뷰</span>
-										 </label>
-
-									</div>
-
-								 </div> <!-- .row -->
-				 	 	 </div> <!-- .form-group -->
-				 	 	 <div class="form-group row">
-								<label class="col-sm-1 col-form-label">기간</label>
-								<div class="col-sm-10">
-									<div class="row">
-										<div class="col-sm-4">
-											<div class="input-daterange input-group" id="datepicker">
-												<input type="text" class="form-control" name="d_start" placeholder="시작일 선택" value="<?php echo $d_start?>">
-												<span class="input-group-addon">~</span>
-												<input type="text" class="form-control" name="d_finish" placeholder="종료일 선택" value="<?php echo $d_finish?>">
-												<span class="input-group-btn">
-													<button class="btn btn-light" type="submit">기간적용</button>
-												</span>
-											</div>
-										</div>
-										<div class="col-sm-3 hidden-xs">
-											<span class="btn-group">
-												<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>','<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>');">어제</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo getDateFormat($date['today'],'Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">오늘</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-7,substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">일주</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">한달</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo getDateFormat(substr($date['today'],0,6).'01','Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">당월</button>
-												<button class="btn btn-light" onclick="dropDate('<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>01','<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>31');">전월</button>
-												<button class="btn btn-light" onclick="dropDate('','');">전체</button>
-											</span>
-										</div>
-									</div>
-								</div>
-						</div>
-				 	 	 <!-- 고급검색 시작 -->
-				 	 	 <div id="search-more" class="collapse<?php if($_SESSION['sh_mbrlist']):?> show<?php endif?>">
-							 <div class="form-group row">
-								<label class="col-sm-1 col-form-label">필터1</label>
-								<div class="col-sm-10">
-									<div class="form-row">
-										 <div class="col-sm-2">
-						 	 	  	  	       <select name="auth" class="form-control custom-select" onchange="this.form.submit();">
-													 <option value="">회원인증</option>
-													 <option value="">--------</option>
-													 <option value="1"<?php if($auth == 1):?> selected="selected"<?php endif?>><?php echo $autharr[1]?></option>
-													 <option value="2"<?php if($auth == 2):?> selected="selected"<?php endif?>><?php echo $autharr[2]?></option>
-													 <option value="3"<?php if($auth == 3):?> selected="selected"<?php endif?>><?php echo $autharr[3]?></option>
-													 <option value="4"<?php if($auth == 4):?> selected="selected"<?php endif?>><?php echo $autharr[4]?></option>
-												 </select>
-										  </div>
-										   <div class="col-sm-2">
-						 	 	  	  	       <select name="mygroup"  class="form-control custom-select" onchange="this.form.submit();">
-														<option value="">회원그룹</option>
-														<option value="">--------</option>
-														<?php $_GRPARR = array()?>
-														<?php $GRP = getDbArray($table['s_mbrgroup'],'','*','gid','asc',0,1)?>
-														<?php while($_G=db_fetch_array($GRP)):$_GRPARR[$_G['uid']] = $_G['name']?>
-														<option value="<?php echo $_G['uid']?>"<?php if($_G['uid']==$mygroup):?> selected="selected"<?php endif?>><?php echo $_G['name']?> (<?php echo number_format($_G['num'])?>)</option>
-														<?php endwhile?>
-													</select>
-										  </div>
-										  <div class="col-sm-2">
-						 	 	  	  	       <select name="level"  class="form-control custom-select" onchange="this.form.submit();">
-														<option value="">회원등급</option>
-														<option value="">--------</option>
-														<?php $_LVLARR = array()?>
-														<?php $levelnum = getDbData($table['s_mbrlevel'],'gid=1','*')?>
-														<?php $LVL=getDbArray($table['s_mbrlevel'],'','*','uid','asc',$levelnum['uid'],1)?>
-														<?php while($_L=db_fetch_array($LVL)):$_LVLARR[$_L['uid']] = $_L['name']?>
-														<option value="<?php echo $_L['uid']?>"<?php if($_L['uid']==$level):?> selected="selected"<?php endif?>><?php echo $_L['name']?> (<?php echo number_format($_L['num'])?>)</option>
-														<?php endwhile?>
-													</select>
-										  </div>
-										   <div class="col-sm-2">
-						 	 	  	  	       <select name="sex"  class="form-control custom-select" onchange="this.form.submit();">
-														<option value="">회원성별</option>
-														<option value="">--------</option>
-														<option value="1"<?php if($sex == 1):?> selected="selected"<?php endif?>>남성</option>
-														<option value="2"<?php if($sex == 2):?> selected="selected"<?php endif?>>여성</option>
-													</select>
-										  </div>
-			                        <div class="col-sm-2">
-			                        	<?php $addr_arr=array('서울','경기','인천','강원','충남','충북','대전','전남','전북','광주','경남','경북','부산','대구','울산','제주','해외','없음')?>
-						 	 	  	  	       <?php $last_i=count($addr_arr)-1;?>
-						 	 	  	  	       <select name="addr0"  class="form-control custom-select" onchange="this.form.submit();">
-														<option value="">가입지역</option>
-														<option value="">--------</option>
-														<?php for($i=0;$i<count($addr_arr);$i++):?>
-													  	     <option value="<?php echo $i==$last_i?'NULL':$addr_arr[$i]?>"<?php if($addr0 == $addr_arr[$i]):?> selected="selected"<?php endif?>><?php echo $addr_arr[$i]?></option>
-					                           <?php endfor?>
-													</select>
-										  </div>
-									</div>
-								</div>
-							</div>
-							<div class="form-group row">
-								<label class="col-sm-1 col-form-label">필터2</label>
-								<div class="col-sm-10">
-									<div class="form-row">
-										 <div class="col-sm-2">
-						 	 	  	  	       <select name="now_log" class="form-control custom-select" onchange="this.form.submit();">
-													<option value="">현재접속</option>
-														<option value="">--------</option>
-														<option value="2"<?php if($now_log == 2):?> selected="selected"<?php endif?>>온라인</option>
-														<option value="1"<?php if($now_log == 1):?> selected="selected"<?php endif?>>오프라인</option>
-												 </select>
-										  </div>
-										   <div class="col-sm-2">
-						 	 	  	  	       <select name="marr1"  class="form-control custom-select" onchange="this.form.submit();">
-														<option value="">결혼여부</option>
-														<option value="">--------</option>
-														<option value="1"<?php if($marr1 == 1):?> selected="selected"<?php endif?>>미혼</option>
-														<option value="2"<?php if($marr1 == 2):?> selected="selected"<?php endif?>>기혼</option>
-													</select>
-										  </div>
-										  <div class="col-sm-2">
-						 	 	  	  	       <select name="mailing"  class="form-control custom-select" onchange="this.form.submit();">
-														<option value="">메일수신</option>
-														<option value="">--------</option>
-														<option value="2"<?php if($mailing == 2):?> selected="selected"<?php endif?>>동의</option>
-														<option value="1"<?php if($mailing == 1):?> selected="selected"<?php endif?>>동의안함</option>
-													</select>
-										  </div>
-										   <div class="col-sm-2">
-						 	 	  	  	       <select name="sms"  class="form-control custom-select" onchange="this.form.submit();">
-														<option value="">문자수신</option>
-														<option value="">--------</option>
-														<option value="2"<?php if($sms == 2):?> selected="selected"<?php endif?>>동의</option>
-														<option value="1"<?php if($sms == 1):?> selected="selected"<?php endif?>>동의안함</option>
-													</select>
-										  </div>
-			                  </div>
-								</div>
-							</div>
-			            <div class="form-group row">
-								<label class="col-sm-1 col-form-label">정렬</label>
-								<div class="col-sm-10">
-									<div class="btn-toolbar">
-										<div class="btn-group" data-toggle="buttons">
-											<label class="btn btn-light<?php if($sort=='memberuid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="memberuid" name="sort"<?php if($sort=='memberuid'):?> checked<?php endif?>> 가입일
-											</label>
-											 <label class="btn btn-light<?php if($sort=='mygroup'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="mygroup" name="sort"<?php if($sort=='mygroup'):?> checked<?php endif?>>그룹
-											</label>
-											<label class="btn btn-light<?php if($sort=='level'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="level" name="sort"<?php if($sort=='level'):?> checked<?php endif?>>등급
-											</label>
-											<label class="btn btn-light<?php if($sort=='point'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="point" name="sort"<?php if($sort=='point'):?> checked<?php endif?>> 보유포인트
-											</label>
-											<label class="btn btn-light<?php if($sort=='usepoint'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="usepoint" name="sort"<?php if($sort=='usepoint'):?> checked<?php endif?>> 사용포인트
-											</label>
-											<label class="btn btn-light<?php if($sort=='cash'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="cash" name="sort"<?php if($sort=='cash'):?> checked<?php endif?>> 보유적립금
-											</label>
-											<label class="btn btn-light<?php if($sort=='money'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="money" name="sort"<?php if($sort=='money'):?> checked<?php endif?>> 보유예치금
-											</label>
-											<label class="btn btn-light<?php if($sort=='last_log'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="last_log" name="sort"<?php if($sort=='last_log'):?> checked<?php endif?>> 최근접속
-											</label>
-											<label class="btn btn-light<?php if($sort=='birth1'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="birth1" name="sort"<?php if($sort=='birth1'):?> checked<?php endif?>> 나이
-											</label>
-											<label class="btn btn-light<?php if($sort=='birth2'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-												<input type="radio" value="birth2" name="sort"<?php if($sort=='birth2'):?> checked<?php endif?>> 생년월일
-											</label>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="form-group row">
-					    	 <label class="col-sm-1 col-form-label">검색</label>
-								 <div class="col-sm-8">
-									<div class="input-group">
-										<span class="input-group-btn" style="width:165px">
-											<select name="where" class="form-control custom-select border-0">
-												<option value="name"<?php if($where=='name'):?> selected="selected"<?php endif?>>이름</option>
-												<option value="nic"<?php if($where=='nic'):?> selected="selected"<?php endif?>>닉네임</option>
-												<option value="id"<?php if($where=='id'):?> selected="selected"<?php endif?>>아이디</option>
-											</select>
-										</span>
-										<input type="text" name="keyw" value="<?php echo stripslashes($keyw)?>" class="form-control">
-										<span class="input-group-btn">
-											<button class="btn btn-light" type="submit">검색</button>
-										</span>
-									</div>
-								</div>
-						</div>
-					</div> <!-- 고급검색 -->
-						<div class="form-group row">
-							<div class="offset-sm-1 col-sm-10">
-								<button type="button" class="btn btn-light rb-advance<?php if(!$_SESSION['sh_mbrlist']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#search-more" onclick="sessionSetting('sh_mbrlist','1','','1');">고급검색<small></small></button>
-								<a href="<?php echo $g['adm_href']?>" class="btn btn-light">초기화</a>
-							</div>
-						</div>
 
 				</div>
 			</form>
@@ -565,7 +373,7 @@ $xmin1	= substr($date['totime'],10,2);
 		<div class="col-sm-8 col-md-8 ml-sm-auto col-xl-9 pt-3">
 
 
-			<div class="card table-responsive">
+			<div class="card">
 				<div class="card-header border-bottom-0 d-flex justify-content-start">
 					<span class="text-muted">
 						 총 <?php echo number_format($NUM)?>명 (<?php echo $p?>/<?php echo $TPG?>페이지)
@@ -611,7 +419,12 @@ $xmin1	= substr($date['totime'],10,2);
 				 	<table class="table table-hover mb-0">
 						<thead>
 							<tr>
-								<th class="text-center"><input type="checkbox"  class="checkAll-member" data-toggle="tooltip" title="전체선택"></th>
+								<th class="text-center">
+									<div class="custom-control custom-checkbox js-tooltip checkAll-member" title="전체선택">
+									  <input type="checkbox" class="custom-control-input" id="checkAll-member">
+									  <label class="custom-control-label" for="checkAll-member"></label>
+									</div>
+								</th>
 								<th class="text-center">번호</th>
 								<th class="text-center">인증</th>
 								<th class="text-center">접속</th>
@@ -643,7 +456,14 @@ $xmin1	= substr($date['totime'],10,2);
 							<?php while($R=db_fetch_array($RCD)):?>
 				           <?php $_R=getUidData($table['s_mbrid'],$R['memberuid'])?>
 							<tr>	<!-- 라인이 체크된 경우 warning 처리됨  -->
-								<td class="text-center"><input type="checkbox" name="mbrmembers[]"  onclick="checkboxCheck();" class="rb-member" value="<?php echo $R['memberuid']?>"></td>
+								<td class="text-center">
+
+									<div class="custom-control custom-checkbox checkAll-member">
+									  <input type="checkbox" class="custom-control-input" id="mbrmembers_<?php echo $R['memberuid']?>" name="mbrmembers[]" onclick="checkboxCheck();"  value="<?php echo $R['memberuid']?>">
+									  <label class="custom-control-label" for="mbrmembers_<?php echo $R['memberuid']?>"></label>
+									</div>
+
+								</td>
 								<td class="text-center"><?php echo ($NUM-((($p-1)*$recnum)+$_recnum++))?></td>
 								<td class="text-center"><?php echo $autharr[$R['auth']]?></td>
 								<td class="text-center"><?php echo $R['now_log']?'<i class="fa fa-circle text-success" title="온라인" data-toggle="tooltip"></i>':'<i class="fa fa-circle text-muted" title="오프라인" data-toggle="tooltip"></i>'?></td>
@@ -680,32 +500,32 @@ $xmin1	= substr($date['totime'],10,2);
 				<div class="card-footer btn-toolbar">
 					<fieldset id="list-bottom-fset" disabled> <!--목록에 체크된 항목이 없을 경우  fieldset이 disabled 됨-->
 						<div class="btn-group">
-							<div class="btn-group dropup">
+							<div class="btn-group">
 								<button type="button" class="btn btn-light dropdown-toggle act-btn" data-toggle="dropdown">
 									<i class="fa fa-wrench"></i> 관리 <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li role="presentation" class="dropdown-header">회원승인 상태변경</li>
-									<li><a href="#" class="adm-act" id="auth_1">승인</a></li>
-									<li><a href="#" class="adm-act" id="auth_2">보류</a></li>
-									<li><a href="#" class="adm-act" id="auth_3">대기</a></li>
-									<li><a href="#" class="adm-act" id="auth_4">탈퇴</a></li>
-									<li class="divider"></li>
-									<li><a href="#" class="adm-act" id="tool_mygroup">그룹 변경</a></li>
-									<li><a href="#" class="adm-act" id="tool_level">등급 변경</a></li>
-									<li class="divider" ></li>
-									<li><a href="#" class="adm-act" id="tool_delete"><span class="text-danger">데이터 삭제</span></a></li>
-								</ul>
+								<div class="dropdown-menu" role="menu">
+									<h6 class="dropdown-header">회원승인 상태변경</h6>
+									<a href="#" class="dropdown-item adm-act" id="auth_1">승인</a>
+									<a href="#" class="dropdown-item adm-act" id="auth_2">보류</a>
+									<a href="#" class="dropdown-item adm-act" id="auth_3">대기</a>
+									<a href="#" class="dropdown-item adm-act" id="auth_4">탈퇴</a>
+									<div class="dropdown-divider"></div>
+									<a href="#" class="dropdown-item adm-act" id="tool_mygroup">그룹 변경</a>
+									<a href="#" class="dropdown-item adm-act" id="tool_level">등급 변경</a>
+									<div class="dropdown-divider"></div>
+									<a href="#" class="dropdown-item adm-act" id="tool_delete"><span class="text-danger">데이터 삭제</span></a>
+								</div>
 							</div>
 							<div class="btn-group dropup">
 								<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
 									<i class="fa fa-won"></i> 지급/차감 <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#" class="adm-act" id="point_point">포인트</a></li>
-									<li><a href="#" class="adm-act" id="point_cash">적립금</a></li>
-									<li><a href="#" class="adm-act" id="point_money">예치금</a></li>
-								</ul>
+								<div class="dropdown-menu" role="menu">
+									<a href="#" class="dropdown-item adm-act" id="point_point">포인트</a>
+									<a href="#" class="dropdown-item adm-act" id="point_cash">적립금</a>
+									<a href="#" class="dropdown-item adm-act" id="point_money">예치금</a>
+								</div>
 							</div>
 							<a href="#" type="button" class="btn btn-light adm-act" id="send_paper"><i class="fa fa-comment"></i> 쪽지</a>
 							<a href="#" type="button" class="btn btn-light adm-act" id="send_notice"><i class="fa fa-bell"></i> 알림</a>
@@ -715,13 +535,13 @@ $xmin1	= substr($date['totime'],10,2);
 							<button type="button" class="btn btn-light dropdown-toggle hidden-xs" data-toggle="dropdown">
 								<i class="fa fa-download"></i> 자료추출 <span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu pull-right" role="menu">
-								<li><a href="#" class="adm-act" id="dump_email">이메일</a></li>
-								<li><a href="#" class="adm-act" id="dump_tel">연락처</a></li>
-								<li><a href="#" class="adm-act" id="dump_address">DM주소</a></li>
-								<li class="divider"></li>
-								<li><a href="#" class="adm-act" id="dump_alldata">전체 데이터</a></li>
-							</ul>
+							<div class="dropdown-menu dropdown-menu-right" role="menu">
+								<a href="#" class="dropdown-item adm-act" id="dump_email">이메일</a>
+								<a href="#" class="dropdown-item adm-act" id="dump_tel">연락처</a>
+								<a href="#" class="dropdown-item adm-act" id="dump_address">DM주소</a>
+								<div class="dropdown-divider"></div>
+								<a href="#" class="dropdown-item adm-act" id="dump_alldata">전체 데이터</a>
+							</div>
 						</div>
 					</fieldset>
 				    <div class="btn-group pull-right">
@@ -814,7 +634,7 @@ input[readonly] {
 $(document).ready(function() {
 
 
-	$('#collapseOne').on('shown.bs.collapse', function () {
+	$('#collapse_search').on('shown.bs.collapse', function () {
 	  $('[name="keyw"]').focus()
 	})
 
@@ -923,6 +743,7 @@ $(document).ready(function() {
 
 <!-- basic -->
 <script>
+
 $('.input-daterange').datepicker({
 	format: "yyyy/mm/dd",
 	todayBtn: "linked",

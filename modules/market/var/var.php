@@ -1,5 +1,5 @@
 <?php
-$d['market']['url'] = "https://www.kimsq.com/?m=qmarket";
+$d['market']['url'] = "http://www.kimsq.co.kr/?m=qmarket";
 $d['market']['id'] = "";
 $d['market']['pw'] = "";
 ?>

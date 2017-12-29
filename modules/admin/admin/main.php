@@ -6,19 +6,28 @@
 			시스템 환경
 		</div>
 		<div class="card-body">
-			<dl class="row mb-0">
-			  <dt class="col-sm-2">웹서버</dt>
-			  <dd class="col-sm-9"><?php echo $_SERVER['SERVER_SOFTWARE']?></dd>
 
-				<dt class="col-sm-2">PHP</dt>
-				<dd class="col-sm-9"><?php echo phpversion()?></dd>
+			<div class="row">
 
-				<dt class="col-sm-2">MySQL</dt>
-				<dd class="col-sm-9"><?php echo db_info()?> (<?php echo $DB['type']?>)</dd>
+				<div class="col-sm-6 mt-4">
+					<span class=" kf-bi-01 h1"> </span> <span class="h3 ml-2">Rb <code><?php echo $d['admin']['version']?></code></span>
+				</div>
 
-				<dt class="col-sm-2">KimsQ Rb Version</dt>
-				<dd class="col-sm-9"><?php echo $d['admin']['version']?></dd>
-			</dl>
+				<div class="col-sm-6">
+					<dl class="form-row mb-0">
+					  <dt class="col-sm-2">웹서버</dt>
+					  <dd class="col-sm-9"><?php echo $_SERVER['SERVER_SOFTWARE']?></dd>
+
+						<dt class="col-sm-2">PHP</dt>
+						<dd class="col-sm-9"><?php echo phpversion()?></dd>
+
+						<dt class="col-sm-2">MySQL</dt>
+						<dd class="col-sm-9"><?php echo db_info()?> (<?php echo $DB['type']?>)</dd>
+
+					</dl>
+				</div>
+			</div>
+
 		</div><!-- /.card-body -->
 	</div><!-- /.card -->
 
@@ -183,7 +192,7 @@
 			</div>
 			<div class="card-body">
 
-				<div class="btn-group nav" data-toggle="buttons">
+				<div class="btn-group btn-group-toggle nav" data-toggle="buttons">
 					<label class="btn btn-light<?php if(!$d['admin']['smtp_use']):?> active<?php endif?>" data-toggle="pill" data-target="#mail-sendmail">
 						<input type="radio" name="smtp_use" value=""<?php if(!$d['admin']['smtp_use']):?> checked<?php endif?>> Sendmail
 					</label>
@@ -201,7 +210,7 @@
 							<label>시스템 메일</label>
 							<div class="input-group">
 								<input type="email" name="sysmail" value="<?php echo $d['admin']['sysmail']?$d['admin']['sysmail']:$my['email']?>" class="form-control">
-								<span class="input-group-btn">
+								<span class="input-group-append">
 									<button class="btn btn-light" type="button" id="sendmailbtn" onclick="sendCheck(this.id);">
 										<?php if($d['admin']['email']):?><i class="fa fa-info-circle fa-lg fa-fw"></i>정상<?php else:?>이메일 전송확인<?php endif?>
 									</button>
@@ -260,7 +269,7 @@
 			</div>
 			<div class="card-body">
 
-				<div class="btn-group nav" data-toggle="buttons">
+				<div class="btn-group btn-group-toggle nav" data-toggle="buttons">
 					<label class="btn btn-light<?php if(!$d['admin']['ftp_use']):?> active<?php endif?>" data-toggle="pill" data-target="#ftp-nobody">
 						<input type="radio" name="ftp_use" value=""<?php if(!$d['admin']['ftp_use']):?> checked<?php endif?>> Nobody
 					</label>

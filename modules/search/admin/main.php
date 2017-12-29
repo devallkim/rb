@@ -172,11 +172,11 @@ $SITEN = db_num_rows($SITES);
 					<label class="col-lg-2 col-form-label text-lg-right">출력사이트</label>
 					<div class="col-lg-10 col-xl-9 pt-1">
 						<?php foreach($TMPST as $_val):?>
-						<label class="custom-control custom-checkbox">
-						  <input type="checkbox" class="custom-control-input" name="aply_sites[]" value="<?php echo $_val[1]?>"<?php if(strstr($_names[1],'['.$_val[1].']')):?> checked<?php endif?>>
-						  <span class="custom-control-indicator"></span>
-						  <span class="custom-control-description"><?php echo $_val[0]?> <small class="text-muted">(<?php echo $_val[1]?>)</small></span>
-						</label>
+
+						<div class="custom-control custom-checkbox custom-control-inline">
+						  <input type="checkbox" class="custom-control-input" id="aply_sites_<?php echo $_val[1]?>" name="aply_sites[]" value="<?php echo $_val[1]?>"<?php if(strstr($_names[1],'['.$_val[1].']')):?> checked<?php endif?>>
+						  <label class="custom-control-label" for="aply_sites_<?php echo $_val[1]?>"><?php echo $_val[0]?> <small class="text-muted">(<?php echo $_val[1]?>)</small></label>
+						</div>
 						<?php endforeach?>
 					</div>
 				</div>
@@ -253,15 +253,24 @@ $SITEN = db_num_rows($SITES);
 				<div class="form-group row">
 					<label class="col-lg-2 col-form-label text-lg-right">검색 결과수</label>
 					<div class="col-lg-10 col-xl-9">
+
 						<div class="input-group" style="width:250px">
-							<span class="input-group-addon">통합검색시</span>
-							<input type="text" name="num1" size="5" value="<?php echo $d['search']['num1']?>" class="form-control">
-							<span class="input-group-addon">개</span>
+							<div class="input-group-prepend">
+						    <span class="input-group-text">통합검색시</span>
+						  </div>
+							<input type="text" name="num1" size="5" value="<?php echo $d['search']['num1']?>" class="form-control text-center">
+							<div class="input-group-append">
+						    <span class="input-group-text">개</span>
+						  </div>
 						</div>
 						<div class="input-group" style="width:250px;margin-top:10px">
-							<span class="input-group-addon">세부검색시</span>
-							<input type="text" name="num2" size="5" value="<?php echo $d['search']['num2']?>" class="form-control">
-							<span class="input-group-addon">개</span>
+							<div class="input-group-prepend">
+						    <span class="input-group-text">세부검색시</span>
+						  </div>
+							<input type="text" name="num2" size="5" value="<?php echo $d['search']['num2']?>" class="form-control text-center">
+							<div class="input-group-append">
+						    <span class="input-group-text">개</span>
+						  </div>
 						</div>
 					</div>
 				</div>

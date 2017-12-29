@@ -165,7 +165,7 @@ if ($is_regismode)
 
 					<div class="input-group input-group-lg">
 					  <input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$cat):?> autofocus<?php endif?>>
-					  <span class="input-group-btn">
+					  <div class="input-group-append">
 						<?php if($CINFO['depth']==1):?>
 						<a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>&amp;vtype=sub" class="btn btn-light" data-tooltip="tooltip" title="2차도메인 등록">
 						  <i class="fa fa-share fa-rotate-90 fa-lg"></i>
@@ -174,7 +174,7 @@ if ($is_regismode)
 						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletedomain&amp;cat=<?php echo $cat?>&amp;code=<?php echo $CINFO['depth']==1?$CINFO['uid']:$CINFO['parent']?>&amp;parent=<?php echo $delparent?>" class="btn btn-light" data-tooltip="tooltip" title="삭제" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');">
 						  <i class="fa fa-trash-o fa-lg"></i>
 						</a>
-					  </span>
+						</div>
 					</div>
 					<small class="form-text text-muted mt-2">
 						1차 도메인을 삭제하면 소속된 2차 도메인 모두 삭제됩니다.
@@ -184,10 +184,10 @@ if ($is_regismode)
 
 						<div class="input-group input-group-lg">
 							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>" autofocus>
-							<?php if($vtype=='sub'):?><span class="input-group-addon"><?php echo $_fdomain?></span><?php endif?>
-							<span class="input-group-btn">
+							<div class="input-group-append">
+								<?php if($vtype=='sub'):?><span class="input-group-text"><?php echo $_fdomain?></span><?php endif?>
 								<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_new" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg text-muted"></i></button>
-							</span>
+							</div>
 						</div>
 						<p id="guide_new" class="form-text text-muted mt-2 collapse"><code>http://</code> 또는 <code>https://</code> 를 제외하고 입력해주세요.</p>
 

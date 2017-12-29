@@ -40,7 +40,6 @@ body {
   background-color: #e9ecef !important;
   background-image: none !important;
   border-color: rgba(27,31,35,0.35) !important;
-  box-shadow: inset 0 0.15em 0.3em rgba(27,31,35,0.15) !important;
 }
 .btn-light:disabled,
 .btn-light.disabled {
@@ -58,15 +57,24 @@ body {
 .btn-light:focus, .btn-light.focus {
   box-shadow: 0 0 0 0.2em rgba(3,102,214,0.3);
 }
+.rb-system-site .card-header a {
+	color: #888;
+}
+.rb-system-site .card-header.bg-primary a {
+	color: #fff
+}
 [data-toggle="buttons"].btn-group .btn-light {
-  color: #999;
+  color: #777 !important;
   font-weight: normal;
 }
-
-[data-toggle="buttons"].btn-group .btn-light.active {
-  color: #393f4a !important;
-  background-color: #fff !important;
+[data-toggle="buttons"].btn-group .btn-light.active,
+[data-toggle="buttons"].btn-group .btn-light:active {
+  color: #eee !important;
+  background-color: rgba(0,0,0,.09)!important;
   border-color: #222 !important;
+	-webkit-box-shadow:inset 1px 1px 3px #222;
+	-moz-box-shadow:inset 1px 1px 3px #222;
+  box-shadow:inset 1px 1px 3px #222;
 }
 
 .btn-sm {
@@ -188,13 +196,12 @@ body {
 .rb-system-sidebar.rb-inverse nav ul li a {
   color: #a8a8a8;
 }
-
-.rb-system-sidebar.rb-inverse nav ul li .menu-item-parent {
-  color: #ffffff;
+#sidebar-modules .list-group-item.active a {
+  background-color: #272c32;
+	color:#fff
 }
-
 .rb-system-sidebar.rb-inverse nav ul li .menu-item-parent {
-  color: #ffffff;
+  color: #ccc;
 }
 
 .rb-system-sidebar.rb-inverse nav ul li a:focus {
@@ -344,7 +351,7 @@ body {
 	border-left: 1px solid #222;
 }
 .rb-system-site .rb-panel-top {
-  background-color: #272c32;
+	background-color: #272c32!important;
   border-bottom: 1px solid #222;
 	color: #eee
 
@@ -352,7 +359,10 @@ body {
 .rb-system-site .rb-icon-hide {
 	color: #eee
 }
-
+.rb-hidden-system-site .rb-system-site .rb-icon-hide:hover .rb-icon:before,
+.rb-system-site .rb-icon-hide:hover .rb-icon:before {
+  color: #eee;
+}
 
 /* tabs-below */
 
@@ -424,6 +434,16 @@ body {
 .rb-system-site .custom-control-description {
 	line-height: 1.9
 }
+.custom-checkbox,
+.custom-radio {
+  line-height: 1.7rem;
+}
+
+.custom-control-label::before {
+  background-color: #1f2227;
+  border-radius: .15rem;
+}
+
 
 .rb-system-site .rb-content-padded {
    padding: 0;
@@ -487,10 +507,11 @@ body {
   background-color: rgba(0,0,0,.03)!important;
 }
 .btn.btn-light {
-	background-color: #393f4a;
+	background-color: #343a40;
 	background-image: none;
-	color: #9ea6b3!important;
-	border-color: #181a1e
+	color: #ccc!important;
+	border-color: #181a1e;
+	font-weight: normal;
 }
 .btn.btn-block {
   border-radius: 4rem;
@@ -511,7 +532,7 @@ body {
 }
 
 .rb-system-site .custom-select {
-	background-color: #384047 !important;
+	background-color: #272c32;
 	display: inline-block;
 	max-width: 100%;
 	height: calc(2.25rem + 2px);
@@ -519,9 +540,9 @@ body {
 	line-height: 1.5;
 	/*color: #495057;*/
 	vertical-align: middle;
-	background: #384047 url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#abafb5' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
+	background: #272c32 url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#abafb5' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right 0.75rem center;
 	background-size: 8px 10px;
-	border: 1px solid #272c32;
+	border: 1px solid #222;
 	border-radius: 0.15rem;
 	-webkit-appearance: none;
 	   -moz-appearance: none;
