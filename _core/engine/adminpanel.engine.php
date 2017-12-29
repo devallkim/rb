@@ -36,11 +36,11 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 <meta name="robots" content="NOINDEX,NOFOLLOW">
 <title>킴스큐 관리모드 (Rb V <?php echo $d['admin']['version']?>)</title>
 
-<?php getImport('bootstrap','css/bootstrap.min','4.0.0-beta.2','css')?>
+<?php getImport('bootstrap','css/bootstrap.min','4.0.0-beta.3','css')?>
 
 <?php getImport('jquery','jquery.min','3.2.1','js')?>
 <?php getImport('popper.js','umd/popper.min','1.12.3','js')?>
-<?php getImport('bootstrap','js/bootstrap.min','4.0.0-beta.2','js')?>
+<?php getImport('bootstrap','js/bootstrap.min','4.0.0-beta.3','js')?>
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['s']?>/_core/images/ico/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">
@@ -601,13 +601,13 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 				<div class="tab-pane<?php if($_COOKIE['rightAdmTab']=='emulator'):?> active<?php endif?>" id="device-emulator">
 					<div class="btn-group rb-device-buttons w-100 px-2" data-toggle="buttons">
-						<label class="btn btn-light rb-btn-desktop js-tooltip<?php if($_COOKIE['rightemulTab']=='desktop'||!$_COOKIE['rightemulTab']):?> active<?php endif?>" title="Desktop">
+						<label class="btn btn-light rb-btn-desktop <?php if($_COOKIE['rightemulTab']=='desktop'||!$_COOKIE['rightemulTab']):?> active<?php endif?>" title="Desktop">
 							<input type="radio" name="options" id="rightemulTab_desktop" checked> <i class="fa fa-desktop fa-2x"></i><br>데스크탑
 						</label>
-						<label class="btn btn-light rb-btn-tablet js-tooltip<?php if($_COOKIE['rightemulTab']=='tablet'):?> active<?php endif?>" title="Tablet">
+						<label class="btn btn-light rb-btn-tablet <?php if($_COOKIE['rightemulTab']=='tablet'):?> active<?php endif?>" title="Tablet">
 							<input type="radio" name="options" id="rightemulTab_tablet"> <i class="fa fa-tablet fa-2x"></i><br>태블릿
 						</label>
-						<label class="btn btn-light rb-btn-mobile js-tooltip<?php if($_COOKIE['rightemulTab']=='mobile'):?> active<?php endif?>" title="Mobile">
+						<label class="btn btn-light rb-btn-mobile <?php if($_COOKIE['rightemulTab']=='mobile'):?> active<?php endif?>" title="Mobile">
 							<input type="radio" name="options" id="rightemulTab_mobile"> <i class="fa fa-mobile fa-2x"></i><br>폰
 						</label>
 					</div>
@@ -657,7 +657,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									  <span class="custom-control-indicator"></span>
 									  <span class="custom-control-description">
 											모바일 디바이스 접속
-											<span class="fa fa-question-circle" style="position:relative;" data-popover="popover" title="[도움말] 모바일 디바이스 접속이란?" data-content="<small>모바일 기기로 접속한 것으로 가정하여 사이트를 보여줍니다. 사이트 설정에서 모바일 분기설정을 적용하면 모바일 전용 레이아웃, 시작페이지, 메뉴가 적용 됩니다.</small>"></span>
+											<span class="fa fa-question-circle" data-toggle="popover" title="[도움말] 모바일 디바이스 접속이란?" data-content="<small>모바일 기기로 접속한 것으로 가정하여 사이트를 보여줍니다. 사이트 설정에서 모바일 분기설정을 적용하면 모바일 전용 레이아웃, 시작페이지, 메뉴가 적용 됩니다.</small>"></span>
 										</span>
 									</label>
 								</fieldset>
