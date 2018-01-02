@@ -1,0 +1,1 @@
+<?php include $g['dir_module_mode'].'.php';?>
