@@ -1,0 +1,98 @@
+/* list.php */
+.rb-bbs-list .table {
+  border-bottom: 1px solid #d7d7d7
+}
+.rb-bbs-list .table th,
+.rb-bbs-list .table td {
+  text-align: center;
+  font-size: 14px
+}
+.rb-bbs-list .table thead th {
+  background-color: #f9f9f9;
+  border-top: 1px solid #1a6dba
+}
+
+.rb-bbs-list .table tbody td a {
+  color: #333
+}
+.rb-bbs-list .table tbody td a:hover {
+  color: #2a70ff;
+  text-decoration: none;
+}
+
+/* view.php */
+
+
+
+.rb-bbs-view .card {
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  border-top: 1px solid #1a6dba
+}
+.rb-bbs-view .card-header {
+  font-size: 17px;
+  background-color: #f9f9f9
+}
+.rb-bbs-view .card-header .list-inline-item,
+.rb-bbs-view .card-header .nav-link {
+  font-size: 12px;
+  color: #666
+}
+
+.rb-bbs-view .card-header .list-inline-item::after,
+.rb-bbs-view .card-header .nav-link::after {
+  content: '|';
+  color: #d7d7d7
+}
+.rb-bbs-view .card-header .list-inline-item::after {
+  padding-left: .7rem;
+}
+.rb-bbs-view .card-header .nav-link::after {
+  padding-left: .5rem;
+}
+.rb-bbs-view .card-header .list-inline-item:last-child::after,
+.rb-bbs-view .card-header .nav-link:last-child::after {
+  content: ''
+}
+.rb-bbs-view .card-block {
+  font-size: 14px;
+  line-height: 1.7
+}
+.rb-bbs-view .card-footer {
+  background-color: #fff
+}
+
+/*댓글*/
+.rb-comments .list-group {
+  margin-top: 1rem
+}
+.rb-comments .list-group-item {
+  padding: 15px 10px;
+  border-left: 0;
+  border-right: 0;
+  font-size: 13px
+}
+.rb-comments .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.rb-comments .list-group-item:last-child {
+  border-bottom: none;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.rb-comments-write .form-inline {
+  margin-top: -.5rem
+}
+.rb-comments-write .form-control {
+  width: 602px;
+  height: 89px
+}
+.rb-comments-write .btn {
+  width: 80px;
+  height: 89px;
+  font-size: 18px
+}

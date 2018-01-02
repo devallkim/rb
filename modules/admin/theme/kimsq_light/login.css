@@ -1,0 +1,102 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #EEEEEE !important;
+  font-family: 'Open Sans', "돋움", dotum, '나눔고딕', 'Nanum Gothic', sans-serif, FontAwesome, kimsq !important;
+}
+
+.rb-root {
+  display: table;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+#rb-login {
+  display: table-cell;
+  text-align: left;
+  margin: 0 auto;
+  padding: 10% 0 100px;
+}
+
+#rb-login .card {
+  margin: 0 auto 15px;
+  background-color: #fbfbfb;
+  border: 1px solid #AAA;
+  border-bottom: 1px solid #888;
+  border-radius: 3px;
+  color: #444;
+  box-shadow: 0px 2px 2px #AAA;
+}
+#rb-login .card-header h1 {
+	margin-bottom: 0;
+	font-size: 18px
+}
+#rb-login .card-header a {
+	color: #444
+}
+#rb-login .card-header a:hover {
+	text-decoration: none
+}
+#rb-login .card .form-group label {
+  font-weight: normal;
+	display: block;
+	margin-bottom: 7px
+}
+#rb-login .form-login .label-link {
+  float: right;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+#rb-login .panel .form-control.input-lg {
+  border-radius: 2px;
+}
+
+#rb-login .card-footer ul {
+  margin-bottom: 0
+}
+
+#rb-login .card-foote a {
+  font-size: 90%;
+}
+
+
+/*반응형 설정*/
+
+@media (min-width: 481px) {
+  #rb-login .card {
+    width: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    background-color: #fff !important
+  }
+  #rb-login {
+    padding: 0;
+  }
+  #rb-login .card {
+    box-shadow: none;
+    border: none;
+    border-radius: none;
+    background-color: inherit;
+  }
+  #rb-login .card-footer {
+    background-color: transparent;
+  }
+  #rb-login h1 {
+    font-size: 20px
+  }
+  #rb-login .btn.btn-primary {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+  }
+}

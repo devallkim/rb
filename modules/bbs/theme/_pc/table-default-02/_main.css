@@ -1,0 +1,204 @@
+@charset "utf-8";
+/*!
+ * Bootstrap bbs template (default)
+ * Version: 1.0
+ * Author: gitaeks
+ * Homepage: http://gitaeks.github.io/
+ * Licensed under MIT
+ * Based on Bootstrap v3.3.5
+*/
+
+/**
+ * 목차:
+ *
+ * 1 - Common 공통
+ * 2 - list 목록
+ * 3 - View 보기
+ * 4 - Write 쓰기
+ * ----------------------------------------------------------------------------
+ */
+
+
+/**
+ * 1 - Common 공통
+ * ----------------------------------------------------------------------------
+ */
+
+ .rb-bbs-heading {
+   margin-top: 22px;
+   margin-bottom: 19px
+ }
+ .rb-bbs .btn {
+  font-family :"맑은 고딕",malgun gothic;
+  font-size: 13px;
+  font-weight: bold;
+ }
+
+/**
+ * 2 - list 목록
+ * ----------------------------------------------------------------------------
+ */
+
+/********** bbs-heading **********/
+
+
+.rb-bbs-heading .form-control.custom-select,
+.rb-bbs-heading .form-control,
+.rb-bbs-heading .btn {
+  height: 35px !important;
+  padding: 0.4rem 0.75rem !important;
+  font-size: 14px;
+  border: 1px solid #d7d7d7;
+  font-family :"맑은 고딕",malgun gothic
+}
+
+
+
+/********** bbs-body **********/
+
+.rb-bbs-list .rb-bbs-body {
+  font-size: 14px;
+  color: #333
+}
+.rb-bbs-list .rb-bbs-body a {
+  color: #333
+}
+.rb-bbs-list .rb-bbs-body .table {
+  margin-bottom: 30px;
+  border-top: 1px solid #1a6dba;
+  border-bottom: 1px solid #d7d7d7
+}
+.rb-bbs-list .rb-bbs-body thead th {
+  font-size: 15px;
+  color: #666;
+  background-color: #f9f9f9;
+  text-align: center;
+  border-top: none
+}
+.table thead th {
+  padding: 15px 10px !important;
+  vertical-align: bottom;
+  border-bottom: 1px solid #d7d7d7;
+  line-height: 1
+}
+.rb-bbs-list .rb-bbs-body tbody th,
+.rb-bbs-list .rb-bbs-body tbody td {
+  padding: 10.5px;
+  text-align: center;
+  background-color: #fff
+}
+.rb-bbs-list .rb-bbs-body tbody td.rb-title {
+  text-align: left;
+}
+
+/* bbs-footer */
+.rb-bbs-footer {
+  margin-bottom: 50px
+}
+.rb-bbs-footer .page-item .page-link {
+  padding: 5px 8px 5px;
+  font-size: 17px;
+  border-color: #fff;
+  line-height: 17px
+}
+.page-item.active .page-link {
+  background-color: #2a70ff;
+  border-color: #2a70ff;
+}
+
+/**
+ * 2 - View 보기
+ * ----------------------------------------------------------------------------
+ */
+
+
+
+/********** bbs-heading **********/
+
+
+
+
+/********** bbs-body **********/
+
+.rb-bbs-view .card.rb-bbs-body {
+  margin-bottom: 30px;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  font-size: 13px;
+  border-top: 1px solid #1a6dba;
+}
+
+.rb-bbs-view .card.rb-bbs-body .card-header {
+  padding: 16px 20px 14px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #d7d7d7
+}
+.rb-bbs-view .card.rb-bbs-body .card-header h3 {
+  font-size: 17px;
+  font-weight: bold;
+}
+.rb-bbs-view .card.rb-bbs-body .card-header .rb-meta {
+  margin-top: 13px
+}
+.rb-bbs-view .card.rb-bbs-body .card-header ul {
+  margin-bottom: 0;
+}
+.rb-bbs-view .card.rb-bbs-body .card-header li {
+  margin-right:0;
+  padding: 0 20px 0 10px;
+  font-size: 12px;
+  color: #666;
+  border-right: 1px solid #d7d7d7;
+  line-height: 12px
+}
+.rb-bbs-view .card.rb-bbs-body .card-header li:first-child {
+  padding-left: 0
+}
+.rb-bbs-view .card.rb-bbs-body .card-header li:last-child {
+  padding-right: 0;
+  border-right: none
+}
+.rb-bbs-view .card.rb-bbs-body .card-header li a {
+  font-size: 11px;
+  color: #666
+}
+.rb-bbs-view .card.rb-bbs-body .card-footer {
+  background-color: #fff
+}
+
+/*print*/
+@media print {
+  .page-header .breadcrumb,
+  .rb-bbs-view .btn {
+    display: none
+  }
+
+}
+
+
+/********** bbs-footer **********/
+
+
+/*tag*/
+
+/*attach*/
+
+
+/*tabs*/
+
+
+/*copyright*/
+
+
+/*comments*/
+
+
+/**
+ * 3 - Write 쓰기
+ * ----------------------------------------------------------------------------
+ */
+
+
+
+/*attach*/

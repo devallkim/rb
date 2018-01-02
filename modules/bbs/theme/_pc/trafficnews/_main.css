@@ -1,0 +1,20 @@
+.rb-bbs-list .table {
+  border-bottom: 1px solid #d7d7d7
+}
+.rb-bbs-list .table th,
+.rb-bbs-list .table td {
+  text-align: center;
+  font-size: 14px
+}
+.rb-bbs-list .table thead th {
+  background-color: #f9f9f9;
+  border-top: 1px solid #1a6dba
+}
+
+.rb-bbs-list .table tbody td a {
+  color: #333
+}
+.rb-bbs-list .table tbody td a:hover {
+  color: #2a70ff;
+  text-decoration: none;
+}
