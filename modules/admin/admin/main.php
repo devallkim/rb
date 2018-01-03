@@ -14,9 +14,7 @@
 				</div>
 
 				<div class="col-sm-6">
-					<dl class="form-row mb-0">
-					  <dt class="col-sm-2">웹서버</dt>
-					  <dd class="col-sm-9"><?php echo $_SERVER['SERVER_SOFTWARE']?></dd>
+					<dl class="form-row mt-4 mb-0">
 
 						<dt class="col-sm-2">PHP</dt>
 						<dd class="col-sm-9"><?php echo phpversion()?></dd>
