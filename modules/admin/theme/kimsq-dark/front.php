@@ -1,5 +1,5 @@
 
-<header class="navbar navbar-expand fixed-top navbar-dark bg-dark" role="navigation">
+<header class="navbar navbar-expand fixed-top navbar-dark bg-dark" role="navigation" data-scroll-header>
 
 		<?php if($g['device'] && $module == 'dashboard'):?>
 		<a class="navbar-brand" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=dashboard&amp;front=mobile.shortcut" style="margin-left:0;">
