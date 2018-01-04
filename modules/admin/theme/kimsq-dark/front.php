@@ -23,11 +23,11 @@
 			</ul>
 			<?php else:?>
 			<ul class="navbar-nav mr-auto" id="rb-admin-ul-tabs">
-
+				<?php $_front =explode('_' , $front); ?>
 				<?php $_menuCount=count($d['amenu']);if(!$nosite&&$_menuCount):?>
 				<?php $_i=1;foreach($d['amenu'] as $_k => $_v):?>
 				<li id="rb-more-tab-<?php echo $_i?>" class="nav-item">
-					<a class="nav-link<?php if($front == $_k):?> active<?php endif?>" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_k ?>">
+					<a class="nav-link<?php if($_front[0] == $_k):?> active<?php endif?>" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_k ?>">
 						<?php echo $_v ?>
 					</a>
 				</li>
