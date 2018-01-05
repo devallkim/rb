@@ -153,62 +153,23 @@ function filterNum(str)
 //페이징처리
 function getPageLink(lnum,p,tpage,img)
 {
-	if (img == 'mobile')
-	{
-		var g_q = '<div class="'+lnum+'panel-footer"><span class="'+lnum+'paging"><span class="'+lnum+'count"><span class="'+lnum+'hidden">Current page</span><span class="'+lnum+'current">'+p+'</span><span class="'+lnum+'bar">/</span><span class="'+lnum+'hidden">Total page</span> '+tpage+'</span>';
-		if(p==1||tpage<2) g_q  += '<a class="btn btn-link '+lnum+'prev '+lnum+'disabled" title="Prev"><i class="fa fa-angle-left"></i></a>';
-		else g_q  += '<a href="'+getPageGo(p-1,'')+'" class="btn btn-link '+lnum+'prev" title="Prev"><i class="fa fa-angle-left"></i></a>';
-		if(p<tpage) g_q  += '<a href="'+getPageGo(p+1,'')+'" class="btn btn-link '+lnum+'next" title="Next"><i class="fa fa-angle-right"></i></a>';
-		else g_q  += '<a class="btn btn-link '+lnum+'next '+lnum+'disabled" title="Next"><i class="fa fa-angle-right"></i></a>';
-		g_q  += '</span></div>';
-		document.write(g_q);
-	}
-	else if (img != '' && img != 'mobile')
-	{
-		var g_hi = img.split('|');
-		var imgpath = g_hi[0];
-		var wp = g_hi[1] ? g_hi[1] : '';
-		var g_p1 = '<img src="'+imgpath+'/p1.gif" alt="Prev '+lnum+' pages" />';
-		var g_p2 = '<img src="'+imgpath+'/p2.gif" alt="Prev '+lnum+' pages" />';
-		var g_n1 = '<img src="'+imgpath+'/n1.gif" alt="Next '+lnum+' pages" />';
-		var g_n2 = '<img src="'+imgpath+'/n2.gif" alt="Next '+lnum+' pages" />';
-		var g_cn = '<img src="'+imgpath+'/l.gif" class="split" alt="" />';
-		var g_q  = p > 1 ? '<a href="'+getPageGo(1,wp)+'"><img src="'+imgpath+'/fp.gif" alt="First page" class="phidden" /></a>' : '<img src="'+imgpath+'/fp1.gif" alt="First page" class="phidden" />';
+	var wp = '';
+	var g_q  = p > 1 ? '<li class="page-item"><a class="page-link" href="'+getPageGo(1,wp)+'" data-toggle="tooltip" title="First Page"><i class="fa fa-angle-double-left"></i></a></li>' : '<li class="page-item disabled"><a class="page-link"  href="#." data-toggle="tooltip" title="First page"><i class="fa fa-angle-double-left"></i></a></li>';
 
-		if(p < lnum+1) { g_q += g_p1; }
-		else{ var pp = parseInt((p-1)/lnum)*lnum; g_q += '<a href="'+getPageGo(pp,wp)+'">'+g_p2+'</a>';} g_q += g_cn;
+	if(p < lnum+1) { g_q += '<li class="page-item disabled"><a class="page-link" href="#." data-toggle="tooltip" title="Previous"><i class="fa fa-angle-left"></i></a></li>'; }
+	else{ var pp = parseInt((p-1)/lnum)*lnum; g_q += '<li class="page-item"><a class="page-link" href="'+getPageGo(pp,wp)+'" data-toggle="tooltip" title="Previous"><i class="fa fa-angle-left"></i></a></li>';}
 
-		var st1 = parseInt((p-1)/lnum)*lnum + 1;
-		var st2 = st1 + lnum;
+	var st1 = parseInt((p-1)/lnum)*lnum + 1;
+	var st2 = st1 + lnum;
 
-		for(var jn = st1; jn < st2; jn++)
-		if ( jn <= tpage)
-		(jn == p)? g_q += '<span class="selected" title="'+jn+' page">'+jn+'</span>'+g_cn : g_q += '<a href="'+getPageGo(jn,wp)+'" class="notselected" title="'+jn+' page">'+jn+'</a>'+g_cn;
+	for(var jn = st1; jn < st2; jn++)
+	if ( jn <= tpage)
+	(jn == p)? g_q += '<li class="page-item active"><span class="page-link">'+jn+'</span></li>' : g_q += '<li class="page-item"><a class="page-link" href="'+getPageGo(jn,wp)+'">'+jn+'</a></li>';
 
-		if(tpage < lnum || tpage < jn) { g_q += g_n1; }
-		else{var np = jn; g_q += '<a href="'+getPageGo(np,wp)+'">'+g_n2+'</a>'; }
-		g_q  += tpage > p ? '<a href="'+getPageGo(tpage,wp)+'"><img src="'+imgpath+'/lp.gif" alt="Last page" class="phidden" /></a>' : '<img src="'+imgpath+'/lp1.gif" alt="Last page" class="phidden" />';
-		document.write(g_q);
-	}
-	else {
-		var wp = '';
-		var g_q  = p > 1 ? '<li><a href="'+getPageGo(1,wp)+'" data-toggle="tooltip" title="First Page"><i class="fa fa-angle-double-left"></i></a></li>' : '<li class="disabled"><a href="#." data-toggle="tooltip" title="First page"><i class="fa fa-angle-double-left"></i></a></li>';
-
-		if(p < lnum+1) { g_q += '<li class="disabled"><a href="#." data-toggle="tooltip" title="Previous"><i class="fa fa-angle-left"></i></a></li>'; }
-		else{ var pp = parseInt((p-1)/lnum)*lnum; g_q += '<li><a href="'+getPageGo(pp,wp)+'" data-toggle="tooltip" title="Previous"><i class="fa fa-angle-left"></i></a></li>';}
-
-		var st1 = parseInt((p-1)/lnum)*lnum + 1;
-		var st2 = st1 + lnum;
-
-		for(var jn = st1; jn < st2; jn++)
-		if ( jn <= tpage)
-		(jn == p)? g_q += '<li class="active"><span>'+jn+'</span></li>' : g_q += '<li><a href="'+getPageGo(jn,wp)+'">'+jn+'</a></li>';
-
-		if(tpage < lnum || tpage < jn) { g_q += '<li class="disabled"><a href="#." data-toggle="tooltip" title="Next"><i class="fa fa-angle-right"></i></a></li>'; }
-		else{var np = jn; g_q += '<li><a href="'+getPageGo(np,wp)+'" data-toggle="tooltip" title="Next"><i class="fa fa-angle-right"></i></a></li>'; }
-		g_q  += tpage > p ? '<li><a href="'+getPageGo(tpage,wp)+'" data-toggle="tooltip" title="Last pages ('+tpage+')"><i class="fa fa-angle-double-right"></i></a></li>' : '<li class="disabled"><a href="#." data-toggle="tooltip" title="Last pages ('+tpage+')"><i class="fa fa-angle-double-right"></i></a></li>';
-		document.write(g_q);
-	}
+	if(tpage < lnum || tpage < jn) { g_q += '<li class="page-item disabled"><a class="page-link" href="#." data-toggle="tooltip" title="Next"><i class="fa fa-angle-right"></i></a></li>'; }
+	else{var np = jn; g_q += '<li><a class="page-link" href="'+getPageGo(np,wp)+'" data-toggle="tooltip" title="Next"><i class="fa fa-angle-right"></i></a></li>'; }
+	g_q  += tpage > p ? '<li><a class="page-link" href="'+getPageGo(tpage,wp)+'" data-toggle="tooltip" title="Last pages ('+tpage+')"><i class="fa fa-angle-double-right"></i></a></li>' : '<li class="page-item disabled"><a class="page-link" href="#." data-toggle="tooltip" title="Last pages ('+tpage+')"><i class="fa fa-angle-double-right"></i></a></li>';
+	document.write(g_q);
 }
 //페이지클릭
 function getPageGo(n,wp)
