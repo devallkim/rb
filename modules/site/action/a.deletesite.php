@@ -37,6 +37,7 @@ if ($R['uid'])
 	include $g['path_core'].'function/dir.func.php';
 	DirDelete($g['path_page'].$R['id'].'-menus');
 	DirDelete($g['path_page'].$R['id'].'-pages');
+	DirDelete($g['path_var'].'site/'.$R['id']);
 }
 
 if (!getDbRows($table['s_site'],''))

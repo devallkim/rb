@@ -90,10 +90,12 @@ else {
 	mkdir($g['path_page'].$id.'-pages',0707);
 	mkdir($g['path_page'].$id.'-menus/images',0707);
 	mkdir($g['path_page'].$id.'-pages/images',0707);
+	mkdir($g['path_var'].'site/'.$id,0707);
 	@chmod($g['path_page'].$id.'-menus',0707);
 	@chmod($g['path_page'].$id.'-pages',0707);
 	@chmod($g['path_page'].$id.'-menus/images',0707);
 	@chmod($g['path_page'].$id.'-pages/images',0707);
+	@chmod($g['path_var'].'site/'.$id,0707);
 
 	if ($nosite=='Y')
 	{
