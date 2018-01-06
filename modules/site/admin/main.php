@@ -167,7 +167,8 @@ if ($R['uid'])
 						<div class="form-row">
 							<div class="col-sm-6" id="rb-mlayout-select">
 								<select class="form-control custom-select form-control-lg" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','custom-select form-control-lg');">
-										<option value="0">사용안함(기본 레이아웃 적용)</option>
+									<option value="0">사용안함(기본 레이아웃 적용)</option>
+									<option disabled>--------------------</option>
 									<?php $_layoutExp2=explode('/',$R['m_layout'])?>
 										<?php $dirs = opendir($g['path_layout'])?>
 										<?php while(false !== ($tpl = readdir($dirs))):?>
@@ -441,8 +442,8 @@ if ($R['uid'])
 					<div class="col-lg-10 col-xl-9">
 						<div class="panel-group">
 							<div class="card">
-								<div class="card-header">
-									<a class="d-block muted-link" data-toggle="collapse" data-parent="#accordion" href="#site-code-head" onclick="sessionSetting('sh_site_main_2','1','','1');">
+								<div class="card-header p-0">
+									<a class="d-block muted-link collapsed" data-toggle="collapse" data-parent="#accordion" href="#site-code-head" onclick="sessionSetting('sh_site_main_2','1','','1');">
 										head 코드 <?php if($R['headercode']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 										<small><code>&lt;head&gt; &lt;/head&gt;</code> 태그 내부에 삽입할 코드를 등록해 주세요.</small>
 									</a>
@@ -454,8 +455,8 @@ if ($R['uid'])
 								</div>
 							</div>
 							<div class="card">
-								<div class="card-header">
-									<a class="d-block muted-link" data-toggle="collapse" data-parent="#accordion" href="#site-code-foot" onclick="sessionSetting('sh_site_main_3','1','','1');">
+								<div class="card-header p-0">
+									<a class="d-block muted-link collapsed" data-toggle="collapse" data-parent="#accordion" href="#site-code-foot" onclick="sessionSetting('sh_site_main_3','1','','1');">
 										foot 코드 <?php if($R['footercode']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 										<small><code>&lt;/body&gt;&lt;/html&gt;</code> 태그 직전에 삽입할 코드를 등록해 주세요.</small>
 									</a>
@@ -469,8 +470,8 @@ if ($R['uid'])
 							</div>
 
 								<div class="card">
-								<div class="card-header">
-									<a class="d-block muted-link" data-toggle="collapse" data-parent="#accordion" href="#site-code-php" onclick="sessionSetting('sh_site_main_4','1','','1');">
+								<div class="card-header p-0">
+									<a class="d-block muted-link collapsed" data-toggle="collapse" data-parent="#accordion" href="#site-code-php" onclick="sessionSetting('sh_site_main_4','1','','1');">
 										PHP코드 <?php if($R['uid']&&filesize($g['path_var'].'sitephp/'.$R['uid'].'.php')):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 											<small>이 사이트 전용 <code>&lt;?php ?&gt;</code> 를 등록해 주세요.</small>
 									</a>
@@ -484,8 +485,8 @@ if ($R['uid'])
 							</div>
 
 							<div class="card">
-								<div class="card-header">
-									<a class="d-block muted-link" data-toggle="collapse" data-parent="#accordion" href="#site-code-googleanalytics" onclick="sessionSetting('sh_site_main_5','1','','1');">
+								<div class="card-header p-0">
+									<a class="d-block muted-link collapsed" data-toggle="collapse" data-parent="#accordion" href="#site-code-googleanalytics" onclick="sessionSetting('sh_site_main_5','1','','1');">
 										구글 웹로그 분석 <?php if($R['dtd']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 											<small>이 사이트 전용 Google Analytics <code>추적 ID</code> 를 등록해 주세요.</small>
 									</a>
