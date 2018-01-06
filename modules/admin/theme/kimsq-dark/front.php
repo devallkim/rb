@@ -70,11 +70,11 @@
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
 						<i id="_bookmark_star_" class="fa fa-lg fa-star<?php if($exists_bookmark):?> rb-star-fill<?php else:?>-o<?php endif?>"></i>
 					</a>
-					<div class="dropdown-menu dropdown-menu-right">
-						<div class="card border-0" style="width: 300px">
-							<div class="card-header clearfix">
-								<h4 class="pull-left">북마크</h4>
-								<div class="pull-right">
+					<div class="dropdown-menu dropdown-menu-right p-0">
+						<div class="card border-0 mb-0" style="width: 300px">
+							<div class="card-header d-flex justify-content-between align-items-center p-2">
+								북마크
+								<div>
 									<div id="_bookmark_notyet_" class="btn-group btn-group-sm dropdown<?php if($exists_bookmark):?> d-none<?php endif?>">
 
 										<button type="button" class="btn btn-light rb-bookmark-add">북마크에 추가</button>
@@ -102,14 +102,16 @@
 									</div>
 								</div>
 							</div>
-							<div id="_add_bookmark_" class="list-group rb-scrollbar">
+							<div id="_add_bookmark_" class="list-group list-group-flush rb-scrollbar">
 								<?php $ADMPAGE = getDbArray($table['s_admpage'],'memberuid='.$my['uid'],'*','gid','asc',0,1)?>
 								<?php while($R=db_fetch_array($ADMPAGE)):?>
-								<a href="<?php echo $R['url']?>" class="list-group-item" id="_now_bookmark_<?php echo $R['uid']?>"><i class="fa fa-fw fa-file-text-o"></i><?php echo $R['name']?></a>
+								<a href="<?php echo $R['url']?>" class="list-group-item list-group-item-action" id="_now_bookmark_<?php echo $R['uid']?>"><i class="fa fa-fw fa-file-text-o"></i><?php echo $R['name']?></a>
 								<?php endwhile?>
 								<?php if(!db_num_rows($ADMPAGE)):?><a class="list-group-item"><i class="fa fa-fw fa-file-text-o"></i>등록된 북마크가 없습니다</a><?php endif?>
 							</div>
-							<div class="panel-footer"><a href="#." data-toggle="modal" data-target="#modal_window" class="rb-modal-bookmark">북마크 관리</a></div>
+							<div class="card-footer p-0 border-top-0">
+								<a href="#." data-toggle="modal" data-target="#modal_window" class="rb-modal-bookmark btn btn-link btn-block">북마크 관리</a>
+							</div>
 						</div>
 					</div>
 				</li>
