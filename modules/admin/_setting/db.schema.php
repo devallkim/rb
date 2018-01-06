@@ -873,7 +873,7 @@ if ( !$_tmp ) {
 $_tmp = ("
 
 CREATE TABLE ".$table['s_mbrtoken']." (
-uid			INT				PRIMARY KEY		NOT NULL AUTO_INCREMENT,
+uid   INT    PRIMARY KEY  NOT NULL AUTO_INCREMENT,
 memberuid	INT				DEFAULT '0'		NOT NULL,
 access_token		VARCHAR(100)	DEFAULT ''		NOT NULL,
 expire		INT				DEFAULT '0'		NOT NULL,

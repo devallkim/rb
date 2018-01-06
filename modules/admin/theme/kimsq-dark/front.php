@@ -37,7 +37,7 @@
 				<?php endif?>
 
 				<?php if($_i>10):?>
-				<li class="nav-item dropdown rb-more-tabs">
+				<li class="nav-item dropdown rb-more-tabs d-block d-sm-none">
 					<a class="nav-link dropdown-toggle" href="#." data-toggle="dropdown">더보기</a>
 					<div class="dropdown-menu dropdown-menu-right">
 						<?php $_i=1;foreach($d['amenu'] as $_k => $_v):?>

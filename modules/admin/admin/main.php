@@ -355,6 +355,9 @@
 
 <!-- basic -->
 <script>
+
+putCookieAlert('admin_config_result') // 실행결과 알림 메시지 출력
+
 var submitFlag = false;
 function sendCheck(id)
 {

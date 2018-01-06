@@ -21,7 +21,6 @@ fwrite($fp, "?>");
 fclose($fp);
 @chmod($gfile,0707);
 
-
-
+setrawcookie('bbs_config_result', rawurlencode('<i class="fa fa-check" aria-hidden="true"></i> 설정이 변경 되었습니다.|success'));  // 처리여부 cookie 저장
 getLink('reload','parent.','','');
 ?>

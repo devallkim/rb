@@ -1042,14 +1042,7 @@ include_once $_tmpvfile;
 
 <script type="text/javascript">
 
-var notify_result = Cookies.get('member_config_result')  // 결과 가져오기
-if (notify_result == 'success') {
-	setTimeout(function(){
-		$.notify('설정이 변경 되었습니다.');
-	}, 500);
-}
-Cookies.remove('member_config_result');  // 결과 초기화
-
+putCookieAlert('member_config_result') // 실행결과 알림 메시지 출력
 
 function addField(f)
 {

@@ -13,6 +13,6 @@ if ($name)
 {
 	getDbInsert($table['s_mbrgroup'],'gid,name,num',"'".$i."','".trim($name)."','0'");
 }
-
+setrawcookie('member_group_result', rawurlencode('그룹 설정이 변경 되었습니다.|success'));  // 처리여부 cookie 저장
 getLink('reload','parent.','','');
 ?>

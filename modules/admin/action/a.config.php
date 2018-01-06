@@ -57,5 +57,8 @@ parent.document.procForm.autosave.value = '';
 exit;
 endif;
 if ($panel_reload) getLink($g['s'].'/?r='.$r.'&pickmodule='.$m.'&panel=Y','parent.parent.','','');
-else getLink('reload','parent.','반영 되었습니다.','');
+else {
+	setrawcookie('admin_config_result', rawurlencode('시스템 설정이 변경 되었습니다.|success'));  // 처리여부 cookie 저장
+	getLink('reload','parent.','','');
+}
 ?>

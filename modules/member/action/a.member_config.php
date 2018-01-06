@@ -125,7 +125,7 @@ if ($_join_menu == 'signup-form-add')
 }
 
 $_SESSION['_join_menu'] = $_join_menu;
-setrawcookie('member_config_result', rawurlencode('success'));  // 성공여부 cookie 저장
+setrawcookie('member_config_result', rawurlencode('설정이 변경 되었습니다.|success'));  // 처리여부 cookie 저장
 
 getLink('reload','parent.','','');
 ?>

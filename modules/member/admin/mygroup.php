@@ -4,9 +4,9 @@
 			<div class="panel-group" id="accordion">
 				<div class="card border-0">
 					<form name="sosokForm" action="<?php echo $g['s']?>/" method="post" target="_action_frame_<?php echo $m?>" onsubmit="return regisCheck(this);">
-					<input type="hidden" name="r" value="<?php echo $r?>" />
-					<input type="hidden" name="m" value="<?php echo $module?>" />
-					<input type="hidden" name="a" value="sosok_regis" />
+					<input type="hidden" name="r" value="<?php echo $r?>">
+					<input type="hidden" name="m" value="<?php echo $module?>">
+					<input type="hidden" name="a" value="sosok_regis">
 					<div class="card-header">
 						<i class="fa fa-arrows-h fa-lg fa-fw"></i> 회원그룹 <span class="badge badge-light">Group</span>
 					</div>
@@ -140,19 +140,20 @@
 				</div>
 				<div class="card-footer p-2">
 					<div class="form-group mb-0">
-						<label class="sr-only" for="levelnum">사용할 등급수</label>
+
 						<div class="input-group">
-						  	 <div class="input-group-btn">
-							  	 <select name="num" id="levelnum" class="form-control custom-select">
-								   	<?php $levelnum = getDbData($table['s_mbrlevel'],'gid=1','*')?>
-										<?php for($i=5; $i < 101; $i=$i+5):?>
-										<option value="<?php echo $i?>"<?php if($i==$levelnum['uid']):?> selected="selected"<?php endif?>>사용등급 : <?php echo $i?></option>
-										<?php endfor?>
-									</select>
-							 </div>
-							 <div class="input-group-btn">
-							 	  <button type="input" class="btn btn-light">저장</button>
-							 </div>
+							<div class="input-group-prepend">
+								<span class="input-group-text">사용할 등급수</span>
+							</div>
+							<select name="num" id="levelnum" class="form-control custom-select">
+							 <?php $levelnum = getDbData($table['s_mbrlevel'],'gid=1','*')?>
+							 <?php for($i=5; $i < 101; $i=$i+5):?>
+							 <option value="<?php echo $i?>"<?php if($i==$levelnum['uid']):?> selected="selected"<?php endif?>>사용등급 : <?php echo $i?></option>
+							 <?php endfor?>
+						 </select>
+						 <div class="input-group-append">
+						 	  <button type="input" class="btn btn-light">저장</button>
+						 </div>
 						</div>
 					 </div>  <!-- .form-group -->
 				</div> <!-- .panel-footer -->
@@ -196,6 +197,8 @@
 
 <script type="text/javascript">
 //<![CDATA[
+
+putCookieAlert('member_group_result') // 실행결과 알림 메시지 출력
 
 //그룹순서 변경 이벤트
 $(function() {
@@ -268,10 +271,7 @@ function regisSosok()
 }
 function levelCheck(f)
 {
-	if (confirm('정말로 실행하시겠습니까?   '))
-	{
-		getIframeForAction(f);
-	}
+	getIframeForAction(f);
 }
 function regisCheck(f)
 {

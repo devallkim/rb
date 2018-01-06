@@ -198,7 +198,9 @@ include_once $g['path_module'].$module.'/var/var.php';
 
 </form>
 <script type="text/javascript">
-//<![CDATA[
+
+putCookieAlert('bbs_config_result') // 실행결과 알림 메시지 출력
+
 function saveCheck(f)
 {
 	if (f.skin_main.value == '')
@@ -213,11 +215,8 @@ function saveCheck(f)
 	// 	f.skin_mobile.focus();
 	// 	return false;
 	// }
-	  if (confirm('정말로 실행하시겠습니까?         '))
-		{
-			getIframeForAction(f);
-			f.submit();
-		}
+	getIframeForAction(f);
+	f.submit();
 }
-//]]>
+
 </script>

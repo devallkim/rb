@@ -1,5 +1,5 @@
 <?php
-$d['member']['theme_main'] = "bs-4.0.0-default";
+$d['member']['theme_main'] = "bs-4.0.0-simple";
 $d['member']['theme_mobile'] = "rc-1.0.0-alpha.3-default";
 $d['member']['layout_join'] = "";
 $d['member']['layout_join_mobile'] = "";
