@@ -10,7 +10,7 @@ if (!$cat) getLink($g['s'].'/?r='.$r.'&m='.$m.'&admin=Y&mod=makecategory&uid='.$
 
 
 include $g['path_module'].$m.'/lib/tree.func.php';
-$subQue = getMenuCodeToSqlBlog($table[$m.'category'],$cat,'uid');
+$subQue = getMenuCodeToSqlset($table[$m.'category'],$cat,'uid');
 
 if ($subQue)
 {

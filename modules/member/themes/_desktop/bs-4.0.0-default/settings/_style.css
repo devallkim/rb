@@ -1,0 +1,130 @@
+.page-wrapper {
+  margin-top: 20px
+}
+.page-nav {
+  /*padding-left: 0*/
+}
+.page-nav .card-header {
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #586069;
+  background-color: #f3f5f8;
+  border-bottom: none
+}
+.page-nav .list-group-item {
+  padding: 8px 10px;
+  color: #24292e;
+}
+.page-nav .list-group-item.selected::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  content: "";
+  background-color: #e36209;
+}
+.page-nav .list-group-item-action {
+  color: #0366d6;
+}
+.page-main {
+  /*padding-right: 0*/
+}
+
+/*Subhead*/
+.Subhead {
+  display: -webkit-box;
+  display: flex;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px #e1e4e8 solid;
+  flex-flow: row wrap;
+}
+.Subhead-spacious {
+  margin-top: 40px;
+}
+.Subhead-heading {
+  font-size: 24px;
+  font-weight: normal;
+  -webkit-box-flex: 1;
+  flex: 1 1 auto;
+}
+.Subhead-heading-danger {
+  font-weight: 600;
+  color: #cb2431;
+}
+
+/*column*/
+.column {
+  float: left;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.two-thirds {
+  width: 66.666667%;
+}
+.edit-profile-avatar {
+  width: 200px;
+}
+
+/*forms*/
+.form-group .form-control.short {
+  width: 250px;
+}
+
+/*billing*/
+.billing-section .section-title {
+  width: 100px;
+}
+[data-toggle="buttons"] .btn-white {
+  min-width: 150px;
+  border: 1px solid #d1d5da;
+  color: #777
+}
+[data-toggle="buttons"] .btn-white.active {
+  border-color: #0366d6;
+  color: #333
+}
+
+.billing-plans th {
+  padding: 9px;
+  background-color: #fafbfc;
+  border-top: 0;
+  border-bottom: 1px solid #eaecef !important;
+}
+.billing-plans .current {
+  background-color: #f2ffed;
+}
+.billing-plans td {
+  vertical-align: middle;
+}
+.billing-plans .btn-sm {
+  padding: 3px 10px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.payment-history th {
+  padding: 9px;
+  background-color: #fafbfc;
+  border-bottom: 1px solid #eaecef;
+}
+.payment-history .failed .status {
+  color: #cb2431;
+}
+.payment-history .succeeded .status {
+  color: #28a745;
+}
+.payment-history .refunded, .payment-history .failed {
+  background: #f6f8fa;
+}
+.payment-history .refunded td,
+.payment-history .failed td {
+  opacity: 0.5;
+}
+.payment-history code {
+  color: #444;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}

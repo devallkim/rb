@@ -1,5 +1,6 @@
 <?php
 $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,1);
+$SITEN   = db_num_rows($SITES);
 
 $type	= $type ? $type : 'point';
 $sort	= $sort ? $sort : 'uid';
@@ -24,19 +25,32 @@ $NUM = getDbRows($table['s_'.$type],$_WHERE);
 $TPG = getTotalPage($NUM,$recnum);
 ?>
 
-<div class="container-fluid">
+<div class="row no-gutters">
 
-	<div class="row">
+	<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
 
-		<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
+		<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="card">
+			<input type="hidden" name="r" value="<?php echo $r?>">
+			<input type="hidden" name="m" value="<?php echo $m?>">
+			<input type="hidden" name="module" value="<?php echo $module?>">
+			<input type="hidden" name="front" value="<?php echo $front?>">
+			<input type="hidden" name="type" value="<?php echo $type?>">
 
-			<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="p-3">
-				<input type="hidden" name="r" value="<?php echo $r?>">
-				<input type="hidden" name="m" value="<?php echo $m?>">
-				<input type="hidden" name="module" value="<?php echo $module?>">
-				<input type="hidden" name="front" value="<?php echo $front?>">
-				<input type="hidden" name="type" value="<?php echo $type?>">
+			<?php if($SITEN>1):?>
+			<div class="border border-primary">
+				<select name="account" class="form-control custom-select border-0" onchange="this.form.submit();">
+					<option value="">전체사이트</option>
+					<?php while($S = db_fetch_array($SITES)):?>
+					<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['name']?></option>
+					<?php endwhile?>
+					<?php if(!db_num_rows($SITES)):?>
+					<option value="">등록된 사이트가 없습니다.</option>
+					<?php endif?>
+				</select>
+			</div>
+			<?php endif?>
 
+			<div class="card-body">
 				<div class="form-group">
 			    <label>기간</label>
 					<span class="input-daterange" id="datepicker">
@@ -110,124 +124,120 @@ $TPG = getTotalPage($NUM,$recnum);
 							<input type="radio" value="asc" name="orderby"<?php if($orderby=='asc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-asc"></i> 오름차순
 						</label>
 					</div>
-
-
 			  </div>
+			</div><!-- /.card-body -->
 
-				<hr>
-
+			<div class="card-footer">
 				<a href="<?php echo $g['adm_href']?>" class="btn btn-light btn-block">검색조건 초기화</a>
+			</div>
 
-			</form>
+		</form>
 
 
 
 
-		</div><!-- /.sidebar -->
-		<div class="col-sm-8 col-md-8 ml-sm-auto col-xl-9 pt-3">
+	</div><!-- /.sidebar -->
+	<div class="col-sm-8 col-md-8 ml-sm-auto col-xl-9">
 
-			<div class="card table-responsive">
-				<div class="card-header border-bottom-0">
-					<span class="pull-left">
-						 총<code><?php echo number_format($NUM)?></code>개 (<?php echo $p?>/<?php echo $TPG?>페이지)
-					</span>
+		<?php if($NUM):?>
+		<form class="card rounded-0 border-0" name="listForm" action="<?php echo $g['s']?>/" method="post" target="_action_frame_<?php echo $m?>">
+			<input type="hidden" name="r" value="<?php echo $r?>">
+			<input type="hidden" name="m" value="<?php echo $module?>">
+			<input type="hidden" name="a" value="">
+			<input type="hidden" name="pointType" value="<?php echo $type?>">
 
-					<div class="btn-group pull-right">
-			         <a href="<?php echo '/?'.$_SERVER['QUERY_STRING']?>&amp;p=<?php echo $p-1?>" class="btn btn-light btn-page" <?php echo $p>1?'':'disabled'?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="이전">
-			            <i class="fa fa-chevron-left fa-lg"></i>
-			         </a>
-			         <a href="<?php echo '/?'.$_SERVER['QUERY_STRING']?>&amp;p=<?php echo $p+1?>" class="btn btn-light btn-page" <?php echo $NUM>($p*$recnum)?'':'disabled'?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="다음">
-			            <i class="fa fa-chevron-right fa-lg"></i>
-			          </a>
-			      </div>
-					<div class="btn-group pull-right">
+			<div class="card-header d-flex justify-content-between align-items-center border-0">
+				<span class="pull-left">
+					 총<code><?php echo number_format($NUM)?></code>개 (<?php echo $p?>/<?php echo $TPG?>페이지)
+				</span>
+				<div class="">
+					<div class="btn-group">
+						 <a href="<?php echo '/?'.$_SERVER['QUERY_STRING']?>&amp;p=<?php echo $p-1?>" class="btn btn-light btn-page" <?php echo $p>1?'':'disabled'?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="이전">
+								<i class="fa fa-chevron-left fa-lg"></i>
+						 </a>
+						 <a href="<?php echo '/?'.$_SERVER['QUERY_STRING']?>&amp;p=<?php echo $p+1?>" class="btn btn-light btn-page" <?php echo $NUM>($p*$recnum)?'':'disabled'?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="다음">
+								<i class="fa fa-chevron-right fa-lg"></i>
+							</a>
+					</div>
+					<div class="btn-group">
 						 <div class="btn-group dropup hidden-xs">
-					      <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" >
-					        <i class="fa fa-list"></i> <?php echo $recnum?>개씩  <span class="caret"></span>
-					       </button>
-					      <ul class="dropdown-menu pull-right" role="menu">
-					        <li <?php $recnum=='20'?'class="active"':''?>><a href="<?php echo $g['adm_href']?>&amp;recnum=20">20개 출력</a></li>
-					        <li <?php $recnum=='35'?'class="active"':''?>> <a href="<?php echo $g['adm_href']?>&amp;recnum=35">35개 출력</a></li>
-					        <li <?php $recnum=='50'?'class="active"':''?>><a href="<?php echo $g['adm_href']?>&amp;recnum=50">50개 출력</a></li>
-					        <li <?php $recnum=='75'?'class="active"':''?>><a href="<?php echo $g['adm_href']?>&amp;recnum=75">75개 출력</a></li>
-					        <li <?php $recnum=='90'?'class="active"':''?>><a href="<?php echo $g['adm_href']?>&amp;recnum=90">90개 출력</a></li>
-					      </ul>
-					    </div>
-				   </div>
+								<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" >
+									<i class="fa fa-list"></i> <?php echo $recnum?>개씩  <span class="caret"></span>
+								 </button>
+								<ul class="dropdown-menu pull-right" role="menu">
+									<li <?php $recnum=='20'?'class="active"':''?>><a href="<?php echo $g['adm_href']?>&amp;recnum=20">20개 출력</a></li>
+									<li <?php $recnum=='35'?'class="active"':''?>> <a href="<?php echo $g['adm_href']?>&amp;recnum=35">35개 출력</a></li>
+									<li <?php $recnum=='50'?'class="active"':''?>><a href="<?php echo $g['adm_href']?>&amp;recnum=50">50개 출력</a></li>
+									<li <?php $recnum=='75'?'class="active"':''?>><a href="<?php echo $g['adm_href']?>&amp;recnum=75">75개 출력</a></li>
+									<li <?php $recnum=='90'?'class="active"':''?>><a href="<?php echo $g['adm_href']?>&amp;recnum=90">90개 출력</a></li>
+								</ul>
+							</div>
+					 </div>
 				</div>
-				<!-- //.panel-heading -->
 
-				<form name="listForm" action="<?php echo $g['s']?>/" method="post" target="_action_frame_<?php echo $m?>">
-					<input type="hidden" name="r" value="<?php echo $r?>" />
-					<input type="hidden" name="m" value="<?php echo $module?>" />
-					<input type="hidden" name="a" value="" />
-					<input type="hidden" name="pointType" value="<?php echo $type?>" />
+			</div>
+			<!-- //.card-heade -->
 
-			   <!-- 리스트 테이블 시작-->
-			 	<table class="table table-hover">
-					<thead>
-						<tr>
-							<th class="text-center"><input type="checkbox"  class="checkAll-point-member" data-toggle="tooltip" title="전체선택"></th>
-							<th class="text-center">번호</th>
-							<th class="text-center">획득/사용자</th>
-							<th class="text-center">획득/사용액</th>
-							<th>지금자</th>
-							<th>내용</th>
-							<th>날짜</th>
-					   </tr>
-					</thead>
-					<tbody>
-						<?php while($R=db_fetch_array($RCD)):?>
-			        	<?php $M1=getDbData($table['s_mbrdata'],'memberuid='.$R['my_mbruid'],'*')?>
-				     <?php if($R['by_mbruid']){$M2=getDbData($table['s_mbrdata'],'memberuid='.$R['by_mbruid'],'*');}else{$M2=array();}?>
-						<tr>	<!-- 라인이 체크된 경우 warning 처리됨  -->
-							<td class="text-center"><input type="checkbox" name="point_mbrmembers[]"  onclick="checkboxCheck();" class="rb-poin-member" value="<?php echo $R['uid']?>"></td>
-							<td class="text-center"><?php echo ($NUM-((($p-1)*$recnum)+$_recnum++))?></td>
-							<td><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-mbrinfo" onmousedown="mbrIdDrop('<?php echo $M1['uid']?>','point');" data-toggle="tooltip" title="획득/사용내역"><?php echo $M1[$_HS['nametype']]?></a></td><!-- main -->
-						   <td><?php echo number_format($R['price'])?></td>
-							<td>
-								<?php if($M2['memberuid']):?>
-								 <a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-mbrinfo" onmousedown="mbrIdDrop('<?php echo $M2['uid']?>','point');" data-toggle="tooltip" title="획득/사용내역"><?php echo $M1[$_HS['nametype']]?></a></td><!-- post -->
-							   <?php else:?>
-							   	시스템
-						 		<?php endif?>
-			            </td>
-			            <td><?php echo strip_tags($R['content'])?></td>
-						   <td><?php echo getDateFormat($R['d_regis'],'Y.m.d')?></td>
-			         </tr>
-			         <?php endwhile?>
-					</tbody>
-				</table>
-
-			    <!-- 리스트 테이블 끝 -->
-
-			    <?php if($NUM):?>
-			   <!--목록에 체크된 항목이 없을 경우  fieldset이 disabled 됨-->
-				<div class="card-footer btn-toolbar">
-				    <div class="col-sm-12 text-center">
-				    	  	<ul class="pagination pagination-sm">
-							<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
-							</ul>
-			       </div>
-				</div> <!-- // .panel-footer-->
-			</form>
-				<?php else:?>
-				<hr>
-				<div class="p-5 text-center text-muted">
-					<i class="fa fa-exclamation-circle fa-lg"></i> 조건에 해당하는 회원이 없습니다.
-				</div>
-				<?php endif?>
-			</div>  <!-- // .panel-->
+		   <!-- 리스트 테이블 시작-->
+		 	<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="text-center"><input type="checkbox"  class="checkAll-point-member" data-toggle="tooltip" title="전체선택"></th>
+						<th class="text-center">번호</th>
+						<th class="text-center">획득/사용자</th>
+						<th class="text-center">획득/사용액</th>
+						<th>지금자</th>
+						<th>내용</th>
+						<th>날짜</th>
+				   </tr>
+				</thead>
+				<tbody>
+					<?php while($R=db_fetch_array($RCD)):?>
+		        	<?php $M1=getDbData($table['s_mbrdata'],'memberuid='.$R['my_mbruid'],'*')?>
+			     <?php if($R['by_mbruid']){$M2=getDbData($table['s_mbrdata'],'memberuid='.$R['by_mbruid'],'*');}else{$M2=array();}?>
+					<tr>	<!-- 라인이 체크된 경우 warning 처리됨  -->
+						<td class="text-center"><input type="checkbox" name="point_mbrmembers[]"  onclick="checkboxCheck();" class="rb-poin-member" value="<?php echo $R['uid']?>"></td>
+						<td class="text-center"><?php echo ($NUM-((($p-1)*$recnum)+$_recnum++))?></td>
+						<td><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-mbrinfo" onmousedown="mbrIdDrop('<?php echo $M1['uid']?>','point');" data-toggle="tooltip" title="획득/사용내역"><?php echo $M1[$_HS['nametype']]?></a></td><!-- main -->
+					   <td><?php echo number_format($R['price'])?></td>
+						<td>
+							<?php if($M2['memberuid']):?>
+							 <a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-mbrinfo" onmousedown="mbrIdDrop('<?php echo $M2['uid']?>','point');" data-toggle="tooltip" title="획득/사용내역"><?php echo $M1[$_HS['nametype']]?></a></td><!-- post -->
+						   <?php else:?>
+						   	시스템
+					 		<?php endif?>
+		            </td>
+		            <td><?php echo strip_tags($R['content'])?></td>
+					   <td><?php echo getDateFormat($R['d_regis'],'Y.m.d')?></td>
+		         </tr>
+		         <?php endwhile?>
+				</tbody>
+			</table>
+			<!-- 리스트 테이블 끝 -->
 
 
+		   <!--목록에 체크된 항목이 없을 경우  fieldset이 disabled 됨-->
+			<div class="card-footer btn-toolbar">
+			    <div class="col-sm-12 text-center">
+			    	  	<ul class="pagination pagination-sm">
+						<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
+						</ul>
+		       </div>
+			</div> <!-- // .card-footer-->
+		</form><!-- // .card-->
+		<?php else:?>
+			<div class="text-center text-muted d-flex align-items-center justify-content-center" style="height: calc(100vh - 10rem);">
+				 <div><i class="fa fa-exclamation-circle fa-3x mb-3" aria-hidden="true"></i>
+					 <p>조건에 해당하는 자료가 없습니다.</p>
+					 <a href="<?php echo $g['adm_href']?>" class="btn btn-light btn-block mt-2">
+				 	 	검색조건 초기화
+				 	 </a>
+				 </div>
+			 </div>
+		<?php endif?>
 
-		</div>
-
-	</div><!-- /.row -->
-
-</div>
-
-
+	</div>
+</div><!-- /.row -->
 
 <!-- bootstrap-datepicker,  http://eternicode.github.io/bootstrap-datepicker/  -->
 <?php getImport('bootstrap-datepicker','css/datepicker3',false,'css')?>

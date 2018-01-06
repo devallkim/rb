@@ -2,7 +2,7 @@
 #rb-body {background: #fff}
 </style>
 <?php
- $_frontTitle=array('makeblog'=>'블로그','seo'=>'SEO');
+ $_frontTitle=array('makeset'=>'블로그','seo'=>'SEO');
 ?>
 <!--@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴-->
 <div id="_modal_header" class="hidden">

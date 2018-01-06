@@ -1,8 +1,8 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-if (!$blog) getLink('','','포스트셋 아이디가 지정되지 않았습니다.',''); 
-$B = getUidData($table[$m.'list'],$blog);
+if (!$set) getLink('','','포스트셋 아이디가 지정되지 않았습니다.',''); 
+$B = getUidData($table[$m.'list'],$set);
 if (!$B['uid']) getLink('','','존재하지 않는 포스트셋입니다.','');
 if (!$my['uid'] || ($my['uid']!=$B['mbruid'] && !strpos('_,'.$B['members'].',',','.$my['id'].','))) getLink('','','포스트 등록권한이 없습니다.','');
 $C = getUidData($table[$m.'category'],$cat);
@@ -16,7 +16,7 @@ $mbruid=$my['uid'];
 $d_regis = $date['totime'];
 $_tagdate = $date['today'];
 $log = $my[$_HS['nametype']].'|'.getDateFormat($date['totime'],'Y.m.d H:i').'<s>';
-$_cats = getArrayString(getMenuCodeToSqlBlog1($table[$m.'category'],$cat,$B['uid'],''));
+$_cats = getArrayString(getMenuCodeToSqlset1($table[$m.'category'],$cat,$B['uid'],''));
 $i = 0;
 
 rsort($meta_post);
@@ -38,19 +38,19 @@ foreach($meta_post as $_val)
 	$mingid = getDbCnt($table[$m.'data'],'min(gid)','');
 	$gid = $mingid ? $mingid-1 : 100000000;
 	
-	$QKEY1 = "blog,gid,isreserve,isphoto,isvod,cutcomment,mbruid,tag,subject,review,content,";
+	$QKEY1 = "set,gid,isreserve,isphoto,isvod,cutcomment,mbruid,tag,subject,review,content,";
 	$QKEY1.= "hit,comment,oneline,d_regis,d_modify,d_comment,sns,upload,log";
 	$QVAL1 = "'".$B['uid']."','$gid','0','0','0','0','$mbruid','$_tag','$_subject','".getStrCut(getStripTags($_content),500,'..')."','$_content',";
 	$QVAL1.= "'0','0','0','$d_regis','','','','','$log'";
 	getDbInsert($table[$m.'data'],$QKEY1,$QVAL1);
 	getDbUpdate($table[$m.'list'],"num_w=num_w+1,d_last='".$d_regis."'",'uid='.$B['uid']);
-	if(!getDbRows($table[$m.'day'],"date='".$date['today']."' and blog=".$B['uid'])) getDbInsert($table[$m.'day'],'date,blog,num',"'".$date['today']."','".$B['uid']."','1'");
+	if(!getDbRows($table[$m.'day'],"date='".$date['today']."' and set=".$B['uid'])) getDbInsert($table[$m.'day'],'date,set,num',"'".$date['today']."','".$B['uid']."','1'");
 	else getDbUpdate($table[$m.'day'],'num=num+1',"date='".$date['today']."' and bbs=".$B['uid']);
 	$LASTUID = getDbCnt($table[$m.'data'],'max(uid)','');
-	$QKEY2 = "blog,parent,subject,title,keywords,description,classification,replyto,language,build";
+	$QKEY2 = "set,parent,subject,title,keywords,description,classification,replyto,language,build";
 	$QVAL2 = "'".$B['uid']."','".$LASTUID."','$_subject','$_subject','$_tag','".getStrCut(getStripTags($_content),150,'..')."','','','',''";
 	getDbInsert($table[$m.'seo'],$QKEY2,$QVAL2);
-	getDbUpdate($table[$m.'members'],'num_w=num_w+1','blog='.$B['uid'].' and mbruid='.$my['uid']);
+	getDbUpdate($table[$m.'members'],'num_w=num_w+1','set='.$B['uid'].' and mbruid='.$my['uid']);
 
 
 	$sql = '';
@@ -58,7 +58,7 @@ foreach($meta_post as $_val)
 	{
 		if (!getDbRows($table[$m.'catidx'],'parent='.$LASTUID.' and category='.$_ct2))
 		{
-			getDbInsert($table[$m.'catidx'],'blog,parent,category',"'".$B['uid']."','".$LASTUID."','".$_ct2."'");
+			getDbInsert($table[$m.'catidx'],'set,parent,category',"'".$B['uid']."','".$LASTUID."','".$_ct2."'");
 			if ($isreserve)
 			{
 				getDbUpdate($table[$m.'category'],'num_reserve=num_reserve+1','uid='.$_ct2);
@@ -86,5 +86,5 @@ foreach($meta_post as $_val)
 }
 
 
-getLink($g['s'].'/?r='.$r.'&m='.$m.'&blog='.$B['id'].'&front=list&cat='.$cat.'&vtype='.$vtype,'parent.','총 '.$i.'개의 포스트를 로컬DB로 가져왔습니다.','');
+getLink($g['s'].'/?r='.$r.'&m='.$m.'&set='.$B['id'].'&front=list&cat='.$cat.'&vtype='.$vtype,'parent.','총 '.$i.'개의 포스트를 로컬DB로 가져왔습니다.','');
 ?>

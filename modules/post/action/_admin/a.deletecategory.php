@@ -6,7 +6,7 @@ checkAdmin(0);
 if (!$cat) getLink('./?m=admin&module='.$m.'&front=makecategory&iframe=Y&uid='.$uid,'parent.','','');
 
 include $g['path_module'].$m.'/lib/tree.func.php';
-$subQue = getMenuCodeToSqlBlog($table[$m.'category'],$cat,'uid');
+$subQue = getMenuCodeToSqlset($table[$m.'category'],$cat,'uid');
 
 if ($subQue)
 {

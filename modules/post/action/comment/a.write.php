@@ -1,14 +1,14 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-if ($d['blog']['c_perm_write'] > $my['level'] && !$my['admin'])
+if ($d['set']['c_perm_write'] > $my['level'] && !$my['admin'])
 {
 	getLink('','','댓글등록 권한이 없습니다.','');
 }
 
 include $g['dir_module'].'var/var.php';
 
-//$blog		= 
+//$set		= 
 //$parent	= 
 //$notice	= 
 //$hidden	= 
@@ -27,9 +27,9 @@ $agent		= $_SERVER['HTTP_USER_AGENT'];
 $hidden		= $hidden ? (int)$hidden : 0;
 $notice		= $notice ? (int)$notice : 0;
 
-if ($d['blog']['badword_action'])
+if ($d['set']['badword_action'])
 {
-	$badwordarr = explode(',' , $d['blog']['badword']);
+	$badwordarr = explode(',' , $d['set']['badword']);
 	$badwordlen = count($badwordarr);
 	for($i = 0; $i < $badwordlen; $i++)
 	{
@@ -37,12 +37,12 @@ if ($d['blog']['badword_action'])
 
 		if(strstr($content,$badwordarr[$i]))
 		{
-			if ($d['blog']['badword_action'] == 1)
+			if ($d['set']['badword_action'] == 1)
 			{
 				getLink('','','등록이 제한된 단어를 사용하셨습니다.','');
 			}
 			else {
-				$badescape = strCopy($badwordarr[$i],$d['blog']['badword_escape']);
+				$badescape = strCopy($badwordarr[$i],$d['set']['badword_escape']);
 				$content = str_replace($badwordarr[$i],$badescape,$content);
 			}
 		}
@@ -77,28 +77,28 @@ else
 	$minuid = getDbCnt($table[$m.'comment'],'min(uid)','');
 	$uid = $minuid ? $minuid-1 : 1000000000;
 
-	$QKEY = "uid,blog,parent,notice,hidden,mbruid,name,url,pw,content,";
+	$QKEY = "uid,set,parent,notice,hidden,mbruid,name,url,pw,content,";
 	$QKEY.= "oneline,d_regis,d_modify,d_oneline,ip,agent,sns";
-	$QVAL = "'$uid','$blog','$parent','$notice','$hidden','$mbruid','$name','$url','$pw','$content',";
+	$QVAL = "'$uid','$set','$parent','$notice','$hidden','$mbruid','$name','$url','$pw','$content',";
 	$QVAL.= "'$oneline','$d_regis','$d_modify','$d_oneline','$ip','$agent','$sns'";
 	getDbInsert($table[$m.'comment'],$QKEY,$QVAL);
 	getDbUpdate($table[$m.'data'],"comment=comment+1,d_comment='".$date['totime']."'",'uid='.$parent);
-	getDbUpdate($table[$m.'list'],"d_last='".$date['totime']."',num_c=num_c+1",'uid='.$blog);
-	getDbUpdate($table[$m.'members'],'num_c=num_c+1','blog='.$blog.' and mbruid='.$my['uid']);
+	getDbUpdate($table[$m.'list'],"d_last='".$date['totime']."',num_c=num_c+1",'uid='.$set);
+	getDbUpdate($table[$m.'members'],'num_c=num_c+1','set='.$set.' and mbruid='.$my['uid']);
 
 	if ($uid == 1000000000) db_query("OPTIMIZE TABLE ".$table[$m.'comment'],$DB_CONNECT);
 
-	if ($d['blog']['c_give_point']&&$my['uid'])
+	if ($d['set']['c_give_point']&&$my['uid'])
 	{
-		getDbInsert($table['s_point'],'my_mbruid,by_mbruid,price,content,d_regis',"'".$my['uid']."','0','".$d['blog']['c_give_point']."','포스트셋댓글(".getStrCut($content,15,'').")포인트','".$date['totime']."'");
-		getDbUpdate($table['s_mbrdata'],'point=point+'.$d['blog']['c_give_point'],'memberuid='.$my['uid']);
+		getDbInsert($table['s_point'],'my_mbruid,by_mbruid,price,content,d_regis',"'".$my['uid']."','0','".$d['set']['c_give_point']."','포스트셋댓글(".getStrCut($content,15,'').")포인트','".$date['totime']."'");
+		getDbUpdate($table['s_mbrdata'],'point=point+'.$d['set']['c_give_point'],'memberuid='.$my['uid']);
 	}
 
 
 	if ($snsCallBack && ($sns_t||$sns_f||$sns_m||$sns_y))
 	{
-		$B=getUidData($table[$m.'list'],$blog);
-		$xcync = "[][][][][][r:".$r.",m:".$m.",blog:".$B['id'].",uid:".$parent."]";
+		$B=getUidData($table[$m.'list'],$set);
+		$xcync = "[][][][][][r:".$r.",m:".$m.",set:".$B['id'].",uid:".$parent."]";
 		$orignContent = getStrCut(strip_tags($content),60,'..');
 		$orignSubject = $orignContent;
 		$orignUrl = 'http://'.$_SERVER['SERVER_NAME'].str_replace('./','/',getCyncUrl($xcync)).'#CMT';

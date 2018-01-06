@@ -103,14 +103,14 @@ if ($uid)
 	foreach($_category_members['data'] as $_ct1)
 	{
 		$sql = '';
-		$_cats = getArrayString(getMenuCodeToSqlBlog1($table[$m.'category'],$_ct1,$B['uid'],''));
+		$_cats = getArrayString(getMenuCodeToSqlset1($table[$m.'category'],$_ct1,$B['uid'],''));
 		foreach($_cats['data'] as $_ct2)
 		{
 		    $_ct2_info=getUidData($table[$m.'category'],$_ct2);
 			$_ct2_depth=$_ct2_info['depth'];
 			if (!getDbRows($table[$m.'catidx'],'post='.$R['uid'].' and category='.$_ct2))
 			{
-				getDbInsert($table[$m.'catidx'],'blog,post,category,depth',"'".$B['uid']."','".$R['uid']."','".$_ct2."','".$_ct2_depth."'");
+				getDbInsert($table[$m.'catidx'],'set,post,category,depth',"'".$B['uid']."','".$R['uid']."','".$_ct2."','".$_ct2_depth."'");
 				if ($isreserve)
 				{
 					getDbUpdate($table[$m.'category'],'num_reserve=num_reserve+1','uid='.$_ct2);
@@ -144,22 +144,22 @@ else
 	$gid = $mingid ? $mingid-1 : 100000000;
 	$log = $my[$_HS['nametype']].'|'.getDateFormat($date['totime'],'Y.m.d H:i').'<s>';
 
-	$QKEY1 = "site,blog,gid,isreserve,isphoto,isvod,cutcomment,mbruid,tag,subject,review,content,";
+	$QKEY1 = "site,set,gid,isreserve,isphoto,isvod,cutcomment,mbruid,tag,subject,review,content,";
 	$QKEY1.= "hit,comment,oneline,d_regis,d_modify,d_comment,sns,upload,log,published,step,use_auth,d_publish,d_published,featured_img,content_format";
 	$QVAL1 = "'$s','".$B['uid']."','$gid','$isreserve','$isphoto','$isvod','$cutcomment','$mbruid','$tag','$subject','$review','$content',";
 	$QVAL1.= "'0','0','0','$d_regis','','','','$upload','$log','$published','$step','$use_auth','$d_publish','$d_published','$featured_img','$content_format'";
 	getDbInsert($table[$m.'data'],$QKEY1,$QVAL1);
 	getDbUpdate($table[$m.'list'],"num_w=num_w+1,d_last='".$d_regis."'",'uid='.$B['uid']);
-	if(!getDbRows($table[$m.'day'],"date='".$date['today']."' and blog=".$B['uid'])) getDbInsert($table[$m.'day'],'date,blog,num',"'".$date['today']."','".$B['uid']."','1'");
-	else getDbUpdate($table[$m.'day'],'num=num+1',"date='".$date['today']."' and blog=".$B['uid']);
-	if(!getDbRows($table[$m.'month'],"date='".$date['month']."' and blog=".$B['uid'])) getDbInsert($table[$m.'month'],'year,date,blog,num',"'".$date['year']."','".$date['month']."','".$B['uid']."','1'");
-	else getDbUpdate($table[$m.'month'],'num=num+1',"date='".$date['month']."' and blog='".$B['uid']."' ");
+	if(!getDbRows($table[$m.'day'],"date='".$date['today']."' and set=".$B['uid'])) getDbInsert($table[$m.'day'],'date,set,num',"'".$date['today']."','".$B['uid']."','1'");
+	else getDbUpdate($table[$m.'day'],'num=num+1',"date='".$date['today']."' and set=".$B['uid']);
+	if(!getDbRows($table[$m.'month'],"date='".$date['month']."' and set=".$B['uid'])) getDbInsert($table[$m.'month'],'year,date,set,num',"'".$date['year']."','".$date['month']."','".$B['uid']."','1'");
+	else getDbUpdate($table[$m.'month'],'num=num+1',"date='".$date['month']."' and set='".$B['uid']."' ");
 
 	$LASTUID = getDbCnt($table[$m.'data'],'max(uid)','');
-	$QKEY2 = "blog,parent,subject,title,keywords,description,classification,replyto,language,build";
+	$QKEY2 = "set,parent,subject,title,keywords,description,classification,replyto,language,build";
 	$QVAL2 = "'".$B['uid']."','".$LASTUID."','$s_subject','$s_title','$s_keywords','$s_desc','$s_class','$s_replyto','$s_language','$s_build'";
 	getDbInsert($table[$m.'seo'],$QKEY2,$QVAL2);
-	getDbUpdate($table[$m.'members'],'num_w=num_w+1','blog='.$B['uid'].' and mbruid='.$my['uid']);
+	getDbUpdate($table[$m.'members'],'num_w=num_w+1','set='.$B['uid'].' and mbruid='.$my['uid']);
 
 
 	$_category_members = array();
@@ -167,14 +167,14 @@ else
 	foreach($_category_members['data'] as $_ct1)
 	{
 		$sql = '';
-		$_cats = getArrayString(getMenuCodeToSqlBlog1($table[$m.'category'],$_ct1,$B['uid'],''));
+		$_cats = getArrayString(getMenuCodeToSqlset1($table[$m.'category'],$_ct1,$B['uid'],''));
 		foreach($_cats['data'] as $_ct2)
 		{
 			$_ct2_info=getUidData($table[$m.'category'],$_ct2);
 			$_ct2_depth=$_ct2_info['depth'];
 			if (!getDbRows($table[$m.'catidx'],'post='.$LASTUID.' and category='.$_ct2))
 			{
-				getDbInsert($table[$m.'catidx'],'blog,post,category,depth',"'".$B['uid']."','".$LASTUID."','".$_ct2."','".$_ct2_depth."'");
+				getDbInsert($table[$m.'catidx'],'set,post,category,depth',"'".$B['uid']."','".$LASTUID."','".$_ct2."','".$_ct2_depth."'");
 				if ($isreserve)
 				{
 					getDbUpdate($table[$m.'category'],'num_reserve=num_reserve+1','uid='.$_ct2);

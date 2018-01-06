@@ -21,7 +21,7 @@ $fp = fopen($gfile,'w');
 fwrite($fp, "<?php\n");
 foreach ($fdset as $val)
 {
-	fwrite($fp, "\$d['blog']['".$val."'] = \"".trim(${$val})."\";\n");
+	fwrite($fp, "\$d['set']['".$val."'] = \"".trim(${$val})."\";\n");
 }
 fwrite($fp, "?>");
 fclose($fp);

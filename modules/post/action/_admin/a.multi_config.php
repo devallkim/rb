@@ -3,7 +3,7 @@ if(!defined('__KIMS__')) exit;
 
 checkAdmin(0);
 
-foreach ($blog_members as $val)
+foreach ($set_members as $val)
 {
 	$R = getUidData($table[$m.'list'],$val);
 	if (!$R['uid']) continue;

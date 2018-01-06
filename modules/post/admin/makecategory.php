@@ -1,14 +1,14 @@
 <?php
 include $g['path_module'].$module.'/lib/tree.func.php';
-$BLOGS = getDbArray($table[$module.'list'],'','*','gid','asc',0,$p);
-$Minblog=getDbCnt($table[$module.'list'],'min(uid)','');
-$blog=$blog?$blog:$Minblog;
-$ISCAT = getDbRows($table[$module.'category'],'blog='.$blog);
+$setS = getDbArray($table[$module.'list'],'','*','gid','asc',0,$p);
+$Minset=getDbCnt($table[$module.'list'],'min(uid)','');
+$set=$set?$set:$Minset;
+$ISCAT = getDbRows($table[$module.'category'],'set='.$set);
 
 if($cat)
 {
 	$CINFO = getUidData($table[$module.'category'],$cat);
-	$ctarr = getMenuCodeToPathBlog($table[$module.'category'],$cat,0);
+	$ctarr = getMenuCodeToPathset($table[$module.'category'],$cat,0);
 	$ctnum = count($ctarr);
 	$CINFO['code'] = '';
 
@@ -48,13 +48,13 @@ if ($is_regismode)
 						</div>
 						<h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapmetane">카테고리 내역</a></h4>
 					</div>
-					<div class="panel-collapse collapse in" id="collapmetane">
+					<div class="panel-collapse collapse show" id="collapmetane">
 						<div class="panel-body rb-panel-form">
-							<select class="form-control" onchange="goHref('<?php echo $g['adm_href']?>&amp;blog='+this.value);">
-							<?php while($S = db_fetch_array($BLOGS)):?>
-							<option value="<?php echo $S['uid']?>"<?php if($blog==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['name']?></option>
+							<select class="form-control" onchange="goHref('<?php echo $g['adm_href']?>&amp;set='+this.value);">
+							<?php while($S = db_fetch_array($setS)):?>
+							<option value="<?php echo $S['uid']?>"<?php if($set==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['name']?></option>
 							<?php endwhile?>
-							<?php if(!db_num_rows($BLOGS)):?>
+							<?php if(!db_num_rows($setS)):?>
 							<option value="">등록된 블로그가 없습니다.</option>
 							<?php endif?>
 							</select>
@@ -63,8 +63,8 @@ if ($is_regismode)
 						<div class="panel-body">
 							<div style="min-height:300px;">
 								<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
-								<?php $_treeOptions=array('table'=>$table[$module.'category'],'blog'=>$blog,'dispNum'=>true,'dispHidden'=>false,'dispCheckbox'=>false,'allOpen'=>false,'bookmark'=>'blog-category-info')?>
-								<?php $_treeOptions['link'] = $g['adm_href'].'&amp;blog='.$blog.'&amp;cat='?>
+								<?php $_treeOptions=array('table'=>$table[$module.'category'],'set'=>$set,'dispNum'=>true,'dispHidden'=>false,'dispCheckbox'=>false,'allOpen'=>false,'bookmark'=>'set-category-info')?>
+								<?php $_treeOptions['link'] = $g['adm_href'].'&amp;set='.$set.'&amp;cat='?>
 								<?php echo getTreeCategory($_treeOptions,$code,0,0,'')?>
 							</div>
 						</div>
@@ -91,7 +91,7 @@ if ($is_regismode)
 							<div class="panel-body" style="border-top:1px solid #DEDEDE;">
 								<div class="dd" id="nestable-menu">
 									<ol class="dd-list">
-									<?php $_MENUS=getDbSelect($table[$module.'category'],'blog='.$blog.' and parent='.intval($CINFO['uid']).' and depth='.($CINFO['depth']+1).' order by gid asc','*')?>
+									<?php $_MENUS=getDbSelect($table[$module.'category'],'set='.$set.' and parent='.intval($CINFO['uid']).' and depth='.($CINFO['depth']+1).' order by gid asc','*')?>
 									<?php $_i=1;while($_M=db_fetch_array($_MENUS)):?>
 									<li class="dd-item" data-id="<?php echo $_i?>">
 									<input type="checkbox" name="categorymembers[]" value="<?php echo $_M['uid']?>" checked class="hidden">
@@ -130,7 +130,7 @@ if ($is_regismode)
 			<input type="hidden" name="r" value="<?php echo $r?>">
 			<input type="hidden" name="m" value="<?php echo $module?>">
 			<input type="hidden" name="a" value="_admin/regiscategory">
-			<input type="hidden" name="blog" value="<?php echo $blog?>" />
+			<input type="hidden" name="set" value="<?php echo $set?>" />
 			<input type="hidden" name="cat" value="<?php echo $CINFO['uid']?>" />
 			<input type="hidden" name="vtype" value="<?php echo $vtype?>" />
 			<input type="hidden" name="depth" value="<?php echo intval($CINFO['depth'])?>" />
@@ -153,7 +153,7 @@ if ($is_regismode)
 				<div class="col-md-9">
 					<ol class="breadcrumb">
 					<?php for ($i = 0; $i < $ctnum; $i++):?>
-					<li><a href="<?php echo $g['adm_href']?>&amp;blog=<?php echo $blog?>&amp;cat=<?php echo $ctarr[$i]['uid']?>"><?php echo $ctarr[$i]['name']?></a></li>
+					<li><a href="<?php echo $g['adm_href']?>&amp;set=<?php echo $set?>&amp;cat=<?php echo $ctarr[$i]['uid']?>"><?php echo $ctarr[$i]['name']?></a></li>
 					<?php $catcode .= $ctarr[$i]['id'].'/';endfor?>
 					</ol>
 				</div>
@@ -165,7 +165,7 @@ if ($is_regismode)
 					<div class="col-md-9">
 						<ol class="breadcrumb">
 						<?php for ($i = 0; $i < $ctnum-1; $i++):?>
-						<li><a href="<?php echo $g['adm_href']?>&amp;blog=<?php echo $blog?>&amp;cat=<?php echo $ctarr[$i]['uid']?>"><?php echo $ctarr[$i]['name']?></a></li>
+						<li><a href="<?php echo $g['adm_href']?>&amp;set=<?php echo $set?>&amp;cat=<?php echo $ctarr[$i]['uid']?>"><?php echo $ctarr[$i]['name']?></a></li>
 						<?php $delparent=$ctarr[$i]['uid'];$catcode .= $ctarr[$i]['id'].'/';endfor?>
 						<?php if(!$delparent):?>최상위 카테고리<?php endif?>
 						</ol>
@@ -180,10 +180,10 @@ if ($is_regismode)
 					<div class="input-group">
 						<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$cat && !$g['device']):?> autofocus<?php endif?>>
 						<span class="input-group-btn">
-							<a href="<?php echo $g['adm_href']?>&amp;blog=<?php echo $blog?>&amp;cat=<?php echo $cat?>&amp;vtype=sub" class="btn btn-default" data-tooltip="tooltip" title="서브카테고리 등록">
+							<a href="<?php echo $g['adm_href']?>&amp;set=<?php echo $set?>&amp;cat=<?php echo $cat?>&amp;vtype=sub" class="btn btn-default" data-tooltip="tooltip" title="서브카테고리 등록">
 								<i class="fa fa-share fa-rotate-90 fa-lg"></i>
 							</a>
-							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=_admin/deletecategory&amp;blog=<?php echo $blog?>&amp;cat=<?php echo $cat?>&amp;parent=<?php echo $delparent?>" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');" class="btn btn-default" data-tooltip="tooltip" title="카테고리 삭제">
+							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=_admin/deletecategory&amp;set=<?php echo $set?>&amp;cat=<?php echo $cat?>&amp;parent=<?php echo $delparent?>" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');" class="btn btn-default" data-tooltip="tooltip" title="카테고리 삭제">
 								<i class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span>

@@ -16,16 +16,16 @@ foreach($comment_members as $val)
 		if (!$inbox)
 		{
 			getDbUpdate($table[$m.'data'],'comment=comment+1,oneline=oneline+'.$R['oneline'],'uid='.$R['parent']);
-			getDbUpdate($table[$m.'list'],'num_c=num_c+1,num_o=num_o+'.$R['oneline'],'uid='.$R['blog']);
-			getDbUpdate($table[$m.'members'],'num_c=num_c+1,num_o=num_o+'.$R['oneline'],'blog='.$R['blog'].' and mbruid='.$R['mbruid']);
+			getDbUpdate($table[$m.'list'],'num_c=num_c+1,num_o=num_o+'.$R['oneline'],'uid='.$R['set']);
+			getDbUpdate($table[$m.'members'],'num_c=num_c+1,num_o=num_o+'.$R['oneline'],'set='.$R['set'].' and mbruid='.$R['mbruid']);
 		}
 	}
 	else {
 		if ($inbox)
 		{
 			getDbUpdate($table[$m.'data'],'comment=comment-1,oneline=oneline-'.$R['oneline'],'uid='.$R['parent']);
-			getDbUpdate($table[$m.'list'],'num_c=num_c-1,num_o=num_o-'.$R['oneline'],'uid='.$R['blog']);
-			getDbUpdate($table[$m.'members'],'num_c=num_c-1,num_o=num_o-'.$R['oneline'],'blog='.$R['blog'].' and mbruid='.$R['mbruid']);
+			getDbUpdate($table[$m.'list'],'num_c=num_c-1,num_o=num_o-'.$R['oneline'],'uid='.$R['set']);
+			getDbUpdate($table[$m.'members'],'num_c=num_c-1,num_o=num_o-'.$R['oneline'],'set='.$R['set'].' and mbruid='.$R['mbruid']);
 		}
 	}
 }

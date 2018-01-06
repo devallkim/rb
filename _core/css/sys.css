@@ -186,6 +186,10 @@
   display: none !important
 }
 
+/* color */
+.bg-transparent {
+  background-color: transparent !important
+}
 
 /*loader*/
 .isloading-wrapper.isloading-right{margin-left:10px;}

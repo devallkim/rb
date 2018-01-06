@@ -7,7 +7,7 @@ $bbsque	= 'hidden='.$hidden;
 
 if ($d_start) $bbsque .= ' and d_regis > '.str_replace('/','',$d_start).'000000';
 if ($d_finish) $bbsque .= ' and d_regis < '.str_replace('/','',$d_finish).'240000';
-if ($blog) $bbsque .= ' and blog='.$blog;
+if ($set) $bbsque .= ' and set='.$set;
 if ($parent) $bbsque .= ' and parent='.$parent;
 if ($where && $keyw)
 {
@@ -35,12 +35,12 @@ $TPG = getTotalPage($NUM,$recnum);
 	 	 	  <div class="col-sm-10">
 	 	 	  	  <div class="row">
 	 	 	  	  	   <div class="col-sm-3">
-                           <select name="blog" class="form-control input-sm" onchange="this.form.submit();">
+                           <select name="set" class="form-control input-sm" onchange="this.form.submit();">
 									<option value="">전체 블로그</option>
 									<option value="">--------------------</option>
 									<?php $_BBSLIST = getDbArray($table[$module.'list'],'','*','gid','asc',0,1)?>
 									<?php while($_B=db_fetch_array($_BBSLIST)):?>
-									<option value="<?php echo $_B['uid']?>"<?php if($_B['uid']==$blog):?> selected="selected"<?php endif?>>ㆍ<?php echo $_B['name']?>(<?php echo $_B['id']?> - <?php echo number_format($_B['num_r'])?>)</option>
+									<option value="<?php echo $_B['uid']?>"<?php if($_B['uid']==$set):?> selected="selected"<?php endif?>>ㆍ<?php echo $_B['name']?>(<?php echo $_B['id']?> - <?php echo number_format($_B['num_r'])?>)</option>
 									<?php endwhile?>
 									<?php if(!db_num_rows($_BBSLIST)):?>
 									<option value="">등록된 블로그가 없습니다.</option>
@@ -196,7 +196,7 @@ $TPG = getTotalPage($NUM,$recnum);
 	     <tbody>
 			<?php while($R=db_fetch_array($RCD)):?>
 			<?php $_M=getDbData($table['s_mbrdata'],'memberuid='.$R['mbruid'],'*')?>
-			<?php $_B=getUidData($table[$module.'list'],$R['blog'])?>
+			<?php $_B=getUidData($table[$module.'list'],$R['set'])?>
 			<?php $_R=getUidData($table[$module.'data'],$R['parent'])?>
 			<?php $L1=getOverTime($date['totime'],$R['d_regis'])?>
 			<tr>
@@ -211,7 +211,7 @@ $TPG = getTotalPage($NUM,$recnum);
 				</td>
 		       <td><?php echo $_M['memberuid']?$_M[$_HS['nametype']]:$R['name']?></td>
 		       <td class="sbj">
-					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;blog=<?php echo $_B['id']?>&amp;front=list&amp;uid=<?php echo $_R['uid']?>&amp;comment=<?php echo $R['uid']?>" target="_blank"><?php echo $_R['subject']?></a>
+					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;set=<?php echo $_B['id']?>&amp;front=list&amp;uid=<?php echo $_R['uid']?>&amp;comment=<?php echo $R['uid']?>" target="_blank"><?php echo $_R['subject']?></a>
 					<div class="cmt">
 					<?php echo getStrCut($R['content'],100,'..')?>
 					</div>
@@ -343,16 +343,16 @@ function actCheck(act)
 // #####################   2.0 부분  ######################################
 // 포스트 uid  세팅  
 var _postUid;
-var _blogFront;
+var _setFront;
 function postUidSet(uid,front)
 {
 	_postUid = uid;
-	_blogFront=front;
+	_setFront=front;
 }
 
 // 포스트 seo 모달 출력 
 $('.rb-modal-seo').on('click',function() {
-	modalSetting('modal_window','<?php echo getModalLink('&amp;m=admin&amp;module=blog&amp;front=modal.blog&amp;uid=')?>'+_postUid+'&_front='+_blogFront);
+	modalSetting('modal_window','<?php echo getModalLink('&amp;m=admin&amp;module=set&amp;front=modal.set&amp;uid=')?>'+_postUid+'&_front='+_setFront);
 });
 
 // 선택박스 체크 이벤트 핸들러

@@ -9,9 +9,9 @@ if (!$R['uid']) getLink('','','정상적인 요청이 아닙니다.','');
 $filename = getUTFtoKR($R['name']);
 $filetmpname = getUTFtoKR($R['tmpname']);
 
-if ($R['url']==$d['blog']['ftp_urlpath'])
+if ($R['url']==$d['set']['ftp_urlpath'])
 {
-	$filepath = $d['blog']['ftp_urlpath'].$R['folder'].'/'.$filetmpname;
+	$filepath = $d['set']['ftp_urlpath'].$R['folder'].'/'.$filetmpname;
 	$filesize = $R['size'];
 }
 else {
@@ -28,16 +28,16 @@ header("Cache-Control: private, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-if ($R['url']==$d['blog']['ftp_urlpath'])
+if ($R['url']==$d['set']['ftp_urlpath'])
 {
-	$FTP_CONNECT = ftp_connect($d['blog']['ftp_host'],$d['blog']['ftp_port']); 
-	$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['blog']['ftp_user'],$d['blog']['ftp_pass']); 
-	if ($d['blog']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
+	$FTP_CONNECT = ftp_connect($d['set']['ftp_host'],$d['set']['ftp_port']); 
+	$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['set']['ftp_user'],$d['set']['ftp_pass']); 
+	if ($d['set']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
 	if (!$FTP_CONNECT) getLink('','','FTP서버 연결에 문제가 발생했습니다.','');
 	if (!$FTP_CRESULT) getLink('','','FTP서버 아이디나 패스워드가 일치하지 않습니다.','');
 	
 	$filepath = $g['path_tmp'].'session/'.$filetmpname;
-	ftp_get($FTP_CONNECT,$filepath,$d['blog']['ftp_folder'].$R['folder'].'/'.$filetmpname,FTP_BINARY);
+	ftp_get($FTP_CONNECT,$filepath,$d['set']['ftp_folder'].$R['folder'].'/'.$filetmpname,FTP_BINARY);
 	ftp_close($FTP_CONNECT);
 	$fp = fopen($filepath, 'rb');
 	if (!fpassthru($fp)) fclose($fp);

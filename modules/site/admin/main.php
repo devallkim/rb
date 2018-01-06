@@ -135,7 +135,7 @@ if ($R['uid'])
 					<div class="form-row">
 						<div class="col-sm-6" id="rb-layout-select">
 							<select class="form-control custom-select form-control-lg" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','custom-select form-control-lg');">
-									<?php $_layoutExp1=explode('/',$R['layout'])?>
+								<?php $_layoutExp1=explode('/',$R['layout'])?>
 								<?php $dirs = opendir($g['path_layout'])?>
 								<?php $_i=0;while(false !== ($tpl = readdir($dirs))):?>
 								<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
@@ -166,7 +166,7 @@ if ($R['uid'])
 					<div class="col-lg-10 col-xl-9">
 						<div class="form-row">
 							<div class="col-sm-6" id="rb-mlayout-select">
-								<select class="form-control custom-select form-control-lg" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','input-lg');">
+								<select class="form-control custom-select form-control-lg" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','custom-select form-control-lg');">
 										<option value="0">사용안함(기본 레이아웃 적용)</option>
 									<?php $_layoutExp2=explode('/',$R['m_layout'])?>
 										<?php $dirs = opendir($g['path_layout'])?>

@@ -1,10 +1,13 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-include_once $g['dir_module'].'var/var.join.php';
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php'; // 사이트 회원모듈 변수파일
+$_varfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['dir_module'].'var/var.php';
+include_once $_varfile; // 변수파일 인클루드
 
 $_mod	= $_GET['mod'];
 $front	= $front? $front: 'login';
+$page	= $page ? $page : 'main';
 
 // 모바일/데스크탑 분기
 if ($g['mobile'] && $_SESSION['pcmode'] != 'Y') {
@@ -13,7 +16,6 @@ if ($g['mobile'] && $_SESSION['pcmode'] != 'Y') {
 	$_front = '_desktop/'.$front;
 }
 
-$page	= $page ? $page : 'main';
 
 switch ($front) {
 	case 'join' :
@@ -77,11 +79,9 @@ $g['url_reset']	 = $g['s'].'/?r='.$r.'&amp;'.($_mod ? 'mod='.$_mod : 'm='.$m.'&a
 $g['url_page']	 = $g['url_reset'].'&amp;page='.$page;
 $g['url_action'] = $g['s'].'/?r='.$r.'&amp;m='.$m.'&amp;a=';
 
-$g['dir_module_skin'] = $g['dir_module'].'pages/'.$_front.'/';
-$g['url_module_skin'] = $g['url_module'].'/pages/'.$_front;
+$g['dir_module_skin'] = $g['dir_module'].'themes/_desktop/'.$d['member']['theme_main'].'/'.$front.'/';
+$g['url_module_skin'] = $g['url_module'].'/themes/_desktop/'.$d['member']['theme_main'].'/'.$front;
 $g['img_module_skin'] = $g['url_module_skin'].'/image';
-
-
 
 $g['dir_module_mode'] = $g['dir_module_skin'].$page;
 $g['url_module_mode'] = $g['url_module_skin'].'/'.$page;

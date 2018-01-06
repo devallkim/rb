@@ -22,21 +22,21 @@ $maxupsize = str_replace('M','',ini_get('upload_max_filesize'));
 	</div>
 
 	<table>
-		<?php $BLOGLIST = getDbArray($table[$module.'list'],'uid','*','gid','asc',0,1)?>
+		<?php $setLIST = getDbArray($table[$module.'list'],'uid','*','gid','asc',0,1)?>
 		<tr>
 			<td class="td1">이전대상 블로그</td>
 			<td class="td2">
-				<select name="blog" class="select1" onchange="goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&blog='+this.value);">
+				<select name="set" class="select1" onchange="goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&set='+this.value);">
 				<option value="">&nbsp;+ 선택하세요</option>
 				<option value="">----------------------------------------------------------------</option>
-				<?php while($R=db_fetch_array($BLOGLIST)):?>
-				<option value="<?php echo $R['uid']?>"<?php if($R['uid']==$blog):$_blog=$R['id']?> selected="selected"<?php endif?>>ㆍ<?php echo $R['name']?>(<?php echo $R['id']?> - <?php echo number_format($R['num_w'])?>개)</option>
+				<?php while($R=db_fetch_array($setLIST)):?>
+				<option value="<?php echo $R['uid']?>"<?php if($R['uid']==$set):$_set=$R['id']?> selected="selected"<?php endif?>>ㆍ<?php echo $R['name']?>(<?php echo $R['id']?> - <?php echo number_format($R['num_w'])?>개)</option>
 				<?php endwhile?>
 				</select>
-				<a href="#." onclick="crLayer('블로그 추가','<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=makeblog&amp;iframe=Y','iframe',800,650,'5%');"><img src="<?php echo $g['img_core']?>/_public/btn_add.gif" alt="게시판만들기" /></a>
+				<a href="#." onclick="crLayer('블로그 추가','<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=makeset&amp;iframe=Y','iframe',800,650,'5%');"><img src="<?php echo $g['img_core']?>/_public/btn_add.gif" alt="게시판만들기" /></a>
 			</td>
 		</tr>
-		<?php if($blog):$ISCAT = getDbRows($table[$module.'category'],'blog='.$blog)?>
+		<?php if($set):$ISCAT = getDbRows($table[$module.'category'],'set='.$set)?>
 		<?php include $g['path_module'].$module.'/lib/tree.func.php'?>
 		<?php $checkbox=true?>
 		<tr>
@@ -45,7 +45,7 @@ $maxupsize = str_replace('M','',ini_get('upload_max_filesize'));
 
 
 <div class="tbox">
-	<div class="treetop"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;blog=<?php echo $_blog?>" target="_blank">블로그보기</a></div>
+	<div class="treetop"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;set=<?php echo $_set?>" target="_blank">블로그보기</a></div>
 	<div class="joinimg"></div>
 	<div class="tree">
 
@@ -59,7 +59,7 @@ $maxupsize = str_replace('M','',ini_get('upload_max_filesize'));
 	<script type="text/javascript" src="<?php echo $g['s']?>/_core/js/tree.js"></script>
 	<script type="text/javascript">
 	//<![CDATA[
-	var TREE_ITEMS = [['', null, <?php getMenuShowBlog($blog,$table[$module.'category'],0,0,0,$cat,$CXA,0)?>]];
+	var TREE_ITEMS = [['', null, <?php getMenuShowset($set,$table[$module.'category'],0,0,0,$cat,$CXA,0)?>]];
 	new tree(TREE_ITEMS, tree_tpl);
 	<?php echo $MenuOpen?>
 	//]]>
@@ -109,10 +109,10 @@ function saveCheck(f)
 		alert('데이터를 이전중에 있습니다. 잠시만 기다려 주세요.    ');
 		return false;
 	}
-	if (f.blog.value == '')
+	if (f.set.value == '')
 	{
 		alert('이전대상 블로그를 선택해 주세요.    ');
-		f.blog.focus();
+		f.set.focus();
 		return false;
 	}
 

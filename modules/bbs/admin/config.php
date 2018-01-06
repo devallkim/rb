@@ -13,11 +13,11 @@ include_once $g['path_module'].$module.'/var/var.php';
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_main" class="form-control custom-select">
 				 <option value="">&nbsp;+ 선택하세요</option>
-				 <?php $tdir = $g['path_module'].$module.'/theme/_pc/'?>
+				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
 				 <?php $dirs = opendir($tdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
 				 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-				 <option value="_pc/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_pc/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+				 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
 				 <?php endwhile?>
 				 <?php closedir($dirs)?>
 			 </select>
@@ -34,7 +34,7 @@ include_once $g['path_module'].$module.'/var/var.php';
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_mobile" class="form-control custom-select">
 				 <option value="">&nbsp;+ 모바일 테마 사용안함</option>``
-				 <?php $tdir = $g['path_module'].$module.'/theme/_mobile/'?>
+				 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
 				 <?php $dirs = opendir($tdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
 				 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
@@ -54,11 +54,11 @@ include_once $g['path_module'].$module.'/var/var.php';
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_total" class="form-control custom-select">
 				 <option value="">&nbsp;+ 통합보드 사용안함</option>
-				 <?php $tdir = $g['path_module'].$module.'/theme/_pc/'?>
+				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
 				 <?php $dirs = opendir($tdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
 				 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-				 <option value="_pc/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_pc/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+				 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
 				 <?php endwhile?>
 				 <?php closedir($dirs)?>
 			 </select>

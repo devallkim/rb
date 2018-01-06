@@ -28,8 +28,8 @@ if($LR['featured_img']){
 }
 
 // 원문주소
-$blog_view = $g['blog_view']?$g['blog_view']:$g['s'].'/?r='.$r.'&m=blog&blog='.$LR['blog'].'&uid=';
-$article_url = $g['url_host'].'/?r='.$r.'&m=blog&blog='.$LR['blog'].'&uid='.$LR['uid'];
+$set_view = $g['set_view']?$g['set_view']:$g['s'].'/?r='.$r.'&m=set&set='.$LR['set'].'&uid=';
+$article_url = $g['url_host'].'/?r='.$r.'&m=set&set='.$LR['set'].'&uid='.$LR['uid'];
 
 // 다음송고채널이 있는 경우에만 생성
 if($daum_cat){

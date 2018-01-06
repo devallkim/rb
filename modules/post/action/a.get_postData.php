@@ -10,7 +10,7 @@ $uid = $_GET['uid']; // 포스트 고유번호
 $result=array();
 $result['error'] = false;
 
-$result['total_comment'] = $module->getPostComment('blog',$uid);
+$result['total_comment'] = $module->getPostComment('set',$uid);
 
 echo json_encode($result);
 exit;

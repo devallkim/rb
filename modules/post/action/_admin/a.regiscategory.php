@@ -14,7 +14,7 @@ if ($cat && !$vtype)
 
 	if ($id != $R['id'])
 	{
-		$ISMCODE = getDbData($table[$m.'category'],"id='".$id."' and blog=".$blog,'*');
+		$ISMCODE = getDbData($table[$m.'category'],"id='".$id."' and set=".$set,'*');
 		if ($ISMCODE['uid']) getLink('','','카테고리코드 ['.$ISMCODE['id'].'] 는 다른카테고리 ['.$ISMCODE['name'].'] 에서 사용중입니다.','');
 	}
 
@@ -39,8 +39,8 @@ else {
 		$xname	= trim($sarr[$i]);
 		$xnarr	= explode('=',$xname);
 
-		$QKEY = "gid,blog,metaurl,metause,isson,parent,depth,id,name,mobile,hidden,num_open,num_reserve,vtype,recnum,vopen,d_last,linkedmenu";
-		$QVAL = "'$gid','$blog','$metaurl','$metause','0','$parent','$xdepth','$xnarr[1]','$xnarr[0]','$mobile','$hidden','0','0','$vtype1','$recnum','$vopen','','$linkedmenu'";
+		$QKEY = "gid,set,metaurl,metause,isson,parent,depth,id,name,mobile,hidden,num_open,num_reserve,vtype,recnum,vopen,d_last,linkedmenu";
+		$QVAL = "'$gid','$set','$metaurl','$metause','0','$parent','$xdepth','$xnarr[1]','$xnarr[0]','$mobile','$hidden','0','0','$vtype1','$recnum','$vopen','','$linkedmenu'";
 
 		getDbInsert($table[$m.'category'],$QKEY,$QVAL);
 		$lastmenu = getDbCnt($table[$m.'category'],'max(uid)','');
@@ -50,7 +50,7 @@ else {
 			getDbUpdate($table[$m.'category'],"id='".$lastmenu."'",'uid='.$lastmenu);
 		}
 		else {
-			$ISMCODE = getDbData($table[$m.'category'],"uid<> ".$lastmenu." and id='".$xnarr[1]."' and blog=".$blog,'*');
+			$ISMCODE = getDbData($table[$m.'category'],"uid<> ".$lastmenu." and id='".$xnarr[1]."' and set=".$set,'*');
 			if ($ISMCODE['uid'])
 			{
 				getDbUpdate($table[$m.'category'],"id='".$lastmenu."'",'uid='.$lastmenu);

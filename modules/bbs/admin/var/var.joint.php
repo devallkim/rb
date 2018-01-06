@@ -112,11 +112,11 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 				<select name="skin" class="select1">
 				<option value="">&nbsp;+ 게시판 대표테마</option>
 				<option value="">--------------------------------</option>
-				<?php $tdir = $g['path_module'].$smodule.'/theme/_pc/'?>
+				<?php $tdir = $g['path_module'].$smodule.'/theme/_desktop/'?>
 				<?php $dirs = opendir($tdir)?>
 				<?php while(false !== ($skin = readdir($dirs))):?>
 				<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-				<option value="_pc/<?php echo $skin?>" title="<?php echo $skin?>">ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+				<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>">ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
 				<?php endwhile?>
 				<?php closedir($dirs)?>
 				</select>

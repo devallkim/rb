@@ -12,7 +12,7 @@ foreach ($post_members as $val)
 { 
 	$R = getUidData($table[$m.'data'],$val);
 	if (!$R['uid']) continue;
-	$B = getUidData($table[$m.'list'],$R['blog']);
+	$B = getUidData($table[$m.'list'],$R['set']);
 	if (!$B['uid']) continue;
    
     getDbUpdate($table[$m.'data'],'published='.$published.', step='.$act_to_step[$act],'uid='.$val);

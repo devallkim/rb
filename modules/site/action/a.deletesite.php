@@ -13,8 +13,8 @@ if ($R['uid'])
 	while($_M = db_fetch_array($_MENUS))
 	{
 		@unlink($g['path_var'].'menu/'.$_M['imghead']);
-		@unlink($g['path_var'].'menu/'.$_M['imgfoot']);	
-		
+		@unlink($g['path_var'].'menu/'.$_M['imgfoot']);
+
 		getDbDelete($table['s_seo'],'rel=1 and parent='.$_M['uid']);
 	}
 
@@ -27,10 +27,10 @@ if ($R['uid'])
 	getDbDelete($table['s_menu'],'site='.$R['uid']);
 	getDbDelete($table['s_page'],'site='.$R['uid']);
 
-	db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT); 
-	db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT); 
-	db_query("OPTIMIZE TABLE ".$table['s_page'],$DB_CONNECT); 
-	db_query("OPTIMIZE TABLE ".$table['s_seo'],$DB_CONNECT); 
+	db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT);
+	db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT);
+	db_query("OPTIMIZE TABLE ".$table['s_page'],$DB_CONNECT);
+	db_query("OPTIMIZE TABLE ".$table['s_seo'],$DB_CONNECT);
 
 	unlink($g['path_var'].'sitephp/'.$account.'.php');
 

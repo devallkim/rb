@@ -29,6 +29,10 @@ body {
 	color: #ccc
 }
 
+a {
+  color: #6698e8;
+}
+
 label {
 	color: #ccc
 }
@@ -51,7 +55,7 @@ code {
 }
 
 #rb-admin-page-content {
-	padding-top: 3.8rem
+	padding-top: 3.34rem
 }
 
 .navbar {
@@ -115,7 +119,7 @@ code {
 
 .sidebar {
   position: fixed;
-  top: 3.28rem;
+  top: 3.29rem;
   bottom: 0;
   left: 0;
   z-index: 1000;
@@ -312,6 +316,40 @@ border-radius: 0.25rem;
   border: 1px solid #222;
 }
 
+/* tab */
+.nav-tabs {
+  border-bottom: 1px solid #222;
+}
+
+.nav-tabs .nav-link {
+  text-align: center;
+	padding: .5rem 2rem;
+	border-right: 1px solid #222;
+  border-bottom: 0;
+  color: #777;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 0
+}
+.nav-tabs .nav-link:hover {
+	border-color: #222;
+	border-top-color: transparent;
+	border-left-color: transparent
+}
+
+.nav-tabs .nav-link.active {
+  color: #eee;
+  background-color: inherit;
+  border: 1px solid #222;
+	border-top: 0;
+	border-bottom-color: #272c31;
+  border-top: 1px solid red
+}
+.nav-tabs .nav-link.active:first-child {
+	border-left: 0
+}
+
+
+
 /* ------------------ table --------------------*/
 .table thead th {
   border-bottom: none
@@ -446,7 +484,11 @@ border-radius: 0.25rem;
             transition: all 2s ease-in-out
 }
 
-
+/* CodeMirror */
+.CodeMirror .CodeMirror-scroll {
+  line-height: 1.5 !important;
+  font-size: 12px
+}
 
 /* ------------------ footer --------------------*/
 .rb-admin-footer {
@@ -845,4 +887,9 @@ border-radius: 0.25rem;
 .markdown-body h1,
 .markdown-body h2 {
   border-bottom: 1px solid #222 !important;
+}
+
+/* code-view */
+.rb-codeview-footer {
+  border-top: 1px solid #222
 }

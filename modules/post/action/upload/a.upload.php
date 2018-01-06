@@ -6,10 +6,10 @@ include $g['dir_module'].'var/var.php';
 
 $sessArr	= explode('_',$sess_Code);
 $tmpcode	= $sessArr[0];
-$blog		= $sessArr[2];
+$set		= $sessArr[2];
 $mbruid		= $sessArr[1];
-$fserver	= $d['blog']['up_use_fileserver'];
-$url		= $fserver ? $d['blog']['ftp_urlpath'] : $g['url_root'].'/modules/'.$m.'/files/';
+$fserver	= $d['set']['up_use_fileserver'];
+$url		= $fserver ? $d['set']['ftp_urlpath'] : $g['url_root'].'/modules/'.$m.'/files/';
 $name		= strtolower($_FILES['Filedata']['name']);
 $size		= $_FILES['Filedata']['size'];
 $width		= 0;
@@ -25,7 +25,7 @@ $tmpname	= md5($name).substr($date['totime'],8,14);
 $tmpname	= $type == 2 ? $tmpname.'.'.$fileExt : $tmpname;
 $hidden		= $type == 2 ? 1 : 0;
 
-if ($d['blog']['up_ext_cut'] && strstr($d['blog']['up_ext_cut'],$fileExt)) getLink('','','정상적인 접근이 아닙니다.','');
+if ($d['set']['up_ext_cut'] && strstr($d['set']['up_ext_cut'],$fileExt)) getLink('','','정상적인 접근이 아닙니다.','');
 
 $savePath1	= $saveDir.substr($date['today'],0,4);
 $savePath2	= $savePath1.'/'.substr($date['today'],4,2);
@@ -34,17 +34,17 @@ $folder		= substr($date['today'],0,4).'/'.substr($date['today'],4,2).'/'.substr(
 
 if ($fserver)
 {
-	$FTP_CONNECT = ftp_connect($d['blog']['ftp_host'],$d['blog']['ftp_port']); 
-	$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['blog']['ftp_user'],$d['blog']['ftp_pass']); 
-	if ($d['blog']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
+	$FTP_CONNECT = ftp_connect($d['set']['ftp_host'],$d['set']['ftp_port']); 
+	$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['set']['ftp_user'],$d['set']['ftp_pass']); 
+	if ($d['set']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
 	if (!$FTP_CONNECT) exit;
 	if (!$FTP_CRESULT) exit;
 
-	ftp_chdir($FTP_CONNECT,$d['blog']['ftp_folder']);
+	ftp_chdir($FTP_CONNECT,$d['set']['ftp_folder']);
 
 	for ($i = 1; $i < 4; $i++)
 	{
-		ftp_mkdir($FTP_CONNECT,$d['blog']['ftp_folder'].str_replace('./files/','',${'savePath'.$i}));
+		ftp_mkdir($FTP_CONNECT,$d['set']['ftp_folder'].str_replace('./files/','',${'savePath'.$i}));
 	}
 
 	if ($Overwrite == 'true' || !is_file($saveFile))
@@ -57,11 +57,11 @@ if ($fserver)
 			$IM = getimagesize($_FILES['Filedata']['tmp_name']);
 			$width = $IM[0];
 			$height= $IM[1];
-			ftp_put($FTP_CONNECT,$d['blog']['ftp_folder'].$folder.'/'.$thumbname,$thumbFile,FTP_BINARY);
+			ftp_put($FTP_CONNECT,$d['set']['ftp_folder'].$folder.'/'.$thumbname,$thumbFile,FTP_BINARY);
 			unlink($thumbFile);
 		}
 	}
-	ftp_put($FTP_CONNECT,$d['blog']['ftp_folder'].$folder.'/'.$tmpname,$_FILES['Filedata']['tmp_name'],FTP_BINARY);
+	ftp_put($FTP_CONNECT,$d['set']['ftp_folder'].$folder.'/'.$tmpname,$_FILES['Filedata']['tmp_name'],FTP_BINARY);
 	ftp_close($FTP_CONNECT);
 }
 else {
@@ -98,15 +98,15 @@ else {
 $mingid = getDbCnt($table[$m.'upload'],'min(gid)','');
 $gid = $mingid ? $mingid - 1 : 100000000;
 
-$QKEY = "gid,hidden,tmpcode,blog,parent,mbruid,type,ext,fserver,url,folder,name,tmpname,thumbname,size,width,height,caption,down,d_regis,d_update";
-$QVAL = "'$gid','$hidden','$tmpcode','$blog','0','$mbruid','$type','$fileExt','$fserver','$url','$folder','$name','$tmpname','$thumbname','$size','$width','$height','$caption','$down','$d_regis','$d_update'";
+$QKEY = "gid,hidden,tmpcode,set,parent,mbruid,type,ext,fserver,url,folder,name,tmpname,thumbname,size,width,height,caption,down,d_regis,d_update";
+$QVAL = "'$gid','$hidden','$tmpcode','$set','0','$mbruid','$type','$fileExt','$fserver','$url','$folder','$name','$tmpname','$thumbname','$size','$width','$height','$caption','$down','$d_regis','$d_update'";
 getDbInsert($table[$m.'upload'],$QKEY,$QVAL);
 
 if ($gid == 100000000) db_query("OPTIMIZE TABLE ".$table[$m.'upload'],$DB_CONNECT); 
 
 if ($upType == 'normal')
 {
-	getLink($g['s'].'/?r='.$r.'&m='.$m.'&blog='.$blog.'&upload=Y&mod='.$mod.'&gparam='.$gparam.($cupload?'&cupload='.$cupload:''),'','','');
+	getLink($g['s'].'/?r='.$r.'&m='.$m.'&set='.$set.'&upload=Y&mod='.$mod.'&gparam='.$gparam.($cupload?'&cupload='.$cupload:''),'','','');
 }
 exit;
 ?>

@@ -1,10 +1,10 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-$B = getUidData($table[$m.'list'],$blog);
+$B = getUidData($table[$m.'list'],$set);
 if (!$B['uid']) exit;
 
-$QUE = 'blog='.$B['uid'].' and isreserve=0';
+$QUE = 'set='.$B['uid'].' and isreserve=0';
 $RCD = getDbArray($table[$m.'data'],$QUE,'*','gid','asc',20,1);
 
 Header("Content-type: text/xml");
@@ -17,7 +17,7 @@ if($type == 'rss1') :?>
 <rss version='2.0' xmlns:dc='http://purl.org/dc/elements/1.1/'>
 	<channel>
 		<title><?php echo htmlspecialchars($B['name'])?></title>
-		<link><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;blog=<?php echo $B['id']?></link> 
+		<link><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;set=<?php echo $B['id']?></link> 
 		<dc:language><?php echo substr($_HS['lang'],0,2)?></dc:language>
 		<description><?php echo htmlspecialchars($B['name'])?></description>
 <?php while($R=db_fetch_array($RCD)):?>
@@ -25,7 +25,7 @@ if($type == 'rss1') :?>
 		<item>
 			<title><?php echo htmlspecialchars($R['subject'])?></title>
 			<description><![CDATA[<?php echo getContents($R['content'],'HTML')?>]]></description>
-			<link><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;blog=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></link>
+			<link><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;set=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></link>
 			<dc:creator><?php echo htmlspecialchars($_M[$_HS['nametype']])?></dc:creator>
 			<?php if($R['tag']):?>
 			<?php $tags=explode(',',trim($R['tag']))?>
@@ -34,7 +34,7 @@ if($type == 'rss1') :?>
 			<category><![CDATA[<?php echo htmlspecialchars($tags[$i])?>]]></category>
 			<?php endfor?>
 			<?php endif?>
-			<guid><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;blog=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></guid>
+			<guid><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;set=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></guid>
 			<pubDate><?php echo getDateFormat($R['d_regis'],'r')?></pubDate>
 			<dc:subject></dc:subject>
 		</item>
@@ -53,15 +53,15 @@ if($type == 'rss1') :?>
 
 	<title><?php echo htmlspecialchars($B['name'])?></title>
 
-	<id><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;blog=<?php echo $B['id']?></id> 
+	<id><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;set=<?php echo $B['id']?></id> 
 	<author><name><?php echo htmlspecialchars($B['name']?$B['name']:$_HS['name'])?></name></author>
 	<info><![CDATA[<?php echo htmlspecialchars($B['name']?$B['name']:$_HS['name'])?>]]></info>
 
 <?php while($R=db_fetch_array($RCD)):?>
 	<entry>
 		<title><?php echo htmlspecialchars($R['subject'])?></title>
-		<link rel="alternate" type="text/html" href="<?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;blog=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?>" />
-		<id><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;blog=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></id>
+		<link rel="alternate" type="text/html" href="<?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;set=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?>" />
+		<id><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;set=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></id>
 		<created><?php echo getDateFormat($R['d_regis'],'r')?></created>
 		<modified><?php echo getDateFormat($R['d_modify'],'r')?></modified>
 		<summary type="text/html" mode="escaped"><![CDATA[<?php echo getContents($R['content'],'HTML')?>]]></summary>
@@ -76,7 +76,7 @@ if($type == 'rss1') :?>
 <rss version='2.0' xmlns:dc='http://purl.org/dc/elements/1.1/'>
 	<channel>
 		<title><?php echo htmlspecialchars($B['name'])?></title>
-		<link><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;blog=<?php echo $B['id']?></link> 
+		<link><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;set=<?php echo $B['id']?></link> 
 		<dc:language><?php echo substr($_HS['lang'],0,2)?></dc:language>
 		<description><?php echo htmlspecialchars($B['name'])?></description>
 <?php while($R=db_fetch_array($RCD)):?>
@@ -84,7 +84,7 @@ if($type == 'rss1') :?>
 		<item>
 			<title><?php echo htmlspecialchars($R['subject'])?></title>
 			<description><![CDATA[<?php echo getContents($R['content'],'HTML')?>]]></description>
-			<link><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;blog=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></link>
+			<link><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;set=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></link>
 			<dc:creator><?php echo htmlspecialchars($_M[$_HS['nametype']])?></dc:creator>
 			<?php if($R['tag']):?>
 			<?php $tags=explode(',',trim($R['tag']))?>
@@ -93,7 +93,7 @@ if($type == 'rss1') :?>
 			<category><![CDATA[<?php echo htmlspecialchars($tags[$i])?>]]></category>
 			<?php endfor?>
 			<?php endif?>
-			<guid><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;blog=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></guid>
+			<guid><?php echo $g['url_root']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;set=<?php echo $B['id']?>&amp;front=list&amp;uid=<?php echo $R['uid']?></guid>
 			<pubDate><?php echo getDateFormat($R['d_regis'],'r')?></pubDate>
 			<dc:subject></dc:subject>
 		</item>

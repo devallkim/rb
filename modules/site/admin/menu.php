@@ -1,4 +1,6 @@
-<?php$SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);$SITEN = db_num_rows($SITES);
+<?php
+$SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);
+$SITEN = db_num_rows($SITES);
 include $g['path_core'].'function/menu.func.php';$ISCAT = getDbRows($table['s_menu'],'site='.$_HS['uid']);
 if($cat){	$CINFO = getUidData($table['s_menu'],$cat);	$_SEO = getDbData($table['s_seo'],'rel=1 and parent='.$CINFO['uid'],'*');	$ctarr = getMenuCodeToPath($table['s_menu'],$cat,0);	$ctnum = count($ctarr);
 	$CINFO['code'] = '';
@@ -13,151 +15,141 @@ if($cat){	$CINFO = getUidData($table['s_menu'],$cat);	$_SEO = getDbData($tabl
 $catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';if ($is_regismode){	$CINFO['menutype'] = '3';	$CINFO['name']	   = '';	$CINFO['joint']	   = '';	$CINFO['redirect'] = '';	$CINFO['hidden']   = '';	$CINFO['target']   = '';	$CINFO['imghead']  = '';	$CINFO['imgfoot']  = '';}
 $menuType = array('','모듈연결','위젯전시','직접편집');
 ?>
-<div class="container-fluid">
-	<div id="catebody" class="row">
-		<nav id="category" class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
-			<div class="panel-group" id="accordion">
-				<div class="card">
-					<a class="card-header accordion-toggle muted-link" data-toggle="collapse" data-parent="#accordion" href="#collapmetane">
-						<i class="fa fa-sitemap fa-lg fa-fw"></i>
-						메뉴구조
-					</a>
+<div id="catebody" class="row no-gutters">
+	<nav id="category" class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
+		<div id="accordion">
+			<div class="card">
+				<a class="card-header accordion-toggle muted-link" data-toggle="collapse" data-parent="#accordion" href="#collapmetane">
+					<i class="fa fa-sitemap fa-lg fa-fw"></i>
+					메뉴구조
+				</a>
 
-					<div class="panel-collapse collapse show" id="collapmetane" style="height: calc(100vh - 8.53rem);">
-
-						<div class="border border-primary">
-							<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
-								<?php while($S = db_fetch_array($SITES)):?>
-								<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
-								<?php endwhile?>
-							</select>
-						</div>
-
-						<?php if($ISCAT):?>
-						<div class="card-body">
-							<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
-							<?php $_treeOptions=array('site'=>$s,'table'=>$table['s_menu'],'dispNum'=>true,'dispHidden'=>false,'dispCheckbox'=>false,'allOpen'=>false,'bookmark'=>'site-menu-info')?>
-							<?php $_treeOptions['link'] = $g['adm_href'].'&amp;cat='?>
-							<?php echo getTreeMenu($_treeOptions,$code,0,0,'')?>
-						</div>
-
-						<div class="card-footer">
-							<div class="btn-group dropup btn-block">
-								<button type="button" class="btn btn-light dropdown-toggle btn-block" data-toggle="dropdown">
-									<i class="fa fa-download fa-lg"></i> 구조 내려받기
-								</button>
-
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=xml" target="_blank">XML로 생성/받기</a>
-									<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=xls" target="_action_frame_<?php echo $m?>">엑셀로 받기</a>
-									<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=txt" target="_action_frame_<?php echo $m?>">텍스트파일로 받기</a>
-									<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=package_menu" target="_action_frame_<?php echo $m?>">패키지용 데이터 받기</a>
-									</div>
-							</div>
-						</div>
-						<?php else: ?>
-						<div class="text-center p-5 text-muted">등록된 메뉴가 없습니다.</div>
-						<?php endif?>
-
+				<div class="collapse show" id="collapmetane" style="height: calc(100vh - 8.53rem);">
+					<?php if($SITEN>1):?>
+					<div class="border border-primary">
+						<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
+							<?php while($S = db_fetch_array($SITES)):?>
+							<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
+							<?php endwhile?>
+						</select>
 					</div>
-				</div>
+					<?php endif?>
+
+					<?php if($ISCAT):?>
+					<div class="card-body">
+						<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
+						<?php $_treeOptions=array('site'=>$s,'table'=>$table['s_menu'],'dispNum'=>true,'dispHidden'=>false,'dispCheckbox'=>false,'allOpen'=>false,'bookmark'=>'site-menu-info')?>
+						<?php $_treeOptions['link'] = $g['adm_href'].'&amp;cat='?>
+						<?php echo getTreeMenu($_treeOptions,$code,0,0,'')?>
+					</div>
 
 
-				<?php if($g['device']):?><a name="site-menu-info"></a><?php endif?>
-				<div class="card">
-					<a class="card-header accordion-toggle collapsed muted-link" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
-						<i class="fa fa-retweet fa-lg fa-fw"></i>
-						순서 조정
-					</a>
+					<div class="card-footer">
+						<div class="btn-group dropup btn-block">
+							<button type="button" class="btn btn-light dropdown-toggle btn-block" data-toggle="dropdown">
+								<i class="fa fa-download fa-lg"></i> 구조 내려받기
+							</button>
 
-						<div class="panel-collapse collapse" id="collapseTwo">
-							<?php if($CINFO['is_child']||(!$cat&&$ISCAT)):?>
-							<form role="form" action="<?php echo $g['s']?>/" method="post">
-								<input type="hidden" name="r" value="<?php echo $r?>">
-								<input type="hidden" name="m" value="<?php echo $module?>">
-								<input type="hidden" name="a" value="modifymenugid">
-
-								<div class="card-body">
-									<div class="dd" id="nestable-menu">
-										<ol class="dd-list">
-										<?php $_MENUS=getDbSelect($table['s_menu'],'site='.$s.' and parent='.intval($CINFO['uid']).' and depth='.($CINFO['depth']+1).' order by gid asc','*')?>
-										<?php $_i=1;while($_M=db_fetch_array($_MENUS)):?>
-										<li class="dd-item" data-id="<?php echo $_i?>">
-										<input type="checkbox" name="menumembers[]" value="<?php echo $_M['uid']?>" checked class="d-none">
-										<div class="dd-handle"><i class="fa fa-arrows fa-fw"></i> <?php echo $_M['name']?></div>
-										</li>
-										<?php $_i++;endwhile?>
-										</ol>
-									</div>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=xml" target="_blank">XML로 생성/받기</a>
+								<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=xls" target="_action_frame_<?php echo $m?>">엑셀로 받기</a>
+								<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=txt" target="_action_frame_<?php echo $m?>">텍스트파일로 받기</a>
+								<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=package_menu" target="_action_frame_<?php echo $m?>">패키지용 데이터 받기</a>
 								</div>
-							</form>
+						</div>
+					</div>
+					<?php else: ?>
+					<div class="text-center p-5 text-muted">등록된 메뉴가 없습니다.</div>
+					<?php endif?>
 
-							<!-- nestable : https://github.com/dbushell/Nestable -->
-							<?php getImport('nestable','jquery.nestable',false,'js') ?>
-							<script>
-							$('#nestable-menu').nestable();
-							$('.dd').on('change', function() {
-								var f = document.forms[0];
-								getIframeForAction(f);
-								f.submit();
-							});
-							</script>
+				</div>
+			</div>
 
-							<?php else:?>
-							<div class="card-body rb-blank">
-								<?php if($cat):?>
-								<?php echo sprintf('[%s] 하위에 등록된 메뉴가 없습니다.',$CINFO['name'])?>
-								<?php else:?>
-								등록된 메뉴가 없습니다.
-								<?php endif?>
+
+			<?php if($g['device']):?><a name="site-menu-info"></a><?php endif?>
+			<div class="card">
+				<a class="card-header accordion-toggle collapsed muted-link" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+					<i class="fa fa-retweet fa-lg fa-fw"></i>
+					순서 조정
+				</a>
+
+					<div class="panel-collapse collapse" id="collapseTwo">
+						<?php if($CINFO['is_child']||(!$cat&&$ISCAT)):?>
+						<form role="form" action="<?php echo $g['s']?>/" method="post">
+							<input type="hidden" name="r" value="<?php echo $r?>">
+							<input type="hidden" name="m" value="<?php echo $module?>">
+							<input type="hidden" name="a" value="modifymenugid">
+
+							<div class="card-body">
+								<div class="dd" id="nestable-menu">
+									<ol class="dd-list">
+									<?php $_MENUS=getDbSelect($table['s_menu'],'site='.$s.' and parent='.intval($CINFO['uid']).' and depth='.($CINFO['depth']+1).' order by gid asc','*')?>
+									<?php $_i=1;while($_M=db_fetch_array($_MENUS)):?>
+									<li class="dd-item" data-id="<?php echo $_i?>">
+									<input type="checkbox" name="menumembers[]" value="<?php echo $_M['uid']?>" checked class="d-none">
+									<div class="dd-handle"><i class="fa fa-arrows fa-fw"></i> <?php echo $_M['name']?></div>
+									</li>
+									<?php $_i++;endwhile?>
+									</ol>
+								</div>
 							</div>
+						</form>
+
+						<!-- nestable : https://github.com/dbushell/Nestable -->
+						<?php getImport('nestable','jquery.nestable',false,'js') ?>
+						<script>
+						$('#nestable-menu').nestable();
+						$('.dd').on('change', function() {
+							var f = document.forms[0];
+							getIframeForAction(f);
+							f.submit();
+						});
+						</script>
+
+						<?php else:?>
+						<div class="card-body rb-blank">
+							<?php if($cat):?>
+							<?php echo sprintf('[%s] 하위에 등록된 메뉴가 없습니다.',$CINFO['name'])?>
+							<?php else:?>
+							등록된 메뉴가 없습니다.
 							<?php endif?>
 						</div>
-				</div>
-
-			</div>
-		</nav>
-
-	<div id="catinfo" class="col-sm-8 col-md-8 ml-sm-auto col-xl-9 pt-3">
-			<form class="form-horizontal rb-form" name="procForm" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" onsubmit="return saveCheck(this);">
-				<input type="hidden" name="r" value="<?php echo $r?>">
-				<input type="hidden" name="m" value="<?php echo $module?>">
-				<input type="hidden" name="a" value="regismenu">
-				<input type="hidden" name="cat" value="<?php echo $CINFO['uid']?>">
-					<input type="hidden" name="code" value="<?php echo $code?>">
-				<input type="hidden" name="vtype" value="<?php echo $vtype?>">
-				<input type="hidden" name="depth" value="<?php echo intval($CINFO['depth'])?>">
-				<input type="hidden" name="parent" value="<?php echo intval($CINFO['uid'])?>">
-				<input type="hidden" name="perm_g" value="<?php echo $CINFO['perm_g']?>">
-				<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
-					<input type="hidden" name="layout" value="">
-					<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:3?>">
-
-				<div class="page-header mt-2">
-					<h4>
-						<?php if($is_regismode):?>
-						<?php if($vtype == 'sub'):?>서브메뉴 만들기<?php else:?>최상위 메뉴 만들기<?php endif?>
-						<?php else:?>
-						메뉴 등록정보
-							<div class="pull-right rb-top-btnbox hidden-xs">
-								<a href="<?php echo $g['adm_href']?>" class="btn btn-light"><i class="fa fa-plus"></i> 상위메뉴 새 메뉴</a>
-								<div class="btn-group rb-btn-view">
-									<a href="<?php echo RW('c='.$CINFO['code'])?>" class="btn btn-light">접속하기</a>
-									<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-										<span class="caret"></span>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="<?php echo RW('c='.$CINFO['code'])?>" target="_blank">
-											<i class="fa fa-external-link"></i>  새창으로 보기
-										</a>
-									</div>
-								</div>
-							</div>
 						<?php endif?>
-					</h4>
-				</div>
+					</div>
+			</div>
 
-					<?php if($vtype == 'sub'):?>
+		</div>
+	</nav>
+	<div id="catinfo" class="col-sm-8 col-md-8 ml-sm-auto col-xl-9">
+		<form class="card rounded-0 border-0" name="procForm" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" onsubmit="return saveCheck(this);">
+			<input type="hidden" name="r" value="<?php echo $r?>">
+			<input type="hidden" name="m" value="<?php echo $module?>">
+			<input type="hidden" name="a" value="regismenu">
+			<input type="hidden" name="cat" value="<?php echo $CINFO['uid']?>">
+			<input type="hidden" name="code" value="<?php echo $code?>">
+			<input type="hidden" name="vtype" value="<?php echo $vtype?>">
+			<input type="hidden" name="depth" value="<?php echo intval($CINFO['depth'])?>">
+			<input type="hidden" name="parent" value="<?php echo intval($CINFO['uid'])?>">
+			<input type="hidden" name="perm_g" value="<?php echo $CINFO['perm_g']?>">
+			<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
+			<input type="hidden" name="layout" value="">
+			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:3?>">
+
+			<div class="card-header d-flex justify-content-between align-items-center">
+
+				<?php if($is_regismode):?>
+				<?php if($vtype == 'sub'):?>서브메뉴 만들기<?php else:?>최상위 메뉴 만들기<?php endif?>
+				<?php else:?>
+				<h4 class="h5 mb-0">메뉴 등록정보 <span class="badge badge-primary badge-pill"><?php echo $CINFO['name']?></span></h4>
+				<a href="<?php echo $g['adm_href']?>" class="btn btn-light"><i class="fa fa-plus"></i> 최상위 새 메뉴</a>
+				<?php endif?>
+
+			</div><!-- /.card-header -->
+
+
+			<div class="card-body">
+
+				<?php if($vtype == 'sub'):?>
 				<div class="form-group row">
 					<label class="col-lg-2 col-form-label text-lg-right">상위메뉴</label>
 					<div class="col-lg-10 col-xl-9">
@@ -302,9 +294,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 
 									<div class="custom-controls-stacked">
 										<label class="custom-control custom-checkbox">
-										  <input type="checkbox" class="custom-control-input" name="redirect" id="xredirect" value="1"<?php if($CINFO['redirect']):?> checked<?php endif?>>
-										  <span class="custom-control-indicator"></span>
-										  <span class="custom-control-description">입력된 주소로 리다이렉트 시켜줍니다. <small> (외부주소 링크시 사용)</small></span>
+											<input type="checkbox" class="custom-control-input" name="redirect" id="xredirect" value="1"<?php if($CINFO['redirect']):?> checked<?php endif?>>
+											<span class="custom-control-indicator"></span>
+											<span class="custom-control-description">입력된 주소로 리다이렉트 시켜줍니다. <small> (외부주소 링크시 사용)</small></span>
 										</label>
 									</div>
 
@@ -341,14 +333,36 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 						</div>
 					</div>
 				</div>
-				<?php endif?>
 
-				<?php if($is_fcategory && $CINFO['is_child']):?>
-				<label class="custom-control custom-checkbox">
-				  <input type="checkbox" class="custom-control-input" name="subcopy" id="cubcopy" value="1" checked>
-				  <span class="custom-control-indicator"></span>
-				  <span class="custom-control-description">이 설정을 서브메뉴에도 일괄적용 <small class="text-muted">(메뉴숨김, 레이아웃, 권한)</small></span>
-				</label>
+				<?php $_url_1 = $g['s'].'/?r='.$r.'&c='.($vtype?substr($catcode,0,strlen($catcode)-1):$catcode.$CINFO['id'])?>
+				<?php $_url_2 = $g['s'].'/'.$r.'/c/'.($vtype?substr($catcode,0,strlen($catcode)-1):$catcode.$CINFO['id'])?>
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label text-lg-right">주소</label>
+					<div class="col-lg-10 col-xl-9">
+
+						<div class="input-group" style="margin-bottom: 5px">
+							<div class="input-group-prepend">
+								<span class="input-group-text">물리주소</span>
+							</div>
+							<input id="_url_m_1_" type="text" class="form-control" value="<?php echo $_url_1?>" readonly>
+							<span class="input-group-append">
+								<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
+								<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
+							</span>
+						</div>
+
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">고유주소</span>
+							</div>
+							<input id="_url_m_2_" type="text" class="form-control" value="<?php echo $_url_2?>" readonly>
+							<span class="input-group-append">
+								<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
+								<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
+							</span>
+						</div>
+					</div>
+				</div>
 				<?php endif?>
 
 
@@ -447,9 +461,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 										</div>
 
 										<div class="card-footer">
-					  					<small class="text-muted">
-					  						<i class="fa fa-info-circle fa-lg fa-fw"></i> meta 정보 설정은 검색엔진최적화, 소셜미디어 최적화와 직접 관련이 있습니다.
-					  					</small>
+											<small class="text-muted">
+												<i class="fa fa-info-circle fa-lg fa-fw"></i> meta 정보 설정은 검색엔진최적화, 소셜미디어 최적화와 직접 관련이 있습니다.
+											</small>
 									</div>
 								</div>
 							</div>
@@ -622,37 +636,6 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 												</ul>
 											</div>
 										</div>
-										<?php if($CINFO['uid']):?>
-										<?php $_url_1 = $g['s'].'/?r='.$r.'&c='.($vtype?substr($catcode,0,strlen($catcode)-1):$catcode.$CINFO['id'])?>
-										<?php $_url_2 = $g['s'].'/'.$r.'/c/'.($vtype?substr($catcode,0,strlen($catcode)-1):$catcode.$CINFO['id'])?>
-										<div class="form-group row">
-											<label class="col-lg-2 col-form-label text-lg-right">주소</label>
-											<div class="col-lg-10 col-xl-9">
-
-												<div class="input-group" style="margin-bottom: 5px">
-													<div class="input-group-prepend">
-														<span class="input-group-text">물리주소</span>
-													</div>
-													<input id="_url_m_1_" type="text" class="form-control" value="<?php echo $_url_1?>" readonly>
-													<span class="input-group-append">
-														<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
-														<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
-													</span>
-												</div>
-
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<span class="input-group-text">고유주소</span>
-													</div>
-													<input id="_url_m_2_" type="text" class="form-control" value="<?php echo $_url_2?>" readonly>
-													<span class="input-group-append">
-														<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
-														<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
-													</span>
-												</div>
-											</div>
-										</div>
-										<?php endif?>
 
 
 										<div class="form-group row">
@@ -787,12 +770,23 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 						</div>
 				</div>
 
+
+				<?php if($is_fcategory && $CINFO['is_child']):?>
+				<div class="custom-control custom-checkbox">
+				  <input type="checkbox" class="custom-control-input" name="subcopy" id="cubcopy" value="1" checked>
+				  <label class="custom-control-label" for="cubcopy">이 설정을 서브메뉴에도 일괄적용 <small class="text-muted">(메뉴숨김, 레이아웃, 권한)</small></label>
+				</div>
+				<?php endif?>
+
+
 				<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit">
 					<?php echo $CINFO['uid']?'속성변경':'신규메뉴 등록' ?>
 				</button>
 
-			</form>
-		</div>
+			</div><!-- /.card-body -->
+
+
+		</form>
 	</div>
 </div>
 

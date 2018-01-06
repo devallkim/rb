@@ -1,8 +1,8 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-if (!$blog) getLink('','','정상적인 접근이 아닙니다.','');
-$_BX = getUidData($table[$m.'list'],$blog);
+if (!$set) getLink('','','정상적인 접근이 아닙니다.','');
+$_BX = getUidData($table[$m.'list'],$set);
 if (!$_BX['uid']) getLink('','','정상적인 접근이 아닙니다.','');
 if ($my['uid']!=$_BX['mbruid']) getLink('','','관리권한이 없습니다.','');
 
@@ -17,7 +17,7 @@ if ($cat && !$vtype)
 
 	if ($id != $R['id'])
 	{
-		$ISMCODE = getDbData($table[$m.'category'],"id='".$id."' and blog=".$blog,'*');
+		$ISMCODE = getDbData($table[$m.'category'],"id='".$id."' and set=".$set,'*');
 		if ($ISMCODE['uid']) getLink('','','카테고리코드 ['.$ISMCODE['id'].'] 는 다른카테고리 ['.$ISMCODE['name'].'] 에서 사용중입니다.','');
 	}
 
@@ -40,8 +40,8 @@ else {
 		$xname	= trim($sarr[$i]);
 		$xnarr	= explode('=',$xname);
 
-		$QKEY = "gid,blog,metaurl,metause,isson,parent,depth,id,name,mobile,hidden,num_open,num_reserve,vtype,recnum,vopen,d_last";
-		$QVAL = "'$gid','$blog','$metaurl','$metause','0','$parent','$xdepth','$xnarr[1]','$xnarr[0]','$mobile','$hidden','0','0','$vtype1','$recnum','$vopen',''";
+		$QKEY = "gid,set,metaurl,metause,isson,parent,depth,id,name,mobile,hidden,num_open,num_reserve,vtype,recnum,vopen,d_last";
+		$QVAL = "'$gid','$set','$metaurl','$metause','0','$parent','$xdepth','$xnarr[1]','$xnarr[0]','$mobile','$hidden','0','0','$vtype1','$recnum','$vopen',''";
 
 		getDbInsert($table[$m.'category'],$QKEY,$QVAL);
 		$lastmenu = getDbCnt($table[$m.'category'],'max(uid)','');
@@ -51,7 +51,7 @@ else {
 			getDbUpdate($table[$m.'category'],"id='".$lastmenu."'",'uid='.$lastmenu);
 		}
 		else {
-			$ISMCODE = getDbData($table[$m.'category'],"uid<> ".$lastmenu." and id='".$xnarr[1]."' and blog=".$blog,'*');
+			$ISMCODE = getDbData($table[$m.'category'],"uid<> ".$lastmenu." and id='".$xnarr[1]."' and set=".$set,'*');
 			if ($ISMCODE['uid'])
 			{
 				getDbUpdate($table[$m.'category'],"id='".$lastmenu."'",'uid='.$lastmenu);
@@ -65,6 +65,6 @@ else {
 	}
 	db_query("OPTIMIZE TABLE ".$table[$m.'category'],$DB_CONNECT); 
 
-	getLink($g['s'].'/?r='.$r.'&m='.$m.'&admin='.$admin.'&mod='.$mod.($parent?'&cat='.$parent:'').'&uid='.$blog,'parent.','','');
+	getLink($g['s'].'/?r='.$r.'&m='.$m.'&admin='.$admin.'&mod='.$mod.($parent?'&cat='.$parent:'').'&uid='.$set,'parent.','','');
 }
 ?>

@@ -3,15 +3,15 @@ $sort	= $sort ? $sort : 'gid';
 $orderby= $orderby ? $orderby : 'asc';
 $recnum	= $recnum && $recnum < 301 ? $recnum : 20;
 
-$blogque ='uid>0';
+$setque ='uid>0';
 // 키원드 검색 추가
 if ($keyw)
 {
-	$blogque .= " and (id like '%".$keyw."%' or name like '%".$keyw."%')";
+	$setque .= " and (id like '%".$keyw."%' or name like '%".$keyw."%')";
 }
 
-$RCD = getDbArray($table[$module.'list'],$blogque,'*',$sort,$orderby,$recnum,$p);
-$NUM = getDbRows($table[$module.'list'],$blogque);
+$RCD = getDbArray($table[$module.'list'],$setque,'*',$sort,$orderby,$recnum,$p);
+$NUM = getDbRows($table[$module.'list'],$setque);
 $TPG = getTotalPage($NUM,$recnum);
 
 if ($uid)
@@ -25,7 +25,7 @@ if ($uid)
 }
 $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p.'&uid='.$uid;
 ?>
-<link rel="stylesheet" href="<?php echo $g['path_module'].'blog/admin/makeblog.css'?>">
+<link rel="stylesheet" href="<?php echo $g['path_module'].'set/admin/makeset.css'?>">
 <div class="row">
    <div class="col-sm-4 col-lg-3">
    	<div class="panel panel-default">  <!-- 메뉴 리스트 패털 시작 -->
@@ -38,11 +38,11 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 				<h4 class="panel-title">
 					포스트셋 리스트
 					<span class="pull-right">
-						<button type="button" class="btn btn-default btn-xs<?php if(!$_SESSION['sh_site_blog_search']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#panel-search" data-tooltip="tooltip" title="검색필터" onclick="sessionSetting('sh_site_blog_search','1','','1');getSearchFocus();"><i class="glyphicon glyphicon-search"></i></button>
+						<button type="button" class="btn btn-default btn-xs<?php if(!$_SESSION['sh_site_set_search']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#panel-search" data-tooltip="tooltip" title="검색필터" onclick="sessionSetting('sh_site_set_search','1','','1');getSearchFocus();"><i class="glyphicon glyphicon-search"></i></button>
 					</span>
 				</h4>
 			</div>
-			<div id="panel-search" class="collapse<?php if($_SESSION['sh_site_blog_search']):?> in<?php endif?>">
+			<div id="panel-search" class="collapse<?php if($_SESSION['sh_site_set_search']):?> in<?php endif?>">
 				<form role="form" action="<?php echo $g['s']?>/" method="get">
 				<input type="hidden" name="r" value="<?php echo $r?>">
 				<input type="hidden" name="m" value="<?php echo $m?>">
@@ -71,7 +71,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 			</div>
 			<div class="panel-body" style="border-top:1px solid #DEDEDE;">
 				<?php if($NUM):?>
-				<form name="blogform" role="form" action="<?php echo $g['s']?>/" method="post" target="_orderframe_">
+				<form name="setform" role="form" action="<?php echo $g['s']?>/" method="post" target="_orderframe_">
 				<input type="hidden" name="r" value="<?php echo $r?>" />
 				<input type="hidden" name="m" value="<?php echo $module?>" />
 				<input type="hidden" name="a" value="admin/order_update" />
@@ -79,7 +79,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 					<ul class="dd-list list-unstyled">
 					<?php $_i=1;while($BR = db_fetch_array($RCD)):?>
 					<li class="dd-item" data-id="<?php echo $_i?>">
-						<input type="checkbox" name="blogmembers[]" value="<?php echo $BR['uid']?>" checked class="hidden"/>
+						<input type="checkbox" name="setmembers[]" value="<?php echo $BR['uid']?>" checked class="hidden"/>
 						<span class="dd-handle <?php if($BR['uid']==$R['uid']):?>alert alert-info<?php endif?>" ><i class="fa fa-arrows fa-fw"></i>
 						   <?php echo $BR['name']?>(<?php echo $BR['id']?>)
 						</span>
@@ -98,7 +98,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 				<script>
 					$('#nestable-menu').nestable();
 					$('.dd').on('change', function() {
-						var f = document.blogform;
+						var f = document.setform;
 						getIframeForAction(f);
 						f.submit();
 					});
@@ -125,7 +125,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 		<input type="hidden" name="r" value="<?php echo $r?>" />
 		<input type="hidden" name="m" value="<?php echo $module?>" />
 		<input type="hidden" name="a" value="_admin/makePostSet" />
-		<input type="hidden" name="blog" value="<?php echo $R['uid']?>" />
+		<input type="hidden" name="set" value="<?php echo $R['uid']?>" />
 		<input type="hidden" name="_referer" value="<?php echo $_referer?>" />
 
 		    <div class="form-group">
@@ -134,17 +134,17 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 					<div class="input-group">
 						<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $R['name']?>"<?php if(!$R['uid'] && !$g['device']):?> autofocus<?php endif?>>
 						<span class="input-group-btn">
-							<button class="btn btn-default rb-help-btn" type="button" data-toggle="collapse" data-target="#blog_name-guide" data-tooltip="tooltip" title="도움말"><i class="fa fa-question-circle fa-lg"></i></button>
+							<button class="btn btn-default rb-help-btn" type="button" data-toggle="collapse" data-target="#set_name-guide" data-tooltip="tooltip" title="도움말"><i class="fa fa-question-circle fa-lg"></i></button>
 						</span>
 						<?php if($R['id']):?>
 						<span class="input-group-btn">
-							<a href="<?php echo RW('m='.$module.'&blog='.$R['id'])?>" target="_blank" class="btn btn-default" data-tooltip="tooltip" title="포스트셋 보기">
+							<a href="<?php echo RW('m='.$module.'&set='.$R['id'])?>" target="_blank" class="btn btn-default" data-tooltip="tooltip" title="포스트셋 보기">
 							<i class="fa fa-link fa-lg"></i>
 							</a>
 						</span>
 						<?php endif?>
 					</div>
-					<p class="help-block collapse alert alert-warning" id="blog_name-guide">
+					<p class="help-block collapse alert alert-warning" id="set_name-guide">
 						<small> 포스트셋 제목에 해당되며 한글,영문등 자유롭게 등록할 수 있습니다.</small>
 			      </p>
 				</div>
@@ -155,18 +155,18 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 					<div class="input-group">
 						<input class="form-control" placeholder="" type="text" name="id" value="<?php echo $R['id']?>" <?php if($R['uid']):?>disabled<?php endif?>>
 						<span class="input-group-btn">
-							<button class="btn btn-default rb-help-btn" type="button" data-toggle="collapse" data-target="#blog_id-guide" data-tooltip="tooltip" title="도움말"><i class="fa fa-question-circle fa-lg"></i></button>
+							<button class="btn btn-default rb-help-btn" type="button" data-toggle="collapse" data-target="#set_id-guide" data-tooltip="tooltip" title="도움말"><i class="fa fa-question-circle fa-lg"></i></button>
 						</span>
 						<?php if($R['uid']):?>
 						<input type="hidden" name="id" value="<?php echo $R['id']?>" />
 						<span class="input-group-btn">
-							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=admin/deleteblog&amp;uid=<?php echo $R['uid']?>" onclick="return hrefCheck(this,true,'삭제하시면 모든 게시물이 지워지며 복구할 수 없습니다.\n정말로 삭제하시겠습니까?');"  class="btn btn-default" data-tooltip="tooltip" title="삭제하기">
+							<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=admin/deleteset&amp;uid=<?php echo $R['uid']?>" onclick="return hrefCheck(this,true,'삭제하시면 모든 게시물이 지워지며 복구할 수 없습니다.\n정말로 삭제하시겠습니까?');"  class="btn btn-default" data-tooltip="tooltip" title="삭제하기">
 							<i class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span>
 						<?php endif?>
 					</div>
-					<p class="help-block collapse alert alert-warning" id="blog_id-guide">
+					<p class="help-block collapse alert alert-warning" id="set_id-guide">
 						<small> 영문 대소문자+숫자+_ 조합으로 만듭니다.</small>
 			      </p>
 				</div>
@@ -183,10 +183,10 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 				<label class="col-sm-3 control-label">포스트셋 형식</label>
 				<div class="col-sm-9">
 					<label class="radio-inline" >
-	  		          <input type="radio" name="blogtype" value="1"<?php if(!$R['blogtype']||$R['blogtype']==1):?> checked="checked"<?php endif?> /> 개인포스트셋
+	  		          <input type="radio" name="settype" value="1"<?php if(!$R['settype']||$R['settype']==1):?> checked="checked"<?php endif?> /> 개인포스트셋
  				   </label>
                  <label class="radio-inline">
- 	                	<input type="radio" name="blogtype" value="2"<?php if($R['blogtype']==2):?> checked="checked"<?php endif?> /> 팀포스트셋
+ 	                	<input type="radio" name="settype" value="2"<?php if($R['settype']==2):?> checked="checked"<?php endif?> /> 팀포스트셋
    	             </label>
 				</div>
 		 </div>
@@ -254,7 +254,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 							<option value="">--------------------------------</option>
 							<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 							<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-							<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['blog']['layout']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo str_replace('.php','',$tpl1)?>)</option>
+							<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['set']['layout']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo str_replace('.php','',$tpl1)?>)</option>
 							<?php endwhile?>
 							<?php closedir($dirs1)?>
 							<?php endwhile?>
@@ -263,7 +263,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 				</div>
 				<div class="col-sm-4">
 					<label class="text-danger" data-tooltip="tooltip" title="여기를 체크하시면 선택된 레이아웃이 적용되지 않습니다. ">
-						<input type="checkbox" name="iframe" value="Y"<?php if(!$R['uid']||$d['blog']['iframe']=='Y'):?> checked="checked"<?php endif?> /> 전용 레이아웃 사용
+						<input type="checkbox" name="iframe" value="Y"<?php if(!$R['uid']||$d['set']['iframe']=='Y'):?> checked="checked"<?php endif?> /> 전용 레이아웃 사용
 					</label>
 				</div>
 		 </div>
@@ -280,7 +280,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 					 <option value="">--------------------------------</option>
 					 <?php while(false !== ($tpl1 = readdir($dirs1))):?>
 					 <?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-					 <option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['blog']['m_layout']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo str_replace('.php','',$tpl1)?>)</option>
+					 <option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['set']['m_layout']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo str_replace('.php','',$tpl1)?>)</option>
 					 <?php endwhile?>
 					 <?php closedir($dirs1)?>
 					 <?php endwhile?>
@@ -301,7 +301,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 						<?php $dirs = opendir($tdir)?>
 						<?php while(false !== ($skin = readdir($dirs))):?>
 						<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-						<option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['blog']['theme_pc']==$skin):?> selected="selected"<?php endif?>><?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+						<option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['set']['theme_pc']==$skin):?> selected="selected"<?php endif?>><?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
 						<?php endwhile?>
 						<?php closedir($dirs)?>
 					</select>
@@ -317,7 +317,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 						<?php $dirs = opendir($tdir)?>
 						<?php while(false !== ($skin = readdir($dirs))):?>
 						<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-						<option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['blog']['theme_mobile']==$skin):?> selected="selected"<?php endif?>><?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+						<option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['set']['theme_mobile']==$skin):?> selected="selected"<?php endif?>><?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
 						<?php endwhile?>
 						<?php closedir($dirs)?>
 					</select>
@@ -331,7 +331,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 							 	<option value="">사용 안함</option>
 								<option value="">----------------------</option>
 							   <?php include_once $g['path_core'].'function/menu1.func.php'?>
-							   <?php $cat=$d['blog']['sosokmenu']?>
+							   <?php $cat=$d['set']['sosokmenu']?>
 							   <?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
 							</select>
 							<span class="input-group-btn">
@@ -358,7 +358,7 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 								<?php $dirs = opendir($tdir)?>
 								<?php while(false !== ($skin = readdir($dirs))):?>
 								<?php if($skin=='.' || $skin == '..')continue?>
-								<option value="social/inc/<?php echo $skin?>"<?php if($d['blog']['snsconnect']=='social/inc/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo str_replace('.php','',$skin)?></option>
+								<option value="social/inc/<?php echo $skin?>"<?php if($d['set']['snsconnect']=='social/inc/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo str_replace('.php','',$skin)?></option>
 								<?php endwhile?>
 								<?php closedir($dirs)?>
 								<?php endif?>
@@ -379,28 +379,28 @@ $_referer=$g['adm_href'].'&iframe=Y&_front='.$_front.'&recnum='.$recnum.'&p='.$p
 		  	  <label class="col-sm-3 control-label text-muted">포스트 진열</label>
 		     <div class="col-sm-3">
  					<select name="vtype" class="form-control">
-					   <option value="review"<?php if($d['blog']['vtype']=='review'):?> selected="selected"<?php endif?>>리뷰형</option>
-					   <option value="list"<?php if($d['blog']['vtype']=='list'):?> selected="selected"<?php endif?>>리스트형</option>
-					   <option value="gall"<?php if($d['blog']['vtype']=='gall'):?> selected="selected"<?php endif?>>이미지형</option>
+					   <option value="review"<?php if($d['set']['vtype']=='review'):?> selected="selected"<?php endif?>>리뷰형</option>
+					   <option value="list"<?php if($d['set']['vtype']=='list'):?> selected="selected"<?php endif?>>리스트형</option>
+					   <option value="gall"<?php if($d['set']['vtype']=='gall'):?> selected="selected"<?php endif?>>이미지형</option>
 					</select>
 			  </div> <!-- .col-sm-3  -->
 			  <div class="col-sm-3">
  					<select name="recnum" class="form-control">
-				    <?php $d['blog']['recnum']=$d['blog']['recnum']?$d['blog']['recnum']:20?>
+				    <?php $d['set']['recnum']=$d['set']['recnum']?$d['set']['recnum']:20?>
 				    <?php for($i=10;$i<51;$i=$i+5):?>
-					     <option value="<?php echo $i?>"<?php if($d['blog']['recnum']==$i):?> selected="selected"<?php endif?>><?php echo $i?>개씩 보기</option>
+					     <option value="<?php echo $i?>"<?php if($d['set']['recnum']==$i):?> selected="selected"<?php endif?>><?php echo $i?>개씩 보기</option>
 					<?php endfor?>
 					</select>
 			  </div> <!-- .col-sm-3  -->
 			  <div class="col-sm-3">
-	     	     <input type="checkbox" name="vopen" id="vopen" value="1"<?php if($d['blog']['vopen']):?> checked="checked"<?php endif?> /><label for="vopen">&nbsp;1개씩 보기</label>
+	     	     <input type="checkbox" name="vopen" id="vopen" value="1"<?php if($d['set']['vopen']):?> checked="checked"<?php endif?> /><label for="vopen">&nbsp;1개씩 보기</label>
 		      </div>
 		</div> <!-- .form-group  -->
 		<div class="form-group">
 				<label class="col-sm-3 control-label">리뷰 글자수</label>
 				<div class="col-sm-9">
 					<div class="input-group">
-						<input class="form-control" placeholder="" type="text" name="rlength" value="<?php echo $d['blog']['rlength']?$d['blog']['rlength']:200?>">
+						<input class="form-control" placeholder="" type="text" name="rlength" value="<?php echo $d['set']['rlength']?$d['set']['rlength']:200?>">
 						<span class="input-group-addon">자</span>
 					</div>
 				</div>

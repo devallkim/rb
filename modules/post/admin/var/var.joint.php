@@ -39,11 +39,11 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 		<tr>
 		<td>
 			<input type="hidden" id="cat<?php echo $R['id']?>" value="" />
-			<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $smodule?>&amp;blog=<?php echo $R['id']?>" target="_blank" title="블로그보기"><?php echo $R['name']?></a><span>(<?php echo $R['id']?>)</span>
+			<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $smodule?>&amp;set=<?php echo $R['id']?>" target="_blank" title="블로그보기"><?php echo $R['name']?></a><span>(<?php echo $R['id']?>)</span>
 		</td>
 		<td class="aply">
-			<input type="button" value="블로그메인" class="btnblue" onclick="dropJoint('<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $smodule?>&blog=<?php echo $R['id']?>');" />
-			<input type="button" value="포스트" class="btnblue" onclick="dropJoint('<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $smodule?>&blog=<?php echo $R['id']?>&front=list');" />
+			<input type="button" value="블로그메인" class="btnblue" onclick="dropJoint('<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $smodule?>&set=<?php echo $R['id']?>');" />
+			<input type="button" value="포스트" class="btnblue" onclick="dropJoint('<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $smodule?>&set=<?php echo $R['id']?>&front=list');" />
 		</td>
 		</tr>
 		<?php endwhile?>

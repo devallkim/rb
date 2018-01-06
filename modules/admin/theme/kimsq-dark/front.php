@@ -25,6 +25,8 @@
 			<ul class="navbar-nav mr-auto" id="rb-admin-ul-tabs">
 				<?php $_front =explode('_' , $front); ?>
 				<?php $_menuCount=count($d['amenu']);if(!$nosite&&$_menuCount):?>
+
+				<?php if($_i<=10):?>
 				<?php $_i=1;foreach($d['amenu'] as $_k => $_v):?>
 				<li id="rb-more-tab-<?php echo $_i?>" class="nav-item">
 					<a class="nav-link<?php if($_front[0] == $_k):?> active<?php endif?>" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_k ?>">
@@ -32,7 +34,9 @@
 					</a>
 				</li>
 				<?php $_i++;endforeach?>
-				<?php if($_i>4):?>
+				<?php endif?>
+
+				<?php if($_i>10):?>
 				<li class="nav-item dropdown rb-more-tabs">
 					<a class="nav-link dropdown-toggle" href="#." data-toggle="dropdown">더보기</a>
 					<div class="dropdown-menu dropdown-menu-right">
@@ -56,7 +60,7 @@
         <?php if($module!='dashboard'):?>
         <li class="nav-item">
 					<a class="nav-link<?php if($front == '_info'):?> active<?php endif?>" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_info">
-						<i class="fa fa-question-circle fa-lg"></i> 정보
+						<i class="fa fa-question-circle fa-lg"></i> 안내
 					</a>
 				</li>
 				<?php endif?>

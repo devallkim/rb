@@ -3,7 +3,7 @@ if(!defined('__KIMS__')) exit;
 require_once $g['path_module'].'keywordset/_main.php'; // 공통함수 파일
 $KWS=getUidData($table['keywordsetdata'],$uid);
 $TG=getDbData($table['s_tag'],"keyword='".$KWS['name']."'",'*'); // s_tag uid 추출
-$TBD=getDbSelect($table['s_tagrelation'],"module='blog' and tag='".$TG['uid']."'",'*');
+$TBD=getDbSelect($table['s_tagrelation'],"module='set' and tag='".$TG['uid']."'",'*');
 $i=0;
 $WH='(';
 while($TB=db_fetch_array($TBD)){
@@ -12,8 +12,8 @@ while($TB=db_fetch_array($TBD)){
  }
 $WH =substr($WH,0,-4).')';
 
-$RCD=getDbArray($table['blogdata'],$WH,'*','uid','desc','20',1);
-$NUM=getDbRows($table['blogdata'],$WH);
+$RCD=getDbArray($table['setdata'],$WH,'*','uid','desc','20',1);
+$NUM=getDbRows($table['setdata'],$WH);
 while($R=db_fetch_array($RCD)) $BCD[]=$R;
 $result=array();
 $result['error']=false;
@@ -24,7 +24,7 @@ $list='
           $img_data=array('src'=>$preview_img,'width'=>'230','height'=>'230');
 
          $list.='<li class="table-view-cell media">
-            <a href="#" id="rb_blog_data-'.$R['uid'].'" data-modal-open="postview-01">
+            <a href="#" id="rb_set_data-'.$R['uid'].'" data-modal-open="postview-01">
              <img class="media-object pull-left" src="'.getTimThumb($img_data).'">
              <div class="media-body">
                  <strong>'.getPostData($R,'title').'</strong>

@@ -7,7 +7,7 @@ include $g['dir_module'].'var/var.php';
 $sessArr	= explode('_',$sess_Code);
 $tmpcode	= $sessArr[0];
 $mbruid		= $sessArr[1];
-$blog		= $sessArr[2];
+$set		= $sessArr[2];
 $fserver	= $d['mediaset']['up_use_fileserver'];
 $url		= $fserver ? $d['mediaset']['ftp_urlpath'] : '/files/'.$m.'/';
 $name		= strtolower($_FILES['file']['name']);
@@ -118,7 +118,7 @@ if ($gid == 100000000) db_query("OPTIMIZE TABLE ".$table['s_upload'],$DB_CONNECT
 
 if ($upType == 'normal')
 {
-	getLink($g['s'].'/?r='.$r.'&m='.$m.'&blog='.$blog.'&upload=Y&mod='.$mod.'&gparam='.$gparam.($cupload?'&cupload='.$cupload:''),'','','');
+	getLink($g['s'].'/?r='.$r.'&m='.$m.'&set='.$set.'&upload=Y&mod='.$mod.'&gparam='.$gparam.($cupload?'&cupload='.$cupload:''),'','','');
 }
            
 

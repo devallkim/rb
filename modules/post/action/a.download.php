@@ -18,11 +18,11 @@ if (!strstr($_SERVER['HTTP_REFERER'],'module=upload') && !$my['admin'])
 {
 
 	//동기화
-	$cyncArr = getArrayString($R['sync']); //[blog][60][uid,down][rb_blog_data][1][m:blog,bid:3,uid:60]
+	$cyncArr = getArrayString($R['sync']); //[set][60][uid,down][rb_set_data][1][m:set,bid:3,uid:60]
 	$fdexp = explode(',',$cyncArr['data'][2]);
 	if($fdexp[0]&&$fdexp[1]&&$cyncArr['data'][3])
 	{
-		// if ($cyncArr['data'][0] == 'blog' && $cyncArr['data'][1])
+		// if ($cyncArr['data'][0] == 'set' && $cyncArr['data'][1])
 		// {
 		// 	$AT = getUidData($table[$cyncArr['data'][0].'data'],$cyncArr['data'][1]);
 		// 	include_once $g['path_module'].$cyncArr['data'][0].'/var/var.'.$AT['bbsid'].'.php';

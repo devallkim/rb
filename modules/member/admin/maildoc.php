@@ -14,85 +14,80 @@ $typeset = array
 $type = $type ? $type : '_join';
 ?>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-4 col-md-3 col-xl-3 d-none d-sm-block sidebar" id="tab-content-list">
-			<div class="card">
-				<div class="card-header">
-					이메일 양식
-				</div>
-				<div class="list-group list-group-flush">
-					<?php $tdir = $g['path_module'].$module.'/doc/'?>
-					<?php $dirs = opendir($tdir)?>
-					<?php while(false !== ($skin = readdir($dirs))):?>
-					<?php if($skin=='.' || $skin == '..')continue?>
-					<?php $_type = str_replace('.txt','',$skin)?>
-						<a href="<?php echo $g['adm_href']?>&amp;type=<?php echo $_type?>" class="list-group-item list-group-item-action <?php if($_type==$type):?>active<?php endif?> doc-style">
-							<i class="fa fa-envelope-o fa-lg pull-right"></i> <?php echo getMDname($_type)?>
-						   <small>(<?php echo $_type?>)</small>
-						</a>
-					<?php endwhile?>
-					<?php closedir($dirs)?>
-				</div>
+<div class="row no-gutters">
+	<div class="col-sm-4 col-md-3 col-xl-3 d-none d-sm-block sidebar" id="tab-content-list">
+		<div class="card">
+			<div class="card-header">
+				이메일 양식
 			</div>
-		</div>
-		<div class="col-sm-8 col-md-9 ml-sm-auto col-xl-9 pt-3" id="tab-content-view">
-
-			<div class="page-header mt-2">
-				<h4>
-					<?php echo getMDname($type)?>
-				</h4>
+			<div class="list-group list-group-flush">
+				<?php $tdir = $g['path_module'].$module.'/doc/'?>
+				<?php $dirs = opendir($tdir)?>
+				<?php while(false !== ($skin = readdir($dirs))):?>
+				<?php if($skin=='.' || $skin == '..')continue?>
+				<?php $_type = str_replace('.txt','',$skin)?>
+					<a href="<?php echo $g['adm_href']?>&amp;type=<?php echo $_type?>" class="list-group-item list-group-item-action <?php if($_type==$type):?>active<?php endif?> doc-style">
+						<i class="fa fa-envelope-o fa-lg pull-right"></i> <?php echo getMDname($_type)?>
+						 <small>(<?php echo $_type?>)</small>
+					</a>
+				<?php endwhile?>
+				<?php closedir($dirs)?>
 			</div>
-
-			<form name="procForm" action="<?php echo $g['s']?>/" method="post" target="_action_frame_<?php echo $m?>" onsubmit="return saveCheck(this);">
-				<input type="hidden" name="r" value="<?php echo $r?>">
-				<input type="hidden" name="m" value="<?php echo $module?>">
-				<input type="hidden" name="a" value="maildoc_regis">
-				<input type="hidden" name="type" value="<?php echo $type?>">
-
-			<div class="small text-muted">
-				<ul class="pl-3">
-					<li>내용에는 다음과 같은 치환문자를 사용할 수 있습니다.</li>
-					<li>회원이름 : <code>{NAME}</code> / 닉네임 <code>{NICK}</code> / 아이디 <code>{ID}</code> / 이메일 <code>{EMAIL}</code></li>
-				</ul>
-			</div>
-			<!-- 에디터 -->
-		   <div class="editor">
-				<textarea  id="summernote" name ="content" class="form-control" rows="3" onkeyup="resize(this)"><?php echo htmlspecialchars(implode('',file($g['path_module'].$module.'/doc/'.$type.'.txt')))?></textarea>
-			</div>
-			<!-- /에티터 -->
-			<br>
-			<div class="input-group">
-				<?php if(!$typeset[$type]):?>
-				<span class="input-group-btn">
-				   <button class="btn btn-danger" onclick="delCheck('<?php echo $type?>');" />삭제</button>
-				</span>
-				<?php endif?>
-				<span class="input-group-btn">
-				  <button type="submit" class="btn btn-primary ">수정</button>
-				</span>
-				<input type="text" name="newdoc" value="" size="15" class="form-control" placeholder="신규양식 이름.." />
-				<span class="input-group-btn">
-				   <input type="submit" class="btn btn-primary" value="신규 등록" />
-			   </span>
-			   <span class="input-group-btn">
-			      <button title="" data-tooltip="tooltip" data-target="#new_maildoc-guide" data-toggle="collapse" type="button" class="btn btn-default rb-help-btn" data-original-title="도움말">
-			      	<i class="fa fa-question-circle fa-lg"></i>
-			      </button>
-			   </span>
-			</div>
-			<p id="new_maildoc-guide" class="help-block collapse alert alert-warning">
-				<small>
-					이 양식으로 새로운 양식을 생성할 수 있습니다. <br>
-				   새로운 양식명 (영문소문자+숫자+_ 조합)을 입력하신 후 [신규등록] 버튼을 눌러주세요.<br>
-				</small>
-			</p>
-
-		  </form>
 		</div>
 	</div>
-</div>
+	<div class="col-sm-8 col-md-9 ml-sm-auto col-xl-9" id="tab-content-view">
 
+		<form class="card" name="procForm" action="<?php echo $g['s']?>/" method="post" target="_action_frame_<?php echo $m?>" onsubmit="return saveCheck(this);">
+			<input type="hidden" name="r" value="<?php echo $r?>">
+			<input type="hidden" name="m" value="<?php echo $module?>">
+			<input type="hidden" name="a" value="maildoc_regis">
+			<input type="hidden" name="type" value="<?php echo $type?>">
+
+			<div class="card-header">
+				<span>양식 수정 <span class="badge badge-primary badge-pill"><?php echo getMDname($type)?></span></span>
+			</div>
+			<div class="card-body">
+				<div class="small text-muted">
+					<ul class="pl-3">
+						<li>내용에는 다음과 같은 치환문자를 사용할 수 있습니다.</li>
+						<li>회원이름 : <code>{NAME}</code> / 닉네임 <code>{NICK}</code> / 아이디 <code>{ID}</code> / 이메일 <code>{EMAIL}</code></li>
+					</ul>
+				</div>
+				<!-- 에디터 -->
+				 <div class="editor">
+					<textarea  id="summernote" name ="content" class="form-control" rows="3" onkeyup="resize(this)"><?php echo htmlspecialchars(implode('',file($g['path_module'].$module.'/doc/'.$type.'.txt')))?></textarea>
+				</div>
+				<!-- /에티터 -->
+			</div><!-- /.card-body -->
+
+			<div class="card-footer">
+				<div class="form-row">
+					<div class="col">
+						<button type="submit" class="btn btn-outline-primary btn-block">수정</button>
+					</div>
+					<?php if(!$typeset[$type]):?>
+					<div class="col">
+						<button class="btn btn-outline-danger btn-block" onclick="delCheck('<?php echo $type?>');">삭제</button>
+					</div>
+					<?php endif?>
+				</div>
+				<hr>
+				<div class="input-group mb-2">
+					<input type="text" name="newdoc" value="" size="15" class="form-control" placeholder="신규양식 이름..">
+					<div class="input-group-append">
+				    <button class="btn btn-outline-secondary" type="submit">신규 등록</button>
+				  </div>
+				</div>
+				<small class="text-muted">
+					이 양식으로 새로운 양식을 생성할 수 있습니다.
+					 새로운 양식명 (영문소문자+숫자+_ 조합)을 입력하신 후 [신규등록] 버튼을 눌러주세요.
+				</small>
+
+			</div><!-- /.card-footer -->
+
+		</form><!-- /.card -->
+	</div>
+</div>
 
 
 

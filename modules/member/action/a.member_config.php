@@ -1,12 +1,33 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-
 checkAdmin(0);
 
-$_tmpdfile = $g['dir_module'].'var/var.join.php';
-$fp = fopen($_tmpdfile,'w');
+$_tmpvfile = $g['path_var'].'site/'.$r.'/'.$m.'.var.php';
+
+$fp = fopen($_tmpvfile,'w');
 fwrite($fp, "<?php\n");
+
+//기초환경 설정
+fwrite($fp, "\$d['member']['theme_main'] = \"".$theme_main."\";\n");
+fwrite($fp, "\$d['member']['theme_mobile'] = \"".$theme_mobile."\";\n");
+
+fwrite($fp, "\$d['member']['layout_join'] = \"".$layout_join."\";\n");
+fwrite($fp, "\$d['member']['layout_join_mobile'] = \"".$layout_join_mobile."\";\n");
+fwrite($fp, "\$d['member']['layout_login'] = \"".$layout_login."\";\n");
+fwrite($fp, "\$d['member']['layout_login_mobile'] = \"".$layout_login_mobile."\";\n");
+fwrite($fp, "\$d['member']['layout_profile'] = \"".$layout_profile."\";\n");
+fwrite($fp, "\$d['member']['layout_profile_mobile'] = \"".$layout_profile_mobile."\";\n");
+fwrite($fp, "\$d['member']['layout_settings'] = \"".$layout_settings."\";\n");
+fwrite($fp, "\$d['member']['layout_settings_mobile'] = \"".$layout_settings_mobile."\";\n");
+
+fwrite($fp, "\$d['member']['sosokmenu'] = \"".$sosokmenu."\";\n");
+
+//로그인
+fwrite($fp, "\$d['member']['login_expire'] = \"".$login_expire."\";\n");
+fwrite($fp, "\$d['member']['login_emailid'] = \"".$login_emailid."\";\n");
+fwrite($fp, "\$d['member']['login_cookie'] = \"".$login_cookie."\";\n");
+fwrite($fp, "\$d['member']['login_ssl'] = \"".$login_ssl."\";\n");
 
 //회원가입
 fwrite($fp, "\$d['member']['join_enable'] = \"".$join_enable."\";\n");
@@ -67,43 +88,24 @@ fwrite($fp, "\$d['member']['mytab_pw'] = \"".$mytab_pw."\";\n");
 fwrite($fp, "\$d['member']['mytab_out'] = \"".$mytab_out."\";\n");
 fwrite($fp, "\$d['member']['mytab_recnum'] = \"".$mytab_recnum."\";\n");
 
-
-//로그인
-fwrite($fp, "\$d['member']['login_point'] = \"".$login_point."\";\n");
-fwrite($fp, "\$d['member']['login_expire'] = \"".$login_expire."\";\n");
-fwrite($fp, "\$d['member']['login_emailid'] = \"".$login_emailid."\";\n");
-fwrite($fp, "\$d['member']['login_openid'] = \"".$login_openid."\";\n");
-fwrite($fp, "\$d['member']['login_ssl'] = \"".$login_ssl."\";\n");
-
-fwrite($fp, "\$d['member']['layout_join'] = \"".$layout_join."\";\n");
-fwrite($fp, "\$d['member']['layout_login'] = \"".$layout_login."\";\n");
-fwrite($fp, "\$d['member']['layout_mypage'] = \"".$layout_mypage."\";\n");
-
-fwrite($fp, "\$d['member']['sosokmenu'] = \"".$sosokmenu."\";\n");
-
 fwrite($fp, "?>");
 fclose($fp);
-@chmod($_tmpdfile,0707);
+@chmod($_tmpvfile,0707);
 
 
-if ($_join_menu == 2)
+if ($_join_menu == 'signup-form-config')
 {
-	$mfile = $g['path_module'].$m.'/var/job.txt';
+	$mfile = $g['path_var'].'site/'.$r.'/'.$m.'.job.txt';
+
 	$fp = fopen($mfile,'w');
 	fwrite($fp,trim(stripslashes($job)));
 	fclose($fp);
 	@chmod($mfile,0707);
 
-	$mfile = $g['path_module'].$m.'/var/pw_question.txt';
-	$fp = fopen($mfile,'w');
-	fwrite($fp,trim(stripslashes($pw_question)));
-	fclose($fp);
-	@chmod($mfile,0707);
-
 }
-if ($_join_menu == 3)
+if ($_join_menu == 'signup-form-add')
 {
-	$mfile = $g['dir_module'].'var/add_field.txt';
+	$mfile = $g['path_var'].'site/'.$r.'/'.$m.'.add_field.txt';
 	if(!is_array($addFieldMembers))
 	{
 		$addFieldMembers = array();

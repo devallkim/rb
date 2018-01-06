@@ -21,154 +21,140 @@ if ($uid)
 $pageType = array('','모듈연결','위젯전시','직접편집');
 ?>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
-			<div class="card">
-				<div class="card-header p-1 d-flex justify-content-between">
-					<div class="dropdown">
-						<a class="btn btn-link muted-link dropdown-toggle" data-toggle="dropdown" href="#">
-							<i class="fa fa-file-text-o fa-lg fa-fw"></i> <?php echo $cat?$cat:'전체페이지'?>
+<div class="row no-gutters">
+	<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
+		<div class="card">
+			<div class="card-header p-1 d-flex justify-content-between">
+				<div class="dropdown">
+					<a class="btn btn-link muted-link dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-file-text-o fa-lg fa-fw"></i> <?php echo $cat?$cat:'전체페이지'?>
+					</a>
+					<div class="dropdown-menu">
+						<h6 class="dropdown-header">페이지 분류</h6>
+						<a class="dropdown-item<?php if(!$cat):?> active<?php endif?>" href="<?php echo $g['adm_href']?>">전체페이지</a>
+						<?php $_cats=array()?>
+						<?php $CATS=db_query("select *,count(*) as cnt from ".$table['s_page']." group by category",$DB_CONNECT)?>
+						<?php while($C=db_fetch_array($CATS)):$_cats[]=$C['category']?>
+						<a class="dropdown-item<?php if($C['category']==$cat):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;cat=<?php echo urlencode($C['category'])?>">
+							<?php echo $C['category']?> <small>(<?php echo $C['cnt']?>)</small>
 						</a>
-						<div class="dropdown-menu">
-							<h6 class="dropdown-header">페이지 분류</h6>
-							<a class="dropdown-item<?php if(!$cat):?> active<?php endif?>" href="<?php echo $g['adm_href']?>">전체페이지</a>
-							<?php $_cats=array()?>
-							<?php $CATS=db_query("select *,count(*) as cnt from ".$table['s_page']." group by category",$DB_CONNECT)?>
-							<?php while($C=db_fetch_array($CATS)):$_cats[]=$C['category']?>
-							<a class="dropdown-item<?php if($C['category']==$cat):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;cat=<?php echo urlencode($C['category'])?>">
-								<?php echo $C['category']?> <small>(<?php echo $C['cnt']?>)</small>
-							</a>
-							<?php endwhile?>
-						</div>
-					</div>
-					<button type="button" class="btn btn-link muted-link btn-sm<?php if(!$_SESSION['sh_site_page_search']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#panel-search" data-tooltip="tooltip" title="검색필터" onclick="sessionSetting('sh_site_page_search','1','','1');getSearchFocus();">
-						<i class="fa fa-cog" aria-hidden="true"></i>
-					</button>
-				</div>
-
-				<?php if($SITEN>1):?>
-				<div class="border border-primary">
-					<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
-						<?php while($S = db_fetch_array($SITES)):?>
-						<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
 						<?php endwhile?>
-					</select>
-				</div>
-				<?php endif?>
-
-
-
-				<div  style="height: calc(100vh - 16.8rem);">
-
-					<div id="panel-search" class="collapse<?php if($_SESSION['sh_site_page_search']):?> show<?php endif?>">
-						<form role="form" action="<?php echo $g['s']?>/" method="get">
-							<input type="hidden" name="r" value="<?php echo $r?>">
-							<input type="hidden" name="m" value="<?php echo $m?>">
-							<input type="hidden" name="module" value="<?php echo $module?>">
-							<input type="hidden" name="front" value="<?php echo $front?>">
-							<input type="hidden" name="cat" value="<?php echo $cat?>">
-
-							<div class="card-body p-0">
-								<div class="input-group">
-									<span class="input-group-addon border-0 bg-white">출력수</span>
-									<select class="form-control border-0" name="recnum" onchange="this.form.submit();">
-										<option value="15"<?php if($recnum==15):?> selected<?php endif?>>15</option>
-										<option value="30"<?php if($recnum==30):?> selected<?php endif?>>30</option>
-										<option value="60"<?php if($recnum==60):?> selected<?php endif?>>60</option>
-										<option value="100"<?php if($recnum==100):?> selected<?php endif?>>100</option>
-									</select>
-								</div>
-							</div>
-							<div class="rb-keyword-search">
-								<input type="text" name="keyw" class="form-control" value="<?php echo $keyw?>" placeholder="페이지명,코드,분류명 검색">
-							</div>
-						</form>
 					</div>
+				</div>
+				<button type="button" class="btn btn-link muted-link btn-sm<?php if(!$_SESSION['sh_site_page_search']):?> collapsed<?php endif?>" data-toggle="collapse" data-target="#panel-search" data-tooltip="tooltip" title="검색필터" onclick="sessionSetting('sh_site_page_search','1','','1');getSearchFocus();">
+					<i class="fa fa-cog" aria-hidden="true"></i>
+				</button>
+			</div>
 
-					<table id="page-list" class="table mb-0">
-						<thead>
-							<tr>
-								<td class="rb-pagename"><span>페이지명</span></td>
-								<td class="rb-time"><span>최종수정</span></td>
-							</tr>
-						</thead>
-						<tbody>
-							<?php $pageTypeIcon=array('','fa-link','fa-puzzle-piece','fa-pencil')?>
-							<?php while($PR = db_fetch_array($PAGES)):?>
-							<tr<?php if($uid==$PR['uid']):?> class="table-active"<?php endif?> data-tooltip="tooltip" title="[<?php echo $PR['category']?>] <?php echo $PR['name']?>">
-								<td onclick="goHref('<?php echo $g['adm_href']?>&amp;uid=<?php echo $PR['uid']?>&amp;recnum=<?php echo $recnum?>&amp;p=<?php echo $p?>&amp;cat=<?php echo urlencode($cat)?>&amp;keyw=<?php echo urlencode($keyw)?>#site-page-info');">
-									<a href="#.">
-										<span class="badge badge-dark badge-pill">
-											<i class="fa <?php echo $pageTypeIcon[$PR['pagetype']]?> fa-lg"></i>
-										</span>
-										<?php echo getStrCut($PR['name'],14,'..')?>
-									</a>
-									<small><i><?php echo $PR['id']?></i></small>
-								</td>
-								<td class="rb-time">
-									<?php echo getDateFormat($PR['d_update'],'Y.m.d')?>
-								</td>
-							</tr>
-							<?php endwhile?>
-						</tbody>
-					</table>
+			<?php if($SITEN>1):?>
+			<div class="border border-primary">
+				<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
+					<?php while($S = db_fetch_array($SITES)):?>
+					<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
+					<?php endwhile?>
+				</select>
+			</div>
+			<?php endif?>
+
+
+
+			<div  style="height: calc(100vh - 16.8rem);">
+
+				<div id="panel-search" class="collapse<?php if($_SESSION['sh_site_page_search']):?> show<?php endif?>">
+					<form role="form" action="<?php echo $g['s']?>/" method="get">
+						<input type="hidden" name="r" value="<?php echo $r?>">
+						<input type="hidden" name="m" value="<?php echo $m?>">
+						<input type="hidden" name="module" value="<?php echo $module?>">
+						<input type="hidden" name="front" value="<?php echo $front?>">
+						<input type="hidden" name="cat" value="<?php echo $cat?>">
+
+						<div class="card-body p-0">
+							<div class="input-group">
+								<span class="input-group-addon border-0 bg-white">출력수</span>
+								<select class="form-control border-0" name="recnum" onchange="this.form.submit();">
+									<option value="15"<?php if($recnum==15):?> selected<?php endif?>>15</option>
+									<option value="30"<?php if($recnum==30):?> selected<?php endif?>>30</option>
+									<option value="60"<?php if($recnum==60):?> selected<?php endif?>>60</option>
+									<option value="100"<?php if($recnum==100):?> selected<?php endif?>>100</option>
+								</select>
+							</div>
+						</div>
+						<div class="rb-keyword-search">
+							<input type="text" name="keyw" class="form-control" value="<?php echo $keyw?>" placeholder="페이지명,코드,분류명 검색">
+						</div>
+					</form>
 				</div>
 
+				<table id="page-list" class="table mb-0">
+					<thead>
+						<tr>
+							<td class="rb-pagename"><span>페이지명</span></td>
+							<td class="rb-time"><span>최종수정</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $pageTypeIcon=array('','fa-link','fa-puzzle-piece','fa-pencil')?>
+						<?php while($PR = db_fetch_array($PAGES)):?>
+						<tr<?php if($uid==$PR['uid']):?> class="table-active"<?php endif?> data-tooltip="tooltip" title="[<?php echo $PR['category']?>] <?php echo $PR['name']?>">
+							<td onclick="goHref('<?php echo $g['adm_href']?>&amp;uid=<?php echo $PR['uid']?>&amp;recnum=<?php echo $recnum?>&amp;p=<?php echo $p?>&amp;cat=<?php echo urlencode($cat)?>&amp;keyw=<?php echo urlencode($keyw)?>#site-page-info');">
+								<a href="#.">
+									<span class="badge badge-dark badge-pill">
+										<i class="fa <?php echo $pageTypeIcon[$PR['pagetype']]?> fa-lg"></i>
+									</span>
+									<?php echo getStrCut($PR['name'],14,'..')?>
+								</a>
+								<small><i><?php echo $PR['id']?></i></small>
+							</td>
+							<td class="rb-time">
+								<?php echo getDateFormat($PR['d_update'],'Y.m.d')?>
+							</td>
+						</tr>
+						<?php endwhile?>
+					</tbody>
+				</table>
+			</div>
 
-				<nav>
-					<ul class="pagination justify-content-center mb-0">
-						<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
-						<?php //echo getPageLink(5,$p,$TPG,'')?>
-					</ul>
-				</nav>
-				<div class="card-footer">
-					<a class="btn btn-light btn-block" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=package_page" target="_action_frame_<?php echo $m?>"><i class="fa fa-download fa-lg"></i> 패키지용 데이터 받기</a>
-				</div>
+
+			<nav>
+				<ul class="pagination pagination-sm justify-content-center mb-0">
+					<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
+					<?php //echo getPageLink(5,$p,$TPG,'')?>
+				</ul>
+			</nav>
+			<div class="card-footer">
+				<a class="btn btn-light btn-block" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=package_page" target="_action_frame_<?php echo $m?>"><i class="fa fa-download fa-lg"></i> 패키지용 데이터 받기</a>
 			</div>
 		</div>
+	</div>
 
-		<div id="tab-content-view" class="col-sm-8 col-md-8 ml-sm-auto col-xl-9 pt-3">
-			<?php if($g['device']):?><a name="site-page-info"></a><?php endif?>
-			<form name="procForm" class="form-horizontal rb-form" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
-				<input type="hidden" name="r" value="<?php echo $r?>">
-				<input type="hidden" name="m" value="<?php echo $module?>">
-				<input type="hidden" name="a" value="regispage">
-				<input type="hidden" name="uid" value="<?php echo $R['uid']?>">
-				<input type="hidden" name="orign_id" value="<?php echo $R['id']?>">
-				<input type="hidden" name="perm_g" value="<?php echo $R['perm_g']?>">
-				<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
-				<input type="hidden" name="layout" value="">
-				<input type="hidden" name="cat" value="<?php echo $cat?>">
-				<input type="hidden" name="recnum" value="<?php echo $recnum?>">
-				<input type="hidden" name="keyw" value="<?php echo $keyw?>">
-				<input type="hidden" name="p" value="<?php echo $p?>">
-				<input type="hidden" name="pagetype" value="<?php echo $R['uid']?$R['pagetype']:3?>">
+	<div id="tab-content-view" class="col-sm-8 col-md-8 ml-sm-auto col-xl-9">
+		<?php if($g['device']):?><a name="site-page-info"></a><?php endif?>
+		<form name="procForm" class="card rounded-0 border-0" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
+			<input type="hidden" name="r" value="<?php echo $r?>">
+			<input type="hidden" name="m" value="<?php echo $module?>">
+			<input type="hidden" name="a" value="regispage">
+			<input type="hidden" name="uid" value="<?php echo $R['uid']?>">
+			<input type="hidden" name="orign_id" value="<?php echo $R['id']?>">
+			<input type="hidden" name="perm_g" value="<?php echo $R['perm_g']?>">
+			<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
+			<input type="hidden" name="layout" value="">
+			<input type="hidden" name="cat" value="<?php echo $cat?>">
+			<input type="hidden" name="recnum" value="<?php echo $recnum?>">
+			<input type="hidden" name="keyw" value="<?php echo $keyw?>">
+			<input type="hidden" name="p" value="<?php echo $p?>">
+			<input type="hidden" name="pagetype" value="<?php echo $R['uid']?$R['pagetype']:3?>">
 
-				<div class="page-header mt-2">
-					<h4>
-						<?php if($R['uid']):?>
-						페이지 등록정보
-						<div class="pull-right rb-top-btnbox hidden-xs">
-							<a href="<?php echo $g['adm_href']?>" class="btn btn-light"><i class="fa fa-plus"></i> 새 페이지</a>
-							<div class="btn-group rb-btn-view">
-								<a href="<?php echo RW('mod='.$R['id'])?>" class="btn btn-light">접속하기</a>
-								<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-									<span class="caret"></span>
-								</button>
-								<div class="dropdown-menu dropdown-menu-right" role="menu">
-									<a class="dropdown-item" href="<?php echo RW('mod='.$R['id'])?>" target="_blank">
-										<i class="fa fa-external-link"></i> 새창으로 보기
-									</a>
-								</div>
-							</div>
-						</div>
-						<?php else:?>
-						새 페이지 만들기
-						<?php endif?>
-					</h4>
-				</div>
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<?php if($R['uid']):?>
+				<h4 class="h5 mb-0">페이지 등록정보 <span class="badge badge-primary badge-pill"><?php echo $R['name']?></span></h4>
+				<a href="<?php echo $g['adm_href']?>" class="btn btn-light"><i class="fa fa-plus"></i> 새 페이지</a>
+				<?php else:?>
+				새 페이지 만들기
+				<?php endif?>
+			</div><!-- /.card-header -->
 
+
+			<div class="card-body">
 				<div class="form-group row rb-outside">
 					<label class="col-lg-2 col-form-label text-lg-right">페이지명</label>
 					<div class="col-lg-10 col-xl-9">
@@ -205,13 +191,13 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 						<div class="col-lg-10 col-xl-9 offset-lg-2">
 
 							<div class="custom-control custom-checkbox custom-control-inline">
-							  <input type="checkbox" class="custom-control-input" id="ismain" name="ismain" value="1"<?php if($R['ismain']):?> checked<?php endif?>>
-							  <label class="custom-control-label" for="ismain"><span class="fa fa-home"></span> 메인 페이지</label>
+								<input type="checkbox" class="custom-control-input" id="ismain" name="ismain" value="1"<?php if($R['ismain']):?> checked<?php endif?>>
+								<label class="custom-control-label" for="ismain"><span class="fa fa-home"></span> 메인 페이지</label>
 							</div>
 
 							<div class="custom-control custom-checkbox custom-control-inline">
-							  <input type="checkbox" class="custom-control-input" id="mobile" name="mobile" value="1"<?php if($R['mobile']):?> checked<?php endif?>>
-							  <label class="custom-control-label" for="mobile"><span class="fa fa-mobile"></span> 모바일 페이지</label>
+								<input type="checkbox" class="custom-control-input" id="mobile" name="mobile" value="1"<?php if($R['mobile']):?> checked<?php endif?>>
+								<label class="custom-control-label" for="mobile"><span class="fa fa-mobile"></span> 모바일 페이지</label>
 							</div>
 
 							<small class="form-text text-muted mb-3">
@@ -256,7 +242,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 								</div>
 							</fieldset>
 							<span class="form-text text-muted mt-2">
-								<ul class="list-unstyled">
+								<ul class="list-unstyled mb-0">
 									<li><small>직접꾸미기는 소스코드를 직접 편집하거나 위지위그 에디터를 이용할 수 있습니다.</small></li>
 									<li><small>소스코드로 작성한 페이지를 위지위그로 편집하면 소스코드가 변형될 수 있으니 유의하세요.</small></li>
 									<?php if($R['pagetype']!=3):?><li><small>페이지 속성을 변경한 후에 활성화 됩니다.</small></li><?php endif?>
@@ -292,7 +278,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 								</div>
 							</fieldset>
 							<small class="form-text text-muted mt-2">
-								<ul class="list-unstyled">
+								<ul class="list-unstyled mb-0">
 									<li>이 페이지에 연결시킬 모듈이 있을 경우 모듈연결을 클릭한 후 선택해 주세요.</li>
 									<li>모듈 연결주소가 지정되면 이 메뉴를 호출시 해당 연결주소의 모듈이 출력됩니다.</li>
 									<li>접근권한은 연결된 모듈의 권한설정을 따릅니다.</li>
@@ -301,6 +287,38 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 						</div>
 					</div>
 				</div>
+
+
+				<?php if($R['uid']):?>
+				<?php $_url_1 = $g['s'].'/index.php?r='.$r.'&mod='.$R['id']?>
+				<?php $_url_2 = $g['s'].'/'.$r.'/p/'.$R['id']?>
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label text-lg-right">주소</label>
+					<div class="col-lg-10 col-xl-9">
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+						    <span class="input-group-text">물리주소</span>
+						  </div>
+							<input type="text" id="_url_m_1_" class="form-control" value="<?php echo $_url_1?>">
+							<span class="input-group-append">
+								<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
+								<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
+							</span>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+						    <span class="input-group-text">고유주소</span>
+						  </div>
+							<input type="text" id="_url_m_2_" class="form-control" value="<?php echo $_url_2?>">
+							<span class="input-group-append">
+								<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
+								<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				<?php endif?>
+
 
 				<div class="panel-group" id="page-settings">
 					<div class="card" id="page-settings-meta">
@@ -554,31 +572,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 										<textarea name="extra" class="form-control" rows="3"><?php echo htmlspecialchars($R['extra'])?></textarea>
 									</div>
 								</div>
-								<?php if($R['uid']):?>
-								<?php $_url_1 = $g['s'].'/index.php?r='.$r.'&mod='.$R['id']?>
-								<?php $_url_2 = $g['s'].'/'.$r.'/p/'.$R['id']?>
-								<div class="form-group row">
-									<label class="col-lg-2 col-form-label text-lg-right">주소</label>
-									<div class="col-lg-10 col-xl-9">
-										<div class="input-group" style="margin-bottom: 5px">
-											<span class="input-group-addon">물리주소</span>
-											<input type="text" id="_url_m_1_" class="form-control" value="<?php echo $_url_1?>">
-											<span class="input-group-append">
-												<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
-												<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
-											</span>
-										</div>
-										<div class="input-group">
-											<span class="input-group-addon">고유주소</span>
-											<input type="text" id="_url_m_2_" class="form-control" value="<?php echo $_url_2?>">
-											<span class="input-group-append">
-												<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
-												<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
-											</span>
-										</div>
-									</div>
-								</div>
-								<?php endif?>
+
 							</div>
 						</div>
 					</div>
@@ -586,8 +580,9 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 				<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit">
 					<?php echo $R['uid']?'속성변경':'신규페이지 등록' ?>
 				</button>
-			</form>
-		</div>
+			</div><!-- /.card-body -->
+
+		</form>
 	</div>
 </div>
 

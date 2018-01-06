@@ -8,5 +8,5 @@ if (!$R['uid']) exit;
 if (!$my['admin'] && (!$R['mbruid'] || $my['uid'] != $R['mbruid'])) exit;
 
 getDbUpdate($table[$m.'upload'],'hidden='.($R['hidden']?0:1),'uid='.$R['uid']);
-getLink($g['s'].'/?r='.$r.'&m='.$m.'&upload=Y&mod=list&blog='.$blog.'&gparam='.$gparam.'&code='.$code,'parent.','','');
+getLink($g['s'].'/?r='.$r.'&m='.$m.'&upload=Y&mod=list&set='.$set.'&gparam='.$gparam.'&code='.$code,'parent.','','');
 ?>

@@ -1,8 +1,8 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-if (!$blog) getLink('','','포스트셋 아이디가 지정되지 않았습니다.',''); 
-$B = getUidData($table[$m.'list'],$blog);
+if (!$set) getLink('','','포스트셋 아이디가 지정되지 않았습니다.',''); 
+$B = getUidData($table[$m.'list'],$set);
 if (!$B['uid']) getLink('','','존재하지 않는 포스트셋입니다.','');
 if (!$my['uid'] || ($my['uid']!=$B['mbruid'] && !strpos('_,'.$B['members'].',',','.$my['id'].','))) getLink('','','포스트 등록권한이 없습니다.',''); 
 include $g['dir_module'].'var/var.php';
@@ -11,7 +11,7 @@ include $g['dir_module'].'lib/tree.func.php';
 include $g['dir_module'].'lib/action.func.php';
 
 //$uid		=
-$blog		= $B['uid'];
+$set		= $B['uid'];
 //$gid		=
 //$isreserve=
 //$isphoto	=
@@ -64,8 +64,8 @@ if ($num_upfile || $num_photo)
 
 	include $g['path_core'].'function/thumb.func.php';
 
-	$fserver	= $d['blog']['up_use_fileserver'];
-	$fserverurl = $fserver ? $d['blog']['ftp_urlpath'] : $g['url_root'].'/modules/'.$m.'/files/';
+	$fserver	= $d['set']['up_use_fileserver'];
+	$fserverurl = $fserver ? $d['set']['ftp_urlpath'] : $g['url_root'].'/modules/'.$m.'/files/';
 	$incPhoto	= '';
 	$upload		= $uid ? $upload : '';
 	$saveDir	= $g['path_module'].$m.'/files/';
@@ -77,16 +77,16 @@ if ($num_upfile || $num_photo)
 
 	if ($fserver)
 	{
-		$FTP_CONNECT = ftp_connect($d['blog']['ftp_host'],$d['blog']['ftp_port']); 
-		$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['blog']['ftp_user'],$d['blog']['ftp_pass']);
-		if ($d['blog']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
+		$FTP_CONNECT = ftp_connect($d['set']['ftp_host'],$d['set']['ftp_port']); 
+		$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['set']['ftp_user'],$d['set']['ftp_pass']);
+		if ($d['set']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
 		if (!$FTP_CONNECT) getLink('','','FTP서버 연결에 문제가 발생했습니다.','');
 		if (!$FTP_CRESULT) getLink('','','FTP서버 아이디나 패스워드가 일치하지 않습니다.','');
 
-		ftp_chdir($FTP_CONNECT,$d['blog']['ftp_folder']);
+		ftp_chdir($FTP_CONNECT,$d['set']['ftp_folder']);
 		for ($i = 1; $i < 4; $i++)
 		{
-			ftp_mkdir($FTP_CONNECT,$d['blog']['ftp_folder'].str_replace('./files/','',${'savePath'.$i}));
+			ftp_mkdir($FTP_CONNECT,$d['set']['ftp_folder'].str_replace('./files/','',${'savePath'.$i}));
 		}
 	}
 	else {
@@ -128,10 +128,10 @@ if ($num_upfile || $num_photo)
 				$IM = getimagesize($_FILES['upfile']['tmp_name'][$i]);
 				$width = $IM[0];
 				$height= $IM[1];
-				ftp_put($FTP_CONNECT,$d['blog']['ftp_folder'].$up_folder.'/'.$up_thumbname,$up_thumbFile,FTP_BINARY);
+				ftp_put($FTP_CONNECT,$d['set']['ftp_folder'].$up_folder.'/'.$up_thumbname,$up_thumbFile,FTP_BINARY);
 				unlink($up_thumbFile);
 			}
-			ftp_put($FTP_CONNECT,$d['blog']['ftp_folder'].$up_folder.'/'.$up_tmpname,$_FILES['upfile']['tmp_name'][$i],FTP_BINARY);
+			ftp_put($FTP_CONNECT,$d['set']['ftp_folder'].$up_folder.'/'.$up_tmpname,$_FILES['upfile']['tmp_name'][$i],FTP_BINARY);
 		}
 		else {
 
@@ -152,7 +152,7 @@ if ($num_upfile || $num_photo)
 			}
 		}
 
-		$QKEY = "gid,hidden,tmpcode,blog,parent,mbruid,type,ext,fserver,url,folder,name,tmpname,thumbname,size,width,height,caption,down,d_regis,d_update";
+		$QKEY = "gid,hidden,tmpcode,set,parent,mbruid,type,ext,fserver,url,folder,name,tmpname,thumbname,size,width,height,caption,down,d_regis,d_update";
 		$QVAL = "'$up_gid','$up_hidden','','".$B['uid']."','0','$mbruid','$up_type','$up_fileExt','$fserver','$fserverurl','$up_folder','$up_name','$up_tmpname','$up_thumbname','$up_size','$width','$height','$up_caption','0','$d_regis',''";
 		getDbInsert($table[$m.'upload'],$QKEY,$QVAL);
 		$up_lastuid = getDbCnt($table[$m.'upload'],'max(uid)','');
@@ -161,10 +161,10 @@ if ($num_upfile || $num_photo)
 		{
 			if ($fserver)
 			{
-				$incPhoto .= '<img src="'.$d['blog']['ftp_urlpath'].$up_folder.'/'.$up_tmpname.'" width="'.$d['blog']['width_img'].'" class="photo" alt="" /><br /><br />';
+				$incPhoto .= '<img src="'.$d['set']['ftp_urlpath'].$up_folder.'/'.$up_tmpname.'" width="'.$d['set']['width_img'].'" class="photo" alt="" /><br /><br />';
 			}
 			else {
-				$incPhoto .= '<img src="'.$g['url_root'].'/modules/'.$m.'/files/'.$up_folder.'/'.$up_tmpname.'" width="'.$d['blog']['width_img'].'" class="photo" alt="" /><br /><br />';
+				$incPhoto .= '<img src="'.$g['url_root'].'/modules/'.$m.'/files/'.$up_folder.'/'.$up_tmpname.'" width="'.$d['set']['width_img'].'" class="photo" alt="" /><br /><br />';
 			}
 		}
 
@@ -182,10 +182,10 @@ if ($num_upfile || $num_photo)
 			{
 				if ($fserver)
 				{
-					$incPhoto .= '<img src="'.$d['blog']['ftp_urlpath'].$U['folder'].'/'.$U['tmpname'].'" width="'.$d['blog']['width_img'].'" class="photo" alt="" /><br /><br />';
+					$incPhoto .= '<img src="'.$d['set']['ftp_urlpath'].$U['folder'].'/'.$U['tmpname'].'" width="'.$d['set']['width_img'].'" class="photo" alt="" /><br /><br />';
 				}
 				else {
-					$incPhoto .= '<img src="'.$g['url_root'].'/files/'.$U['folder'].'/'.$U['tmpname'].'" width="'.$d['blog']['width_img'].'" class="photo" alt="" /><br /><br />';
+					$incPhoto .= '<img src="'.$g['url_root'].'/files/'.$U['folder'].'/'.$U['tmpname'].'" width="'.$d['set']['width_img'].'" class="photo" alt="" /><br /><br />';
 				}
 			}
 		}
@@ -246,14 +246,14 @@ if ($uid)
 	foreach($_category_members['data'] as $_ct1)
 	{
 		$sql = '';
-		$_cats = getArrayString(getMenuCodeToSqlBlog1($table[$m.'category'],$_ct1,$B['uid'],''));
+		$_cats = getArrayString(getMenuCodeToSqlset1($table[$m.'category'],$_ct1,$B['uid'],''));
 		foreach($_cats['data'] as $_ct2)
 		{
 		    $_ct2_info=getUidData($table[$m.'category'],$_ct2);
 			$_ct2_depth=$_ct2_info['depth'];
 			if (!getDbRows($table[$m.'catidx'],'post='.$R['uid'].' and category='.$_ct2))
 			{
-				getDbInsert($table[$m.'catidx'],'blog,post,category,depth',"'".$B['uid']."','".$R['uid']."','".$_ct2."','".$_ct2_depth."'");
+				getDbInsert($table[$m.'catidx'],'set,post,category,depth',"'".$B['uid']."','".$R['uid']."','".$_ct2."','".$_ct2_depth."'");
 				if ($isreserve)
 				{
 					getDbUpdate($table[$m.'category'],'num_reserve=num_reserve+1','uid='.$_ct2);
@@ -286,22 +286,22 @@ else
 	$gid = $mingid ? $mingid-1 : 100000000;
 	$log = $my[$_HS['nametype']].'|'.getDateFormat($date['totime'],'Y.m.d H:i').'<s>';
 	
-	$QKEY1 = "site,blog,gid,isreserve,isphoto,isvod,cutcomment,mbruid,tag,subject,review,content,";
+	$QKEY1 = "site,set,gid,isreserve,isphoto,isvod,cutcomment,mbruid,tag,subject,review,content,";
 	$QKEY1.= "hit,comment,oneline,d_regis,d_modify,d_comment,sns,upload,log,published,step,use_auth,d_publish,d_published";
 	$QVAL1 = "'$s','".$B['uid']."','$gid','$isreserve','$isphoto','$isvod','$cutcomment','$mbruid','$tag','$subject','$review','$content',";
 	$QVAL1.= "'0','0','0','$d_regis','','','','$upload','$log','$published','$step','$use_auth','$d_publish','$d_published'";
 	getDbInsert($table[$m.'data'],$QKEY1,$QVAL1);
 	getDbUpdate($table[$m.'list'],"num_w=num_w+1,d_last='".$d_regis."'",'uid='.$B['uid']);
-	if(!getDbRows($table[$m.'day'],"date='".$date['today']."' and blog=".$B['uid'])) getDbInsert($table[$m.'day'],'date,blog,num',"'".$date['today']."','".$B['uid']."','1'");
-	else getDbUpdate($table[$m.'day'],'num=num+1',"date='".$date['today']."' and blog=".$B['uid']); 
-	if(!getDbRows($table[$m.'month'],"date='".$date['month']."' and blog=".$B['uid'])) getDbInsert($table[$m.'month'],'year,date,blog,num',"'".$date['year']."','".$date['month']."','".$B['uid']."','1'");
-	else getDbUpdate($table[$m.'month'],'num=num+1',"date='".$date['month']."' and blog='".$B['uid']."' ");
+	if(!getDbRows($table[$m.'day'],"date='".$date['today']."' and set=".$B['uid'])) getDbInsert($table[$m.'day'],'date,set,num',"'".$date['today']."','".$B['uid']."','1'");
+	else getDbUpdate($table[$m.'day'],'num=num+1',"date='".$date['today']."' and set=".$B['uid']); 
+	if(!getDbRows($table[$m.'month'],"date='".$date['month']."' and set=".$B['uid'])) getDbInsert($table[$m.'month'],'year,date,set,num',"'".$date['year']."','".$date['month']."','".$B['uid']."','1'");
+	else getDbUpdate($table[$m.'month'],'num=num+1',"date='".$date['month']."' and set='".$B['uid']."' ");
 
 	$LASTUID = getDbCnt($table[$m.'data'],'max(uid)','');
-	$QKEY2 = "blog,parent,subject,title,keywords,description,classification,replyto,language,build";
+	$QKEY2 = "set,parent,subject,title,keywords,description,classification,replyto,language,build";
 	$QVAL2 = "'".$B['uid']."','".$LASTUID."','$s_subject','$s_title','$s_keywords','$s_desc','$s_class','$s_replyto','$s_language','$s_build'";
 	getDbInsert($table[$m.'seo'],$QKEY2,$QVAL2);
-	getDbUpdate($table[$m.'members'],'num_w=num_w+1','blog='.$B['uid'].' and mbruid='.$my['uid']);
+	getDbUpdate($table[$m.'members'],'num_w=num_w+1','set='.$B['uid'].' and mbruid='.$my['uid']);
 
 
 	$_category_members = array();
@@ -309,14 +309,14 @@ else
 	foreach($_category_members['data'] as $_ct1)
 	{
 		$sql = '';
-		$_cats = getArrayString(getMenuCodeToSqlBlog1($table[$m.'category'],$_ct1,$B['uid'],''));
+		$_cats = getArrayString(getMenuCodeToSqlset1($table[$m.'category'],$_ct1,$B['uid'],''));
 		foreach($_cats['data'] as $_ct2)
 		{
 			$_ct2_info=getUidData($table[$m.'category'],$_ct2);
 			$_ct2_depth=$_ct2_info['depth'];
 			if (!getDbRows($table[$m.'catidx'],'post='.$LASTUID.' and category='.$_ct2))
 			{
-				getDbInsert($table[$m.'catidx'],'blog,post,category,depth',"'".$B['uid']."','".$LASTUID."','".$_ct2."','".$_ct2_depth."'");
+				getDbInsert($table[$m.'catidx'],'set,post,category,depth',"'".$B['uid']."','".$LASTUID."','".$_ct2."','".$_ct2_depth."'");
 				if ($isreserve)
 				{
 					getDbUpdate($table[$m.'category'],'num_reserve=num_reserve+1','uid='.$_ct2);
@@ -344,9 +344,9 @@ if ($upload)
 	foreach ($_updata['data'] as $_ups)
 	{
 		$_upv = getUidData($table[$m.'upload'],$_ups);
-		if (!$_upv['blog'] || !$_upv['parent'])
+		if (!$_upv['set'] || !$_upv['parent'])
 		{
-			getDbUpdate($table[$m.'upload'],'blog='.$B['uid'].',parent='.$NOWUID,'uid='.$_upv['uid']);
+			getDbUpdate($table[$m.'upload'],'set='.$B['uid'].',parent='.$NOWUID,'uid='.$_upv['uid']);
 		}
 	}
 }
@@ -359,7 +359,7 @@ if ($tag || $R['tag'])
 
 if ($snsCallBack && ($sns_t||$sns_f||$sns_m||$sns_y))
 {
-	$xcync = "[][][][][][r:".$r.",m:".$m.",blog:".$B['id'].",uid:".$NOWUID."]";
+	$xcync = "[][][][][][r:".$r.",m:".$m.",set:".$B['id'].",uid:".$NOWUID."]";
 	$orignSubject = strip_tags($subject);
 	$orignContent = getStrCut($orignSubject,60,'..');
 	$orignUrl = 'http://'.$_SERVER['SERVER_NAME'].str_replace('./','/',getCyncUrl($xcync)).'#CMT';
@@ -380,14 +380,14 @@ if($step==1){
 	$SM=getDbData($table['s_mbrdata'],'memberuid='.$mbruid,'*'); // 필자 정보 
 	$RM=getDbData($table['s_mbrdata'],'memberuid='.$mnguid,'*'); // 메니져 정보
 	$mod='req';
-	$blog_id=$B['id'];
-	putPostNotice($SM,$RM,$blog_id,$mod);
+	$set_id=$B['id'];
+	putPostNotice($SM,$RM,$set_id,$mod);
 } 
 
 $_SESSION['bbsback'] = $backtype;
 if ($backtype == 'list')
 {
-	$_link=$g['s'].'/?r='.$r.'&m='.$m.'&blog='.$B['id'];
+	$_link=$g['s'].'/?r='.$r.'&m='.$m.'&set='.$B['id'];
 
 	if(!$published) getLink($_link.'&front=my_draft','parent.','','');
 	else{
@@ -396,7 +396,7 @@ if ($backtype == 'list')
 }
 else if ($backtype == 'view')
 {
-	 getLink($g['s'].'/?r='.$r.'&m='.$m.'&blog='.$B['id'].'&front=view&uid='.$NOWUID,'parent.','',''); 
+	 getLink($g['s'].'/?r='.$r.'&m='.$m.'&set='.$B['id'].'&front=view&uid='.$NOWUID,'parent.','',''); 
 }
 else {
 	getLink('','parent.','','');
