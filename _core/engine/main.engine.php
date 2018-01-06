@@ -17,6 +17,20 @@ if ($_SESSION['mbr_uid'])
 	$g['mysns'] = explode('|',$my['sns']);
 }
 
+// 로그인 상태 유지 프로세스 추가
+if($_COOKIE[$DB['head'].'_token'])
+{
+    $memberuid=getArrayCookie($_COOKIE[$DB['head'].'_token'],'|',0);
+    $access_token=getArrayCookie($_COOKIE[$DB['head'].'_token'],'|',1);
+    $_now=time();
+    $t_que="memberuid='".$memberuid."' and access_token='".$access_token."' and expire > '".$_now."' ";
+    $is_token=getDbData($DB['head'].'_s_mbrtoken',$t_que,'*');
+     if($is_token['uid']){
+     	  $my = array_merge(getUidData($table['s_mbrid'],$memberuid),getDbData($table['s_mbrdata'],"memberuid='".$memberuid."'",'*'));
+	     $g['mysns'] = explode('|',$my['sns']);
+     }
+}
+
 if ($r)
 {
 	$_HS = getDbData($table['s_site'],"id='".$r."'",'*');
