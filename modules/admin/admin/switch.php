@@ -130,11 +130,10 @@ $SITEN = db_num_rows($SITES);
 				<div class="form-group">
 					<div class="col-lg-12">
 						<?php foreach($TMPST as $_val):?>
-						<label class="custom-control custom-checkbox">
-						  <input type="checkbox" class="custom-control-input" name="aply_sites[]" value="<?php echo $_val[1]?>"<?php if(strstr($sinfo[1],'['.$_val[1].']')):?> checked<?php endif?>>
-						  <span class="custom-control-indicator"></span>
-						  <span class="custom-control-description"><?php echo $_val[0]?> <small class="text-muted">(<?php echo $_val[1]?>)</small></span>
-						</label>
+						<div class="custom-control custom-checkbox custom-control-inline">
+						  <input type="checkbox" class="custom-control-input" id="aply_sites_<?php echo $_val[1]?>" name="aply_sites[]" value="<?php echo $_val[1]?>"<?php if(strstr($sinfo[1],'['.$_val[1].']')):?> checked<?php endif?>>
+						  <label class="custom-control-label" for="aply_sites_<?php echo $_val[1]?>"><?php echo $_val[0]?> <small class="text-muted">(<?php echo $_val[1]?>)</small></label>
+						</div>
 						<?php endforeach?>
 					</div>
 				</div>
