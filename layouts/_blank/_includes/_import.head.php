@@ -86,6 +86,3 @@ $.notifyDefaults({
 <script src="<?php echo $_val?>.js<?php echo $g['wcache']?>"></script>
 <?php endif?>
 <?php endforeach?>
-
-<!-- bootbox -->
-<?php getImport('bootbox','bootbox',false,'js')?>
