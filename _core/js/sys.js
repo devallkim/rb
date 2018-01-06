@@ -354,3 +354,19 @@ function getContext(context,event)
 	getId('rb-context-menu').style.left = xy.x + 'px';
 	getId('rb-context-menu').children[0].click();
 }
+// 알림 출력 (쿠키 활용, js-cookie, bootstrap-notify 플러그인 필요)
+function putCookieAlert(name)
+{
+	var action_result = Cookies.get(name)  // 결과 가져오기
+	var _action_result = action_result.split('|');
+	if (action_result) {
+	 setTimeout(function(){
+		 $.notify({
+		 	message: _action_result[0]
+		 },{
+		 	type: _action_result[1]
+		 });
+	 }, 300);
+	}
+	Cookies.remove(name);  // 결과 초기화
+}
