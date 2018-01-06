@@ -70,6 +70,7 @@ if ($uid)
 		else getLink(RW('mod='.$id),'parent.','','');
 	}
 	else {
+		setrawcookie('result_page', rawurlencode('페이지 등록정보가 변경 되었습니다.|success'));  // 처리여부 cookie 저장
 		getLink('reload','parent.','','');
 	}
 }
@@ -116,7 +117,7 @@ else {
 	}
 
 	db_query("OPTIMIZE TABLE ".$table['s_page'],$DB_CONNECT);
-
+	setrawcookie('result_page', rawurlencode('페이지가 등록 되었습니다.|success'));  // 처리여부 cookie 저장
 	getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&front=page&uid='.$lastpage.'&cat='.urlencode($cat).'&renum='.$recnum.'&p='.$p.'&keyw='.urlencode($keyw),'parent.','','');
 }
 ?>

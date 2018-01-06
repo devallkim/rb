@@ -26,7 +26,9 @@ if($_HS['startpage'] && $_HS['startpage'] == $R['uid'])
 	getDbUpdate($table['s_site'],'startpage=0','uid='.$s);
 }
 
-db_query("OPTIMIZE TABLE ".$table['s_page'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table['s_page'],$DB_CONNECT);
+
+setrawcookie('result_page', rawurlencode('페이지가 삭제 되었습니다.|success'));  // 처리여부 cookie 저장
 
 if ($back=='Y')
 {

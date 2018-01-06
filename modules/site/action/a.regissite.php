@@ -44,7 +44,7 @@ if ($site_uid)
 		rename($g['path_page'].$r.'-menus',$g['path_page'].$id.'-menus');
 		rename($g['path_page'].$r.'-pages',$g['path_page'].$id.'-pages');
 	}
-
+	setrawcookie('result_site', rawurlencode('사이트가 등록정보가 변경되었습니다.|success'));  // 처리여부 cookie 저장
 	if ($r != $id || $name != $_HS['name'])
 	{
 		getLink($g['s'].'/?r='.$id.'&pickmodule='.$m.'&panel=Y','parent.parent.','','');
@@ -97,6 +97,7 @@ else {
 	@chmod($g['path_page'].$id.'-pages/images',0707);
 	@chmod($g['path_var'].'site/'.$id,0707);
 
+	setrawcookie('result_site', rawurlencode('사이트가 등록 되었습니다.|success'));  // 처리여부 cookie 저장
 	if ($nosite=='Y')
 	{
 		getLink($g['s'].'/?r='.$id.'&m=admin&pickmodule='.$m.'&panel=Y','parent.','','');

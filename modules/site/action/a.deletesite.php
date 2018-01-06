@@ -39,6 +39,7 @@ if ($R['uid'])
 	DirDelete($g['path_page'].$R['id'].'-pages');
 	DirDelete($g['path_var'].'site/'.$R['id']);
 }
+setrawcookie('result_site', rawurlencode('사이트가 삭제 되었습니다.|success'));  // 처리여부 cookie 저장
 
 if (!getDbRows($table['s_site'],''))
 {

@@ -25,16 +25,16 @@ if ($subQue)
 		@unlink($_xfile.'.js');
 		@unlink($_xfile.'.header.php');
 		@unlink($_xfile.'.footer.php');
-		
+
 		@unlink($_xfile.'.txt');
 		@unlink($_xfile.'.cache');
 		@unlink($_xfile.'.widget.cache');
 		@unlink($_xfile.'.mobile.cache');
 
 		@unlink($g['path_var'].'menu/'.$R['imghead']);
-		@unlink($g['path_var'].'menu/'.$R['imgfoot']);	
+		@unlink($g['path_var'].'menu/'.$R['imgfoot']);
 	}
-	
+
 	if ($parent)
 	{
 		if (!getDbRows($table['s_menu'],'parent='.$parent))
@@ -42,8 +42,10 @@ if ($subQue)
 			getDbUpdate($table['s_menu'],'is_child=0','uid='.$parent);
 		}
 	}
-	db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT); 
+	db_query("OPTIMIZE TABLE ".$table['s_menu'],$DB_CONNECT);
 }
+
+setrawcookie('result_menu', rawurlencode('메뉴가 삭제 되었습니다.|success'));  // 처리여부 cookie 저장
 
 if ($back=='Y')
 {

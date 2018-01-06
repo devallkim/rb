@@ -148,6 +148,7 @@ if ($cat && !$vtype)
 			getDbUpdate($table['s_menu'],"hidden='".$hidden."',reject='".$reject."',perm_g='".$perm_g."',perm_l='".$perm_l."',layout='".$layout."',m_layout='".$m_layout."'","uid <> ".$cat." and (".$subQue.")");
 		}
 	}
+	setrawcookie('result_menu', rawurlencode('메뉴 등록정보가 변경 되었습니다.|success'));  // 처리여부 cookie 저장
 	getLink('reload','parent.','','');
 }
 else {
@@ -242,9 +243,11 @@ else {
 
 	if ($i > 1)
 	{
+		setrawcookie('result_menu', rawurlencode('복수의 메뉴가 등록 되었습니다.|success'));  // 처리여부 cookie 저장
 		getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&front=menu&cat='.$parent.'&code='.$code.'&vtype='.$vtype,'parent.','','');
 	}
 	else {
+		setrawcookie('result_menu', rawurlencode('메뉴가 등록 되었습니다.|success'));  // 처리여부 cookie 저장
 		getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&front=menu&cat='.$lastmenu.'&code='.$code.'/'.$lastmenu.'#site-menu-info','parent.','','');
 	}
 }

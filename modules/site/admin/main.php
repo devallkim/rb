@@ -637,6 +637,8 @@ $('.dd').on('change', function() {
 <?php getImport('bootstrap-maxlength','bootstrap-maxlength.min',false,'js')?>
 <script>
 
+putCookieAlert('result_site') // 실행결과 알림 메시지 출력
+
 $('#site-info').on('shown.bs.collapse', function () {
   $('#site-code').focus()
 })

@@ -15,6 +15,7 @@ if($cat){	$CINFO = getUidData($table['s_menu'],$cat);	$_SEO = getDbData($tabl
 $catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';if ($is_regismode){	$CINFO['menutype'] = '3';	$CINFO['name']	   = '';	$CINFO['joint']	   = '';	$CINFO['redirect'] = '';	$CINFO['hidden']   = '';	$CINFO['target']   = '';	$CINFO['imghead']  = '';	$CINFO['imgfoot']  = '';}
 $menuType = array('','모듈연결','위젯전시','직접편집');
 ?>
+
 <div id="catebody" class="row no-gutters">
 	<nav id="category" class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
 		<div id="accordion">
@@ -37,7 +38,6 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 
 					<?php if($ISCAT):?>
 					<div class="card-body">
-						<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
 						<?php $_treeOptions=array('site'=>$s,'table'=>$table['s_menu'],'dispNum'=>true,'dispHidden'=>false,'dispCheckbox'=>false,'allOpen'=>false,'bookmark'=>'site-menu-info')?>
 						<?php $_treeOptions['link'] = $g['adm_href'].'&amp;cat='?>
 						<?php echo getTreeMenu($_treeOptions,$code,0,0,'')?>
@@ -499,7 +499,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 													</div>
 													<div class="col-sm-6" id="rb-layout-select2">
 														<select class="form-control custom-select" name="layout_1_sub"<?php if(!$CINFO['layout']):?> disabled<?php endif?>>
-															<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+															<?php if(!$CINFO['layout']):?><option>서브 레이아웃</option><?php endif?>
 															<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
 															<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 															<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
@@ -519,7 +519,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 											<div class="col-lg-10 col-xl-9">
 												<div class="form-row">
 													<div class="col-sm-6" id="rb-m_layout-select">
-														<select class="form-control custom-select" name="m_layout_1" required onchange="getSubLayout(this,'rb-m_layout-select2','m_layout_1_sub','custom-select');">
+														<select class="form-control custom-select" name="m_layout_1" onchange="getSubLayout(this,'rb-m_layout-select2','m_layout_1_sub','custom-select');">
 															<option value="">&nbsp;모바일 레이아웃 사용안함</option>
 															<option disabled>--------------------</option>
 															<?php $_layoutHexp=explode('/',$_HS['layout'])?>
@@ -536,7 +536,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 													</div>
 													<div class="col-sm-6" id="rb-m_layout-select2">
 														<select class="form-control custom-select" name="m_layout_1_sub"<?php if(!$CINFO['m_layout']):?> disabled<?php endif?>>
-															<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+															<?php if(!$CINFO['m_layout']):?><option>서브 레이아웃</option><?php endif?>
 															<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
 															<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 															<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
@@ -829,24 +829,20 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 		</form>
 	</div>
 </div>
-
-<!-- zero-clipboard -->
-<?php getImport('zero-clipboard','ZeroClipboard.min',false,'js') ?>
-<script>
-var client = new ZeroClipboard($(".rb-clipboard"));
-client.on( "ready", function( readyEvent ) {
-	client.on( "aftercopy", function( event ) {
-		$('.tooltip .tooltip-inner').text('복사되었습니다');
-	});
-});
-</script>
 
-<!-- bootstrap-maxlength --><?php getImport('bootstrap-maxlength','bootstrap-maxlength.min',false,'js')?>
-<script>$('input.rb-title').maxlength({	alwaysShow: true,	threshold: 10,	warningClass: "label label-success",	limitReachedClass: "label label-danger",});
-$('textarea.rb-description').maxlength({	alwaysShow: true,	threshold: 10,	warningClass: "label label-success",	limitReachedClass: "label label-danger",});
-</script>
-<!-- modal -->
+
+
+
+<!-- bootstrap-maxlength -->
+<?php getImport('bootstrap-maxlength','bootstrap-maxlength.min',false,'js')?>
+
 <script>
+
+
+$('input.rb-title').maxlength({	alwaysShow: true,	threshold: 10,	warningClass: "label label-success",	limitReachedClass: "label label-danger",});
+$('textarea.rb-description').maxlength({	alwaysShow: true,	threshold: 10,	warningClass: "label label-success",	limitReachedClass: "label label-danger",});
+
+
 var _mediasetField='';
 $(document).ready(function() {
 	$('.rb-modal-code').on('click',function() {
@@ -881,7 +877,10 @@ $(document).ready(function() {
 <?php getImport('bootstrap-validator','dist/js/bootstrapValidator.min',false,'js')?>
 
 <script>
-$('.form-horizontal').bootstrapValidator({
+
+putCookieAlert('result_menu') // 실행결과 알림 메시지 출력
+
+$('[name="procForm"]').bootstrapValidator({
 	message: 'This value is not valid',
 	<?php if(!$g['device']):?>
 	feedbackIcons: {
@@ -959,4 +958,5 @@ document.ondblclick = function(event)
 	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?><?php if($CINFO['code']):?>&c=<?php echo $CINFO['code']?><?php endif?>">사용자모드 보기</a></li><li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&front=menu">새 메뉴 만들기</a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a></li>',event);
 }
 <?php endif?>
+
 </script>

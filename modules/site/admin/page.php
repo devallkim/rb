@@ -446,7 +446,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 											</div>
 											<div class="col-sm-6" id="rb-layout-select2">
 												<select class="form-control custom-select" name="layout_1_sub"<?php if(!$R['layout']):?> disabled<?php endif?>>
-													<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+													<?php if(!$R['layout']):?><option>서브 레이아웃</option><?php endif?>
 													<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
 													<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 													<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
@@ -466,7 +466,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 									<div class="col-lg-10 col-xl-9">
 										<div class="form-row">
 											<div class="col-sm-6" id="rb-m_layout-select">
-												<select class="form-control custom-select" name="m_layout_1" required onchange="getSubLayout(this,'rb-m_layout-select2','m_layout_1_sub','custom-select');">
+												<select class="form-control custom-select" name="m_layout_1" onchange="getSubLayout(this,'rb-m_layout-select2','m_layout_1_sub','custom-select');">
 													<option value="">&nbsp;모바일 레이아웃 사용안함</option>
 													<option disabled>--------------------</option>
 													<?php $_layoutHexp=explode('/',$_HS['layout'])?>
@@ -629,17 +629,6 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 </div>
 
 
-<!-- zero-clipboard -->
-<?php getImport('zero-clipboard','ZeroClipboard.min',false,'js') ?>
-<script>
-var client = new ZeroClipboard($(".rb-clipboard"));
-client.on( "ready", function( readyEvent ) {
-	client.on( "aftercopy", function( event ) {
-		$('.tooltip .tooltip-inner').text('복사되었습니다');
-	});
-});
-</script>
-
 <!-- bootstrap-maxlength -->
 <?php getImport('bootstrap-maxlength','bootstrap-maxlength.min',false,'js')?>
 <script>
@@ -693,7 +682,10 @@ $(document).ready(function() {
 <?php getImport('bootstrap-validator','dist/css/bootstrapValidator.min',false,'css')?>
 <?php getImport('bootstrap-validator','dist/js/bootstrapValidator.min',false,'js')?>
 <script>
-$('.form-horizontal').bootstrapValidator({
+
+putCookieAlert('result_page') // 실행결과 알림 메시지 출력
+
+$('[name="procForm"]').bootstrapValidator({
 	message: 'This value is not valid',
 	<?php if(!$g['device']):?>
 	feedbackIcons: {
