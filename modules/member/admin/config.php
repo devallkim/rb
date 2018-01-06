@@ -409,8 +409,8 @@ include_once $_tmpvfile;
 								 </div>
 
 								 <div class="custom-control custom-checkbox custom-control-inline">
-									 <input type="checkbox" class="custom-control-input" id="use_login_cookie" name="login_cookie" value="1" <?php if($d['member']['use_login_cookie']):?> checked="checked"<?php endif?>>
-									 <label class="custom-control-label" for="use_login_cookie">로그인 상태 유지 기능 사용</label>
+									 <input type="checkbox" class="custom-control-input" id="login_cookie" name="login_cookie" value="1" <?php if($d['member']['login_cookie']):?> checked="checked"<?php endif?>>
+									 <label class="custom-control-label" for="login_cookie">로그인 상태 유지 기능 사용</label>
 								 </div>
 
 							 </div>
