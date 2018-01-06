@@ -57,7 +57,7 @@ if ($uid)
 		}
 	}
 
-	$QVAL = "pagetype='$pagetype',ismain='$ismain',mobile='$mobile',id='$id',category='$category',name='$name',perm_g='$perm_g',perm_l='$perm_l',layout='$layout',joint='$joint',linkedmenu='$linkedmenu',d_update='$d_regis',mediaset='$mediaset',extra='$extra'";
+	$QVAL = "pagetype='$pagetype',ismain='$ismain',mobile='$mobile',id='$id',category='$category',name='$name',perm_g='$perm_g',perm_l='$perm_l',layout='$layout',m_layout='$m_layout',joint='$joint',linkedmenu='$linkedmenu',d_update='$d_regis',mediaset='$mediaset',extra='$extra'";
 	getDbUpdate($table['s_page'],$QVAL,'uid='.$uid);
 
 	$_SEO = getDbData($table['s_seo'],'uid='.(int)$seouid,'uid');
@@ -107,8 +107,8 @@ else {
 			@chmod($g['path_page'].$r.'-pages/'.$xnid.'.txt',0707);
 		}
 
-		$QKEY = "site,pagetype,ismain,mobile,id,category,name,perm_g,perm_l,layout,joint,hit,linkedmenu,d_regis,d_update,mediaset,member,extra";
-		$QVAL = "'$s','$pagetype','$ismain','$mobile','$xnid','$category','$xnarr[0]','$perm_g','$perm_l','$layout','$joint','$hit','$linkedmenu','$d_regis','$d_regis','$mediaset','".$my['uid']."','$extra'";
+		$QKEY = "site,pagetype,ismain,mobile,id,category,name,perm_g,perm_l,layout,m_layout,joint,hit,linkedmenu,d_regis,d_update,mediaset,member,extra";
+		$QVAL = "'$s','$pagetype','$ismain','$mobile','$xnid','$category','$xnarr[0]','$perm_g','$perm_l','$layout','$m_layout','$joint','$hit','$linkedmenu','$d_regis','$d_regis','$mediaset','".$my['uid']."','$extra'";
 		getDbInsert($table['s_page'],$QKEY,$QVAL);
 		$lastpage = getDbCnt($table['s_page'],'max(uid)','');
 		getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'2','$lastpage','$title','$keywords','$description','$classification','$image_src'");
