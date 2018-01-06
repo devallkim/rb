@@ -133,6 +133,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 			<input type="hidden" name="perm_g" value="<?php echo $CINFO['perm_g']?>">
 			<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
 			<input type="hidden" name="layout" value="">
+			<input type="hidden" name="m_layout" value="">
 			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:3?>">
 
 			<div class="card-header d-flex justify-content-between align-items-center">
@@ -483,9 +484,10 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 											<div class="col-lg-10 col-xl-9">
 												<div class="form-row">
 													<div class="col-sm-6" id="rb-layout-select">
-														<select class="form-control custom-select" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','');">
+														<select class="form-control custom-select" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','custom-select');">
 															<?php $_layoutHexp=explode('/',$_HS['layout'])?>
 															<option value="0">사이트 레이아웃(<?php echo $_layoutHexp[0]?>)</option>
+															<option disabled>--------------------</option>
 															<?php $_layoutExp1=explode('/',$CINFO['layout'])?>
 															<?php $dirs = opendir($g['path_layout'])?>
 															<?php while(false !== ($tpl = readdir($dirs))):?>
@@ -507,6 +509,44 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 														</select>
 													</div>
 												</div>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label text-lg-right">
+												<span class="badge badge-dark">모바일</span>
+											</label>
+											<div class="col-lg-10 col-xl-9">
+												<div class="form-row">
+													<div class="col-sm-6" id="rb-m_layout-select">
+														<select class="form-control custom-select" name="m_layout_1" required onchange="getSubLayout(this,'rb-m_layout-select2','m_layout_1_sub','custom-select');">
+															<option value="">&nbsp;모바일 레이아웃 사용안함</option>
+															<option disabled>--------------------</option>
+															<?php $_layoutHexp=explode('/',$_HS['layout'])?>
+															<option value="0">사이트 레이아웃(<?php echo $_layoutHexp[0]?>)</option>
+															<option disabled>--------------------</option>
+															<?php $_layoutExp1=explode('/',$CINFO['m_layout'])?>
+															<?php $dirs = opendir($g['path_layout'])?>
+															<?php while(false !== ($tpl = readdir($dirs))):?>
+															<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
+															<option value="<?php echo $tpl?>"<?php if($_layoutExp1[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
+															<?php endwhile?>
+															<?php closedir($dirs)?>
+														</select>
+													</div>
+													<div class="col-sm-6" id="rb-m_layout-select2">
+														<select class="form-control custom-select" name="m_layout_1_sub"<?php if(!$CINFO['m_layout']):?> disabled<?php endif?>>
+															<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+															<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
+															<?php while(false !== ($tpl1 = readdir($dirs1))):?>
+															<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
+															<option value="<?php echo $tpl1?>"<?php if($_layoutExp1[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
+															<?php endwhile?>
+															<?php closedir($dirs1)?>
+														</select>
+													</div>
+												</div>
+												<small class="d-block mt-2 form-text text-muted">모바일 레이아웃을 지정하지 않으면 데스크탑 레이아웃으로 설정됩니다.</small>
 											</div>
 										</div>
 
@@ -888,6 +928,10 @@ function saveCheck(f){
 
 	if(f.layout_1.value != '0') f.layout.value = f.layout_1.value + '/' + f.layout_1_sub.value;
 	else f.layout.value = '';
+
+	if(f.m_layout_1.value != '0') f.m_layout.value = f.m_layout_1.value + '/' + f.m_layout_1_sub.value;
+	else f.m_layout.value = '';
+
 	getIframeForAction(f);}
 
 function boxDeco(layer1,layer2)
