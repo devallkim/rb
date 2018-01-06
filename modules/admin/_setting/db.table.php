@@ -13,6 +13,7 @@ $table['s_mbrcomp']	= $DB['head'].'_s_mbrcomp';
 $table['s_mbrlevel']	= $DB['head'].'_s_mbrlevel';
 $table['s_mbrgroup']	= $DB['head'].'_s_mbrgroup';
 $table['s_mbrsns']	= $DB['head'].'_s_mbrsns';
+$table['s_mbrtoken']	= $DB['head'].'_s_mbrtoken';
 $table['s_scrap']	= $DB['head'].'_s_scrap';
 $table['s_paper']	= $DB['head'].'_s_paper';
 $table['s_friend']	= $DB['head'].'_s_friend';

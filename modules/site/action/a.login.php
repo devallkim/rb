@@ -28,8 +28,9 @@ if (!$M1['admin']) getLink('','','회원님은 관리자가 아닙니다.',$hist
 getDbUpdate($table['s_mbrdata'],"tmpcode='',num_login=num_login+1,now_log=1,last_log='".$date['totime']."'",'memberuid='.$M['uid']);
 getDbUpdate($table['s_referer'],'mbruid='.$M['uid'],"d_regis like '".$date['today']."%' and site=".$s." and mbruid=0 and ip='".$_SERVER['REMOTE_ADDR']."'");
 
-if ($idpwsave == 'checked') setcookie('svshop', $id.'|'.$pw, time()+60*60*24*30, '/');
-else setcookie('svshop', '', 0, '/');
+if($login_cookie=='checked'){
+ setAccessToken($M1['memberuid'],'login');
+}
 
 $_SESSION['mbr_uid'] = $M['uid'];
 $_SESSION['mbr_pw']  = $M['pw'];

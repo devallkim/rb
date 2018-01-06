@@ -528,4 +528,42 @@ function getLangFile($path,$lang,$file)
 	else if(is_file($langFile2)) return $langFile2;
 	else return $GLOBALS['g']['path_var'].'empty.php';
 }
+// 엑세스토큰 생성
+function genAccessToken($length)
+{
+   $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+   $access_token = substr( str_shuffle( $chars ), 0, $length );
+    return $access_token;
+}
+// 엑세스토큰 세팅함수
+function setAccessToken($memberuid,$type)
+{
+   global $g,$d,$DB,$r;
+   // 해당 회원 uid 로 등록된 모든 토큰 삭제
+    if($type=='logout'){
+    	$RCD = array();
+    	$_RCD = getDbSelect($DB['head'].'_s_mbrtoken','memberuid='.$memberuid,'*');
+		while($_RC=db_fetch_array($_RCD)) $RCD[] = $_RC;
+		$_WHERE = '(';
+		foreach($RCD as $R)
+		{
+		   $_WHERE .='(memberuid='.$R['memberuid'].') or ';
+		}
+	     $_WHERE = substr($_WHERE,0,strlen($_WHERE)-4).')';
+      getDbDelete($DB['head'].'_s_mbrtoken',$_WHERE);
+      setcookie($DB['head'].'_token','',time() - 3600,'/'); // 쿠키 초기화
+   }else{
+     // 신규토큰 세팅
+		 $g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
+		 $_mbrVerFile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].'member/var/var.php';
+		 require_once $_mbrVerFile;
+	   $login_expire=$d['member']['login_expire']; // 회원모듈 사이트별 환경설정에서 지정한 로그인 유지 기간 (일 기준)
+	   $login_expire_last=time()+60*60*24*(int)$login_expire;
+	   $access_token=genAccessToken(80); //
+	   $_QKEY="memberuid,access_token,expire";
+	   $_QVAL=" '".$memberuid."','".$access_token."','".$login_expire_last."'";
+	   getDbInsert($DB['head'].'_s_mbrtoken',$_QKEY,$_QVAL); // 토큰 테이블에 저장
+	   setcookie($DB['head'].'_token',$memberuid.'|'.$access_token,$login_expire_last,'/'); // 쿠키 생성
+   }
+}
 ?>

@@ -42,7 +42,7 @@
 				</li>
 				<!-- //검색 -->
 				<?php endif?>
-				
+
 				<?php if($d['layout']['header_login']!='hidden'):?>
 				<?php if(!$my['uid']):?>
 				<li class="dropdown">
@@ -74,7 +74,7 @@
 								</div>
 							</div>
 							<div class="checkbox">
-								<label><input class="rb-confirm" type="checkbox" name="idpwsave" value="checked" <?php if($_COOKIE['svshop']):?> checked<?php endif?>><?php echo _LANG('s3006','xlayout')?></label>
+								<label><input  type="checkbox" name="login_cookie" value="checked"><?php echo _LANG('s3006','xlayout')?></label>
 							</div>
 							<button type="submit" class="btn btn-primary btn-block"><?php echo _LANG('s3003','xlayout')?></button>
 						</form>
@@ -86,8 +86,8 @@
 				<!-- 알림 -->
 				<li class="dropdown">
 					<a href="#." class="dropdown-toggle rb-notifications-toggle" data-toggle="dropdown">
-						<i class="fa fa-bell"></i> 
-						<span id="rb-notification-badge" class="badge"><?php echo $my['num_notice']?></span> 
+						<i class="fa fa-bell"></i>
+						<span id="rb-notification-badge" class="badge"><?php echo $my['num_notice']?></span>
 						<i class="caret"></i>
 					</a>
 					<div class="dropdown-menu rb-toggle-layer">
@@ -98,7 +98,7 @@
 							</div>
 							<div id="rb-notifications-layer" class="list-group rb-notifications-layer"></div>
 							<div class="panel-footer"><a href="#." class="rb-notifications-modal-view" role="button" data-toggle="modal" data-target="#modal_window"><?php echo _LANG('s3009','xlayout')?></a></div>
-						</div> 
+						</div>
 					</div>
 				</li>
 				<!-- //알림 -->
@@ -106,7 +106,7 @@
 				<!-- 개인정보 -->
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo $my[$_HS['nametype']]?> <b class="caret"></b></a>
-					<ul class="dropdown-menu">    
+					<ul class="dropdown-menu">
 						<li class="dropdown-header"> <?php echo _LANG('s3010','xlayout')?></li>
 						<li><a href="#."><img class="img-circle" width="25" height="25" src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>"> <?php echo $my[$_HS['nametype']]?></a></li>
 						<li class="divider"></li>
@@ -124,4 +124,3 @@
 		</div>
 	</div>
 </header>
-

@@ -864,6 +864,22 @@ KEY sn(sn)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
 db_query("OPTIMIZE TABLE ".$table['s_mbrsns'],$DB_CONNECT);
 }
+
+//로그인 상태유지 토큰 저장
+$_tmp = db_query( "select count(*) from ".$table['s_mbrtoken'], $DB_CONNECT );
+if ( !$_tmp ) {
+$_tmp = ("
+
+CREATE TABLE ".$table['s_mbrtoken']." (
+uid			INT				PRIMARY KEY		NOT NULL AUTO_INCREMENT,
+memberuid	INT				DEFAULT '0'		NOT NULL,
+access_token		VARCHAR(100)	DEFAULT ''		NOT NULL,
+expire		INT				DEFAULT '0'		NOT NULL,
+KEY memberuid(memberuid)) ENGINE=".$DB['type']." CHARSET=UTF8");
+db_query($_tmp, $DB_CONNECT);
+db_query("OPTIMIZE TABLE ".$table['s_mbrtoken'],$DB_CONNECT);
+}
+
 //SEO테이블
 $_tmp = db_query( "select count(*) from ".$table['s_seo'], $DB_CONNECT );
 if ( !$_tmp ) {

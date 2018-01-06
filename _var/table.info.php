@@ -13,6 +13,7 @@ $table['s_mbrcomp'] = "rb_s_mbrcomp";
 $table['s_mbrlevel'] = "rb_s_mbrlevel";
 $table['s_mbrgroup'] = "rb_s_mbrgroup";
 $table['s_mbrsns'] = "rb_s_mbrsns";
+$table['s_mbrtoken'] = "rb_s_mbrtoken";
 $table['s_scrap'] = "rb_s_scrap";
 $table['s_paper'] = "rb_s_paper";
 $table['s_friend'] = "rb_s_friend";

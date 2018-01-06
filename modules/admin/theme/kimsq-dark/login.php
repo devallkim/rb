@@ -24,13 +24,12 @@
 						<input type="password" name="pw" class="form-control input-lg" id="pw" placeholder="" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',1)?>" required tabindex="2">
 					</div>
 
-					<label class="custom-control custom-checkbox" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true">
-					  <input type="checkbox" name="idpwsave" value="checked" class="custom-control-input">
-					  <span class="custom-control-indicator"></span>
-					  <span class="custom-control-description">로그인 상태 유지</span>
-					</label>
+					<div class="custom-control custom-checkbox mb-2" data-toggle="collapse" data-target="#collapsealert" aria-expanded="true">
+					  <input type="checkbox" class="custom-control-input" id="login_cookie" name="login_cookie" value="checked">
+					  <label class="custom-control-label" for="login_cookie">로그인 상태 유지</label>
+					</div>
 
-					<div class="collapse" id="collapseExample" style="">
+					<div class="collapse" id="collapsealert" style="">
 					  <div class="alert alert-danger f12 mb-3">
 					    개인정보 보호를 위해, 개인 PC에서만 사용해 주세요.
 					  </div>
@@ -49,7 +48,6 @@
 		</div>
 	</div>
 </div>
-
 
 <!-- bootstrap Validator -->
 <?php getImport('bootstrap-validator','dist/css/bootstrapValidator.min',false,'css')?>
