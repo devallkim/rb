@@ -65,6 +65,6 @@ $d['member']['mytab_out'] = "";
 $d['member']['mytab_recnum'] = "";
 $d['member']['login_emailid'] = "1";
 $d['member']['login_cookie'] = "";
-$d['member']['login_expire'] = "10";
+$d['member']['login_expire'] = "15";
 $d['member']['login_ssl'] = "";
 ?>
