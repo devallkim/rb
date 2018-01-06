@@ -684,9 +684,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 											<div class="panel-group" style="margin-bottom:0;">
 												<div class="card">
 
-													<div class="card-header">
-														<a class="d-block muted-link" data-toggle="collapse" href="#menu_header" onclick="sessionSetting('sh_site_menu_3','1','','1');">
-															<i class="fa fa-caret-right fa-fw"></i> 문서헤더
+													<div class="card-header p-0">
+														<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#menu_header" onclick="sessionSetting('sh_site_menu_3','1','','1');">
+															문서헤더
 															<?php if($CINFO['uid']&&($CINFO['imghead']||is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.header.php'))):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 														</a>
 													</div>
@@ -722,9 +722,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 												</div>
 
 													<div class="card">
-													<div class="card-header">
-														<a class="d-block muted-link" data-toggle="collapse" href="#menu_footer" onclick="sessionSetting('sh_site_menu_4','1','','1');">
-															<i class="fa fa-caret-right fa-fw"></i> 문서풋터
+													<div class="card-header p-0">
+														<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#menu_footer" onclick="sessionSetting('sh_site_menu_4','1','','1');">
+															문서풋터
 															<?php if($CINFO['uid']&&($CINFO['imgfoot']||is_file($g['path_page'].$r.'-menus/'.$CINFO['id'].'.footer.php'))):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 														</a>
 													</div>
@@ -761,9 +761,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 												</div>
 
 													<div class="card">
-													<div class="card-header">
-														<a class="d-block muted-link" data-toggle="collapse" href="#menu_addinfo" onclick="sessionSetting('sh_site_menu_5','1','','1');">
-															<i class="fa fa-caret-right fa-fw"></i> 부가필드
+													<div class="card-header p-0">
+														<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#menu_addinfo" onclick="sessionSetting('sh_site_menu_5','1','','1');">
+															부가필드
 															<?php if($CINFO['addinfo']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 														</a>
 													</div>
@@ -782,9 +782,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 												</div>
 
 													<div class="card">
-													<div class="card-header">
-														<a class="muted-link d-block" data-toggle="collapse" href="#menu_addattr" onclick="sessionSetting('sh_site_menu_6','1','','1');">
-															<i class="fa fa-caret-right fa-fw"></i> 속성추가
+													<div class="card-header p-0">
+														<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#menu_addattr" onclick="sessionSetting('sh_site_menu_6','1','','1');">
+															속성추가
 															<?php if($_SEO['subject']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 														</a>
 													</div>
