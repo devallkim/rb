@@ -68,17 +68,18 @@
 				<?php $exists_bookmark=getDbRows($table['s_admpage'],'memberuid='.$my['uid']." and url='".$g['s'].'/?r='.$r.'&m='.$m.'&module='.$module.'&front='.$front."'")?>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-						<i id="_bookmark_star_" class="fa fa-lg fa-star<?php if($exists_bookmark):?> rb-star-fill<?php else:?>-o<?php endif?>"></i>
+						<i id="_bookmark_star_" class="fa fa-lg fa-star<?php if($exists_bookmark):?> rb-star-fill text-primary<?php else:?>-o<?php endif?>"></i>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right p-0">
-						<div class="card border-0 mb-0" style="width: 300px">
-							<div class="card-header d-flex justify-content-between align-items-center p-2">
+						<div class="card border-dark rounded-0 mb-0" style="width: 300px">
+							<div class="card-header d-flex justify-content-between align-items-center py-1 px-2">
 								북마크
 								<div>
+
 									<div id="_bookmark_notyet_" class="btn-group btn-group-sm dropdown<?php if($exists_bookmark):?> d-none<?php endif?>">
 
 										<button type="button" class="btn btn-light rb-bookmark-add">북마크에 추가</button>
-										<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn btn-light dropdown-toggle dropdown-body" data-toggle="dropdown">
 											<span class="caret"></span>
 											<span class="sr-only">Toggle Dropdown</span>
 										</button>
@@ -88,14 +89,13 @@
 											<a href="#." data-toggle="modal" data-target="#modal_window" class="dropdown-item  rb-modal-bookmark">북마크 관리</a>
 										</div>
 									</div>
-									<div id="_bookmark_already_" class="btn-group btn-group-sm dropdown<?php if(!$exists_bookmark):?> d-none<?php endif?>">
+									<div id="_bookmark_already_" class="btn-group btn-group-sm <?php if(!$exists_bookmark):?> d-none<?php endif?>">
 										<button type="button" class="btn btn-light disabled">추가됨</button>
-										<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-											<span class="caret"></span>
+										<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 											<span class="sr-only">Toggle Dropdown</span>
 										</button>
-										<div id="rb-bookmark-dropdown2" class="dropdown-menu">
-											<a class="dropdown-itemr b-bookmark-del" href="#">북마크에서 삭제</a>
+										<div id="rb-bookmark-dropdown2" class="dropdown-menu dropdown-menu-right">
+											<a class="dropdown-item b-bookmark-del" href="#">북마크에서 삭제</a>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item rb-modal-bookmark" href="#" data-toggle="modal" data-target="#modal_window">북마크 관리</a>
 										</div>
@@ -105,7 +105,10 @@
 							<div id="_add_bookmark_" class="list-group list-group-flush rb-scrollbar">
 								<?php $ADMPAGE = getDbArray($table['s_admpage'],'memberuid='.$my['uid'],'*','gid','asc',0,1)?>
 								<?php while($R=db_fetch_array($ADMPAGE)):?>
-								<a href="<?php echo $R['url']?>" class="list-group-item list-group-item-action" id="_now_bookmark_<?php echo $R['uid']?>"><i class="fa fa-fw fa-file-text-o"></i><?php echo $R['name']?></a>
+								<a href="<?php echo $R['url']?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="_now_bookmark_<?php echo $R['uid']?>">
+									<?php echo $R['name']?>
+									<i class="fa fa-fw fa-file-text-o"></i>
+								</a>
 								<?php endwhile?>
 								<?php if(!db_num_rows($ADMPAGE)):?><a class="list-group-item"><i class="fa fa-fw fa-file-text-o"></i>등록된 북마크가 없습니다</a><?php endif?>
 							</div>
@@ -225,4 +228,10 @@ function tabSetting()
 	if (showTabMore == true) $('.rb-more-tabs').removeClass('d-none');
 	else $('.rb-more-tabs').addClass('d-none');
 }
+
+// 북마크 dropdown 내부클릭시 dropdown 유지
+$('.dropdown-body').on('click', function(e) {
+	e.stopPropagation();
+});
+
 </script>

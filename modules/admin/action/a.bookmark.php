@@ -36,7 +36,7 @@ if ($_addmodule == 'admin' && $_addfront == 'bookmark')
 else {
 ?>
 <script>
-parent.getId('_bookmark_star_').className = 'fa fa-lg fa-star rb-star-fill';
+parent.getId('_bookmark_star_').className = 'fa fa-lg fa-star rb-star-fill text-primary';
 parent.getId('_bookmark_notyet_').className = 'btn-group btn-group-sm dropdown hidden';
 parent.getId('_bookmark_already_').className = 'btn-group btn-group-sm dropdown';
 parent.getId('_add_bookmark_').innerHTML <?php if(getDbRows($table['s_admpage'],'memberuid='.$my['uid'])>1):?>+<?php endif?>= '<a href="<?php echo $url?>" class="list-group-item" id="_now_bookmark_<?php echo $bookmark_uid?>"><i class="fa fa-fw fa-file-text-o"></i><?php echo $name?></a>';

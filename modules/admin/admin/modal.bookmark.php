@@ -1,8 +1,8 @@
 <div id="bookmark" class="xrow">
 	<form action="<?php echo $g['s']?>/" method="post" class="rb-form">
-	<input type="hidden" name="r" value="<?php echo $r?>">
-	<input type="hidden" name="m" value="<?php echo $module?>">
-	<input type="hidden" name="a" value="">
+		<input type="hidden" name="r" value="<?php echo $r?>">
+		<input type="hidden" name="m" value="<?php echo $module?>">
+		<input type="hidden" name="a" value="">
 		<div class="dd" id="nestable-menu">
 			<ol class="dd-list">
 				<?php $ADMPAGE = getDbArray($table['s_admpage'],'memberuid='.$my['uid'],'*','gid','asc',0,1)?>
@@ -80,42 +80,23 @@ function actQue(act)
 
 
 
+<!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
-
-
-
-
-
-
-
-
-
-
-
-<!----------------------------------------------------------------------------
-@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
-
-<div id="_modal_header" class="hidden">
+<div id="_modal_header" hidden>
+	<h5 class="modal-title"><i class="fa fa-star-o fa-lg"></i> 북마크 관리</h5>
 	<button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
-	<h4 class="modal-title" id="myModalLabel"><i class="fa fa-star-o fa-lg"></i> 북마크 관리</h4>
 </div>
-<div id="_modal_footer" class="hidden">
-	<ul class="list-inline clearfix">
-		<li class="pull-left">
-			<button type="button" class="btn btn-default"<?php if($_i==1):?> disabled<?php endif?> onclick="frames._modal_iframe_modal_window.checkboxChoice('bookmark_pages[]',true);">
-				전체선택
-			</button>
-			<button type="button" class="btn btn-default"<?php if($_i==1):?> disabled<?php endif?> onclick="frames._modal_iframe_modal_window.checkboxChoice('bookmark_pages[]',false);">
-				전체취소
-			</button>
-		</li>
-		<li class="pull-right">
-			<button type="button" class="btn btn-primary"<?php if($_i==1):?> disabled<?php endif?> onclick="frames._modal_iframe_modal_window.actQue('bookmark_delete');">
-				삭제
-			</button>
-		</li>
-	</ul>
+<div id="_modal_footer" hidden>
+	<button type="button" class="btn btn-light"<?php if($_i==1):?> disabled<?php endif?> onclick="frames._modal_iframe_modal_window.checkboxChoice('bookmark_pages[]',true);">
+		전체선택
+	</button>
+	<button type="button" class="btn btn-light"<?php if($_i==1):?> disabled<?php endif?> onclick="frames._modal_iframe_modal_window.checkboxChoice('bookmark_pages[]',false);">
+		전체취소
+	</button>
+
+	<button type="button" class="btn btn-light"<?php if($_i==1):?> disabled<?php endif?> onclick="frames._modal_iframe_modal_window.actQue('bookmark_delete');">
+		삭제
+	</button>
 </div>
 
 
