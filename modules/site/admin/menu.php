@@ -370,9 +370,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 					<div id="menu-settings">
 							<!-- 메타설정-->
 							<div class="card" id="menu-settings-meta">
-								<div class="card-header px-3">
-									<a class="d-block muted-link" data-toggle="collapse" data-parent="#menu-settings" href="#menu-settings-meta-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-meta').className.indexOf('default')==-1?'':'1','','');">
-										<i class="fa fa-caret-right fa-fw"></i> 메타설정
+								<div class="card-header p-0">
+									<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" data-parent="#menu-settings" href="#menu-settings-meta-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-meta').className.indexOf('default')==-1?'':'1','','');">
+										메타설정
 									</a>
 								</div>
 								<div id="menu-settings-meta-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_1']==1):?> in<?php endif?>">
@@ -471,9 +471,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 
 							<div class="card" id="menu-settings-advance"><!--고급설정-->
 
-								<div class="card-header px-3">
-									<a class="d-block muted-link" data-toggle="collapse" data-parent="#menu-settings" href="#menu-settings-advance-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-advance').className.indexOf('default')==-1?'':'2','','')">
-										<i class="fa fa-caret-right fa-fw"></i> 고급설정
+								<div class="card-header p-0">
+									<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" data-parent="#menu-settings" href="#menu-settings-advance-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-advance').className.indexOf('default')==-1?'':'2','','')">
+										고급설정
 									</a>
 								</div>
 

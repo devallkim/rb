@@ -322,9 +322,9 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 
 				<div class="panel-group" id="page-settings">
 					<div class="card" id="page-settings-meta">
-						<div class="card-header px-2">
-							<a class="muted-link d-block" data-toggle="collapse" data-parent="#page-settings" href="#page-settings-meta-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-meta').className.indexOf('default')==-1?'':'1','','');">
-								<i class="fa fa-caret-right fa-fw"></i>메타설정
+						<div class="card-header p-0">
+							<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" data-parent="#page-settings" href="#page-settings-meta-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-meta').className.indexOf('default')==-1?'':'1','','');">
+								메타설정
 							</a>
 						</div>
 						<div id="page-settings-meta-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==1):?> show<?php endif?>">
@@ -417,9 +417,9 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 					</div>
 
 					<div class="card" id="page-settings-advance">
-						<div class="card-header px-2">
-							<a class="muted-link d-block" data-toggle="collapse" data-parent="#page-settings" href="#page-settings-advance-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-advance').className.indexOf('default')==-1?'':'2','','');">
-								<i class="fa fa-caret-right fa-fw"></i>고급설정
+						<div class="card-header p-0">
+							<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" data-parent="#page-settings" href="#page-settings-advance-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-advance').className.indexOf('default')==-1?'':'2','','');">
+								고급설정
 							</a>
 						</div>
 						<div id="page-settings-advance-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==2):?> show<?php endif?>">
