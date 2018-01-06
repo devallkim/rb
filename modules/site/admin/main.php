@@ -167,13 +167,13 @@ if ($R['uid'])
 						<div class="form-row">
 							<div class="col-sm-6" id="rb-mlayout-select">
 								<select class="form-control custom-select form-control-lg" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','custom-select form-control-lg');">
-									<option value="0">사용안함(기본 레이아웃 적용)</option>
+									<option value="0">사용안함 (기본 레이아웃 적용)</option>
 									<option disabled>--------------------</option>
 									<?php $_layoutExp2=explode('/',$R['m_layout'])?>
 										<?php $dirs = opendir($g['path_layout'])?>
 										<?php while(false !== ($tpl = readdir($dirs))):?>
 										<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
-										<option value="<?php echo $tpl?>"<?php if($_layoutExp2[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
+										<option value="<?php echo $tpl?>"<?php if($_layoutExp2[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?> (<?php echo $tpl?>)</option>
 										<?php endwhile?>
 										<?php closedir($dirs)?>
 								</select>

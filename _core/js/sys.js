@@ -357,14 +357,14 @@ function getContext(context,event)
 // 알림 출력 (쿠키 활용, js-cookie, bootstrap-notify 플러그인 필요)
 function putCookieAlert(name)
 {
-	var action_result = Cookies.get(name)  // 결과 가져오기
-	var _action_result = action_result.split('|');
-	if (action_result) {
+	var actionResult = Cookies.get(name)
+	if (actionResult) {
+	var _actionResult = actionResult.split("|")
 	 setTimeout(function(){
 		 $.notify({
-		 	message: _action_result[0]
+		 	message: _actionResult[0]
 		 },{
-		 	type: _action_result[1]
+		 	type: _actionResult[1]
 		 });
 	 }, 300);
 	}

@@ -486,13 +486,13 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 													<div class="col-sm-6" id="rb-layout-select">
 														<select class="form-control custom-select" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','custom-select');">
 															<?php $_layoutHexp=explode('/',$_HS['layout'])?>
-															<option value="0">사이트 레이아웃(<?php echo $_layoutHexp[0]?>)</option>
+															<option value="0">사이트 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
 															<option disabled>--------------------</option>
 															<?php $_layoutExp1=explode('/',$CINFO['layout'])?>
 															<?php $dirs = opendir($g['path_layout'])?>
 															<?php while(false !== ($tpl = readdir($dirs))):?>
 															<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
-															<option value="<?php echo $tpl?>"<?php if($_layoutExp1[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
+															<option value="<?php echo $tpl?>"<?php if($_layoutExp1[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?> (<?php echo $tpl?>)</option>
 															<?php endwhile?>
 															<?php closedir($dirs)?>
 														</select>
@@ -520,10 +520,12 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 												<div class="form-row">
 													<div class="col-sm-6" id="rb-m_layout-select">
 														<select class="form-control custom-select" name="m_layout_1" onchange="getSubLayout(this,'rb-m_layout-select2','m_layout_1_sub','custom-select');">
-															<option value="">&nbsp;모바일 레이아웃 사용안함</option>
-															<option disabled>--------------------</option>
-															<?php $_layoutHexp=explode('/',$_HS['layout'])?>
-															<option value="0">사이트 레이아웃(<?php echo $_layoutHexp[0]?>)</option>
+															<?php if ($_HS['m_layout']): ?>
+															<?php $_layoutHexp=explode('/',$_HS['m_layout'])?>
+															<option value="0">사이트 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
+															<?php else: ?>
+															<option value="0">&nbsp;사용안함 (기본 레이아웃 적용)</option>
+															<?php endif; ?>
 															<option disabled>--------------------</option>
 															<?php $_layoutExp1=explode('/',$CINFO['m_layout'])?>
 															<?php $dirs = opendir($g['path_layout'])?>
@@ -536,7 +538,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 													</div>
 													<div class="col-sm-6" id="rb-m_layout-select2">
 														<select class="form-control custom-select" name="m_layout_1_sub"<?php if(!$CINFO['m_layout']):?> disabled<?php endif?>>
-															<?php if(!$CINFO['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+															<?php if(!$CINFO['m_layout']):?><option value="0">서브 레이아웃</option><?php endif?>
 															<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
 															<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 															<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
@@ -546,7 +548,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 														</select>
 													</div>
 												</div>
-												<small class="d-block mt-2 form-text text-muted">모바일 레이아웃을 지정하지 않으면 데스크탑 레이아웃으로 설정됩니다.</small>
+												<?php if (!$_HS['m_layout']): ?>
+												<small class="d-block mt-2 form-text text-muted">모바일 레이아웃을 지정하지 않으면 기본 레이아웃으로 설정됩니다.</small>
+												<?php endif; ?>
 											</div>
 										</div>
 
