@@ -680,7 +680,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 	</div>
 </div>
 
-<nav class="navbar navbar-default fixed-bottom d-sm-none" style="border-top:#efefef solid 1px;">
+<nav class="navbar navbar-default fixed-bottom d-none" style="border-top:#efefef solid 1px;">
 	<div class="container">
 		<div class="btn-group">
 			<div class="login-info">
