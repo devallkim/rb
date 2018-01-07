@@ -1,6 +1,15 @@
 <!-- 사이트 풋터 코드 -->
 <?php echo $_HS['footercode'] ?>
 
+<!-- is-loading : https://github.com/hekigan/is-loading-->
+<?php getImport('is-loading','jquery.isloading.min','1.0.6','js')?>
+
+<!-- js-cookie : https://github.com/js-cookie/js-cookie -->
+<?php getImport('js-cookie','js.cookie.min','2.2.0','js')?>
+
+<!-- bootstrap-notify : https://github.com/mouse0270/bootstrap-notify  -->
+<?php getImport('bootstrap-notify','bootstrap-notify.min','3.1.3','js')?>
+
 <!-- 푸터 스위치 -->
 <?php foreach($g['switch_3'] as $_switch) include $_switch ?>
 
@@ -19,6 +28,24 @@ if($my['uid']) include $g['path_core'].'engine/notification.engine.php';
 ?>
 
 <script>
+
+// 알림 기본 셋팅값 정의
+$.notifyDefaults({
+  placement: {
+    from: "bottom",
+    align: "center"
+  },
+  allow_dismiss: false,
+  offset: 20,
+  type: "dark",
+  timer: 100,
+  delay: 1500,
+  animate: {
+    enter: "animated fadeInUp",
+    exit: "animated fadeOutDown"
+  }
+});
+
 <?php if($_HS['dtd']):?>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
