@@ -1,48 +1,12 @@
 <!-- global css -->
 <link href="<?php echo $g['url_module_skin']?>/_style.css" rel="stylesheet">
 
-<style>
-.custom-select.is-invalid, .form-control.is-invalid, .was-validated .custom-select:invalid, .was-validated .form-control:invalid {
-	border-color: #dc3545;
-}
-</style>
-
 <div class="bg-shade-gradient">
 	<article class="page-wrapper">
 
 		<div class="page-header mb-4">
 			<h1>킴스큐 가입 심플형</h1>
 			<p class="lead">웹사이트를 설계, 제작하고 서비스하는 가장 좋은 방법을 제공해 드립니다.</p>
-
-			<ol class="steps mb-3">
-		    <li class="current">
-					<div class="media">
-						<i class="fa fa-user fa-2x d-flex mr-3" aria-hidden="true"></i>
-					  <div class="media-body">
-					    <h5 class="mt-0">Step 1:</h5>
-					    회원정보 입력
-					  </div>
-					</div>
-		    </li>
-		    <li>
-					<div class="media">
-						<i class="fa fa-file-text-o fa-2x d-flex mr-3" aria-hidden="true"></i>
-					  <div class="media-body">
-					    <h5 class="mt-0">Step 2:</h5>
-					    멤버쉽 플랜 선택
-					  </div>
-					</div>
-		    </li>
-		    <li>
-					<div class="media">
-						<i class="fa fa-cog fa-2x d-flex mr-3" aria-hidden="true"></i>
-					  <div class="media-body">
-					    <h5 class="mt-0">Step 3:</h5>
-					    추가정보 입력
-					  </div>
-					</div>
-		    </li>
-		  </ol>
 
 		</div>
 

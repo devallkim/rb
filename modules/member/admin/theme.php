@@ -72,7 +72,7 @@
           </a>
         </li>
         <li class="nav-item editor">
-          <a class="nav-link js-tooltip<?php if($_COOKIE['moduleBbsThemeTab']=='editor'):?> active<?php endif?>" href="#var" data-toggle="tab" onclick="setCookie('moduleBbsThemeTab','editor','1');" title="_var.php" data-placement="bottom">
+          <a class="nav-link js-tooltip<?php if($_COOKIE['moduleBbsThemeTab']=='editor'):?> active<?php endif?>" href="#var" data-toggle="tab" onclick="setCookie('moduleBbsThemeTab','editor','1');" title="var.php" data-placement="bottom">
             <i class="fa fa-code fa-fw" aria-hidden="true"></i>
             설정 변수
           </a>
@@ -112,7 +112,7 @@
           <div class="">
             <div class="rb-codeview">
               <div class="rb-codeview-body">
-                <textarea name="theme_var" id="__code__" class="form-control" rows="30"><?php echo implode('',file($g['path_module'].$module.'/themes/'.$theme.'/_var.php'))?></textarea>
+                <textarea name="theme_var" id="__code__" class="form-control" rows="30"><?php echo implode('',file($g['path_module'].$module.'/themes/'.$theme.'/_var/var.php'))?></textarea>
               </div>
 
               <div class="rb-codeview-footer p-2">
@@ -134,8 +134,8 @@
                     </div>
                   </div>
                   <div class="col text-right pt-2 text-muted">
-                    <small><?php echo count(file($g['path_module'].$module.'/themes/'.$theme.'/_var.php')).' lines'?></small></li>
-                    <small class="ml-3"><?php echo getSizeFormat(@filesize($g['path_module'].$module.'/themes/'.$theme.'/_var.php'),2)?></small>
+                    <small><?php echo count(file($g['path_module'].$module.'/themes/'.$theme.'/_var/var.php')).' lines'?></small></li>
+                    <small class="ml-3"><?php echo getSizeFormat(@filesize($g['path_module'].$module.'/themes/'.$theme.'/_var/var.php'),2)?></small>
                   </div>
                 </div>
               </div>

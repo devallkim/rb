@@ -13,8 +13,8 @@ for ($i = 1; $i < 6; $i++)
 
 }
 
-$_SESSION['_join_menu'] = 5;
+$_SESSION['_join_menu'] = 'terms';
 $_SESSION['_join_tab'] = $_join_tab;
-
+setrawcookie('member_config_result', rawurlencode('약관/안내 메시지가 변경 되었습니다.|success'));  // 처리여부 cookie 저장
 getLink('reload','parent.','','');
 ?>
