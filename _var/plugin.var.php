@@ -3,6 +3,7 @@ $d['ov']['is-loading'] = '1.0.6';
 $d['ov']['smooth-scroll'] = '12.1.5';
 $d['ov']['codemirror'] = '4.6';
 $d['ov']['photoswipe'] = '4.0.6';
+$d['ov']['rc'] = '1.0.0-alpha.4';
 $d['ov']['jquery-markdown'] = '0.0.10';
 $d['ov']['nestable'] = '1.0';
 $d['ov']['snap'] = '1.9.3';
