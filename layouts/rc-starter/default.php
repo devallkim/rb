@@ -7,9 +7,9 @@
 
 	<?php include $g['dir_layout'].'/_includes/header.php' ?>
 
-	<main role="main" class="container">
+	<main role="main">
 		<?php include __KIMS_CONTENT__ ?>
-	</main><!-- /.container -->
+	</main>
 
 	<?php include $g['dir_layout'].'/_includes/footer.php' ?>
 	<?php include $g['dir_layout'].'/_includes/_import.foot.php' ?>
