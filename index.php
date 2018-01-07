@@ -104,7 +104,7 @@ else include $g['dir_module'].'main.php';
 if ($m=='admin' || $iframe=='Y') $d['layout']['php'] = $_HM['layout'] = '_blank/default.php';
 else {
 	if (!$g['mobile']||$_SESSION['pcmode']=='Y') $d['layout']['php'] = $prelayout ? $prelayout.'.php' : ($_HM['layout'] ? $_HM['layout'] : $_HS['layout']);
-	else $d['layout']['php'] = $prelayout ? $prelayout.'.php' : ($_HS['m_layout'] ? $_HS['m_layout'] : ($_HM['layout'] ? $_HM['layout'] : $_HS['layout']));
+	else $d['layout']['php'] = $prelayout ? $prelayout.'.php' : ($_HM['m_layout'] ? $_HM['m_layout'] : ($_HS['m_layout'] ? $_HS['m_layout'] : $_HS['layout']));
 }
 
 $d['layout']['dir'] = dirname($d['layout']['php']);
