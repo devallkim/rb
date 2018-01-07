@@ -16,7 +16,6 @@ if ($g['mobile'] && $_SESSION['pcmode'] != 'Y') {
 	$_front = '_desktop/'.$front;
 }
 
-
 switch ($front) {
 	case 'join' :
 
@@ -79,8 +78,14 @@ $g['url_reset']	 = $g['s'].'/?r='.$r.'&amp;'.($_mod ? 'mod='.$_mod : 'm='.$m.'&a
 $g['url_page']	 = $g['url_reset'].'&amp;page='.$page;
 $g['url_action'] = $g['s'].'/?r='.$r.'&amp;m='.$m.'&amp;a=';
 
-$g['dir_module_skin'] = $g['dir_module'].'themes/_desktop/'.$d['member']['theme_main'].'/'.$front.'/';
-$g['url_module_skin'] = $g['url_module'].'/themes/_desktop/'.$d['member']['theme_main'].'/'.$front;
+if ($d['member']['theme_mobile'] && $g['mobile'] && $_SESSION['pcmode'] != 'Y' ) {
+	$g['dir_module_skin'] = $g['dir_module'].'themes/_mobile/'.$d['member']['theme_mobile'].'/'.$front.'/';
+	$g['url_module_skin'] = $g['url_module'].'/themes/_mobile/'.$d['member']['theme_mobile'].'/'.$front;
+} else {
+	$g['dir_module_skin'] = $g['dir_module'].'themes/_desktop/'.$d['member']['theme_main'].'/'.$front.'/';
+	$g['url_module_skin'] = $g['url_module'].'/themes/_desktop/'.$d['member']['theme_main'].'/'.$front;
+}
+
 $g['img_module_skin'] = $g['url_module_skin'].'/image';
 
 $g['dir_module_mode'] = $g['dir_module_skin'].$page;
