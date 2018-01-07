@@ -1,6 +1,3 @@
-<?php getImport('bootstrap-select','bootstrap-select',false,'js')?>
-<?php getImport('bootstrap-select','bootstrap-select',false,'css')?>
-
  <div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title"><i class="kf-bbs"></i> <?php echo $B['name']?> 게시판</h3>
@@ -199,8 +196,7 @@ input[readonly] {
 $(document).ready(function() {
     $('[data-toggle=tooltip]').tooltip();
 });
- // bootstrap 셀렉트
- $('.boot-select').selectpicker();
+
 
 // 에디터 입력내용 소스창에 적용
 function InserHTMLtoEditor(sHTML)

@@ -1,5 +1,4 @@
-<?php getImport('bootstrap-select','bootstrap-select',false,'js')?>
-<?php getImport('bootstrap-select','bootstrap-select',false,'css')?>
+
 <link href="<?php echo $g['dir_module_skin']?>/_main.css" rel="stylesheet">
 <section id="rb-forum" class="rb-forum-list">
     <div class="panel panel-default rb-panel-table">
@@ -165,14 +164,3 @@
         </div> <!-- .panel-footer -->
     </div> <!-- .panel panel-default rb-panel-table -->
 </section>
-
-<script type="text/javascript">
-//<![CDATA[
-
-$(document).ready(function() {
-    // bootstrap-select 활성화
-    $('.boot-select').selectpicker();
-});
-
-//]]>
-</script>
