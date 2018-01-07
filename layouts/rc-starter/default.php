@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?php echo $lang['xlayout']['lang'] ?>">
+<html lang="ko">
 <head>
 <?php include $g['dir_layout'].'/_includes/_import.head.php' ?>
 </head>
@@ -7,7 +7,7 @@
 
 	<?php include $g['dir_layout'].'/_includes/header.php' ?>
 
-	<main role="main">
+	<main role="main" class="content">
 		<?php include __KIMS_CONTENT__ ?>
 	</main>
 
