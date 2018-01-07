@@ -21,7 +21,7 @@ $('.rb-notifications-modal-view').on('click',function() {
 $('.rb-notifications-modal-config').on('click',function() {
 	modalSetting('modal_window','<?php echo getModalLink('&amp;system=popup.notification&amp;callMod=config')?>');
 });
-var bootboxNotificationConfirm = true
+
 function pushNotification(num)
 {
 	var _num = (num >= <?php echo $d['ntfc']['num']?> ? '+<?php echo $d['ntfc']['num']?>' : num);

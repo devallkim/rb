@@ -33,8 +33,5 @@ var is_admin= '<?php echo $my['admin']?>';
 <?php endif?>
 <?php endforeach?>
 
-<!-- bootbox -->
-<?php getImport('bootbox','bootbox',false,'js')?>
-
 <!-- 헤더 스위치 -->
 <?php foreach($g['switch_2'] as $_switch) include $_switch ?>
