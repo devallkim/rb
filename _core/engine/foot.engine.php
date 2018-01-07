@@ -18,7 +18,7 @@
 <div id="_hidden_layer_"></div>
 <div id="_overLayer_"></div>
 <div id="rb-context-menu" class="dropdown"><a data-toggle="dropdown" href="#."></a><ul class="dropdown-menu" role="menu"></ul></div>
-<iframe name="_action_frame_<?php echo $m?>" width="0" height="0" frameborder="0" scrolling="no" title="iframe"></iframe>
+<iframe hidden name="_action_frame_<?php echo $m?>" width="0" height="0" frameborder="0" scrolling="no" title="iframe"></iframe>
 
 <?php
 $g['wdgcod'] = $g['path_tmp'].'widget/c'.$_HM['uid'].'.p'.$_HP['uid'].'.cache';
