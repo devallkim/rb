@@ -147,14 +147,15 @@ include_once $_tmpvfile;
 									 <label class="d-block">회원가입 <code class="pull-right">join</code></label>
 									 <select name="layout_join" class="form-control custom-select" id="" tabindex="-1">
 										 <option value="">사이트 대표 레이아웃</option>
+										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
 										 <?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 										 <?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-											 <optgroup label="<?php echo $tpl?>">
+											 <optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
 												 <?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												 <?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_join']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>-<?php echo str_replace('.php','',$tpl1)?></option>
+													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_join']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
 												 <?php endwhile?>
 											</optgroup>
 										 <?php closedir($dirs1)?>
@@ -167,15 +168,21 @@ include_once $_tmpvfile;
 								 <div class="form-group error">
 									 <label class="d-block">회원가입 <span class="badge badge-dark">모바일 전용</span> <code class="pull-right">join</code></label>
 									 <select name="layout_join_mobile" class="form-control custom-select" id="" tabindex="-1">
-										 <option value="">&nbsp;모바일 레이아웃 사용안함</option>
+										 <?php if ($_HS['m_layout']): ?>
+										 <?php $_layoutHexp=explode('/',$_HS['m_layout'])?>
+										 <option value="0">사이트 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
+										 <?php else: ?>
+										 <option value="0">&nbsp;사용안함 (기본 레이아웃 적용)</option>
+										 <?php endif; ?>
+										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
 										 <?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 										 <?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-											 <optgroup label="<?php echo $tpl?>">
+											 <optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
 												 <?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												 <?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_join_mobile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>-<?php echo str_replace('.php','',$tpl1)?></option>
+													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_join_mobile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
 												 <?php endwhile?>
 											</optgroup>
 										 <?php closedir($dirs1)?>
@@ -193,14 +200,15 @@ include_once $_tmpvfile;
 									 <label class="d-block">로그인 <code class="pull-right">login</code></label>
 									 <select name="layout_login" class="form-control custom-select" id="" tabindex="-1">
 										 <option value="">사이트 대표 레이아웃</option>
+										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
 										 <?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 										 <?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-											 <optgroup label="<?php echo $tpl?>">
+											 <optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
 												 <?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												 <?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_login']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>-<?php echo str_replace('.php','',$tpl1)?></option>
+													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_login']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
 												 <?php endwhile?>
 											</optgroup>
 										 <?php closedir($dirs1)?>
@@ -213,15 +221,21 @@ include_once $_tmpvfile;
 								 <div class="form-group error">
 									 <label class="d-block">로그인 <span class="badge badge-dark">모바일 전용</span> <code class="pull-right">login</code></label>
 									 <select name="layout_login_mobile" class="form-control custom-select" id="" tabindex="-1">
-										 <option value="">&nbsp;모바일 레이아웃 사용안함</option>
+										 <?php if ($_HS['m_layout']): ?>
+										 <?php $_layoutHexp=explode('/',$_HS['m_layout'])?>
+										 <option value="0">사이트 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
+										 <?php else: ?>
+										 <option value="0">&nbsp;사용안함 (기본 레이아웃 적용)</option>
+										 <?php endif; ?>
+										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
 										 <?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 										 <?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-											 <optgroup label="<?php echo $tpl?>">
+											 <optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
 												 <?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												 <?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_login_mobile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>-<?php echo str_replace('.php','',$tpl1)?></option>
+													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_login_mobile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
 												 <?php endwhile?>
 											</optgroup>
 										 <?php closedir($dirs1)?>
@@ -238,14 +252,15 @@ include_once $_tmpvfile;
 									 <label class="d-block">프로필<code class="pull-right">profile</code></label>
 									 <select name="layout_profile" class="form-control custom-select" id="" tabindex="-1">
 										 <option value="">사이트 대표 레이아웃</option>
+										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
 										 <?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 										 <?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-											 <optgroup label="<?php echo $tpl?>">
+											 <optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
 												 <?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												 <?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_profile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>-<?php echo str_replace('.php','',$tpl1)?></option>
+													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_profile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
 												 <?php endwhile?>
 											</optgroup>
 										 <?php closedir($dirs1)?>
@@ -258,15 +273,21 @@ include_once $_tmpvfile;
 								 <div class="form-group">
 									 <label class="d-block">프로필 <span class="badge badge-dark">모바일 전용</span> <code class="pull-right">profile</code></label>
 									 <select name="layout_profile_mobile" class="form-control custom-select" id="" tabindex="-1">
-										 <option value="">&nbsp;모바일 레이아웃 사용안함</option>
+										 <?php if ($_HS['m_layout']): ?>
+										 <?php $_layoutHexp=explode('/',$_HS['m_layout'])?>
+										 <option value="0">사이트 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
+										 <?php else: ?>
+										 <option value="0">&nbsp;사용안함 (기본 레이아웃 적용)</option>
+										 <?php endif; ?>
+										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
 										 <?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 										 <?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-											 <optgroup label="<?php echo $tpl?>">
+											 <optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
 												 <?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												 <?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_profile_mobile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>-<?php echo str_replace('.php','',$tpl1)?></option>
+													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_profile_mobile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
 												 <?php endwhile?>
 											</optgroup>
 										 <?php closedir($dirs1)?>
@@ -283,14 +304,15 @@ include_once $_tmpvfile;
 									 <label class="d-block">개인정보 설정<code class="pull-right">settings</code></label>
 									 <select name="layout_settings" class="form-control custom-select" id="" tabindex="-1">
 										 <option value="">사이트 대표 레이아웃</option>
+										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
 										 <?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 										 <?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-											 <optgroup label="<?php echo $tpl?>">
+											 <optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
 												 <?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												 <?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_settings']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>-<?php echo str_replace('.php','',$tpl1)?></option>
+													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_settings']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
 												 <?php endwhile?>
 											</optgroup>
 										 <?php closedir($dirs1)?>
@@ -303,15 +325,21 @@ include_once $_tmpvfile;
 								 <div class="form-group">
 									 <label class="d-block">개인정보 설정 <span class="badge badge-dark">모바일 전용</span> <code class="pull-right">settings</code></label>
 									 <select name="layout_settings_mobile" class="form-control custom-select" id="" tabindex="-1">
-										 <option value="">&nbsp;모바일 레이아웃 사용안함</option>
+										 <?php if ($_HS['m_layout']): ?>
+										 <?php $_layoutHexp=explode('/',$_HS['m_layout'])?>
+										 <option value="0">사이트 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
+										 <?php else: ?>
+										 <option value="0">&nbsp;사용안함 (기본 레이아웃 적용)</option>
+										 <?php endif; ?>
+										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
 										 <?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 										 <?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-											 <optgroup label="<?php echo $tpl?>">
+											 <optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
 												 <?php while(false !== ($tpl1 = readdir($dirs1))):?>
 												 <?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_settings_mobile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>-<?php echo str_replace('.php','',$tpl1)?></option>
+													<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['member']['layout_settings_mobile']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
 												 <?php endwhile?>
 											</optgroup>
 										 <?php closedir($dirs1)?>
@@ -333,14 +361,15 @@ include_once $_tmpvfile;
 						 <i class="fa fa-sitemap fa-lg fa-fw"></i> 소속메뉴 설정
 					 </div>
 					 <div class="card-body">
+						 <?php include_once $g['path_core'].'function/menu1.func.php'?>
 						 <div class="row">
 							 <div class="col-sm-6">
 								 <div class="form-group">
 									 <label>회원가입</label>
-									 <select name="sosokmenu" class="form-control custom-select">
-										 <option value="">&nbsp;+ 사용안함</option>
-										 <?php include_once $g['path_core'].'function/menu1.func.php'?>
-										 <?php $cat=$d['member']['sosokmenu']?>
+									 <select name="sosokmenu_join" class="form-control custom-select">
+										 <option value="">사용안함</option>
+										 <option disabled>--------------------</option>
+										 <?php $cat=$d['member']['sosokmenu_join']?>
 										 <?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
 									 </select>
 								 </div>
@@ -348,10 +377,10 @@ include_once $_tmpvfile;
 							 <div class="col-sm-6">
 								 <div class="form-group">
 									 <label>로그인</label>
-									 <select name="sosokmenu" class="form-control custom-select">
-										 <option value="">&nbsp;+ 사용안함</option>
-										 <?php include_once $g['path_core'].'function/menu1.func.php'?>
-										 <?php $cat=$d['member']['sosokmenu']?>
+									 <select name="sosokmenu_login" class="form-control custom-select">
+										 <option value="">사용안함</option>
+										 <option disabled>--------------------</option>
+										 <?php $cat=$d['member']['sosokmenu_login']?>
 										 <?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
 									 </select>
 								 </div>
@@ -361,10 +390,10 @@ include_once $_tmpvfile;
 							 <div class="col-sm-6">
 								 <div class="form-group">
 									 <label>프로필</label>
-									 <select name="sosokmenu" class="form-control custom-select">
-										 <option value="">&nbsp;+ 사용안함</option>
-										 <?php include_once $g['path_core'].'function/menu1.func.php'?>
-										 <?php $cat=$d['member']['sosokmenu']?>
+									 <select name="sosokmenu_profile" class="form-control custom-select">
+										 <option value="">사용안함</option>
+										 <option disabled>--------------------</option>
+										 <?php $cat=$d['member']['sosokmenu_profile']?>
 										 <?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
 									 </select>
 								 </div>
@@ -372,10 +401,10 @@ include_once $_tmpvfile;
 							 <div class="col-sm-6">
 								 <div class="form-group">
 									 <label>개인정보 설정</label>
-									 <select name="sosokmenu" class="form-control custom-select">
-										 <option value="">&nbsp;+ 사용안함</option>
-										 <?php include_once $g['path_core'].'function/menu1.func.php'?>
-										 <?php $cat=$d['member']['sosokmenu']?>
+									 <select name="sosokmenu_settings" class="form-control custom-select">
+										 <option value="">사용안함</option>
+										 <option disabled>--------------------</option>
+										 <?php $cat=$d['member']['sosokmenu_settings']?>
 										 <?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
 									 </select>
 								 </div>
