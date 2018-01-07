@@ -159,7 +159,7 @@ if ($g['mobile']&&$_SESSION['pcmode']!='Y')
 
 }
 
-include_once $g['path_module'].$m.'/theme/'.$d['bbs']['skin'].'/_var.php';
+include_once $g['path_module'].$m.'/themes/'.$d['bbs']['skin'].'/_var.php';
 
 if ($c) $g['bbs_reset']	= getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&amp;':'').'c='.$c,array($skin?'skin':'',$iframe?'iframe':'',$cat?'cat':''));
 else $g['bbs_reset']	= getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&amp;':'').'m='.$m,array($bid?'bid':'',$skin?'skin':'',$iframe?'iframe':'',$cat?'cat':''));
@@ -182,8 +182,8 @@ if ($_HS['rewrite'] && $sort == 'gid' && $orderby == 'asc' && $recnum == $d['bbs
 	$g['bbs_write']= $g['bbs_list'].'/write';
 }
 
-$g['dir_module_skin'] = $g['dir_module'].'theme/'.$d['bbs']['skin'].'/';
-$g['url_module_skin'] = $g['url_module'].'/theme/'.$d['bbs']['skin'];
+$g['dir_module_skin'] = $g['dir_module'].'themes/'.$d['bbs']['skin'].'/';
+$g['url_module_skin'] = $g['url_module'].'/themes/'.$d['bbs']['skin'];
 $g['img_module_skin'] = $g['url_module_skin'].'/image';
 
 $g['dir_module_mode'] = $g['dir_module_skin'].$mod;
