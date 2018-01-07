@@ -1,6 +1,5 @@
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="apple-mobile-web-app-capable" content="no">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
@@ -17,12 +16,25 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['s']?>/_core/images/ico/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">
 
-
 <!-- 사이트 헤드 코드 -->
 <?php echo $_HS['headercode']?>
 
-<!-- 엔진코드:삭제하지마세요 -->
-<?php include $g['path_core'].'engine/cssjs.engine.php'?>
+<!-- bootstrap css -->
+<?php getImport('bootstrap','css/bootstrap.min','4.0.0-beta.3','css')?>
 
-<!-- global js -->
-<script src="<?php echo $g['url_layout']?>/_js/script.js"></script>
+<!-- jQuery -->
+<?php getImport('jquery','jquery.min','3.2.1','js')?>
+
+<?php getImport('popper.js','umd/popper.min','1.12.3','js')?>
+
+<!-- bootstrap js -->
+<?php getImport('bootstrap','js/bootstrap.min','4.0.0-beta.3','js')?>
+
+<!-- 시스템 폰트 -->
+<?php getImport('font-awesome','css/font-awesome','4.7.0','css')?>
+
+<!-- global css -->
+<link href="<?php echo $g['url_layout']?>/_css/_style.css<?php echo $g['wcache']?>" rel="stylesheet">
+
+<!-- 엔진코드:삭제하지마세요 -->
+<?php include $g['path_core'].'engine/cssjs.engine.php' ?>
