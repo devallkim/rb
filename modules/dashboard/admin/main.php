@@ -18,10 +18,6 @@ $_mywidget = $g['path_module'].$module.'/var/'.$my['uid'].'.php';
 if(is_file($_mywidget)) include $_mywidget;
 ?>
 
-<?php getImport('morris','morris',false,'css') ?>
-<?php getImport('raphael','raphael-min',false,'js') ?>
-<?php getImport('morris','morris.min',false,'js') ?>
-
 <div id="rb-dashboard">
 	<?php if($_lastupdate[0] && !$_isnewversion):?>
 	<div id="rb-update-alert" class="alert alert-danger fade in">

@@ -86,16 +86,7 @@ $(document).ready(function() {
     });
 });
 
-var bootmsg = '<div class="media"><i class="pull-left fa fa-exclamation-circle fa-4x hidden-xs"></i><div class="media-body">';
-	bootmsg+= '<h4 class="media-heading">로그인 정보를 저장하시겠습니까?</h4>';
-	bootmsg+= '로그인 정보를 저장할 경우 다음접속시 정보를 입력하지 않으셔도 됩니다.<br>그러나, 개인PC가 아닐 경우 타인이 로그인할 수 있습니다.<br>PC를 여러사람이 사용하는 공공장소에서는 체크하지 마세요.';
-	bootmsg+= '</div></div>';
 
-$('.rb-confirm').on('click', function() {
-	bootbox.confirm(bootmsg, function(result){
-		document.loginform.idpwsave.checked = result;
-	});
-});
 function loginCheck(f)
 {
 	getIframeForAction(f);
