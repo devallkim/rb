@@ -59,11 +59,10 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
 		</div>
 	</section>
    <br >
-	<div class="form-group checkbox has-error">
+	<div class="form-group checkbox">
 		<label>
 			<input type="checkbox" name="agreecheckbox"> 위의 <strong>'홈페이지 이용약관 및 개인정보 수집·이용'</strong>에 동의 합니다.
 		</label>
-
 	</div>
 
 	<div class="page-footer">

@@ -1,77 +1,56 @@
-<!-- global css -->
-<link href="<?php echo $g['url_module_skin']?>/_style.css" rel="stylesheet">
+<?php
+$g['memberAgree1ForSite'] = $g['path_var'].'site/'.$r.'/member.agree1.txt';
+$agree1File = file_exists($g['memberAgree1ForSite']) ? $g['memberAgree1ForSite'] : $g['dir_module'].'var/agree1.txt';
 
-<article id="pages-signup">
-  	<form name="procForm" action="<?php echo $g['s']?>/" method="get">
-	<input type="hidden" name="r" value="<?php echo $r?>" />
-	<input type="hidden" name="c" value="<?php echo $c?>" />
-	<input type="hidden" name="m" value="<?php echo $_m?>" />
-	<input type="hidden" name="front" value="<?php echo $front?>" />
-	<input type="hidden" name="mod" value="<?php echo $_GET['mod']?>" />
-	<input type="hidden" name="page" value="step2" />
-	<input type="hidden" name="comp" value="0" />
+$g['memberAgree2ForSite'] = $g['path_var'].'site/'.$r.'/member.agree2.txt';
+$agree2File = file_exists($g['memberAgree2ForSite']) ? $g['memberAgree2ForSite'] : $g['dir_module'].'var/agree2.txt';
 
-	<div class="page-header">
-		<h2>약관동의 <small>약관 및 안내를 읽고 동의해 주세요.</small></h2>
-	</div>
-<!-- 	<div class="alert alert-danger alert-dismissable">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-		<i class="fa fa-info-circle fa-lg"></i> 회원으로 가입을 원하실 경우, [홈페이지 약관 및 개인정보 수집·이용]에 동의 하셔야 합니다.
-	</div> -->
+$g['memberAgree3ForSite'] = $g['path_var'].'site/'.$r.'/member.agree3.txt';
+$agree3File = file_exists($g['memberAgree3ForSite']) ? $g['memberAgree3ForSite'] : $g['dir_module'].'var/agree3.txt';
 
-	<section class="page-section" id="agreement">
-		<h4><i class="fa fa-file-text-o"></i> 이용약관</h4>
-		<p>
-		<textarea readonly="readonly" class="form-control" rows="12"><?php readfile($g['dir_module'].'var/agree1.txt')?></textarea>
-		</p>
-	</section>
+$g['memberAgree4ForSite'] = $g['path_var'].'site/'.$r.'/member.agree4.txt';
+$agree4File = file_exists($g['memberAgree4ForSite']) ? $g['memberAgree4ForSite'] : $g['dir_module'].'var/agree4.txt';
 
-	<section class="page-section" id="privacy">
-		<h4><i class="fa fa-file-text-o"></i> 개인정보 취급방침</h4>
-		<ul class="nav nav-tabs hidden-xs hidden-sm">
-		  <li class="active"><a href="#agree-privacy-1" data-toggle="tab">개인정보수집 및 이용목적</a></li>
-		  <li><a href="#agree-privacy-2" data-toggle="tab">수집하는 개인정보의 항목</a></li>
-		  <li><a href="#agree-privacy-3" data-toggle="tab">개인정보보유 및 이용기간</a></li>
-		  <li><a href="#agree-privacy-3" data-toggle="tab">개인정보의 위탁처리</a></li>
-		</ul>
-		<ul class="nav nav-tabs visible-sm">
-		  <li class="active"><a href="#agree-privacy-1" data-toggle="tab">수집목적</a></li>
-		  <li><a href="#agree-privacy-2" data-toggle="tab">수집항목</a></li>
-		  <li><a href="#agree-privacy-3" data-toggle="tab">보유기간</a></li>
-		  <li><a href="#agree-privacy-3" data-toggle="tab">위탁처리</a></li>
-		</ul>
-		<ul class="nav nav-tabs visible-xs">
-		  <li class="active"><a href="#agree-privacy-1" data-toggle="tab">목적</a></li>
-		  <li><a href="#agree-privacy-2" data-toggle="tab">항목</a></li>
-		  <li><a href="#agree-privacy-3" data-toggle="tab">기간</a></li>
-		  <li><a href="#agree-privacy-3" data-toggle="tab">위탁</a></li>
-		</ul>
-		<div class="tab-content">
-			<div class="tab-pane active" id="agree-privacy-1"><textarea readonly="readonly" class="form-control" rows="12"><?php readfile($g['dir_module'].'var/agree2.txt')?></textarea></div>
-			<div class="tab-pane" id="agree-privacy-2"><textarea readonly="readonly" class="form-control" rows="12"><?php readfile($g['dir_module'].'var/agree3.txt')?></textarea></div>
-			<div class="tab-pane" id="agree-privacy-3"><textarea readonly="readonly" class="form-control" rows="12"><?php readfile($g['dir_module'].'var/agree4.txt')?></textarea></div>
-			<div class="tab-pane" id="agree-privacy-4"><textarea readonly="readonly" class="form-control" rows="12"><?php readfile($g['dir_module'].'var/agree5.txt')?></textarea></div>
-		</div>
-	</section>
-   <br >
-	<div class="form-group checkbox has-error">
-		<label>
-			<input type="checkbox" name="agreecheckbox"> 위의 <strong>'홈페이지 이용약관 및 개인정보 수집·이용'</strong>에 동의 합니다.
-		</label>
+$g['memberAgree5ForSite'] = $g['path_var'].'site/'.$r.'/member.agree5.txt';
+$agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite'] : $g['dir_module'].'var/agree5.txt';
+?>
 
-	</div>
+<form class="content-padded" name="procForm" action="<?php echo $g['s']?>/" method="get">
+  <input type="hidden" name="r" value="<?php echo $r?>">
+  <input type="hidden" name="c" value="<?php echo $c?>">
+  <input type="hidden" name="m" value="<?php echo $_m?>">
+  <input type="hidden" name="front" value="<?php echo $front?>">
+  <input type="hidden" name="mod" value="<?php echo $_GET['mod']?>">
+  <input type="hidden" name="page" value="forms">
+  <input type="hidden" name="comp" value="0">
 
-	<div class="page-footer">
-		<?php if($d['member']['form_comp']&&!$d['member']['form_jumin']):?>
-		<button type="button" class="btn btn-primary" onclick="return nextStep(0);"><i class="fa fa-male fa-lg"></i> 개인 회원가입</button>
-		<button type="button" class="btn btn-primary" onclick="return nextStep(1);"><i class="fa fa-building-o fa-lg"></i> 기업 회원가입</button>
-		<?php else:?>
-		<button type="button" class="btn btn-primary" onclick="return nextStep(0);">다음단계로</button>
-		<?php endif?>
-	</div>
- </form>
-</article>
+  <header class="bar bar-nav bar-dark bg-inverse">
+  	<a class="icon icon-home pull-left" role="button" href="<?php  echo RW(0) ?>"></a>
+  	<h1 class="title">약관동의</h1>
+  </header>
+  <footer class="bar bar-footer bar-light bg-faded">
+    <button class="btn btn-primary btn-block" type="button" onclick="return nextStep(0);">다음단계로</button>
+  </footer>
 
+  <main class="content">
+    <div class="content-padded">
+
+      <p>약관 및 안내를 읽고 동의해 주세요.</p>
+      <h5>이용약관</h5>
+      <p><textarea class="form-control" rows="5"><?php readfile($agree1File)?></textarea></p>
+      <h5>개인정보 취급방침</h5>
+      <textarea class="form-control" rows="5"><?php readfile($agree2File)?><?php readfile($agree3File)?><?php readfile($agree4File)?><?php readfile($agree5File)?></textarea>
+
+      <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" name="agreecheckbox">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">위의 사항에 동의 합니다.</span>
+      </label>
+
+    </div>
+  </main>
+
+</form>
 
 <script type="text/javascript">
 //<![CDATA[

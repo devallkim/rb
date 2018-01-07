@@ -34,12 +34,12 @@
 						</label>
 					</div>
 
-					<label class="custom-control custom-checkbox" data-toggle="collapse" data-target="#collapseExample">
-					  <input type="checkbox" name="idpwsave" value="checked" class="custom-control-input">
-					  <span class="custom-control-indicator"></span>
-					  <span class="custom-control-description">로그인 상태 유지</span>
-					</label>
-					<div class="collapse" id="collapseExample">
+					<div class="custom-control custom-checkbox" data-toggle="collapse" data-target="#collapsealert">
+					  <input type="checkbox" class="custom-control-input" id="login_cookie" name="login_cookie" value="checked">
+					  <label class="custom-control-label" for="login_cookie">로그인 상태 유지</label>
+					</div>
+
+					<div class="collapse" id="collapsealert">
 					  <div class="alert alert-danger f12 mb-3">
 					    개인정보 보호를 위해, 개인 PC에서만 사용해 주세요.
 					  </div>
@@ -124,17 +124,6 @@ function _loginCheck()
 	var f = document.loginform;
 	getIframeForAction(f);
 	f.submit();
-}
-
-function remember_idpw(ths)
-{
-	if (ths.checked == true)
-	{
-		if (!confirm('패스워드정보를 저장할 경우 다음접속시 \n\n패스워드를 입력하지 않으셔도 됩니다.\n\n그러나, 개인PC가 아닐 경우 타인이 로그인할 수 있습니다.     \n\nPC를 여러사람이 사용하는 공공장소에서는 체크하지 마세요.\n\n정말로 패스워드를 기억시키겠습니까?\n\n'))
-		{
-			ths.checked = false;
-		}
-	}
 }
 
 </script>

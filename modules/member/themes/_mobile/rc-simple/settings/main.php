@@ -1,9 +1,9 @@
 <header class="bar bar-nav bar-dark bg-inverse">
 	<a class="icon icon-home pull-left" role="button" href="<?php  echo RW(0) ?>"></a>
-	<h1 class="title">회원가입</h1>
+	<h1 class="title">개인정보관리</h1>
 </header>
 <footer class="bar bar-footer bar-light bg-faded">
-	<button class="btn btn-primary btn-block" type="button">회원가입</button>
+	<button class="btn btn-primary btn-block" type="button">수정하기</button>
 </footer>
 
 <main class="content">
