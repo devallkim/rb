@@ -32,41 +32,51 @@ switch ($front) {
 		if (!$d['member']['form_agree']) {
 			$page = $page == 'agree' ? 'forms' : $page;
 		}
-		$_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['member']['layout_join'];
+		if ($d['member']['layout_join_mobile'] && $g['mobile'] && $_SESSION['pcmode'] != 'Y') {
+			$_HM['m_layout'] = $_HM['m_layout'] ? $_HM['m_layout'] : $d['member']['layout_join_mobile'];
+		} else {
+			$_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['member']['layout_join'];
+		}
 	break;
 
 	case 'login' :
 		if ($page !='idpwsearch' && $my['uid']){
 			getLink(RW(0),'','','');
 		}
-		$_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['member']['layout_login'];
+		if ($d['member']['layout_login_mobile'] && $g['mobile'] && $_SESSION['pcmode'] != 'Y') {
+			$_HM['m_layout'] = $_HM['m_layout'] ? $_HM['m_layout'] : $d['member']['layout_login_mobile'];
+		} else {
+			$_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['member']['layout_login'];
+		}
 	break;
 
 	case 'profile' :
-
-		//  $URI = $_SERVER['REQUEST_URI'];
-		//  $mbrid = str_replace("/", "", $URI);
-
 		$_MH = array();
 		if ($mbrid){
 			$_MH = getDbData($table['s_mbrid'],"id='".$mbrid."'",'*');
-			if (!$_MH['uid']) getLink($g['s'].'/404','','','');
 
 			if ($_MH['type'] == 1) {
 				 $_MH = array_merge(getDbData($table['s_mbrdata'],"memberuid='".$_MH['uid']."'",'*'),$_MH);
 			} else {
-				 $_MH = array_merge(getDbData($table['orgsdata'],"memberuid='".$_MH['uid']."'",'*'),$_MH);
+				 $_MH = array_merge(getDbData($table['s_orgdata'],"memberuid='".$_MH['uid']."'",'*'),$_MH);
 			}
 		}
-
-		$_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['member']['layout_profile'];
+		if ($d['member']['layout_profile_mobile'] && $g['mobile'] && $_SESSION['pcmode'] != 'Y') {
+			$_HM['m_layout'] = $_HM['m_layout'] ? $_HM['m_layout'] : $d['member']['layout_profile_mobile'];
+		} else {
+			$_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['member']['layout_profile'];
+		}
 	break;
 
 	case 'settings' :
 		if (!$my['uid']){
 			getLink($g['s'].'/?r='.$r.'&mod=login&referer='.urlencode(RW('mod=settings')),'','','');
 		}
-		$_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['member']['layout_settings'];
+		if ($d['member']['layout_settings_mobile'] && $g['mobile'] && $_SESSION['pcmode'] != 'Y') {
+			$_HM['m_layout'] = $_HM['m_layout'] ? $_HM['m_layout'] : $d['member']['layout_settings_mobile'];
+		} else {
+			$_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['member']['layout_settings'];
+		}
 	break;
 
 }
