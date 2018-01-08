@@ -36,7 +36,6 @@
 							</div>
 						  <?php endif?>
 				   <?php endif?>
-
   	          <?php if($B['category']):$_catexp = explode(',',$B['category']);$_catnum=count($_catexp)?>
 					<div class="form-group">
 						<label class="col-sm-2 text-center" for="">카테고리</label>
@@ -63,7 +62,6 @@
 									    </label>
 									 </div>
 							  	<?php endif?>
-
 								<div class="checkbox col-sm-1">
 									<?php if($d['theme']['use_hidden']==1):?>
 									   <label>
@@ -74,14 +72,12 @@
 										    <input type="hidden" name="hidden" value="1" />
 									<?php endif?>
 							 </div>
-
 					 </div>
                  <div class="form-group">
 				        <div class="col-sm-12">
 				            <textarea  id="summernote" name ="content" class="form-control" rows="3" onkeyup="resize(this)" placeholder="내용을 입력하세요..."> <?php echo getContents($R['content'],$R['html'])?></textarea>
 				        </div>
 				    </div>
-
 				    <?php if($d['theme']['file_upload_show']&&$d['theme']['perm_upload']<=$my['level']):?>
 					    <?php for($i=1;$i<$d['theme']['file_upload_qty']+1;$i++):?>
 						 <div class="form-group">
@@ -99,7 +95,6 @@
 						 </div>
 						 <?php endfor?>
 		          <?php endif?>
-
 				    <?php if($d['theme']['show_wtag']):?>
 					 <div class="form-group">
 							<label class="col-sm-2 text-center" for="">태그<span class="rb-form-required text-danger"></span></label>
@@ -109,7 +104,6 @@
 							</div>
 					 </div>
 		          <?php endif?>
-
 		          <?php if($d['theme']['show_trackback']):?>
 			        <div class="form-group">
 							<label class="col-sm-2 text-center" for="">트랙백<span class="rb-form-required text-danger"></span></label>
@@ -125,10 +119,8 @@
 							<div class="col-sm-10">
 								<?php include_once $g['path_module'].$d['bbs']['snsconnect']?> 에도 게시물을 등록합니다.
 							</div>
-
 					 </div>
 		          <?php endif?>
-
 		           <div class="form-group">
 							<label class="col-sm-2 text-center" for="">등록 후<span class="rb-form-required text-danger"></span></label>
 							<div class="col-sm-10">
@@ -146,7 +138,6 @@
 			</form>
 		</div>
 	</div><!-- panel panel-default-->
-
 <!-- 코드미러를 먼저 호출하고 난 후에 summernote 호출해야 코드미러가 적용이 됨-->
 <!-- include summernote codemirror-->
  <style>
@@ -177,37 +168,30 @@ input[readonly] {
   background-color: white !important;
   cursor: text !important;
 }
-
 </style>
 <?php getImport('codemirror','codemirror',false,'css')?>
 <?php getImport('codemirror','codemirror',false,'js')?>
 <?php getImport('codemirror','theme/monokai',false,'css')?>
 <?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
 <?php getImport('codemirror','mode/xml/xml',false,'js')?>
-
 <!-- include summernote css/js-->
 <?php getImport('summernote','dist/summernote.min',false,'js')?>
 <?php getImport('summernote','lang/summernote-ko-KR',false,'js')?>
  <?php getImport('summernote','dist/summernote',false,'css')?>
 <script type="text/javascript">
-
 //<![CDATA[
 // 툴팁 이벤트
 $(document).ready(function() {
     $('[data-toggle=tooltip]').tooltip();
 });
-
-
 // 에디터 입력내용 소스창에 적용
 function InserHTMLtoEditor(sHTML)
 {
 	var nHTML = $('#summernote').code();
 	$('#summernote').code(nHTML+sHTML);
 }
-
 // 에디터 호출
 $(document).ready(function() {
-
       $('#summernote').summernote({
         tabsize: 2,
         styleWithSpan: false,
@@ -230,7 +214,6 @@ $(document).ready(function() {
 	       ['insert', ['link', 'video', 'table','hr']],
 		    ['Misc', ['fullscreen','codeview','help']]
 		  ],
-
        // 소스 편집창
 		 codemirror: {
 			mode: "text/html",
@@ -244,16 +227,13 @@ $(document).ready(function() {
 		  onImageUpload: function(files, editor, welEditable) {
           Upload_file('img',files[0],editor,welEditable);
        }
-
      });
  });
-
 // 첨부파일 업로드 이벤트
 $('.file-upload').on('change',function(){
     var file=$(this)[0].files[0];
     Upload_file('',file,'',''); // 아래 파일 업로두 함수 호출
 });
-
 /* 파일 업로드 함수
      type : 파일 타입(이미지, 워드,엑셀 등)
 */
@@ -278,10 +258,8 @@ $('.file-upload').on('change',function(){
 	  	      var source=val[1];// path + tempname
 		  	   var upuid=val[2]; // upload 테이블 저장 uid
 		  	   var up_val=$('input[name="upfiles"]').val(); // 현재 upfiles 값
-
 		  	   if(up_val=='') $('input[name="upfiles"]').val('['+upuid+']'); // 처음이면 uid 값만...
 		  	   else $('input[name="upfiles"]').val(up_val+'['+upuid+']'); // 처음이 아니면 콤마 추가
-
 		  	   // 파일 타입이 이미지인 경우에만 에디터에 이미지 삽입
 		  	   if(type=='img') {
 		  	       editor.insertImage(welEditable, source);
@@ -291,11 +269,9 @@ $('.file-upload').on('change',function(){
             alert(msg);
             return false;
 	  	   }
-
 	     } // success
     }); // ajax
  } // function
-
 // 첨부파일 : input-file onchange 이벤트시 해당 값 보여주기
 $(document).on('change', '.btn-file :file', function() {
   var input = $(this),
@@ -303,26 +279,20 @@ $(document).on('change', '.btn-file :file', function() {
       label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
   input.trigger('fileselect', [numFiles, label]);
 });
-
 $(document).ready( function() {
     $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
-
         var input = $(this).parents('.input-group').find(':text'),
             log = numFiles > 1 ? numFiles + ' files selected' : label;
-
         if( input.length ) {
             input.val(log);
         } else {
             if( log ) alert(log);
         }
-
     });
 });
 // 첨부파일 : input-file onchange 이벤트시 해당 값 보여주기
-
 // 글 등록 함수
 var submitFlag = false;
-
 function writeCheck(f)
 {
 	if (submitFlag == true)
@@ -363,7 +333,6 @@ function writeCheck(f)
 			return false;
 		}
 	}
-
 	// 내용 체크 및 포커싱  ie 에서는 안됨
 	var content =$('.note-editable').text();
 	if (content.trim() =='')
@@ -374,7 +343,6 @@ function writeCheck(f)
 	}
 	submitFlag = true;
 }
-
 function cancelCheck()
 {
 	if (confirm('정말 취소하시겠습니까?    '))
@@ -382,7 +350,5 @@ function cancelCheck()
 		history.back();
 	}
 }
-
-
 //]]>
 </script>

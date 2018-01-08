@@ -26,10 +26,10 @@
 	 	  <div class="pull-right hidden-xs" id="tool-icon">
  	  	    <?php if($d['theme']['use_singo']):?>
 		 	  	      <a href="<?php echo $g['bbs_action']?>singo&amp;uid=<?php echo $R['uid']?>" target="_action_frame_<?php echo $m?>" onclick="return confirm('정말로 신고하시겠습니까?');"><i class="fa fa-bell-o"></i>신고</a>
-		 	  	  <?php endif?>   
+		 	  	  <?php endif?>
 		 	  	  <?php if($d['theme']['use_print']):?>
 		 	  	      <a href="javascript:printWindow('<?php echo $g['bbs_print'].$R['uid']?>');" ><i class="fa fa-print"></i>인쇄</a>
-		 	  	   <?php endif?>   
+		 	  	   <?php endif?>
 		 	  	 	<?php if($d['theme']['use_scrap']):?>
 				      <a href="<?php echo $g['bbs_action']?>scrap&amp;uid=<?php echo $R['uid']?>"  target="_action_frame_<?php echo $m?>" onclick="return isLogin2();"><i class="fa fa-paperclip"></i>스크랩</a>
 			 <?php endif?>
@@ -45,12 +45,12 @@
 			<?php if($d['theme']['show_score1']):?>
 				<a href="<?php echo $g['bbs_action']?>score&amp;value=good&amp;uid=<?php echo $R['uid']?>" target="_action_frame_<?php echo $m?>" onclick="return confirm('정말로 평가하시겠습니까?');" class="btn btn-default">
 					 <i class="fa fa-thumbs-o-up"></i> 공감 <span class="text-muted"><em><?php echo $R['score1']?></em></span>
-			  	</a>   
+			  	</a>
 			<?php endif?>
 			<?php if($d['theme']['show_score2']):?>
              <a href="<?php echo $g['bbs_action']?>score&amp;value=bad&amp;uid=<?php echo $R['uid']?>" target="_action_frame_<?php echo $m?>" onclick="return confirm('정말로 평가하시겠습니까?');" class="btn btn-default">
 				    <i class="fa fa-thumbs-o-down"></i> 비공감 <span class="text-muted"><em><?php echo $R['score2']?></em></span>
-		  	    </a>    
+		  	    </a>
 		   <?php endif?>
 	  </div>
 	  <?php endif?>
@@ -62,22 +62,19 @@
 	        <div class="list-group">
 	        	<?php foreach($d['upload']['data'] as $_u):?>
 				<?php if($_u['hidden'])continue?>
-				<?php 
+				<?php
 				   $ext_to_fa=array('xls'=>'excel','xlsx'=>'excel','ppt'=>'powerpoint','pptx'=>'powerpoint','txt'=>'text','pdf'=>'pdf','zip'=>'archive','doc'=>'word');
-				   $ext_icon=in_array($_u['ext'],array_keys($ext_to_fa))?'-'.$ext_to_fa[$_u['ext']]:''; 
+				   $ext_icon=in_array($_u['ext'],array_keys($ext_to_fa))?'-'.$ext_to_fa[$_u['ext']]:'';
 				 ?>
-
-	            <li class="list-group-item"><i class="fa fa-file<?php echo $ext_icon?>-o"></i> 
-	            	<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=download&amp;uid=<?php echo $_u['uid']?>" title="<?php echo $_u['caption']?>"><?php echo $_u['name']?></a> 
+	            <li class="list-group-item"><i class="fa fa-file<?php echo $ext_icon?>-o"></i>
+	            	<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=download&amp;uid=<?php echo $_u['uid']?>" title="<?php echo $_u['caption']?>"><?php echo $_u['name']?></a>
 	            	<small class="text-muted">(<?php echo getSizeFormat($_u['size'],1)?>)</small> <span title="다운로드 수" data-toggle="tooltip" class="badge hidden-xs"><?php echo number_format($_u['down'])?></span>
 	            </li>
-	          <?php endforeach?> 
-	          
+	          <?php endforeach?>
 	        </div>
 	    </article>
-	 </div>   
+	 </div>
 	 <?php endif?>
-		
 	 <?php if($R['tag']&&$d['theme']['show_tag']):?>
 	 <div class="col-sm-12">
 	    <div class="panel panel-default">
@@ -86,23 +83,23 @@
 	                     <?php $_tags=explode(',',$R['tag'])?>
 						      <?php $_tagn=count($_tags)?>
 						     <?php $i=0;for($i = 0; $i < $_tagn; $i++):?>
-						     <?php $_tagk=trim($_tags[$i])?> 
+						     <?php $_tagk=trim($_tags[$i])?>
 	                    <span class="badge tag-links">
 	                    	  <i class="fa fa-tags" title="태그"></i>
 	                    	  <a href="<?php echo $g['bbs_orign']?>&amp;where=subject|tag&amp;keyword=<?php echo urlencode($_tagk)?>"> <?php echo $_tagk?></a>
 	                    	</span>
 	                    <?php endfor?>
 	              </div>
-	          </div>    
+	          </div>
 	    </div>
-	 </div>             
-    <?php endif?>	 
+	 </div>
+    <?php endif?>
     <div class="panel-body">
 	 	<div class="pull-right">
          <div class="btn-group btn-group-sm">
             <?php if($my['admin'] || $my['uid']==$R['mbruid']):?>
 	            <a href="<?php echo $g['bbs_modify'].$R['uid']?>" class="btn btn-default">수정</a>
-	            <a href="<?php echo $g['bbs_delete'].$R['uid']?>" target="_action_frame_<?php echo $m?>" onclick="return confirm('정말로 삭제하시겠습니까?');" class="btn btn-default">삭제</a> 
+	            <a href="<?php echo $g['bbs_delete'].$R['uid']?>" target="_action_frame_<?php echo $m?>" onclick="return confirm('정말로 삭제하시겠습니까?');" class="btn btn-default">삭제</a>
              <?php endif?>
              <?php if($my['admin']&&$d['theme']['use_reply']):?>
                  <a href="<?php echo $g['bbs_reply'].$R['uid']?>" class="btn btn-default">답변</a>
@@ -113,18 +110,15 @@
 	 </div>
     <!-- 댓글 인클루드 -->
 	 <?php if(!$d['bbs']['c_hidden']):?>
-	   <?php include $g['dir_module_skin'].'comment/list.php'?>  
+	   <?php include $g['dir_module_skin'].'comment/list.php'?>
     <?php endif?>
 </div> <!--.row-->
-
 <script type="text/javascript">
 //<![CDATA[
-
-// 툴팁 이벤트 
+// 툴팁 이벤트
 $(document).ready(function() {
     $('[data-toggle=tooltip]').tooltip();
-}); 
-
+});
 <?php if($d['theme']['snsping']):?>
 function snsWin(sns)
 {
@@ -139,7 +133,6 @@ function snsWin(sns)
 	window.open(snsset[sns]);
 }
 <?php endif?>
-
 //로그인체크
 function isLogin2()
 {
@@ -150,16 +143,13 @@ function isLogin2()
 	}
 	return true;
 }
-
-function printWindow(url) 
+function printWindow(url)
 {
 	window.open(url,'printw','left=0,top=0,width=700px,height=600px,statusbar=no,scrollbars=yes,toolbar=yes');
 }
 //]]>
 </script>
-
 <?php if($d['theme']['show_list']&&$print!='Y'):?>
 <?php include_once $g['dir_module'].'mod/_list.php'?>
 <?php include_once $g['dir_module_skin'].'list.php'?>
 <?php endif?>
-
