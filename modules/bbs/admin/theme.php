@@ -99,7 +99,7 @@
           <?php if (is_file($g['path_module'].$module.'/themes/'.$theme.'/LICENSE')): ?>
           <div class="py-5 px-4">
             <h5>라이센스</h5>
-            <textarea class="form-control" rows="10"><?php readfile($g['path_module'].$module.'/theme/'.$theme.'/LICENSE')?></textarea>
+            <textarea class="form-control" rows="10"><?php readfile($g['path_module'].$module.'/themes/'.$theme.'/LICENSE')?></textarea>
           </div>
           <?php endif; ?>
 
