@@ -129,6 +129,14 @@ code {
   border-right: 1px solid #222;
 }
 
+.sidebar.sidebar-right {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 1px solid #222;
+}
+
+
 .sidebar .nav {
   margin-bottom: 20px;
 }

@@ -67,9 +67,7 @@ $xmin1	= substr($date['totime'],10,2);
 
 <div class="row no-gutters">
 
-	<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
-
-
+	<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar sidebar-right">
 
 		<!-- 검색폼 -->
 		<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="">
@@ -357,7 +355,7 @@ $xmin1	= substr($date['totime'],10,2);
 
 
 	</div><!-- /.sidebar -->
-	<div class="col-sm-8 col-md-8 ml-sm-auto col-xl-9">
+	<div class="col-sm-8 col-md-8 mr-sm-auto col-xl-9">
 
 		<?php if($NUM):?>
 		<div class="card rounded-0 ">
