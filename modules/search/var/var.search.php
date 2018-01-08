@@ -1,7 +1,7 @@
 <?php
-$d['search']['theme'] = "default";
+$d['search']['theme'] = "bs4-simple";
 $d['search']['num1'] = "5";
 $d['search']['num2'] = "20";
 $d['search']['term'] = "12";
-$d['search']['layout'] = "default/_full_layout.php";
+$d['search']['layout'] = "bs4-starter/default.php";
 ?>
