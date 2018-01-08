@@ -252,6 +252,7 @@ CREATE TABLE ".$table['s_mbrdata']." (
 memberuid	INT				PRIMARY KEY		NOT NULL,
 site		INT				DEFAULT '0'		NOT NULL,
 auth		TINYINT			DEFAULT '0'		NOT NULL,
+hidden		TINYINT			DEFAULT '0'		NOT NULL,
 mygroup		INT				DEFAULT '0'		NOT NULL,
 level		INT				DEFAULT '0'		NOT NULL,
 comp		TINYINT			DEFAULT '0'		NOT NULL,
