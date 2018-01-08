@@ -18,7 +18,7 @@ $TPG = getTotalPage($NUM,$recnum);
 <!-- 2.0 시작-->
 
 <div class="row">
-	<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
+	<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar sidebar-right">
 
 		<div class="rb-heading well well-sm">
 			<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="form-horizontal">
@@ -122,7 +122,7 @@ $TPG = getTotalPage($NUM,$recnum);
 
 
 	</div><!-- /.sidebar -->
-	<div class="col-sm-8 col-md-8 ml-sm-auto col-xl-9 pt-3">
+	<div class="col-sm-8 col-md-8 mr-sm-auto col-xl-9 pt-3">
 
 		<h4>채널  리스트
 			<a href="#" data-toggle="modal" data-target="#modal_window" onmousedown="setUidSet('<?php echo $R['uid']?>','makeset');" class="pull-right btn btn-link rb-modal-set">
