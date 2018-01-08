@@ -55,7 +55,7 @@ $type = $type ? $type : '_join';
 				</div>
 				<!-- 에디터 -->
 				 <div class="editor">
-					<textarea  id="summernote" name ="content" class="form-control" rows="3" onkeyup="resize(this)"><?php echo htmlspecialchars(implode('',file($g['path_module'].$module.'/doc/'.$type.'.txt')))?></textarea>
+					<textarea  id="summernote" name ="content" class="d-none" rows="3"><?php echo htmlspecialchars(implode('',file($g['path_module'].$module.'/doc/'.$type.'.txt')))?></textarea>
 				</div>
 				<!-- /에티터 -->
 			</div><!-- /.card-body -->
@@ -93,36 +93,7 @@ $type = $type ? $type : '_join';
 
 <!-- 코드미러를 먼저 호출하고 난 후에 summernote 호출해야 코드미러가 적용이 됨-->
 <!-- include summernote codemirror-->
- <style>
-.CodeMirror {
-	font-size: 13px;
-	font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
-}
-/* 첨부파일 : input-file*/
-.btn-file {
-  position: relative;
-  overflow: hidden;
-}
-.btn-file input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 100%;
-  min-height: 100%;
-  font-size: 100px;
-  text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  background: red;
-  cursor: inherit;
-  display: block;
-}
-input[readonly] {
-  background-color: white !important;
-  cursor: text !important;
-}
 
-</style>
 <?php getImport('codemirror','codemirror',false,'css')?>
 <?php getImport('codemirror','codemirror',false,'js')?>
 <?php getImport('codemirror','theme/monokai',false,'css')?>
@@ -130,9 +101,9 @@ input[readonly] {
 <?php getImport('codemirror','mode/xml/xml',false,'js')?>
 
 <!-- include summernote css/js-->
-<?php getImport('summernote','dist/summernote.min',false,'js')?>
-<?php getImport('summernote','lang/summernote-ko-KR',false,'js')?>
- <?php getImport('summernote','dist/summernote',false,'css')?>
+<?php getImport('summernote','summernote-bs4.min','0.8.9','js')?>
+<?php getImport('summernote','lang/summernote-ko-KR','0.8.9','js')?>
+<?php getImport('summernote','summernote-bs4','0.8.9','css')?>
 
 
 
@@ -157,23 +128,11 @@ $(document).ready(function() {
       $('#summernote').summernote({
         tabsize: 2,
         styleWithSpan: false,
-        height:450,  //  에디터 높이
-        minHeight: null,             // set minimum height of editor
+        minHeight:350,  //  에디터 높이
         maxHeight: null,             // set maximum height of editor
         focus: true,
         lang : 'ko-KR', // 언어 설정
-        toolbar: [
-		   //[groupname, [button list]]  : 툴바 그룹 [버튼 id ]  참조 페이지 ==> http://summernote.org/#/features  : 아래 순서대로 노출된다.
-	       ['style', ['style']],
-	       ['fontstyle', ['fontname','bold','strikethrough','italic','underline', 'clear']],
-	       ['fontsize', ['fontsize']],
-	       ['color', ['color']],
-	       ['height', ['height']],
-	       ['Layout', ['ul','ol','paragraph']],
-	       ['picture', ['picture']],
-	       ['insert', ['link', 'video', 'table','hr']],
-		    ['Misc', ['fullscreen','codeview','help']]
-		  ],
+
 
        // 소스 편집창
 		 codemirror: {
