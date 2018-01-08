@@ -335,9 +335,6 @@ $xmin1	= substr($date['totime'],10,2);
 								<button class="btn btn-light" onclick="dropDate('','');">전체</button>
 							</div>
 
-
-
-
 						</div>
 					</div>
 				</div>

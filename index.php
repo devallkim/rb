@@ -23,13 +23,13 @@ if(!get_magic_quotes_gpc())
 	if (is_array($_GET))
 		foreach($_GET as $_tmp['k'] => $_tmp['v'])
 			if (is_array($_GET[$_tmp['k']]))
-				foreach($_GET[$_tmp['k']] as $_tmp['k1'] => $_tmp['v1']) 
-					$_GET[$_tmp['k']][$_tmp['k1']] = ${$_tmp['k']}[$_tmp['k1']] = addslashes($_tmp['v1']); 
+				foreach($_GET[$_tmp['k']] as $_tmp['k1'] => $_tmp['v1'])
+					$_GET[$_tmp['k']][$_tmp['k1']] = ${$_tmp['k']}[$_tmp['k1']] = addslashes($_tmp['v1']);
 			else $_GET[$_tmp['k']] = ${$_tmp['k']} = addslashes($_tmp['v']);
 	if (is_array($_POST))
 		foreach($_POST as $_tmp['k'] => $_tmp['v'])
 			if (is_array($_POST[$_tmp['k']]))
-				foreach($_POST[$_tmp['k']] as $_tmp['k1'] => $_tmp['v1']) 
+				foreach($_POST[$_tmp['k']] as $_tmp['k1'] => $_tmp['v1'])
 					$_POST[$_tmp['k']][$_tmp['k1']] = ${$_tmp['k']}[$_tmp['k1']] = addslashes($_tmp['v1']);
 			else $_POST[$_tmp['k']] = ${$_tmp['k']} = addslashes($_tmp['v']);
 }
@@ -114,7 +114,7 @@ $g['img_layout'] = $g['url_layout'].'/_images';
 
 define('__KIMS_CONTENT__',$g['path_core'].'engine/content.engine.php');
 
-if($my['admin'] && (!$_SERVER['HTTP_REFERER'] || $panel=='Y') && $panel!='N' && !$iframe) 
+if($my['admin'] && (!$_SERVER['HTTP_REFERER'] || $panel=='Y') && $panel!='N' && !$iframe)
 {
 	include $g['path_core'].'engine/adminpanel.engine.php';
 }
