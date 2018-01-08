@@ -1,3 +1,5 @@
+<link href="<?php echo $g['dir_module_skin']?>/_main.css">
+
 <section class="rb-bbs-view">
 
 	<header>
@@ -18,9 +20,7 @@
 				</a>
 	 			<?php endif?>
 	 			<?php if($d['theme']['use_print']):?>
-	 			<a class="btn btn-light"  href="javascript:printWindow('<?php echo $g['bbs_print'].$R['uid']?>');" >
-					<i class="fa fa-print"></i> 인쇄
-				</a>
+				<button class="btn btn-light js-print" type="button"><i class="fa fa-print"></i> 인쇄</button>
 	 			<?php endif?>
 	 			<?php if($d['theme']['use_scrap']):?>
 	 			<a class="btn btn-light"  href="<?php echo $g['bbs_action']?>scrap&amp;uid=<?php echo $R['uid']?>"  target="_action_frame_<?php echo $m?>" onclick="return isLogin2();">
@@ -91,3 +91,5 @@
 <?php include_once $g['dir_module'].'mod/_list.php'?>
 <?php include_once $g['dir_module_skin'].'list.php'?>
 <?php endif?>
+
+<script src="<?php echo $g['dir_module_skin']?>/_main.js"></script>

@@ -1,3 +1,5 @@
+<link href="<?php echo $g['dir_module_skin']?>/_main.css">
+
 <section class="rb-bbs-write">
 
   <header>
@@ -142,8 +144,9 @@
 <?php getImport('summernote','lang/summernote-ko-KR','0.8.9','js')?>
 <?php getImport('summernote','summernote-bs4','0.8.9','css')?>
 
-<script type="text/javascript">
+<script src="<?php echo $g['dir_module_skin']?>/_main.js"></script>
 
+<script type="text/javascript">
 
 // 에디터 호출
 $(document).ready(function() {
