@@ -48,7 +48,7 @@ while(false !== ($file = readdir($opendir)))
 }
 closedir($opendir);
 
-if ($usertype == 'admin') getLink($g['s'].'/?r='.$r.'&panel=Y&pickmodule=dashboard','parent.parent.','','');
+if ($usertype == 'admin') getLink($g['s'].'/?r='.$r.'&panel=Y&pickmodule=site','parent.parent.','','');
 if ($M1['admin']) getLink($g['s'].'/?r='.$r.'&panel=Y&_admpnl_='.urlencode($referer),'parent.parent.','','');
 getLink($referer?$referer:$g['s'].'/?r='.$r,'parent.parent.','','');
 ?>
