@@ -1,4 +1,3 @@
-
 <section class="rb-bbs-list">
 
   <header class="d-flex justify-content-between align-items-center mb-3">
@@ -128,7 +127,7 @@
             <?php if(strstr($R['content'],'.jpg')):?><i class="fa fa-image fa-lg"></i><?php endif?>
             <?php if($R['upload']):?><i class="fa fa-paperclip"></i><?php endif?>
             <?php if($R['hidden']):?><i class="fa fa-lock fa-lg"></i><?php endif?>
-            <?php if($R['comment']):?><span class="badge"><?php echo $R['comment']?><?php echo $R['oneline']?'+'.$R['oneline']:''?></span><?php endif?>
+            <?php if($R['comment']):?><span class="badge badge-pill badge-secondary"><?php echo $R['comment']?><?php echo $R['oneline']?'+'.$R['oneline']:''?></span><?php endif?>
             <?php if(getNew($R['d_regis'],24)):?><small class="text-danger"><small>New</small></span><?php endif?>
           </td>
           <td><?php echo $R[$_HS['nametype']]?></td>
