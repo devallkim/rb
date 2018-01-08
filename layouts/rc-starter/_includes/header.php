@@ -1,7 +1,12 @@
 <header class="bar bar-nav bar-dark bg-inverse">
   <?php if ($my['uid']): ?>
-  <a class="icon icon icon-gear pull-left" role="button" href="./?mod=settings"></a>
+  <a class="icon icon icon-gear pull-left" role="button" href="./?mod=settings" title="개인정보수정"></a>
   <?php endif; ?>
-  <a class="icon icon-person pull-right" role="button" href="<?php echo $my['uid']?'./?mod=profile':'./?mod=login' ?>"></a>
+
+  <?php if ($my['uid']): ?>
+  <a class="icon fa fa-sign-out pull-right" role="button" href="<?php echo $g['s']?>/?r=<?php echo $r?>&a=logout" title="로그아웃"></a>
+  <?php else: ?>
+  <a class="icon icon-person pull-right" role="button" href="./?mod=login" title="로그인"></a>
+  <?php endif; ?>
   <h1 class="title">Title</h1>
 </header>
