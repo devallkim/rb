@@ -588,5 +588,35 @@ function getTimThumb($data=array())
 	return $result;
 }
 
+// 업로드 이미지 src 추출함수
+function getUpImageSrc($R){
+  global $table;
+
+   if($R['featured_img']){
+			$F=getUidData($table['s_upload'],trim($R['featured_img']));
+			$src=$F['url'].$F['folder'].'/'.$F['tmpname'];
+   }else{
+      $img_arr=getImgs($R['content'],'jpg|jpge|gif|png');
+      $src=$img_arr[0]?$img_arr[0]:'';
+   }
+  return $src;
+}
+
+// 유트브 대표 이미지 src 추출함수
+function getYoutubeImageSrc($R,$width,$height)
+{
+	global $table;
+
+	$F=getUidData($table['s_upload'],trim($R['featured_img']));
+	$src='/files/youtube/'.$F['thumbname'].'/thumb_'.$width.'x'.$height.'.jpg';
+	return $src;
+}
+// 대표이미지 메타정보 추출
+function getFeaturedimgMeta($R,$meta){
+  global $table;
+	$F=getUidData($table['s_upload'],trim($R['featured_img']));
+	$meta=$F[$meta];
+  return $meta;
+}
 
 ?>
