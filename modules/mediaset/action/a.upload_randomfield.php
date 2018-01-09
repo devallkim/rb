@@ -12,7 +12,6 @@ if(!is_dir($saveDir)){
 }
 
 include $g['path_module'].'mediaset/themes/'.$theme.'/main.func.php';
-include $g['path_module'].'mediaset/themes/'.$theme.'/var.php';
 include $g['path_module'].'mediaset/var/var.php';
 include $g['path_core'].'function/thumb.func.php';
 
@@ -33,16 +32,8 @@ $fileExt  = getExt($name);
 $fileExt  = $fileExt == 'jpeg' ? 'jpg' : $fileExt;
 $type   = getFileType($fileExt);
 $tmpname  = md5($name).substr($date['totime'],8,14);
-
-if ($type == 2 || $type == 4 || $type == 5 ) {
-  $tmpname = $tmpname.'.'.$fileExt;
-}
-
-$hidden   = 0;
-if ($d['theme']['hidden_photo'] == 1 && $type == 2) {
-  $hidden  = 1;
-}
-
+$tmpname  = $type == 2 ? $tmpname.'.'.$fileExt : $tmpname;
+$hidden   = $type == 2 ? 1 : 0;
 
 if ($d['mediaset']['up_ext_cut'] && strstr($d['mediaset']['up_ext_cut'],$fileExt))
 {
@@ -131,30 +122,12 @@ if(isset($_FILES["files"]))
 
     $result=array();
     // main.func.php 파일 getAttachFile 함수 참조
-
-    if ($type==4) {
-      $preview_default=getAttachFile($R,'upload',''); // 빈값은 대표이미지 uid 이다. (최초 등록시에는 없다.)
-      $preview_modal=getAttachFile($R,'modal','');
-    } elseif($type==5) {
-      $preview_default=getAttachVideo($R,'upload',''); // 빈값은 대표이미지 uid 이다. (최초 등록시에는 없다.)
-      $preview_modal=getAttachVideo($R,'modal','');
-    } else {
-      $preview_default=getAttachFile($R,'upload',''); // 빈값은 대표이미지 uid 이다. (최초 등록시에는 없다.)
-      $preview_modal=getAttachFile($R,'modal','');
-    }
-
+    $preview_default=getAttachFile($R['uid'],$parent_table,$parent_uid,$parent_field); // 빈값은 대표이미지 uid 이다. (최초 등록시에는 없다.)
     $result['preview_default']=$preview_default;
-    $result['preview_modal']=$preview_modal; // 모달 리스트 출력용 (소스복사외 다른 메뉴는 없다.)
-
-    if ($type==2) {
-      $result['type']='photo';
-    } else if($type==4) {
-      $result['type']='audio';
-    } else if($type==5) {
-      $result['type']='video';
-    } else {
-      $result['type']='file';
-    }
+    $result['parent_table']=$parent_table;
+    $result['parent_uid']=$parent_uid;
+    $result['parent_field']=$parent_field;
+    $result['type']=$type==2?'photo':'file';
 
     echo json_encode($result,true);
 }

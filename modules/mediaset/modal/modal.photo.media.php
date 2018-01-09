@@ -63,14 +63,10 @@ if ($tab == 'file_info')
 $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropfield='.$dropfield.'&dropfiles='.$dropfiles.'&dfiles='.$dfiles;
 ?>
 
-<?php getImport('bootstrap-select','bootstrap-select',false,'css')?>
-<?php getImport('bootstrap-select','bootstrap-select',false,'js')?>
-
-
 <form name="_upload_form_" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" target="_upload_iframe_">
 	<input type="hidden" name="r" value="<?php echo $r?>">
 	<input type="hidden" name="m" value="<?php echo $m?>">
-	<input type="hidden" name="a" value="upload">
+	<input type="hidden" name="a" value="mediaset/upload">
 	<input type="hidden" name="saveDir" value="<?php echo $g['path_file']?>">
 	<input type="hidden" name="gparam" value="<?php echo $gparam?>">
 	<input type="hidden" name="category" value="<?php echo $_album?>">
@@ -102,7 +98,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<form action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_" onsubmit="return AddAlbumRcheck(this);">
 			<input type="hidden" name="r" value="<?php echo $r?>">
 			<input type="hidden" name="m" value="<?php echo $m?>">
-			<input type="hidden" name="a" value="category_add">
+			<input type="hidden" name="a" value="mediaset/category_add">
 			<input type="hidden" name="ablum_type" value="1">
 			<div class="input-group">
 				<input type="text" name="name" class="form-control" placeholder="추가할 분류">
@@ -123,8 +119,8 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 		<?php if($NUM):?>
 		<?php if(!$dfiles):?>
-		<div class="btn-toolbar border well-sm">
-			<div class="btn-group">
+		<div class="d-flex mb-3">
+			<div class="btn-group mr-auto">
 				<button type="button" class="btn btn-light" title="전체선택" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','true');"><i class="fa fa-check-square-o fa-lg"></i></button>
 				<button type="button" class="btn btn-light" title="선택해제" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','false');"><i class="fa fa-minus-square-o fa-lg"></i></button>
 				<button type="button" class="btn btn-light"title="휴지통" data-tooltip="tooltip" onclick="deleteCheck(1,'');"><i class="fa fa-trash-o fa-lg"></i></button>
@@ -134,23 +130,23 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 					<i class="fa fa-folder fa-lg"></i> 옮기기
 					<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu">
-					<li><a href="#." onclick="deleteCheck('move','0');"><i class="fa fa-folder"></i> 미분류</a></li>
-					<?php foreach($_TMP_CT as $_CT):?>
-					<li><a href="#." onclick="deleteCheck('move','<?php echo $_CT['uid']?>');"><i class="fa fa-folder"></i> <?php echo $_CT['name']?></a></li>
-					<?php endforeach?>
-					<li class="divider"></li>
-					<li><a href="#." onclick="deleteCheck('delete','');"><i class="fa fa-times fa-lg"></i> 영구삭제</a></li>
-					</ul>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a class="dropdown-item" href="#." onclick="deleteCheck('move','0');"><i class="fa fa-folder"></i> 미분류</a>
+						<?php foreach($_TMP_CT as $_CT):?>
+						<a class="dropdown-item" href="#." onclick="deleteCheck('move','<?php echo $_CT['uid']?>');"><i class="fa fa-folder"></i> <?php echo $_CT['name']?></a>
+						<?php endforeach?>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#." onclick="deleteCheck('delete','');"><i class="fa fa-times fa-lg"></i> 영구삭제</a>
+					</div>
 				</div>
 			</div>
 
-			<div class="btn-group pull-right">
+			<div class="btn-group">
 				<button type="button" class="btn btn-light"<?php if($p-1<1):?> disabled="disabled"<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="이전" onclick="location.href=getPageGo(<?php echo $p-1?>,0);"><i class="fa fa-chevron-left fa-lg"></i></button>
 				<button type="button" class="btn btn-light"<?php if($p+1>$TPG):?> disabled="disabled"<?php endif?> data-toggle="tooltip" data-placement="bottom" title="" data-original-title="다음" onclick="location.href=getPageGo(<?php echo $p+1?>,0);"><i class="fa fa-chevron-right fa-lg"></i></button>
 			</div>
 
-			<div class="btn-group pull-right">
+			<div class="btn-group">
 				<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"><?php echo number_format($NUM)?>개 (<?php echo $p?>/<?php echo sprintf('%s 페이지',$TPG)?>)</button>
 				<ul class="dropdown-menu" role="menu">
 				<li<?php if($p==1):?> class="active"<?php endif?>><a href="#." onclick="location.href=getPageGo(1,0);">첫 페이지</a></li>
@@ -232,7 +228,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<form name="_upload_form1_" action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_">
 			<input type="hidden" name="r" value="<?php echo $r?>">
 			<input type="hidden" name="m" value="<?php echo $m?>">
-			<input type="hidden" name="a" value="upload">
+			<input type="hidden" name="a" value="mediaset/upload">
 			<input type="hidden" name="gparam" value="<?php echo $gparam?>">
 			<input type="hidden" name="link" value="Y">
 			<input type="hidden" name="category" value="<?php echo $_album?>">
@@ -274,7 +270,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<form name="captionForm" action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_">
 			<input type="hidden" name="r" value="<?php echo $r?>">
 			<input type="hidden" name="m" value="<?php echo $m?>">
-			<input type="hidden" name="a" value="caption_regis">
+			<input type="hidden" name="a" value="mediaset/caption_regis">
 			<input type="hidden" name="uid" value="<?php echo $_R['uid']?>">
 			<div class="panel-body">
 				<div class="form-group">
@@ -397,7 +393,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 <div id="_modal_header" hidden>
 
-	<ul class="nav nav-tabs" style="position:relative;left:5px;margin-bottom:-20px;z-index:0;">
+	<ul class="nav nav-tabs border-bottom-0" style="margin-top: .1rem">
 		<li class="nav-item">
 			<a href="#" class="nav-link active">
 				포토셋
@@ -550,7 +546,7 @@ function catDelete()
 	if (confirm('정말로 삭제하시겠습니까?   '))
 	{
 		var f = document._upload_form_;
-		f.a.value = 'category_delete';
+		f.a.value = 'mediaset/category_delete';
 		f.submit();
 	}
 	return false;
@@ -567,7 +563,7 @@ function deleteCheck(x,uid)
 	{
 		if (confirm('정말로 휴지통을 비우시겠습니까?'))
 		{
-			f.a.value = 'files_empty';
+			f.a.value = 'mediaset/files_empty';
 			f.submit();
 		}
 		return false;
@@ -597,7 +593,7 @@ function deleteCheck(x,uid)
 		}
 		if (confirm('삭제할 사진을 선택해 주세요.'))
 		{
-			f.a.value = 'files_delete';
+			f.a.value = 'mediaset/files_delete';
 			f.dtype.value = x;
 			f.mcat.value = uid;
 			f.submit();
@@ -612,7 +608,7 @@ function deleteCheck(x,uid)
 		}
 		if (confirm('이동할 사진을 선택해 주세요.'))
 		{
-			f.a.value = 'files_delete';
+			f.a.value = 'mediaset/files_delete';
 			f.dtype.value = x;
 			f.submit();
 		}
@@ -625,7 +621,7 @@ function deleteCheck(x,uid)
 		}
 		if (confirm('이동할 사진을 선택해 주세요.'))
 		{
-			f.a.value = 'files_delete';
+			f.a.value = 'mediaset/files_delete';
 			f.submit();
 		}
 	}
@@ -643,7 +639,7 @@ function orderCheck()
 		{
 			l[i].checked = true;
 		}
-		f.a.value = 'files_order';
+		f.a.value = 'mediaset/files_order';
 		f.submit();
 	}
 	return false;
@@ -822,44 +818,213 @@ $('.selectpicker').selectpicker();
 
 <style>
 <?php $_gapAdj = strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')||strpos($_SERVER['HTTP_USER_AGENT'],'Firefox')||strpos($_SERVER['HTTP_USER_AGENT'],'rv:1')?true:false?>
-#rb-body {background:#fff;}
+#rb-body {
+  background: #fff;
+}
 
-#photobox {position:absolute;display:block;top:0;left:0;bottom:0;right:<?php echo $_sideOpen?290:0?>px;overflow:hidden;}
-#photobox .category-box {position:absolute;display:block;top:0;left:0;bottom:0;width:<?php echo $dfiles?'0px':'195px'?>;padding-top:25px;overflow-x:hidden;overflow-y:auto;}
-#photobox .photo-box {position:absolute;display:block;top:0;left:<?php echo $dfiles?'0px':'210px'?>;bottom:0;right:0;padding-top:45px;overflow-x:hidden;overflow-y:auto;}
-#photobox .alert {margin-right:<?php echo $_sideOpen=true?'15':'305'?>px;}
+#photobox {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: <?php echo $_sideOpen?290: 0?>px;
+  overflow: hidden;
+}
 
-#photobox .btn-toolbar {position:relative;top:-15px;left:15px;margin-right:40px;}
+#photobox .category-box {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: <?php echo $dfiles?'0px': '195px'?>;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
-#photoorder {padding:0 0 10px 0;}
-#photoorder .rb-photo-check {position:absolute;margin-left:5px;}
-#photoorder li {float:left;list-style-type:none;border:#dfdfdf solid 3px;padding:0;margin:0 9px 20px 10px;}
-#photoorder .selected {border:#FC5F4A solid 3px;}
-#photoorder li .photo {width:105px;height:78px;cursor:move;}
-#photoorder li .btn-group {display:none;}
-#photoorder li:hover .btn-group {display:block;position:absolute;}
-#photoorder li:hover .btn-group button {top:-22px;}
+#photobox .photo-box {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: <?php echo $dfiles?'0px': '210px'?>;
+  bottom: 0;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
-#infobox {position:absolute;display:block;width:290px;top:15px;right:0;bottom:0;overflow:hidden;}
-#infobox .infobox-body {display:block;width:100%;height:100%;border-left:#dfdfdf solid 1px;overflow:hidden;}
-#infobox .infobox-body .pic-info {position:absolute;display:block;width:100%;top:42px;bottom:<?php echo $_gapAdj?'95px':'55px'?>;overflow-x:hidden;overflow-y:auto;}
-#infobox .infobox-body .pic-info img {padding:15px 15px 0 15px;}
-#infobox .infobox-body .pic-submit {position:absolute;display:block;width:100%;bottom:<?php echo $_gapAdj?'40px':'0'?>;border-top:#dfdfdf solid 1px;padding:10px 15px 10px 15px;}
+#photobox .alert {
+  margin-right: <?php echo $_sideOpen=true?'15': '305'?>px;
+}
 
-#infobox .infobox-body .pic-info1 {position:absolute;display:block;width:100%;top:42px;bottom:<?php echo $_gapAdj?'132px':'92px'?>;overflow-x:hidden;overflow-y:auto;}
-#infobox .infobox-body .pic-submit1 {position:absolute;display:block;width:100%;bottom:<?php echo $_gapAdj?'40px':'0'?>;border-top:#dfdfdf solid 1px;padding:10px 15px 10px 15px;}
+#photobox .btn-toolbar {
+  position: relative;
+  top: -15px;
+  left: 15px;
+  margin-right: 40px;
+}
 
-#infobox .text-center .btn {width:100%;}
+#photoorder {
+  padding: 0 0 10px 0;
+}
 
-#infobox .layoutbox-body {display:block;width:100%;height:100%;border-left:#dfdfdf solid 1px;overflow:hidden;}
-#infobox .layoutbox-body .selectbox {position:absolute;display:block;width:100%;left:0;right:0;padding:10px 15px 0 15px;}
-#infobox .layoutbox-body .iframebox {position:absolute;display:block;width:100%;top:95px;bottom:<?php echo $_gapAdj?'105px':'55px'?>;padding:0 0 0 15px;overflow:hidden;border-top:#dfdfdf solid 1px;}
-#infobox .layoutbox-body .optionbox {position:absolute;display:block;width:100%;padding:1px 15px 10px 15px;bottom:<?php echo $_gapAdj?'40px':'0'?>;border-top:#dfdfdf solid 1px;}
-#infobox .layoutbox-body .optionbox .text-center {border-top:0; padding-top:10px;padding-bottom:0;}
+#photoorder .rb-photo-check {
+  position: absolute;
+  margin-left: 5px;
+}
 
-#progressBar {display:none;margin-right:15px;}
+#photoorder li {
+  float: left;
+  list-style-type: none;
+  border: #dfdfdf solid 3px;
+  padding: 0;
+  margin: 0 9px 20px 10px;
+}
+
+#photoorder .selected {
+  border: #FC5F4A solid 3px;
+}
+
+#photoorder li .photo {
+  width: 105px;
+  height: 78px;
+  cursor: move;
+}
+
+#photoorder li .btn-group {
+  display: none;
+}
+
+#photoorder li:hover .btn-group {
+  display: block;
+  position: absolute;
+}
+
+#photoorder li:hover .btn-group button {
+  top: -22px;
+}
+
+#infobox {
+  position: absolute;
+  display: block;
+  width: 290px;
+  top: 15px;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+#infobox .infobox-body {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-left: #dfdfdf solid 1px;
+  overflow: hidden;
+}
+
+#infobox .infobox-body .pic-info {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 42px;
+  bottom: <?php echo $_gapAdj?'95px': '55px'?>;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#infobox .infobox-body .pic-info img {
+  padding: 15px 15px 0 15px;
+}
+
+#infobox .infobox-body .pic-submit {
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: <?php echo $_gapAdj?'40px': '0'?>;
+  border-top: #dfdfdf solid 1px;
+  padding: 10px 15px 10px 15px;
+}
+
+#infobox .infobox-body .pic-info1 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 42px;
+  bottom: <?php echo $_gapAdj?'132px': '92px'?>;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#infobox .infobox-body .pic-submit1 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: <?php echo $_gapAdj?'40px': '0'?>;
+  border-top: #dfdfdf solid 1px;
+  padding: 10px 15px 10px 15px;
+}
+
+#infobox .text-center .btn {
+  width: 100%;
+}
+
+#infobox .layoutbox-body {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-left: #dfdfdf solid 1px;
+  overflow: hidden;
+}
+
+#infobox .layoutbox-body .selectbox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 10px 15px 0 15px;
+}
+
+#infobox .layoutbox-body .iframebox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 95px;
+  bottom: <?php echo $_gapAdj?'105px': '55px'?>;
+  padding: 0 0 0 15px;
+  overflow: hidden;
+  border-top: #dfdfdf solid 1px;
+}
+
+#infobox .layoutbox-body .optionbox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  padding: 1px 15px 10px 15px;
+  bottom: <?php echo $_gapAdj?'40px': '0'?>;
+  border-top: #dfdfdf solid 1px;
+}
+
+#infobox .layoutbox-body .optionbox .text-center {
+  border-top: 0;
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+
+#progressBar {
+  display: none;
+  margin-right: 15px;
+}
+
 #progressPer {}
 
-.rb-list-group a {padding:8px 5px 3px 7px;}
-.rb-list-group a span {font-weight:normal;}
+.rb-list-group a {
+  padding: 8px 5px 3px 7px;
+}
+
+.rb-list-group a span {
+  font-weight: normal;
+}
+
 </style>

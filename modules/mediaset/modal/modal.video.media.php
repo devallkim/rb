@@ -70,7 +70,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 <form name="_upload_form_" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" target="_upload_iframe_">
 <input type="hidden" name="r" value="<?php echo $r?>">
 <input type="hidden" name="m" value="<?php echo $m?>">
-<input type="hidden" name="a" value="upload_vod">
+<input type="hidden" name="a" value="mediaset/upload_vod">
 <input type="hidden" name="saveDir" value="<?php echo $g['path_file']?>">
 <input type="hidden" name="gparam" value="<?php echo $gparam?>">
 <input type="hidden" name="category" value="<?php echo $_album?>">
@@ -100,7 +100,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<form action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_" onsubmit="return AddAlbumRcheck(this);">
 			<input type="hidden" name="r" value="<?php echo $r?>">
 			<input type="hidden" name="m" value="<?php echo $m?>">
-			<input type="hidden" name="a" value="category_add">
+			<input type="hidden" name="a" value="mediaset/category_add">
 			<input type="hidden" name="ablum_type" value="2">
 			<div class="input-group">
 				<input type="text" name="name" class="form-control" placeholder="추가할 분류">
@@ -230,7 +230,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<form name="_upload_form1_" action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_">
 			<input type="hidden" name="r" value="<?php echo $r?>">
 			<input type="hidden" name="m" value="<?php echo $m?>">
-			<input type="hidden" name="a" value="upload_vod">
+			<input type="hidden" name="a" value="mediaset/upload_vod">
 			<input type="hidden" name="gparam" value="<?php echo $gparam?>">
 			<input type="hidden" name="category" value="<?php echo $_album?>">
 			<input type="hidden" name="mediaset" value="Y">
@@ -286,7 +286,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<form name="captionForm" action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_">
 				<input type="hidden" name="r" value="<?php echo $r?>">
 				<input type="hidden" name="m" value="<?php echo $m?>">
-				<input type="hidden" name="a" value="caption_regis_vod">
+				<input type="hidden" name="a" value="mediaset/caption_regis_vod">
 				<input type="hidden" name="uid" value="<?php echo $_R['uid']?>">
 
 				<div class="panel-body">
@@ -372,7 +372,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 <div id="_modal_header" hidden>
 
-	<ul class="nav nav-tabs" style="position:relative;left:5px;margin-bottom:-20px;z-index:0;">
+	<ul class="nav nav-tabs border-bottom-0" style="margin-top: .1rem">
 		<?php if(!$dfiles && !$dropfield):?>
 		<li class="nav-item"><a class="nav-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&iframe=Y&mdfile=modal.photo.media&dropfield=<?php echo $dropfield?>&dropfiles=<?php echo $dropfiles?>" target="_modal_iframe_modal_window">포토셋</a></li>
 		<?php endif?>
@@ -514,7 +514,7 @@ function catDelete()
 	if (confirm('정말로 삭제하시겠습니까?   '))
 	{
 		var f = document._upload_form_;
-		f.a.value = 'category_delete';
+		f.a.value = 'mediaset/category_delete';
 		f.submit();
 	}
 	return false;
@@ -548,7 +548,7 @@ function deleteCheck(x,uid)
 	{
 		if (confirm('정말로 휴지통을 비우시겠습니까?'))
 		{
-			f.a.value = 'files_empty_vod';
+			f.a.value = 'mediaset/files_empty_vod';
 			f.submit();
 		}
 		return false;
@@ -577,7 +577,7 @@ function deleteCheck(x,uid)
 		}
 		if (confirm('정말로 이동하시겠습니까?'))
 		{
-			f.a.value = 'files_delete_vod';
+			f.a.value = 'mediaset/files_delete_vod';
 			f.dtype.value = x;
 			f.mcat.value = uid;
 			f.submit();
@@ -592,7 +592,7 @@ function deleteCheck(x,uid)
 		}
 		if (confirm('정말로 삭제하시겠습니까?'))
 		{
-			f.a.value = 'files_delete_vod';
+			f.a.value = 'mediaset/files_delete_vod';
 			f.dtype.value = x;
 			f.submit();
 		}
@@ -606,7 +606,7 @@ function deleteCheck(x,uid)
 		}
 		if (confirm('정말로 삭제하시겠습니까?'))
 		{
-			f.a.value = 'files_delete_vod';
+			f.a.value = 'mediaset/files_delete_vod';
 			f.submit();
 		}
 	}
@@ -624,7 +624,7 @@ function orderCheck()
 		{
 			l[i].checked = true;
 		}
-		f.a.value = 'files_order';
+		f.a.value = 'mediaset/files_order';
 		f.submit();
 	}
 	return false;
@@ -745,42 +745,211 @@ $('.selectpicker').selectpicker();
 <style>
 <?php $_gapAdj = strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')||strpos($_SERVER['HTTP_USER_AGENT'],'Firefox')||strpos($_SERVER['HTTP_USER_AGENT'],'rv:1')?true:false?>
 
-#photobox {position:absolute;display:block;top:0;left:0;bottom:0;right:<?php echo $_sideOpen?290:0?>px;overflow:hidden;}
-#photobox .category-box {position:absolute;display:block;top:0;left:0;bottom:0;width:<?php echo $dfiles?'0px':'195px'?>;padding-top:25px;overflow-x:hidden;overflow-y:auto;}
-#photobox .photo-box {position:absolute;display:block;top:0;left:<?php echo $dfiles?'0px':'210px'?>;bottom:0;right:0;padding-top:45px;overflow-x:hidden;overflow-y:auto;}
-#photobox .alert {margin-right:<?php echo $_sideOpen=true?'15':'305'?>px;}
+#photobox {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: <?php echo $_sideOpen?290: 0?>px;
+  overflow: hidden;
+}
 
-#photobox .btn-toolbar {position:relative;top:-15px;left:15px;margin-right:40px;}
+#photobox .category-box {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: <?php echo $dfiles?'0px': '195px'?>;
+  padding-top: 25px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
-#photoorder {padding:0 0 10px 0;}
-#photoorder .rb-photo-check {position:absolute;margin-left:5px;}
-#photoorder li {float:left;list-style-type:none;border:#dfdfdf solid 3px;padding:0;margin:0 9px 20px 10px;}
-#photoorder .selected {border:#FC5F4A solid 3px;}
-#photoorder li .photo {width:170px;height:98px;cursor:move;}
-#photoorder li .btn-group {display:none;}
-#photoorder li:hover .btn-group {display:block;position:absolute;}
-#photoorder li:hover .btn-group button {top:-34px;}
+#photobox .photo-box {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: <?php echo $dfiles?'0px': '210px'?>;
+  bottom: 0;
+  right: 0;
+  padding-top: 45px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 
-#infobox {position:absolute;display:block;width:290px;top:15px;right:0;bottom:0;overflow:hidden;}
-#infobox .infobox-body {display:block;width:100%;height:100%;border-left:#dfdfdf solid 1px;overflow:hidden;}
-#infobox .infobox-body .pic-info {position:absolute;display:block;width:100%;top:42px;bottom:<?php echo $_gapAdj?'95px':'55px'?>;overflow-x:hidden;overflow-y:auto;}
-#infobox .infobox-body .pic-info img {padding:15px 15px 0 15px;}
-#infobox .infobox-body .pic-submit {position:absolute;display:block;width:100%;bottom:<?php echo $_gapAdj?'40px':'0'?>;border-top:#dfdfdf solid 1px;padding:10px 15px 10px 15px;}
+#photobox .alert {
+  margin-right: <?php echo $_sideOpen=true?'15': '305'?>px;
+}
 
-#infobox .infobox-body .pic-info1 {position:absolute;display:block;width:100%;top:42px;bottom:<?php echo $_gapAdj?'132px':'92px'?>;overflow-x:hidden;overflow-y:auto;}
-#infobox .infobox-body .pic-submit1 {position:absolute;display:block;width:100%;bottom:<?php echo $_gapAdj?'40px':'0'?>;border-top:#dfdfdf solid 1px;padding:10px 15px 10px 15px;}
+#photobox .btn-toolbar {
+  position: relative;
+  top: -15px;
+  left: 15px;
+  margin-right: 40px;
+}
 
-#infobox .text-center .btn {width:100%;}
+#photoorder {
+  padding: 0 0 10px 0;
+}
 
-#infobox .layoutbox-body {display:block;width:100%;height:100%;border-left:#dfdfdf solid 1px;overflow:hidden;}
-#infobox .layoutbox-body .selectbox {position:absolute;display:block;width:100%;left:0;right:0;padding:10px 15px 0 15px;}
-#infobox .layoutbox-body .iframebox {position:absolute;display:block;width:100%;top:95px;bottom:<?php echo $_gapAdj?'105px':'55px'?>;padding:0 0 0 15px;overflow:hidden;border-top:#dfdfdf solid 1px;}
-#infobox .layoutbox-body .optionbox {position:absolute;display:block;width:100%;padding:1px 15px 10px 15px;bottom:<?php echo $_gapAdj?'40px':'0'?>;border-top:#dfdfdf solid 1px;}
-#infobox .layoutbox-body .optionbox .text-center {border-top:0; padding-top:10px;padding-bottom:0;}
+#photoorder .rb-photo-check {
+  position: absolute;
+  margin-left: 5px;
+}
 
-#progressBar {display:none;margin-right:15px;}
+#photoorder li {
+  float: left;
+  list-style-type: none;
+  border: #dfdfdf solid 3px;
+  padding: 0;
+  margin: 0 9px 20px 10px;
+}
+
+#photoorder .selected {
+  border: #FC5F4A solid 3px;
+}
+
+#photoorder li .photo {
+  width: 170px;
+  height: 98px;
+  cursor: move;
+}
+
+#photoorder li .btn-group {
+  display: none;
+}
+
+#photoorder li:hover .btn-group {
+  display: block;
+  position: absolute;
+}
+
+#photoorder li:hover .btn-group button {
+  top: -34px;
+}
+
+#infobox {
+  position: absolute;
+  display: block;
+  width: 290px;
+  top: 15px;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+#infobox .infobox-body {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-left: #dfdfdf solid 1px;
+  overflow: hidden;
+}
+
+#infobox .infobox-body .pic-info {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 42px;
+  bottom: <?php echo $_gapAdj?'95px': '55px'?>;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#infobox .infobox-body .pic-info img {
+  padding: 15px 15px 0 15px;
+}
+
+#infobox .infobox-body .pic-submit {
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: <?php echo $_gapAdj?'40px': '0'?>;
+  border-top: #dfdfdf solid 1px;
+  padding: 10px 15px 10px 15px;
+}
+
+#infobox .infobox-body .pic-info1 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 42px;
+  bottom: <?php echo $_gapAdj?'132px': '92px'?>;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#infobox .infobox-body .pic-submit1 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: <?php echo $_gapAdj?'40px': '0'?>;
+  border-top: #dfdfdf solid 1px;
+  padding: 10px 15px 10px 15px;
+}
+
+#infobox .text-center .btn {
+  width: 100%;
+}
+
+#infobox .layoutbox-body {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-left: #dfdfdf solid 1px;
+  overflow: hidden;
+}
+
+#infobox .layoutbox-body .selectbox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 10px 15px 0 15px;
+}
+
+#infobox .layoutbox-body .iframebox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 95px;
+  bottom: <?php echo $_gapAdj?'105px': '55px'?>;
+  padding: 0 0 0 15px;
+  overflow: hidden;
+  border-top: #dfdfdf solid 1px;
+}
+
+#infobox .layoutbox-body .optionbox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  padding: 1px 15px 10px 15px;
+  bottom: <?php echo $_gapAdj?'40px': '0'?>;
+  border-top: #dfdfdf solid 1px;
+}
+
+#infobox .layoutbox-body .optionbox .text-center {
+  border-top: 0;
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+
+#progressBar {
+  display: none;
+  margin-right: 15px;
+}
+
 #progressPer {}
 
-.rb-list-group a {padding:8px 5px 3px 7px;}
-.rb-list-group a span {font-weight:normal;}
+.rb-list-group a {
+  padding: 8px 5px 3px 7px;
+}
+
+.rb-list-group a span {
+  font-weight: normal;
+}
+
 </style>
