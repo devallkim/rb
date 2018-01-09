@@ -210,10 +210,10 @@ if ($uid)
 
 
 			       <div class="form-group row">
-							<label class="col-lg-2 col-form-label text-lg-right">게시판 이름</label>
+							<label class="col-lg-2 col-form-label text-lg-right">게시판 이름 <small class="text-danger">*</small></label>
 							<div class="col-lg-10 col-xl-9">
 								<div class="input-group">
-									<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $R['name']?>"<?php if(!$R['uid'] && !$g['device']):?> autofocus<?php endif?>>
+									<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $R['name']?>"<?php if(!$R['uid'] && !$g['device']):?> autofocus<?php endif?> required>
 									<?php if($R['uid']):?>
 									<div class="input-group-append">
 										<a href="<?php echo RW('m='.$module.'&bid='.$R['id'])?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="게시판 보기">
@@ -226,10 +226,10 @@ if ($uid)
 							</div>
 					 </div>
 					 <div class="form-group row">
-							<label class="col-lg-2 col-form-label text-lg-right">게시판 아이디</label>
+							<label class="col-lg-2 col-form-label text-lg-right">게시판 아이디 <small class="text-danger">*</small></label>
 							<div class="col-lg-10 col-xl-9">
 								<div class="input-group">
-									<input class="form-control" placeholder="" type="text" name="id" value="<?php echo $R['id']?>" <?php if($R['uid']):?>readonly<?php endif?>>
+									<input class="form-control" placeholder="" type="text" name="id" value="<?php echo $R['id']?>" <?php if($R['uid']):?>readonly<?php endif?> required>
 									<?php if($R['uid']):?>
 									<div class="input-group-append">
 										<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletebbs&amp;uid=<?php echo $R['uid']?>" onclick="return hrefCheck(this,true,'삭제하시면 모든 게시물이 지워지며 복구할 수 없습니다.\n정말로 삭제하시겠습니까?');"  class="btn btn-light" data-tooltip="tooltip" title="삭제하기">
@@ -270,8 +270,9 @@ if ($uid)
 								</select>
 							</div>
 					 </div>
+					 <hr>
 					 <div class="form-group row">
-				  	  <label class="col-lg-2 col-form-label text-lg-right">게시판 테마 </label>
+				  	  <label class="col-lg-2 col-form-label text-lg-right"><i class="fa fa-list-alt fa-lg fa-fw" aria-hidden="true"></i> 게시판 테마 </label>
 					     <div class="col-lg-10 col-xl-9">
 			  		    <select name="skin" class="form-control custom-select">
 									<option value="">&nbsp;+ 게시판 대표테마</option>
@@ -286,7 +287,7 @@ if ($uid)
 							</div> <!-- .col-sm-10  -->
 					</div> <!-- .form-group  -->
 					<div class="form-group row">
-			  	  <label class="col-lg-2 col-form-label text-lg-right">(모바일 접속)</label>
+			  	  <label class="col-lg-2 col-form-label text-lg-right"><span class="badge badge-dark">모바일 접속</span></label>
 				     <div class="col-lg-10 col-xl-9">
 						  		<select name="m_skin" class="form-control custom-select">
 									<option value="">&nbsp;+ 게시판 모바일 대표테마</option>
@@ -300,6 +301,59 @@ if ($uid)
 								</select>
 							</div> <!-- .col-sm-10  -->
 					</div> <!-- .form-group  -->
+					<hr>
+					<div class="form-group row">
+						 <label class="col-lg-2 col-form-label text-lg-right"><i class="fa fa-paperclip fa-fw fa-lg" aria-hidden="true"></i> 파일첨부</label>
+							<div class="col-lg-10 col-xl-9">
+							 <select name="a_skin" class="form-control custom-select">
+								 <option value="">파일첨부 대표테마</option>
+								 <?php $mdir = $g['path_module'].'mediaset/themes/_desktop/'?>
+								 <?php $dirs = opendir($mdir)?>
+								 <?php while(false !== ($skin = readdir($dirs))):?>
+								 <?php if($skin=='.' || $skin == '..' || is_file($mmdir.$skin))continue?>
+								 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mdir.$skin)?>(<?php echo $skin?>)</option>
+								 <?php endwhile?>
+								 <?php closedir($dirs)?>
+							 </select>
+						 </div> <!-- .col-sm-10  -->
+				 </div> <!-- .form-group  -->
+				 <div class="form-group row">
+					 <label class="col-lg-2 col-form-label text-lg-right"><span class="badge badge-dark">모바일 접속</span></label>
+						<div class="col-lg-10 col-xl-9">
+								 <select name="a_mskin" class="form-control custom-select">
+								 <option value="">파일첨부 모바일 대표테마</option>
+								 <?php $mmdir = $g['path_module'].'mediaset/themes/_mobile/'?>
+								 <?php $dirs = opendir($mmdir)?>
+								 <?php while(false !== ($skin = readdir($dirs))):?>
+								 <?php if($skin=='.' || $skin == '..' || is_file($mmdir.$skin))continue?>
+								 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_mskin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mmdir.$skin)?>(<?php echo $skin?>)</option>
+								 <?php endwhile?>
+								 <?php closedir($dirs)?>
+							 </select>
+						 </div> <!-- .col-sm-10  -->
+				 </div> <!-- .form-group  -->
+
+				 <hr>
+
+				 <div class="form-group row">
+						<label class="col-lg-2 col-form-label text-lg-right"><i class="fa fa-comments-o fa-fw fa-lg" aria-hidden="true"></i> 댓글</label>
+						 <div class="col-lg-10 col-xl-9">
+							<select name="c_skin" class="form-control custom-select">
+								<option value="">댓글 대표테마</option>
+							</select>
+						</div> <!-- .col-sm-10  -->
+				</div> <!-- .form-group  -->
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label text-lg-right"><span class="badge badge-dark">모바일 접속</span></label>
+					 <div class="col-lg-10 col-xl-9">
+								<select name="c_mskin" class="form-control custom-select">
+								<option value="">댓글 모바일 대표테마</option>
+							</select>
+						</div> <!-- .col-sm-10  -->
+				</div> <!-- .form-group  -->
+				<hr>
+
+
 					<div class="form-group row">
 							<label class="col-lg-2 col-form-label text-lg-right">연결메뉴</label>
 							<div class="col-lg-10 col-xl-9">
@@ -315,27 +369,7 @@ if ($uid)
 								 </small>
 							</div>
 					 </div>
-					 <div class="form-group row">
-			      <label class="col-lg-2 col-form-label text-lg-right">소셜연동</label>
-							<div class="col-lg-10 col-xl-9">
-								<select name="snsconnect" class="form-control custom-select">
-								 <option value="0">&nbsp;+ 연동안함</option>
-								 <?php $tdir = $g['path_module'].'social/inc/'?>
-								 <?php if(is_dir($tdir)):?>
-								 <?php $dirs = opendir($tdir)?>
-								 <?php while(false !== ($skin = readdir($dirs))):?>
-								 <?php if($skin=='.' || $skin == '..')continue?>
-								 <option value="social/inc/<?php echo $skin?>"<?php if($d['bbs']['snsconnect']=='social/inc/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo str_replace('.php','',$skin)?></option>
-								 <?php endwhile?>
-								 <?php closedir($dirs)?>
-								 <?php endif?>
-							 </select>
-							 <small class="form-text text-muted">
-								게시물 등록시 SNS에 동시등록을 가능하게 합니다.<br>
-								이 서비스를 위해서는 소셜연동 모듈을 설치해야 합니다.
-							 </small>
-							</div>
-					 </div>
+
 					<!-- 추가설정 시작 : panel-group 으로 각각의 panel 을 묶는다.-->
 			     <div id="bbs-settings" class="panel-group">
 						 <div id="bbs-settings-add" class="card"> <!-- 추가설정-->
@@ -346,6 +380,7 @@ if ($uid)
 							 </div> <!-- .panel-heading -->
 							<div class="collapse" id="bbs-settings-add-body">
 								<div class="card-body">
+
 									  <!-- .form-group 나열  -->
 									  <?php include $g['path_module'].$module.'/admin/_add_fgroup.php';?>
 								</div>
@@ -427,7 +462,9 @@ if ($uid)
 
 <iframe hidden name="_orderframe_"></iframe>
 <script type="text/javascript">
-//<![CDATA[
+
+putCookieAlert('result_bbs_main') // 실행결과 알림 메시지 출력
+
 // 추가설정 패널 디자인 조정
 function boxDeco(val)
 {
@@ -509,12 +546,9 @@ function saveCheck(f)
 			return false;
 		}
 	}
-   if (confirm('정말로 실행하시겠습니까?         '))
-		{
-			getIframeForAction(f);
-			f.submit();
-		}
 
+	getIframeForAction(f);
+	f.submit();
 }
 //]]>
 </script>

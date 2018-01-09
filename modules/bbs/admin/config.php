@@ -8,7 +8,7 @@ include_once $g['path_module'].$module.'/var/var.php';
 
    <div class="form-group row">
   	  <label class="col-md-2 col-form-label text-md-right">
-				대표테마
+				게시판 대표 테마
 			</label>
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_main" class="form-control custom-select">
@@ -29,7 +29,7 @@ include_once $g['path_module'].$module.'/var/var.php';
 	</div> <!-- .form-group  -->
 	<div class="form-group row">
   	  <label class="col-md-2 col-form-label text-md-right">
-				모바일 테마
+				<span class="badge badge-dark">게시판 모바일 대표테마</span>
 			</label>
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_mobile" class="form-control custom-select">
@@ -70,6 +70,81 @@ include_once $g['path_module'].$module.'/var/var.php';
 
 		</div> <!-- .col-sm-10  -->
 	 </div> <!-- .form-group  -->
+
+	 <hr>
+	 <div class="form-group row">
+  	  <label class="col-md-2 col-form-label text-md-right">
+				<i class="fa fa-paperclip fa-fw" aria-hidden="true"></i> 파일첨부 대표 테마
+			</label>
+     <div class="col-md-10 col-xl-9">
+			 <select name="attach_main" class="form-control custom-select">
+				 <option value="">&nbsp;+ 사용안함</option>
+				 <?php $mdir = $g['path_module'].'mediaset/themes/_desktop/'?>
+				 <?php $dirs = opendir($mdir)?>
+				 <?php while(false !== ($skin = readdir($dirs))):?>
+				 <?php if($skin=='.' || $skin == '..' || is_file($mdir.$skin))continue?>
+				 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['attach_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mdir.$skin)?>(<?php echo $skin?>)</option>
+				 <?php endwhile?>
+				 <?php closedir($dirs)?>
+			 </select>
+			 <small class="form-text text-muted">
+				 지정된 대표테마는 게시판설정시 별도의 테마지정없이 자동으로 적용됩니다.
+				 가장 많이 사용하는 테마를 지정해 주세요.
+			 </small>
+		</div> <!-- .col-sm-10  -->
+	</div> <!-- .form-group  -->
+	<div class="form-group row">
+  	  <label class="col-md-2 col-form-label text-md-right">
+				<span class="badge badge-dark">모바일 대표테마</span>
+			</label>
+     <div class="col-md-10 col-xl-9">
+			 <select name="attach_mobile" class="form-control custom-select">
+				 <option value="">&nbsp;+ 사용안함</option>``
+				 <?php $mmdir = $g['path_module'].'mediaset/themes/_mobile/'?>
+				 <?php $dirs = opendir($mmdir)?>
+				 <?php while(false !== ($skin = readdir($dirs))):?>
+				 <?php if($skin=='.' || $skin == '..' || is_file($mmdir.$skin))continue?>
+				 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['attach_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mmdir.$skin)?>(<?php echo $skin?>)</option>
+				 <?php endwhile?>
+				 <?php closedir($dirs)?>
+			 </select>
+			 <small class="form-text text-muted">
+				 선택하지 않으면 데스크탑 대표테마로 설정됩니다.
+			 </small>
+		</div> <!-- .col-sm-10  -->
+	</div> <!-- .form-group  -->
+	<hr>
+
+	<div class="form-group row">
+		 <label class="col-md-2 col-form-label text-md-right">
+			 <i class="fa fa-comments-o fa-fw" aria-hidden="true"></i> 댓글 대표 테마
+		 </label>
+		<div class="col-md-10 col-xl-9">
+			<select name="comment_main" class="form-control custom-select">
+				<option value="">사용안함</option>
+
+			</select>
+			<small class="form-text text-muted">
+				지정된 대표테마는 게시판설정시 별도의 테마지정없이 자동으로 적용됩니다.
+				가장 많이 사용하는 테마를 지정해 주세요.
+			</small>
+	 </div> <!-- .col-sm-10  -->
+ </div> <!-- .form-group  -->
+ <div class="form-group row">
+		 <label class="col-md-2 col-form-label text-md-right">
+			 <span class="badge badge-dark">모바일 대표테마</span>
+		 </label>
+		<div class="col-md-10 col-xl-9">
+			<select name="comment_mobile" class="form-control custom-select">
+				<option value="">사용안함</option>``
+			</select>
+			<small class="form-text text-muted">
+				선택하지 않으면 데스크탑 대표테마로 설정됩니다.
+			</small>
+	 </div> <!-- .col-sm-10  -->
+ </div> <!-- .form-group  -->
+ <hr>
+
 	 <div class="form-group row">
 			<label class="col-md-2 col-form-label text-md-right">RSS 발행</label>
 			<div class="col-md-10 col-xl-9">

@@ -78,7 +78,7 @@ if ($bid)
 			unlink($vfile.'.footer.php');
 		}
 	}
-	$backUrl = $g['s'].'/?r='.$r.'&m=admin&module='.$m.'&front=makebbs&iframe=Y&uid='.$R['uid'];	
+	$backUrl = $g['s'].'/?r='.$r.'&m=admin&module='.$m.'&front=makebbs&iframe=Y&uid='.$R['uid'];
 }
 else {
 
@@ -134,7 +134,7 @@ else {
 }
 
 
-$fdset = array('layout','skin','m_skin','c_skin','c_mskin','c_hidden','c_open','perm_g_list','perm_g_view','perm_g_write','perm_g_down','perm_l_list','perm_l_view','perm_l_write','perm_l_down','admin','hitcount','recnum','sbjcut','newtime','rss','sosokmenu','point1','point2','point3','display','hidelist','snsconnect');
+$fdset = array('layout','skin','m_skin','a_skin','a_mskin','c_skin','c_mskin','c_hidden','c_open','perm_g_list','perm_g_view','perm_g_write','perm_g_down','perm_l_list','perm_l_view','perm_l_write','perm_l_down','admin','hitcount','recnum','sbjcut','newtime','rss','sosokmenu','point1','point2','point3','display','hidelist','snsconnect');
 
 $gfile= $g['dir_module'].'var/var.'.$id.'.php';
 $fp = fopen($gfile,'w');
@@ -147,5 +147,12 @@ fwrite($fp, "?>");
 fclose($fp);
 @chmod($gfile,0707);
 
-getLink('reload','parent.','새 게시판이 만들어졌습니다. ','');
+if ($bid) {
+	setrawcookie('result_bbs_main', rawurlencode('게시판 등록정보가 변경 되었습니다.|success'));  // 처리여부 cookie 저장
+} else {
+	setrawcookie('result_bbs_main', rawurlencode('게시판이 생성 되었습니다.|success'));  // 처리여부 cookie 저장
+}
+
+getLink('reload','parent.','','');
+
 ?>
