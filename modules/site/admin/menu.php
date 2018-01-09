@@ -59,7 +59,9 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 						</div>
 					</div>
 					<?php else: ?>
-					<div class="text-center p-5 text-muted">등록된 메뉴가 없습니다.</div>
+					<div class="text-center text-muted d-flex align-items-center justify-content-center" style="height: calc(100vh - 15.6rem);">
+						 <div><i class="fa fa-exclamation-circle fa-3x mb-2" aria-hidden="true"></i> <br>등록된 메뉴가 없습니다. </div>
+					</div>
 					<?php endif?>
 
 				</div>

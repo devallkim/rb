@@ -58,7 +58,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 
 
 
-			<div  style="height: calc(100vh - 16.8rem);">
+			<div  style="height: calc(100vh - 12.2rem);">
 
 				<div id="panel-search" class="collapse<?php if($_SESSION['sh_site_page_search']):?> show<?php endif?>">
 					<form role="form" action="<?php echo $g['s']?>/" method="get">
@@ -85,6 +85,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 					</form>
 				</div>
 
+				<?php if ($NUM): ?>
 				<table id="page-list" class="table mb-0">
 					<thead>
 						<tr>
@@ -112,15 +113,27 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 						<?php endwhile?>
 					</tbody>
 				</table>
+
+				<?php if ($TPG > 1): ?>
+				<nav class="mt-3">
+					<ul class="pagination pagination-sm justify-content-center mb-0">
+						<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
+						<?php //echo getPageLink(5,$p,$TPG,'')?>
+					</ul>
+				</nav>
+				<?php endif; ?>
+
+				<?php else: ?>
+				<div class="text-center text-muted d-flex align-items-center justify-content-center" style="height: calc(100vh - 15.6rem);">
+					 <div><i class="fa fa-exclamation-circle fa-3x mb-2" aria-hidden="true"></i> <br>등록된 페이지가 없습니다. </div>
+				</div>
+				<?php endif; ?>
+
+
 			</div>
 
 
-			<nav>
-				<ul class="pagination pagination-sm justify-content-center mb-0">
-					<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
-					<?php //echo getPageLink(5,$p,$TPG,'')?>
-				</ul>
-			</nav>
+
 			<div class="card-footer">
 				<a class="btn btn-light btn-block" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=dumpmenu&amp;type=package_page" target="_action_frame_<?php echo $m?>"><i class="fa fa-download fa-lg"></i> 패키지용 데이터 받기</a>
 			</div>
