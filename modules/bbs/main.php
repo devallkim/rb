@@ -149,7 +149,11 @@ else if ($mod == 'rss')
 }
 
 $_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['bbs']['layout'];
-$d['bbs']['skin'] = $d['bbs']['skin'] ? $d['bbs']['skin'] : $d['bbs']['skin_main'];
+$d['bbs']['skin']     = $d['bbs']['skin'] ? $d['bbs']['skin'] : $d['bbs']['skin_main'];
+$d['bbs']['m_skin']   = $d['bbs']['m_skin'] ? $d['bbs']['m_skin'] : $d['bbs']['skin_mobile'];
+$d['bbs']['attach']   = $d['bbs']['a_skin'] ? $d['bbs']['a_skin'] : $d['bbs']['attach_main'];
+$d['bbs']['m_attach'] = $d['bbs']['a_mskin'] ? $d['bbs']['a_mskin'] : $d['bbs']['attach_mobile'];
+// $d['bbs']['comment'] = $d['bbs']['comment'] ? $d['bbs']['comment'] : $d['bbs']['comment_main'];
 $d['bbs']['skin'] = $skin ? $skin : $d['bbs']['skin'];
 
 if ($g['mobile']&&$_SESSION['pcmode']!='Y')
