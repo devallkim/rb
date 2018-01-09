@@ -26,3 +26,27 @@ RewriteRule ^([a-zA-Z0-9_\-]+)/(b)/([a-zA-Z0-9_\-]+)/write/?$ ./index.php?r=$1&m
 RewriteRule ^([a-zA-Z0-9_\-]+)/(b)/([a-zA-Z0-9_\-]+)/([0-9]+)/s([0-9]+)/?$ ./index.php?r=$1&m=forum&bid=$3&uid=$4&s=$5 [L]
 RewriteRule ^([a-zA-Z0-9_\-]+)/(b)/([a-zA-Z0-9_\-]+)/([0-9]+)/([0-9]+)/?$ ./index.php?r=$1&m=forum&bid=$3&uid=$4&CMT=$5#CMT [L]
 RewriteRule ^([a-zA-Z0-9_\-]+)/(b)/([a-zA-Z0-9_\-]+)/([0-9]+)/([0-9]+)/s([0-9]+)/?$ ./index.php?r=$1&m=forum&bid=$3&uid=$4&CMT=$5&s=$6#CMT [L]
+
+#youtube & vimeo thumb & timthumb
+RewriteRule ^(files)/(youtube)/([a-zA-Z0-9_\-]+)/(thumb)_([0-9]+)x([0-9]+)\.(jpg)$ ./_core/opensrc/timthumb/thumb.php?src=http://img.youtube.com/vi/$3/0.$7&w=$5&h=$6&a=c [NC,L]
+RewriteRule ^(files)/(vimeo)/([a-zA-Z0-9_\-]+)/(thumb)_([0-9]+)x([0-9]+)\.(jpg)$ ./_core/opensrc/timthumb/thumb.php?src=https://i.vimeocdn.com/video/$3.$7&w=$5&h=$6 [NC,L]
+
+#timthumb
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_([0-9]+)x([0-9]+)\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$6&w=$4&h=$5 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_s\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=75&h=75 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_q\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=150&h=150 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_t\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=100&h=67 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_m\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=240&h=160 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_n\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=320&h=213 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_z\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=640&h=427 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_c\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=800&h=534 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_b\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=1024&h=683 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_h\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=1600&h=1068 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_k\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=2048&h=1367 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_onair\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=800&h=550 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=680 [NC,L]
+
+#avatar
+RewriteRule ^(avatar)/(.*)_s\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./_var/avatar/$2.$3&w=40&h=40&s=1 [NC,L]
+RewriteRule ^(avatar)/(.*)_m\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./_var/avatar/$2.$3&w=80&h=80&s=1 [NC,L]
+RewriteRule ^(avatar)/(.*)_l\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./_var/avatar/$2.$3&w=168&h=168&s=1 [NC,L]
