@@ -566,4 +566,27 @@ function setAccessToken($memberuid,$type)
 	   setcookie($DB['head'].'_token',$memberuid.'|'.$access_token,$login_expire_last,'/'); // 쿠키 생성
    }
 }
+
+// TimThumb 이미지 출력함수
+function getTimThumb($data=array())
+{
+	global $g;
+	$origin_src=$data['src'];
+	$w=$data['width'];
+	$h=$data['height'];
+	$q=$data['qulity'];
+ 	$f=$data['filter'];
+	$a=$data['align'];
+	$t=$data['type'];
+	$s=$data['style'];
+	$source='/_core/opensrc/timthumb/thumb.php';
+  $img_qry=$source.'?src='.($data['modal']?'':$g['url_host']).$origin_src;
+  $img_qry .=($w?'&w='.$w:'').($h?'&h='.$h:'').($q?'&q='.$q:'').($f?'&f='.$f:'').($a?'&a='.$a:'').($t?'&t='.$t:'').($s?'&s='.$s:'');
+
+	if($origin_src) $result=$img_qry;
+	else $result='';
+	return $result;
+}
+
+
 ?>
