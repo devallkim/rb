@@ -272,13 +272,13 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 					<input type="hidden" name="referer" value="">
 
 					<div class="panel-group rb-scrollbar" id="site-settings-panels">
-						<div class="card border-primary" id="site-settings-01">
-							<div class="card-header bg-primary text-white">
-								<a data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-01-body">
+						<div class="card" id="site-settings-01">
+							<div class="card-header">
+								<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-01-body">
 									<i></i>기본정보
 								</a>
 							</div>
-							<div class="card-body panel-collapse collapse show" id="site-settings-01-body">
+							<div class="card-body panel-collapse collapse" id="site-settings-01-body">
 								<div class="form-group">
 									<label>사이트 라벨</label>
 									<input type="text" class="form-control" name="label" value="<?php echo $_HS['label']?>">
@@ -452,13 +452,13 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 					<div class="panel-group rb-scrollbar" id="layout-settings-panels">
 						<?php $_i=1;foreach($d['layout']['dom'] as $_key => $_val):$__i=sprintf('%02d',$_i)?>
-						<div class="card<?php echo $_i==1?' boder-primary':''?>" id="layout-settings-<?php echo $__i?>">
-							<div class="card-header<?php echo $_i==1?' bg-primary text-white':''?>">
+						<div class="card" id="layout-settings-<?php echo $__i?>">
+							<div class="card-header">
 								<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-<?php echo $__i?>-body">
 									<i></i><?php echo $_val[0]?>
 								</a>
 							</div>
-							<div class="card-body panel-collapse collapse<?php echo $_i==1?' show':''?>" id="layout-settings-<?php echo $__i?>-body">
+							<div class="card-body panel-collapse collapse" id="layout-settings-<?php echo $__i?>-body">
 								<p><?php echo $_val[1]?></p>
 
 								<?php if(count($_val[2])):?>
