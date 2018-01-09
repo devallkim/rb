@@ -284,12 +284,7 @@ function regisCheck(f)
 			return false;
 	}
 
-	if (confirm('정말로 실행하시겠습니까?   '))
-	{
-		getIframeForAction(f);
-	}else{
-		return false;
-	}
+	getIframeForAction(f);
 }
 function numFormat1(obj)
 {

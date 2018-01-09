@@ -4,7 +4,7 @@ $_R1=getUidData($table['s_mbrid'],$uid);
 $_R2=getDbData($table['s_mbrdata'],'memberuid='.$_R1['uid'],'*');
 $_M=array_merge($_R1,$_R2);
 if (!$_M['uid']) exit;
-// 삭제파일명 지정 
+// 삭제파일명 지정
 if($tab=='post'||$tab=='notice') $del_file='multi_delete';
 else $del_file=$tab.'_multi_delete';
 ?>
@@ -16,21 +16,21 @@ else $del_file=$tab.'_multi_delete';
 	<li<?php if($tab=='oneline'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=oneline&amp;uid=<?php echo $_M['uid']?>">한줄의견</a></li>
 	<li<?php if($tab=='scrap'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=scrap&amp;uid=<?php echo $_M['uid']?>">스크랩</a></li>
 	<li<?php if($tab=='paper'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=paper&amp;uid=<?php echo $_M['uid']?>">쪽지</a></li>
- 	<li<?php if($tab=='notice'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=notice&amp;uid=<?php echo $_M['uid']?>">알림</a></li> 
+ 	<li<?php if($tab=='notice'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=notice&amp;uid=<?php echo $_M['uid']?>">알림</a></li>
 	<li<?php if($tab=='point'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=point&amp;uid=<?php echo $_M['uid']?>">포인트</a></li>
 	<li<?php if($tab=='log'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=log&amp;uid=<?php echo $_M['uid']?>">접속기록</a></li>
-	<li<?php if($tab=='info'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=info&amp;uid=<?php echo $_M['uid']?>">가입정보</a></li>	
+	<li<?php if($tab=='info'):?> class="active"<?php endif?>><a href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=info&amp;uid=<?php echo $_M['uid']?>">가입정보</a></li>
 </ul>
 <!-- tab 내용 -->
 <div class="tab-content">
 	<div class="tab-pane active">
-		    <?php include $g['path_module'].$module.'/admin/manager/'.$tab.'.php';?>			
+		    <?php include $g['path_module'].$module.'/admin/manager/'.$tab.'.php';?>
 	</div>
 </div>
 <!--@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴-->
 <div id="_modal_header" class="hidden">
-	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	<h4 class="modal-title"><small class="label label-<?php echo $_M['now_log']?'primary':'default'?>" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?><?php echo $_M['admin']?($_M['adm_view']?'부관리자':'최고관리자'):'일반회원'?>"></small> <?php echo sprintf('<strong>%s</strong> 님의 정보',$_M['name'])?> </h4>
+	<h5 class="modal-title"><small class="label label-<?php echo $_M['now_log']?'primary':'default'?>" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?><?php echo $_M['admin']?($_M['adm_view']?'부관리자':'최고관리자'):'일반회원'?>"></small> <?php echo sprintf('<strong>%s</strong> 님의 정보',$_M['name'])?> </h5>
+  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 </div>
 <div id="_modal_footer" class="hidden">
 	<?php if($tab=='info'):?>
@@ -38,7 +38,7 @@ else $del_file=$tab.'_multi_delete';
 	<?php elseif($tab!='log' && $tab!='profile'):?>
 	<button type="button" class="btn btn-danger btn-sm pull-left act-btn" onclick="frames._modal_iframe_modal_window.actCheck('<?php echo $del_file?>','<?php echo $tab?>');">삭제</button>
 	<?php endif?>
-	<button id="_close_btn_" type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	<button id="_close_btn_" type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
 </div>
 
 <!-- bootstrap-datepicker,  http://eternicode.github.io/bootstrap-datepicker/  -->
@@ -49,10 +49,10 @@ else $del_file=$tab.'_multi_delete';
 .datepicker {z-index: 1151 !important;}
 </style>
 <script>
- // 툴팁 이벤트 
+ // 툴팁 이벤트
 $(document).ready(function() {
        $('[data-toggle=tooltip]').tooltip();
- }); 
+ });
 
 $('.input-daterange').datepicker({
 	format: "yyyy/mm/dd",
@@ -72,10 +72,10 @@ $(".checkAll-act-list").click(function(){
 // tab 으로 리스트 체크박스명과 모듈명 추출함수
 function getTabData(tab,val)
 {
-	var m; // 모듈 
+	var m; // 모듈
 	var ck; // 체크박스
    if(tab=='post' || tab=='comment' || tab=='oneline' ){
-    	m='bbs'; // 최종적으로 모듈명을 넘겨준다. 
+    	m='bbs'; // 최종적으로 모듈명을 넘겨준다.
     	ck = document.getElementsByName(tab+'_members[]');
    }else if(tab=='scrap'|| tab=='paper'|| tab=='point'){
    	m='member';
@@ -87,14 +87,14 @@ function getTabData(tab,val)
    var result={"m":m,"ck":ck,};
 
    return result[val];
-}  
+}
 
 // 선택박스 체크시 액션버튼 활성화 함수
 function checkboxCheck()
 {
-	var tab=$('input[name="tab"]').val(); 
+	var tab=$('input[name="tab"]').val();
  	var f = document.adm_list_form;
-	var l =getTabData(tab,'ck'); // 체크박스명 얻기  
+	var l =getTabData(tab,'ck'); // 체크박스명 얻기
    var n = l.length;
    var i;
 	var j=0;
@@ -105,8 +105,8 @@ function checkboxCheck()
           $(l[i]).parent().parent().addClass('warning'); // 선택된 체크박스 tr 강조표시
 			j++;
 		}else{
-			$(l[i]).parent().parent().removeClass('warning'); 
-		} 
+			$(l[i]).parent().parent().removeClass('warning');
+		}
 	}
 	// 하단 회원관리 액션 버튼 상태 변경
 	if (j) $('.act-btn').prop("disabled",false);
@@ -115,7 +115,7 @@ function checkboxCheck()
 
 function actCheck(act,tab)
 {
-	var l; // tab 에 따라서 list 엘리먼트 name 이 바뀐다. 
+	var l; // tab 에 따라서 list 엘리먼트 name 이 바뀐다.
 	var f = document.adm_list_form; // 모든 리스트의 공통 form
    var 	l = getTabData(tab,'ck');
    var n = l.length;
@@ -123,14 +123,14 @@ function actCheck(act,tab)
    var i;
    var msg;
 
-   // 최종적으로 모듈명을 넘겨준다. 
-   f.m.value=getTabData(tab,'m'); 
-   
+   // 최종적으로 모듈명을 넘겨준다.
+   f.m.value=getTabData(tab,'m');
+
    for (i = 0; i < n; i++)
 	{
 		if(l[i].checked == true)
 		{
-			j++;	
+			j++;
 		}
 	}
 	if (!j)
@@ -140,7 +140,7 @@ function actCheck(act,tab)
 	}
    msg='정말로 삭제하시겠습니가? ';
 	if(confirm(msg))
-	{		
+	{
 	 	f.a.value = act;
 	   getIframeForAction(f);
 		f.submit();
@@ -154,7 +154,7 @@ function actCheck(act,tab)
 jQuery(document).ready(function() {
 	$(".rb-update time").timeago();
 });
-</script>   
+</script>
 
 
 <script>
@@ -239,8 +239,6 @@ function modalSetting()
 
 	parent.getId('_modal_header_modal_window').innerHTML = getId('_modal_header').innerHTML;
 	parent.getId('_modal_header_modal_window').className = 'modal-header';
-	parent.getId('_modal_body_modal_window').style.padding = '0';
-	parent.getId('_modal_body_modal_window').style.margin = '0';
 
 	parent.getId('_modal_footer_modal_window').innerHTML = getId('_modal_footer').innerHTML;
 	parent.getId('_modal_footer_modal_window').className = 'modal-footer';

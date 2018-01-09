@@ -22,9 +22,11 @@ fclose($fp);
 
 if ($newdoc)
 {
-	getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&front=maildoc&type='.$newdoc,'parent.','등록되었습니다. ','');
+	setrawcookie('maildoc_result', rawurlencode('등록 되었습니다.|success'));
+	getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&front=maildoc&type='.$newdoc,'parent.','','');
 }
 else {
-	getLink('reload','parent.','수정되었습니다. ','');
+	setrawcookie('maildoc_result', rawurlencode('수정 되었습니다.|success'));
+	getLink('reload','parent.','','');
 }
 ?>

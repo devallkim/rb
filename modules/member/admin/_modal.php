@@ -11,11 +11,11 @@
 			<input type="hidden" name="check_email" value="0">
 
 			<div class="modal-header">
+				<h5 class="modal-title">회원 추가</h5>
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">회원 추가</h4>
 			</div>
 			<div class="modal-body">
-	
+
 				<div class="form-group rb-outside">
 					<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 					<div class="col-sm-9">
@@ -54,7 +54,7 @@
 							   </small>
 							</div>
 						</div>
-					</div>		
+					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">이름</label>
@@ -107,4 +107,3 @@
 		</div>
 	</div>
 </div>
-

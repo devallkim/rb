@@ -67,7 +67,7 @@ $type = $type ? $type : '_join';
 					</div>
 					<?php if(!$typeset[$type]):?>
 					<div class="col">
-						<button class="btn btn-outline-danger btn-block" onclick="delCheck('<?php echo $type?>');">삭제</button>
+						<button class="btn btn-outline-danger btn-block" onclick="delCheck('<?php echo $type?>');" type="button">삭제</button>
 					</div>
 					<?php endif?>
 				</div>
@@ -108,7 +108,8 @@ $type = $type ? $type : '_join';
 
 
 <script type="text/javascript">
-//<![CDATA[
+
+putCookieAlert('maildoc_result') // 실행결과 알림 메시지 출력
 
 // 툴팁 이벤트
 $(document).ready(function() {
@@ -229,5 +230,5 @@ function saveCheck(f)
 
 	return confirm('정말로 실행하시겠습니까?         ');
 }
-//]]>
+
 </script>

@@ -377,11 +377,11 @@ $xmin1	= substr($date['totime'],10,2);
 
 				 <!-- 리스트 테이블 시작-->
 				 <div class="table-responsive">
-					 <table class="table table-hover mb-0" style="min-width: 800px;">
+					 <table class="table table-hover mb-0 text-center">
 	 					<thead>
 	 						<tr>
-	 							<th class="text-center">
-	 								<div class="custom-control custom-checkbox js-tooltip checkAll-member" title="전체선택">
+	 							<th class="text-center py-0">
+	 								<div class="custom-control custom-checkbox js-tooltip checkAll-member" title="전체선택" style="top: -3px;">
 	 									<input type="checkbox" class="custom-control-input" id="checkAll-member">
 	 									<label class="custom-control-label" for="checkAll-member"></label>
 	 								</div>
@@ -394,12 +394,12 @@ $xmin1	= substr($date['totime'],10,2);
 	 							<th>아이디</th>
 	 							<th class="text-center">등급</th>
 	 							<th class="text-center">그룹</th>
-	 							<th class="text-center">성별</th>
-	 							<th class="text-center">나이</th>
-	 							<th>가입일</th>
-	 									<th>최근접속</th>
+								<th>가입일</th>
+								<th>최근접속</th>
 
 	 						<?php if($wideview == 'Y'):?>
+								<th class="text-center">성별</th>
+								<th class="text-center">나이</th>
 	 							<th>지역</th>
 	 							<th>연락처</th>
 	 							<th>이메일</th>
@@ -433,11 +433,11 @@ $xmin1	= substr($date['totime'],10,2);
 	 							<td><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-mbrinfo" onmousedown="mbrIdDrop('<?php echo $R['memberuid']?>','info');"><?php echo $_R['id']?></a></td><!-- info -->
 	 							<td class="text-center"><?php echo $R['level']?></td>
 	 							<td class="text-center"><?php echo $_GRPARR[$R['mygroup']]?></td>
-	 							<td class="text-center"><?php if($R['sex']) echo getSex($R['sex'])?></td>
-	 							<td class="text-center"><?php if($R['birth1']) echo getAge($R['birth1'])?></td>
 	 							 <td><?php echo getDateFormat($R['d_regis'],'Y.m.d')?></td>
 	 							 <td title="<?php echo getDateFormat($R['last_log'],'Y.m.d')?>"><?php echo -getRemainDate($R['last_log'])?>일</td>
 	 						<?php if($wideview == 'Y'):?>
+								<td class="text-center"><?php if($R['sex']) echo getSex($R['sex'])?></td>
+								<td class="text-center"><?php if($R['birth1']) echo getAge($R['birth1'])?></td>
 	 							<td><?php echo $R['addr0']?></td>
 	 							<td><?php echo $R['tel2']?$R['tel2']:$R['tel1']?></td>
 	 							<td><?php echo $R['email']?></td>
@@ -518,7 +518,7 @@ $xmin1	= substr($date['totime'],10,2);
 		</div>  <!-- // .card-->
 
 		<nav class="d-flex px-3 align-items-center">
-			<ul class="pagination">
+			<ul class="pagination mb-0">
 				<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
 			</ul>
 
