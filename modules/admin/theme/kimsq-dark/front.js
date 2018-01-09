@@ -24,6 +24,8 @@ function editFullSize(id,obj)
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
-	$('[data-tooltip="tooltip"]').tooltip()
+	$('[data-tooltip="tooltip"]').tooltip({
+		html: true
+	})
 	$('.js-tooltip').tooltip()
 })
