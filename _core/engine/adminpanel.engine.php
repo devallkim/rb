@@ -101,8 +101,8 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 						</div>
 					</div>
 
-					<div class="dropdown js-tooltip" title="미디어셋">
-						<button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-photo fa-2x"></i></button>
+					<div class="dropdown js-tooltip" title="각종도구">
+						<button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tasks fa-2x"></i></button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-photo"><i class="fa fa-photo"></i> 포토셋</a>
 							<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-video"><i class="fa fa-video-camera"></i> 비디오셋</a>
