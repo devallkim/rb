@@ -20,10 +20,12 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 	<nav id="category" class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
 		<div id="accordion">
 			<div class="card">
-				<a class="card-header accordion-toggle muted-link" data-toggle="collapse" data-parent="#accordion" href="#collapmetane">
-					<i class="fa fa-sitemap fa-lg fa-fw"></i>
-					메뉴구조
-				</a>
+				<div class="card-header p-0">
+					<a class="d-block accordion-toggle muted-link" data-toggle="collapse" data-parent="#accordion" href="#collapmetane">
+						<i class="fa fa-sitemap fa-lg fa-fw"></i>
+						메뉴구조
+					</a>
+				</div>
 
 				<div class="collapse show" id="collapmetane" style="height: calc(100vh - 8.53rem);">
 					<?php if($SITEN>1):?>
@@ -70,11 +72,12 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 
 			<?php if($g['device']):?><a name="site-menu-info"></a><?php endif?>
 			<div class="card">
-				<a class="card-header accordion-toggle collapsed muted-link" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
-					<i class="fa fa-retweet fa-lg fa-fw"></i>
-					순서 조정
-				</a>
-
+				<div class="card-header p-0">
+					<a class="d-block accordion-toggle collapsed muted-link" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+						<i class="fa fa-retweet fa-lg fa-fw"></i>
+						순서 조정
+					</a>
+				</div>
 					<div class="panel-collapse collapse" id="collapseTwo">
 						<?php if($CINFO['is_child']||(!$cat&&$ISCAT)):?>
 						<form role="form" action="<?php echo $g['s']?>/" method="post">
@@ -109,13 +112,18 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 						</script>
 
 						<?php else:?>
-						<div class="card-body rb-blank">
-							<?php if($cat):?>
-							<?php echo sprintf('[%s] 하위에 등록된 메뉴가 없습니다.',$CINFO['name'])?>
-							<?php else:?>
-							등록된 메뉴가 없습니다.
-							<?php endif?>
+
+						<div class="text-center text-muted d-flex align-items-center justify-content-center" style="height: calc(100vh - 15.6rem);">
+							 <div>
+								 <i class="fa fa-exclamation-circle fa-3x mb-2" aria-hidden="true"></i> <br>
+								 <?php if($cat):?>
+								 <?php echo sprintf('[%s] 하위에 등록된 메뉴가 없습니다.',$CINFO['name'])?>
+								 <?php else:?>
+								 등록된 메뉴가 없습니다.
+								 <?php endif?>
+							 </div>
 						</div>
+
 						<?php endif?>
 					</div>
 			</div>

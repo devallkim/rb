@@ -107,8 +107,8 @@ function getWidgetPreviewImg($path)
 		<?php endif?>
 
 		<ul class="nav nav-tabs" role="tablist">
-			<li class="active"><a href="#code" role="tab" data-toggle="tab">설정하기</a></li>
-			<li><a href="#preview" role="tab" data-toggle="tab">미리보기</a></li>
+			<li class="nav-item"><a class="nav-link active" href="#code" role="tab" data-toggle="tab">설정하기</a></li>
+			<li class="nav-item"><a class="nav-link" href="#preview" role="tab" data-toggle="tab">미리보기</a></li>
 			<?php if($isWcode=='Y'):?>
 			<li class="pull-right"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');"><i class="glyphicon glyphicon-trash"></i></a></li>
 			<?php endif?>
@@ -147,23 +147,23 @@ function getWidgetPreviewImg($path)
 </div>
 
 
-<!----------------------------------------------------------------------------
-@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
+<!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
-<div id="_modal_header" class="hidden">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	<h4 class="modal-title"><i class="kf-widget kf-lg"></i> 위젯 선택하기</h4>
+<div id="_modal_header" hidden>
+	<h5 class="modal-title"><i class="kf-widget kf-lg"></i> 위젯 선택하기</h5>
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </div>
 
-<div id="_modal_footer" class="hidden">
-	<button type="button" class="btn btn-default pull-left" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_">닫기</button>
+<div id="_modal_footer" hidden>
+	<button type="button" class="btn btn-light pull-left" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_">닫기</button>
 	<?php if(!$isWcode||$isEdit):?>
 	<?php if($isCodeOnly):?>
 	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>코드보기</a>
-	<button type="button" class="btn btn-default" disabled>위젯코드만 지원</button>
+	<button type="button" class="btn btn-light" disabled>위젯코드만 지원</button>
 	<?php else:?>
-	<button type="button" class="btn btn-default" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>코드보기</a>
+	<button type="button" class="btn btn-light" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>코드보기</a>
 	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._saveCheck(<?php echo $isEdit?1:0?>);"<?php if(!$swidget):?> disabled<?php endif?>>삽입하기</button>
 	<?php endif?>
 	<?php else:?>
