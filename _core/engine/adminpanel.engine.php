@@ -404,7 +404,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 								<div class="card-body">
 									<div class="form-group">
 										<label>도메인</label>
-										<ul>
+										<ul class="list-unstyled">
 											<?php $DOMAINS = getDbArray($table['s_domain'],'site='.$_HS['uid'],'*','gid','asc',0,1)?>
 											<?php $DOMAINN = db_num_rows($DOMAINS)?>
 											<?php if($DOMAINN):?>
@@ -413,9 +413,11 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 											<?php endwhile?>
 											<?php else:?>
 											<li>
+												<small class="text-muted">연결된 도메인이 없습니다.
 												<a class="muted-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=domain&amp;selsite=<?php echo $_HS['uid']?>&amp;type=makedomain" target="_ADMPNL_">
-													연결된 도메인이 없습니다.
+													추가하기
 												</a>
+												</small>
 											</li>
 											<?php endif?>
 										</ul>
