@@ -6,6 +6,7 @@ $d['ov']['photoswipe'] = '4.0.6';
 $d['ov']['rc'] = '1.0.0-alpha.4';
 $d['ov']['jquery-markdown'] = '0.0.10';
 $d['ov']['nestable'] = '1.0';
+$d['ov']['mediaelement'] = '4.1.3';
 $d['ov']['snap'] = '1.9.3';
 $d['ov']['bootstrap-switch'] = '3.0.2';
 $d['ov']['clipboard'] = '1.5.5';
