@@ -9,7 +9,7 @@ if (!$my['admin'] && !strstr(','.($d['bbs']['admin']?$d['bbs']['admin']:'.').','
 	}
 }
 if ($R['hidden'])
-{	
+{
 	if ($my['uid'] != $R['mbruid'] && $my['uid'] != $R['pw'] && !$my['admin'])
 	{
 		if (!strpos('_'.$_SESSION['module_'.$m.'_pwcheck'],'['.$R['uid'].']'))
@@ -57,15 +57,15 @@ if ($d['bbs']['isperm'] && $R['upload'])
 	}
 	if ($R['upload'] != $d['upload']['tmp'])
 	{
-		getDbUpdate($table[$m.'data'],"upload='".$R['upload']."'",'uid='.$R['uid']);
+		// getDbUpdate($table[$m.'data'],"upload='".$R['upload']."'",'uid='.$R['uid']);
 	}
 	$d['upload']['count'] = $d['_pload']['count'];
 }
 
-// 메타 이미지 세팅 = 해당 포스트의 대표 이미지를 메타 이미지로 적용한다. 
+// 메타 이미지 세팅 = 해당 포스트의 대표 이미지를 메타 이미지로 적용한다.
 if($R['featured_img']){
        $FI=getUidData($table['s_upload'],$R['featured_img']);
-       $featured_img=getDynamicResizeImg($FI['tmpname'],'q'); // 동적 사이즈 조정 
+       $featured_img=getDynamicResizeImg($FI['tmpname'],'q'); // 동적 사이즈 조정
        $g['meta_img']=$g['url_root'].$FI['url'].$FI['folder'].'/'.$featured_img;
 }
 $mod = $mod ? $mod : 'view';

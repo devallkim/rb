@@ -13,6 +13,7 @@ include_once $g['path_module'].$module.'/var/var.php';
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_main" class="form-control custom-select">
 				 <option value="">선택하세요</option>
+				 <option value="" disabled>--------------------------------</option>
 				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
 				 <?php $dirs = opendir($tdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -33,7 +34,8 @@ include_once $g['path_module'].$module.'/var/var.php';
 			</label>
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_mobile" class="form-control custom-select">
-				 <option value="">모바일 테마 사용안함</option>``
+				 <option value="">모바일 테마 사용안함</option>
+				 <option value="" disabled>--------------------------------</option>
 				 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
 				 <?php $dirs = opendir($tdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -54,6 +56,7 @@ include_once $g['path_module'].$module.'/var/var.php';
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_total" class="form-control custom-select">
 				 <option value="">통합보드 사용안함</option>
+				 <option value="" disabled>--------------------------------</option>
 				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
 				 <?php $dirs = opendir($tdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -79,6 +82,7 @@ include_once $g['path_module'].$module.'/var/var.php';
      <div class="col-md-10 col-xl-9">
 			 <select name="attach_main" class="form-control custom-select">
 				 <option value="">사용안함</option>
+				 <option value="" disabled>--------------------------------</option>
 				 <?php $mdir = $g['path_module'].'mediaset/themes/_desktop/'?>
 				 <?php $dirs = opendir($mdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -100,6 +104,7 @@ include_once $g['path_module'].$module.'/var/var.php';
      <div class="col-md-10 col-xl-9">
 			 <select name="attach_mobile" class="form-control custom-select">
 				 <option value="">사용안함</option>
+				 <option value="" disabled>--------------------------------</option>
 				 <?php $mmdir = $g['path_module'].'mediaset/themes/_mobile/'?>
 				 <?php $dirs = opendir($mmdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -122,6 +127,7 @@ include_once $g['path_module'].$module.'/var/var.php';
 		<div class="col-md-10 col-xl-9">
 			<select name="comment_main" class="form-control custom-select">
 				<option value="">사용안함</option>
+				<option value="" disabled>--------------------------------</option>
 				<?php $cdir = $g['path_module'].'comment/themes/_desktop/'?>
 				<?php $dirs = opendir($cdir)?>
 				<?php while(false !== ($skin = readdir($dirs))):?>
@@ -143,6 +149,7 @@ include_once $g['path_module'].$module.'/var/var.php';
 		<div class="col-md-10 col-xl-9">
 			<select name="comment_mobile" class="form-control custom-select">
 				<option value="">사용안함</option>
+				<option value="" disabled>--------------------------------</option>
 				<?php $cmdir = $g['path_module'].'comment/themes/_mobile/'?>
 				<?php $dirs = opendir($cmdir)?>
 				<?php while(false !== ($skin = readdir($dirs))):?>
