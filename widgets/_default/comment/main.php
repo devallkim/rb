@@ -4,7 +4,7 @@
 
 <!-- theme css : 삭제금지, 불필요한 경우 해당 파일 내용을 비움. -->
 
-<link href="<?php echo $g['url_root']?>/modules/comment/theme/<?php echo $wdgvar['theme']?>/css/style.css" rel="stylesheet">
+<link href="<?php echo $g['url_root']?>/modules/comment/themes/<?php echo $wdgvar['theme']?>/css/style.css" rel="stylesheet">
 <script src="<?php echo $g['url_root']?>/modules/comment/lib/Rb.comment.js"></script>
 
 <script>
@@ -31,5 +31,6 @@ var p_uid = '<?php echo $wdgvar['parent_uid']?>';//9294053;
 var theme = '<?php echo $wdgvar['theme']?>';
 
 get_Rb_Comment(p_module,p_table,p_uid,theme);
+
 
 </script>
