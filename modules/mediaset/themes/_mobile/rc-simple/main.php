@@ -27,26 +27,6 @@
       <?php endif?>
     </ul>
 
-    <!-- 오디오 리스트  -->
-    <ul class="table-view bg-white" data-role="attach-preview-audio">
-      <?php if($parent_data['uid']):?>
-      <?php echo getAttachFileList($parent_data,'upload','audio')?>
-      <?php endif?>
-    </ul>
-
-    <!-- 비디오 리스트  -->
-    <div class="table-view bg-white" data-role="attach-preview-video">
-      <?php if($parent_data['uid']):?>
-      <?php echo getAttachPlatformList($parent_data,'upload','video')?>
-      <?php endif?>
-    </div>
-
-    <!-- 유튜브 리스트  -->
-    <ul class="table-view bg-white" data-role="attach-preview-youtube">
-      <?php if($parent_data['uid']):?>
-      <?php echo getAttachPlatformList($parent_data,'upload','youtube')?>
-      <?php endif?>
-    </ul>
 
   </div>
 

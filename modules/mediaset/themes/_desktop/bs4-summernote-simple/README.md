@@ -11,3 +11,4 @@
 
 ## 요구사항
 - `widgets/_default/attach` 위젯 필요
+- `/plugins/jquery-form/4.2.2/jquery.form.min.js` 플러그인 필요

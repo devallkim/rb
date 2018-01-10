@@ -8,7 +8,7 @@
  */
 (function ($) {
 	if($.fn.ajaxForm == undefined) {
-		$.getScript(("https:" == document.location.protocol ? "https://" : "http://") + "malsup.github.io/jquery.form.js");
+		$.getScript(rooturl+'/plugins/jquery-form/4.2.2/jquery.form.min.js');
 	}
 	var feature = {};
 	feature.fileapi = $("<input type='file'/>").get(0).files !== undefined;
@@ -17,7 +17,7 @@
 		// This is the easiest way to have default options.
 		var s = $.extend({
 			// These are the defaults.
-			url: rooturl+'/?r='+raccount+'&m=mediaset&a=upload', // attach 모듈 upload 액션 파일 지정 
+			url: rooturl+'/?r='+raccount+'&m=mediaset&a=upload', // attach 모듈 upload 액션 파일 지정
 			method: "POST",
 			enctype: "multipart/form-data",
 			returnType: null,

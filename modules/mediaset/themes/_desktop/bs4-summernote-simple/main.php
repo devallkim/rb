@@ -19,46 +19,8 @@ include $g['dir_attach_theme'].'/header.php';
     <?php endif?>
   </ul>
 
-  <ul class="list-group rb-attach-audio mt-2 bg-faded" data-role="attach-preview-audio"> <!-- 오디오 리스트  -->
-    <?php if($parent_data['uid']):?>
-    <?php echo getAttachFileList($parent_data,'upload','audio')?>
-    <?php endif?>
-  </ul>
-
-  <ul class="list-group rb-attach-youtube mt-2 bg-faded" data-role="attach-preview-youtube"> <!-- 비디오 리스트  -->
-    <?php if($parent_data['uid']):?>
-    <?php echo getAttachPlatformList($parent_data,'upload','youtube')?>
-    <?php endif?>
-  </ul>
 
 </div><!-- /.rb-attach -->
-
-
-<!-- 유튜브 링크 추가  -->
-<div class="modal fade" tabindex="-1" role="dialog" id="modal-attach-youtube">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"><i class="fa fa-youtube fa-lg"></i> 유튜브 비디오 추가</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div><!-- /.modal-header -->
-      <div class="modal-body">
-        <div id="_youtube_play_layer_" class="media-pic"></div>
-        <input name="src" id="_youtube_url_" class="form-control input-lg" type="text" value="" placeholder="비디오 URL을 입력하세요.">
-        <span class="help-block text-muted">예) https://youtu.be/NVgeV9ACexY</span>
-      </div>
-      <div class="modal-footer">
-        <div class="mr-auto">
-          <button type="button" class="btn btn-light rb-preview" onclick="getYoutubePreview();" role="button">불러오기</button>
-          <button type="button" class="btn btn-light rb-reset" onclick="getYoutubeReset();" role="button">초기화</button>
-        </div>
-
-        <button type="button" class="btn btn-light" data-dismiss="modal" role="button">닫기</button>
-        <button type="button" class="btn btn-light" data-role="btn-addYoutube" data-attach-act="saveYoutube" data-linkData="" disabled  role="button">추가하기</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 
 <!-- 첨부 사진 메타정보 수정 -->
@@ -101,7 +63,6 @@ include $g['dir_attach_theme'].'/header.php';
     </div>
 </div>
 
-<script src="<?php echo $g['url_attach_theme']?>/main-youtube.js"></script>
 
 <?php
   include $g['dir_attach_theme'].'/footer.php';
@@ -157,59 +118,6 @@ include $g['dir_attach_theme'].'/header.php';
     theme : '<?php echo $g['dir_attach_theme']?>',
   };
 
-  $('#rb-attach-youtube-wrapper').RbAttachYoutube(link_settings);
-
-  // youtube 추가 모달 초기화
-  $('#modal-attach-youtube').on('show.bs.modal', function () {
-    $('#_youtube_url_').val('');
-    $('[data-attach-act="saveYoutube"]').attr('disabled','disabled').removeClass('btn-primary').addClass('btn-light')
-  })
-  $('#modal-attach-youtube').on('shown.bs.modal', function () {
-    $('#_youtube_url_').focus();
-  })
-  $('#modal-attach-youtube').on('hidden.bs.modal', function () {
-    $('#_youtube_play_layer_').html('');
-  })
-
-  $('#modal-attach-youtube-meta').on('shown.bs.modal', function (event) {
-
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var uid = button.data('id');
-    var type = button.data('type'); // file or photo
-
-    // data 값 세팅
-    var filename = button.data('filename');
-    var caption = button.attr('data-caption');
-    var description = button.attr('data-description');
-    var time = button.attr('data-time');
-    var youtube_embed = 'https://www.youtube.com/embed/';// 미리보기 이미지
-
-    var modal = $(this)
-    // data 값 모달에 적용 description
-    modal.find('[data-role="caption"]').val(caption).focus();
-    modal.find('[data-role="description"]').val(description);
-    modal.find('[data-role="time"]').val(time);
-    modal.find('[data-role="eventHandler"]').attr('data-id',uid); // save, cancel 엘리먼트 data-id="" 값에 uid 값 적용
-    modal.find('[data-role="eventHandler"]').attr('data-type',type); // save, cancel 엘리먼트 data-type="" 값에 type 값 적용
-    modal.find('[data-role="src"]').attr('src',youtube_embed + filename)
-
-
-  })
-
-  $('#modal-attach-youtube-meta').on('hidden.bs.modal', function () {
-    $(this).find('[data-role="caption"]').val(''); // 입력된 캡션명 초기화
-    $(this).find('[data-role="description"]').val(''); // 입력된 description 초기화
-    $(this).find('.video-col').html('<video class="mejs-player img-responsive"  style="max-width:100%;" preload="none"><source data-role="src" type="video/youtube"></video>');
-  })
-
-  $('#_youtube_url_').on('keyup', function() {
-
-    if ($(this).val().length >= 5) {
-      $('.rb-preview').removeAttr('disabled').removeClass('btn-light').addClass('btn-primary')
-    } else {
-      $('.rb-preview').attr('disabled','disabled').removeClass('btn-primary').addClass('btn-light');
-    }
-  });
 
   $('.rb-preview').on('click', function() {
     $(this).removeClass('btn-primary').addClass('btn-light')
