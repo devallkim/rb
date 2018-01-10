@@ -1,0 +1,33 @@
+<div class="ma-comment-view" data-role="comment-item" data-uid="{$comment_uid}" data-page="{$comment_page}" data-totalPage="{$total_page}" data-type="comment">
+    <div class="ma-comment-layout ma-cell-layout">
+        <div class="ma-cell ma-cell-picture">
+            <img src="{$comment_user_pic}" alt="Comment User Picture">
+        </div>
+        <div class="ma-cell ma-cell-wide">
+            <div class="ma-comment-text">
+                <input type="hidden" data-role="comment-origin-content-{$comment_uid}" value="{$comment_content}" />
+                <a class="ma-write-comment" data-role="toggle-oneline-input" data-parent="{$comment_uid}">댓글쓰기</a>
+                <a data-kcact="like" data-type="comment" data-entry="{$comment_uid}">좋아요(<span data-role="comment-likeTotal-{$comment_uid}">{$comment_like_total}</span>)
+                </a>
+                <span class="ma-name">{$comment_user_name}</span>
+                <span class="ma-icon ma-icon-clock"><i class="fa fa-clock-o" aria-hidden="true"></i></span> <span class="ma-timelapse" data-role="comment-time-wrapper-{$comment_uid}">{$comment_regis_time}</span>
+                {$btn_showHideMenu} <!-- 메뉴 출력/숨기 버튼 btn_showHideMenu.html : 권한이 있는 경우(로그인,작성자,관리자) 에만 노출됨 -->
+                {$my_menu} <!-- 수정 모드시 취소/완료 버튼 btn_ediMod.html : 수정권한이 있는 경우에만 노출됨 -->
+                <div class="ma-comment-content" data-role="comment-content-wrapper-{$comment_uid}">
+                	{$comment_content}
+                </div>
+                {$btn_editMod} <!-- 수정 모드시 취소/완료 버튼 btn_ediMod.html -->
+            </div>
+            <div data-role="oneline-container-{$comment_uid}">
+                {$oneline_rows} <!-- 한줄의견 리스트 -->
+            </div>
+            <div class="ma-comment-innerinput" data-role="oneline-input-wrapper-{$comment_uid}"> <!-- 한줄의견 등록폼 -->
+                <form>
+                    <input type="text" data-role="oneline-input-{$comment_uid}"> <!-- 주의 : comment_uid 가 들어가야 함 -->
+                    <input type="submit" value="댓글쓰기" data-kcact="regis" data-type="oneline" data-parent="{$comment_uid}" data-grant="{$grant_uid}">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

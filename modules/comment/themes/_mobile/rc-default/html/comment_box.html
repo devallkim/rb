@@ -1,0 +1,29 @@
+<!-- 공통 사항 data-* ="*" 과 {$*} 는 수정 금지 -->
+<header data-role="header-container">
+   {$comment_header} <!-- 댓글 header : comment_header.html  -->
+</header>
+<div class="rb-comment-wrapper">
+  <div class="rb-comments-write" data-role="commentWrite-container"> <!-- 댓글 입렵부 : comment_write.html -->
+  	{$comment_write}
+  </div>
+
+  <div class="nav nav-control w-50 mb-2" data-toggle="buttons">
+    <a class="nav-link active" role="button" data-kcact="changeSort" data-sort="uid" data-orderby="asc">최신순</a>
+    <a class="nav-link" role="button" data-kcact="changeSort" data-sort="likes" data-orderby="desc">추천순</a>
+    <a class="nav-link" role="button" data-kcact="changeSort" data-sort="uid" data-orderby="desc">과거순</a>
+  </div>
+
+  <ul class="media-list mt-3" data-role="comment-container"> <!-- 댓글 출력부 : comment_row.html -->
+      {$comment_rows}
+  </ul>
+  <div data-role="btnMore-container"> <!-- 더보기 버튼 -->
+    <a class="btn btn-link btn-block" data-role="trigger-getMoreComment">더보기</a>
+ </div>
+</div>
+
+<script>
+$(".rb-comment-wrapper .nav-link").tap(function(){
+  $('.rb-comment-wrapper .nav-link').removeClass('active')
+  $(this).addClass('active')
+});
+</script>

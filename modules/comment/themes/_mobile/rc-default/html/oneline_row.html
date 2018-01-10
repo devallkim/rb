@@ -1,0 +1,20 @@
+<div class="media" data-role="oneline-item" data-uid="{$oneline_uid}" data-type="oneline">
+    <div class="media-body">
+      <input type="hidden" data-role="oneline-origin-content-{$oneline_uid}" value="{$oneline_content}" />
+      <!-- <a data-kcact="like" data-type="oneline" data-entry="{$oneline_uid}">좋아요(<span data-role="oneline-likeTotal-{$oneline_uid}">{$oneline_like_total}</span>)</a> -->
+
+      <div class="media-heading h6 d-flex">
+        <span class="text-primary">{$oneline_user_name}</span>
+        <span class="pl-1 badge badge-default badge-inverted" data-role="oneline-time-wrapper-{$oneline_uid}">{$oneline_regis_time}</span>
+        <div class="ml-auto">
+          {$btn_showHideMenu} <!-- 메뉴 출력/숨기 버튼 btn_showHideMenu.html : 권한이 있는 경우(로그인,작성자,관리자) 에만 노출됨 -->
+          {$my_menu} <!-- 수정 모드시 취소/완료 버튼 btn_ediMod.html : 수정권한이 있는 경우에만 노출됨 -->
+        </div>
+      </div>
+
+      <p data-role="oneline-content-wrapper-{$oneline_uid}">
+          {$oneline_content}
+      </p>
+      {$btn_editMod}
+    </div>
+</div>

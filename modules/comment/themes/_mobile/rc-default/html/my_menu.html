@@ -1,0 +1,37 @@
+<!-- Sheet 시작 -->
+<div class="sheet"  data-role="menu-container-{$entry_type}">
+	<ul class="table-view">
+		<li class="table-view-cell media">
+			<a data-role="trigger-edit" data-type="{$entry_type}" data-uid="{$uid}">
+				<span class="media-object pull-left icon icon-compose"></span>
+				<div class="media-body">
+					수정
+				</div>
+			</a>
+		</li>
+		<li class="table-view-cell media">
+			<a data-kcact="delete" data-type="{$entry_type}" data-uid="{$uid}" data-parent="{$entry_parent}">
+				<span class="media-object pull-left icon icon-trash"></span>
+				<div class="media-body">
+					삭제
+				</div>
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="backdrop hidden"></div>
+
+
+<script>
+var sheet = $('[data-role="comment-item"]').find('.sheet')
+sheet.find('a').click(function(){
+	$('[data-role="comment-item"]').find('.backdrop').addClass('hidden')
+	sheet.removeClass('active');
+});
+
+$('[data-role="comment-item"]').find('.backdrop').tap(function(){
+	$(this).addClass('hidden')
+	sheet.removeClass('active');
+});
+
+</script>

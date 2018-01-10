@@ -1,0 +1,20 @@
+<!-- 공통 사항 data-* ="*" 과 {$*} 는 수정 금지 -->
+<header class="d-flex justify-content-start" data-role="header-container">
+   {$comment_header} <!-- 댓글 header : comment_header.html  -->
+</header>
+<div class="ma-comment-wrapper">
+    <div class="rb-comments-write d-print-none" data-role="commentWrite-container"> <!-- 댓글 입렵부 : comment_write.html -->
+    	{$comment_write}   
+    </div>
+    <div class="ma-comment-text ma-sort-wrapper pull-right">
+    	<span class="ma-act" data-kcact="changeSort" data-sort="likes" data-orderby="desc"> 추천순 </span>
+    	<span class="ma-act" data-kcact="changeSort" data-sort="uid" data-orderby="asc"> 최신순 </span>
+    	<span class="ma-act" data-kcact="changeSort" data-sort="uid" data-orderby="desc"> 과거순 </span>
+    </div>
+    <div class="ma-commentRow-wrapper" data-role="comment-container"> <!-- 댓글 출력부 : comment_row.html -->
+        {$comment_rows} 
+    </div>
+    <div data-role="btnMore-container"> <!-- 더보기 버튼 -->
+	    <a class="ma-black-button" data-role="trigger-getMoreComment">더보기</a>
+	</div>
+</div>

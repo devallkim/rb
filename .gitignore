@@ -1,6 +1,6 @@
-
 .ftpconfig
 .DS_Store
 _var/site/*
 _var/site/s091227/member.var.php
 modules/attach/*
+modules/post/*
