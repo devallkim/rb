@@ -12,7 +12,7 @@ if(!is_dir($saveDir)){
 }
 
 include $g['path_module'].'mediaset/themes/'.$theme.'/main.func.php';
-include $g['path_module'].'mediaset/themes/'.$theme.'/var.php';
+include $g['path_module'].'mediaset/themes/'.$theme.'/_var.php';
 include $g['path_module'].'mediaset/var/var.php';
 include $g['path_core'].'function/thumb.func.php';
 
