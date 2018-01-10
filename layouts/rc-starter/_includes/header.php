@@ -8,5 +8,5 @@
   <?php else: ?>
   <a class="icon icon-person pull-right" role="button" href="./?mod=login" title="로그인"></a>
   <?php endif; ?>
-  <h1 class="title">Title</h1>
+  <a class="title" href="<?php echo RW(0)?>"><?php echo stripslashes($d['layout']['header_title'])?></a>
 </header>
