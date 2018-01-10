@@ -1,3 +1,26 @@
+<?php
+if (!$_SESSION['upsescode'])
+{
+  $_SESSION['upsescode'] = str_replace('.','',$g['time_start']);
+}
+$sescode = $_SESSION['upsescode'];
+if($R['uid']){
+    $u_arr = getArrayString($R['upload']);
+    $_tmp=array();
+    $i=0;
+    foreach ($u_arr['data'] as $val) {
+       $U=getUidData($table['s_upload'],$val);
+       if(!$U['fileonly']) $_tmp[$i]=$val;
+       $i++;
+    }
+    $insert_array='';
+    // 중괄로로 재조립
+    foreach ($_tmp as $uid) {
+        $insert_array.='['.$uid.']';
+    }
+}
+?>
+
 <link href="<?php echo $g['dir_module_skin']?>/_main.css">
 
 <section class="rb-bbs-write">
@@ -88,7 +111,24 @@
         </div>
 
         <?php if($d['theme']['file_upload_show']&&$d['theme']['perm_upload']<=$my['level']):?>
+
+         <?php if ($d['bbs']['attach']): ?>
+
+           <?php if($d['theme']['perm_photo']<=$my['level']):?>
+           <div class="btn-group my-3">
+             <button type="button" data-role="attach-handler-file" data-type="file" class="btn btn-light" title="파일첨부" role="button" data-loading-text="업로드 중...">
+               <i class="fa fa fa-upload fa-lg"></i> 파일추가
+             </button>
+          </div>
+          <?php endif?>
+
+        <!-- module : 첨부파일 사용 모듈 , theme : 첨부파일 테마 , attach_handler_file : 파일첨부 실행 엘리먼트 , attach_handler_photo : 사진첨부 실행 엘리먼트 ,parent_data : 수정시 필요한 해당 포스트 데이타 배열 변수, attach_handler_getModalList : 업로드 리스트 모달로 호출용 엘리먼트 (class 인 경우 . 까지 넘긴다.)  -->
+         <?php getWidget('_default/attach',array('parent_module'=>$m,'theme'=> $d['bbs']['attach'],'attach_handler_file'=>'[data-role="attach-handler-file"]','attach_handler_photo'=>'[data-role="attach-handler-photo"]','attach_handler_getModalList'=>'.getModalList','parent_data'=>$R));?>
+         <?php endif; ?>
+
+
         <?php endif?>
+
 
   		   <?php if($d['theme']['show_wtag']):?>
   			 <div class="form-group row">
@@ -119,6 +159,7 @@
 
 				   </div>
 				</div><!-- /.form-group -->
+
 
       <footer class="text-center my-5">
         <button class="btn btn-light" type="button"onclick="cancelCheck();">취소</button>
@@ -226,6 +267,28 @@ function writeCheck(f)
       alert('내용을 입력해 주세요.       ');
       return false;
 	}
+
+  // 대표이미지가 없을 경우, 첫번째 업로드 사진을 지정함
+  var featured_img_input = $('input[name="featured_img"]'); // 대표이미지 input
+  var featured_img_uid = $(featured_img_input).val();
+  if(featured_img_uid ==''){ // 대표이미지로 지정된 값이 없는 경우
+      var first_attach_img_li = $('.rb-attach-photo li:first'); // 첫번째 첨부된 이미지 리스트 li
+      var first_attach_img_uid = $(first_attach_img_li).data('id');
+      $(featured_img_input).val(first_attach_img_uid);
+  }
+
+  // 첨부파일 uid 를 upfiles 값에 추가하기
+  var attachfiles=$('input[name="attachfiles[]"]').map(function(){return $(this).val()}).get();
+  var new_upfiles='';
+  if(attachfiles){
+        for(var i=0;i<attachfiles.length;i++)
+        {
+             new_upfiles+=attachfiles[i];
+        }
+        $('input[name="upfiles"]').val(new_upfiles);
+  }
+
+
 	submitFlag = true;
 }
 function cancelCheck()
