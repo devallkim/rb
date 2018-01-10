@@ -364,7 +364,15 @@ border-radius: 0.25rem;
 
 /* ------------------ table --------------------*/
 .table thead th {
-  border-bottom: none
+  border-bottom: none;
+  padding: .75rem 1.25rem;
+  line-height: 1;
+  font-weight: normal;
+}
+.table thead th,
+.table tbody td {
+  white-space: nowrap!important;
+  vertical-align: middle;
 }
 
 #rb-body .card .card-header.rb-icon .icon {
@@ -606,6 +614,21 @@ border-radius: 0.25rem;
 
 
 /*component*/
+
+/* modal */
+
+.modal .modal-header {
+  background-color: #007bff !important;
+  color: #fff;
+  border-bottom: none
+}
+.modal .modal-header .close {
+  color: #fff;
+  opacity: 1;
+}
+.modal .modal-body iframe body {
+  background-color: #fff
+}
 
 /*list-group*/
 .list-group-item {

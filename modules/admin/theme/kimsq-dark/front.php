@@ -72,14 +72,14 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right p-0">
 						<div class="card border-dark rounded-0 mb-0" style="width: 300px">
-							<div class="card-header d-flex justify-content-between align-items-center py-1 px-2">
+							<div class="card-header d-flex justify-content-between align-items-center py-1 px-2 bg-white border-secondary">
 								북마크
 								<div>
 
 									<div id="_bookmark_notyet_" class="btn-group btn-group-sm dropdown<?php if($exists_bookmark):?> d-none<?php endif?>">
 
-										<button type="button" class="btn btn-light rb-bookmark-add">북마크에 추가</button>
-										<button type="button" class="btn btn-light dropdown-toggle dropdown-body" data-toggle="dropdown">
+										<button type="button" class="btn btn-outline-secondary rb-bookmark-add">북마크에 추가</button>
+										<button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-body" data-toggle="dropdown">
 											<span class="caret"></span>
 											<span class="sr-only">Toggle Dropdown</span>
 										</button>
