@@ -453,31 +453,30 @@ body {
 	background-color: #272c32;
 	color: #999
 }
-.nav-tabs {
+.rb-system-sidebar .nav-tabs {
   border-bottom: 1px solid transparent;
 }
-.nav-tabs .nav-item {
+.rb-system-sidebar .nav-tabs .nav-item {
 	width: 33.3%
 }
-.nav-tabs .nav-link {
+.rb-system-sidebar .nav-tabs .nav-link {
 	padding: .5rem;
 	border-right: 1px solid #222;
   border-bottom: 1px solid #222;
 }
-.nav-tabs .nav-link:hover {
+.rb-system-sidebar .nav-tabs .nav-link:hover {
 	border-color: #222;
 	border-top-color: transparent;
 	border-left-color: transparent
 }
-
-.nav-tabs .nav-link.active {
+.rb-system-sidebar .nav-tabs .nav-link.active {
   color: #eee;
   background-color: inherit;
   border: 1px solid #222;
 	border-top: 0;
 	border-bottom: 0
 }
-.nav-tabs .nav-link.active:first-child {
+.rb-system-sidebar .nav-tabs .nav-link.active:first-child {
 	border-left: 0
 }
 
