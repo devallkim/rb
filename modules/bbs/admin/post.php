@@ -245,7 +245,7 @@ $TPG = getTotalPage($NUM,$recnum);
 			</div>
 
 			<div class="table-responsive">
-				<table class="table table-striped">
+				<table class="table table-striped text-center mb-0">
 					<thead>
 						<tr>
 							<th><label data-tooltip="tooltip" title="선택"><input type="checkbox" class="checkAll-post-user"></label></th>
@@ -268,7 +268,7 @@ $TPG = getTotalPage($NUM,$recnum);
 						<td>
 						    <?php echo $NUM-((($p-1)*$recnum)+$_rec++)?>
 						</td>
-						<td>
+						<td class="text-left">
 							<?php if($R['notice']):?><i class="fa fa-volume-up"></i><?php endif?>
 							<?php if($R['mobile']):?><i class="fa fa-mobile f-lg"></i><?php endif?>
 							<?php if($R['category']):?><strong>[<?php echo $R['category']?>]</strong><?php endif?>
@@ -278,7 +278,7 @@ $TPG = getTotalPage($NUM,$recnum);
 							<?php if($R['hidden']):?><i class="fa fa-lock fa-lg"></i><?php endif?>
 							<?php if($R['comment']):?><span class="comment">[<?php echo $R['comment']?><?php if($R['oneline']):?>+<?php echo $R['oneline']?><?php endif?>]</span><?php endif?>
 							<?php if($R['trackback']):?><span class="trackback">[<?php echo $R['trackback']?>]</span><?php endif?>
-							<?php if(getNew($R['d_regis'],24)):?><small class="label label-danger">new</small><?php endif?>
+							<?php if(getNew($R['d_regis'],24)):?><small class="text-danger">new</small><?php endif?>
 						</td>
 						<?php if($R['id']):?>
 						<td><a href="javascript:OpenWindow('<?php echo $g['s']?>/?r=<?php echo $r?>&iframe=Y&m=member&front=manager&page=post&mbruid=<?php echo $R['mbruid']?>');" title="게시정보"><?php echo $R[$_HS['nametype']]?></a></td>
@@ -314,10 +314,7 @@ $TPG = getTotalPage($NUM,$recnum);
 		<?php else: ?>
 			<div class="text-center text-muted d-flex align-items-center justify-content-center" style="height: calc(100vh - 10rem);">
 			 <div><i class="fa fa-exclamation-circle fa-3x mb-3" aria-hidden="true"></i>
-				 <p>등록된 게시글이 없습니다. <br> <small>게시판 생성후 게시글을 작성할 수 있습니다.</small></p>
-				 <a href="<?php echo $g['adm_href']?>&amp;front=main_detail"  class="btn btn-outline-primary btn-block mt-2">
-			 	 	<i class="fa fa-plus"></i> 새 게시판 만들기
-			 	 </a>
+				 <p>등록된 게시글이 없습니다.</p>
 			 </div>
 		 </div>
 		<?php endif?>

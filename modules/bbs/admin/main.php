@@ -215,24 +215,25 @@ while($_L=db_fetch_array($_LEVELDATA)) $_LEVELNAME['l'.$_L['uid']] = $_L['name']
 			<input type="hidden" name="a" value="">
 
 			<div class="table-responsive">
-				<table class="table table-striped">
-					<tr>
-						<th><label data-tooltip="tooltip" title="선택"><input type="checkbox" class="checkAll-email-user"></label></th>
-						<th>번호</th>
-						<th>아이디</th>
-						<th>게시판명</th>
-						<th>게시물</th>
-						<th>최근게시</th>
-						<th>분류</th>
-						<th>연결</th>
-						<th>소셜</th>
-						<th>헤더</th>
-						<th>풋터</th>
-						<th>레이아웃</th>
-						<th>접근권한</th>
-						<th>포인트</th>
-						<th>관리</th>
-					</tr>
+				<table class="table table-striped text-center mb-0">
+					<thead>
+						<tr>
+							<th class="py-0"><label data-tooltip="tooltip" title="선택"><input type="checkbox" class="checkAll-email-user"></label></th>
+							<th>번호</th>
+							<th>아이디</th>
+							<th>게시판명</th>
+							<th>게시물</th>
+							<th>최근게시</th>
+							<th>분류</th>
+							<th>연결</th>
+							<th>소셜</th>
+							<th>레이아웃</th>
+							<th>접근권한</th>
+							<th>포인트</th>
+							<th>관리</th>
+						</tr>
+					</thead>
+
 					<?php while($R=db_fetch_array($RCD)):?>
 					<?php $L=getOverTime($date['totime'],$R['d_last'])?>
 					<?php $d=array();include $g['path_module'].$module.'/var/var.'.$R['id'].'.php';?>
@@ -276,12 +277,10 @@ while($_L=db_fetch_array($_LEVELDATA)) $_LEVELNAME['l'.$_L['uid']] = $_L['name']
 						<td><a href="<?php echo RW('m='.$module.'&bid='.$R['id'])?>" target="_blank"><?php echo $R['id']?></a></td>
 						<td><input class="form-control" type="text" name="name_<?php echo $R['uid']?>" value="<?php echo $R['name']?>" data-tooltip="tooltip" title="<?php echo $sbj_tooltip?>"></td>
 						<td><?php echo number_format($R['num_r'])?></td>
-						<td><?php echo $R['d_last']?($L[1]<3?$L[0].$bbs_time[$L[1]].'전':getDateFormat($R['d_last'],'Y.m.d')):''?><?php if(getNew($R['d_last'],24)):?> <span class="label label-danger">new</span><?php endif?></td>
+						<td><?php echo $R['d_last']?($L[1]<3?$L[0].$bbs_time[$L[1]].'전':getDateFormat($R['d_last'],'Y.m.d')):''?><?php if(getNew($R['d_last'],24)):?> <small class="text-danger">new</small><?php endif?></td>
 						<td><?php echo $R['category']?'<span>Y</span>':'N'?></td>
 						<td><?php echo $d['bbs']['sosokmenu']?'<span>Y</span>':'N'?></td>
 						<td><?php echo $d['bbs']['snsconnect']?'<span>Y</span>':'N'?></td>
-						<td><?php echo $R['imghead']||is_file($g['path_module'].$module.'/var/code/'.$R['id'].'.header.php')?'<span>Y</span>':'N'?></td>
-						<td><?php echo $R['imgfoot']||is_file($g['path_module'].$module.'/var/code/'.$R['id'].'.footer.php')?'<span>Y</span>':'N'?></td>
 						<td><span data-tooltip="tooltip" title="<?php echo $lay_tooltip?>"><?php echo $d['bbs']['layout']?'<i>Y</i>':'N'?> / <?php echo $d['bbs']['skin']?'<i>Y</i>':'N'?> / <?php echo $d['bbs']['c_skin']?'<i>Y</i>':'N'?></span></td>
 						<td><span data-tooltip="tooltip" title="<?php echo $perm_tooltip?>"><?php echo $d['bbs']['perm_l_list']?> / <?php echo $d['bbs']['perm_l_view']?> / <?php echo $d['bbs']['perm_l_write']?></span></td>
 						<td><span data-tooltip="tooltip" title="<?php echo $point_tooltip?>"><?php echo number_format($d['bbs']['point1'])?> / <?php echo number_format($d['bbs']['point2'])?> / <?php echo number_format($d['bbs']['point3'])?></span></td>
@@ -331,9 +330,9 @@ while($_L=db_fetch_array($_LEVELDATA)) $_LEVELNAME['l'.$_L['uid']] = $_L['name']
 <script>
 
 $(function () {
-  $('[data-tooltip="tooltip"]').tooltip({
-		html: true
-	})
+	putCookieAlert('result_bbs_main') // 실행결과 알림 메시지 출력
+
+
 })
 
 $(".checkAll-file-user").click(function(){

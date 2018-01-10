@@ -12,7 +12,7 @@ include_once $g['path_module'].$module.'/var/var.php';
 			</label>
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_main" class="form-control custom-select">
-				 <option value="">&nbsp;+ 선택하세요</option>
+				 <option value="">선택하세요</option>
 				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
 				 <?php $dirs = opendir($tdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -33,7 +33,7 @@ include_once $g['path_module'].$module.'/var/var.php';
 			</label>
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_mobile" class="form-control custom-select">
-				 <option value="">&nbsp;+ 모바일 테마 사용안함</option>``
+				 <option value="">모바일 테마 사용안함</option>``
 				 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
 				 <?php $dirs = opendir($tdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -53,7 +53,7 @@ include_once $g['path_module'].$module.'/var/var.php';
 			</label>
      <div class="col-md-10 col-xl-9">
 			 <select name="skin_total" class="form-control custom-select">
-				 <option value="">&nbsp;+ 통합보드 사용안함</option>
+				 <option value="">통합보드 사용안함</option>
 				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
 				 <?php $dirs = opendir($tdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -78,7 +78,7 @@ include_once $g['path_module'].$module.'/var/var.php';
 			</label>
      <div class="col-md-10 col-xl-9">
 			 <select name="attach_main" class="form-control custom-select">
-				 <option value="">&nbsp;+ 사용안함</option>
+				 <option value="">사용안함</option>
 				 <?php $mdir = $g['path_module'].'mediaset/themes/_desktop/'?>
 				 <?php $dirs = opendir($mdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -99,7 +99,7 @@ include_once $g['path_module'].$module.'/var/var.php';
 			</label>
      <div class="col-md-10 col-xl-9">
 			 <select name="attach_mobile" class="form-control custom-select">
-				 <option value="">&nbsp;+ 사용안함</option>``
+				 <option value="">사용안함</option>
 				 <?php $mmdir = $g['path_module'].'mediaset/themes/_mobile/'?>
 				 <?php $dirs = opendir($mmdir)?>
 				 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -122,7 +122,13 @@ include_once $g['path_module'].$module.'/var/var.php';
 		<div class="col-md-10 col-xl-9">
 			<select name="comment_main" class="form-control custom-select">
 				<option value="">사용안함</option>
-
+				<?php $cdir = $g['path_module'].'comment/themes/_desktop/'?>
+				<?php $dirs = opendir($cdir)?>
+				<?php while(false !== ($skin = readdir($dirs))):?>
+				<?php if($skin=='.' || $skin == '..' || is_file($cdir.$skin))continue?>
+				<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['comment_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($cdir.$skin)?>(<?php echo $skin?>)</option>
+				<?php endwhile?>
+				<?php closedir($dirs)?>
 			</select>
 			<small class="form-text text-muted">
 				지정된 대표테마는 게시판설정시 별도의 테마지정없이 자동으로 적용됩니다.
@@ -136,7 +142,14 @@ include_once $g['path_module'].$module.'/var/var.php';
 		 </label>
 		<div class="col-md-10 col-xl-9">
 			<select name="comment_mobile" class="form-control custom-select">
-				<option value="">사용안함</option>``
+				<option value="">사용안함</option>
+				<?php $cmdir = $g['path_module'].'comment/themes/_mobile/'?>
+				<?php $dirs = opendir($cmdir)?>
+				<?php while(false !== ($skin = readdir($dirs))):?>
+				<?php if($skin=='.' || $skin == '..' || is_file($cmdir.$skin))continue?>
+				<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['comment_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($cmdir.$skin)?>(<?php echo $skin?>)</option>
+				<?php endwhile?>
+				<?php closedir($dirs)?>
 			</select>
 			<small class="form-text text-muted">
 				선택하지 않으면 데스크탑 대표테마로 설정됩니다.

@@ -307,11 +307,11 @@ if ($uid)
 							<div class="col-lg-10 col-xl-9">
 							 <select name="a_skin" class="form-control custom-select">
 								 <option value="">파일첨부 대표테마</option>
-								 <?php $mdir = $g['path_module'].'mediaset/themes/_desktop/'?>
-								 <?php $dirs = opendir($mdir)?>
+								 <?php $a_dir = $g['path_module'].'mediaset/themes/_desktop/'?>
+								 <?php $dirs = opendir($a_dir)?>
 								 <?php while(false !== ($skin = readdir($dirs))):?>
-								 <?php if($skin=='.' || $skin == '..' || is_file($mmdir.$skin))continue?>
-								 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mdir.$skin)?>(<?php echo $skin?>)</option>
+								 <?php if($skin=='.' || $skin == '..' || is_file($a_dir.$skin))continue?>
+								 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($a_dir.$skin)?>(<?php echo $skin?>)</option>
 								 <?php endwhile?>
 								 <?php closedir($dirs)?>
 							 </select>
@@ -322,11 +322,11 @@ if ($uid)
 						<div class="col-lg-10 col-xl-9">
 								 <select name="a_mskin" class="form-control custom-select">
 								 <option value="">파일첨부 모바일 대표테마</option>
-								 <?php $mmdir = $g['path_module'].'mediaset/themes/_mobile/'?>
-								 <?php $dirs = opendir($mmdir)?>
+								 <?php $a_mdir = $g['path_module'].'mediaset/themes/_mobile/'?>
+								 <?php $dirs = opendir($a_mdir)?>
 								 <?php while(false !== ($skin = readdir($dirs))):?>
-								 <?php if($skin=='.' || $skin == '..' || is_file($mmdir.$skin))continue?>
-								 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_mskin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mmdir.$skin)?>(<?php echo $skin?>)</option>
+								 <?php if($skin=='.' || $skin == '..' || is_file($a_mdir.$skin))continue?>
+								 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_mskin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($a_mdir.$skin)?>(<?php echo $skin?>)</option>
 								 <?php endwhile?>
 								 <?php closedir($dirs)?>
 							 </select>
@@ -340,6 +340,13 @@ if ($uid)
 						 <div class="col-lg-10 col-xl-9">
 							<select name="c_skin" class="form-control custom-select">
 								<option value="">댓글 대표테마</option>
+								<?php $c_dir = $g['path_module'].'comment/themes/_desktop/'?>
+								<?php $dirs = opendir($c_dir)?>
+								<?php while(false !== ($skin = readdir($dirs))):?>
+								<?php if($skin=='.' || $skin == '..' || is_file($c_dir.$skin))continue?>
+								<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['c_skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($c_dir.$skin)?>(<?php echo $skin?>)</option>
+								<?php endwhile?>
+								<?php closedir($dirs)?>
 							</select>
 						</div> <!-- .col-sm-10  -->
 				</div> <!-- .form-group  -->
@@ -348,6 +355,13 @@ if ($uid)
 					 <div class="col-lg-10 col-xl-9">
 								<select name="c_mskin" class="form-control custom-select">
 								<option value="">댓글 모바일 대표테마</option>
+								<?php $c_mdir = $g['path_module'].'comment/themes/_mobile/'?>
+								<?php $dirs = opendir($c_mdir)?>
+								<?php while(false !== ($skin = readdir($dirs))):?>
+								<?php if($skin=='.' || $skin == '..' || is_file($c_mdir.$skin))continue?>
+								<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['c_mskin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($c_mdir.$skin)?>(<?php echo $skin?>)</option>
+								<?php endwhile?>
+								<?php closedir($dirs)?>
 							</select>
 						</div> <!-- .col-sm-10  -->
 				</div> <!-- .form-group  -->
