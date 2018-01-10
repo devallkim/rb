@@ -17,7 +17,7 @@
 		// This is the easiest way to have default options.
 		var s = $.extend({
 			// These are the defaults.
-			url: rooturl+'/?r='+raccount+'&m=attach&a=upload', // attach 모듈 upload 액션 파일 지정 
+			url: rooturl+'/?r='+raccount+'&m=mediaset&a=upload', // attach 모듈 upload 액션 파일 지정
 			method: "POST",
 			enctype: "multipart/form-data",
 			returnType: null,
@@ -33,16 +33,16 @@
 			maxFileSize: -1,
 			maxFileCount: -1,
 			multiple: true,
-			dragDrop: false, // 수정 dragDrop 사용하지 않음 
+			dragDrop: false, // 수정 dragDrop 사용하지 않음
 			autoSubmit: true,
 			showCancel: true,
 			showAbort: true,
 			showDone: false,
 			showDelete: false,
 			showError: true,
-			showStatusAfterSuccess: false, // 수정 
+			showStatusAfterSuccess: false, // 수정
 			showStatusAfterError: true,
-			showFileCounter: false, // 수정 
+			showFileCounter: false, // 수정
 			fileCounterStyle: "). ",
 			showFileSize: true,
 			showProgress: true,
@@ -56,7 +56,7 @@
 			onSuccess: function (files, response, xhr, pd) {},
 			onError: function (files, status, message, pd) {},
 			onCancel: function (files, pd) {},
-			onAbort: function (files, pd) {},            
+			onAbort: function (files, pd) {},
 			downloadCallback: false,
 			deleteCallback: false,
 			afterUploadAll: false,
@@ -109,15 +109,15 @@
 		if(!feature.formdata) {
 			s.multiple = false;
 		}
-	  
+
 		$(this).html("");
 
 		var obj = this;
-		
+
 		var uploadLabel = $('<div>' + s.uploadStr + '</div>');
 
 		$(uploadLabel).addClass(s.uploadButtonClass);
-		
+
 		// wait form ajax Form plugin and initialize
 		(function checkAjaxFormLoaded() {
 			if($.fn.ajaxForm) {
@@ -133,13 +133,13 @@
 					$(obj).append(uploadLabel);
 				}
 				$(obj).append(obj.errorLog);
-				
-				// 미리보기 div 출력 삭제 - 이 부분은 해당 페이지에서 커스텀으로 처리한다. 
+
+				// 미리보기 div 출력 삭제 - 이 부분은 해당 페이지에서 커스텀으로 처리한다.
 			// if(s.showQueueDiv)
 			//     	obj.container =$("#"+s.showQueueDiv);
 			   //  else
 			//         obj.container = $("<div class='ajax-file-upload-container'></div>").insertAfter($(obj));
-		
+
 				s.onLoad.call(this, obj);
 				createCustomInputFile(obj, formGroup, s, uploadLabel);
 
@@ -195,7 +195,7 @@
 		{
 			obj.container.html("");
 			$(obj).remove();
-	
+
 		}
 		//This is for showing Old files to user.
 		this.createProgress = function (filename,filepath,filesize) {
@@ -204,11 +204,11 @@
 			pd.progressbar.width('100%');
 
 			var fileNameStr = "";
-			if(s.showFileCounter) 
+			if(s.showFileCounter)
 				fileNameStr = obj.fileCounter + s.fileCounterStyle + filename;
 			else fileNameStr = filename;
-			
-			
+
+
 			if(s.showFileSize)
 				fileNameStr += " ("+getSizeStr(filesize)+")";
 
@@ -221,7 +221,7 @@
 				pd.preview.attr('src',filepath);
 				pd.preview.show();
 			}
-			
+
 			if(s.showDownload) {
 				pd.download.show();
 				pd.download.click(function () {
@@ -253,16 +253,16 @@
 			if(running) return;
 			running = true;
 			(function checkPendingForms() {
-				
+
 					//if not sequential upload all files
 					if(!s.sequential) s.sequentialCount=99999;
-					
+
 					if(mainQ.length == 0 &&   progressQ.length == 0)
 					{
 						if(s.afterUploadAll) s.afterUploadAll(obj);
 						running= false;
-					}              
-					else 
+					}
+					else
 					{
 						if( progressQ.length < s.sequentialCount)
 						{
@@ -272,12 +272,12 @@
 								progressQ.push(frm);
 								frm.submit();
 							}
-						}						
+						}
 						window.setTimeout(checkPendingForms, 100);
 					}
 				})();
 		}
-		
+
 		function setDragDropHandlers(obj, s, ddObj) {
 			ddObj.on('dragenter', function (e) {
 				e.stopPropagation();
@@ -362,8 +362,8 @@
 				var fd = new FormData();
 				var fileArray = [];
 				var fileName = s.fileName.replace("[]", "");
-				var fileListStr="";                
-				
+				var fileListStr="";
+
 				for (var i = 0; i < files.length; i++) {
 				if (!isFileTypeAllowed(obj, s, files[i].name)) {
 					if (s.showError) $("<div><font color='red'><b>" + files[i].name + "</b> " + s.extErrorStr + s.allowedTypes + "</font></div>").appendTo(obj.errorLog);
@@ -379,7 +379,7 @@
 					obj.fileCounter++;
 				}
 				if(fileArray.length ==0 ) return;
-				
+
 				var extraData = s.formData;
 				if (extraData) {
 					var sData = serializeData(extraData);
@@ -390,7 +390,7 @@
 					}
 				}
 
-				
+
 				ts.fileData = fd;
 				var pd = new createProgressDiv(obj, s);
 				pd.filename.html(fileListStr);
@@ -445,14 +445,14 @@
 
 				if(s.showFileSize)
 				fileNameStr += " ("+getSizeStr(files[i].size)+")";
-				
+
 				pd.filename.html(fileNameStr);
 				var form = $("<form style='display:block; position:absolute;left: 150px;' class='" + obj.formGroup + "' method='" + s.method + "' action='" +
 					s.url + "' enctype='" + s.enctype + "'></form>");
 				form.appendTo('body');
 				var fileArray = [];
 				fileArray.push(files[i].name);
-				
+
 				ajaxFormSubmit(form, ts, pd, fileArray, obj, files[i]);
 				obj.fileCounter++;
 			}
@@ -516,11 +516,11 @@
 				});
 			}
 		}
-		// input 폼 세팅함수 
+		// input 폼 세팅함수
 		function createCustomInputFile (obj, group, s, uploadLabel) {
 
 			//var fileUploadId = "ajax-upload-id-" + (new Date().getTime());
-			var fileUploadId=s.inputId; // 옵션에서 지정한 id 값으로 세팅한다. 
+			var fileUploadId=s.inputId; // 옵션에서 지정한 id 값으로 세팅한다.
 
 			var form = $("<form method='" + s.method + "' action='" + s.url + "' enctype='" + s.enctype + "'></form>");
 			var fileInputStr = "<input type='file' id='" + fileUploadId + "' name='" + s.fileName + "' accept='" + s.acceptFiles + "'/>";
@@ -644,7 +644,7 @@
 
 		function defaultProgressBar(obj,s)
 		{
-		
+
 			this.statusbar = $("<div class='ajax-file-upload-statusbar'></div>").width(s.statusBarWidth);
 			this.preview = $("<img class='ajax-file-upload-preview' />").width(s.previewWidth).height(s.previewHeight).appendTo(this.statusbar).hide();
 			this.filename = $("<div class='ajax-file-upload-filename'></div>").appendTo(this.statusbar);
@@ -658,10 +658,10 @@
 
 			this.abort.addClass("ajax-file-upload-red");
 			this.done.addClass("ajax-file-upload-green");
-			this.download.addClass("ajax-file-upload-green");            
+			this.download.addClass("ajax-file-upload-green");
 			this.cancel.addClass("ajax-file-upload-red");
 			this.del.addClass("ajax-file-upload-red");
-			
+
 			return this;
 		}
 		function createProgressDiv(obj, s) {
@@ -672,14 +672,14 @@
 				bar =  new defaultProgressBar(obj,s);
 
 			bar.abort.addClass(obj.formGroup);
-			bar.abort.addClass(s.abortButtonClass);        	
+			bar.abort.addClass(s.abortButtonClass);
 
 			bar.cancel.addClass(obj.formGroup);
-			bar.cancel.addClass(s.cancelButtonClass);    
-			
+			bar.cancel.addClass(s.cancelButtonClass);
+
 			if(s.extraHTML)
-				bar.extraHTML = $("<div class='extrahtml'>"+s.extraHTML()+"</div>").insertAfter(bar.filename);    	
-			
+				bar.extraHTML = $("<div class='extrahtml'>"+s.extraHTML()+"</div>").insertAfter(bar.filename);
+
 			if(s.uploadQueueOrder == 'bottom')
 				$(obj.container).append(bar.statusbar);
 			else
@@ -701,7 +701,7 @@
 				dataType: s.returnType,
 				beforeSubmit: function (formData, $form, options) {
 					if(s.onSubmit.call(this, fileArray) != false) {
-						if(s.dynamicFormData) 
+						if(s.dynamicFormData)
 						{
 							var sData = serializeData(s.dynamicFormData());
 							if(sData) {
@@ -796,17 +796,17 @@
 					}
 
 					pd.abort.hide();
-					s.onSuccess.call(this, fileArray, data, xhr, pd); // 해당 페이지에서 업로드 성공 후 추가 액션 가능 
-					// 미리보기 출력 
-					var result=$.parseJSON(data); // a.upload.php 에서 결과값을 preview & type 으로 구분하여 json 으로 보내준다. 
+					s.onSuccess.call(this, fileArray, data, xhr, pd); // 해당 페이지에서 업로드 성공 후 추가 액션 가능
+					// 미리보기 출력
+					var result=$.parseJSON(data); // a.upload.php 에서 결과값을 preview & type 으로 구분하여 json 으로 보내준다.
 					var preview_default=result.preview_default; // 기본 리스트
-        				var preview_modal=result.preview_modal; // 모달 리스트 (소스복사외 다른 메뉴는 노출하지 않는다.) 
+        				var preview_modal=result.preview_modal; // 모달 리스트 (소스복사외 다른 메뉴는 노출하지 않는다.)
 					var attachType=result.type; // 해당 attachHandler 의 data-type 값 photo, file, map, link, people....
 					var previewBox_default=$('[data-role="attach-preview-'+attachType+'"]'); // type 에 따라서 미리보기 container 를 분리해서 지정한다.
 					var previewBox_modal=$('[data-role="modal-attach-preview-'+attachType+'"]'); // type 에 따라서 미리보기 container 를 분리해서 지정한다.
-					$(preview_default).appendTo(previewBox_default);// 업로드 성공후 미리보기 출력되는 부분 처리 
-                            $(preview_modal).appendTo(previewBox_modal);// 업로드 성공후 모달 미리보기 출력되는 부분 처리  
-					
+					$(preview_default).appendTo(previewBox_default);// 업로드 성공후 미리보기 출력되는 부분 처리
+                            $(preview_modal).appendTo(previewBox_modal);// 업로드 성공후 모달 미리보기 출력되는 부분 처리
+
 					if(s.showStatusAfterSuccess) {
 						if(s.showDone) {
 							pd.done.show();
@@ -876,7 +876,7 @@
 				form.ajaxForm(options);
 				mainQ.push(form);
 				submitPendingUploads();
-				
+
 			} else {
 				if(s.showCancel) {
 					pd.cancel.show();

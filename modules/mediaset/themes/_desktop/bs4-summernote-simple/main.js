@@ -42,12 +42,12 @@
               if(showhide=='show'){
                     $('[data-role="attachList-menu-showhide-'+uid+'"]').attr('data-content','hide'); // data-content 값 수정
                     $('[data-role="attachList-menu-showhide-'+uid+'"]').text('숨기기'); // 메뉴명 변경
-                    $('[data-role="attachList-label-hidden-'+uid+'"]').addClass('hidden-xs-up'); // 숨김 라벨 숨기기
+                    $('[data-role="attachList-label-hidden-'+uid+'"]').addClass('d-none'); // 숨김 라벨 숨기기
                     console.log($('[data-role="attachList-label-hidden-'+uid+'"]'));
               }else{
                     $('[data-role="attachList-menu-showhide-'+uid+'"]').attr('data-content','show'); // data-content 값 수정
                     $('[data-role="attachList-menu-showhide-'+uid+'"]').text('보이기'); // 메뉴명 변경
-                    $('[data-role="attachList-label-hidden-'+uid+'"]').removeClass('hidden-xs-up'); // 숨김 라벨 노출
+                    $('[data-role="attachList-label-hidden-'+uid+'"]').removeClass('d-none'); // 숨김 라벨 노출
               }
         }
 
@@ -90,21 +90,21 @@
                    // 삭제하는 리스트가 대표 이미지인 경우 write.php input 값에 적용
                    var is_featured=$(this).attr('data-featured');
                    if(is_featured=='1' && type=='photo'){
-                      if(confirm('대표이미지를 삭제하시겠습니까? ')){
-                            $('input[name="featured_img"]').val('');
-                      }else{
-                           return false;
-                      }
+                          if(confirm('대표이미지를 삭제하시겠습니까? ')){
+                                $('input[name="featured_img"]').val('');
+                          }else{
+                               return false;
+                          }
                    }
-                   $.post(rooturl+'/?r='+raccount+'&m=attach&a=delete',{
+                   $.post(rooturl+'/?r='+raccount+'&m='+module+'&a=delete',{
                       uid : uid
                     },function(response){
                          var previewUl_default=$('[data-role="attach-preview-'+type+'"]'); // 파일 리스트 엘리먼트 class
-                         //var previewUl_modal=$('[data-role="modal-attach-preview-'+type+'"]'); // 파일 리스트 엘리먼트 class
+                         var previewUl_modal=$('[data-role="modal-attach-preview-'+type+'"]'); // 파일 리스트 엘리먼트 class
                          var delEl_default=$(previewUl_default).find('[data-id="'+uid+'"]'); // 삭제 이벤트 진행된 엘리먼트
-                         //var delEl_modal=$(previewUl_modal).find('[data-id="'+uid+'"]'); // 삭제 이벤트 진행된 엘리먼트
+                         var delEl_modal=$(previewUl_modal).find('[data-id="'+uid+'"]'); // 삭제 이벤트 진행된 엘리먼트
                          delEl_default.remove();// 삭제 이벤트 진행시 해당 li 엘리먼트 remove
-                         //delEl_modal.remove();// 삭제 이벤트 진행시 해당 li 엘리먼트 remove
+                         delEl_modal.remove();// 삭제 이벤트 진행시 해당 li 엘리먼트 remove
                    });
               }else if(act=='showhide'){
                    var showhide=$(this).attr('data-content'); // data('content') 로 할 경우, ajax 로 변경된 값이 인식되지 않는다.
@@ -162,17 +162,14 @@
                     $('input[name="featured_img"]').val(uid);
 
 
+
                     // 대표 이미지 라벨 업데이트
-
-
-
                     $('[data-role="attachList-label-featured"]').each(function(){
-                        $(this).addClass('hidden');
-                        //$(this).removeClass('hidden');
+                        $(this).addClass('d-none');
                         // 삭제 메뉴에 대표이미지 표시 지우기
                         $('[data-attach-act="delete"]').attr('data-featured','');
-                        if($('[data-role="attachList-label-featured"]').data('id')==uid){
-                            $(this).removeClass('hidden');
+                        if($(this).data('id')==uid){
+                            $(this).removeClass('d-none');
                             // 삭제 메뉴에 대표이미지 표시
                             $('[data-role="attachList-menu-delete-'+uid+'"]').attr('data-featured',1);
                         }

@@ -1,1 +1,1 @@
-알씨 파일첨부 심플형
+﻿bs-summernote

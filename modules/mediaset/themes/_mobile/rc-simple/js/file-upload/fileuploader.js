@@ -17,7 +17,7 @@
 		// This is the easiest way to have default options.
 		var s = $.extend({
 			// These are the defaults.
-			url: rooturl+'/?r='+raccount+'&m=mediaset&a=upload', // attach 모듈 upload 액션 파일 지정
+			url: rooturl+'/?r='+raccount+'&m=attach&a=upload', // attach 모듈 upload 액션 파일 지정
 			method: "POST",
 			enctype: "multipart/form-data",
 			returnType: null,
