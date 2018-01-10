@@ -293,17 +293,15 @@ while($_L=db_fetch_array($_LEVELDATA)) $_LEVELNAME['l'.$_L['uid']] = $_L['name']
 				</table>
 			</div><!-- /.table-responsive -->
 
-			<div class="card-footer">
-				<div class="pull-right">
-					<ul class="pagination">
-						<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
-						<?php //echo getPageLink(5,$p,$TPG,'')?>
-					</ul>
-				</div>
+			<div class="card-footer d-flex justify-content-between">
 				<div>
-					<button type="button" onclick="chkFlag('bbs_members[]');checkboxCheck();" class="btn btn-light">선택/해제</button>
-					<button type="button" onclick="actCheck('multi_config');" class="btn btn-light" id="rb-action-btn">수정</button>
+					<button type="button" onclick="chkFlag('bbs_members[]');checkboxCheck();" class="btn btn-sm btn-light">선택/해제</button>
+					<button type="button" onclick="actCheck('multi_config');" class="btn btn-sm btn-light" id="rb-action-btn">수정</button>
 				</div>
+				<ul class="pagination">
+					<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
+					<?php //echo getPageLink(5,$p,$TPG,'')?>
+				</ul>
 			</div><!-- .card-footer -->
 	</form><!-- .card -->
 
