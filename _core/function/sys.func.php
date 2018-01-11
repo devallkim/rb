@@ -611,6 +611,7 @@ function getYoutubeImageSrc($R,$width,$height)
 	$src='/files/youtube/'.$F['thumbname'].'/thumb_'.$width.'x'.$height.'.jpg';
 	return $src;
 }
+
 // 대표이미지 메타정보 추출
 function getFeaturedimgMeta($R,$meta){
   global $table;
@@ -619,4 +620,23 @@ function getFeaturedimgMeta($R,$meta){
   return $meta;
 }
 
+// html to markdown class 호출 함수
+function getHtmlToMarkdownClass($className)
+{
+  global $g;
+
+  $path=$g['path_core'].'opensrc/html-to-markdown/src/';
+
+  $className = ltrim($className, '\\');
+  $fileName  = '';
+  $namespace = '';
+  if ($lastNsPos = strrpos($className, '\\')) {
+      $namespace = substr($className, 0, $lastNsPos);
+      $className = substr($className, $lastNsPos + 1);
+      $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+  }
+  $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+
+  require_once $path.$fileName;
+}
 ?>
