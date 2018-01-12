@@ -17,6 +17,7 @@ if ($uid)
 	$R = getUidData($table[$module.'list'],$uid);
 	if ($R['uid'])
 	{
+		include_once $g['path_module'].$module.'/var/var.php';
 		include_once $g['path_module'].$module.'/var/var.'.$R['id'].'.php';
 	}
 }
@@ -254,28 +255,66 @@ if ($uid)
 			       <div class="form-group row">
 							<label class="col-lg-2 col-form-label text-lg-right">레이아웃</label>
 							<div class="col-lg-10 col-xl-9">
-						   	 <select name="layout" class="form-control custom-select">
-								 	<option value="">&nbsp;+ 사이트 대표레이아웃</option>
-										<?php $dirs = opendir($g['path_layout'])?>
-										<?php while(false !== ($tpl = readdir($dirs))):?>
-										<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
-										<?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-										<?php while(false !== ($tpl1 = readdir($dirs1))):?>
-										<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-										<option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['bbs']['layout']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo str_replace('.php','',$tpl1)?>)</option>
-										<?php endwhile?>
-										<?php closedir($dirs1)?>
-										<?php endwhile?>
-										<?php closedir($dirs)?>
+
+								<select name="layout" class="form-control custom-select">
+									<option value="">사이트 대표 레이아웃</option>
+									<option disabled>--------------------</option>
+									<?php $dirs = opendir($g['path_layout'])?>
+									<?php while(false !== ($tpl = readdir($dirs))):?>
+									<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
+									<?php $dirs1 = opendir($g['path_layout'].$tpl)?>
+										<optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
+											<?php while(false !== ($tpl1 = readdir($dirs1))):?>
+											<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
+											 <option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['bbs']['layout']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
+											<?php endwhile?>
+									 </optgroup>
+									<?php closedir($dirs1)?>
+									<?php endwhile?>
+									<?php closedir($dirs)?>
 								</select>
 							</div>
 					 </div>
+
+					 <div class="form-group row">
+						<label class="col-lg-2 col-form-label text-lg-right">
+							<span class="badge badge-dark">모바일 접속</span>
+						</label>
+						<div class="col-lg-10 col-xl-9">
+
+							<select name="m_layout" class="form-control custom-select" id="" tabindex="-1">
+								<?php if ($_HS['m_layout']): ?>
+								<option value="0">사이트 레이아웃</option>
+								<?php else: ?>
+								<option value="0">&nbsp;사용안함 (기본 레이아웃 적용)</option>
+								<?php endif; ?>
+								<option disabled>--------------------</option>
+								<?php $dirs = opendir($g['path_layout'])?>
+								<?php while(false !== ($tpl = readdir($dirs))):?>
+								<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
+								<?php $dirs1 = opendir($g['path_layout'].$tpl)?>
+									<optgroup label="<?php echo getFolderName($g['path_layout'].$tpl)?>">
+										<?php while(false !== ($tpl1 = readdir($dirs1))):?>
+										<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
+										 <option value="<?php echo $tpl?>/<?php echo $tpl1?>"<?php if($d['bbs']['m_layout']==$tpl.'/'.$tpl1):?> selected="selected"<?php endif?>><?php echo $tpl?> &gt; <?php echo str_replace('.php','',$tpl1)?></option>
+										<?php endwhile?>
+								 </optgroup>
+								<?php closedir($dirs1)?>
+								<?php endwhile?>
+								<?php closedir($dirs)?>
+							</select>
+
+						</div>
+				 </div>
+
 					 <hr>
 					 <div class="form-group row">
 				  	  <label class="col-lg-2 col-form-label text-lg-right"><i class="fa fa-list-alt fa-lg fa-fw" aria-hidden="true"></i> 게시판 테마 </label>
 					     <div class="col-lg-10 col-xl-9">
 			  		    <select name="skin" class="form-control custom-select">
-									<option value="">&nbsp;+ 게시판 대표테마</option>
+									<?php $_skinHexp=explode('/',$d['bbs']['skin_main'])?>
+									<option value="">게시판 대표테마 (<?php echo $d['bbs']['skin_main']?$_skinHexp[1]:'사용안함'?>)</option>
+									<option disabled>--------------------</option>
 									<?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
 									<?php $dirs = opendir($tdir)?>
 									<?php while(false !== ($skin = readdir($dirs))):?>
@@ -289,8 +328,10 @@ if ($uid)
 					<div class="form-group row">
 			  	  <label class="col-lg-2 col-form-label text-lg-right"><span class="badge badge-dark">모바일 접속</span></label>
 				     <div class="col-lg-10 col-xl-9">
-						  		<select name="m_skin" class="form-control custom-select">
-									<option value="">&nbsp;+ 게시판 모바일 대표테마</option>
+					  		<select name="m_skin" class="form-control custom-select">
+									<?php $_skinmHexp=explode('/',$d['bbs']['skin_mobile'])?>
+									<option value="">게시판 모바일 대표테마 (<?php echo $d['bbs']['skin_mobile']?$_skinmHexp[1]:'사용안함'?>)</option>
+									<option disabled>--------------------</option>
 									<?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
 									<?php $dirs = opendir($tdir)?>
 									<?php while(false !== ($skin = readdir($dirs))):?>
@@ -306,7 +347,9 @@ if ($uid)
 						 <label class="col-lg-2 col-form-label text-lg-right"><i class="fa fa-paperclip fa-fw fa-lg" aria-hidden="true"></i> 파일첨부</label>
 							<div class="col-lg-10 col-xl-9">
 							 <select name="a_skin" class="form-control custom-select">
-								 <option value="">파일첨부 대표테마</option>
+								 <?php $_attachHexp=explode('/',$d['bbs']['attach_main'])?>
+								 <option value="">파일첨부 대표테마 (<?php echo $d['bbs']['attach_main']?$_attachHexp[1]:'사용안함'?>)</option>
+								 <option disabled>--------------------</option>
 								 <?php $a_dir = $g['path_module'].'mediaset/themes/_desktop/'?>
 								 <?php $dirs = opendir($a_dir)?>
 								 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -321,7 +364,9 @@ if ($uid)
 					 <label class="col-lg-2 col-form-label text-lg-right"><span class="badge badge-dark">모바일 접속</span></label>
 						<div class="col-lg-10 col-xl-9">
 								 <select name="a_mskin" class="form-control custom-select">
-								 <option value="">파일첨부 모바일 대표테마</option>
+								 <?php $_attachmHexp=explode('/',$d['bbs']['attach_mobile'])?>
+								 <option value="">파일첨부 모바일 대표테마 (<?php echo $d['bbs']['attach_mobile']?$_attachmHexp[1]:'사용안함'?>)</option>
+								 <option disabled>--------------------</option>
 								 <?php $a_mdir = $g['path_module'].'mediaset/themes/_mobile/'?>
 								 <?php $dirs = opendir($a_mdir)?>
 								 <?php while(false !== ($skin = readdir($dirs))):?>
@@ -339,7 +384,9 @@ if ($uid)
 						<label class="col-lg-2 col-form-label text-lg-right"><i class="fa fa-comments-o fa-fw fa-lg" aria-hidden="true"></i> 댓글</label>
 						 <div class="col-lg-10 col-xl-9">
 							<select name="c_skin" class="form-control custom-select">
-								<option value="">댓글 대표테마</option>
+								<?php $_commentHexp=explode('/',$d['bbs']['comment_main'])?>
+								<option value="">댓글 대표테마 (<?php echo $d['bbs']['comment_main']?$_commentHexp[1]:'사용안함'?>)</option>
+								<option disabled>--------------------</option>
 								<?php $c_dir = $g['path_module'].'comment/themes/_desktop/'?>
 								<?php $dirs = opendir($c_dir)?>
 								<?php while(false !== ($skin = readdir($dirs))):?>
@@ -354,7 +401,9 @@ if ($uid)
 					<label class="col-lg-2 col-form-label text-lg-right"><span class="badge badge-dark">모바일 접속</span></label>
 					 <div class="col-lg-10 col-xl-9">
 								<select name="c_mskin" class="form-control custom-select">
-								<option value="">댓글 모바일 대표테마</option>
+								<?php $_commentmHexp=explode('/',$d['bbs']['comment_mobile'])?>
+								<option value="">댓글 모바일 대표테마 (<?php echo $d['bbs']['comment_mobile']?$_commentmHexp[1]:'사용안함'?>)</option>
+								<option disabled>--------------------</option>
 								<?php $c_mdir = $g['path_module'].'comment/themes/_mobile/'?>
 								<?php $dirs = opendir($c_mdir)?>
 								<?php while(false !== ($skin = readdir($dirs))):?>
@@ -372,7 +421,8 @@ if ($uid)
 							<label class="col-lg-2 col-form-label text-lg-right">연결메뉴</label>
 							<div class="col-lg-10 col-xl-9">
 								<select name="sosokmenu" class="form-control custom-select">
-									 <option value="">&nbsp;+ 사용 안함</option>
+									 <option value="">사용 안함</option>
+									 <option disabled>--------------------</option>
 										<?php include_once $g['path_core'].'function/menu1.func.php'?>
 										<?php $cat=$d['bbs']['sosokmenu']?>
 										<?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
