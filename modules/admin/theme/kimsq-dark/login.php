@@ -24,8 +24,8 @@
 						<input type="password" name="pw" class="form-control input-lg" id="pw" placeholder="" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',1)?>" required tabindex="2">
 					</div>
 
-					<div class="custom-control custom-checkbox mb-2" data-toggle="collapse" data-target="#collapsealert" aria-expanded="true">
-					  <input type="checkbox" class="custom-control-input" id="login_cookie" name="login_cookie" value="checked">
+					<div class="custom-control custom-checkbox mb-2">
+					  <input type="checkbox" class="custom-control-input" id="login_cookie" name="login_cookie" value="checked"  data-toggle="collapse" data-target="#collapsealert">
 					  <label class="custom-control-label" for="login_cookie">로그인 상태 유지</label>
 					</div>
 
