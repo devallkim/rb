@@ -39,14 +39,6 @@ else
 				getLink($g['s'].'/?r='.$r,'','','');
 			}
 		}
-		elseif ($_HM['menutype'] == 2)
-		{
-			$d['page']['widget'] = array();
-			$d['page']['cctime'] = $g['path_page'].$r.'-menus/'.$_HM['id'].'.txt';
-			$d['page']['source'] = $g['path_page'].$r.'-menus/'.$_HM['id'].'.widget.php';
-			include $d['page']['source'];
-			$g['main'] = $g['path_core'].'engine/widget.engine.php';
-		}
 		else
 		{
 			$g['dir_module_skin'] = $g['path_page'].$r.'-menus/';
@@ -90,14 +82,6 @@ else
 		if ($_HP['pagetype'] == 1)
 		{
 			getLink($g['s'].'/?r='.$r,'','','');
-		}
-		elseif ($_HP['pagetype'] == 2)
-		{
-			$d['page']['widget'] = array();
-			$d['page']['cctime'] = $g['path_page'].$r.'-pages/'.$_HP['id'].'.txt';
-			$d['page']['source'] = $g['path_page'].$r.'-pages/'.$_HP['id'].'.widget.php';
-			include $d['page']['source'];
-			$g['main'] = $g['path_core'].'engine/widget.engine.php';
 		}
 		else
 		{
