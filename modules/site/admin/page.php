@@ -244,7 +244,7 @@ $pageType = array('','모듈연결','직접편집');
 				<div class="form-group tab-content<?php if(!$R['uid']):?> d-none<?php endif?>">
 					<div class="form-group row<?php if($R['pagetype']!=2):?> d-none<?php endif?>" id="editBox3">
 						<div class="col-lg-10 col-xl-9 offset-lg-2">
-							<fieldset<?php if($R['pagetype']!=3):?> disabled<?php endif?>>
+							<fieldset<?php if($R['pagetype']!=2):?> disabled<?php endif?>>
 								<div class="btn-group btn-group-justified" data-toggle="buttons">
 									<a class="btn btn-light rb-modal-code">
 										<i class="fa fa-code fa-lg"></i> 소스코드

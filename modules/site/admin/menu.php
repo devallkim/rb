@@ -252,7 +252,7 @@ $menuType = array('','모듈연결','직접편집');
 
 						<div class="form-group form-row<?php if($CINFO['menutype']!=2):?> d-none<?php endif?>" id="editBox3">
 							<div class="col-lg-10 col-xl-9 offset-lg-2">
-								<fieldset<?php if($CINFO['menutype']!=3):?> disabled<?php endif?>>
+								<fieldset<?php if($CINFO['menutype']!=2):?> disabled<?php endif?>>
 									<div class="btn-group btn-group-justified" data-toggle="buttons">
 										<a class="btn btn-light rb-modal-code">
 											<i class="fa fa-code fa-lg"></i> 소스코드
