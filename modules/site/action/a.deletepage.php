@@ -11,7 +11,6 @@ getDbDelete($table['s_seo'],'rel=2 and parent='.$R['uid']);
 $_xfile = $g['path_page'].$r.'-pages/'.$R['id'];
 
 unlink($_xfile.'.php');
-unlink($_xfile.'.widget.php');
 
 @unlink($_xfile.'.mobile.php');
 @unlink($_xfile.'.css');

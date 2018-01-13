@@ -18,7 +18,7 @@ if ($uid)
 	$R = getUidData($table['s_page'],$uid);
 	$_SEO = getDbData($table['s_seo'],'rel=2 and parent='.$R['uid'],'*');
 }
-$pageType = array('','모듈연결','위젯전시','직접편집');
+$pageType = array('','모듈연결','직접편집');
 ?>
 
 <div class="row no-gutters">
@@ -156,7 +156,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 			<input type="hidden" name="recnum" value="<?php echo $recnum?>">
 			<input type="hidden" name="keyw" value="<?php echo $keyw?>">
 			<input type="hidden" name="p" value="<?php echo $p?>">
-			<input type="hidden" name="pagetype" value="<?php echo $R['uid']?$R['pagetype']:3?>">
+			<input type="hidden" name="pagetype" value="<?php echo $R['uid']?$R['pagetype']:2?>">
 
 			<div class="card-header d-flex justify-content-between align-items-center">
 				<?php if($R['uid']):?>
@@ -179,8 +179,7 @@ $pageType = array('','모듈연결','위젯전시','직접편집');
 									<span id="rb-document-type"><?php echo $pageType[$R['pagetype']]?></span> <span class="caret"></span>
 								</button>
 								<div class="dropdown-menu" role="menu">
-									<a class="dropdown-item" href="#" onclick="docType(3,'<?php echo $pageType[3]?>');"><i class="fa fa-code"></i> <?php echo $pageType[3]?></a>
-									<a class="dropdown-item" href="#" onclick="docType(2,'<?php echo $pageType[2]?>');"><i class="fa fa-puzzle-piece fa-lg"></i> <?php echo $pageType[2]?></a>
+									<a class="dropdown-item" href="#" onclick="docType(2,'<?php echo $pageType[2]?>');"><i class="fa fa-code"></i> <?php echo $pageType[2]?></a>
 									<a class="dropdown-item" href="#" onclick="docType(1,'<?php echo $pageType[1]?>');"><i class="kf kf-module"></i> <?php echo $pageType[1]?></a>
 								</div>
 							</span>

@@ -85,14 +85,12 @@ if ($cat && !$vtype)
 	{
 		$vfile1 = $g['path_page'].$r.'-menus/'.$R['id'];
 		rename($vfile1.'.php',$vfile.'.php');
-		rename($vfile1.'.widget.php',$vfile.'.widget.php');
 		if(is_file($vfile1.'.css')) rename($vfile1.'.css',$vfile.'.css');
 		if(is_file($vfile1.'.js')) rename($vfile1.'.js',$vfile.'.js');
 		if(is_file($vfile1.'.header.php')) rename($vfile1.'.header.php',$vfile.'.header.php');
 		if(is_file($vfile1.'.footer.php')) rename($vfile1.'.footer.php',$vfile.'.footer.php');
 		if(is_file($vfile1.'.txt')) rename($vfile1.'.txt',$vfile.'.txt');
 		if(is_file($vfile1.'.cache')) rename($vfile1.'.cache',$vfile.'.cache');
-		if(is_file($vfile1.'.widget.cache')) rename($vfile1.'.widget.cache',$vfile.'.widget.cache');
 		if(is_file($vfile1.'.mobile.cache')) rename($vfile1.'.mobile.cache',$vfile.'.mobile.cache');
 	}
 
@@ -204,11 +202,6 @@ else {
 		fwrite($fp,'');
 		fclose($fp);
 		@chmod($mfile.'.php',0707);
-
-		$fp = fopen($mfile.'.widget.php','w');
-		fwrite($fp,'');
-		fclose($fp);
-		@chmod($mfile.'.widget.php',0707);
 
 		if (trim($codhead))
 		{

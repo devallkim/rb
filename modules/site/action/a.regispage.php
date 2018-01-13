@@ -37,10 +37,6 @@ if ($uid)
 		$mfile2 = $g['path_page'].$r.'-pages/'.$id.'.php';
 		@rename($mfile1,$mfile2);
 		@chmod($mfile2,0707);
-		$mfile1 = $g['path_page'].$r.'-pages/'.$orign_id.'.widget.php';
-		$mfile2 = $g['path_page'].$r.'-pages/'.$id.'.widget.php';
-		@rename($mfile1,$mfile2);
-		@chmod($mfile2,0707);
 		@unlink($g['path_page'].$r.'-pages/'.$orign_id.'.txt');
 	}
 	if ($cachetime)
@@ -90,11 +86,6 @@ else {
 		if(getDbRows($table['s_page'],"site=".$s." and id='".$xnid."'")) continue;
 
 		$mfile = $g['path_page'].$r.'-pages/'.$xnid.'.php';
-		$fp = fopen($mfile,'w');
-		fwrite($fp,'');
-		fclose($fp);
-		@chmod($mfile,0707);
-		$mfile = $g['path_page'].$r.'-pages/'.$xnid.'.widget.php';
 		$fp = fopen($mfile,'w');
 		fwrite($fp,'');
 		fclose($fp);

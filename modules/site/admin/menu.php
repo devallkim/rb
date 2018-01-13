@@ -13,7 +13,7 @@ if($cat){	$CINFO = getUidData($table['s_menu'],$cat);	$_SEO = getDbData($tabl
 	$code = $code ? $code : $_code;
 }
 $catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';if ($is_regismode){	$CINFO['menutype'] = '3';	$CINFO['name']	   = '';	$CINFO['joint']	   = '';	$CINFO['redirect'] = '';	$CINFO['hidden']   = '';	$CINFO['target']   = '';	$CINFO['imghead']  = '';	$CINFO['imgfoot']  = '';}
-$menuType = array('','모듈연결','위젯전시','직접편집');
+$menuType = array('','모듈연결','직접편집');
 ?>
 
 <div id="catebody" class="row no-gutters">
@@ -144,7 +144,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 			<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
 			<input type="hidden" name="layout" value="">
 			<input type="hidden" name="m_layout" value="">
-			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:3?>">
+			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:2?>">
 
 			<div class="card-header d-flex justify-content-between align-items-center">
 
@@ -203,8 +203,7 @@ $menuType = array('','모듈연결','위젯전시','직접편집');
 										<span id="rb-document-type"><?php echo $menuType[$CINFO['menutype']]?></span> <span class="caret"></span>
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-										<a class="dropdown-item" href="#" onclick="docType(3,'<?php echo $menuType[3]?>');"><i class="fa fa-code"></i> <?php echo $menuType[3]?></a>
-										<a class="dropdown-item" href="#" onclick="docType(2,'<?php echo $menuType[2]?>');"><i class="fa fa-puzzle-piece fa-lg"></i> <?php echo $menuType[2]?></a>
+										<a class="dropdown-item" href="#" onclick="docType(2,'<?php echo $menuType[2]?>');"><i class="fa fa-code"></i> <?php echo $menuType[2]?></a>
 										<a class="dropdown-item" href="#" onclick="docType(1,'<?php echo $menuType[1]?>');"><i class="kf kf-module"></i> <?php echo $menuType[1]?></a>
 									</div>
 								</span>
@@ -954,17 +953,14 @@ function boxDeco(layer1,layer2)
 	$("#"+layer2).addClass("border-light").removeClass("border-primary");
 }function docType(n,str)
 {
-	if (confirm('정말로 변경하시겠습니까?'))
-	{
-		getId('rb-document-type').innerHTML = str;
-		$('#editBox1').addClass('d-none');
-		$('#editBox2').addClass('d-none');
-		$('#editBox3').addClass('d-none');
-		$('#editBox'+n).removeClass('d-none');
-		getIframeForAction(document.procForm);
-		document.procForm.menutype.value = n;
-		document.procForm.submit();
-	}
+	getId('rb-document-type').innerHTML = str;
+	$('#editBox1').addClass('d-none');
+	$('#editBox2').addClass('d-none');
+	$('#editBox3').addClass('d-none');
+	$('#editBox'+n).removeClass('d-none');
+	getIframeForAction(document.procForm);
+	document.procForm.menutype.value = n;
+	document.procForm.submit();
 }
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)

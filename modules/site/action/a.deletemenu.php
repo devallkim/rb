@@ -19,7 +19,6 @@ if ($subQue)
 		$_xfile = $g['path_page'].$r.'-menus/'.$R['id'];
 
 		unlink($_xfile.'.php');
-		unlink($_xfile.'.widget.php');
 		@unlink($_xfile.'.mobile.php');
 		@unlink($_xfile.'.css');
 		@unlink($_xfile.'.js');
@@ -28,7 +27,6 @@ if ($subQue)
 
 		@unlink($_xfile.'.txt');
 		@unlink($_xfile.'.cache');
-		@unlink($_xfile.'.widget.cache');
 		@unlink($_xfile.'.mobile.cache');
 
 		@unlink($g['path_var'].'menu/'.$R['imghead']);
