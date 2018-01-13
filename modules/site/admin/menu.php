@@ -250,7 +250,7 @@ $menuType = array('','모듈연결','직접편집');
 
 					<div class="tab-content<?php if(!$CINFO['uid']||$vtype=='sub'):?> d-none<?php endif?>">
 
-						<div class="form-group form-row<?php if($CINFO['menutype']!=3):?> d-none<?php endif?>" id="editBox3">
+						<div class="form-group form-row<?php if($CINFO['menutype']!=2):?> d-none<?php endif?>" id="editBox3">
 							<div class="col-lg-10 col-xl-9 offset-lg-2">
 								<fieldset<?php if($CINFO['menutype']!=3):?> disabled<?php endif?>>
 									<div class="btn-group btn-group-justified" data-toggle="buttons">
@@ -269,22 +269,6 @@ $menuType = array('','모듈연결','직접편집');
 										<?php if($CINFO['menutype']!=3):?><li>메뉴 속성을 변경한 후에 활성화 됩니다.</li><?php endif?>
 									</ul>
 								</small>
-							</div>
-						</div>
-						<div class="form-group form-row<?php if($CINFO['menutype']!=2):?> d-none<?php endif?>" id="editBox2">
-							<div class="col-lg-10 col-xl-9 offset-lg-2">
-								<?php if($CINFO['menutype']==2):?>
-								<fieldset>
-									<a href="#." class="btn btn-light btn-block rb-modal-widget"><i class="fa fa-puzzle-piece fa-lg"></i> 위젯으로 꾸미기</a>
-								</fieldset>
-								<?php else:?>
-								<fieldset disabled>
-									<a href="#." class="btn btn-light btn-block"><i class="fa fa-puzzle-piece fa-lg"></i>
-										위젯으로 꾸미기
-										<small class="text-muted">( 메뉴 속성을 변경한 후에 활성화 됩니다. )</small>
-									</a>
-								</fieldset>
-								<?php endif?>
 							</div>
 						</div>
 						<div class="form-group form-row<?php if($CINFO['menutype']!=1):?> d-none<?php endif?>" id="editBox1">
@@ -863,9 +847,6 @@ $(document).ready(function() {
 	});
 	$('.rb-modal-wysiwyg').on('click',function() {
 		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=menu&uid=<?php echo $CINFO['uid']?>&type=source&wysiwyg=Y&cat=<?php echo $cat?>&code=<?php echo $code?>');
-	});
-	$('.rb-modal-widget').on('click',function() {
-		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=menu&uid=<?php echo $CINFO['uid']?>&type=widget&cat=<?php echo $cat?>&code=<?php echo $code?>');
 	});
 	$('.rb-modal-module').on('click',function() {
 		modalSetting('modal_window','<?php echo getModalLink('&amp;system=popup.joint&amp;dropfield=jointf')?>');

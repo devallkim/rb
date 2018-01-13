@@ -242,7 +242,7 @@ $pageType = array('','모듈연결','직접편집');
 				</div>
 
 				<div class="form-group tab-content<?php if(!$R['uid']):?> d-none<?php endif?>">
-					<div class="form-group row<?php if($R['pagetype']!=3):?> d-none<?php endif?>" id="editBox3">
+					<div class="form-group row<?php if($R['pagetype']!=2):?> d-none<?php endif?>" id="editBox3">
 						<div class="col-lg-10 col-xl-9 offset-lg-2">
 							<fieldset<?php if($R['pagetype']!=3):?> disabled<?php endif?>>
 								<div class="btn-group btn-group-justified" data-toggle="buttons">
@@ -261,22 +261,6 @@ $pageType = array('','모듈연결','직접편집');
 									<?php if($R['pagetype']!=3):?><li><small>페이지 속성을 변경한 후에 활성화 됩니다.</small></li><?php endif?>
 								</ul>
 							</span>
-						</div>
-					</div>
-					<div class="form-group row<?php if($R['pagetype']!=2):?> d-none<?php endif?>" id="editBox2">
-						<div class="col-lg-10 col-xl-9 offset-lg-2">
-							<?php if($R['pagetype']==2):?>
-							<fieldset>
-								<a href="#." class="btn btn-light btn-block rb-modal-widget"><i class="fa fa-puzzle-piece fa-lg"></i> 위젯으로 꾸미기</a>
-							</fieldset>
-							<?php else:?>
-							<fieldset disabled>
-								<a href="#." class="btn btn-light btn-block"><i class="fa fa-puzzle-piece fa-lg"></i>
-									위젯으로 꾸미기
-									<small class="text-muted">( 페이지 속성을 변경한 후에 활성화 됩니다. )</small>
-								</a>
-							</fieldset>
-							<?php endif?>
 						</div>
 					</div>
 					<div class="form-group row<?php if($R['pagetype']!=1):?> d-none<?php endif?>" id="editBox1">
@@ -671,9 +655,6 @@ $(document).ready(function() {
 	$('.rb-modal-wysiwyg').on('click',function() {
 		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=page&uid=<?php echo $R['uid']?>&type=source&wysiwyg=Y&cat=<?php echo urlencode($cat)?>&p=<?php echo $p?>&recnum=<?php echo $recnum?>&keyw=<?php echo urlencode($keyw)?>');
 	});
-	$('.rb-modal-widget').on('click',function() {
-		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=page&uid=<?php echo $R['uid']?>&type=widget&cat=<?php echo urlencode($cat)?>&p=<?php echo $p?>&recnum=<?php echo $recnum?>&keyw=<?php echo urlencode($keyw)?>');
-	});
 	$('.rb-modal-module').on('click',function() {
 		modalSetting('modal_window','<?php echo getModalLink('&amp;system=popup.joint&amp;dropfield=jointf&amp;cmodule=[site]')?>');
 	});
@@ -785,17 +766,14 @@ function getSearchFocus()
 }
 function docType(n,str)
 {
-	if (confirm('정말로 변경하시겠습니까?'))
-	{
-		getId('rb-document-type').innerHTML = str;
-		$('#editBox1').addClass('d-none');
-		$('#editBox2').addClass('d-none');
-		$('#editBox3').addClass('d-none');
-		$('#editBox'+n).removeClass('d-none');
-		getIframeForAction(document.procForm);
-		document.procForm.pagetype.value = n;
-		document.procForm.submit();
-	}
+	getId('rb-document-type').innerHTML = str;
+	$('#editBox1').addClass('d-none');
+	$('#editBox2').addClass('d-none');
+	$('#editBox3').addClass('d-none');
+	$('#editBox'+n).removeClass('d-none');
+	getIframeForAction(document.procForm);
+	document.procForm.pagetype.value = n;
+	document.procForm.submit();
 }
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)
