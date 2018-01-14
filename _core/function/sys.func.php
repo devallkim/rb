@@ -480,7 +480,7 @@ function getPageTitile()
 	$title = str_replace('{site}',$_HS['name'],$_HS['title']);
 	$title = str_replace('{location}',getLocation($g['location']),$title);
 	if ($_HM['uid']) $title = str_replace('{subject}',$_HM['name'],$title);
-	else if ($_HP['uid']) $title = str_replace('{subject}',$_HP['name'],$title);
+	else if ($_HP['uid'] && !$_HP['ismain']) $title = str_replace('{subject}',$_HP['name'],$title);
 	else $title = $_HS['name'];
 	return $title;
 }
