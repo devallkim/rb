@@ -34,7 +34,7 @@ $d['admin']['secu_param'] = ";a=,&a=,?a=,m=admin,system=,";
 $d['admin']['smtp_ssl'] = "";
 $d['admin']['uninstall'] = "1";
 $d['admin']['dblclick'] = "1";
-$d['admin']['editor'] = "summernote";
+$d['admin']['editor'] = "simplemde";
 $d['admin']['syslang'] = "DEFAULT";
 $d['admin']['sysmail'] = "admin@kimsq.com";
 $d['admin']['sysmodule'] = "site";

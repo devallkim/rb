@@ -132,7 +132,7 @@
 						</div>
 
 						<div class="form-group">
-							<label>위지위그 에디터</label>
+							<label>시스템 에디터</label>
 							<select name="editor" class="form-control custom-select">
 								<?php $dirs = opendir($g['path_plugin'])?>
 								<?php while(false !== ($tpl = readdir($dirs))):?>
@@ -142,7 +142,7 @@
 								<?php closedir($dirs)?>
 							</select>
 							<small class="form-text text-muted">
-								위지위그 에디터는 플러그인 폴더(%s)에 추가될 수 있습니다. 에디터를 변경하시려면 플러그인에 추가 후 버젼선택 후에 변경해 주세요.
+								시스템 에디터는 플러그인 폴더(%s)에 추가될 수 있습니다. 에디터를 변경하시려면 플러그인에 추가 후 버젼선택 후에 변경해 주세요.
 							</small>
 						</div>
 
