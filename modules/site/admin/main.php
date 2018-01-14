@@ -751,7 +751,7 @@ function iconDropAply()
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)
 {
-	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>">사용자모드 보기</a></li><li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&type=makesite">새 사이트 만들기</a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a></li>',event);
+	getContext('<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>">사용자모드 보기</a><a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&type=makesite">새 사이트 만들기</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a>',event);
 }
 <?php endif?>
 </script>

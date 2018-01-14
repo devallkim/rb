@@ -12,7 +12,7 @@ if($cat){	$CINFO = getUidData($table['s_menu'],$cat);	$_SEO = getDbData($tabl
 	}
 	$code = $code ? $code : $_code;
 }
-$catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';if ($is_regismode){	$CINFO['menutype'] = '3';	$CINFO['name']	   = '';	$CINFO['joint']	   = '';	$CINFO['redirect'] = '';	$CINFO['hidden']   = '';	$CINFO['target']   = '';	$CINFO['imghead']  = '';	$CINFO['imgfoot']  = '';}
+$catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';if ($is_regismode){	$CINFO['menutype'] = '2';	$CINFO['name']	   = '';	$CINFO['joint']	   = '';	$CINFO['redirect'] = '';	$CINFO['hidden']   = '';	$CINFO['target']   = '';	$CINFO['imghead']  = '';	$CINFO['imgfoot']  = '';}
 $menuType = array('','모듈연결','직접편집');
 ?>
 
@@ -266,7 +266,7 @@ $menuType = array('','모듈연결','직접편집');
 									<ul class="form-text text-muted pl-3 mt-3">
 										<li>직접꾸미기는 소스코드를 직접 편집하거나 위지위그 에디터를 이용할 수 있습니다.</li>
 										<li>소스코드로 작성한 페이지를 위지위그로 편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
-										<?php if($CINFO['menutype']!=3):?><li>메뉴 속성을 변경한 후에 활성화 됩니다.</li><?php endif?>
+										<?php if($CINFO['menutype']!=2):?><li>메뉴 속성을 변경한 후에 활성화 됩니다.</li><?php endif?>
 									</ul>
 								</small>
 							</div>
@@ -946,7 +946,7 @@ function boxDeco(layer1,layer2)
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)
 {
-	getContext('<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?><?php if($CINFO['code']):?>&c=<?php echo $CINFO['code']?><?php endif?>">사용자모드 보기</a></li><li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&front=menu">새 메뉴 만들기</a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a></li>',event);
+	getContext('<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?><?php if($CINFO['code']):?>&c=<?php echo $CINFO['code']?><?php endif?>">사용자모드 보기</a><a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&front=menu">새 메뉴 만들기</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a>',event);
 }
 <?php endif?>
 
