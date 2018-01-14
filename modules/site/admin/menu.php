@@ -255,17 +255,17 @@ $menuType = array('','모듈연결','직접편집');
 								<fieldset<?php if($CINFO['menutype']!=2):?> disabled<?php endif?>>
 									<div class="btn-group btn-group-justified" data-toggle="buttons">
 										<a class="btn btn-light rb-modal-code">
-											<i class="fa fa-code fa-lg"></i> 소스코드
+											<i class="fa fa-code"></i> 소스코드
 										</a>
-										<a class="btn btn-light rb-modal-wysiwyg">
-											<i class="fa fa-edit fa-lg"></i> 위지위그
+										<a class="btn btn-light rb-modal-markdown">
+											<i class="fa fa-hashtag"></i> 마크다운
 										</a>
 									</div>
 								</fieldset>
 								<small>
 									<ul class="form-text text-muted pl-3 mt-3">
-										<li>직접꾸미기는 소스코드를 직접 편집하거나 위지위그 에디터를 이용할 수 있습니다.</li>
-										<li>소스코드로 작성한 페이지를 위지위그로 편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
+										<li>직접꾸미기는 소스코드를 직접 편집하거나 마크다운 에디터를 이용할 수 있습니다.</li>
+										<li>소스코드로 작성한 페이지를 마크다운으로 재편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
 										<?php if($CINFO['menutype']!=2):?><li>메뉴 속성을 변경한 후에 활성화 됩니다.</li><?php endif?>
 									</ul>
 								</small>
@@ -845,8 +845,8 @@ $(document).ready(function() {
 	$('.rb-modal-code').on('click',function() {
 		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=menu&uid=<?php echo $CINFO['uid']?>&type=source&cat=<?php echo $cat?>&code=<?php echo $code?>');
 	});
-	$('.rb-modal-wysiwyg').on('click',function() {
-		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=menu&uid=<?php echo $CINFO['uid']?>&type=source&wysiwyg=Y&cat=<?php echo $cat?>&code=<?php echo $code?>');
+	$('.rb-modal-markdown').on('click',function() {
+		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=menu&uid=<?php echo $CINFO['uid']?>&type=source&markdown=Y&cat=<?php echo $cat?>&code=<?php echo $code?>');
 	});
 	$('.rb-modal-module').on('click',function() {
 		modalSetting('modal_window','<?php echo getModalLink('&amp;system=popup.joint&amp;dropfield=jointf')?>');
