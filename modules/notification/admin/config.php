@@ -37,16 +37,15 @@
 
 				<?php $_MODULES=getDbArray($table['s_module'],'','*','gid','asc',0,1)?>
 				<?php while($_MD=db_fetch_array($_MODULES)):?>
-				<label class="custom-control custom-checkbox">
-				  <input type="checkbox" class="custom-control-input" name="module_members[]" value="<?php echo $_MD['id']?>"<?php if(strstr($d['ntfc']['cut_modules'],'['.$_MD['id'].']')):?> checked<?php endif?>>
-				  <span class="custom-control-indicator"></span>
-				  <span class="custom-control-description"><?php echo $_MD['name']?> <small class="text-muted">(<?php echo $_MD['id']?>)</small></span>
-				</label>
+				<div class="custom-control custom-checkbox custom-control-inline">
+				  <input type="checkbox" class="custom-control-input" id="module_members_<?php echo $_MD['id']?>" name="module_members[]" value="<?php echo $_MD['id']?>"<?php if(strstr($d['ntfc']['cut_modules'],'['.$_MD['id'].']')):?> checked<?php endif?>>
+				  <label class="custom-control-label" for="module_members_<?php echo $_MD['id']?>"><?php echo $_MD['name']?> <small class="text-muted">(<?php echo $_MD['id']?>)</small></label>
+				</div>
 				<?php endwhile?>
 
-				<small class="form-text text-muted">
+				<p class="form-text text-muted mt-3">
 					알림을 원천적으로 차단할 모듈을 선택해주세요.
-				</small>
+				</p>
 			</div>
 		</div>
 
