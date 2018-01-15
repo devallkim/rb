@@ -397,9 +397,9 @@ function getTreeMenu($conf,$code,$depth,$parent,$tmpcode)
 			if($conf['dispNum']&&$C['num']) $tree.= ' <small>('.$C['num'].')</small>';
 			if(!$conf['hideIcon'])
 			{
-				//if($C['mobile']) $tree.= '<i class="glyphicon glyphicon-phone" title="'._LANG('fs005','admin').'" data-tooltip="tooltip"></i>&nbsp;';
-				if($C['target']) $tree.= '<i class="glyphicon glyphicon-new-window" title="'._LANG('fs004','admin').'" data-tooltip="tooltip"></i>&nbsp;';
-				if($C['reject']) $tree.= '<i class="glyphicon glyphicon-ban-circle" title="'._LANG('fs003','admin').'" data-tooltip="tooltip"></i>';
+				// if($C['mobile']) $tree.= '<i class="fa fa-mobile" title="'._LANG('fs005','admin').'" data-tooltip="tooltip"></i>&nbsp;';
+				if($C['target']) $tree.= ' <i class="fa fa-window-restore fa-fw" title="'._LANG('fs004','admin').'" data-tooltip="tooltip"></i>';
+				if($C['reject']) $tree.= ' <i class="fa fa-lock fa-lg fa-fw" title="'._LANG('fs003','admin').'" data-tooltip="tooltip"></i>';
 			}
 
 			$tree.= '<ul id="'.$id.'-'.$_i.'-'.$C['uid'].'" class="collapse'.($conf['allOpen']||$topen?' show':'').'">';
@@ -421,8 +421,8 @@ function getTreeMenu($conf,$code,$depth,$parent,$tmpcode)
 			if(!$conf['hideIcon'])
 			{
 				//if($C['mobile']) $tree.= '<i class="glyphicon glyphicon-phone" title="'._LANG('fs005','admin').'" data-tooltip="tooltip"></i>&nbsp;';
-				if($C['target']) $tree.= '<i class="glyphicon glyphicon-new-window" title="'._LANG('fs004','admin').'" data-tooltip="tooltip"></i>&nbsp;';
-				if($C['reject']) $tree.= '<i class="glyphicon glyphicon-ban-circle" title="'._LANG('fs003','admin').'" data-tooltip="tooltip"></i>';
+				if($C['target']) $tree.= ' <i class="fa fa-window-restore fa-fw" title="'._LANG('fs004','admin').'" data-tooltip="tooltip"></i>';
+				if($C['reject']) $tree.= ' <i class="fa fa-lock fa-lg fa-fw" title="'._LANG('fs003','admin').'" data-tooltip="tooltip"></i>';
 			}
 		}
 		$tree.= '</li>';

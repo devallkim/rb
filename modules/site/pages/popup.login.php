@@ -8,14 +8,14 @@
 		<div class="form-group">
 			<label class="sr-only" for="username">아이디 또는 이메일</label>
 			<div class="input-group">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				<span class="input-group-addon"><i class="fa fa-user"></i></span>
 				<input type="text" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',0)?>" id="username" name="id" placeholder="아이디 또는 이메일" class="form-control">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="sr-only" for="password">Password</label>
 			<div class="input-group">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
 				<input type="password" id="password" name="pw" value="<?php echo getArrayCookie($_COOKIE['svshop'],'|',1)?>" placeholder="패스워드" class="form-control">
 			</div>
 		</div>

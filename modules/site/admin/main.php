@@ -338,7 +338,7 @@ if ($R['uid'])
 						<?php else:?>
 						<div class="form-control-static">
 							<span class="text-muted">
-								<span class="glyphicon glyphicon-exclamation-sign"></span>
+								<span class="fa fa-info-circle"></span>
 								연결된 도메인이 없습니다.
 							</span>
 							<a class="badge badge-pill badge-dark" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=domain&amp;selsite=<?php echo $R['uid']?>&amp;type=makedomain">도메인 연결하기</a>
@@ -347,7 +347,7 @@ if ($R['uid'])
 						<?php else:?>
 						<p class="form-control-static">
 							<span class="text-muted">
-								<span class="glyphicon glyphicon-exclamation-sign"></span>
+								<span class="fa fa-info-circle"></span>
 								사이트 생성 후 연결할 수 있습니다.
 							</span>
 						</p>
@@ -684,9 +684,9 @@ $('.form-horizontal').bootstrapValidator({
 	message: 'This value is not valid',
 	<?php if(!$g['device']):?>
 	feedbackIcons: {
-		valid: 'glyphicon glyphicon-ok',
-		invalid: 'glyphicon glyphicon-remove',
-		validating: 'glyphicon glyphicon-refresh'
+		valid: 'fa fa-check',
+		invalid: 'fa fa-times',
+		validating: 'fa fa-refresh'
 	},
 	<?php endif?>
 	fields: {

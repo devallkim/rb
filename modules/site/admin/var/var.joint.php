@@ -42,7 +42,7 @@ $dropButtonUrl = ''; //모듈연결하기 버튼에 지정할 URL(미 지정시 
 				<span>(<?php echo $PR['id']?>)</span>
 			</td>			<td>
 				<button class="pull-right btn btn-default" type="button" onclick="dropJoint('<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $smodule?>&mod=<?php echo $PR['id']?>');">
-					<i class="glyphicon glyphicon-save"></i>
+					<i class="fa fa-floppy-o"></i>
 					연결하기
 				</button>
 			</td>		</tr>

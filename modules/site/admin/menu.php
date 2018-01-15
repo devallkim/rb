@@ -550,22 +550,22 @@ $menuType = array('','모듈연결','직접편집');
 											<div class="btn-group btn-group-toggle btn-group-justified" data-toggle="buttons">
 												<label class="btn btn-light<?php if($CINFO['mobile']||!$CINFO['uid']):?> active<?php endif?>">
 													<input type="checkbox" name="mobile" value="1"<?php if($CINFO['mobile']||!$CINFO['uid']):?> checked<?php endif?>>
-													<span class="glyphicon glyphicon-phone"></span>
+													<span class="fa fa-mobile"></span>
 													모바일출력
 												</label>
 												<label class="btn btn-light<?php if($CINFO['target']):?> active<?php endif?>">
 													<input type="checkbox" name="target" value="_blank"<?php if($CINFO['target']):?> checked<?php endif?>>
-													<span class="glyphicon glyphicon-new-window"></span>
+													<i class="fa fa-window-restore" aria-hidden="true"></i>
 													새창열기
 												</label>
 												<label class="btn btn-light<?php if($CINFO['hidden']):?> active<?php endif?>">
 													<input type="checkbox" name="hidden" value="1"<?php if($CINFO['hidden']):?> checked<?php endif?>>
-													<span class="glyphicon glyphicon-eye-close"></span>
+													<i class="fa fa-eye-slash" aria-hidden="true"></i>
 													메뉴숨김
 												</label>
 												<label class="btn btn-light<?php if($CINFO['reject']):?> active<?php endif?>">
 													<input type="checkbox" name="reject" value="1"<?php if($CINFO['reject']):?> checked<?php endif?>>
-													<span class="glyphicon glyphicon-lock"></span>
+													<i class="fa fa-lock" aria-hidden="true"></i>
 													메뉴잠금
 												</label>
 											</div>
@@ -875,9 +875,9 @@ $('[name="procForm"]').bootstrapValidator({
 	message: 'This value is not valid',
 	<?php if(!$g['device']):?>
 	feedbackIcons: {
-		valid: 'glyphicon glyphicon-ok',
-		invalid: 'glyphicon glyphicon-remove',
-		validating: 'glyphicon glyphicon-refresh'
+		valid: 'fa fa-check',
+		invalid: 'fa fa-times',
+		validating: 'fa fa-refresh'
 	},
 	<?php endif?>
 	fields: {

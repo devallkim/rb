@@ -17,7 +17,7 @@
 				<br>
 				<br>
 				<a class="btn btn-primary" href="./?r=<?php echo $r?>&amp;panel=Y&amp;_admpnl_=<?php echo urlencode('./?r='.$r.'&m=admin&module=site')?>">
-					<i class="glyphicon glyphicon-ok"></i>
+					<i class="fa fa-check"></i>
 					시작하기
 				</a>
 			</p>

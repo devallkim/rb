@@ -684,9 +684,9 @@ $('[name="procForm"]').bootstrapValidator({
 	message: 'This value is not valid',
 	<?php if(!$g['device']):?>
 	feedbackIcons: {
-		valid: 'glyphicon glyphicon-ok',
-		invalid: 'glyphicon glyphicon-remove',
-		validating: 'glyphicon glyphicon-refresh'
+		valid: 'fa fa-check',
+		invalid: 'fa fa-times',
+		validating: 'fa fa-refresh'
 	},
 	<?php endif?>
 	fields: {
