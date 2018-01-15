@@ -193,12 +193,17 @@ $g['img_module_skin'] = $g['url_module_skin'].'/image';
 $g['dir_module_mode'] = $g['dir_module_skin'].$mod;
 $g['url_module_mode'] = $g['url_module_skin'].'/'.$mod;
 
+$g['url_reset'] = $g['s'].'/?r='.$r.'&m='.$m; // 기본링크
+$g['push_location'] = '<li class="breadcrumb-item active">'.$_HMD['name'].'</li>'; // 현재위치 셋팅
+
 if($_m != $g['sys_module']&&!$_HM['uid']) $g['location'] .= ' &gt; <a href="'.$g['bbs_reset'].'">'.($B['uid']?$B['name']:'전체게시물').'</a>';
 
 if($d['bbs']['sosokmenu'])
 {
-	$_CA = explode('/',$d['bbs']['sosokmenu']);
-	$g['location'] = '<a href="'.RW(0).'">HOME</a>';
+	$c=substr($d['bbs']['sosokmenu'],-1)=='/'?str_replace('/','',$d['bbs']['sosokmenu']):$d['bbs']['sosokmenu'];
+	$_CA = explode('/',$c);
+	$_FHM = getDbData($table['s_menu'],"id='".$_CA[0]."' and site=".$s,'*');
+
 	$_tmp['count'] = count($_CA);
 	$_tmp['split_id'] = '';
 	for ($_i = 0; $_i < $_tmp['count']; $_i++)
@@ -207,6 +212,8 @@ if($d['bbs']['sosokmenu'])
 		$_tmp['split_id'].= ($_i?'/':'').$_tmp['location']['id'];
 		$g['location']   .= ' &gt; <a href="'.RW('c='.$_tmp['split_id']).'">'.$_tmp['location']['name'].'</a>';
 		$_HM['uid'] = $_tmp['location']['uid'];
+		$_HM['name'] = $_tmp['location']['name'];
+		$_HM['addinfo'] = $_tmp['location']['addinfo'];
 	}
 }
 
