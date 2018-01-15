@@ -41,7 +41,7 @@ $TPG = getTotalPage($NUM,$recnum);
 				<select name="account" class="form-control custom-select border-0" onchange="this.form.submit();">
 					<option value="">전체사이트</option>
 					<?php while($S = db_fetch_array($SITES)):?>
-					<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['name']?></option>
+					<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
 					<?php endwhile?>
 					<?php if(!db_num_rows($SITES)):?>
 					<option value="">등록된 사이트가 없습니다.</option>

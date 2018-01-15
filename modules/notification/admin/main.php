@@ -43,7 +43,7 @@ $TPG = getTotalPage($NUM,$recnum);
 								<option value="">사이트(전체)</option>
 								<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
 								<?php while($S = db_fetch_array($SITES)):?>
-								<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$siteuid):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
+								<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$siteuid):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
 								<?php endwhile?>
 							</select>
 						</div>
