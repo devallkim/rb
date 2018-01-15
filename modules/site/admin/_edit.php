@@ -34,14 +34,14 @@ $_editArray = array(
 	<div class="d-flex justify-content-between">
 		<h4><?php echo $_filetype?> - <?php echo $_filesbj?></h4>
 		<div class="rb-top-btnbox">
-				<?php if($wysiwyg=='Y'):?>
+				<?php if($markdown=='Y'):?>
 				<div class="btn-group">
 					<a class="btn btn-light rb-modal-photoset" href="#." data-toggle="modal" data-target="#modal_window"><i class="fa fa-photo"></i> 포토셋</a>
 					<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 						<span class="sr-only">Toggle Dropdown</span>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a href="#." data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-videoset"><i class="glyphicon glyphicon-facetime-video"></i> 비디오셋</a>
+						<a href="#." data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-videoset"><i class="fa fa-video-camera"></i> 비디오셋</a>
 						<a href="#." data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-widgetedit"><i class="fa fa-puzzle-piece"></i> 위젯</a>
 					</div>
 				</div>
@@ -57,7 +57,7 @@ $_editArray = array(
 						<span class="sr-only">Toggle Dropdown</span>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="<?php echo $_viewpage?>" target="_blank"><i class="glyphicon glyphicon-new-window"></i> 새창으로 보기</a>
+						<a class="dropdown-item" href="<?php echo $_viewpage?>" target="_blank"><i class="fa fa-window-restore"></i> 새창으로 보기</a>
 					</div>
 				</div>
 				<div class="btn-group">
@@ -66,14 +66,14 @@ $_editArray = array(
 						<span class="sr-only">Toggle Dropdown</span>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right">
-						<?php if($wysiwyg=='Y'):?>
+						<?php if($markdown=='Y'):?>
 						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;uid=<?php echo $uid?>&amp;cat=<?php echo urlencode($cat)?>&amp;p=<?php echo $p?>&amp;recnum=<?php echo $recnum?>&amp;keyw=<?php echo urlencode($keyw)?>"><i class="fa fa-code"></i> 소스코드 편집모드</a>
 						<?php else:?>
-						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;uid=<?php echo $uid?>&amp;cat=<?php echo urlencode($cat)?>&amp;p=<?php echo $p?>&amp;recnum=<?php echo $recnum?>&amp;keyw=<?php echo urlencode($keyw)?>&amp;wysiwyg=Y"><i class="fa fa-edit"></i> 위지위그 편집모드</a>
+						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;uid=<?php echo $uid?>&amp;cat=<?php echo urlencode($cat)?>&amp;p=<?php echo $p?>&amp;recnum=<?php echo $recnum?>&amp;keyw=<?php echo urlencode($keyw)?>&amp;markdown=Y"><i class="fa fa-edit"></i> 마크다운 편집모드</a>
 						<?php endif?>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_mtype?>"><i class="fa fa-plus"></i> 새 페이지</a>
-						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletepage&amp;uid=<?php echo $uid?>&back=Y" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');"><i class="glyphicon glyphicon-trash"></i> 페이지 삭제</a>
+						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletepage&amp;uid=<?php echo $uid?>&back=Y" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');"><i class="fa fa-trash-o"></i> 페이지 삭제</a>
 					</div>
 				</div>
 				<?php else:$_viewpage=RW('c='.$_HM['code'])?>
@@ -84,23 +84,23 @@ $_editArray = array(
 						<span class="sr-only">Toggle Dropdown</span>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="<?php echo $_viewpage?>" target="_blank"><i class="glyphicon glyphicon-new-window"></i> 새창으로 보기</a>
+						<a class="dropdown-item" href="<?php echo $_viewpage?>" target="_blank"><i class="fa fa-window-restore"></i> 새창으로 보기</a>
 					</div>
 				</div>
 				<div class="btn-group">
-					<a id="rb-list-back" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_mtype?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>" class="btn btn-light"><i class="glyphicon glyphicon-ok"></i> 메뉴목록</a>
+					<a id="rb-list-back" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_mtype?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>" class="btn btn-light">메뉴목록</a>
 					<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 						<span class="sr-only">Toggle Dropdown</span>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right">
-						<?php if($wysiwyg=='Y'):?>
+						<?php if($markdown=='Y'):?>
 						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;uid=<?php echo $uid?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>"><i class="fa fa-code"></i> 소스코드 편집모드</a>
 						<?php else:?>
-						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;uid=<?php echo $uid?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>&amp;wysiwyg=Y"><i class="fa fa-edit"></i> 위지위그 편집모드</a>
+						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;uid=<?php echo $uid?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>&amp;markdown=Y"><i class="fa fa-edit"></i> 마크다운 편집모드</a>
 						<?php endif?>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_mtype?>"><i class="fa fa-plus"></i> 새 메뉴</a>
-						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletemenu&amp;cat=<?php echo $cat?>&amp;back=Y" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');"><i class="glyphicon glyphicon-trash"></i> 메뉴삭제</a>
+						<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletemenu&amp;cat=<?php echo $cat?>&amp;back=Y" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');"><i class="fa fa-trash-o"></i> 메뉴삭제</a>
 					</div>
 				</div>
 				<?php endif?>
@@ -118,17 +118,17 @@ $_editArray = array(
 		<?php else:?>
 		<input type="hidden" name="id" value="<?php echo $_HP['id']?>">
 		<?php endif?>
-		<input type="hidden" name="wysiwyg" value="<?php echo $wysiwyg?>">
+		<input type="hidden" name="markdown" value="<?php echo $markdown?>">
 		<input type="hidden" name="editFilter" value="<?php echo $d['admin']['editor']?>">
 
 		<?php
-		if($wysiwyg=='Y'):
+		if($markdown=='Y'):
 		$__SRC__ = is_file($g['path_page'].$_filekind.'.php') ? htmlspecialchars(implode('',file($g['path_page'].$_filekind.'.php'))) : '';
 		include $g['path_plugin'].$d['admin']['editor'].'/import.php';
 		?>
 
 		<div class="form-group">
-			<button class="btn btn-primary btn-block btn-lg" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> 수정하기</button>
+			<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> 수정하기</button>
 		</div>
 		<?php else:?>
 		<div id="tab-edit-area">
@@ -182,7 +182,7 @@ $_editArray = array(
 </div>
 
 
-<?php if($wysiwyg!='Y' && $d['admin']['codeeidt']):?>
+<?php if($markdown!='Y' && $d['admin']['codeeidt']):?>
 <!-- codemirror -->
 <style>
 .CodeMirror {
@@ -327,7 +327,7 @@ $('.rb-modal-widgetcall-modify').on('click',function() {
 <?php if($d['admin']['dblclick']):?>
 document.ondblclick = function(event)
 {
-	getContext('<li><a href="<?php echo $_viewpage?>">사용자모드 보기</a></li><li><a href="#." onclick="goHref(getId(\'rb-list-back\').href);">등록정보 보기</a></li><li class="divider"></li><li><a href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a></li>',event);
+	getContext('<a class="dropdown-item" href="<?php echo $_viewpage?>">사용자모드 보기</a><a class="dropdown-item" href="#." onclick="goHref(getId(\'rb-list-back\').href);">등록정보 보기</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a>',event);
 }
 <?php endif?>
 
