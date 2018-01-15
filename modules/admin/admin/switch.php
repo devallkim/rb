@@ -37,7 +37,7 @@ $SITEN = db_num_rows($SITES);
 				</div>
 				<div class="rb-panel-form">
 					<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&switchdir=<?php echo $switchdir?>&r='+this.value);">
-						<?php while($S = db_fetch_array($SITES)):$TMPST[]=array($S['name'],$S['id'])?>
+						<?php while($S = db_fetch_array($SITES)):$TMPST[]=array($S['label'],$S['id'])?>
 						<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
 						<?php endwhile?>
 					</select>
