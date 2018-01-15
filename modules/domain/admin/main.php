@@ -204,7 +204,7 @@ if ($is_regismode)
 							<option value="">지정안함</option>
 							<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
 							<?php while($S = db_fetch_array($SITES)):?>
-							<option value="<?php echo $S['uid']?>"<?php if($CINFO['site']==$S['uid'] || $selsite==$S['uid']):?> selected<?php endif?>>ㆍ<?php echo $S['name']?></option>
+							<option value="<?php echo $S['uid']?>"<?php if($CINFO['site']==$S['uid'] || $selsite==$S['uid']):?> selected<?php endif?>>ㆍ<?php echo $S['label']?></option>
 							<?php endwhile?>
 							<?php if(!db_num_rows($SITES)):?>
 							<option value="">등록된 사이트가 없습니다.</option>

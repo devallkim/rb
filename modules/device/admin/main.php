@@ -61,7 +61,7 @@ $R = getDbData($table['s_mobile'],'','*');
 							<option value="">연결할 사이트를 선택하세요.</option>
 							<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
 							<?php while($S = db_fetch_array($SITES)):?>
-							<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$R['startsite']):?> selected<?php endif?>>ㆍ<?php echo $S['name']?></option>
+							<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$R['startsite']):?> selected<?php endif?>>ㆍ<?php echo $S['label']?></option>
 							<?php endwhile?>
 							<?php if(!db_num_rows($SITES)):?>
 							<option value="">등록된 사이트가 없습니다.</option>
