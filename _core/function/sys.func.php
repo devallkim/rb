@@ -437,7 +437,7 @@ function getLocation($loc)
 	if ($loc) return str_replace(' - Home - ','',strip_tags(str_replace('<li',' - <li',$loc)));
 	else {
 		global $g,$table,$_HS,$_HP,$_HM,$_CA,$c;
-		$_loc = '<li><a href="'.RW(0).'">Home</a></li>';
+		$_loc = '<li class="breadcrumb-item"><a href="'.RW(0).'">Home</a></li>';
 		if ($_HM['uid'])
 		{
 			$_cnt = count($_CA)-1;
@@ -446,9 +446,9 @@ function getLocation($loc)
 			{
 				$_val  = getDbData($table['s_menu'],"id='".$_CA[$i]."'",'id,name');
 				$_cod .= $_val['id'].'/';
-				$_loc .= '<li><a href="'.RW('c='.substr($_cod,0,strlen($_cod)-1)).'">'.$_val['name'].'</a></li>';
+				$_loc .= '<li class="breadcrumb-item"><a href="'.RW('c='.substr($_cod,0,strlen($_cod)-1)).'">'.$_val['name'].'</a></li>';
 			}
-			$_loc .= '<li class="active">'.$_HM['name'].'</li>';
+			$_loc .= '<li class="breadcrumb-item active">'.$_HM['name'].'</li>';
 		}
 		else if ($_HP['uid'])
 		{
@@ -461,10 +461,10 @@ function getLocation($loc)
 				{
 					$_val  = getDbData($table['s_menu'],"id='".$_CA[$i]."'",'id,name');
 					$_cod .= $_val['id'].'/';
-					$_loc .= '<li><a href="'.RW('c='.substr($_cod,0,strlen($_cod)-1)).'">'.$_val['name'].'</a></li>';
+					$_loc .= '<li class="breadcrumb-item"><a href="'.RW('c='.substr($_cod,0,strlen($_cod)-1)).'">'.$_val['name'].'</a></li>';
 				}
 			}
-			$_loc .= '<li class="active">'.$_HP['name'].'</li>';
+			$_loc .= '<li class="breadcrumb-item active">'.$_HP['name'].'</li>';
 		}
 		else if ($g['push_location'])
 		{
