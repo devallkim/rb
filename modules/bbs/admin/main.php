@@ -2,7 +2,7 @@
 include $g['path_module'].$module.'/var/var.php';
 $bbs_time=$d['bbs']['time']; // 아래 $d 배열과 충돌을 피하기 위해서 별도로 지정
 $sort	= $sort ? $sort : 'gid';
-$orderby= $orderby ? $orderby : 'asc';
+$orderby= $orderby ? $orderby : 'desc';
 $recnum	= $recnum && $recnum < 301 ? $recnum : 30;
 $bbsque	= 'uid';
 
