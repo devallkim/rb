@@ -892,6 +892,10 @@ border-radius: 0.25rem;
 .sidebar .rb-tree a {
   color: #ccc;
 }
+.sidebar .rb-tree a u {
+  color: #666;
+  text-decoration: none;
+}
 
 
 /*기본 모듈개별*/
