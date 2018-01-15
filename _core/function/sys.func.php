@@ -281,6 +281,11 @@ function RW($rewrite)
 		$rewrite = str_replace('c=','c/',$rewrite);
 		$rewrite = str_replace('mod=','p/',$rewrite);
 		$rewrite = str_replace('m=admin','admin',$rewrite);
+		$rewrite = str_replace('m=bbs','b',$rewrite);
+		$rewrite = str_replace('&bid=','/',$rewrite);
+		$rewrite = str_replace('&uid=','/',$rewrite);
+		$rewrite = str_replace('&CMT=','/',$rewrite);
+		$rewrite = str_replace('&s=','/s',$rewrite);
 		return $GLOBALS['g']['r'].'/'.$rewrite;
 	}
 	else return $GLOBALS['_HS']['usescode']?('./?r='.$GLOBALS['_HS']['id'].($rewrite?'&amp;'.$rewrite:'')):'./'.($rewrite?'?'.$rewrite:'');
