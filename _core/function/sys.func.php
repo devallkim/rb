@@ -270,7 +270,7 @@ function getUTFtoUTF($str)
 //관리자체크
 function checkAdmin($n)
 {
-	if(!$GLOBALS['my']['admin']) getLink('','',_LANG('fs001','admin'),$n?$n:'');
+	if(!$GLOBALS['my']['admin']) getLink('','','관리권한이 없습니다.',$n?$n:'');
 }
 //MOD_rewrite
 function RW($rewrite)
@@ -389,7 +389,7 @@ function getTreeMenu($conf,$code,$depth,$parent,$tmpcode)
 			else if($conf['userMenu']=='bookmark') $tree.= '<a data-scroll href="#rb-tree-menu-'.$C['id'].'"><span'.($code==$rcode?' class="rb-active"':'').'>';
 			else $tree.= '<a href="'.$conf['link'].$C['uid'].'&amp;code='.$rcode.($conf['bookmark']?'#'.$conf['bookmark']:'').'"><span'.($code==$rcode?' class="rb-active"':'').'>';
 			if($conf['dispCheckbox']) $tree.= '<input type="checkbox" name="tree_members[]" value="'.$C['uid'].'">';
-			if($C['hidden']) $tree.='<u title="'._LANG('fs002','admin').'" data-tooltip="tooltip">';
+			if($C['hidden']) $tree.='<u title="숨김" data-tooltip="tooltip">';
 			$tree.= $C['name'];
 			if($C['hidden']) $tree.='</span>';
 			$tree.='</u></a>';
@@ -397,9 +397,9 @@ function getTreeMenu($conf,$code,$depth,$parent,$tmpcode)
 			if($conf['dispNum']&&$C['num']) $tree.= ' <small>('.$C['num'].')</small>';
 			if(!$conf['hideIcon'])
 			{
-				// if($C['mobile']) $tree.= '<i class="fa fa-mobile" title="'._LANG('fs005','admin').'" data-tooltip="tooltip"></i>&nbsp;';
-				if($C['target']) $tree.= ' <i class="fa fa-window-restore fa-fw" title="'._LANG('fs004','admin').'" data-tooltip="tooltip"></i>';
-				if($C['reject']) $tree.= ' <i class="fa fa-lock fa-lg fa-fw" title="'._LANG('fs003','admin').'" data-tooltip="tooltip"></i>';
+				// if($C['mobile']) $tree.= '<i class="fa fa-mobile" title="모바일" data-tooltip="tooltip"></i>&nbsp;';
+				if($C['target']) $tree.= ' <i class="fa fa-window-restore fa-fw" title="새창" data-tooltip="tooltip"></i>';
+				if($C['reject']) $tree.= ' <i class="fa fa-lock fa-lg fa-fw" title="차단" data-tooltip="tooltip"></i>';
 			}
 
 			$tree.= '<ul id="'.$id.'-'.$_i.'-'.$C['uid'].'" class="collapse'.($conf['allOpen']||$topen?' show':'').'">';
@@ -412,7 +412,7 @@ function getTreeMenu($conf,$code,$depth,$parent,$tmpcode)
 			else if ($conf['userMenu']=='bookmark') $tree.= '<a data-scroll href="#rb-tree-menu'.$C['id'].'"><span'.($code==$rcode?' class="rb-active"':'').'>';
 			else $tree.= '<a href="'.$conf['link'].$C['uid'].'&amp;code='.$rcode.($conf['bookmark']?'#'.$conf['bookmark']:'').'"><span'.($code==$rcode?' class="rb-active"':'').'>';
 			if($conf['dispCheckbox']) $tree.= '<input type="checkbox" name="tree_members[]" value="'.$C['uid'].'">';
-			if($C['hidden']) $tree.='<u title="'._LANG('fs002','admin').'" data-tooltip="tooltip">';
+			if($C['hidden']) $tree.='<u title="숨김" data-tooltip="tooltip">';
 			$tree.= $C['name'];
 			if($C['hidden']) $tree.='</u>';
 			$tree.='</span></a>';
@@ -420,9 +420,9 @@ function getTreeMenu($conf,$code,$depth,$parent,$tmpcode)
 			if($conf['dispNum']&&$C['num']) $tree.= ' <small>('.$C['num'].')</small>';
 			if(!$conf['hideIcon'])
 			{
-				//if($C['mobile']) $tree.= '<i class="glyphicon glyphicon-phone" title="'._LANG('fs005','admin').'" data-tooltip="tooltip"></i>&nbsp;';
-				if($C['target']) $tree.= ' <i class="fa fa-window-restore fa-fw" title="'._LANG('fs004','admin').'" data-tooltip="tooltip"></i>';
-				if($C['reject']) $tree.= ' <i class="fa fa-lock fa-lg fa-fw" title="'._LANG('fs003','admin').'" data-tooltip="tooltip"></i>';
+				//if($C['mobile']) $tree.= '<i class="glyphicon glyphicon-phone" title="모바일" data-tooltip="tooltip"></i>&nbsp;';
+				if($C['target']) $tree.= ' <i class="fa fa-window-restore fa-fw" title="새창" data-tooltip="tooltip"></i>';
+				if($C['reject']) $tree.= ' <i class="fa fa-lock fa-lg fa-fw" title="차단" data-tooltip="tooltip"></i>';
 			}
 		}
 		$tree.= '</li>';
