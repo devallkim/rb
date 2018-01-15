@@ -807,7 +807,7 @@ $menuType = array('','모듈연결','직접편집');
 
 				<?php if($is_fcategory && $CINFO['is_child']):?>
 				<div class="custom-control custom-checkbox">
-				  <input type="checkbox" class="custom-control-input" name="subcopy" id="cubcopy" value="1" checked>
+				  <input type="checkbox" class="custom-control-input" name="subcopy" id="cubcopy" value="1">
 				  <label class="custom-control-label" for="cubcopy">이 설정을 서브메뉴에도 일괄적용 <small class="text-muted">(메뉴숨김, 레이아웃, 권한)</small></label>
 				</div>
 				<?php endif?>
