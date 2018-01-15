@@ -286,12 +286,9 @@ $menuType = array('','모듈연결','직접편집');
 								</fieldset>
 								<div class="form-text mt-2">
 
-									<div class="custom-controls-stacked">
-										<label class="custom-control custom-checkbox">
-											<input type="checkbox" class="custom-control-input" name="redirect" id="xredirect" value="1"<?php if($CINFO['redirect']):?> checked<?php endif?>>
-											<span class="custom-control-indicator"></span>
-											<span class="custom-control-description">입력된 주소로 리다이렉트 시켜줍니다. <small> (외부주소 링크시 사용)</small></span>
-										</label>
+									<div class="custom-control custom-checkbox">
+									  <input type="checkbox" class="custom-control-input" name="redirect" id="xredirect" value="1"<?php if($CINFO['redirect']):?> checked<?php endif?>>
+									  <label class="custom-control-label" for="xredirect">입력된 주소로 리다이렉트 시켜줍니다. <small> (외부주소 링크시 사용)</small></label>
 									</div>
 
 									<small>
