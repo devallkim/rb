@@ -1,1 +1,1 @@
-﻿jquery-timeago-ko
+﻿타임어고
