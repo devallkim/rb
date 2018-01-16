@@ -43,6 +43,7 @@ if ($site_uid)
 	{
 		rename($g['path_page'].$r.'-menus',$g['path_page'].$id.'-menus');
 		rename($g['path_page'].$r.'-pages',$g['path_page'].$id.'-pages');
+		rename($g['path_var'].'site/'.$r,$g['path_var'].'site/'.$id);
 	}
 	setrawcookie('result_site', rawurlencode('사이트가 등록정보가 변경되었습니다.|success'));  // 처리여부 cookie 저장
 	if ($r != $id || $name != $_HS['name'])
