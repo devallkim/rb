@@ -13,7 +13,7 @@ if($cat){	$CINFO = getUidData($table['s_menu'],$cat);	$_SEO = getDbData($tabl
 	$code = $code ? $code : $_code;
 }
 $catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';if ($is_regismode){	$CINFO['menutype'] = '2';	$CINFO['name']	   = '';	$CINFO['joint']	   = '';	$CINFO['redirect'] = '';	$CINFO['hidden']   = '';	$CINFO['target']   = '';	$CINFO['imghead']  = '';	$CINFO['imgfoot']  = '';}
-$menuType = array('','모듈연결','직접편집');
+$menuType = array('','모듈연결','직접편집','메뉴연결');
 ?>
 
 <div id="catebody" class="row no-gutters">
@@ -205,6 +205,7 @@ $menuType = array('','모듈연결','직접편집');
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<a class="dropdown-item" href="#" onclick="docType(2,'<?php echo $menuType[2]?>');"><i class="fa fa-code"></i> <?php echo $menuType[2]?></a>
 										<a class="dropdown-item" href="#" onclick="docType(1,'<?php echo $menuType[1]?>');"><i class="kf kf-module"></i> <?php echo $menuType[1]?></a>
+										<a class="dropdown-item" href="#" onclick="docType(3,'<?php echo $menuType[3]?>');"><i class="fa fa-sitemap"></i> <?php echo $menuType[3]?></a>
 									</div>
 								</span>
 								<?php endif?>
@@ -250,7 +251,7 @@ $menuType = array('','모듈연결','직접편집');
 
 					<div class="tab-content<?php if(!$CINFO['uid']||$vtype=='sub'):?> d-none<?php endif?>">
 
-						<div class="form-group form-row<?php if($CINFO['menutype']!=2):?> d-none<?php endif?>" id="editBox3">
+						<div class="form-group form-row<?php if($CINFO['menutype']!=2):?> d-none<?php endif?>" id="editBox2">
 							<div class="col-lg-10 col-xl-9 offset-lg-2">
 								<fieldset<?php if($CINFO['menutype']!=2):?> disabled<?php endif?>>
 									<div class="btn-group btn-group-justified" data-toggle="buttons">
@@ -301,6 +302,28 @@ $menuType = array('','모듈연결','직접편집');
 								</div>
 							</div>
 						</div>
+						<div class="form-group form-row<?php if($CINFO['menutype']!=3):?> d-none<?php endif?>" id="editBox3">
+							<div class="col-lg-10 col-xl-9 offset-lg-2">
+								<fieldset>
+
+									<select name="joint" class="form-control custom-select">
+								    <option value="">연결시킬 메뉴를 선택해 주세요.</option>
+								    <option value="" disabled>--------------------------------</option>
+								    <?php include_once $g['path_core'].'function/menu1.func.php'?>
+								    <?php $cat=$CINFO['joint']?>
+								    <?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
+							    </select>
+
+								</fieldset>
+								<div class="form-text mt-2">
+									<input type="hidden" name="redirect"  value="1">
+									<small class="text-muted mt-1">
+										선택된 메뉴로 리다이렉트 됩니다.
+									</small>
+								</div>
+							</div>
+						</div>
+
 					</div>
 
 				<?php if($CINFO['uid']&&!$vtype):?>
@@ -929,7 +952,8 @@ function boxDeco(layer1,layer2)
 	if(getId(layer1).className.indexOf('default') == -1) $("#"+layer1).addClass("border-light").removeClass("border-primary");
 	else $("#"+layer1).addClass("border-primary").removeClass("border-light");
 	$("#"+layer2).addClass("border-light").removeClass("border-primary");
-}function docType(n,str)
+}
+function docType(n,str)
 {
 	getId('rb-document-type').innerHTML = str;
 	$('#editBox1').addClass('d-none');
@@ -938,6 +962,8 @@ function boxDeco(layer1,layer2)
 	$('#editBox'+n).removeClass('d-none');
 	getIframeForAction(document.procForm);
 	document.procForm.menutype.value = n;
+	document.procForm.joint.value = '';
+	document.procForm.redirect.value = '';
 	document.procForm.submit();
 }
 <?php if($d['admin']['dblclick']):?>

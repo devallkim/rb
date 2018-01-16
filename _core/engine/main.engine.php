@@ -105,6 +105,12 @@ if (!$g['sys_action'] && !$system)
 				}
 			}
 		}
+
+		if($_HM['menutype']==3)
+		{
+			getLink(RW('c='.$_HM['joint']),'','','');
+		}
+
 	}
 
 	if (!$c && $m == $g['sys_module'])
