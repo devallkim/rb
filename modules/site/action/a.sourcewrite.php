@@ -59,12 +59,14 @@ if ($wysiwyg != 'Y')
 
 	$cachefile_mobile = str_replace('.php','.cache',$vfile.'.mobile');
 	if(file_exists($cachefile_mobile)) unlink($cachefile_mobile);
-	getLink('','','반영되었습니다.','');
+	setrawcookie('site_edit_result', rawurlencode('소스코드 수정사항이 반영 되었습니다|success'));
+	getLink('reload','parent.','','');
 }
 else {
 	$cachefile_pc = str_replace('.php','.cache',$vfile);
 	if(file_exists($cachefile_pc)) unlink($cachefile_pc);
-	getLink('reload','parent.','반영되었습니다.','');
+	setrawcookie('site_edit_result', rawurlencode('반영 되었습니다|success'));
+	getLink('reload','parent.','','');
 }
 exit;
 ?>

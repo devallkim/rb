@@ -1,19 +1,18 @@
 <div class="modal-header">
+	<h5 class="modal-title"><i class="fa fa-code fa-lg"></i> 위젯코드</h5>
 	<button type="button" class="close" onclick="hideModal();">&times;</button>
-	<h4 class="modal-title"><i class="fa fa-code fa-lg"></i> 위젯코드</h4>
 </div>
 <div class="modal-body">
-	<textarea id="rb-widget-code-area"></textarea>
+	<textarea id="rb-widget-code-area" class="form-control"></textarea>
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-default" onclick="hideModal();">닫기</button>
 	<button type="button" class="btn btn-primary rb-clipboard" data-clipboard-target="rb-widget-code-area" onclick="hideModal();">복사하기</button>
 </div>
 
-<!-- zero-clipboard -->
-<?php getImport('zero-clipboard','ZeroClipboard.min',false,'js') ?>
+
 <script>
-var client = new ZeroClipboard($(".rb-clipboard"));
+
 client.on( "ready", function( readyEvent ) {});
 function hideModal()
 {
@@ -26,7 +25,7 @@ function modalSetting()
 	parent.getId('_modal_dialog_top_').style.paddingRight = '20px';
 	parent.getId('_modal_dialog_top_').style.width = '100%';
 	parent.getId('_modal_dialog_top_').style.maxWidth = '500px';
-	parent.getId('_modal_iframe_sub_').style.height = '250px';
+	parent.getId('_modal_iframe_sub_').style.height = '300px';
 }
 modalSetting();
 </script>
