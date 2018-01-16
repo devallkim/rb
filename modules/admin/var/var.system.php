@@ -1,5 +1,5 @@
 <?php
-$d['admin']['version'] = "2.2.0-alpha.3";
+$d['admin']['version'] = "2.2.0-alpha.4";
 $d['admin']['themepc'] = "kimsq-dark";
 $d['admin']['pannellink'] = "kimsq-dark.css";
 $d['admin']['cache_flag'] = "";
