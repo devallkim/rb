@@ -1,22 +1,27 @@
 <?php
-$g['memberAgree1ForSite'] = $g['path_var'].'site/'.$r.'/member.agree1.txt';
+$g['memberAgree1ForSite'] = $g['path_var'].'site/'.$_HS['id'].'/member.agree1.txt';
 $agree1File = file_exists($g['memberAgree1ForSite']) ? $g['memberAgree1ForSite'] : $g['dir_module'].'var/agree1.txt';
 
-$g['memberAgree2ForSite'] = $g['path_var'].'site/'.$r.'/member.agree2.txt';
+$g['memberAgree2ForSite'] = $g['path_var'].'site/'.$_HS['id'].'/member.agree2.txt';
 $agree2File = file_exists($g['memberAgree2ForSite']) ? $g['memberAgree2ForSite'] : $g['dir_module'].'var/agree2.txt';
 
-$g['memberAgree3ForSite'] = $g['path_var'].'site/'.$r.'/member.agree3.txt';
+$g['memberAgree3ForSite'] = $g['path_var'].'site/'.$_HS['id'].'/member.agree3.txt';
 $agree3File = file_exists($g['memberAgree3ForSite']) ? $g['memberAgree3ForSite'] : $g['dir_module'].'var/agree3.txt';
 
-$g['memberAgree4ForSite'] = $g['path_var'].'site/'.$r.'/member.agree4.txt';
+$g['memberAgree4ForSite'] = $g['path_var'].'site/'.$_HS['id'].'/member.agree4.txt';
 $agree4File = file_exists($g['memberAgree4ForSite']) ? $g['memberAgree4ForSite'] : $g['dir_module'].'var/agree4.txt';
 
-$g['memberAgree5ForSite'] = $g['path_var'].'site/'.$r.'/member.agree5.txt';
+$g['memberAgree5ForSite'] = $g['path_var'].'site/'.$_HS['id'].'/member.agree5.txt';
 $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite'] : $g['dir_module'].'var/agree5.txt';
 ?>
 
 <!-- global css -->
 <link href="<?php echo $g['url_module_skin']?>/_style.css" rel="stylesheet">
+
+
+
+<?php echo $d['member']['sosokmenu_join'] ?>
+
 
 <article id="pages-signup">
   	<form name="procForm" action="<?php echo $g['s']?>/" method="get">
