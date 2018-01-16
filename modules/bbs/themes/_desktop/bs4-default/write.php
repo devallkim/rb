@@ -25,9 +25,12 @@ if($R['uid']){
 
 <section class="rb-bbs-write">
 
+  <?php if (!$_HM['uid']): ?>
   <header>
-    <h1 class="h3"><?php echo $B['name']?> 게시판</h1>
+    <h1 class="h3"><?php echo $B['name']?></h1>
   </header>
+  <?php endif; ?>
+
 
 	<article>
   	<form name="writeForm" method="post" action="<?php echo $g['s']?>/" target="_action_frame_<?php echo $m?>" onsubmit="return writeCheck(this);" role="form">
