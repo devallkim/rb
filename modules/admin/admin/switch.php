@@ -38,7 +38,7 @@ $SITEN = db_num_rows($SITES);
 				<div class="rb-panel-form">
 					<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&switchdir=<?php echo $switchdir?>&r='+this.value);">
 						<?php while($S = db_fetch_array($SITES)):$TMPST[]=array($S['label'],$S['id'])?>
-						<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
+						<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
 						<?php endwhile?>
 					</select>
 				</div>
@@ -99,14 +99,14 @@ $SITEN = db_num_rows($SITES);
 					</span>
 				</div>
 				<div class="col-md-10 col-sm-10">
-					<h4 class="media-heading">
+					<h4 class="mt-3 mb-3">
 						<strong><?php echo $sinfo[2]?></strong>
-						<small class="text-muted">(<?php echo $sinfo[0]?>) <span class="label label-default"><?php echo $sinfo[3]?></span></small>
+						<small class="text-muted">(<?php echo $sinfo[0]?>) <span class="badge badge-info"><?php echo $sinfo[3]?></span></small>
 					</h4>
-					<p class="text-muted"><small>선택된 스위치 대한 등록정보입니다.</small></p>
 					<div class="btn-group">
-					  <a class="btn btn-light" data-toggle="collapse" data-target="#_edit_area_" onclick="sessionSetting('sh_admin_switch1','1','','1');"><i class="fa fa-code fa-lg"></i> 편집하기</a>
-					  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+					  <a class="btn btn-light" data-toggle="collapse" data-target="#_edit_area_" onclick="sessionSetting('sh_admin_switch1','1','','1');"><i class="fa fa-code fa-lg"></i> 코드 조회 및 편집</a>
+					  <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+							<span class="sr-only">Toggle Dropdown</span>
 					  </button>
 					  <div class="dropdown-menu dropdown-menu-right" role="menu">
 							<?php if(is_file($g['path_switch'].$switchdir.'/readme.txt')):?>
@@ -118,50 +118,57 @@ $SITEN = db_num_rows($SITES);
 				</div>
 			</div>
 
-			<form name="procForm" class="mt-4" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
+			<form name="procForm" class="mt-4 px-4" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
 				<input type="hidden" name="r" value="<?php echo $r?>">
 				<input type="hidden" name="m" value="<?php echo $module?>">
 				<input type="hidden" name="a" value="switch_edit">
 				<input type="hidden" name="switch" value="<?php echo $switchdir?>">
 				<input type="hidden" name="name" value="<?php echo $sinfo[2]?>">
 
-				<h4>적용 사이트</h4>
+				<h5 class="h6 mt-4">데스크탑 적용 사이트 </h5>
 
-				<div class="form-group">
-					<div class="col-lg-12">
-						<?php foreach($TMPST as $_val):?>
-						<div class="custom-control custom-checkbox custom-control-inline">
-						  <input type="checkbox" class="custom-control-input" id="aply_sites_<?php echo $_val[1]?>" name="aply_sites[]" value="<?php echo $_val[1]?>"<?php if(strstr($sinfo[1],'['.$_val[1].']')):?> checked<?php endif?>>
-						  <label class="custom-control-label" for="aply_sites_<?php echo $_val[1]?>"><?php echo $_val[0]?> <small class="text-muted">(<?php echo $_val[1]?>)</small></label>
-						</div>
-						<?php endforeach?>
-					</div>
+				<?php foreach($TMPST as $_val):?>
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="aply_sites_<?php echo $_val[1]?>" name="aply_sites[]" value="<?php echo $_val[1]?>"<?php if(strstr($sinfo[1],'['.$_val[1].']')):?> checked<?php endif?>>
+					<label class="custom-control-label" for="aply_sites_<?php echo $_val[1]?>"><?php echo $_val[0]?> <small class="text-muted">(<?php echo $_val[1]?>)</small></label>
+				</div>
+				<?php endforeach?>
+				<div class="pt-2">
+					<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',true);">전체선택</button>
+					<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',false);">전체취소</button>
 				</div>
 
 				<hr>
 
-				<div class="form-group">
-					<div class="col-sm-12">
-						<div class="btn-group">
-							<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',true);">전체선택</button>
-							<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',false);">전체취소</button>
-						</div>
-						<button class="btn btn-primary" type="submit"><i class="fa fa-check fa-lg"></i> 저장하기</button>
-					</div>
+				<h5 class="h6 mt-5">모바일 적용 사이트 </h5>
+
+				<?php foreach($TMPST as $_val):?>
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="aply_sites_<?php echo $_val[1]?>" name="aply_sites_mobile[]" value="<?php echo $_val[1]?>"<?php if(strstr($sinfo[1],'['.$_val[1].']')):?> checked<?php endif?>>
+					<label class="custom-control-label" for="aply_sites_<?php echo $_val[1]?>"><?php echo $_val[0]?> <small class="text-muted">(<?php echo $_val[1]?>)</small></label>
+				</div>
+				<?php endforeach?>
+				<div class="pt-2">
+					<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',true);">전체선택</button>
+					<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',false);">전체취소</button>
 				</div>
 
-				<div id="_edit_area_" class="collapse<?php if($_SESSION['sh_admin_switch1']):?> in<?php endif?>">
+				<hr>
+
+				<button class="btn btn-outline-primary btn-block my-4" type="submit"><i class="fa fa-check fa-lg"></i> 저장하기</button>
+
+				<div id="_edit_area_" class="collapse<?php if($_SESSION['sh_admin_switch1']):?> show<?php endif?>">
 					<div class="rb-files">
 						<div class="rb-codeview">
 							<div class="rb-codeview-header">
 								<ol class="breadcrumb pull-left">
-									<li>파일경로 :</li>
-									<li>root</li>
-									<li>switchs</li>
-									<li><?php echo str_replace('/','</li><li>',$switchdir)?></li>
-									<li class="active">main.php</li>
+									<li class="breadcrumb-item">파일경로 :</li>
+									<li class="breadcrumb-item">root</li>
+									<li class="breadcrumb-item">switchs</li>
+									<li class="breadcrumb-item"><?php echo str_replace('/','</li><li class="breadcrumb-item">',$switchdir)?></li>
+									<li class="breadcrumb-item">main.php</li>
 								</ol>
-								<button type="button" class="btn btn-light btn-xs pull-right rb-full-screen" data-tooltip="tooltip" title="전체화면" onclick="editFullSize('_edit_area_',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
+								<button type="button" class="btn btn-light btn-xs float-right rb-full-screen" data-tooltip="tooltip" title="전체화면" onclick="editFullSize('_edit_area_',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
 							</div>
 							<div class="rb-codeview-body">
 								<textarea name="switch_code" id="__code__" class="form-control" rows="35"><?php echo implode('',file($g['path_switch'].$switchdir.'/main.php'))?></textarea>
@@ -176,8 +183,8 @@ $SITEN = db_num_rows($SITES);
 						</div>
 					</div>
 
-					<div class="rb-submit clearfix">
-						<button type="submit" class="btn btn-primary">저장하기</button>
+					<div class="my-4">
+						<button class="btn btn-outline-primary btn-block" type="submit"><i class="fa fa-check fa-lg"></i> 저장하기</button>
 					</div>
 				</div>
 
@@ -186,7 +193,7 @@ $SITEN = db_num_rows($SITES);
 			<?php if(is_file($g['path_switch'].$switchdir.'/readme.txt')):?>
 			<br>
 			<br>
-			<div id="_guide_area_" class="collapse well<?php if($_SESSION['sh_admin_switch2']):?> in<?php endif?>">
+			<div id="_guide_area_" class="collapse well<?php if($_SESSION['sh_admin_switch2']):?> show<?php endif?>">
 				<small><?php echo getContents(nl2br(implode('',file($g['path_switch'].$switchdir.'/readme.txt'))),'HTML')?></small>
 			</div>
 			<?php endif?>
