@@ -28,7 +28,7 @@ $tdir = $g['path_module'].$smodule.'/theme/';
       <div class="input-group ml-2">
         <input type="text" name="_keyw" size="15" value="<?php echo addslashes($_keyw)?>" class="form-control" />
 				<div class="input-group-append">
-					<input type="submit" value=" 검색 " class="btn btn-primary">
+					<input type="submit" value=" 검색 " class="btn btn-secondary">
 					<input type="button" value=" 리셋 " class="btn btn-light" onclick="thisReset();">
 				</div>
        	<!--<input type="button" value=" 새 게시판 " class="btn<?php echo $newboard?'gray':'blue'?>" onclick="this.form.newboard.value=1;this.form.submit();" />-->
@@ -92,7 +92,7 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 					<?php while(false !== ($tpl = readdir($dirs))):?>
 					<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
 					<?php $dirs1 = opendir($g['path_layout'].$tpl)?>
-					<option value="">--------------------------------</option>
+					<option value="" disabled>--------------------------------</option>
 					<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 					<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
 					<option value="<?php echo $tpl?>/<?php echo $tpl1?>">ㆍ<?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo str_replace('.php','',$tpl1)?>)</option>
@@ -108,8 +108,8 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 				<td class="td2">
 					<select name="skin" class="form-control custom-select">
 					<option value="">&nbsp;+ 게시판 대표테마</option>
-					<option value="">--------------------------------</option>
-					<?php $tdir = $g['path_module'].$smodule.'/theme/_desktop/'?>
+					<option value="" disabled>--------------------------------</option>
+					<?php $tdir = $g['path_module'].$smodule.'/themes/_desktop/'?>
 					<?php $dirs = opendir($tdir)?>
 					<?php while(false !== ($skin = readdir($dirs))):?>
 					<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
@@ -124,8 +124,8 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 				<td class="td2">
 					<select name="m_skin" class="form-control custom-select">
 					<option value="">&nbsp;+ 모바일 대표테마</option>
-					<option value="">--------------------------------</option>
-					<?php $tdir = $g['path_module'].$smodule.'/theme/_mobile/'?>
+					<option value="" disabled>--------------------------------</option>
+					<?php $tdir = $g['path_module'].$smodule.'/themes/_mobile/'?>
 					<?php $dirs = opendir($tdir)?>
 					<?php while(false !== ($skin = readdir($dirs))):?>
 					<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
@@ -144,7 +144,7 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 				<td class="td2">
 					<select name="sosokmenu" class="form-control custom-select">
 					<option value="">&nbsp;+ 사용안함</option>
-					<option value="">--------------------------------</option>
+					<option value="" disabled>--------------------------------</option>
 					<?php include_once $g['path_core'].'function/menu1.func.php'?>
 					<?php $cat=$d['bbs']['sosokmenu']?>
 					<?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
@@ -160,7 +160,7 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 				<td class="td2">
 					<select name="perm_l_write" class="form-control custom-select">
 					<option value="0">&nbsp;+ 전체허용</option>
-					<option value="0">--------------------------------</option>
+					<option value="0" disabled>--------------------------------</option>
 					<?php $_LEVEL=getDbArray($table['s_mbrlevel'],'','*','uid','asc',0,1)?>
 					<?php while($_L=db_fetch_array($_LEVEL)):?>
 					<option value="<?php echo $_L['uid']?>"<?php if($_L['uid']==1):?> selected="selected"<?php endif?>>ㆍ<?php echo $_L['name']?>(<?php echo number_format($_L['num'])?>) 이상</option>
@@ -170,10 +170,10 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 			</tr>
 		</table>
 
-		<div class="submitbox">
-			<input type="submit" class="btnblue" value="새게시판 만들기" />
+		<div class="mt-3">
+			<input type="submit" class="btn btn-primary" value="새게시판 만들기">
 			<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=<?php echo $smodule?>&amp;front=main&amp;type=makebbs" target="_blank">더 자세히</a>
-			<a href="#." onclick="thisReset();">취소</a>
+			<a href="#." class="btn btn-light" onclick="thisReset();">취소</a>
 		</div>
 
 	</form>
@@ -197,7 +197,7 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 				    </select>
 				</td>
 				<td class="text-right">
-					<button class="btn btn-light" onclick="dropJoint('<?php echo $g['s']?>/?m=<?php echo $smodule?>');" /><i class="fa glyphicon-save"></i> 연결하기</button>
+					<button class="btn btn-light" onclick="dropJoint('<?php echo $g['s']?>/?m=<?php echo $smodule?>');" /><i class="fa fa-link"></i> 연결하기</button>
 				</td>
 		</tr>
 		<?php while($R = db_fetch_array($PAGES)):?>
@@ -206,34 +206,33 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 		<td>
 			<?php if($R['category']):?>
 			<select id="cat<?php echo $R['id']?>" class="form-control custom-select" title="<?php echo $R['id']?>">
-			<option value="">&nbsp;+ <?php echo $R['name']?></option>
-			<?php $_catexp = explode(',',$R['category']);$_catnum=count($_catexp)?>
-			<option value="">--------------------------------</option>
-			<?php for($i = 1; $i < $_catnum; $i++):if(!$_catexp[$i])continue;?>
-			<option value="<?php echo $_catexp[$i]?>">ㆍ<?php echo $_catexp[$i]?></option>
-			<?php endfor?>
+				<option value="">&nbsp;+ <?php echo $R['name']?></option>
+				<?php $_catexp = explode(',',$R['category']);$_catnum=count($_catexp)?>
+				<option value="" disabled>--------------------------------</option>
+				<?php for($i = 1; $i < $_catnum; $i++):if(!$_catexp[$i])continue;?>
+				<option value="<?php echo $_catexp[$i]?>">ㆍ<?php echo $_catexp[$i]?></option>
+				<?php endfor?>
 			</select>
 			<?php else:?>
-			<input type="hidden" id="cat<?php echo $R['id']?>" value="" class="form-control" />
-			<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $smodule?>&amp;bid=<?php echo $R['id']?>" target="_blank" title="게시판보기"><?php echo $R['name']?></a><span>(<?php echo $R['id']?>)</span>
+			<input type="hidden" id="cat<?php echo $R['id']?>" value="" class="form-control">
+			<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $smodule?>&amp;bid=<?php echo $R['id']?>" target="_blank" title="게시판보기"><?php echo $R['name']?></a><span class="badge badge-light badge-pill"><?php echo $R['id']?></span>
 			<?php endif?>
 		</td>
 		<td class="cat">
 			<select class="form-control custom-select">
-			    <option><?php echo $d['bbs']['skin'] ? getFolderName($tdir.$d['bbs']['skin']) : '게시판 대표테마'?></option>
+		    <option><?php echo $d['bbs']['skin'] ? getFolderName($tdir.$d['bbs']['skin']) : '게시판 대표테마'?></option>
 			</select>
 		</td>
 		<td class="text-right">
-			<button class="pull-right btn btn-light" onclick="dropJoint('<?php echo $g['s']?>/?m=<?php echo $smodule?>&bid=<?php echo $R['id']?>'+(getId('cat<?php echo $R['id']?>').value?'&cat='+getId('cat<?php echo $R['id']?>').value:''));" /><i class="glyphicon glyphicon-save"></i> 연결하기</button>
+			<button class="btn btn-light" onclick="dropJoint('<?php echo $g['s']?>/?m=<?php echo $smodule?>&bid=<?php echo $R['id']?>'+(getId('cat<?php echo $R['id']?>').value?'&cat='+getId('cat<?php echo $R['id']?>').value:''));" /><i class="fa fa-link"></i> 연결하기</button>
 		</td>
 		</tr>
 		<?php endwhile?>
 	</table>
 
 	<div class="mt-3">
-		<ul class="pagination pagination-sm">
-		<script type="text/javascript">getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
-		<?php //echo getPageLink(5,$p,$TPG,'')?>
+		<ul class="pagination justify-content-center">
+			<script type="text/javascript">getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
 		</ul>
 	</div>
 	<?php else:?>

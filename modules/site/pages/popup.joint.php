@@ -1,12 +1,14 @@
 <div id="jointbox">
 	<div class="category">
+		<div class="list-group">
 		<?php $MODULES = getDbArray($table['s_module'],'','*','gid','asc',0,1)?>
 		<?php while($R=db_fetch_array($MODULES)):?>
 		<?php $_jfile0 = $g['path_module'].$R['id'].'/admin/var/var.joint.php'?>
 		<?php if(!is_file($_jfile0)||strstr($cmodule,'['.$R['id'].']'))continue?>
 		<?php if($smodule==$R['id']) $g['var_joint_file'] = is_file($_jfile0)?$_jfile0:(is_file($_jfile1)?$_jfile1:$_jfile2)?>
-		<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;system=<?php echo $system?>&amp;iframe=<?php echo $iframe?>&amp;dropfield=<?php echo $dropfield?>&amp;smodule=<?php echo $R['id']?>&amp;cmodule=<?php echo $cmodule?>" class="list-group-item<?php if($smodule==$R['id']):?> active<?php endif?>"><i class="kf <?php echo $R['icon']?$R['icon']:'kf-'.$R['id']?>"></i> <?php echo $R['name']?><span class="badge"><?php echo $R['id']?></span></a>
+		<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;system=<?php echo $system?>&amp;iframe=<?php echo $iframe?>&amp;dropfield=<?php echo $dropfield?>&amp;smodule=<?php echo $R['id']?>&amp;cmodule=<?php echo $cmodule?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<?php if($smodule==$R['id']):?> active<?php endif?>"><span><i class="kf fa-fw <?php echo $R['icon']?$R['icon']:'kf-'.$R['id']?>"></i> <?php echo $R['name']?></span><span class="badge badge-light badge-pill"><?php echo $R['id']?></span></a>
 		<?php endwhile?>
+		</div>
 	</div>
 	<div class="content">
 		<?php if($smodule):?>
@@ -22,9 +24,7 @@
 
 
 
-<!----------------------------------------------------------------------------
-@부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴
------------------------------------------------------------------------------>
+<!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
 <div id="_modal_header" class="hidden">
   <h4 class="modal-title"><i class="kf-module kf-lg"></i> 모듈 연결하기</h4>
