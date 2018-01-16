@@ -96,7 +96,7 @@ $pageType = array('','모듈연결','직접편집');
 					<tbody>
 						<?php $pageTypeIcon=array('','fa-link','fa-puzzle-piece','fa-pencil')?>
 						<?php while($PR = db_fetch_array($PAGES)):?>
-						<tr<?php if($uid==$PR['uid']):?> class="table-active"<?php endif?> data-tooltip="tooltip" title="[<?php echo $PR['category']?>] <?php echo $PR['name']?>">
+						<tr<?php if($uid==$PR['uid']):?> class="table-active"<?php endif?> data-tooltip="tooltip" title="">
 							<td onclick="goHref('<?php echo $g['adm_href']?>&amp;uid=<?php echo $PR['uid']?>&amp;recnum=<?php echo $recnum?>&amp;p=<?php echo $p?>&amp;cat=<?php echo urlencode($cat)?>&amp;keyw=<?php echo urlencode($keyw)?>#site-page-info');">
 								<a href="#.">
 									<span class="badge badge-dark badge-pill">
@@ -104,10 +104,9 @@ $pageType = array('','모듈연결','직접편집');
 									</span>
 									<?php echo getStrCut($PR['name'],14,'..')?>
 								</a>
-								<small><i><?php echo $PR['id']?></i></small>
 							</td>
 							<td class="rb-time">
-								<?php echo getDateFormat($PR['d_update'],'Y.m.d')?>
+								<span class="badge badge-dark"><?php echo $PR['id']?></span>
 							</td>
 						</tr>
 						<?php endwhile?>
