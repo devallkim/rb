@@ -31,6 +31,8 @@ function getMenuShow($site,$table,$j,$parent,$depth,$uid,$CXA,$hidden)
 		}
 	}
 }
+
+
 //메뉴코드->경로
 function getMenuCodeToPath($table,$cat,$j)
 {

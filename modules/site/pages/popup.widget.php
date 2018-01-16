@@ -52,15 +52,15 @@ function getPrintdir( $nTab, $filepath, $files, $state ,$dir_ex)
 	$fname1 = getKRtoUTF($files);
 	$fname2 = getFolderName($filepath);
 
-    echo '<a href="'.$g['adm_href'].'&amp;pwd='.urlencode($filepath).'" class="list-group-item';
+    echo '<a href="'.$g['adm_href'].'&amp;pwd='.urlencode($filepath).'" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center';
     if($state && $dir_ex) {
-		echo '"><span><img src="'.$g['img_core'].'/blank.gif" width="'.(($nTab*17)+3).'" height="1" alt=""><i class="fa fa-folder-o"></i>&nbsp; ';
+		echo '"><span><i class="fa fa-folder-o"></i>&nbsp; ';
     }
     else if (!$state && $dir_ex) {
-		echo '"><span><img src="'.$g['img_core'].'/blank.gif" width="'.(($nTab*17)+3).'" height="1" alt=""><i class="fa fa-folder-open-o"></i>&nbsp; ';
+		echo '"><span><i class="fa fa-folder-open-o"></i>&nbsp; ';
     }
     else {
-		echo $css.'" style="color:#'.($css?'fff':'999').'"><span><img src="'.$g['img_core'].'/blank.gif" width="'.(($nTab*17)+3).'" height="1" alt=""><i class="fa fa-puzzle-piece"></i>&nbsp; ';
+		echo $css.'" style="color:#'.($css?'fff':'999').'"><span class="pl-3"<i class="fa fa-puzzle-piece"></i>&nbsp; ';
     }
 	echo $fname2.'</span></a>';
 }
@@ -94,7 +94,7 @@ function getWidgetPreviewImg($path)
 }
 ?>
 <div id="widgetbox">
-	<div class="category">
+	<div class="category bg-light">
 		<?php getDirlist($pwd_start,$step_start)?>
 	</div>
 	<div class="content">
@@ -110,7 +110,11 @@ function getWidgetPreviewImg($path)
 			<li class="nav-item"><a class="nav-link active" href="#code" role="tab" data-toggle="tab">설정하기</a></li>
 			<li class="nav-item"><a class="nav-link" href="#preview" role="tab" data-toggle="tab">미리보기</a></li>
 			<?php if($isWcode=='Y'):?>
-			<li class="pull-right"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');"><i class="fa fa-trash-o"></i></a></li>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');">
+					<i class="fa fa-trash-o fa-fw"></i> 삭제
+				</a>
+			</li>
 			<?php endif?>
 		</ul>
 
@@ -132,15 +136,16 @@ function getWidgetPreviewImg($path)
 		</div>
 
 		<?php else:?>
-		<?php if($isWcode=='Y'):?>
-		<ul class="nav">
-			<li class="pull-right"><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');"><i class="fa fa-trash-o"></i></a></li>
-		</ul>
-		<?php endif?>
+
 		<div class="none">
 			<i class="fa fa-puzzle-piece fa-5x"></i><br><br>
 			추가할 위젯을 선택하세요.
 		</div>
+		<?php if($isWcode=='Y'):?>
+		<a class="btn btn-secondary btn-block mt-4" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');">
+			<code><?php echo $pwd?></code> 폴더 삭제
+		</a>
+		<?php endif?>
 		<?php endif?>
 		<textarea id="rb-widget-code-result" class="hidden"></textarea>
 	</div>

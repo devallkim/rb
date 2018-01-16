@@ -17,27 +17,27 @@ $addExtensionSet = array
 	<input type="hidden" name="a" value="add_<?php echo $addType?>">
 	<input type="hidden" name="reload" value="<?php echo $reload?>">
 
-	<div class="modal-body">
+	<div class="modal-body bg-white">
 
-		<div class="attach bg-light form-horizontal">
-			<div class="row">
-				<div class="col-sm-2">
-					<input type="file" name="upfile" id="packageupfile" class="hidden" onchange="progressbar();">
-					<button type="button" class="btn btn-light" id="fileselectbtn" onclick="$('#packageupfile').click();">파일선택</button>
-				</div>
-				<div class="col-sm-10" style="padding-top:7px">
-					<div id="uplocation">
-						<code>업로드 위치 : <?php echo str_replace('./','/root/',$addExtensionSet[$addType][1])?></code>
-					</div>
-					<div class="progress progress-striped active hidden" id="progress-bar">
-						<div class="progress-bar" role="progressbar" aria-valuemax="100"></div>
-					</div>
-				</div>
+		<div class="py-5">
+			<div id="uplocation" class="mb-3">
+				<code>업로드 위치 : <?php echo str_replace('./','/root/',$addExtensionSet[$addType][1])?></code>
 			</div>
+			<input type="file" name="upfile" id="packageupfile" class="hidden" onchange="progressbar();">
+			<button type="button" class="btn btn-secondary btn-block" id="fileselectbtn" onclick="$('#packageupfile').click();">파일선택</button>
 		</div>
-		<ul>
+
+
+		<hr>
+
+
+		<div class="progress progress-striped active hidden" id="progress-bar">
+			<div class="progress-bar" role="progressbar" aria-valuemax="100"></div>
+		</div>
+
+		<ul class="list-unstyled mt-4 text-secondary">
 			<li><?php echo sprintf('킴스큐에서 제공하는 공식 %s만 업로드할 수 있습니다.',$addExtensionSet[$addType][0])?></li>
-			<li><?php echo sprintf('파일형식은 <small><strong>%s</strong></small> 이어야 합니다.',$addExtensionSet[$addType][2])?></li>
+			<li><?php echo sprintf('파일형식은 <code>%s</strong></code> 이어야 합니다.',$addExtensionSet[$addType][2])?></li>
 			<li><?php echo 'FTP로 직접 추가하시려면 매뉴얼에 따라 추가해 주세요.'?></li>
 			<li><?php echo sprintf('이미 같은명칭의 %s 폴더가 존재할 경우 덧씌워지니 주의하세요.',$addExtensionSet[$addType][0])?></li>
 		</ul>
@@ -102,8 +102,8 @@ function modalSetting()
 	parent.getId('modal_window_dialog_modal_window').style.width = '100%';
 	parent.getId('modal_window_dialog_modal_window').style.paddingRight = '20px';
 	parent.getId('modal_window_dialog_modal_window').style.maxWidth = '800px';
-	parent.getId('_modal_iframe_modal_window').style.height = '400px'
-	parent.getId('_modal_body_modal_window').style.height = '400px';
+	parent.getId('_modal_iframe_modal_window').style.height = '330px'
+	parent.getId('_modal_body_modal_window').style.height = '330px';
 
 	parent.getId('_modal_header_modal_window').innerHTML = getId('_modal_header').innerHTML;
 	parent.getId('_modal_header_modal_window').className = 'modal-header';
@@ -122,7 +122,7 @@ document.body.onresize = document.body.onload = function()
 
 
 <style>
-#rb-body {
+body {
 	background: #fff;
 }
 </style>

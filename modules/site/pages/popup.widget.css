@@ -16,12 +16,22 @@
   overflow-x: hidden;
 }
 
-#widgetbox .category span {
-  display: inline-block;
-  width: 165px;
-  height: 17px;
-  overflow: hidden;
+#widgetbox .category .list-group-item:first-child {
+	border-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
+#widgetbox .category .list-group-item:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+#widgetbox .category .list-group-item {
+  padding: .55rem .75rem;
+	border-left: 0;
+	border-right: 0;
+  font-size: 13px
+}
+
 
 #widgetbox .content {
   margin-left: 205px;
@@ -35,10 +45,6 @@
   color: #c0c0c0;
   text-align: center;
   padding-top: 70px;
-}
-
-#widgetbox .list-group-item {
-  padding: 8px 0 3px 7px;
 }
 
 @media (max-width: 600px) {

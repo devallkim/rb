@@ -1,20 +1,25 @@
 <?php $package_step = $package_step ? $package_step : 1?>
 <div id="modal-package-install">
-	<div class="modal-body">
-		<ul>
-			<li<?php if($package_step==1):?> class="active"<?php endif?>><span class="badge badge-secondary">Step 1</span> <span><?php echo '패키지 업로드'?></span></li>
-			<li<?php if($package_step==2):?> class="active"<?php endif?>><span class="badge badge-secondary">Step 2</span> <span><?php echo '설치하기'?></span></li>
-			<li<?php if($package_step==3):?> class="active"<?php endif?>><span class="badge badge-secondary">Step 3</span> <span><?php echo '완료'?></span></li>
-		</ul>
+	<div class="modal-body bg-white">
+
+		<div class="p-3">
+			<ul class="list-inline mb-0">
+				<li class="list-inline-item<?php if($package_step==1):?> active<?php endif?>"><span class="badge badge-secondary">Step 1</span> <span><?php echo '패키지 업로드'?></span></li>
+				<li class="list-inline-item<?php if($package_step==2):?> active<?php endif?>"><span class="badge badge-secondary">Step 2</span> <span><?php echo '설치하기'?></span></li>
+				<li class="list-inline-item<?php if($package_step==3):?> active<?php endif?>"><span class="badge badge-secondary">Step 3</span> <span><?php echo '완료'?></span></li>
+			</ul>
+		</div>
+
 
 		<div class="tab-content">
 			<?php if($package_step==1):?>
-			<form name="_upload_form_" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="r" value="<?php echo $r?>">
-				<input type="hidden" name="m" value="<?php echo $module?>">
-				<input type="hidden" name="a" value="add_package">
-				<input type="hidden" name="package_step" value="<?php echo $package_step?>">
 				<div id="tab1">
+					<form name="_upload_form_" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="r" value="<?php echo $r?>">
+						<input type="hidden" name="m" value="<?php echo $module?>">
+						<input type="hidden" name="a" value="add_package">
+						<input type="hidden" name="package_step" value="<?php echo $package_step?>">
+
 					<div class="row">
 						<div class="col-sm-4 text-center rb-icon">
 							<i class="fa fa-upload fa-3x"></i>
@@ -23,24 +28,27 @@
 							</h4>
 						</div>
 						<div class="col-sm-8">
-							<div class="attach well form-horizontal">
-								<div class="row">
-									<div class="col-sm-3">
-										<input type="file" name="upfile" id="packageupfile" class="hidden" onchange="progressbar();">
-										<button type="button" class="btn btn-light" id="fileselectbtn" onclick="$('#packageupfile').click();">파일선택</button>
-									</div>
-									<div class="col-sm-9" style="padding-top:7px">
-										<div class="progress progress-striped active hidden" id="progress-bar">
-											<div class="progress-bar" role="progressbar" aria-valuemax="100"></div>
-										</div>
-									</div>
+
+
+
+							<div class="mt-4">
+								<input type="file" name="upfile" id="packageupfile" class="hidden" onchange="progressbar();">
+								<button type="button" class="btn btn-outline-secondary btn-block" id="fileselectbtn" onclick="$('#packageupfile').click();">파일선택</button>
+							</div>
+							<div class="mt-4">
+								<div class="progress progress-striped d-none" id="progress-bar">
+									<div class="progress-bar" role="progressbar" aria-valuemax="100"></div>
 								</div>
 							</div>
-							<ul>
-							<li>킴스큐에서 제공하는 공식 패키지만 업로드할 수 있습니다.</li>
-							<li>파일형식은 <small><strong>rb_package_패키지명.zip</strong></small> 이어야 합니다.</li>
-							<li>패키지 설치시 이미 같은명칭의 폴더나 파일이 존재할 경우 덧씌워지니 주의하세요.</li>
+
+
+
+							<ul class="mt-4">
+								<li>킴스큐에서 제공하는 공식 패키지만 업로드할 수 있습니다.</li>
+								<li>파일형식은 <code>rb_package_패키지명.zip</code> 이어야 합니다.</li>
+								<li>패키지 설치시 이미 같은명칭의 폴더나 파일이 존재할 경우 덧씌워지니 주의하세요.</li>
 							</ul>
+
 						</div>
 					</div>
 				</form>
@@ -183,7 +191,7 @@
 var _per = 0;
 function progressbar()
 {
-	if(_per == 0) $('#progress-bar').removeClass('hidden');
+	if(_per == 0) $('#progress-bar').removeClass('d-none');
 
 	if (_per < 100)
 	{
@@ -259,188 +267,166 @@ document.body.onresize = document.body.onload = function()
 
 
 <style>
-#rb-body {
-	background-color: #fff;
-}
-#modal-package-install,
-#modal-package-install h4 {
-    font-family: 'Open Sans', "돋움", dotum !important;
-} {
-    font-family: 'Open Sans', "돋움", dotum !important;
-}
-
 #modal-package-install .modal-body {
-    min-height: 400px;
-    max-height: calc(100vh - 175px);
-    overflow-y: auto;
-    padding: 15px
+  min-height: 400px;
+  max-height: calc(100vh - 175px);
+  overflow-y: auto;
+  padding: 15px
 }
 
 #modal-package-install .tab-content {
-    padding: 20px 0
+  padding: 20px 0
 }
 
 
 /* breadcrumb */
 
 #modal-package-install .breadcrumb {
-    margin: -15px -15px 15px;
-    border-radius: 0;
-    padding: 10px 15px;
+  margin: -15px -15px 15px;
+  border-radius: 0;
+  padding: 10px 15px;
 }
 
 #modal-package-install .breadcrumb a {
-    color: #999;
+  color: #999;
 }
 
 #modal-package-install .breadcrumb a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-#modal-package-install .breadcrumb .active a{
-    color: #428bca;
-    font-weight: bold;
+#modal-package-install .breadcrumb .active a {
+  color: #428bca;
+  font-weight: bold;
 }
 
 #modal-package-install .breadcrumb .badge {
-    background-color: #999;
+  background-color: #999;
 }
 
 #modal-package-install .breadcrumb .active .badge {
-    background-color: #428bca;
+  background-color: #428bca;
 }
 
-
 #modal-package-install h4 {
-    line-height: 1.5
+  line-height: 1.5
 }
 
 #modal-package-install .page-header {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 #modal-package-install .list-group {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 #modal-package-install .rb-icon {
-    font-size: 70px
+  font-size: 70px;
+	color: #444
 }
 
 #modal-package-install .label {
-    display: inline;
-    padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
 }
 
 #modal-package-install .pager {
-    margin: 0;
+  margin: 0;
 }
 
 
 /* tab2 */
 
-#tab2 .well {
-    margin-bottom: 10px
+
+#tab2 .panel-heading a {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
 }
 
 #tab2 .panel-heading a {
-    display: inline-block;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
+  color: #666;
+  display: block;
 }
 
-#tab2 .panel-heading a {
-    color: #666;
-    display: block;
-}
 #tab2 .panel-heading a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 #tab2 .panel-heading span:before {
-    content: " \f078";
+  content: " \f078";
 }
+
 #tab2 .panel-heading .collapsed span:before {
-    content: " \f054";
+  content: " \f054";
 }
 
 
 /* responsive */
 
 @media (min-width: 992px) {
-    .modal-lg {
-        width: 780px;
-    }
+  .modal-lg {
+    width: 780px;
+  }
 }
 
 @media (max-width: 768px) {
-
-    #modal-package-install .breadcrumb .badge {
-        padding: 5px 15px
-    }
-
-    #modal-package-install .breadcrumb .badge {
-        font-size: 18px
-    }
-
-    #modal-package-install .rb-icon {
-        font-size: 40px
-    }
-
-    #modal-package-install .tab-content {
-        padding: 0
-    }
-
-    #tab1 .btn {
-        display: block;
-        width: 100%
-    }
+  #modal-package-install .breadcrumb .badge {
+    padding: 5px 15px
+  }
+  #modal-package-install .breadcrumb .badge {
+    font-size: 18px
+  }
+  #modal-package-install .rb-icon {
+    font-size: 40px
+  }
+  #modal-package-install .tab-content {
+    padding: 0
+  }
+  #tab1 .btn {
+    display: block;
+    width: 100%
+  }
 }
 
 
 /* 김성호 */
+
 #modal-package-install ul {
-	padding: 0;
-	margin: 0;
-	list-style-type: none;
-	background: #f5f5f5;
-	padding: 10px 0 10px 30px;
-	height: 40px;
-}
-#modal-package-install ul {
-	color: #999;
-}
-#modal-package-install ul .active {
-	font-weight:bold;
-	color: #428BCA;
-}
-#modal-package-install ul .active .badge {
-	background: #428BCA;
-}
-#modal-package-install ul li {
-	float: left;
-	margin-right: 15px;
+  color: #666;
 }
 
+#modal-package-install ul .active {
+  font-weight: bold;
+  color: #428BCA;
+}
+
+#modal-package-install ul .active .badge {
+  background: #428BCA;
+}
+
+
 #modal-package-install .modal-body {
-	padding: 0;
+  padding: 0;
 }
+
 #modal-package-install .tab-content {
-	clear: both;
-	padding: 40px 20px 0 20px;
+  clear: both;
+  padding: 40px 20px 0 20px;
 }
+
 #rb-body .tab-content {
-	border: 0;
+  border: 0;
 }
 </style>
