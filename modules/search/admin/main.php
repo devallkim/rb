@@ -75,8 +75,8 @@ $SITEN = db_num_rows($SITES);
 					</div>
 					<div class="">
 						<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&searchfile=<?php echo $searchfile?>&r='+this.value);">
-							<?php while($S = db_fetch_array($SITES)):$TMPST[]=array($S['name'],$S['id'])?>
-							<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
+							<?php while($S = db_fetch_array($SITES)):$TMPST[]=array($S['label'],$S['id'])?>
+							<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
 							<?php endwhile?>
 						</select>
 					</div>
