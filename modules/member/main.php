@@ -19,6 +19,8 @@ if ($g['mobile'] && $_SESSION['pcmode'] != 'Y') {
 switch ($front) {
 	case 'join' :
 
+		$d['member']['sosokmenu'] = $d['member']['sosokmenu_join'];
+
 		if (!$d['member']['join_enable']) {
 			getLink('','','죄송합니다. 지금은 회원가입을 하실 수 없습니다.','-1');
 		}
@@ -40,6 +42,9 @@ switch ($front) {
 	break;
 
 	case 'login' :
+
+		$d['member']['sosokmenu'] = $d['member']['sosokmenu_login'];
+
 		if ($page !='idpwsearch' && $my['uid']){
 			getLink(RW(0),'','','');
 		}
@@ -51,6 +56,9 @@ switch ($front) {
 	break;
 
 	case 'profile' :
+
+		$d['member']['sosokmenu'] = $d['member']['sosokmenu_profile'];
+
 		$_MH = array();
 		if ($mbrid){
 			$_MH = getDbData($table['s_mbrid'],"id='".$mbrid."'",'*');
@@ -69,6 +77,9 @@ switch ($front) {
 	break;
 
 	case 'settings' :
+
+		$d['member']['sosokmenu'] = $d['member']['sosokmenu_settings'];
+
 		if (!$my['uid']){
 			getLink($g['s'].'/?r='.$r.'&mod=login&referer='.urlencode(RW('mod=settings')),'','','');
 		}
@@ -101,11 +112,12 @@ $g['img_module_skin'] = $g['url_module_skin'].'/image';
 $g['dir_module_mode'] = $g['dir_module_skin'].$page;
 $g['url_module_mode'] = $g['url_module_skin'].'/'.$page;
 
-
 if($d['member']['sosokmenu'])
 {
-	$_CA = explode('/',$d['member']['sosokmenu']);
-	$g['location'] = '<a href="'.RW(0).'">HOME</a>';
+	$c=substr($d['member']['sosokmenu'],-1)=='/'?str_replace('/','',$d['member']['sosokmenu']):$d['member']['sosokmenu'];
+	$_CA = explode('/',$c);
+	$_FHM = getDbData($table['s_menu'],"id='".$_CA[0]."' and site=".$s,'*');
+
 	$_tmp['count'] = count($_CA);
 	$_tmp['split_id'] = '';
 	for ($_i = 0; $_i < $_tmp['count']; $_i++)
@@ -113,8 +125,10 @@ if($d['member']['sosokmenu'])
 		$_tmp['location'] = getDbData($table['s_menu'],"id='".$_CA[$_i]."'",'*');
 		$_tmp['split_id'].= ($_i?'/':'').$_tmp['location']['id'];
 		$g['location']   .= ' &gt; <a href="'.RW('c='.$_tmp['split_id']).'">'.$_tmp['location']['name'].'</a>';
+		$_HM['uid'] = $_tmp['location']['uid'];
+		$_HM['name'] = $_tmp['location']['name'];
+		$_HM['addinfo'] = $_tmp['location']['addinfo'];
 	}
-	$g['location']   .= ' &gt; <a href="'.RW('mod='.$_HP['id']).'">'.$_HP['name'].'</a>';
 }
 
 $g['main'] = $g['dir_module_mode'].'.php';
