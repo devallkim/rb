@@ -18,24 +18,21 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
 <!-- global css -->
 <link href="<?php echo $g['url_module_skin']?>/_style.css" rel="stylesheet">
 
-
-
-<?php echo $d['member']['sosokmenu_join'] ?>
-
-
 <article id="pages-signup">
-  	<form name="procForm" action="<?php echo $g['s']?>/" method="get">
-	<input type="hidden" name="r" value="<?php echo $r?>">
-	<input type="hidden" name="c" value="<?php echo $c?>">
-	<input type="hidden" name="m" value="<?php echo $_m?>">
-	<input type="hidden" name="front" value="<?php echo $front?>">
-	<input type="hidden" name="mod" value="<?php echo $_GET['mod']?>">
-	<input type="hidden" name="page" value="forms">
-	<input type="hidden" name="comp" value="0">
+	<form name="procForm" action="<?php echo $g['s']?>/" method="get">
+  	<input type="hidden" name="r" value="<?php echo $r?>">
+  	<input type="hidden" name="m" value="<?php echo $_m?>">
+  	<input type="hidden" name="front" value="<?php echo $front?>">
+  	<input type="hidden" name="mod" value="<?php echo $_GET['mod']?>">
+  	<input type="hidden" name="page" value="forms">
+  	<input type="hidden" name="comp" value="0">
 
-	<div class="page-header">
+  <?php if (!$c): ?>
+  <div class="page-header">
 		<h2>약관동의 <small>약관 및 안내를 읽고 동의해 주세요.</small></h2>
 	</div>
+  <?php endif; ?>
+
 <!-- 	<div class="alert alert-danger alert-dismissable">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 		<i class="fa fa-info-circle fa-lg"></i> 회원으로 가입을 원하실 경우, [홈페이지 약관 및 개인정보 수집·이용]에 동의 하셔야 합니다.
@@ -48,8 +45,8 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
 		</p>
 	</section>
 
-	<section class="page-section" id="privacy">
-		<h4><i class="fa fa-file-text-o"></i> 개인정보 취급방침</h4>
+	<section class="page-section mt-5" id="privacy">
+		<h4 class="mb-3"><i class="fa fa-file-text-o"></i> 개인정보 취급방침</h4>
 		<ul class="nav nav-tabs hidden-xs hidden-sm">
 		  <li class="nav-item"><a class="nav-link active" href="#agree-privacy-1" data-toggle="tab">개인정보수집 및 이용목적</a></li>
 		  <li class="nav-item"><a class="nav-link" href="#agree-privacy-2" data-toggle="tab">수집하는 개인정보의 항목</a></li>

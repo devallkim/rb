@@ -146,7 +146,8 @@ include_once $_tmpvfile;
 								 <div class="form-group">
 									 <label class="d-block">회원가입 <code class="pull-right">join</code></label>
 									 <select name="layout_join" class="form-control custom-select" id="" tabindex="-1">
-										 <option value="">사이트 대표 레이아웃</option>
+										 <?php $_layoutHexp=explode('/',$_HS['layout'])?>
+										 <option value="">사이트 대표 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
 										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
@@ -199,7 +200,8 @@ include_once $_tmpvfile;
 								 <div class="form-group">
 									 <label class="d-block">로그인 <code class="pull-right">login</code></label>
 									 <select name="layout_login" class="form-control custom-select" id="" tabindex="-1">
-										 <option value="">사이트 대표 레이아웃</option>
+										 <?php $_layoutHexp=explode('/',$_HS['layout'])?>
+										 <option value="">사이트 대표 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
 										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
@@ -251,7 +253,8 @@ include_once $_tmpvfile;
 								 <div class="form-group">
 									 <label class="d-block">프로필<code class="pull-right">profile</code></label>
 									 <select name="layout_profile" class="form-control custom-select" id="" tabindex="-1">
-										 <option value="">사이트 대표 레이아웃</option>
+										 <?php $_layoutHexp=explode('/',$_HS['layout'])?>
+										 <option value="">사이트 대표 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
 										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>
@@ -303,7 +306,8 @@ include_once $_tmpvfile;
 								 <div class="form-group">
 									 <label class="d-block">개인정보 설정<code class="pull-right">settings</code></label>
 									 <select name="layout_settings" class="form-control custom-select" id="" tabindex="-1">
-										 <option value="">사이트 대표 레이아웃</option>
+										 <?php $_layoutHexp=explode('/',$_HS['layout'])?>
+										 <option value="">사이트 대표 레이아웃 (<?php echo $_layoutHexp[0]?>)</option>
 										 <option disabled>--------------------</option>
 										 <?php $dirs = opendir($g['path_layout'])?>
 										 <?php while(false !== ($tpl = readdir($dirs))):?>

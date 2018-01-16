@@ -4,11 +4,12 @@
 <div class="bg-shade-gradient">
 	<article class="page-wrapper">
 
-		<div class="page-header mb-4">
-			<h1>킴스큐 가입 심플형</h1>
+		<?php if (!$_HM['uid']): ?>
+		<div class="mb-4">
+			<h1>회원가입</h1>
 			<p class="lead">웹사이트를 설계, 제작하고 서비스하는 가장 좋은 방법을 제공해 드립니다.</p>
-
 		</div>
+		<?php endif; ?>
 
 		<div class="page-main">
 
@@ -73,19 +74,7 @@
 		</div><!-- .page-main -->
 
 		<div class="page-secondary">
-			<div class="card">
-			  <div class="card-header bg-transparent">
-			    개발계정 제공 <span class="badge badge-info">무료</span>
-			  </div>
-			  <div class="card-body">
-			    <p class="card-text">체험 및 서비스 개발을 위한 개발계정을 <mark>30일</mark>간 <mark>무료</mark>로 제공해 드립니다.</p>
-			  </div>
-				<ul class="list-group list-group-flush">
-			    <li class="list-group-item"><i class="fa fa-check" aria-hidden="true"></i> HDD 500M</li>
-			    <li class="list-group-item"><i class="fa fa-check" aria-hidden="true"></i> MySQL 50M</li>
-			    <li class="list-group-item"><i class="fa fa-check" aria-hidden="true"></i> 일트래픽 500M</li>
-			  </ul>
-			</div>
+
 		</div>
 
 	</article><!-- .page-wrapper -->
