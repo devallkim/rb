@@ -30,55 +30,6 @@
 				</select>
 			</div>
 		</div>
-		<div class="form-group row">
-			<label class="col-sm-3 col-form-label">링크방식</label>
-			<div class="col-sm-9">
-				<select name="link" class="form-control">
-				<option value="link">일반</option>
-				<option value="bookmark">북마크</option>
-				</select>
-				<span class="help-block">
-					<small>
-						북마크 방식을 지정하면 링크가 다음과 같이 생성됩니다.<br>
-						<code>&lt;a data-scroll href=&quot;#MENUCODE&quot;&gt;</code>
-					</small>
-				</span>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-sm-3 col-form-label">접근 ID</label>
-			<div class="col-sm-9">
-				<input type="text" name="collid" value="<?php echo $wdgvar['collid']?$wdgvar['collid']:'rb-sidemenu-collapse'?>" class="form-control">
-			</div>
-		</div>
-
-
-
-		<div class="form-group row">
-			<label class="col-sm-3 col-form-label"></label>
-			<div class="col-sm-9">
-				<label class="rb-label"><input type="checkbox" name="collapse" value="1"<?php if($wdgvar['collapse']):?> checked<?php endif?>> Collapse 사용(미 사용시 일반메뉴 출력)</label>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-sm-3 col-form-label"></label>
-			<div class="col-sm-9">
-				<label class="rb-label"><input type="checkbox" name="dispfmenu" value="1"<?php if($wdgvar['dispfmenu']):?> checked<?php endif?>> Collapse 사용시 선택메뉴 링크를 포함시킴</label>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-sm-3 col-form-label"></label>
-			<div class="col-sm-9">
-				<span class="help-block">
-					<small>
-						메뉴의 구조가 bootstrap의 <code>collapse</code> 용 태그로 생성됩니다.<br>
-						아이디는 겹치지 않는 문자로 지정해야 합니다.
-					</small>
-				</span>
-			</div>
-		</div>
-
-
 
 	</form>
 </div>
