@@ -245,6 +245,12 @@ if ($uid)
 								<small class="form-text text-muted">영문 대소문자+숫자+_ 조합으로 만듭니다.</small>
 							</div>
 					 </div>
+
+
+					 <div<?php echo $uid?'':' class="d-none"' ?>>
+
+
+
 					 <div class="form-group row">
 							<label class="col-lg-2 col-form-label text-lg-right">카테고리</label>
 							<div class="col-lg-10 col-xl-9">
@@ -255,6 +261,7 @@ if ($uid)
 								</small>
 							</div>
 					 </div>
+
 			       <div class="form-group row">
 							<label class="col-lg-2 col-form-label text-lg-right">레이아웃</label>
 							<div class="col-lg-10 col-xl-9">
@@ -533,10 +540,16 @@ if ($uid)
 				          </div> <!-- .panel-body & .panel-footer : 숨겼다 보였다 하는 내용  -->
 			          </div>  <!-- .panel 전체 -->
 			       </div> <!-- .panel-group -->
+
+
+
+					 </div><!-- /.d-none -->
+
+
 					<div class="form-group">
 						<div class="col-sm-12">
 							<button type="submit" class="btn btn-outline-primary btn-block btn-lg my-4">
-								<i class="fa fa-check fa-lg"></i> <?php echo $R['uid']?'게시판속성 변경':'새게시판 만들기'?>
+								<?php echo $R['uid']?'게시판속성 변경':'새 게시판 만들기'?>
 							</button>
 						</div>
 					</div>
