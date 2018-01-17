@@ -6,6 +6,8 @@ $orderby= $orderby ? $orderby : 'desc';
 $recnum	= $recnum && $recnum < 301 ? $recnum : 30;
 $bbsque	= 'uid';
 
+if ($account) $bbsque .= ' and site='.$account;
+
 if ($where && $keyw)
 {
 	if (strstr('[id]',$where)) $bbsque .= " and ".$where."='".$keyw."'";
@@ -19,6 +21,9 @@ $TPG = getTotalPage($NUM,$recnum);
 $_LEVELNAME = array('l0'=>'전체허용');
 $_LEVELDATA=getDbArray($table['s_mbrlevel'],'','*','uid','asc',0,1);
 while($_L=db_fetch_array($_LEVELDATA)) $_LEVELNAME['l'.$_L['uid']] = $_L['name'].' 이상';
+
+$SITES = getDbArray($table['s_site'],'','*','gid','asc',0,1);
+$SITEN   = db_num_rows($SITES);
 ?>
 
 <div class="row">
@@ -152,7 +157,6 @@ while($_L=db_fetch_array($_LEVELDATA)) $_LEVELNAME['l'.$_L['uid']] = $_L['name']
 	</div><!-- /.sidebar -->
 	<div class="col-sm-12 col-md-12 col-xl-12">
 
-		<?php if($NUM):?>
 		<div class="card p-2 mb-0 bg-dark d-flex justify-content-between pr-4">
 
 			<form class="form-inline" name="procForm" action="<?php echo $g['s']?>/" method="get">
@@ -160,6 +164,16 @@ while($_L=db_fetch_array($_LEVELDATA)) $_LEVELNAME['l'.$_L['uid']] = $_L['name']
 			 <input type="hidden" name="m" value="<?php echo $m?>">
 			 <input type="hidden" name="module" value="<?php echo $module?>">
 			 <input type="hidden" name="front" value="<?php echo $front?>">
+
+				<select name="account" class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&account='+this.value);">
+					<option value="">전체사이트</option>
+					<?php while($S = db_fetch_array($SITES)):?>
+					<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
+					<?php endwhile?>
+					<?php if(!db_num_rows($SITES)):?>
+					<option value="">등록된 사이트가 없습니다.</option>
+					<?php endif?>
+				</select>
 
 				<select class="form-control custom-select" name="sort" onchange="this.form.submit();">
 					<option value="gid" selected="selected">지정순서</option>
@@ -197,15 +211,20 @@ while($_L=db_fetch_array($_LEVELDATA)) $_LEVELNAME['l'.$_L['uid']] = $_L['name']
 				<button type="submit" class="btn btn-light">검색</button>
 				<button type="button" class="btn btn-light" onclick="location.href='<?php echo $g['adm_href']?>';">리셋</button>
 
+				<?php if ($NUM): ?>
 				<a href="<?php echo $g['adm_href']?>&amp;front=main_detail"  class="btn btn-outline-primary ml-auto">
 					<i class="fa fa-plus"></i> 새 게시판 만들기
 				</a>
+				<?php endif; ?>
 
 			</form>
 
 
 
 		</div>
+
+
+		<?php if($NUM):?>
 
 
 		<!-- 리스트 시작  -->
@@ -286,7 +305,7 @@ while($_L=db_fetch_array($_LEVELDATA)) $_LEVELNAME['l'.$_L['uid']] = $_L['name']
 						<td><span data-tooltip="tooltip" title="<?php echo $point_tooltip?>"><?php echo number_format($d['bbs']['point1'])?> / <?php echo number_format($d['bbs']['point2'])?> / <?php echo number_format($d['bbs']['point3'])?></span></td>
 						<td>
 							<a class="btn btn-light" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletebbs&amp;uid=<?php echo $R['uid']?>" onclick="return hrefCheck(this,true,'삭제하시면 모든 게시물이 지워지며 복구할 수 없습니다.\n정말로 삭제하시겠습니까?');" class="del">삭제</a>
-							<a class="btn btn-light" href="<?php echo $g['adm_href']?>&amp;front=main_detail&amp;uid=<?php echo $R['uid']?>">설정</a>
+							<a class="btn btn-light" href="<?php echo $g['adm_href']?>&amp;front=main_detail&amp;uid=<?php echo $R['uid']?>&amp;account=<?php echo $account?>">설정</a>
 						</td>
 					</tr>
 					<?php endwhile?>

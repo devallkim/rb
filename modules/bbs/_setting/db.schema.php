@@ -10,6 +10,7 @@ $_tmp = ("
 CREATE TABLE ".$table[$module.'list']." (
 uid			INT				PRIMARY KEY		NOT NULL AUTO_INCREMENT,
 gid			INT				DEFAULT '0'		NOT NULL,
+site		INT				DEFAULT '0'		NOT NULL,
 id			VARCHAR(30)		DEFAULT ''		NOT NULL,
 name		VARCHAR(200)	DEFAULT ''		NOT NULL,
 category	TEXT			NOT NULL,
@@ -23,9 +24,9 @@ putfoot		VARCHAR(20)		DEFAULT ''		NOT NULL,
 addinfo		TEXT			NOT NULL,
 writecode	TEXT			NOT NULL,
 KEY gid(gid),
-KEY id(id)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY id(id)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table[$module.'list'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table[$module.'list'],$DB_CONNECT);
 }
 
 //게시판인덱스
@@ -41,9 +42,9 @@ gid			double(11,2)	DEFAULT '0.00'	NOT NULL,
 KEY site(site),
 KEY notice(notice),
 KEY bbs(bbs,gid),
-KEY gid(gid)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY gid(gid)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table[$module.'idx'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table[$module.'idx'],$DB_CONNECT);
 }
 
 //게시판데이터
@@ -106,9 +107,9 @@ KEY mbruid(mbruid),
 KEY category(category),
 KEY subject(subject),
 KEY tag(tag),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table[$module.'data'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table[$module.'data'],$DB_CONNECT);
 }
 //게시판월별수량
 $_tmp = db_query( "select count(*) from ".$table[$module.'month'], $DB_CONNECT );
@@ -122,9 +123,9 @@ bbs			INT				DEFAULT '0'		NOT NULL,
 num			INT				DEFAULT '0'		NOT NULL,
 KEY date(date),
 KEY site(site),
-KEY bbs(bbs)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY bbs(bbs)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table[$module.'month'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table[$module.'month'],$DB_CONNECT);
 }
 //게시판일별수량
 $_tmp = db_query( "select count(*) from ".$table[$module.'day'], $DB_CONNECT );
@@ -138,9 +139,9 @@ bbs			INT				DEFAULT '0'		NOT NULL,
 num			INT				DEFAULT '0'		NOT NULL,
 KEY date(date),
 KEY site(site),
-KEY bbs(bbs)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY bbs(bbs)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table[$module.'day'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table[$module.'day'],$DB_CONNECT);
 }
 //확장데이터
 $_tmp = db_query( "select count(*) from ".$table[$module.'xtra'], $DB_CONNECT );
@@ -157,9 +158,9 @@ score2		TEXT			NOT NULL,
 singo		TEXT			NOT NULL,
 KEY parent(parent),
 KEY site(site),
-KEY bbs(bbs)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY bbs(bbs)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table[$module.'xtra'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table[$module.'xtra'],$DB_CONNECT);
 }
 
 //첨부파일데이터
@@ -197,8 +198,8 @@ KEY mbruid(mbruid),
 KEY type(type),
 KEY ext(ext),
 KEY name(name),
-KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");                            
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table[$module.'upload'],$DB_CONNECT); 
+db_query("OPTIMIZE TABLE ".$table[$module.'upload'],$DB_CONNECT);
 }
 ?>

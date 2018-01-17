@@ -160,6 +160,6 @@ if (is_file($mfile.'.footer.php'))
 	unlink($mfile.'.footer.php');
 }
 
-setrawcookie('result_bbs_main', rawurlencode('게시판이 삭제되었습니다.|success'));  // 처리여부 cookie 저장
+setrawcookie('result_bbs_main', rawurlencode($R['name'].' 게시판이 삭제되었습니다.|success'));  // 처리여부 cookie 저장
 getLink('reload','parent.','','');
 ?>

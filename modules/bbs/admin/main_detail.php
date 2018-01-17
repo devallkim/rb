@@ -4,6 +4,9 @@ $sort	= $sort ? $sort : 'gid';
 $orderby= $orderby ? $orderby : 'asc';
 $recnum	= $recnum && $recnum < 301 ? $recnum : 20;
 $bbsque ='uid>0';
+
+if ($account) $bbsque .= ' and site='.$account;
+
 // 키원드 검색 추가
 if ($keyw)
 {
@@ -26,10 +29,10 @@ if ($uid)
 <div class="row no-gutters">
    <div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
 
-			<select name="account" class="form-control custom-select border-0" onchange="this.form.submit();">
-				<option value="">ㆍ전체사이트</option>
+			<select name="account" class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&account='+this.value);">
+				<option value="">전체사이트</option>
 				<?php while($S = db_fetch_array($SITES)):?>
-				<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['name']?></option>
+				<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
 				<?php endwhile?>
 				<?php if(!db_num_rows($SITES)):?>
 				<option value="">등록된 사이트가 없습니다.</option>
@@ -48,7 +51,7 @@ if ($uid)
 					 <div class="list-group list-group-flush" style="height: calc(100vh - 17rem);">
 						 <?php if($NUM):?>
 						 <?php $_i=1;while($BR = db_fetch_array($RCD)):?>
-						 <a href="<?php echo $g['adm_href']?>&amp;recnum=<?php echo $recnum?>&amp;p=<?php echo $p?>&amp;uid=<?php echo $BR['uid']?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<?php if($uid==$BR['uid']):?> border border-primary<?php endif?>">
+						 <a href="<?php echo $g['adm_href']?>&amp;recnum=<?php echo $recnum?>&amp;p=<?php echo $p?>&amp;uid=<?php echo $BR['uid']?>&amp;account=<?php echo $account?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center<?php if($uid==$BR['uid']):?> border border-primary<?php endif?>">
 							 <?php echo $BR['name']?>(<?php echo $BR['id']?>)
 							 <span class="badge badge-dark badge-pill ml-auto"><?php echo number_format($BR['num_r'])?></span>
 						 </a>
@@ -79,7 +82,7 @@ if ($uid)
 
 					 <?php if($NUM):?>
  					<form name="bbsform" role="form" action="<?php echo $g['s']?>/" method="post" target="_orderframe_">
- 					<input type="hidden" name="r" value="<?php echo $r?>" />
+ 					<input type="hidden" name="account" value="<?php echo $account?>" />
  					<input type="hidden" name="m" value="<?php echo $module?>" />
  					<input type="hidden" name="a" value="bbsorder_update" />
  					<div class="dd" id="nestable-menu">
@@ -418,21 +421,41 @@ if ($uid)
 
 
 					<div class="form-group row">
-							<label class="col-lg-2 col-form-label text-lg-right">연결메뉴</label>
+							<label class="col-lg-2 col-form-label text-lg-right">사이트</label>
 							<div class="col-lg-10 col-xl-9">
-								<select name="sosokmenu" class="form-control custom-select">
-									 <option value="">사용 안함</option>
-									 <option disabled>--------------------</option>
-										<?php include_once $g['path_core'].'function/menu1.func.php'?>
-										<?php $cat=$d['bbs']['sosokmenu']?>
-										<?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
+								<select name="account" class="form-control custom-select">
+									<option value="">공통</option>
+									<?php $_SITES = getDbArray($table['s_site'],'','*','gid','asc',0,1); ?>
+									<?php while($S = db_fetch_array($_SITES)):?>
+									<option value="<?php echo $S['uid']?>"<?php if($R['site']==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
+									<?php endwhile?>
+									<?php if(!db_num_rows($SITES)):?>
+									<option value="">등록된 사이트가 없습니다.</option>
+									<?php endif?>
 								 </select>
 								 <small class="form-text text-muted">
-									 이 게시판을 메뉴에 연결하였을 경우 해당메뉴를 지정해 주세요.<br>
-										연결메뉴를 지정하면 게시물수,로케이션이 동기화됩니다.
+									 사이트 전용 게시판이 필요할 경우 지정해 주세요.
 								 </small>
 							</div>
 					 </div>
+
+					 <div class="form-group row">
+							 <label class="col-lg-2 col-form-label text-lg-right">연결메뉴</label>
+							 <div class="col-lg-10 col-xl-9">
+								 <select name="sosokmenu" class="form-control custom-select">
+										<option value="">사용 안함</option>
+										<option disabled>--------------------</option>
+										 <?php include_once $g['path_core'].'function/menu1.func.php'?>
+										 <?php $cat=$d['bbs']['sosokmenu']?>
+										 <?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
+									</select>
+									<small class="form-text text-muted">
+										이 게시판을 메뉴에 연결하였을 경우 해당메뉴를 지정해 주세요.<br>
+										 연결메뉴를 지정하면 게시물수,로케이션이 동기화됩니다.
+									</small>
+							 </div>
+						</div>
+
 
 					<!-- 추가설정 시작 : panel-group 으로 각각의 panel 을 묶는다.-->
 			     <div id="bbs-settings" class="panel-group">

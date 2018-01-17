@@ -46,7 +46,7 @@ if ($bid)
 		}
 	}
 
-	$QVAL = "name='$name',category='$category',imghead='$imghead',imgfoot='$imgfoot',puthead='$puthead',putfoot='$putfoot',addinfo='$addinfo',writecode='$writecode'";
+	$QVAL = "site='$account',name='$name',category='$category',imghead='$imghead',imgfoot='$imgfoot',puthead='$puthead',putfoot='$putfoot',addinfo='$addinfo',writecode='$writecode'";
 	getDbUpdate($table[$m.'list'],$QVAL,"id='".$bid."'");
 
 	$vfile = $g['dir_module'].'var/code/'.$R['id'];
@@ -109,8 +109,8 @@ else {
 	}
 
 	$Ugid = getDbCnt($table[$m.'list'],'max(gid)','') + 1;
-	$QKEY = "gid,id,name,category,num_r,d_last,d_regis,imghead,imgfoot,puthead,putfoot,addinfo,writecode";
-	$QVAL = "'$Ugid','$id','$name','$category','0','','".$date['totime']."','$imghead','$imgfoot','$puthead','$putfoot','$addinfo','$writecode'";
+	$QKEY = "gid,site,id,name,category,num_r,d_last,d_regis,imghead,imgfoot,puthead,putfoot,addinfo,writecode";
+	$QVAL = "'$Ugid','".$account."','$id','$name','$category','0','','".$date['totime']."','$imghead','$imgfoot','$puthead','$putfoot','$addinfo','$writecode'";
 	getDbInsert($table[$m.'list'],$QKEY,$QVAL);
 
 	$lastbbs = getDbCnt($table[$m.'list'],'max(uid)','');
@@ -150,7 +150,7 @@ fclose($fp);
 @chmod($gfile,0707);
 
 if ($bid) {
-	setrawcookie('result_bbs_main', rawurlencode('게시판 등록정보가 변경 되었습니다.|success'));  // 처리여부 cookie 저장
+	setrawcookie('result_bbs_main', rawurlencode($name.' 게시판 등록정보가 변경 되었습니다.|success'));  // 처리여부 cookie 저장
 	getLink('reload','parent.','','');
 } else {
 	setrawcookie('result_bbs_main', rawurlencode($name.' 게시판이 생성 되었습니다.|success'));  // 처리여부 cookie 저장
