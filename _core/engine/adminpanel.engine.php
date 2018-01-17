@@ -108,6 +108,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 							<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-video"><i class="fa fa-video-camera"></i> 비디오셋</a>
 							<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-widgetcode"><i class="fa fa-puzzle-piece"></i> 위젯코드</a>
 							<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-snippet"><i class="fa fa-scissors" style="width:12px"></i> 스니핏</a>
+							<a href="//kimsq.com/docs" class="dropdown-item" target="_blank"><i class="fa fa-book" style="width:12px"></i> 도움말</a>
 						</div>
 					</div>
 					<div class="btn-group">
