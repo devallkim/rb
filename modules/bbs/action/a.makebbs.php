@@ -113,6 +113,8 @@ else {
 	$QVAL = "'$Ugid','$id','$name','$category','0','','".$date['totime']."','$imghead','$imgfoot','$puthead','$putfoot','$addinfo','$writecode'";
 	getDbInsert($table[$m.'list'],$QKEY,$QVAL);
 
+	$lastbbs = getDbCnt($table[$m.'list'],'max(uid)','');
+
 	$mfile = $g['dir_module'].'var/code/'.$id;
 
 	if (trim($codhead))
@@ -149,10 +151,10 @@ fclose($fp);
 
 if ($bid) {
 	setrawcookie('result_bbs_main', rawurlencode('게시판 등록정보가 변경 되었습니다.|success'));  // 처리여부 cookie 저장
+	getLink('reload','parent.','','');
 } else {
-	setrawcookie('result_bbs_main', rawurlencode('게시판이 생성 되었습니다.|success'));  // 처리여부 cookie 저장
+	setrawcookie('result_bbs_main', rawurlencode($name.' 게시판이 생성 되었습니다.|success'));  // 처리여부 cookie 저장
+	getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&front=main_detail&uid='.$lastbbs,'parent.','','');
 }
-
-getLink('reload','parent.','','');
 
 ?>
