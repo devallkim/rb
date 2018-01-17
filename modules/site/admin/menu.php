@@ -328,7 +328,6 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 
 								</fieldset>
 								<div class="form-text mt-2">
-									<input type="hidden" name="redirect"  value="1">
 									<small class="text-muted mt-1">
 										선택된 메뉴로 리다이렉트 됩니다.
 									</small>
@@ -859,8 +858,6 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 	</div>
 </div>
 
-<?php echo $CINFO['menutype'] ?>
-
 
 <!-- bootstrap-maxlength -->
 <?php getImport('bootstrap-maxlength','bootstrap-maxlength.min',false,'js')?>
@@ -956,7 +953,6 @@ function saveCheck(f) {
 		}
 	}
 	<?php endif?>
-
 
 	getIframeForAction(f);
 

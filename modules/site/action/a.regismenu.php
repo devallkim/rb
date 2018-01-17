@@ -5,6 +5,7 @@ checkAdmin(0);
 
 if ($menutype==3) {
 	$joint = $joint_menu;
+	$redirect = 1;
 }
 
 $joint = trim(str_replace('&amp;','&',$joint));
