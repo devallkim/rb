@@ -1,27 +1,6 @@
-.rb-guide-wrapper {
-	display: table;
-	width: 100%;
-	text-align: center;
+body,
+.fullscreen {
+  width: 100%;
+  height: 100vh;
+  padding: 40vh;
 }
-
-.rb-guide-wrapper-inner {
-	display: table-cell;
-	vertical-align: middle;
-}
-
-.rb-guide-wrapper-inner .container {
-	margin-top: 50px;
-	line-height: 1.8
-}
-
-.rb-guide-wrapper-inner h1 .fa {
-	margin-bottom: 15px
-}
-
-.rb-guide-wrapper-inner h1 .fa.text-muted {
-	color: #B4B3B3
-}
-.rb-guide-wrapper-inner h3 {
-	font-family: 'verdana';
-}
-
