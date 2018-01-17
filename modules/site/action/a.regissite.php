@@ -98,6 +98,26 @@ else {
 	@chmod($g['path_page'].$id.'-pages/images',0707);
 	@chmod($g['path_var'].'site/'.$id,0707);
 
+	$mfile = $g['path_page'].$id.'-menus/_main';
+	$fp = fopen($mfile.'.css','w');
+	fwrite($fp,'');
+	fclose($fp);
+	@chmod($mfile.'.css',0707);
+	$fp = fopen($mfile.'.js','w');
+	fwrite($fp,'');
+	fclose($fp);
+	@chmod($mfile.'.js',0707);
+
+	$pfile = $g['path_page'].$id.'-pages/_main';
+	$fp = fopen($pfile.'.css','w');
+	fwrite($fp,'');
+	fclose($fp);
+	@chmod($pfile.'.css',0707);
+	$fp = fopen($pfile.'.js','w');
+	fwrite($fp,'');
+	fclose($fp);
+	@chmod($pfile.'.js',0707);
+
 	setrawcookie('result_site', rawurlencode('사이트가 등록 되었습니다.|success'));  // 처리여부 cookie 저장
 	if ($nosite=='Y')
 	{
