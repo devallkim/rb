@@ -13,7 +13,18 @@ if($cat){	$CINFO = getUidData($table['s_menu'],$cat);	$_SEO = getDbData($tabl
 	}
 	$code = $code ? $code : $_code;
 }
-$catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';if ($is_regismode){	$CINFO['menutype'] = '2';	$CINFO['name']	   = '';	$CINFO['joint']	   = '';	$CINFO['redirect'] = '';	$CINFO['hidden']   = '';	$CINFO['target']   = '';	$CINFO['imghead']  = '';	$CINFO['imgfoot']  = '';}
+$catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';
+
+if ($is_regismode){
+	$CINFO['menutype'] = '2';
+	$CINFO['name']	   = '';
+	$CINFO['joint']	   = '';
+	$CINFO['redirect'] = '';
+	$CINFO['hidden']   = '';
+	$CINFO['target']   = '';
+	$CINFO['imghead']  = '';
+	$CINFO['imgfoot']  = '';
+}
 $menuType = array('','모듈연결','직접편집','메뉴연결');
 ?>
 
@@ -200,8 +211,8 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 						<div class="input-group input-group-lg">
 								<?php if($CINFO['uid']):?>
 								<span class="input-group-append">
-									<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" data-tooltip="tooltip" title="문서의 형식">
-										<span id="rb-document-type"><?php echo $menuType[$CINFO['menutype']]?></span> <span class="caret"></span>
+									<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" data-tooltip="tooltip" title="메뉴의 형식">
+										<span id="rb-document-type"><?php echo $menuType[$CINFO['menutype']]?></span>
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<a class="dropdown-item" href="#" onclick="docType(2,'<?php echo $menuType[2]?>');"><i class="fa fa-code"></i> <?php echo $menuType[2]?></a>
@@ -211,7 +222,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 								</span>
 								<?php endif?>
 
-								<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$cat && !$g['device']):?> autofocus<?php endif?>>
+								<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$cat && !$g['device']):?> autofocus<?php endif?> required>
 							<span class="input-group-append">
 								<a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>&amp;vtype=sub" class="btn btn-light" data-tooltip="tooltip" title="서브메뉴 만들기">
 									<i class="fa fa-share fa-rotate-90 fa-lg"></i>
@@ -227,7 +238,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 						<?php else:?>
 
 						<div class="input-group input-group-lg">
-							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$g['device']):?> autofocus<?php endif?>>
+							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$g['device']):?> autofocus<?php endif?> required>
 							<span class="input-group-append">
 								<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_new" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg text-muted"></i></button>
 							</span>
@@ -252,28 +263,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 
 					<div class="tab-content<?php if(!$CINFO['uid']||$vtype=='sub'):?> d-none<?php endif?>">
 
-						<div class="form-group form-row<?php if($CINFO['menutype']!=2):?> d-none<?php endif?>" id="editBox2">
-							<div class="col-lg-10 col-xl-9 offset-lg-2">
-								<fieldset<?php if($CINFO['menutype']!=2):?> disabled<?php endif?>>
-									<div class="btn-group btn-group-justified" data-toggle="buttons">
-										<a class="btn btn-light rb-modal-code">
-											<i class="fa fa-code"></i> 소스코드
-										</a>
-										<a class="btn btn-light rb-modal-markdown">
-											<i class="fa fa-hashtag"></i> 마크다운
-										</a>
-									</div>
-								</fieldset>
-								<small>
-									<ul class="form-text text-muted pl-3 mt-3">
-										<li>직접꾸미기는 소스코드를 직접 편집하거나 마크다운 에디터를 이용할 수 있습니다.</li>
-										<li>소스코드로 작성한 페이지를 마크다운으로 재편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
-										<?php if($CINFO['menutype']!=2):?><li>메뉴 속성을 변경한 후에 활성화 됩니다.</li><?php endif?>
-									</ul>
-								</small>
-							</div>
-						</div>
-						<div class="form-group form-row<?php if($CINFO['menutype']!=1):?> d-none<?php endif?>" id="editBox1">
+						<div class="form-group form-row" id="editBox1"<?php if($CINFO['menutype']!=1):?> hidden<?php endif?>>
 							<div class="col-lg-10 col-xl-9 offset-lg-2">
 								<fieldset>
 									<div class="input-group">
@@ -303,11 +293,32 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 								</div>
 							</div>
 						</div>
-						<div class="form-group form-row<?php if($CINFO['menutype']!=3):?> d-none<?php endif?>" id="editBox3">
+						<div class="form-group form-row" id="editBox2"<?php if($CINFO['menutype']!=2):?> hidden<?php endif?>>
+							<div class="col-lg-10 col-xl-9 offset-lg-2">
+								<fieldset<?php if($CINFO['menutype']!=2):?> disabled<?php endif?>>
+									<div class="btn-group btn-group-justified" data-toggle="buttons">
+										<a class="btn btn-light rb-modal-code">
+											<i class="fa fa-code"></i> 소스코드
+										</a>
+										<a class="btn btn-light rb-modal-markdown">
+											<i class="fa fa-hashtag"></i> 마크다운
+										</a>
+									</div>
+								</fieldset>
+								<small>
+									<ul class="form-text text-muted pl-3 mt-3">
+										<li>직접꾸미기는 소스코드를 직접 편집하거나 마크다운 에디터를 이용할 수 있습니다.</li>
+										<li>소스코드로 작성한 페이지를 마크다운으로 재편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
+										<?php if($CINFO['menutype']!=2):?><li>메뉴 속성을 변경한 후에 활성화 됩니다.</li><?php endif?>
+									</ul>
+								</small>
+							</div>
+						</div>
+						<div class="form-group form-row" id="editBox3"<?php if($CINFO['menutype']!=3):?> hidden<?php endif?>>
 							<div class="col-lg-10 col-xl-9 offset-lg-2">
 								<fieldset>
 
-									<select name="joint" class="form-control custom-select">
+									<select name="joint_menu" class="form-control custom-select" >
 								    <option value="">연결시킬 메뉴를 선택해 주세요.</option>
 								    <option value="" disabled>--------------------------------</option>
 								    <?php include_once $g['path_core'].'function/menu1.func.php'?>
@@ -848,7 +859,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 	</div>
 </div>
 
-
+<?php echo $CINFO['menutype'] ?>
 
 
 <!-- bootstrap-maxlength -->
@@ -887,66 +898,74 @@ $(document).ready(function() {
 });
 </script>
 
-<!-- bootstrap Validator -->
-<?php getImport('bootstrap-validator','dist/css/bootstrapValidator.min',false,'css')?>
-<?php getImport('bootstrap-validator','dist/js/bootstrapValidator.min',false,'js')?>
-
 <script>
 
 putCookieAlert('result_menu') // 실행결과 알림 메시지 출력
 
-$('[name="procForm"]').bootstrapValidator({
-	message: 'This value is not valid',
-	<?php if(!$g['device']):?>
-	feedbackIcons: {
-		valid: 'fa fa-check',
-		invalid: 'fa fa-times',
-		validating: 'fa fa-refresh'
-	},
-	<?php endif?>
-	fields: {
-		name: {
-			message: 'The menu is not valid',
-			validators: {
-				notEmpty: {
-					message: '메뉴명을 입력해 주세요.'
-				}
-			}
-		},
-		id: {
-			validators: {
-				notEmpty: {
-					message: '메뉴코드를 입력해 주세요.'
-				},
-				regexp: {
-					regexp: /^[a-zA-Z0-9\_\-]+$/,
-					message: '메뉴코드는 영문대소문자/숫자/_/- 만 사용할 수 있습니다.'
-				}
-			}
-		},
+function saveCheck(f) {
+
+  <?php if(!$SITEN):?>
+  alert('사이트가 등록되지 않았습니다.\n먼저 사이트를 만들어주세요.');
+  return false;
+  <?php endif?>
+
+  var l1 = f._perm_g;
+  var n1 = l1.length;
+  var i;
+  var s1 = '';
+  for (i = 0; i < n1; i++) {
+    if (l1[i].selected == true && l1[i].value != '') {
+      s1 += '[' + l1[i].value + ']';
+    }
+  }
+  f.perm_g.value = s1;
+
+  if (f.id) {
+    if (f.id.value == '') {
+      alert('메뉴코드를 입력해 주세요.');
+      f.id.focus();
+      return false;
+    }
+    if (!chkFnameValue(f.id.value)) {
+      alert('메뉴코드는 영문대소문자/숫자/_/- 만 사용할 수 있습니다.');
+      f.id.focus();
+      return false;
+    }
+  }
+
+	<?php if($CINFO['menutype']=='1'):?>
+	if (f.menutype.value == '1')
+	{
+		if (f.joint.value == '')
+		{
+			alert('모듈을 연결해주세요.      ');
+			f.joint.focus();
+			return false;
+		}
 	}
-});
-</script>
-
-<!-- basic -->
-<script>
-function saveCheck(f){
-<?php if(!$SITEN):?>
-	alert('사이트가 등록되지 않았습니다.\n먼저 사이트를 만들어주세요.');
-	return false;
-<?php endif?>  var l1 = f._perm_g;  var n1 = l1.length;  var i;	var s1 = '';
-	for	(i = 0; i < n1; i++)	{		if (l1[i].selected == true && l1[i].value != '')		{			s1 += '['+l1[i].value+']';		}	}	f.perm_g.value = s1;	if (f.id)	{		if (f.id.value == '')		{			alert('메뉴코드를 입력해 주세요.');			f.id.focus();			return false;		}
-		if (!chkFnameValue(f.id.value))		{			alert('메뉴코드는 영문대소문자/숫자/_/- 만 사용할 수 있습니다.');			f.id.focus();			return false;		}	}
-	<?php if($CINFO['menutype']=='1'):?>	if (f.menutype.value == '1')	{		if (f.joint.value == '')		{			alert('모듈을 연결해 주세요.');			f.joint.focus();			return false;		}	}
 	<?php endif?>
 
-	if(f.layout_1.value != '0') f.layout.value = f.layout_1.value + '/' + f.layout_1_sub.value;
-	else f.layout.value = '';
+	<?php if($CINFO['menutype']=='3'):?>
+	if (f.menutype.value == '3')
+	{
+		if (f.joint_menu.value == '')
+		{
+			alert('메뉴를 연결해주세요.      ');
+			f.joint_menu.focus();
+			return false;
+		}
+	}
+	<?php endif?>
 
-	if(f.m_layout_1.value != '0') f.m_layout.value = f.m_layout_1.value + '/' + f.m_layout_1_sub.value;
-	else f.m_layout.value = '';
 
-	getIframeForAction(f);}
+	getIframeForAction(f);
+
+  if (f.layout_1.value != '0') f.layout.value = f.layout_1.value + '/' + f.layout_1_sub.value;
+  else f.layout.value = '';
+  if (f.m_layout_1.value != '0') f.m_layout.value = f.m_layout_1.value + '/' + f.m_layout_1_sub.value;
+  else f.m_layout.value = '';
+
+}
 
 function boxDeco(layer1,layer2)
 {
@@ -956,14 +975,15 @@ function boxDeco(layer1,layer2)
 }
 function docType(n,str)
 {
-	getId('rb-document-type').innerHTML = str;
-	$('#editBox1').addClass('d-none');
-	$('#editBox2').addClass('d-none');
-	$('#editBox3').addClass('d-none');
+	$('#rb-document-type').html(str);
+	$('#editBox1').addClass('d-none').removeAttr('hidden');
+	$('#editBox2').addClass('d-none').removeAttr('hidden');
+	$('#editBox3').addClass('d-none').removeAttr('hidden');
 	$('#editBox'+n).removeClass('d-none');
 	getIframeForAction(document.procForm);
 	document.procForm.menutype.value = n;
 	document.procForm.joint.value = '';
+	document.procForm.joint_menu.value = '';
 	document.procForm.redirect.value = '';
 	document.procForm.submit();
 }

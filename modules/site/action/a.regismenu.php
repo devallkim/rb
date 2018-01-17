@@ -3,6 +3,10 @@ if(!defined('__KIMS__')) exit;
 
 checkAdmin(0);
 
+if ($menutype==3) {
+	$joint = $joint_menu;
+}
+
 $joint = trim(str_replace('&amp;','&',$joint));
 $codhead = trim($codhead);
 $codfoot = trim($codfoot);
