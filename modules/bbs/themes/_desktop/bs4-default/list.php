@@ -1,5 +1,3 @@
-<link href="<?php echo $g['dir_module_skin']?>/_main.css">
-
 <section class="rb-bbs-list">
 
   <header class="d-flex justify-content-between align-items-center mb-3">
@@ -150,5 +148,3 @@
   </footer>
 
 </section>
-
-<script src="<?php echo $g['dir_module_skin']?>/_main.js"></script>

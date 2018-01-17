@@ -1,6 +1,3 @@
-<!-- global css -->
-<link href="<?php echo $g['url_module_skin']?>/_style.css" rel="stylesheet">
-
 <div class="bg-shade-gradient">
 	<article class="page-wrapper">
 

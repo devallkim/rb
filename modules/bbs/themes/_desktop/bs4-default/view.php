@@ -11,8 +11,6 @@ function getPreviewResize($image,$size)
 }
 ?>
 
-<link href="<?php echo $g['dir_module_skin']?>/_main.css">
-
 <section class="rb-bbs-view">
 
 	<header>
@@ -216,5 +214,3 @@ function getPreviewResize($image,$size)
 <?php include_once $g['dir_module'].'mod/_list.php'?>
 <?php include_once $g['dir_module_skin'].'list.php'?>
 <?php endif?>
-
-<script src="<?php echo $g['dir_module_skin']?>/_main.js"></script>

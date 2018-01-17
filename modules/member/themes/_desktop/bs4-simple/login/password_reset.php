@@ -1,7 +1,5 @@
 <?php $id_or_email='회원가입시 등록한 '.($d['member']['login_emailid']?'아이디':'이메일').'을 입력해주세요.'?>
 
-<link href="<?php echo $g['url_module_skin']?>/main.css" rel="stylesheet">
-
 <div class="container">
 
 	<form id="request_tmpPW" class="form-signin" action="<?php echo $g['s']?>/" method="post" target="_action_frame_<?php echo $m?>">

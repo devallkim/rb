@@ -15,9 +15,6 @@ $g['memberAgree5ForSite'] = $g['path_var'].'site/'.$_HS['id'].'/member.agree5.tx
 $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite'] : $g['dir_module'].'var/agree5.txt';
 ?>
 
-<!-- global css -->
-<link href="<?php echo $g['url_module_skin']?>/_style.css" rel="stylesheet">
-
 <article id="pages-signup">
 	<form name="procForm" action="<?php echo $g['s']?>/" method="get">
   	<input type="hidden" name="r" value="<?php echo $r?>">

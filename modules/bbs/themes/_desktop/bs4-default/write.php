@@ -21,8 +21,6 @@ if($R['uid']){
 }
 ?>
 
-<link href="<?php echo $g['dir_module_skin']?>/_main.css">
-
 <section class="rb-bbs-write">
 
   <?php if (!$_HM['uid']): ?>
@@ -187,8 +185,6 @@ if($R['uid']){
 <?php getImport('summernote','summernote-bs4.min','0.8.9','js')?>
 <?php getImport('summernote','lang/summernote-ko-KR','0.8.9','js')?>
 <?php getImport('summernote','summernote-bs4','0.8.9','css')?>
-
-<script src="<?php echo $g['dir_module_skin']?>/_main.js"></script>
 
 <script type="text/javascript">
 
