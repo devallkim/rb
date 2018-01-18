@@ -48,7 +48,7 @@
 					</div>
 				</div>
 				<small class="form-text text-muted mt-2">
-					RBL라이센스를 인증하는 코드이며 설치 이후 후속 서비스 지원에 필요한 key 입니다.<br>
+					설치시 자동으로 입력됩니다. RBL라이센스 취득을 인증하고 후속 서비스 지원에 활용됩니다.<br>
 					key가 맞지 않거나 분실시에는 <a href="https://kimsq.com" target="_blank">kimsq.com</a> 에 로그인 후, 나의 프로젝트 > 호스팅 페이지에서 확인할 수 있습니다.<br>
 					기타 문의 사항은 live@kimsq.com 또는 전화 1544-1507 로 문의 바랍니다.
 				</small>
