@@ -222,7 +222,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 								</span>
 								<?php endif?>
 
-								<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$cat && !$g['device']):?> autofocus<?php endif?> required>
+							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$cat && !$g['device']):?> autofocus<?php endif?> required autocomplete="off">
 							<span class="input-group-append">
 								<a href="<?php echo $g['adm_href']?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>&amp;vtype=sub" class="btn btn-light" data-tooltip="tooltip" title="서브메뉴 만들기">
 									<i class="fa fa-share fa-rotate-90 fa-lg"></i>
@@ -238,7 +238,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 						<?php else:?>
 
 						<div class="input-group input-group-lg">
-							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$g['device']):?> autofocus<?php endif?> required>
+							<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $CINFO['name']?>"<?php if(!$g['device']):?> autofocus<?php endif?> required  autocomplete="off">
 							<span class="input-group-append">
 								<button class="btn btn-light rb-help-btn" type="button" data-toggle="collapse" data-target="#guide_new" data-tooltip="tooltip" title="도움말"><i class="fa fa-question fa-lg text-muted"></i></button>
 							</span>
