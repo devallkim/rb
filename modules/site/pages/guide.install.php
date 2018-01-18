@@ -1,7 +1,7 @@
 
 <div class="text-center" style="margin-top: -100px">
 	<h1>
-		<i class="kf kf-bi-06 fa-lg d-block mb-4 animated bounce delay-3" title="KimsQ is Kind" data-tooltip="tooltip"></i>
+		<i class="kf kf-bi-06 fa-lg d-block mb-4" title="KimsQ is Kind" data-tooltip="tooltip"></i>
 		설치가 완료되었습니다.
 	</h1>
 	<p class="text-muted">
@@ -9,9 +9,17 @@
 		이제 킴스큐를 시작할 준비가 되셨습니다.
 	</p>
 	<p>
-	<a class="btn btn-primary d-block" href="./?r=<?php echo $r?>&amp;panel=Y&amp;_admpnl_=<?php echo urlencode('./?r='.$r.'&m=admin&module=site')?>">
-		시작하기
-	</a>
+	<div class="btn-group btn-group-lg animated bounce delay-3">
+	  <a href="./?r=<?php echo $r?>&amp;panel=Y&amp;_admpnl_=<?php echo urlencode('./?r='.$r.'&m=admin&module=market&front=start')?>" class="btn btn-primary">시작하기</a>
+	  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    <span class="sr-only">Toggle Dropdown</span>
+	  </button>
+	  <div class="dropdown-menu dropdown-menu-right">
+	    <a class="dropdown-item" href="./?r=<?php echo $r?>&amp;panel=Y&amp;_admpnl_=<?php echo urlencode('./?r='.$r.'&m=admin&module=site')?>">사이트 모듈로 이동</a>
+	    <a class="dropdown-item" href="./?r=<?php echo $r?>&amp;panel=Y&amp;_admpnl_=<?php echo urlencode('./?r='.$r.'&m=admin&module=admin')?>">시스템 모듈로 이동</a>
+	  </div>
+	</div>
+
 	</p>
 </div>
 
