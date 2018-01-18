@@ -217,7 +217,7 @@ if ($uid)
 							<label class="col-lg-2 col-form-label text-lg-right">게시판 이름 <small class="text-danger">*</small></label>
 							<div class="col-lg-10 col-xl-9">
 								<div class="input-group">
-									<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $R['name']?>"<?php if(!$R['uid']):?> autofocus<?php endif?> required>
+									<input class="form-control" placeholder="" type="text" name="name" value="<?php echo $R['name']?>"<?php if(!$R['uid']):?> autofocus<?php endif?> required autocomplete="off">
 									<?php if($R['uid']):?>
 									<div class="input-group-append">
 										<a href="<?php echo RW('m='.$module.'&bid='.$R['id'])?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="게시판 보기">
@@ -233,7 +233,7 @@ if ($uid)
 							<label class="col-lg-2 col-form-label text-lg-right">게시판 아이디 <small class="text-danger">*</small></label>
 							<div class="col-lg-10 col-xl-9">
 								<div class="input-group">
-									<input class="form-control" placeholder="" type="text" name="id" value="<?php echo $R['id']?>" <?php if($R['uid']):?>readonly<?php endif?> required>
+									<input class="form-control" placeholder="" type="text" name="id" value="<?php echo $R['id']?>" <?php if($R['uid']):?>readonly<?php endif?> required autocomplete="off">
 									<?php if($R['uid']):?>
 									<div class="input-group-append">
 										<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=deletebbs&amp;uid=<?php echo $R['uid']?>" onclick="return hrefCheck(this,true,'삭제하시면 모든 게시물이 지워지며 복구할 수 없습니다.\n정말로 삭제하시겠습니까?');"  class="btn btn-light" data-tooltip="tooltip" title="삭제하기">
