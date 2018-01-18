@@ -48,7 +48,7 @@
 					</div>
 				</div>
 				<small class="form-text text-muted mt-2">
-					라이브 설치 시 자동으로 입력됩니다. RBL라이센스 취득을 인증하고 후속 서비스 지원에 활용됩니다.<br>
+					라이브 설치 시 자동으로 입력됩니다. RBL라이센스 취득여부를 확인하여 후속 지원에 활용됩니다.<br>
 					key가 맞지 않거나 분실시에는 <a href="https://kimsq.com" target="_blank">kimsq.com</a> 에 로그인 후, 나의 프로젝트 > 호스팅 > kimsQ 설치 페이지에서 확인할 수 있습니다.<br>
 					기타 문의 사항은 live@kimsq.com 또는 전화 1544-1507 로 문의 바랍니다.
 				</small>
