@@ -297,20 +297,34 @@ $pageType = array('','모듈연결','직접편집');
 						  </div>
 							<input type="text" id="_url_m_1_" class="form-control" value="<?php echo $_url_1?>">
 							<span class="input-group-append">
-								<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
+								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
 								<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 							</span>
 						</div>
+
 						<div class="input-group">
 							<div class="input-group-prepend">
 						    <span class="input-group-text">고유주소</span>
 						  </div>
 							<input type="text" id="_url_m_2_" class="form-control" value="<?php echo $_url_2?>">
 							<span class="input-group-append">
-								<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
+								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
 								<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 							</span>
 						</div>
+
+						<?php if (!$R['ismain']): ?>
+						<div class="input-group mt-2">
+							<div class="input-group-prepend">
+								<span class="input-group-text">코드삽입</span>
+							</div>
+							<input id="_url_m_3_" type="text" class="form-control" value="&lt;?php echo RW('mod=<?php echo $R['id']?>') ?&gt;" readonly>
+							<span class="input-group-append">
+								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_3_"><i class="fa fa-clipboard"></i></a>
+							</span>
+						</div>
+						<?php endif; ?>
+
 					</div>
 				</div>
 				<?php endif?>

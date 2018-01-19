@@ -361,6 +361,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 
 				<?php $_url_1 = $g['s'].'/?r='.$r.'&c='.($vtype?substr($catcode,0,strlen($catcode)-1):$catcode.$CINFO['id'])?>
 				<?php $_url_2 = $g['s'].'/'.$r.'/c/'.($vtype?substr($catcode,0,strlen($catcode)-1):$catcode.$CINFO['id'])?>
+				<?php $_url_3 =$vtype?substr($catcode,0,strlen($catcode)-1):$catcode.$CINFO['id'] ?>
 				<div class="form-group row">
 					<label class="col-lg-2 col-form-label text-lg-right">주소</label>
 					<div class="col-lg-10 col-xl-9">
@@ -371,7 +372,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 							</div>
 							<input id="_url_m_1_" type="text" class="form-control" value="<?php echo $_url_1?>" readonly>
 							<span class="input-group-append">
-								<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
+								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
 								<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 							</span>
 						</div>
@@ -382,10 +383,21 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 							</div>
 							<input id="_url_m_2_" type="text" class="form-control" value="<?php echo $_url_2?>" readonly>
 							<span class="input-group-append">
-								<a href="#." class="btn btn-light rb-clipboard hidden-xs" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
+								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
 								<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 							</span>
 						</div>
+
+						<div class="input-group mt-2">
+							<div class="input-group-prepend">
+								<span class="input-group-text">코드삽입</span>
+							</div>
+							<input id="_url_m_3_" type="text" class="form-control" value="&lt;?php echo RW('c=<?php echo $_url_3?>') ?&gt;" readonly>
+							<span class="input-group-append">
+								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_3_"><i class="fa fa-clipboard"></i></a>
+							</span>
+						</div>
+
 					</div>
 				</div>
 				<?php endif?>
