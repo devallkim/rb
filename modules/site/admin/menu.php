@@ -39,7 +39,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 					</a>
 				</div>
 
-				<div class="collapse show" id="collapmetane" style="height: calc(100vh - 8.53rem);">
+				<div class="collapse show" id="collapmetane">
 					<?php if($SITEN>1):?>
 					<div class="border border-primary">
 						<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
