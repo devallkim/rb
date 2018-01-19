@@ -372,7 +372,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 							</div>
 							<input id="_url_m_1_" type="text" class="form-control" value="<?php echo $_url_1?>" readonly>
 							<span class="input-group-append">
-								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_1_"><i class="fa fa-clipboard"></i></a>
+								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="#_url_m_1_"><i class="fa fa-clipboard"></i></a>
 								<a href="<?php echo $_url_1?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 							</span>
 						</div>
@@ -383,7 +383,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 							</div>
 							<input id="_url_m_2_" type="text" class="form-control" value="<?php echo $_url_2?>" readonly>
 							<span class="input-group-append">
-								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_2_"><i class="fa fa-clipboard"></i></a>
+								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="#_url_m_2_"><i class="fa fa-clipboard"></i></a>
 								<a href="<?php echo $_url_2?>" target="_blank" class="btn btn-light" data-tooltip="tooltip" title="접속">Go!</a>
 							</span>
 						</div>
@@ -394,7 +394,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 							</div>
 							<input id="_url_m_3_" type="text" class="form-control" value="&lt;?php echo RW('c=<?php echo $_url_3?>') ?&gt;" readonly>
 							<span class="input-group-append">
-								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="_url_m_3_"><i class="fa fa-clipboard"></i></a>
+								<a href="#." class="btn btn-light js-clipboard" data-tooltip="tooltip" title="클립보드에 복사" data-clipboard-target="#_url_m_3_"><i class="fa fa-clipboard"></i></a>
 							</span>
 						</div>
 

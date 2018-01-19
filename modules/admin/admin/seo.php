@@ -234,13 +234,6 @@
 
 </div>
 
-
-
-<?php getImport('zero-clipboard','ZeroClipboard.min',false,'js') ?>
-<script>
-var client = new ZeroClipboard($(".rb-clipboard"));
-client.on( "ready", function( readyEvent ) {});
-</script>
 <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
 <script>
 (function(jQuery){
