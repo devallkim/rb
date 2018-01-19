@@ -10,7 +10,7 @@
 	</p>
 	<p>
 	<div class="btn-group btn-group-lg animated bounce delay-3">
-	  <a href="./?r=<?php echo $r?>&amp;panel=Y&amp;_admpnl_=<?php echo urlencode('./?r='.$r.'&m=admin&module=market&front=start')?>" class="btn btn-primary">시작하기</a>
+	  <a href="./?r=<?php echo $r?>&amp;panel=Y&amp;_admpnl_=<?php echo urlencode('./?r='.$r.'&m=admin&module=project&front=start')?>" class="btn btn-primary">시작하기</a>
 	  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split btn-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	    <span class="sr-only">Toggle Dropdown</span>
 	  </button>
