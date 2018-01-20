@@ -29,35 +29,6 @@
 		</div><!-- /.card-body -->
 	</div><!-- /.card -->
 
-
-	<div class="card mb-3">
-		<div class="card-header">
-			라이센스 키
-		</div>
-		<div class="card-body">
-
-			<form name="procKey" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck2(this);">
-				<input type="hidden" name="r" value="<?php echo $r?>">
-				<input type="hidden" name="m" value="<?php echo $module?>">
-				<input type="hidden" name="a" value="license">
-
-				<div class="input-group">
-					<input class="form-control" type="text" name="key" value="<?php echo trim(implode('',file($g['path_var'].'rbl.key.txt')))?>" required  autocomplete="off">
-					<div class="input-group-append">
-						<button class="btn btn-light" type="submit">저장</button>
-					</div>
-				</div>
-				<small class="form-text text-muted mt-2">
-					라이브 설치 시 자동으로 입력됩니다. RBL라이센스 취득여부를 확인하여 후속 지원에 활용됩니다.<br>
-					key가 맞지 않거나 분실시에는 <a href="https://kimsq.com" target="_blank">kimsq.com</a> 에 로그인 후, 나의 프로젝트 > 호스팅 > kimsQ 설치 페이지에서 확인할 수 있습니다.<br>
-					기타 문의 사항은 live@kimsq.com 또는 전화 1544-1507 로 문의 바랍니다.
-				</small>
-
-			</form>
-
-		</div>
-	</div>
-
 	<form role="form" name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
 		<input type="hidden" name="r" value="<?php echo $r?>">
 		<input type="hidden" name="m" value="<?php echo $module?>">
@@ -383,16 +354,6 @@
 <script>
 
 putCookieAlert('admin_config_result') // 실행결과 알림 메시지 출력
-
-function saveCheck2(f)
-{
-	if (confirm('정말로 실행하시겠습니까?       '))
-	{
-		getIframeForAction(f);
-		return true;
-	}
-	return false;
-}
 
 var submitFlag = false;
 function sendCheck(id)
