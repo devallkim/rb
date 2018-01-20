@@ -15,18 +15,6 @@
 				<input type="text" class="form-control" name="url" value="<?php echo $d['market']['url']?>" placeholder="">
 			</div>
 		</div>
-		<div class="form-group form-row">
-			<label class="col-sm-2 control-label">아이디(또는 이메일)</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" name="id" value="<?php echo $d['market']['id']?>" placeholder="">
-			</div>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-sm-2 control-label">패스워드</label>
-			<div class="col-sm-10">
-				<input type="password" class="form-control" name="pw" value="<?php echo $d['market']['pw']?>" placeholder="">
-			</div>
-		</div>
 
 		<div class="form-group form-row">
 			<div class="offset-sm-2 col-sm-10">
