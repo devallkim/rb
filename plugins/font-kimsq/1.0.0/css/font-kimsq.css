@@ -115,3 +115,9 @@
 .kf-contents:before {
 	content: "\e61c";
 }
+.kf-project:before {
+	content: "\e61c";
+}
+.kf-post:before {
+	content: "\e61c";
+}
