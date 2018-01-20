@@ -1,4 +1,6 @@
 @charset "utf-8";
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 html {
   scrollbar-face-color: #646464;
   scrollbar-base-color: #646464;
@@ -23,10 +25,11 @@ body {
 	padding-top: 3.5rem;
 	background-color: #272c32 !important;
 	padding: 0;
-	font-family: 'Open Sans', '돋움', dotum, sans-serif;
+	font-family: '돋움', dotum, sans-serif;
 	font-size: 16px;
 	line-height: 1.3rem;
-	color: #ccc
+	color: #ccc;
+  letter-spacing: -.5px
 }
 
 a {
@@ -42,8 +45,7 @@ code {
 }
 
 #rb-body.lang-ko {
-	/*font-family: '돋움', dotum;*/
-	font-family: 'Apple SD Gothic Neo',Dotum,'돋움',sans-serif;
+	font-family: '돋움', dotum, sans-serif;
 }
 #rb-body.lang-en {
 	font-family: 'Open Sans', Helvetica, Arial, 'Liberation Sans', sans-serif;
@@ -84,7 +86,9 @@ code {
 
 
 /* ------------------ tabs --------------------*/
-
+.navbar {
+	font-family: 'Noto Sans KR', sans-serif, '돋움', dotum, sans-serif;
+}
 .navbar .navbar-nav {
 	border-bottom: 0
 }
@@ -175,19 +179,22 @@ code {
 
 /*본문*/
 
-h1, h2, h3, h4, h5, h6 {
-	margin: 0 0 20px;
-	font-weight: 300;
-	line-height: 1;
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: 'Noto Sans KR', sans-serif, '돋움', dotum, sans-serif;
+	margin: 0 0 20px;;
 }
 .h2, h2 {
   font-size: 30px;
+  font-weight: 700
 }
 .h3, h3 {
   font-size: 26px;
+  font-weight: 600
 }
 .h4, h4 {
   font-size: 22px;
+  font-weight: 500
 }
 .page-header {
   padding-top: 20px;
@@ -952,3 +959,6 @@ border-radius: 0.25rem;
 .rb-codeview-footer {
   border-top: 1px solid #222
 }
+
+
+/* Nestable */
