@@ -10,7 +10,7 @@
 			<div class="row">
 
 				<div class="col-sm-6 mt-4">
-					<span class=" kf-bi-01 h1"> </span> <span class="h3 ml-2">Rb <code><?php echo $d['admin']['version']?></code></span>
+					<span class=" kf-bi-01" style="font-size: 38px"> </span> <span class="h3 ml-2">Rb <code><?php echo $d['admin']['version']?></code></span>
 				</div>
 
 				<div class="col-sm-6">

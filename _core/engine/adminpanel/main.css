@@ -25,9 +25,11 @@
  * ----------------------------------------------------------------------------
  */
 
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
  body {
-   font-size: 14px
+   font-size: 14px;
+   font-family: '돋움', dotum, sans-serif;
  }
 
 
@@ -1082,8 +1084,7 @@
 }
 
 body {
-    font-family: "Open Sans", '돋움', dotum, sans-serif;
-    background-color: #EEEEEE
+  background-color: #EEEEEE
 }
 
 body, html {

@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 #rb-body {
-	font-family: "Open Sans", '돋움', dotum, sans-serif;
+	font-family: 'Noto Sans KR', sans-serif, '돋움', dotum, sans-serif;
 }
