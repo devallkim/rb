@@ -124,11 +124,11 @@ else {
 <script type="text/javascript">
 //<![CDATA[
 <?php if(!$resultnum):?>
-parent.document.procForm.<?php echo $fname?>.value = '';
-parent.document.procForm.<?php echo $fname?>.focus();
+parent.document.memberForm.<?php echo $fname?>.value = '';
+parent.document.memberForm.<?php echo $fname?>.focus();
 <?php endif?>
-parent.document.procForm.<?php echo $fname?>.className = "<?php echo $resultclass?>";
-parent.document.procForm.check_<?php echo $fname?>.value = "<?php echo $resultnum?>";
+parent.document.memberForm.<?php echo $fname?>.className = "<?php echo $resultclass?>";
+parent.document.memberForm.check_<?php echo $fname?>.value = "<?php echo $resultnum?>";
 parent.$('#<?php echo $flayer?>').html('<?php echo addslashes($resultmsg)?>');
 //]]>
 </script>

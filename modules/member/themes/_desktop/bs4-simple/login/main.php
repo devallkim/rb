@@ -22,7 +22,7 @@
 					<div class="form-group">
 						<label for="">
 							패스워드
-							<a href="/password_reset" class="label-link" id="password_reset">비밀번호를 잊으셨나요?</a>
+							<a href="./?m=member&front=login&page=password_reset" class="label-link" id="password_reset">비밀번호를 잊으셨나요?</a>
 						</label>
 						<input type="password" name="pw" id="password" class="form-control" placeholder="" tabindex="2" required>
 						<div class="invalid-feedback" id="passwordErrorBlock"></div>

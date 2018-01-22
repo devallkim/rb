@@ -23,7 +23,9 @@ if ($R['auth'] == 3)
 	getDbUpdate($table['s_mbrdata'],'auth=1','memberuid='.$R['memberuid']);
 }
 
-include_once $g['dir_module'].'var/var.join.php';
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
+$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
+include_once $_tmpvfile;
 include_once $g['path_core'].'function/email.func.php';
 
 if ($d['member']['join_email_send']&&$d['member']['join_email'])

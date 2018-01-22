@@ -3,7 +3,9 @@ if(!defined('__KIMS__')) exit;
 
 if (!$fname || !$fvalue) exit;
 
-include_once $g['dir_module'].'var/var.join.php';
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
+$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
+include_once $_tmpvfile;
 
 if ($fname == 'id[]')
 {
@@ -12,7 +14,7 @@ if ($fname == 'id[]')
 		$resultnum = 0;
 		$resultmsg = '사용 제한된 아이디입니다. ';
 	}
-	else 
+	else
 	{
 		$isId = getDbRows($table['s_mbrid'],"id='".$fvalue."'");
 		if (!$isId)
@@ -67,7 +69,7 @@ if ($fname == 'nic[]')
 		$resultnum = 0;
 		$resultmsg = '이미 존재하는 닉네임입니다';
 	}
-	else 
+	else
 	{
 		if ($my['admin'])
 		{
@@ -105,26 +107,26 @@ if ($fname == 'nic[]')
 //<![CDATA[
 function re_fales()
 {
-	
+
     var d = parent.document.getElementsByName('<?php echo $fname?>');
 	var n = d.length;
 	 var j = 0;
 	 var i;
 	 var s = '';
-		 
+
 	 for( i=0;i<n;i++)
 	 {
 		if(d[i].value=='<?php echo $fvalue?>')
 		 {
-		    d[i].value=''; 
+		    d[i].value='';
 			setTimeout(function()
 			{
-			 d[i].focus() 
-			}, 10); 
+			 d[i].focus()
+			}, 10);
 	        return false;
 		 }
-	  } 
-	    
+	  }
+
 }
 
 parent.document.procForm.check_id.value = "<?php echo $resultnum?>";

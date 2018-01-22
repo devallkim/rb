@@ -12,8 +12,9 @@ if (!$id)
 	getLink('','','아이디를 입력해 주세요.','');
 }
 
-
-include_once $g['dir_module'].'var/var.join.php';
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
+$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
+include_once $_tmpvfile;
 
 if ($d['member']['login_emailid'])
 {
@@ -21,7 +22,7 @@ if ($d['member']['login_emailid'])
 	if (!$R['memberuid']) getLink('','','존재하지 않는 이메일입니다.','');
 	$M = getUidData($table['s_mbrid'],$R['memberuid']);
 }
-else 
+else
 {
 	$M = getDbData($table['s_mbrid'],"id='".$id."'",'*');
 	if (!$M['uid']) getLink('','','존재하지 않는 아이디입니다.','');
@@ -62,7 +63,7 @@ else {
 <script type="text/javascript">
 //<![CDATA[
 function pwStepCheck(n)
-{	
+{
 	parent.getId('pwauth_step_1').style.display = 'none';
 	parent.getId('pwauth_step_2').style.display = 'none';
 	parent.getId('pwauth_step_3').style.display = 'none';

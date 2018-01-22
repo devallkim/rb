@@ -1,6 +1,6 @@
 <h1 class="mb-4">개인정보 수정</h1>
 
-<form name="procForm" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
+<form name="memberForm" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
   <input type="hidden" name="r" value="<?php echo $r?>">
   <input type="hidden" name="m" value="<?php echo $m?>">
   <input type="hidden" name="front" value="<?php echo $front?>">

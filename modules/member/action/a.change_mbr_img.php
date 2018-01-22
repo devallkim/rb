@@ -6,10 +6,9 @@ if (!$my['uid'])
 	getLink('','','정상적인 접근이 아닙니다.','');
 }
 
-
 // 아바타 이미지 변경
 if($_FILES['avatar']['tmp_name'])
-{	
+{
 		$tmpname	= $_FILES['avatar']['tmp_name'];
 		$realname	= $_FILES['avatar']['name'];
 		$fileExt	= strtolower(getExt($realname));
@@ -53,7 +52,7 @@ if($_FILES['avatar']['tmp_name'])
 
 // 커버 이미지 변경
 if($_FILES['cover']['tmp_name'])
-{	
+{
 		$tmpname	= $_FILES['cover']['tmp_name'];
 		$realname	= $_FILES['cover']['name'];
 

@@ -1,65 +1,15 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-include_once $g['dir_module'].'var/var.join.php';
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
+$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
+include_once $_tmpvfile;
 
 $id			= trim($id);
 $name		= trim($name);
 $nic		= trim($nic);
 $nic		= $nic ? $nic : $name;
 $email		= trim($email);
-
-
-// 트리포드 회원등록
-$_unableIds = ',,admin,administrator';
-$_exists_id = false;
-
-// 사용할수 없는 아이디 체크
-if (strpos($_unableIds,','.$id.','))
-{
-	getLink('reload', 'parent.', '['.$id.'] 는 사용할 수 없는 아이디 입니다.\n다른 아이디를 사용해 주세요.', '');
-}
-
-// 이미 존재하는 아이디 체크
-include $g['path_core'].'function/rss.func.php';
-$g['livequry'] = 'https://ssl.3-pod.com/User/api.aspx?ptncode=0331&ptnkey=FD08508FA0220C53BA94BE59EBC06045&enc=utf-8&cmd=';
-
-$_EXISTS_ID = getUrlData($g['livequry'].'EXIST_MEMBER_ID&id='.$id,10);
-if(getRssContent($_EXISTS_ID,'Result') != '10000') $_exists_id = true;
-
-if ($_exists_id)
-{
-	getLink('reload', 'parent.', '['.$id.'] 는 이미 사용중인 아이디 입니다.\n다른 아이디를 사용해 주세요.', '');
-}
-
-// 계정 유효화 체크
-$_insertmbrdata  = 'member_id='.$id;
-$_insertmbrdata .= '&member_pwd='.urlencode($pw1);
-$_insertmbrdata .= '&member_name='.urlencode($name);
-$_insertmbrdata .= '&mng_name='.urlencode($name);
-$_insertmbrdata .= '&mng_email='.$email;
-$_insertmbrdata .= '&rct_name='.urlencode($name);
-$_insertmbrdata .= '&rct_email='.$email;
-$_insertmbrdata .= '&zip_no=000-000';
-$_insertmbrdata .= '&addr_zip='.urlencode('주소 앞부분');
-$_insertmbrdata .= '&addr_desc='.urlencode('주소 뒷부분');
-
-
-$_result1= getUrlData($g['livequry']."INSERT_MEMBER_INFO&".$_insertmbrdata,10);
-
-sleep(1);
-
-$_result2 = getUrlData($g['livequry'].'GET_MEMBER_INFO&type=SMID&mid='.$id,10);
-
-if(getRssContent($_result2,'Result') != '10000')
-{
-	getLink('reload', 'parent.', '회원 계정이 생성되지 못했습니다. \n\n고객센터(1544-1507)로 연락 주세요.', '');
-}
-$mbrno = getRssContent($_result2,'MemberNo');
-if($mbrno == '')
-{
-	getLink('reload', 'parent.', '회원 계정이 생성되지 못했습니다. \n\n고객센터(1544-1507)로 연락 주세요.', '');
-}
 
 
 if (!$id || !$name) getLink('', '', '정상적인 접속이 아닙니다.', '');

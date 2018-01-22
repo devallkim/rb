@@ -1,7 +1,9 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-include_once $g['dir_module'].'var/var.join.php';
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
+$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
+include_once $_tmpvfile;
 
 if (!$my['uid'] || !$pw1 || !$pw2 || $pw1 != $pw2)
 {

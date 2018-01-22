@@ -6,7 +6,9 @@ $email		= trim($email);
 
 if (!$name || !$email) getLink('','','정상적인 접근이 아닙니다.','');
 
-include_once $g['dir_module'].'var/var.join.php';
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
+$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
+include_once $_tmpvfile;
 
 if (!$d['member']['join_email'])
 {

@@ -10,7 +10,7 @@
 
 		<div class="page-main">
 
-			<form name="signupForm" role="form" action="<?php echo $g['s']?>/" method="post" id="signupForm" novalidate autocomplete="off">
+			<form name="memberForm" role="form" action="<?php echo $g['s']?>/" method="post" id="signupForm" novalidate autocomplete="off">
 				<input type="hidden" name="r" value="<?php echo $r?>">
 				<input type="hidden" name="c" value="<?php echo $c?>">
 				<input type="hidden" name="m" value="<?php echo $m?>">
@@ -115,7 +115,7 @@
 <script type="text/javascript">
 //<![CDATA[
 
-var f = document.signupForm;
+var f = document.memberForm;
 
 function sameCheck(obj,layer)
 {

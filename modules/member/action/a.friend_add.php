@@ -6,7 +6,9 @@ if (!$my['uid'])
 	getLink('','','정상적인 접근이 아닙니다.','');
 }
 
-include_once $g['dir_module'].'var/var.join.php';
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
+$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
+include_once $_tmpvfile;
 
 $id = trim($friend);
 $idexp = explode(',',$id);
@@ -16,7 +18,7 @@ for ($i = 0; $i < $idlen; $i++)
 {
 	$xid = trim($idexp[$i]);
 	if (!$xid) continue;
-	
+
 	if($xid == $my['id']) continue;
 
 	if ($d['member']['login_emailid'])
