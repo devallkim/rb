@@ -3,12 +3,15 @@ if(!defined('__KIMS__')) exit;
 
 if (!$fname || !$fvalue) exit;
 
-include_once $g['dir_module'].'var/var.join.php';
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
+$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
+include_once $_tmpvfile;
 
 if ($my['admin'])
 {
 	$resultnum = 1;
-	$resultmsg = '<span class="text-primary">OK!</span>';
+	$resultmsg = 'OK!';
+	$resultclass = 'form-control is-valid';
 }
 else {
 	if ($fname == 'id')
@@ -68,7 +71,7 @@ else {
 		}
 		else {
 			$resultnum = 0;
-			$resultmsg = '<span class="text-danger">이미 존재하는 이메일입니다</span>';
+			$resultmsg = '이미 존재하는 이메일입니다';
 			$resultclass = 'form-control is-invalid';
 		}
 	}
@@ -121,12 +124,12 @@ else {
 <script type="text/javascript">
 //<![CDATA[
 <?php if(!$resultnum):?>
-//parent.document.procForm.<?php echo $fname?>.value = '';
-parent.document.signupForm.<?php echo $fname?>.focus();
+parent.document.procForm.<?php echo $fname?>.value = '';
+parent.document.procForm.<?php echo $fname?>.focus();
 <?php endif?>
-parent.document.signupForm.<?php echo $fname?>.className = "<?php echo $resultclass?>";
-parent.document.signupForm.check_<?php echo $fname?>.value = "<?php echo $resultnum?>";
-parent.getId('<?php echo $flayer?>').innerHTML = "<?php echo addslashes($resultmsg)?>";
+parent.document.procForm.<?php echo $fname?>.className = "<?php echo $resultclass?>";
+parent.document.procForm.check_<?php echo $fname?>.value = "<?php echo $resultnum?>";
+parent.$('#<?php echo $flayer?>').html('<?php echo addslashes($resultmsg)?>');
 //]]>
 </script>
 </head>

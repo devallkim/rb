@@ -701,14 +701,14 @@ include_once $_tmpvfile;
 
 								<div class="col-sm-4">
 									<div class="form-group">
-										<label>외국인가입</label>
+										<label>해외거주자 가입</label>
 										<div class="">
 											<div class="btn-group btn-group-toggle" data-toggle="buttons">
-												<label class="btn btn-light <?php if(!$d['member']['form_foreign']):?>active<?php endif?>">
-													<input type="radio" name="form_foreign" value="0" <?php if(!$d['member']['form_foreign']):?>checked<?php endif?> id="en-0"> 허용안함
+												<label class="btn btn-light <?php if(!$d['member']['form_overseas']):?>active<?php endif?>">
+													<input type="radio" name="form_overseas" value="0" <?php if(!$d['member']['form_overseas']):?>checked<?php endif?> id="en-0"> 허용안함
 												</label>
-												<label class="btn btn-light <?php if($d['member']['form_foreign']):?>active<?php endif?>">
-													<input type="radio" name="form_foreign" value="1" <?php if($d['member']['form_foreign']):?>checked<?php endif?> id="en-1"> 허용함
+												<label class="btn btn-light <?php if($d['member']['form_overseas']):?>active<?php endif?>">
+													<input type="radio" name="form_overseas" value="1" <?php if($d['member']['form_overseas']):?>checked<?php endif?> id="en-1"> 허용함
 												</label>
 											</div>
 										</div>
@@ -748,8 +748,8 @@ include_once $_tmpvfile;
 	 											 </div>
 												 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
 												 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
-	 												<input type="checkbox" class="custom-control-input" id="form_<?php echo $_key?>_p" name="form_<?php echo $_key?>_p" value="1"<?php if($d['member']['form_'.$_key.'_p']):?> checked<?php endif?>>
-	 												<label class="custom-control-label" for="form_<?php echo $_key?>_p">필수입력</label>
+	 												<input type="checkbox" class="custom-control-input" id="form_<?php echo $_key?>_required" name="form_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_'.$_key.'_required']):?> checked<?php endif?>>
+	 												<label class="custom-control-label" for="form_<?php echo $_key?>_required">필수입력</label>
 	 											 </div>
 
 											 <?php endif?>
@@ -757,7 +757,7 @@ include_once $_tmpvfile;
 										 <?php $i++;endforeach?>
 										</div>
 										<div class="col-sm-6">
-											<?php $opset = array('qa'=>'패스워드찾기 질답','home'=>'홈페이지','tel1'=>'집전화','tel2'=>'휴대폰','job'=>'직업','marr'=>'결혼기념일','addr'=>'주소')?>
+											<?php $opset = array('bio'=>'간단소개','home'=>'홈페이지','tel1'=>'집전화','tel2'=>'휴대폰','job'=>'직업','marr'=>'결혼기념일','addr'=>'주소')?>
 											<?php foreach($opset as $_key => $_val):?>
 											<fieldset>
 
