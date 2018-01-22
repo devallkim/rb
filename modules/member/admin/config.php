@@ -769,8 +769,8 @@ include_once $_tmpvfile;
 			 								 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
 
 											 <div class="custom-control custom-checkbox custom-control-inline">
-	 											<input type="checkbox" class="custom-control-input" id="form_<?php echo $_key?>_p" name="form_<?php echo $_key?>_p" value="1"<?php if($d['member']['form_'.$_key.'_p']):?> checked<?php endif?>>
-	 											<label class="custom-control-label" for="form_<?php echo $_key?>_p">필수입력</label>
+	 											<input type="checkbox" class="custom-control-input" id="form_<?php echo $_key?>_required" name="form_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_'.$_key.'_required']):?> checked<?php endif?>>
+	 											<label class="custom-control-label" for="form_<?php echo $_key?>_required">필수입력</label>
 	 										 </div>
 
 											</fieldset>
