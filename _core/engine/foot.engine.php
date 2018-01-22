@@ -1,15 +1,6 @@
 <!-- 사이트 풋터 코드 -->
 <?php echo $_HS['footercode'] ?>
 
-<!-- is-loading : https://github.com/hekigan/is-loading-->
-<?php getImport('is-loading','jquery.isloading.min','1.0.6','js')?>
-
-<!-- js-cookie : https://github.com/js-cookie/js-cookie -->
-<?php getImport('js-cookie','js.cookie.min','2.2.0','js')?>
-
-<!-- bootstrap-notify : https://github.com/mouse0270/bootstrap-notify  -->
-<?php getImport('bootstrap-notify','bootstrap-notify.min','3.1.3','js')?>
-
 <!-- 푸터 스위치 -->
 <?php foreach($g['switch_3'] as $_switch) include $_switch ?>
 

@@ -21,6 +21,15 @@ var memberid= '<?php echo $my['id']?>';
 var is_admin= '<?php echo $my['admin']?>';
 </script>
 
+<!-- is-loading : https://github.com/hekigan/is-loading-->
+<?php getImport('is-loading','jquery.isloading.min','1.0.6','js')?>
+
+<!-- js-cookie : https://github.com/js-cookie/js-cookie -->
+<?php getImport('js-cookie','js.cookie.min','2.2.0','js')?>
+
+<!-- bootstrap-notify : https://github.com/mouse0270/bootstrap-notify  -->
+<?php getImport('bootstrap-notify','bootstrap-notify.min','3.1.3','js')?>
+
 <link href="<?php echo $g['s']?>/_core/css/sys.css<?php echo $g['wcache']?>" rel="stylesheet">
 <script src="<?php echo $g['s']?>/_core/js/sys.js<?php echo $g['wcache']?>"></script>
 
