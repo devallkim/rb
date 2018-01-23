@@ -1,3 +1,55 @@
+/* utility */
+.bg-white {
+  background-color: #fff !important
+}
+['data-role="button"'] {
+  cursor: pointer;
+}
+.muted-link {
+  color: #586069 !important
+}
+.muted-link:hover {
+  color: #0366d6 !important
+  text-decoration: none;
+}
+.no-underline {
+  text-decoration: none !important
+}
+.f18 {
+  font-size: 18px !important
+}
+.f17 {
+  font-size: 17px !important
+}
+.f16 {
+  font-size: 16px !important
+}
+.f15 {
+  font-size: 15px !important
+}
+.f14 {
+  font-size: 14px !important
+}
+.f13 {
+  font-size: 13px !important
+}
+.f12 {
+  font-size: 12px !important
+}
+.rounded-2 {
+  border-radius: 6px !important
+}
+.border-top {
+  border-top: 1px #e1e4e8 solid !important
+}
+.border-bottom {
+  border-bottom: 1px solid #e9ecef!important
+}
+.border-gray-light {
+  border-color: #eaecef !important
+}
+
+/* tree */
 .rb-tree {
     font-family: 'Open Sans','돋움', dotum, sans-serif, FontAwesome;
 }
