@@ -12,7 +12,7 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">아이디</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" value="<?php echo $my['id'] ?>">
+      <input type="text" name="id" readonly class="form-control-plaintext" value="<?php echo $my['id'] ?>">
     </div>
   </div>
 
@@ -154,7 +154,7 @@
 
       <div id="addrbox"<?php if($my['addr0']=='해외'):?> class="d-none"<?php endif?>>
         <div class="form-row">
-         <div class="form-group col-3">
+         <div class="form-group col-2">
            <input type="text" class="form-control" name="zip_1" value="<?php echo substr($my['zip'],0,5)?>" id="zip1" maxlength="5" size="5" readonly>
          </div>
          <div class="form-group col-6">
