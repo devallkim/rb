@@ -9,7 +9,6 @@
 </footer>
 
 <main class="content">
-
 	<form class="content-padded" id="memberForm" role="form" action="<?php echo $g['s']?>/" method="post" autocomplete="off">
 		<input type="hidden" name="r" value="<?php echo $r?>">
 	  <input type="hidden" name="m" value="<?php echo $m?>">
@@ -29,9 +28,9 @@
 	    <input type="text" class="form-control" name="name" value="<?php echo $my['name']?>" maxlength="10" required>
 	  </div>
 
-		<?php if($d['member']['form_nic']):?>
+		<?php if($d['member']['form_settings_nic']):?>
 		<div class="form-group">
-			<label>닉네임<?php if($d['member']['form_nic_required']):?> <span class="text-danger">*</span><?php endif?></label>
+			<label>닉네임<?php if($d['member']['form_settings_nic_required']):?> <span class="text-danger">*</span><?php endif?></label>
 			<input type="text" class="form-control" name="nic" value="<?php echo $my['nic']?>"  maxlength="20" required onblur="sameCheck(this,'hLayernic');">
 			<div class="form-control-feedback" id="hLayernic"></div>
 			<div class="invalid-feedback">
@@ -52,9 +51,9 @@
       </div>
 		</div>
 
-		<?php if($d['member']['form_tel1']):?>
+		<?php if($d['member']['form_settings_tel1']):?>
 		<div class="form-group">
-			<label>전화번호 <?php if($d['member']['form_tel1_required']):?><span class="text-danger">*</span><?php endif?></label>
+			<label>전화번호 <?php if($d['member']['form_settings_tel1_required']):?><span class="text-danger">*</span><?php endif?></label>
 			<?php $tel1=explode('-',$my['tel1'])?>
 			<div class="row">
 			  <div class="col-xs-4">
@@ -79,9 +78,9 @@
 		</div>
 		<?php endif?>
 
-		<?php if($d['member']['form_tel2']):?>
+		<?php if($d['member']['form_settings_tel2']):?>
 		<div class="form-group">
-			<label>휴대전화 <?php if($d['member']['form_tel2_required']):?><span class="text-danger">*</span><?php endif?></label>
+			<label>휴대전화 <?php if($d['member']['form_settings_tel2_required']):?><span class="text-danger">*</span><?php endif?></label>
 			<?php $tel2=explode('-',$my['tel2'])?>
 			<div class="row m-b-1">
 				<div class="col-xs-4">
@@ -111,9 +110,9 @@
 		</div>
 		<?php endif?>
 
-		<?php if($d['member']['form_birth']):?>
+		<?php if($d['member']['form_settings_birth']):?>
 		<div class="form-group">
-			<label>생년월일 <?php if($d['member']['form_birth_required']):?> <span class="text-danger">*</span><?php endif?></label>
+			<label>생년월일 <?php if($d['member']['form_settings_birth_required']):?> <span class="text-danger">*</span><?php endif?></label>
 			<?php $tel2=explode('-',$my['tel2'])?>
 			<div class="row m-b-1">
 				<div class="col-xs-4">
@@ -160,9 +159,9 @@
 		</div>
 		<?php endif?>
 
-		<?php if($d['member']['form_sex']):?>
+		<?php if($d['member']['form_settings_sex']):?>
 		<div class="form-group">
-			<label>성별 <?php if($d['member']['form_sex_required']):?><span class="text-danger">*</span><?php endif?></label>
+			<label>성별 <?php if($d['member']['form_settings_sex_required']):?><span class="text-danger">*</span><?php endif?></label>
 			<div class="form-group">
 				<label class="custom-control custom-radio">
 					<input type="radio" class="custom-control-input" name="sex" class="custom-control-input" value="1"<?php if($my['sex']==1):?> checked="checked"<?php endif?>>
@@ -179,26 +178,26 @@
 		<?php endif?>
 
 		<!-- 주소 -->
-		<?php if($d['member']['form_addr']):?>
+		<?php if($d['member']['form_settings_addr']):?>
 		<div class="form-group">
-			<label>주소 <?php if($d['member']['form_addr_required']):?><span class="text-danger">*</span><?php endif?></label>
+			<label>주소 <?php if($d['member']['form_settings_addr_required']):?><span class="text-danger">*</span><?php endif?></label>
 			<div id="addrbox"<?php if($my['addr0']=='해외'):?> class="hidden"<?php endif?>>
 				<div class="input-group" style="margin-bottom: 5px">
-					<input type="number" class="form-control" name="zip_1" id="zip1" placeholder="" readonly>
+					<input type="number" class="form-control" name="zip_1" value="<?php echo substr($my['zip'],0,5)?>" id="zip1" placeholder="" readonly>
 					<span class="input-group-btn">
 						<button class="btn btn-secondary" type="button" onclick="openDaumPostcode();">
 							<i class="fa fa-search"></i>우편번호
 						</button>
 					</span>
 				</div>
-				<input class="form-control" type="text" value="" name="addr1" id="addr1" readonly placeholder="우편번호를 선택" style="margin-bottom: 5px">
-				<input class="form-control" type="text" value="" name="addr2" id="addr2" style="margin-bottom: 5px" placeholder="상세 주소를 입력">
+				<input class="form-control" type="text" value="<?php echo $my['addr1']?>" name="addr1" id="addr1" readonly placeholder="우편번호를 선택" style="margin-bottom: 5px">
+				<input class="form-control" type="text" value="<?php echo $my['addr2']?>" name="addr2" id="addr2" style="margin-bottom: 5px" placeholder="상세 주소를 입력">
 				<div class="invalid-feedback">
 					주소를 입력해주세요.
 				</div>
 			</div>
 
-			<?php if($d['member']['form_overseas']):?>
+			<?php if($d['member']['form_settings_overseas']):?>
       <div class="m-t-1">
         <?php if($my['addr0']=='해외'):?>
 				<label class="custom-control custom-checkbox">
@@ -210,7 +209,7 @@
 				<label class="custom-control custom-checkbox">
 				  <input type="checkbox" class="custom-control-input" name="overseas" value="1" onclick="overseasChk(this);">
 				  <span class="custom-control-indicator"></span>
-				  <span class="custom-control-description" id="overseas_ment">해외거주자일 경우 체크해 주세요.<</span>
+				  <span class="custom-control-description" id="overseas_ment">해외거주자일 경우 체크해 주세요.</span>
 				</label>
         <?php endif?>
       </div>
@@ -238,9 +237,9 @@
 		</script>
 		<?php endif?>
 
-		<?php if($d['member']['form_bio']):?>
+		<?php if($d['member']['form_settings_bio']):?>
 	  <div class="form-group">
-	    <label>간단소개 <?php if($d['member']['form_bio_required']):?> <span class="text-danger">*</span><?php endif?></label>
+	    <label>간단소개 <?php if($d['member']['form_settings_bio_required']):?> <span class="text-danger">*</span><?php endif?></label>
 	    <textarea class="form-control" name="bio" rows="3" placeholder="간략한 소개글을 입력해주세요."><?php echo $my['bio']?></textarea>
 			<div class="invalid-feedback">
 				간단소개를 입력해 주세요.
@@ -248,9 +247,9 @@
 	  </div>
 		<?php endif?>
 
-		<?php if($d['member']['form_home']):?>
+		<?php if($d['member']['form_settings_home']):?>
 		<div class="form-group">
-	    <label>홈페이지<?php if($d['member']['form_home_required']):?> <span class="text-danger">*</span><?php endif?></label>
+	    <label>홈페이지<?php if($d['member']['form_settings_home_required']):?> <span class="text-danger">*</span><?php endif?></label>
 	    <input type="text" class="form-control" name="home" value="<?php echo $my['home']?>" placeholder="URL을 입력하세요.">
 			<div class="invalid-feedback">
 				홈페이지 주소를 입력해주세요.
@@ -258,9 +257,9 @@
 	  </div>
 		<?php endif?>
 
-		<?php if($d['member']['form_job']):?>
+		<?php if($d['member']['form_settings_job']):?>
 	  <div class="form-group">
-	    <label>직업<?php if($d['member']['form_job_required']):?> <span class="text-danger">*</span><?php endif?></label>
+	    <label>직업<?php if($d['member']['form_settings_job_required']):?> <span class="text-danger">*</span><?php endif?></label>
 	    <select class="form-control custom-select" name="job">
 				<option value="">&nbsp;+ 선택하세요</option>
     		<option value="" disabled>------------------</option>
@@ -279,9 +278,9 @@
 	  </div>
 		<?php endif?>
 
-		<?php if($d['member']['form_marr']):?>
+		<?php if($d['member']['form_settings_marr']):?>
 		<div class="form-group">
-			<label>결혼기념일 <?php if($d['member']['form_marr_required']):?> <span class="text-danger">*</span><?php endif?></label>
+			<label>결혼기념일 <?php if($d['member']['form_settings_marr_required']):?> <span class="text-danger">*</span><?php endif?></label>
 			<?php $tel2=explode('-',$my['tel2'])?>
 			<div class="row m-b-1">
 				<div class="col-xs-4">
@@ -370,7 +369,7 @@ function sameCheck(obj,layer) {
 
 $('#memberForm').submit( function(event){
 
-  <?php if($d['member']['form_nic_required']):?>
+  <?php if($d['member']['form_settings_nic_required']):?>
 	if (f.check_nic.value == '0')
 	{
 		f.nic.classList.add('is-invalid')
@@ -386,7 +385,7 @@ $('#memberForm').submit( function(event){
 		return false;
 	}
 
-  <?php if($d['member']['form_tel1']&&$d['member']['form_tel1_required']):?>
+  <?php if($d['member']['form_settings_tel1']&&$d['member']['form_settings_tel1_required']):?>
 	if (f.tel1_1.value == '')
 	{
 		f.tel1_1.classList.add('is-invalid');
@@ -407,7 +406,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-	<?php if($d['member']['form_tel2']&&$d['member']['form_tel2_required']):?>
+	<?php if($d['member']['form_settings_tel2']&&$d['member']['form_settings_tel2_required']):?>
 	if (f.tel2_1.value == '')
 	{
 		f.tel2_1.classList.add('is-invalid');
@@ -428,7 +427,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-  <?php if($d['member']['form_birth']&&$d['member']['form_birth_required']):?>
+  <?php if($d['member']['form_settings_birth']&&$d['member']['form_settings_birth_required']):?>
 	if (f.birth_1.value == '')
 	{
 		f.birth_1.classList.add('is-invalid');
@@ -449,7 +448,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-  <?php if($d['member']['form_sex']&&$d['member']['form_sex_required']):?>
+  <?php if($d['member']['form_settings_sex']&&$d['member']['form_settings_sex_required']):?>
 	if (f.sex[0].checked == false && f.sex[1].checked == false)
 	{
 		f.sex.classList.add('is-invalid');
@@ -457,7 +456,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-  <?php if($d['member']['form_addr']&&$d['member']['form_addr_required']):?>
+  <?php if($d['member']['form_settings_addr']&&$d['member']['form_settings_addr_required']):?>
   if (!f.overseas || f.overseas.checked == false)
   {
     if (f.addr1.value == ''||f.addr2.value == '')
@@ -469,7 +468,7 @@ $('#memberForm').submit( function(event){
   }
   <?php endif?>
 
-  <?php if($d['member']['form_bio']&&$d['member']['form_bio_required']):?>
+  <?php if($d['member']['form_settings_bio']&&$d['member']['form_settings_bio_required']):?>
 	if (f.bio.value == '')
 	{
     f.bio.classList.add('is-invalid');
@@ -478,7 +477,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-  <?php if($d['member']['form_home']&&$d['member']['form_home_required']):?>
+  <?php if($d['member']['form_settings_home']&&$d['member']['form_settings_home_required']):?>
 	if (f.home.value == '')
 	{
     f.home.classList.add('is-invalid');
@@ -487,7 +486,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-  <?php if($d['member']['form_job']&&$d['member']['form_job_required']):?>
+  <?php if($d['member']['form_settings_job']&&$d['member']['form_settings_job_required']):?>
 	if (f.job.value == '')
 	{
     f.job.classList.add('is-invalid');
@@ -496,7 +495,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-  <?php if($d['member']['form_marr']&&$d['member']['form_marr_required']):?>
+  <?php if($d['member']['form_settings_marr']&&$d['member']['form_settings_marr_required']):?>
 	if (f.marr_1.value == '')
 	{
     f.marr_1.classList.add('is-invalid');

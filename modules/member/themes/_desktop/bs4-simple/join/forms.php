@@ -12,7 +12,6 @@
 
 			<form id="memberForm" role="form" action="<?php echo $g['s']?>/" method="post" autocomplete="off">
 				<input type="hidden" name="r" value="<?php echo $r?>">
-				<input type="hidden" name="c" value="<?php echo $c?>">
 				<input type="hidden" name="m" value="<?php echo $m?>">
 				<input type="hidden" name="front" value="<?php echo $front?>">
 				<input type="hidden" name="a" value="join">
@@ -47,9 +46,9 @@
 					</div>
 				</div>
 
-				<?php if($d['member']['form_nic']):?>
+				<?php if($d['member']['form_join_nic']):?>
 				<div class="form-group row">
-			    <label class="col-sm-2 col-form-label">닉네임<?php if($d['member']['form_nic_required']):?> <span class="text-danger">*</span><?php endif?></label>
+			    <label class="col-sm-2 col-form-label">닉네임<?php if($d['member']['form_join_nic_required']):?> <span class="text-danger">*</span><?php endif?></label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" name="nic" id="nic" value="<?php echo $nic?>" placeholder="닉네임을 입력해 주세요." onblur="sameCheck(this,'nic-feedback');">
 						<div id="nic-feedback"></div>
@@ -77,9 +76,9 @@
 				</div>
 
 
-				<?php if($d['member']['form_tel1']):?>
+				<?php if($d['member']['form_join_tel1']):?>
 			    <div class="form-group row">
-			      <label class="col-sm-2 col-form-label">전화번호 <?php if($d['member']['form_tel1_required']):?><span class="text-danger">*</span><?php endif?></label>
+			      <label class="col-sm-2 col-form-label">전화번호 <?php if($d['member']['form_join_tel1_required']):?><span class="text-danger">*</span><?php endif?></label>
 			      <div class="col-sm-10">
 			        <div class="form-inline">
 			          <input type="text" name="tel1_1" value="" maxlength="4" size="4" class="form-control"><span class="px-1">-</span>
@@ -94,9 +93,9 @@
 			    </div>
 				<?php endif?>
 
-				<?php if($d['member']['form_tel2']):?>
+				<?php if($d['member']['form_join_tel2']):?>
 			    <div class="form-group row">
-			      <label class="col-sm-2 col-form-label">휴대전화 <?php if($d['member']['form_tel2_required']):?><span class="text-danger">*</span><?php endif?></label>
+			      <label class="col-sm-2 col-form-label">휴대전화 <?php if($d['member']['form_join_tel2_required']):?><span class="text-danger">*</span><?php endif?></label>
 			      <div class="col-sm-10">
 			        <div class="form-inline">
 			      		<input type="text" name="tel2_1" value="" maxlength="3" size="4" class="form-control"><span class="px-1">-</span>
@@ -114,9 +113,9 @@
 			    </div>
 				<?php endif?>
 
-				<?php if($d['member']['form_birth']):?>
+				<?php if($d['member']['form_join_birth']):?>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">생년월일<?php if($d['member']['form_birth_required']):?> <span class="text-danger">*</span><?php endif?></label>
+			    <label class="col-sm-2 col-form-label">생년월일<?php if($d['member']['form_join_birth_required']):?> <span class="text-danger">*</span><?php endif?></label>
 			    <div class="col-sm-10">
 
 			      <div class="form-inline">
@@ -154,9 +153,9 @@
 				<?php endif?>
 
 
-				<?php if($d['member']['form_sex']):?>
+				<?php if($d['member']['form_join_sex']):?>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">성별 <?php if($d['member']['form_sex_required']):?><span class="text-danger">*</span><?php endif?></label>
+			    <label class="col-sm-2 col-form-label">성별 <?php if($d['member']['form_join_sex_required']):?><span class="text-danger">*</span><?php endif?></label>
 			    <div class="col-sm-10">
 			      <div class="custom-control custom-radio  custom-control-inline">
 			        <input type="radio" id="sex_1" name="sex" class="custom-control-input" value="1"<?php if($regis_jumin2&&(substr($regis_jumin2,0,1)%2)==1):?> checked="checked"<?php endif?> >
@@ -174,9 +173,9 @@
 				<?php endif?>
 
 
-				<?php if($d['member']['form_addr']):?>
+				<?php if($d['member']['form_join_addr']):?>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">주소 <?php if($d['member']['form_addr_required']):?><span class="text-danger">*</span><?php endif?></label>
+			    <label class="col-sm-2 col-form-label">주소 <?php if($d['member']['form_join_addr_required']):?><span class="text-danger">*</span><?php endif?></label>
 			    <div class="col-sm-10">
 
 			      <div id="addrbox">
@@ -196,7 +195,7 @@
 
 			      </div><!-- /#addrbox -->
 
-			      <?php if($d['member']['form_overseas']):?>
+			      <?php if($d['member']['form_join_overseas']):?>
 			      <div class="">
 			        <?php if($my['addr0']=='해외'):?>
 			        <div class="custom-control custom-checkbox">
@@ -236,9 +235,9 @@
 			  <?php endif?>
 
 
-				<?php if($d['member']['form_bio']):?>
+				<?php if($d['member']['form_join_bio']):?>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">간단소개<?php if($d['member']['form_bio_required']):?> <span class="text-danger">*</span><?php endif?></label>
+			    <label class="col-sm-2 col-form-label">간단소개<?php if($d['member']['form_join_bio_required']):?> <span class="text-danger">*</span><?php endif?></label>
 			    <div class="col-sm-10">
 			      <textarea class="form-control" name="bio" rows="3" placeholder="간략한 소개글을 입력해주세요."><?php echo $my['bio']?></textarea>
 			      <div class="invalid-feedback">
@@ -248,9 +247,9 @@
 			  </div>
 			  <?php endif?>
 
-			  <?php if($d['member']['form_home']):?>
+			  <?php if($d['member']['form_join_home']):?>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">홈페이지<?php if($d['member']['form_home_required']):?> <span class="text-danger">*</span><?php endif?></label>
+			    <label class="col-sm-2 col-form-label">홈페이지<?php if($d['member']['form_join_home_required']):?> <span class="text-danger">*</span><?php endif?></label>
 			    <div class="col-sm-10">
 			      <input type="text" class="form-control" name="home" value="" placeholder="URL을 입력하세요.">
 			      <div class="invalid-feedback">
@@ -260,9 +259,9 @@
 			  </div>
 			  <?php endif?>
 
-			  <?php if($d['member']['form_job']):?>
+			  <?php if($d['member']['form_join_job']):?>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">직업<?php if($d['member']['form_job_required']):?> <span class="text-danger">*</span><?php endif?></label>
+			    <label class="col-sm-2 col-form-label">직업<?php if($d['member']['form_join_job_required']):?> <span class="text-danger">*</span><?php endif?></label>
 			    <div class="col-sm-10">
 			      <select class="form-control custom-select" name="job">
 			    		<option value="">&nbsp;+ 선택하세요</option>
@@ -283,9 +282,9 @@
 			  </div>
 				<?php endif?>
 
-				<?php if($d['member']['form_marr']):?>
+				<?php if($d['member']['form_join_marr']):?>
 			  <div class="form-group row">
-			    <label class="col-sm-2 col-form-label">결혼기념일<?php if($d['member']['form_marr_required']):?> <span class="text-danger">*</span><?php endif?></label>
+			    <label class="col-sm-2 col-form-label">결혼기념일<?php if($d['member']['form_join_marr_required']):?> <span class="text-danger">*</span><?php endif?></label>
 			    <div class="col-sm-10">
 
 			      <div class="form-inline">
@@ -423,7 +422,7 @@ $('#memberForm').submit( function(event){
 		f.name.focus();
 		return false;
 	}
-	<?php if($d['member']['form_nic_required']):?>
+	<?php if($d['member']['form_join_nic_required']):?>
 	if (f.check_nic.value == '0')
 	{
 		f.nic.classList.add('is-invalid')
@@ -458,7 +457,7 @@ $('#memberForm').submit( function(event){
 		return false;
 	}
 
-	<?php if($d['member']['form_tel1']&&$d['member']['form_tel1_required']):?>
+	<?php if($d['member']['form_join_tel1']&&$d['member']['form_join_tel1_required']):?>
 	if (f.tel1_1.value == '')
 	{
 		f.tel1_1.classList.add('is-invalid');
@@ -479,7 +478,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-	<?php if($d['member']['form_tel2']&&$d['member']['form_tel2_required']):?>
+	<?php if($d['member']['form_join_tel2']&&$d['member']['form_join_tel2_required']):?>
 	if (f.tel2_1.value == '')
 	{
 		f.tel2_1.classList.add('is-invalid');
@@ -500,7 +499,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-	<?php if($d['member']['form_birth']&&$d['member']['form_birth_required']):?>
+	<?php if($d['member']['form_join_birth']&&$d['member']['form_join_birth_required']):?>
 	if (f.birth_1.value == '')
 	{
 		f.birth_1.classList.add('is-invalid');
@@ -521,7 +520,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-	<?php if($d['member']['form_sex']&&$d['member']['form_sex_required']):?>
+	<?php if($d['member']['form_join_sex']&&$d['member']['form_join_sex_required']):?>
 	if (f.sex[0].checked == false && f.sex[1].checked == false)
 	{
 		f.sex.classList.add('is-invalid');
@@ -529,7 +528,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-	<?php if($d['member']['form_addr']&&$d['member']['form_addr_required']):?>
+	<?php if($d['member']['form_join_addr']&&$d['member']['form_join_addr_required']):?>
 	if (!f.overseas || f.overseas.checked == false)
 	{
 		if (f.addr1.value == ''||f.addr2.value == '')
@@ -541,7 +540,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-	<?php if($d['member']['form_bio']&&$d['member']['form_bio_required']):?>
+	<?php if($d['member']['form_join_bio']&&$d['member']['form_join_bio_required']):?>
 	if (f.bio.value == '')
 	{
 		f.bio.classList.add('is-invalid');
@@ -550,7 +549,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-	<?php if($d['member']['form_home']&&$d['member']['form_home_required']):?>
+	<?php if($d['member']['form_join_home']&&$d['member']['form_join_home_required']):?>
 	if (f.home.value == '')
 	{
 		f.home.classList.add('is-invalid');
@@ -559,7 +558,7 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-	<?php if($d['member']['form_job']&&$d['member']['form_job_required']):?>
+	<?php if($d['member']['form_join_job']&&$d['member']['form_join_job_required']):?>
 	if (f.job.value == '')
 	{
 		f.job.classList.add('is-invalid');
@@ -568,7 +567,201 @@ $('#memberForm').submit( function(event){
 	}
 	<?php endif?>
 
-	<?php if($d['member']['form_marr']&&$d['member']['form_marr_required']):?>
+	<?php if($d['member']['form_join_marr']&&$d['member']['form_join_marr_required']):?>
+	if (f.marr_1.value == '')
+	{
+		f.marr_1.classList.add('is-invalid');
+		f.marr_1.focus();
+		return false;
+	}
+	if (f.marr_2.value == '')
+	{
+		f.marr_2.classList.add('is-invalid');
+		f.marr_2.focus();
+		return false;
+	}
+	if (f.marr_3.value == '')
+	{
+		f.marr_3.classList.add('is-invalid');
+		f.marr_3.focus();
+		return false;
+	}
+	<?php endif?>
+
+	if (f.check_id.value == '0' || f.check_email.value == '0' || f.check_pw.value == '0') {
+		event.preventDefault();
+		event.stopPropagation();
+	}
+
+	$('.js-submit').attr("disabled",true);
+	setTimeout("_submit();",500);
+
+	event.preventDefault();
+	event.stopPropagation();
+	}
+);
+
+
+$('#memberForm').submit( function(event){
+
+	if (f.check_id.value == '0')
+	{
+		f.id.classList.add('is-invalid')
+		f.id.focus();
+		return false;
+	}
+	if (f.name.value == '')
+	{
+		f.name.classList.add('is-invalid');
+		f.name.focus();
+		return false;
+	}
+	<?php if($d['member']['form_join_nic_required']):?>
+	if (f.check_nic.value == '0')
+	{
+		f.nic.classList.add('is-invalid')
+		f.nic.focus();
+		return false;
+	}
+	<?php endif?>
+
+	if (f.check_email.value == '0')
+	{
+		f.email.classList.add('is-invalid');
+		f.email.focus();
+		return false;
+	}
+
+	if (f.pw1.value == '')
+	{
+		f.pw1.classList.add('is-invalid');
+		f.pw1.focus();
+		return false;
+	}
+	if (f.pw2.value == '')
+	{
+		f.pw2.classList.add('is-invalid');
+		f.pw2.focus();
+		return false;
+	}
+	if (f.pw1.value != f.pw2.value)
+	{
+		alert('패스워드가 일치하지 않습니다.');
+		f.pw1.focus();
+		return false;
+	}
+
+	<?php if($d['member']['form_join_tel1']&&$d['member']['form_join_tel1_required']):?>
+	if (f.tel1_1.value == '')
+	{
+		f.tel1_1.classList.add('is-invalid');
+		f.tel1_1.focus();
+		return false;
+	}
+	if (f.tel1_2.value == '')
+	{
+		f.tel1_2.classList.add('is-invalid');
+		f.tel1_2.focus();
+		return false;
+	}
+	if (f.tel1_3.value == '')
+	{
+		f.tel1_3.classList.add('is-invalid');
+		f.tel1_3.focus();
+		return false;
+	}
+	<?php endif?>
+
+	<?php if($d['member']['form_join_tel2']&&$d['member']['form_join_tel2_required']):?>
+	if (f.tel2_1.value == '')
+	{
+		f.tel2_1.classList.add('is-invalid');
+		f.tel2_1.focus();
+		return false;
+	}
+	if (f.tel2_2.value == '')
+	{
+		f.tel2_2.classList.add('is-invalid');
+		f.tel2_2.focus();
+		return false;
+	}
+	if (f.tel2_3.value == '')
+	{
+		f.tel2_3.classList.add('is-invalid');
+		f.tel2_3.focus();
+		return false;
+	}
+	<?php endif?>
+
+	<?php if($d['member']['form_join_birth']&&$d['member']['form_join_birth_required']):?>
+	if (f.birth_1.value == '')
+	{
+		f.birth_1.classList.add('is-invalid');
+		f.birth_1.focus();
+		return false;
+	}
+	if (f.birth_2.value == '')
+	{
+		f.birth_2.classList.add('is-invalid');
+		f.birth_2.focus();
+		return false;
+	}
+	if (f.birth_3.value == '')
+	{
+		f.birth_3.classList.add('is-invalid');
+		f.birth_3.focus();
+		return false;
+	}
+	<?php endif?>
+
+	<?php if($d['member']['form_join_sex']&&$d['member']['form_join_sex_required']):?>
+	if (f.sex[0].checked == false && f.sex[1].checked == false)
+	{
+		f.sex.classList.add('is-invalid');
+		return false;
+	}
+	<?php endif?>
+
+	<?php if($d['member']['form_join_addr']&&$d['member']['form_join_addr_required']):?>
+	if (!f.overseas || f.overseas.checked == false)
+	{
+		if (f.addr1.value == ''||f.addr2.value == '')
+		{
+			f.addr2.classList.add('is-invalid');
+			f.addr2.focus();
+			return false;
+		}
+	}
+	<?php endif?>
+
+	<?php if($d['member']['form_join_bio']&&$d['member']['form_join_bio_required']):?>
+	if (f.bio.value == '')
+	{
+		f.bio.classList.add('is-invalid');
+		f.bio.focus();
+		return false;
+	}
+	<?php endif?>
+
+	<?php if($d['member']['form_join_home']&&$d['member']['form_join_home_required']):?>
+	if (f.home.value == '')
+	{
+		f.home.classList.add('is-invalid');
+		f.home.focus();
+		return false;
+	}
+	<?php endif?>
+
+	<?php if($d['member']['form_join_job']&&$d['member']['form_join_job_required']):?>
+	if (f.job.value == '')
+	{
+		f.job.classList.add('is-invalid');
+		f.job.focus();
+		return false;
+	}
+	<?php endif?>
+
+	<?php if($d['member']['form_join_marr']&&$d['member']['form_join_marr_required']):?>
 	if (f.marr_1.value == '')
 	{
 		f.marr_1.classList.add('is-invalid');
@@ -674,8 +867,5 @@ function _submit() {
 	getIframeForAction(f);
 	f.submit();
 }
-
-
-
 
 </script>

@@ -1,0 +1,19 @@
+.card.join-ageement .card-header {
+  background-color: inherit;
+  border-bottom: none;
+  padding-bottom: .425rem;
+}
+.card.join-ageement .card-title {
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  padding-top: .525rem;
+  padding-left: 5px;
+}
+.card.join-ageement .card-header,
+.card.join-ageement .card-block {
+    padding: .625rem;
+}
+.card.join-ageement .card-block p {
+  margin-bottom: .325rem;
+}

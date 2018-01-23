@@ -22,7 +22,6 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
   	<input type="hidden" name="front" value="<?php echo $front?>">
   	<input type="hidden" name="mod" value="<?php echo $_GET['mod']?>">
   	<input type="hidden" name="page" value="forms">
-  	<input type="hidden" name="comp" value="0">
 
   <?php if (!$c): ?>
   <div class="page-header">
@@ -44,14 +43,14 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
 
 	<section class="page-section mt-5" id="privacy">
 		<h4 class="mb-3"><i class="fa fa-file-text-o"></i> 개인정보 취급방침</h4>
-		<ul class="nav nav-tabs hidden-xs hidden-sm">
+		<ul class="nav nav-tabs mb-2">
 		  <li class="nav-item"><a class="nav-link active" href="#agree-privacy-1" data-toggle="tab">개인정보수집 및 이용목적</a></li>
 		  <li class="nav-item"><a class="nav-link" href="#agree-privacy-2" data-toggle="tab">수집하는 개인정보의 항목</a></li>
 		  <li class="nav-item"><a class="nav-link" href="#agree-privacy-3" data-toggle="tab">개인정보보유 및 이용기간</a></li>
 		  <li class="nav-item"><a class="nav-link" href="#agree-privacy-4" data-toggle="tab">개인정보의 위탁처리</a></li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane active" id="agree-privacy-1"><textarea readonly="readonly" class="form-control" rows="12"><?php readfile($agree2File)?></textarea></div>
+			<div class="tab-pane fade show active" id="agree-privacy-1"><textarea readonly="readonly" class="form-control" rows="12"><?php readfile($agree2File)?></textarea></div>
 			<div class="tab-pane" id="agree-privacy-2"><textarea readonly="readonly" class="form-control" rows="12"><?php readfile($agree3File)?></textarea></div>
 			<div class="tab-pane" id="agree-privacy-3"><textarea readonly="readonly" class="form-control" rows="12"><?php readfile($agree4File)?></textarea></div>
 			<div class="tab-pane" id="agree-privacy-4"><textarea readonly="readonly" class="form-control" rows="12"><?php readfile($agree5File)?></textarea></div>
@@ -76,7 +75,6 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
 
 
 <script type="text/javascript">
-//<![CDATA[
 function nextStep(n)
 {
 	var f = document.procForm;
@@ -86,25 +84,6 @@ function nextStep(n)
 		alert('회원으로 가입을 원하실 경우,\n\n[홈페이지 약관 및 개인정보 수집·이용]에 동의하셔야 합니다.');
 		return false;
 	}
-
-	f.comp.value = n;
 	f.submit();
 }
-function tabShow(n)
-{
-	var i;
-
-	for (i = 1; i < 5; i++)
-	{
-		getId('tagree'+i).style.borderBottom = '#dfdfdf solid 1px';
-		getId('tagree'+i).style.background = '#f9f9f9';
-		getId('tagree'+i).style.color = '#666666';
-		getId('bagree'+i).style.display = 'none';
-	}
-	getId('tagree'+n).style.borderBottom = '#ffffff solid 1px';
-	getId('tagree'+n).style.background = '#ffffff';
-	getId('tagree'+n).style.color = '#000000';
-	getId('bagree'+n).style.display = 'block';
-}
-//]]>
 </script>

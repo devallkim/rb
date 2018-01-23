@@ -722,7 +722,7 @@ include_once $_tmpvfile;
 
 							<div class="card mt-3">
 								<div class="card-header">
-									노출항목 및 옵션
+									회원가입 노출항목 및 옵션 <code>join</code>
 								</div>
 								<div class="card-body">
 									<div class="row">
@@ -743,13 +743,13 @@ include_once $_tmpvfile;
 
 											 <?php else:?>
 												 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
-	 												<input type="checkbox" class="custom-control-input" id="form_<?php echo $_key?>" name="form_<?php echo $_key?>" value="1"<?php if($d['member']['form_'.$_key]):?> checked<?php endif?>>
-	 												<label class="custom-control-label" for="form_<?php echo $_key?>"><?php echo $_val?></label>
+	 												<input type="checkbox" class="custom-control-input" id="form_join_<?php echo $_key?>" name="form_join_<?php echo $_key?>" value="1"<?php if($d['member']['form_join_'.$_key]):?> checked<?php endif?>>
+	 												<label class="custom-control-label" for="form_join_<?php echo $_key?>"><?php echo $_val?></label>
 	 											 </div>
 												 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
 												 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
-	 												<input type="checkbox" class="custom-control-input" id="form_<?php echo $_key?>_required" name="form_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_'.$_key.'_required']):?> checked<?php endif?>>
-	 												<label class="custom-control-label" for="form_<?php echo $_key?>_required">필수입력</label>
+	 												<input type="checkbox" class="custom-control-input" id="form_join_<?php echo $_key?>_required" name="form_join_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_join_'.$_key.'_required']):?> checked<?php endif?>>
+	 												<label class="custom-control-label" for="form_join_<?php echo $_key?>_required">필수입력</label>
 	 											 </div>
 
 											 <?php endif?>
@@ -762,15 +762,15 @@ include_once $_tmpvfile;
 											<fieldset>
 
 												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 100px">
-		 											<input type="checkbox" class="custom-control-input" id="form_<?php echo $_key?>" name="form_<?php echo $_key?>" value="1"<?php if($d['member']['form_'.$_key]):?> checked<?php endif?>>
-		 											<label class="custom-control-label" for="form_<?php echo $_key?>"><?php echo $_val?></label>
+		 											<input type="checkbox" class="custom-control-input" id="form_join_<?php echo $_key?>" name="form_join_<?php echo $_key?>" value="1"<?php if($d['member']['form_join_'.$_key]):?> checked<?php endif?>>
+		 											<label class="custom-control-label" for="form_join_<?php echo $_key?>"><?php echo $_val?></label>
 		 										 </div>
 
 			 								 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
 
 											 <div class="custom-control custom-checkbox custom-control-inline">
-	 											<input type="checkbox" class="custom-control-input" id="form_<?php echo $_key?>_required" name="form_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_'.$_key.'_required']):?> checked<?php endif?>>
-	 											<label class="custom-control-label" for="form_<?php echo $_key?>_required">필수입력</label>
+	 											<input type="checkbox" class="custom-control-input" id="form_join_<?php echo $_key?>_required" name="form_join_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_join_'.$_key.'_required']):?> checked<?php endif?>>
+	 											<label class="custom-control-label" for="form_join_<?php echo $_key?>_required">필수입력</label>
 	 										 </div>
 
 											</fieldset>
@@ -779,6 +779,67 @@ include_once $_tmpvfile;
 									</div>
 								</div>
 							</div>
+
+							<div class="card mt-3">
+								<div class="card-header">
+									개인정보설정 노출항목 및 옵션 <code>settings</code>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-6">
+											<?php $opset2 = array('id'=>'아이디','email'=>'이메일','password'=>'패스워드','name'=>'이름','nic'=>'닉네임','birth'=>'생년월일','sex'=>'성별')?>
+											<?php $i=0;foreach($opset2 as $_key => $_val):?>
+										   <fieldset <?php echo $i<4?'disabled':''?>>
+											 <?php if($i<4):?>
+											<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+												<input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+												<label class="custom-control-label" for="customCheck1"><?php echo $_val?></label>
+											</div>
+											 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+											 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+													<input type="checkbox" class="custom-control-input" id="customCheck2" checked>
+													<label class="custom-control-label" for="customCheck2">필수입력</label>
+												 </div>
+
+											 <?php else:?>
+												 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+	 												<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>" name="form_settings_<?php echo $_key?>" value="1"<?php if($d['member']['form_settings_'.$_key]):?> checked<?php endif?>>
+	 												<label class="custom-control-label" for="form_settings_<?php echo $_key?>"><?php echo $_val?></label>
+	 											 </div>
+												 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+												 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+	 												<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>_required" name="form_settings_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_settings_'.$_key.'_required']):?> checked<?php endif?>>
+	 												<label class="custom-control-label" for="form_settings_<?php echo $_key?>_required">필수입력</label>
+	 											 </div>
+
+											 <?php endif?>
+										 		</fieldset>
+										 <?php $i++;endforeach?>
+										</div>
+										<div class="col-sm-6">
+											<?php $opset2 = array('bio'=>'간단소개','home'=>'홈페이지','tel1'=>'집전화','tel2'=>'휴대폰','job'=>'직업','marr'=>'결혼기념일','addr'=>'주소')?>
+											<?php foreach($opset2 as $_key => $_val):?>
+											<fieldset>
+
+												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 100px">
+		 											<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>" name="form_settings_<?php echo $_key?>" value="1"<?php if($d['member']['form_settings_'.$_key]):?> checked<?php endif?>>
+		 											<label class="custom-control-label" for="form_settings_<?php echo $_key?>"><?php echo $_val?></label>
+		 										 </div>
+
+			 								 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+
+											 <div class="custom-control custom-checkbox custom-control-inline">
+	 											<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>_required" name="form_settings_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_settings_'.$_key.'_required']):?> checked<?php endif?>>
+	 											<label class="custom-control-label" for="form_settings_<?php echo $_key?>_required">필수입력</label>
+	 										 </div>
+
+											</fieldset>
+											<?php endforeach?>
+										</div>
+									</div>
+								</div>
+							</div>
+
 						</div><!-- /.card-body -->
 						<div class="card-footer">
 							<button type="submit" class="btn btn-outline-primary btn-block btn-lg my-3"><i class="fa fa-check"></i> 정보저장</button>
