@@ -49,7 +49,11 @@ while(false !== ($file = readdir($opendir)))
 closedir($opendir);
 
 if ($usertype == 'admin') getLink($g['s'].'/?r='.$r.'&panel=Y&pickmodule=site','parent.parent.','','');
-if ($M1['admin']) getLink($g['s'].'/?r='.$r.'&panel=Y&_admpnl_='.urlencode($referer),'parent.parent.','','');
-setrawcookie('site_login_result', rawurlencode('로그인 되었습니다.|success'));  // 처리여부 cookie 저장
+
+if ($M1['admin']) {
+	setrawcookie('site_login_result', rawurlencode('관리자 로그인 되었습니다.|danger'));  // 알림처리를 위한 로그인 상태 cookie 저장
+	getLink($g['s'].'/?r='.$r.'&panel=Y&_admpnl_='.urlencode($referer),'parent.parent.','','');
+}
+setrawcookie('site_login_result', rawurlencode('로그인 되었습니다.|success'));  // 알림처리를 위한 로그인 상태 cookie 저장
 getLink($referer?$referer:$g['s'].'/?r='.$r,'parent.parent.','','');
 ?>
