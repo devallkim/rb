@@ -43,8 +43,6 @@ if($d['member']['form_nic'])
 	}
 }
 
-
-
 // getDbInsert($table['s_mbrid'],'site,id,pw',"'$s','$id','".md5($pw1)."'"); 1.2 암호변경 방식을 아래방식으로 변경
 getDbInsert($table['s_mbrid'],'site,id,pw',"'$s','$id','".getCrypt($pw1,$date['totime'])."'");
 $memberuid  = getDbCnt($table['s_mbrid'],'max(uid)','');
@@ -62,12 +60,12 @@ $birthtype	= $birthtype ? $birthtype : 0;
 $tel1		= $tel1_1 && $tel1_2 && $tel1_3 ? $tel1_1 .'-'. $tel1_2 .'-'. $tel1_3 : '';
 $tel2		= $tel2_1 && $tel2_2 && $tel2_3 ? $tel2_1 .'-'. $tel2_2 .'-'. $tel2_3 : '';
 
-if(!$foreign)
+if(!$overseas)
 {
 	$zip		= $zip_1.$zip_2;
 	$addrx		= explode(' ',$addr1);
 	$addr0		= $addr1 && $addr2 ? $addrx[0] : '';
-   $addr0		= substr($addr0,0,6); // 신주소 및 기타 주소 API 의 경우 '서울특별시' 와 같은 형태로 입력되기 때문에 2 글자로 잘라서 저장(php 4.0 이상 가능 ) 2015.1.11 by kiere@naver.com
+  $addr0		= substr($addr0,0,6); // 신주소 및 기타 주소 API 의 경우 '서울특별시' 와 같은 형태로 입력되기 때문에 2 글자로 잘라서 저장(php 4.0 이상 가능 ) 2015.1.11 by kiere@naver.com
 	$addr1		= $addr1 && $addr2 ? $addr1 : '';
 	$addr2		= trim($addr2);
 }
@@ -88,8 +86,7 @@ $usepoint	= 0;
 $money		= 0;
 $cash		= 0;
 $num_login	= 1;
-$pw_q		= trim($pw_q);
-$pw_a		= trim($pw_a);
+$bio		= trim($bio);
 $now_log	= 1;
 $last_log	= $date['totime'];
 $last_pw	= $date['totime'];
@@ -121,10 +118,10 @@ foreach($_addarray as $_key)
 
 $_QKEY = "memberuid,site,auth,mygroup,level,comp,admin,adm_view,";
 $_QKEY.= "email,name,nic,grade,photo,home,sex,birth1,birth2,birthtype,tel1,tel2,zip,";
-$_QKEY.= "addr0,addr1,addr2,job,marr1,marr2,sms,mailing,smail,point,usepoint,money,cash,num_login,pw_q,pw_a,now_log,last_log,last_pw,is_paper,d_regis,tmpcode,sns,addfield,mbrno";
+$_QKEY.= "addr0,addr1,addr2,job,marr1,marr2,sms,mailing,smail,point,usepoint,money,cash,num_login,bio,now_log,last_log,last_pw,is_paper,d_regis,tmpcode,sns,addfield";
 $_QVAL = "'$memberuid','$s','$auth','$mygroup','$level','$comp','$admin','',";
 $_QVAL.= "'$email','$name','$nic','','$photo','$home','$sex','$birth1','$birth2','$birthtype','$tel1','$tel2','$zip',";
-$_QVAL.= "'$addr0','$addr1','$addr2','$job','$marr1','$marr2','$sms','$mailing','$smail','$point','$usepoint','$money','$cash','$num_login','$pw_q','$pw_a','$now_log','$last_log','$last_pw','$is_paper','$d_regis','','$sns','$addfield','$mbrno'";
+$_QVAL.= "'$addr0','$addr1','$addr2','$job','$marr1','$marr2','$sms','$mailing','$smail','$point','$usepoint','$money','$cash','$num_login','$bio','$now_log','$last_log','$last_pw','$is_paper','$d_regis','','$sns','$addfield'";
 getDbInsert($table['s_mbrdata'],$_QKEY,$_QVAL);
 getDbUpdate($table['s_mbrlevel'],'num=num+1','uid='.$level);
 getDbUpdate($table['s_mbrgroup'],'num=num+1','uid='.$mygroup);
@@ -198,9 +195,6 @@ if ($auth == 2)
 }
 if ($auth == 3)
 {
-	$_SESSION['mbr_uid'] = $memberuid;
-	$_SESSION['mbr_pw']  = getCrypt($pw1,$d_regis);
-	// getLink(RW(0),'parent.','회원가입 인증메일이 발송되었습니다. 이메일('.$email.')확인 후 인증해 주세요.','');
-	getLink('/join/plan','parent.','','');
+	getLink(RW(0),'parent.','회원가입 인증메일이 발송되었습니다. 이메일('.$email.')확인 후 인증해 주세요.','');
 }
 ?>
