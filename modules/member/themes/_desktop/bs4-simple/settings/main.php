@@ -1,6 +1,6 @@
 <h1 class="mb-4">개인정보 수정</h1>
 
-<form name="memberForm" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
+<form id="memberForm" role="form" action="<?php echo $g['s']?>/" method="post">
   <input type="hidden" name="r" value="<?php echo $r?>">
   <input type="hidden" name="m" value="<?php echo $m?>">
   <input type="hidden" name="front" value="<?php echo $front?>">
@@ -27,8 +27,11 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">닉네임<?php if($d['member']['form_nic_required']):?> <span class="text-danger">*</span><?php endif?></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="nic" value="<?php echo $my['nic']?>"  maxlength="20" required onblur="sameCheck(this,'hLayernic');">
+      <input type="text" class="form-control" name="nic" value="<?php echo $my['nic']?>"  maxlength="20" onblur="sameCheck(this,'hLayernic');">
       <div class="valid-feedback" id="hLayernic"></div>
+      <div class="invalid-feedback">
+        닉네임을 입력해 주세요.
+      </div>
       <small class="form-text text-muted">
         웹사이트에서 사용하고 싶은 이름을 입력해 주세요 (8자이내 중복불가)
       </small>
@@ -39,10 +42,11 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">이메일 <span class="text-danger">*</span></label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="email" value="<?php echo $my['email']?>" required onblur="sameCheck(this,'hLayeremail');">
+      <input type="email" class="form-control" name="email" value="<?php echo $my['email']?>" onblur="sameCheck(this,'hLayeremail');">
       <div class="valid-feedback" id="hLayeremail"></div>
-      <small class="form-text text-muted">
-      </small>
+      <div class="invalid-feedback">
+        이메일을 확인해 주세요.
+      </div>
     </div>
   </div>
 
@@ -55,6 +59,9 @@
           <input type="text" name="tel1_1" value="<?php echo $tel1[0]?>" maxlength="4" size="4" class="form-control"><span class="px-1">-</span>
       		<input type="text" name="tel1_2" value="<?php echo $tel1[1]?>" maxlength="4" size="4" class="form-control"><span class="px-1">-</span>
       		<input type="text" name="tel1_3" value="<?php echo $tel1[2]?>" maxlength="4" size="4" class="form-control">
+          <div class="invalid-feedback">
+            전화번호를 입력해주세요.
+          </div>
         </div><!-- /.form-inline -->
 
       </div>
@@ -70,12 +77,13 @@
       		<input type="text" name="tel2_1" value="<?php echo $tel2[0]?>" maxlength="3" size="4" class="form-control"><span class="px-1">-</span>
       		<input type="text" name="tel2_2" value="<?php echo $tel2[1]?>" maxlength="4" size="4" class="form-control"><span class="px-1">-</span>
       		<input type="text" name="tel2_3" value="<?php echo $tel2[2]?>" maxlength="4" size="4" class="form-control">
-
           <div class="custom-control custom-checkbox ml-3">
-            <input type="checkbox" class="custom-control-input" id="sms" name="sms" value="1"<?php if($my['sms']):?> checked="checked"<?php endif?> >
+            <input type="checkbox" class="custom-control-input" id="sms" name="sms" value="1"<?php if($my['sms']):?> checked="checked"<?php endif?>>
             <label class="custom-control-label" for="sms">알림문자를 받겠습니다.</label>
           </div>
-
+          <div class="invalid-feedback">
+            휴대전화 번호를 입력해주세요.
+          </div>
         </div><!-- /.form-inline -->
       </div>
     </div>
@@ -107,12 +115,13 @@
       		<option value="<?php echo sprintf('%02d',$i)?>"<?php if($birth_3==$i):?> selected="selected"<?php endif?>><?php echo $i?></option>
       		<?php endfor?>
     		</select>
-
         <div class="custom-control custom-checkbox ml-3">
           <input type="checkbox" class="custom-control-input" name="birthtype" id="birthtype" value="1"<?php if($my['birthtype']):?> checked="checked"<?php endif?>>
           <label class="custom-control-label" for="birthtype">음력</label>
         </div>
-
+        <div class="invalid-feedback">
+          생년월일을 지정해 주세요.
+        </div>
       </div><!-- /.form-inline -->
 
     </div>
@@ -130,6 +139,9 @@
       <div class="custom-control custom-radio  custom-control-inline">
         <input type="radio" id="sex_2" name="sex" class="custom-control-input" value="2"<?php if($my['sex']==2):?> checked="checked"<?php endif?>>
         <label class="custom-control-label" for="sex_2">여성</label>
+      </div>
+      <div class="invalid-feedback">
+        성별을 선택해 주세요.
       </div>
     </div>
   </div>
@@ -156,12 +168,16 @@
          </div>
          <div class="form-group col-6">
            <input type="text" class="form-control" name="addr2" id="addr2" value="<?php echo $my['addr2']?>">
+           <div class="invalid-feedback">
+             주소를 입력해주세요.
+           </div>
          </div>
        </div>
+
       </div><!-- /#addrbox -->
 
       <?php if($d['member']['form_overseas']):?>
-      <div class="remail shift">
+      <div class="">
         <?php if($my['addr0']=='해외'):?>
         <div class="custom-control custom-checkbox">
           <input type="checkbox" class="custom-control-input" id="overseas" name="overseas" value="1" checked="checked" onclick="overseasChk(this);">
@@ -175,7 +191,6 @@
         <?php endif?>
       </div>
       <?php endif?>
-
 
       <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
       <script>
@@ -205,6 +220,9 @@
     <label class="col-sm-2 col-form-label">간단소개<?php if($d['member']['form_bio_required']):?> <span class="text-danger">*</span><?php endif?></label>
     <div class="col-sm-10">
       <textarea class="form-control" name="bio" rows="3" placeholder="간략한 소개글을 입력해주세요."><?php echo $my['bio']?></textarea>
+      <div class="invalid-feedback">
+        간단소개를 입력해 주세요.
+      </div>
     </div>
   </div>
   <?php endif?>
@@ -214,6 +232,9 @@
     <label class="col-sm-2 col-form-label">홈페이지<?php if($d['member']['form_home_required']):?> <span class="text-danger">*</span><?php endif?></label>
     <div class="col-sm-10">
       <input type="text" class="form-control" name="home" value="<?php echo $my['home']?>" placeholder="URL을 입력하세요.">
+      <div class="invalid-feedback">
+        홈페이지 주소를 입력해주세요.
+      </div>
     </div>
   </div>
   <?php endif?>
@@ -234,6 +255,9 @@
     		<option value="<?php echo trim($_val)?>"<?php if(trim($_val)==$my['job']):?> selected="selected"<?php endif?>>ㆍ<?php echo trim($_val)?></option>
     		<?php endforeach?>
   		</select>
+      <div class="invalid-feedback">
+        직업을 선택해 주세요.
+      </div>
     </div>
   </div>
 	<?php endif?>
@@ -263,6 +287,9 @@
       		<option value="<?php echo sprintf('%02d',$i)?>"<?php if($i==substr($my['marr2'],2,2)):?> selected="selected"<?php endif?>><?php echo $i?></option>
       		<?php endfor?>
     		</select>
+        <div class="invalid-feedback">
+          결혼기념일을 입력해주세요.
+        </div>
       </div><!-- /.form-inline -->
     </div>
   </div>
@@ -270,7 +297,10 @@
 
   <div class="form-group row">
     <div class="col-sm-10 offset-sm-2">
-      <button type="submit" class="btn btn-primary">수정하기</button>
+      <button type="submit" class="btn btn-primary js-submit">
+        <span class="not-loading">수정하기</span>
+        <span class="is-loading"><i class="fa fa-spinner fa-lg fa-spin fa-fw"></i> 수정중 ...</span>
+      </button>
     </div>
   </div>
 </form>
@@ -280,8 +310,9 @@
 
 putCookieAlert('member_settings_result') // 실행결과 알림 메시지 출력
 
-function overseasChk(obj)
-{
+var f = document.getElementById("memberForm");
+
+function overseasChk(obj) {
 	if (obj.checked == true)
 	{
     $('#addrbox').addClass('d-none')
@@ -315,13 +346,11 @@ function sameCheck(obj,layer) {
 	}
 }
 
-
-function saveCheck(f)
-{
-	<?php if($d['member']['form_nic_required']):?>
+$('#memberForm').submit( function(event){
+  <?php if($d['member']['form_nic_required']):?>
 	if (f.check_nic.value == '0')
 	{
-		alert('닉네임을 확인해 주세요.');
+		f.nic.classList.add('is-invalid')
 		f.nic.focus();
 		return false;
 	}
@@ -329,7 +358,7 @@ function saveCheck(f)
 
 	if (f.check_email.value == '0')
 	{
-		alert('이메일을 확인해 주세요.');
+		f.email.classList.add('is-invalid');
 		f.email.focus();
 		return false;
 	}
@@ -337,19 +366,19 @@ function saveCheck(f)
   <?php if($d['member']['form_tel1']&&$d['member']['form_tel1_required']):?>
 	if (f.tel1_1.value == '')
 	{
-		alert('전화번호를 입력해 주세요.');
+		f.tel1_1.classList.add('is-invalid');
 		f.tel1_1.focus();
 		return false;
 	}
 	if (f.tel1_2.value == '')
 	{
-		alert('전화번호를 입력해 주세요.');
+		f.tel1_2.classList.add('is-invalid');
 		f.tel1_2.focus();
 		return false;
 	}
 	if (f.tel1_3.value == '')
 	{
-		alert('전화번호를 입력해 주세요.');
+		f.tel1_3.classList.add('is-invalid');
 		f.tel1_3.focus();
 		return false;
 	}
@@ -358,19 +387,19 @@ function saveCheck(f)
 	<?php if($d['member']['form_tel2']&&$d['member']['form_tel2_required']):?>
 	if (f.tel2_1.value == '')
 	{
-		alert('휴대폰번호를 입력해 주세요.');
+		f.tel2_1.classList.add('is-invalid');
 		f.tel2_1.focus();
 		return false;
 	}
 	if (f.tel2_2.value == '')
 	{
-		alert('휴대폰번호를 입력해 주세요.');
+		f.tel2_2.classList.add('is-invalid');
 		f.tel2_2.focus();
 		return false;
 	}
 	if (f.tel2_3.value == '')
 	{
-		alert('휴대폰번호를 입력해 주세요.');
+		f.tel2_3.classList.add('is-invalid');
 		f.tel2_3.focus();
 		return false;
 	}
@@ -379,19 +408,19 @@ function saveCheck(f)
   <?php if($d['member']['form_birth']&&$d['member']['form_birth_required']):?>
 	if (f.birth_1.value == '')
 	{
-		alert('생년월일을 지정해 주세요.');
+		f.birth_1.classList.add('is-invalid');
 		f.birth_1.focus();
 		return false;
 	}
 	if (f.birth_2.value == '')
 	{
-		alert('생년월일을 지정해 주세요.');
+		f.birth_2.classList.add('is-invalid');
 		f.birth_2.focus();
 		return false;
 	}
 	if (f.birth_3.value == '')
 	{
-		alert('생년월일을 지정해 주세요.');
+		f.birth_3.classList.add('is-invalid');
 		f.birth_3.focus();
 		return false;
 	}
@@ -400,7 +429,7 @@ function saveCheck(f)
   <?php if($d['member']['form_sex']&&$d['member']['form_sex_required']):?>
 	if (f.sex[0].checked == false && f.sex[1].checked == false)
 	{
-		alert('성별을 선택해 주세요.  ');
+		f.sex.classList.add('is-invalid');
 		return false;
 	}
 	<?php endif?>
@@ -410,7 +439,7 @@ function saveCheck(f)
   {
     if (f.addr1.value == ''||f.addr2.value == '')
     {
-      alert('주소를 입력해 주세요.');
+      f.addr2.classList.add('is-invalid');
       f.addr2.focus();
       return false;
     }
@@ -420,7 +449,7 @@ function saveCheck(f)
   <?php if($d['member']['form_bio']&&$d['member']['form_bio_required']):?>
 	if (f.bio.value == '')
 	{
-		alert('간단소개를 입력해 주세요.');
+    f.bio.classList.add('is-invalid');
 		f.bio.focus();
 		return false;
 	}
@@ -429,7 +458,7 @@ function saveCheck(f)
   <?php if($d['member']['form_home']&&$d['member']['form_home_required']):?>
 	if (f.home.value == '')
 	{
-		alert('홈페이지 주소를 입력해 주세요.');
+    f.home.classList.add('is-invalid');
 		f.home.focus();
 		return false;
 	}
@@ -438,7 +467,7 @@ function saveCheck(f)
   <?php if($d['member']['form_job']&&$d['member']['form_job_required']):?>
 	if (f.job.value == '')
 	{
-		alert('직업을 선택해 주세요.');
+    f.job.classList.add('is-invalid');
 		f.job.focus();
 		return false;
 	}
@@ -447,24 +476,32 @@ function saveCheck(f)
   <?php if($d['member']['form_marr']&&$d['member']['form_marr_required']):?>
 	if (f.marr_1.value == '')
 	{
-		alert('결혼기념일을 지정해 주세요.');
+    f.marr_1.classList.add('is-invalid');
 		f.marr_1.focus();
 		return false;
 	}
 	if (f.marr_2.value == '')
 	{
-		alert('결혼기념일을 지정해 주세요.');
+    f.marr_2.classList.add('is-invalid');
 		f.marr_2.focus();
 		return false;
 	}
 	if (f.marr_3.value == '')
 	{
-		alert('결혼기념일을 지정해 주세요.');
+    f.marr_3.classList.add('is-invalid');
 		f.marr_3.focus();
 		return false;
 	}
 	<?php endif?>
+  $('.js-submit').attr("disabled",true);
+  setTimeout("_submit();",500);
 
+	event.preventDefault();
+  event.stopPropagation();
+  }
+);
+
+function _submit() {
 	getIframeForAction(f);
 	f.submit();
 }
