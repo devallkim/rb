@@ -32,7 +32,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 <meta name="robots" content="NOINDEX,NOFOLLOW">
 <title>킴스큐 관리모드 (Rb V <?php echo $d['admin']['version']?>)</title>
 
