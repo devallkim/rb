@@ -52,6 +52,7 @@ if ($usertype == 'admin') getLink($g['s'].'/?r='.$r.'&panel=Y&pickmodule=site','
 
 if ($M1['admin']) {
 	setrawcookie('site_login_result', rawurlencode('관리자 로그인 되었습니다.|default'));  // 알림처리를 위한 로그인 상태 cookie 저장
+	if ($g['mobile']&&$_SESSION['pcmode']!='Y') getLink($referer?$referer:$g['s'].'/?r='.$r,'parent.','','');
 	getLink($g['s'].'/?r='.$r.'&panel=Y&_admpnl_='.urlencode($referer),'parent.','','');
 }
 setrawcookie('site_login_result', rawurlencode('로그인 되었습니다.|default'));  // 알림처리를 위한 로그인 상태 cookie 저장
