@@ -338,6 +338,19 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 					</div>
 
 				<?php if($CINFO['uid']&&!$vtype):?>
+					<div class="form-group row rb-outside">
+						<label class="col-lg-2 col-form-label text-lg-right"></label>
+						<div class="col-lg-10 col-xl-9">
+
+							<div class="custom-control custom-checkbox">
+							  <input type="checkbox" class="custom-control-input" id="mobileCheck"  name="mobile" value="1"<?php if($CINFO['mobile']||!$CINFO['uid']):?> checked<?php endif?>>
+							  <label class="custom-control-label" for="mobileCheck">모바일 출력</label>
+							</div>
+
+						</div>
+					</div>
+
+
 				<div class="form-group row rb-outside">
 					<label class="col-lg-2 col-form-label text-lg-right">코드</label>
 					<div class="col-lg-10 col-xl-9">
@@ -594,11 +607,6 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 										<label class="col-lg-2 col-form-label text-lg-right">메뉴옵션</label>
 										<div class="col-lg-10 col-xl-9">
 											<div class="btn-group btn-group-toggle btn-group-justified" data-toggle="buttons">
-												<label class="btn btn-light<?php if($CINFO['mobile']||!$CINFO['uid']):?> active<?php endif?>">
-													<input type="checkbox" name="mobile" value="1"<?php if($CINFO['mobile']||!$CINFO['uid']):?> checked<?php endif?>>
-													<span class="fa fa-mobile"></span>
-													모바일출력
-												</label>
 												<label class="btn btn-light<?php if($CINFO['target']):?> active<?php endif?>">
 													<input type="checkbox" name="target" value="_blank"<?php if($CINFO['target']):?> checked<?php endif?>>
 													<i class="fa fa-window-restore" aria-hidden="true"></i>

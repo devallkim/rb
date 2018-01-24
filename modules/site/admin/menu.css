@@ -3,6 +3,10 @@
   overflow: auto;
 }
 
+.rb-tree .fa-mobile {
+  font-size: 18px;
+  color: #999
+}
 
 /**
  * Nestable
