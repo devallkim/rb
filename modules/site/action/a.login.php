@@ -5,7 +5,7 @@ $history = $__target ? '-1' : '';
 $id	= trim($_POST['id']);
 $pw	= trim($_POST['pw']);
 
-if (!$id || !$pw) getLink('','','아이디와 패스워드를 입력해 주세요.',$history);
+if (!$id || !$pw) getLink('reload','parent.','이메일과 패스워드를 입력해 주세요.',$history);
 
 if (strpos($id,'@') && strpos($id,'.'))
 {
@@ -17,13 +17,13 @@ else {
 	$M1 = getDbData($table['s_mbrdata'],'memberuid='.$M['uid'],'*');
 }
 
-if (!$M['uid'] || $M1['auth'] == 4) getLink('','','존재하지 않는 아이디입니다.',$history);
-if ($M1['auth'] == 2) getLink('','','회원님은 인증보류 상태입니다.',$history);
-if ($M1['auth'] == 3) getLink('','','회원님은 이메일 인증대기 상태입니다.',$history);
-if ($M['pw'] != getCrypt($pw,$M1['d_regis']) && $M1['tmpcode'] != $pw) getLink('','','패스워드가 일치하지 않습니다.',$history);
+if (!$M['uid'] || $M1['auth'] == 4) getLink('reload','parent.','존재하지 않는 이메일입니다.',$history);
+if ($M1['auth'] == 2) getLink('reload','parent.','회원님은 인증보류 상태입니다.',$history);
+if ($M1['auth'] == 3) getLink('reload','parent.','회원님은 이메일 인증대기 상태입니다.',$history);
+if ($M['pw'] != getCrypt($pw,$M1['d_regis']) && $M1['tmpcode'] != $pw) getLink('reload','parent.','패스워드가 일치하지 않습니다.',$history);
 
 if ($usertype == 'admin')
-if (!$M1['admin']) getLink('','','회원님은 관리자가 아닙니다.',$history);
+if (!$M1['admin']) getLink('reload','parent.','회원님은 관리자가 아닙니다.',$history);
 
 getDbUpdate($table['s_mbrdata'],"tmpcode='',num_login=num_login+1,now_log=1,last_log='".$date['totime']."'",'memberuid='.$M['uid']);
 getDbUpdate($table['s_referer'],'mbruid='.$M['uid'],"d_regis like '".$date['today']."%' and site=".$s." and mbruid=0 and ip='".$_SERVER['REMOTE_ADDR']."'");
@@ -48,12 +48,12 @@ while(false !== ($file = readdir($opendir)))
 }
 closedir($opendir);
 
-if ($usertype == 'admin') getLink($g['s'].'/?r='.$r.'&panel=Y&pickmodule=site','parent.parent.','','');
+if ($usertype == 'admin') getLink($g['s'].'/?r='.$r.'&panel=Y&pickmodule=site','parent.','','');
 
 if ($M1['admin']) {
 	setrawcookie('site_login_result', rawurlencode('관리자 로그인 되었습니다.|default'));  // 알림처리를 위한 로그인 상태 cookie 저장
-	getLink($g['s'].'/?r='.$r.'&panel=Y&_admpnl_='.urlencode($referer),'parent.parent.','','');
+	getLink($g['s'].'/?r='.$r.'&panel=Y&_admpnl_='.urlencode($referer),'parent.','','');
 }
 setrawcookie('site_login_result', rawurlencode('로그인 되었습니다.|default'));  // 알림처리를 위한 로그인 상태 cookie 저장
-getLink($referer?$referer:$g['s'].'/?r='.$r,'parent.parent.','','');
+getLink($referer?$referer:$g['s'].'/?r='.$r,'parent.','','');
 ?>
