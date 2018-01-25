@@ -73,7 +73,11 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 		<div class="login-info">
 			<span class="dropdown">
 				<a href="#" class="rb-username" data-toggle="dropdown">
-					<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="rounded-circle">
+					<?php if ($my['photo']): ?>
+					<img class="rounded-circle" data-role="avatar" src="<?php echo $g['s']?>/_core/opensrc/timthumb/thumb.php?src=/_var/avatar/<?php echo $my['photo']?>&w=50&h=50&s=1" width="25">
+					<?php else: ?>
+					<img class="rounded-circle bg-faded" data-role="avatar" src="<?php echo $g['s']?>/_var/avatar/0.svg" width="25">
+					<?php endif; ?>
 					<span><?php echo $my[$_HS['nametype']]?></span>
 					<small id="rb-notification-name"></small>
 				</a>
