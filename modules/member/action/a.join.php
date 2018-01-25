@@ -43,7 +43,6 @@ if($d['member']['form_nic'])
 	}
 }
 
-// getDbInsert($table['s_mbrid'],'site,id,pw',"'$s','$id','".md5($pw1)."'"); 1.2 암호변경 방식을 아래방식으로 변경
 getDbInsert($table['s_mbrid'],'site,id,pw',"'$s','$id','".getCrypt($pw1,$date['totime'])."'");
 $memberuid  = getDbCnt($table['s_mbrid'],'max(uid)','');
 $auth		= $d['member']['join_auth'];
@@ -53,6 +52,7 @@ $comp		= $d['member']['form_comp'] && $comp ? 1 : 0;
 $admin		= 0;
 $name		= trim($name);
 $photo		= '';
+$cover		= '';
 $home		= $home ? (strstr($home,'http://')?str_replace('http://','',$home):$home) : '';
 $birth1		= $birth_1;
 $birth2		= $birth_2.$birth_3;
@@ -117,10 +117,10 @@ foreach($_addarray as $_key)
 }
 
 $_QKEY = "memberuid,site,auth,mygroup,level,comp,admin,adm_view,";
-$_QKEY.= "email,name,nic,grade,photo,home,sex,birth1,birth2,birthtype,tel1,tel2,zip,";
+$_QKEY.= "email,name,nic,grade,photo,cover,home,sex,birth1,birth2,birthtype,tel1,tel2,zip,";
 $_QKEY.= "addr0,addr1,addr2,job,marr1,marr2,sms,mailing,smail,point,usepoint,money,cash,num_login,bio,now_log,last_log,last_pw,is_paper,d_regis,tmpcode,sns,addfield";
 $_QVAL = "'$memberuid','$s','$auth','$mygroup','$level','$comp','$admin','',";
-$_QVAL.= "'$email','$name','$nic','','$photo','$home','$sex','$birth1','$birth2','$birthtype','$tel1','$tel2','$zip',";
+$_QVAL.= "'$email','$name','$nic','','$photo','$cover','$home','$sex','$birth1','$birth2','$birthtype','$tel1','$tel2','$zip',";
 $_QVAL.= "'$addr0','$addr1','$addr2','$job','$marr1','$marr2','$sms','$mailing','$smail','$point','$usepoint','$money','$cash','$num_login','$bio','$now_log','$last_log','$last_pw','$is_paper','$d_regis','','$sns','$addfield'";
 getDbInsert($table['s_mbrdata'],$_QKEY,$_QVAL);
 getDbUpdate($table['s_mbrlevel'],'num=num+1','uid='.$level);
