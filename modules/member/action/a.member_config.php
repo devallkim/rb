@@ -47,11 +47,13 @@ fwrite($fp, "\$d['member']['join_email'] = \"".$join_email."\";\n");
 fwrite($fp, "\$d['member']['join_email_send'] = \"".$join_email_send."\";\n");
 
 //회원가입 입력양식
-fwrite($fp, "\$d['member']['form_join_agree'] = \"".$form_join_agree."\";\n");
-fwrite($fp, "\$d['member']['form_join_jumin'] = \"".$form_join_jumin."\";\n");
-fwrite($fp, "\$d['member']['form_join_overseas'] = \"".$form_join_overseas."\";\n");
-fwrite($fp, "\$d['member']['form_join_comp'] = \"".$form_join_comp."\";\n");
-fwrite($fp, "\$d['member']['form_join_age'] = \"".$form_join_age."\";\n");
+fwrite($fp, "\$d['member']['form_agree'] = \"".$form_agree."\";\n");
+fwrite($fp, "\$d['member']['form_jumin'] = \"".$form_jumin."\";\n");
+fwrite($fp, "\$d['member']['form_overseas'] = \"".$form_overseas."\";\n");
+fwrite($fp, "\$d['member']['form_orgs'] = \"".$form_orgs."\";\n");
+fwrite($fp, "\$d['member']['form_age'] = \"".$form_age."\";\n");
+
+fwrite($fp, "\$d['member']['form_join_avatar'] = \"".$form_join_avatar."\";\n");
 fwrite($fp, "\$d['member']['form_join_bio'] = \"".$form_join_bio."\";\n");
 fwrite($fp, "\$d['member']['form_join_home'] = \"".$form_join_home."\";\n");
 fwrite($fp, "\$d['member']['form_join_tel1'] = \"".$form_join_tel1."\";\n");
@@ -59,6 +61,7 @@ fwrite($fp, "\$d['member']['form_join_tel2'] = \"".$form_join_tel2."\";\n");
 fwrite($fp, "\$d['member']['form_join_job'] = \"".$form_join_job."\";\n");
 fwrite($fp, "\$d['member']['form_join_marr'] = \"".$form_join_marr."\";\n");
 fwrite($fp, "\$d['member']['form_join_addr'] = \"".$form_join_addr."\";\n");
+fwrite($fp, "\$d['member']['form_join_avatar_required'] = \"".$form_join_avatar_required."\";\n");
 fwrite($fp, "\$d['member']['form_join_bio_required'] = \"".$form_join_bio_required."\";\n");
 fwrite($fp, "\$d['member']['form_join_home_required'] = \"".$form_join_home_required."\";\n");
 fwrite($fp, "\$d['member']['form_join_tel1_required'] = \"".$form_join_tel1_required."\";\n");
@@ -74,11 +77,7 @@ fwrite($fp, "\$d['member']['form_join_sex'] = \"".$form_join_sex."\";\n");
 fwrite($fp, "\$d['member']['form_join_sex_required'] = \"".$form_join_sex_required."\";\n");
 
 //개인정보설정 입력양식
-fwrite($fp, "\$d['member']['form_settings_agree'] = \"".$form_settings_agree."\";\n");
-fwrite($fp, "\$d['member']['form_settings_jumin'] = \"".$form_settings_jumin."\";\n");
-fwrite($fp, "\$d['member']['form_settings_overseas'] = \"".$form_settings_overseas."\";\n");
-fwrite($fp, "\$d['member']['form_settings_comp'] = \"".$form_settings_comp."\";\n");
-fwrite($fp, "\$d['member']['form_settings_age'] = \"".$form_settings_age."\";\n");
+fwrite($fp, "\$d['member']['form_settings_avatar'] = \"".$form_settings_avatar."\";\n");
 fwrite($fp, "\$d['member']['form_settings_bio'] = \"".$form_settings_bio."\";\n");
 fwrite($fp, "\$d['member']['form_settings_home'] = \"".$form_settings_home."\";\n");
 fwrite($fp, "\$d['member']['form_settings_tel1'] = \"".$form_settings_tel1."\";\n");
@@ -86,6 +85,7 @@ fwrite($fp, "\$d['member']['form_settings_tel2'] = \"".$form_settings_tel2."\";\
 fwrite($fp, "\$d['member']['form_settings_job'] = \"".$form_settings_job."\";\n");
 fwrite($fp, "\$d['member']['form_settings_marr'] = \"".$form_settings_marr."\";\n");
 fwrite($fp, "\$d['member']['form_settings_addr'] = \"".$form_settings_addr."\";\n");
+fwrite($fp, "\$d['member']['form_settings_avatar_required'] = \"".$form_settings_avatar_required."\";\n");
 fwrite($fp, "\$d['member']['form_settings_bio_required'] = \"".$form_settings_bio_required."\";\n");
 fwrite($fp, "\$d['member']['form_settings_home_required'] = \"".$form_settings_home_required."\";\n");
 fwrite($fp, "\$d['member']['form_settings_tel1_required'] = \"".$form_settings_tel1_required."\";\n");

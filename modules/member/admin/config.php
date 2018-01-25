@@ -757,7 +757,7 @@ include_once $_tmpvfile;
 										 <?php $i++;endforeach?>
 										</div>
 										<div class="col-sm-6">
-											<?php $opset = array('bio'=>'간단소개','home'=>'홈페이지','tel1'=>'집전화','tel2'=>'휴대폰','job'=>'직업','marr'=>'결혼기념일','addr'=>'주소')?>
+											<?php $opset = array('avatar'=>'프로필 사진','bio'=>'간단소개','home'=>'홈페이지','tel1'=>'집전화','tel2'=>'휴대폰','job'=>'직업','marr'=>'결혼기념일','addr'=>'주소')?>
 											<?php foreach($opset as $_key => $_val):?>
 											<fieldset>
 
@@ -817,7 +817,7 @@ include_once $_tmpvfile;
 										 <?php $i++;endforeach?>
 										</div>
 										<div class="col-sm-6">
-											<?php $opset2 = array('bio'=>'간단소개','home'=>'홈페이지','tel1'=>'집전화','tel2'=>'휴대폰','job'=>'직업','marr'=>'결혼기념일','addr'=>'주소')?>
+											<?php $opset2 = array('avatar'=>'프로필 사진','bio'=>'간단소개','home'=>'홈페이지','tel1'=>'집전화','tel2'=>'휴대폰','job'=>'직업','marr'=>'결혼기념일','addr'=>'주소')?>
 											<?php foreach($opset2 as $_key => $_val):?>
 											<fieldset>
 
