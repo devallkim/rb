@@ -80,11 +80,6 @@ else $g['bbs_reset']	= getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&am
         <ul class="table-view border-top-0">
           <?php foreach($NCD as $R):?>
           <?php $R['mobile']=isMobileConnect($R['agent'])?>
-          <?php
-            $MBR = getDbData($table['s_mbrdata'],'memberuid='.$R['mbruid'],'photo');
-            $avatar = $g['s'].'/_var/avatar/'.$MBR['photo'];
-            $avatar_data=array('src'=>$avatar,'width'=>'84','height'=>'84');
-           ?>
           <li class="table-view-cell<?php echo $R['depth']?' rb-reply rb-reply-0'.$R['depth']:'' ?>" id="item-<?php echo $R['uid']?>">
             <a
               data-toggle="modal"
@@ -95,10 +90,10 @@ else $g['bbs_reset']	= getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&am
               data-regisTime="<?php echo getDateFormat($R['d_regis'],'Y.m.d')?>"
               data-url="<?php echo $g['bbs_view'].$R['uid']?>"
               data-regisName="<?php echo $R[$_HS['nametype']]?>"
-              data-avatarSrc="<?php echo $MBR['photo']?getTimThumb($avatar_data):$g['s'].'/_var/avatar/0.svg' ?>"
+              data-avatarSrc="<?php echo getAavatarSrc($R['mbruid'],'84') ?>"
               data-uid="<?php echo $R['uid'] ?>">
               <?php if (!$R['depth']): ?>
-              <img class="media-object pull-left rb-avatar img-circle bg-faded" src="<?php echo $MBR['photo']?getTimThumb($avatar_data):$g['s'].'/_var/avatar/0.svg' ?>">
+              <img class="media-object pull-left rb-avatar img-circle bg-faded" src="<?php echo getAavatarSrc($R['mbruid'],'84') ?>">
               <?php else: ?>
               <span class="media-object pull-left"><span class="rb-icon fa fa-level-up fa-rotate-90"></span></span>
               <?php endif; ?>
@@ -202,11 +197,6 @@ else $g['bbs_reset']	= getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&am
               <!-- 일반글 출력부 -->
               <?php foreach($RCD as $R):?>
               <?php $R['mobile']=isMobileConnect($R['agent'])?>
-              <?php
-                $MBR = getDbData($table['s_mbrdata'],'memberuid='.$R['mbruid'],'photo');
-                $avatar = $g['s'].'/_var/avatar/'.$MBR['photo'];
-                $avatar_data=array('src'=>$avatar,'width'=>'84','height'=>'84');
-               ?>
               <li class="table-view-cell<?php echo $R['depth']?' rb-reply rb-reply-0'.$R['depth']:'' ?><?php echo $R['hidden']?' secret':'' ?>" id="item-<?php echo $R['uid']?>">
                 <a data-toggle="modal"
                    data-target="#modal-bbs-view"
@@ -216,10 +206,10 @@ else $g['bbs_reset']	= getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&am
                    data-regisTime="<?php echo getDateFormat($R['d_regis'],'Y.m.d')?>"
                    data-url="<?php echo $g['bbs_view'].$R['uid']?>"
                    data-regisName="<?php echo $R[$_HS['nametype']]?>"
-                   data-avatarSrc="<?php echo $MBR['photo']?getTimThumb($avatar_data):$g['s'].'/_var/avatar/0.svg' ?>"
+                   data-avatarSrc="<?php echo getAavatarSrc($R['mbruid'],'84','') ?>"
                    data-uid="<?php echo $R['uid'] ?>" role="button">
                   <?php if (!$R['depth']): ?>
-                  <img class="media-object pull-left rb-avatar img-circle bg-faded" src="<?php echo $MBR['photo']?getTimThumb($avatar_data):$g['s'].'/_var/avatar/0.svg' ?>">
+                  <img class="media-object pull-left rb-avatar img-circle bg-faded" src="<?php echo getAavatarSrc($R['mbruid'],'84') ?>" width="42">
                   <?php else: ?>
                   <span class="media-object pull-left"><span class="rb-icon fa fa-level-up fa-rotate-90"></span></span>
                   <?php endif; ?>

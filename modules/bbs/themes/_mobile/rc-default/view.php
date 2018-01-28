@@ -1,9 +1,3 @@
-<?php
-$MBR = getDbData($table['s_mbrdata'],'memberuid='.$R['mbruid'],'photo');
-$avatar = $g['s'].'/_var/avatar/'.$MBR['photo'];
-$avatar_data=array('src'=>$avatar,'width'=>'84','height'=>'84');
-?>
-
 <section id="page-bbs-view" data-uid="<?php echo $R['uid'] ?>">
 	<header class="bar bar-nav bar-dark bg-primary px-0">
 		<a class="btn btn-link btn-nav pull-left p-x-1" href="<?php echo RW(0)?>">
@@ -33,7 +27,7 @@ $avatar_data=array('src'=>$avatar,'width'=>'84','height'=>'84');
 				<div class="pull-xs-left">
 
 					<div class="media">
-						<img class="media-object pull-left rb-avatar img-circle bg-faded" src="<?php echo $MBR['photo']?getTimThumb($avatar_data):$g['s'].'/_var/avatar/0.svg' ?>" style="width:36px;height:36px">
+						<img class="media-object pull-left rb-avatar img-circle bg-faded" src="<?php echo getAavatarSrc($R['mbruid'],'84','') ?>"  width="42">
 						<div class="media-body m-l-1">
 							<span class="badge badge-default badge-inverted" data-role="regis_name"><?php echo $R[$_HS['nametype']]?></span> <br>
 							<span class="badge badge-default badge-inverted" data-role="regis_time"><?php echo getDateFormat($R['d_regis'],$d['theme']['date_viewf'])?></span>

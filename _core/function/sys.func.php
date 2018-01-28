@@ -583,13 +583,24 @@ function getTimThumb($data=array())
  	$f=$data['filter'];
 	$a=$data['align'];
 	$t=$data['type'];
-	$s=$data['style'];
+	$s=$data['sharpen'];
 	$source='/_core/opensrc/timthumb/thumb.php';
   $img_qry=$source.'?src='.($data['modal']?'':$g['url_host']).$origin_src;
   $img_qry .=($w?'&w='.$w:'').($h?'&h='.$h:'').($q?'&q='.$q:'').($f?'&f='.$f:'').($a?'&a='.$a:'').($t?'&t='.$t:'').($s?'&s='.$s:'');
 
 	if($origin_src) $result=$img_qry;
 	else $result='';
+	return $result;
+}
+
+// 아바타 이미지 추출함수
+function getAavatarSrc($mbruid,$size){
+	global $g,$table;
+	$MBR = getDbData($table['s_mbrdata'],'memberuid='.$mbruid,'photo');
+  $avatar = $g['s'].'/_var/avatar/'.$MBR['photo'];
+	$avatar_data=array('src'=>$avatar,'width'=>$size,'height'=>$size,'sharpen'=>1);
+	if ($MBR['photo']) $result=getTimThumb($avatar_data);
+	else $result=$g['s'].'/_var/avatar/0.svg';
 	return $result;
 }
 
