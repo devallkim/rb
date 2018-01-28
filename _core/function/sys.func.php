@@ -27,6 +27,11 @@ function getPageLink($lnum,$p,$tpage,$img)
 	include_once $GLOBALS['g']['path_core'].'function/lib/page.lib.php';
 	return LIB_getPageLink($lnum,$p,$tpage,$img);
 }
+function getPageLink_RC($lnum,$p,$tpage,$push)
+{
+	include_once $GLOBALS['g']['path_core'].'function/lib/page.lib.php';
+	return LIB_getPageLink_RC($lnum,$p,$tpage,$push);
+}
 //문자열끊기
 function getStrCut($long_str,$cutting_len,$cutting_str)
 {
