@@ -177,7 +177,7 @@ function getFileType($ext)
 {
 	if (strpos('_gif,jpg,jpeg,png,bmp,',strtolower($ext))) return 2;
 	if (strpos('_swf,',strtolower($ext))) return 3;
-	if (strpos('_mid,wav,mp3,',strtolower($ext))) return 4;
+	if (strpos('_mid,wav,mp3,m4a,',strtolower($ext))) return 4;
 	if (strpos('_mp4,asf,asx,avi,mpg,mpeg,wmv,wma,mov,flv,',strtolower($ext))) return 5;
 	if (strpos('_doc,xls,ppt,hwp',strtolower($ext))) return 6;
 	if (strpos('_zip,tar,gz,tgz,alz,',strtolower($ext))) return 7;
