@@ -623,8 +623,8 @@ function getUpImageSrc($R){
   return $src;
 }
 
-// 이미지 resize 함수
-function getDynamicResizeImg($image,$size){
+// 미리보기용 이미지 resize 함수 .htaccess 연계됨
+function getPreviewResize($image,$size){
   $_array=explode('.',$image);
   $name=$_array[0];
   $ext=$_array[1];
