@@ -47,7 +47,6 @@ if ($act == 'info')  // 프로필 정보 변경
 
 	if(!$overseas)
 	{
-		$zip		= $zip_1.$zip_2;
 		$addrx		= explode(' ',$addr1);
 		$addr0		= $addr1 && $addr2 ? $addrx[0] : '';
 		$addr1		= $addr1 && $addr2 ? $addr1 : '';
@@ -75,12 +74,21 @@ if ($act == 'info')  // 프로필 정보 변경
 	}
 
 	$_QVAL = "email='$email',name='$name',nic='$nic',home='$home',sex='$sex',birth1='$birth1',birth2='$birth2',birthtype='$birthtype',tel1='$tel1',tel2='$tel2',";
-	$_QVAL.= "zip='$zip',addr0='$addr0',addr1='$addr1',addr2='$addr2',job='$job',marr1='$marr1',marr2='$marr2',sms='$sms',mailing='$mailing',pw_q='$pw_q',bio='$bio',addfield='$addfield'";
+	$_QVAL.= "zip='$zip',addr0='$addr0',addr1='$addr1',addr2='$addr2',job='$job',marr1='$marr1',marr2='$marr2',sms='$sms',mailing='$mailing',bio='$bio',addfield='$addfield'";
 	getDbUpdate($table['s_mbrdata'],$_QVAL,'memberuid='.$memberuid);
 
-	setrawcookie('member_settings_result', rawurlencode('개인정보가 변경 되었습니다.|success'));  // 처리여부 cookie 저장
-	getLink('reload','parent.','','');
+	if ($send_mod == 'ajax') {
 
+		echo '<script type="text/javascript">';
+		echo 'parent.$.notify({message: "변경 되었습니다."},{type: "default"});';
+		echo '</script>';
+
+		exit;
+
+	} else {
+		setrawcookie('member_settings_result', rawurlencode('개인정보가 변경 되었습니다.|success'));  // 처리여부 cookie 저장
+		getLink('reload','parent.','','');
+	}
 }
 
 

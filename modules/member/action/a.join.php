@@ -2,7 +2,7 @@
 if(!defined('__KIMS__')) exit;
 
 $g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
-$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
+$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$m.'/var/var.php';
 include_once $_tmpvfile;
 
 $id			= trim($id);
@@ -16,30 +16,30 @@ if (!$id || !$name) getLink('', '', '정상적인 접속이 아닙니다.', '');
 
 if (!$check_id || ($d['member']['form_nic'] && !$check_nic) || !$check_email)
 {
-	getLink('','','정상적인 접근이 아닙니다.','');
+	getLink('reload','parent.','정상적인 접근이 아닙니다.','');
 }
 
 if(strstr(','.$d['member']['join_cutid'].',',','.$id.',') || getDbRows($table['s_mbrid'],"id='".$id."'"))
 {
-	getLink('','','사용할 수 없는 아이디입니다.','');
+	getLink('reload','parent.','사용할 수 없는 아이디입니다.'.$_tmpvfile,'');
 }
 if(!$d['member']['join_rejoin'])
 {
 	if(is_file($g['path_tmp'].'out/'.$id.'.txt'))
 	{
-		getLink('','','사용할 수 없는 아이디입니다.','');
+		getLink('reload','parent.','사용할 수 없는 아이디입니다.','');
 	}
 }
 
 if(getDbRows($table['s_mbrdata'],"email='".$email."'"))
 {
-	getLink('','','이미 존재하는 이메일입니다.','');
+	getLink('reload','parent.','이미 존재하는 이메일입니다.','');
 }
 if($d['member']['form_nic'])
 {
 	if(strstr(','.$d['member']['join_cutnic'].',',','.$nic.',') || getDbRows($table['s_mbrdata'],"nic='".$nic."'"))
 	{
-		getLink('','','사용할 수 없는 닉네임입니다.','');
+		getLink('reload','parent.','사용할 수 없는 닉네임입니다.','');
 	}
 }
 
@@ -187,6 +187,7 @@ if ($auth == 1)
 
 	$_SESSION['mbr_uid'] = $memberuid;
   $_SESSION['mbr_pw']  = getCrypt($pw1,$d_regis);
+	setrawcookie('site_login_result', rawurlencode($name.'님 로그인 되셨습니다.|default'));  // 알림처리를 위한 로그인 상태 cookie 저장
 	getLink(RW(0),'parent.','축하합니다. 회원가입 승인되었습니다.','');
 }
 if ($auth == 2)
