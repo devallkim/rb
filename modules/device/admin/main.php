@@ -5,10 +5,10 @@ $R = getDbData($table['s_mobile'],'','*');
 <div class="container-fluid" id="mobilebox">
 
 	<form class="row" name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
-		<input type="hidden" name="r" value="<?php echo $r?>" />
-		<input type="hidden" name="m" value="<?php echo $module?>" />
-		<input type="hidden" name="a" value="mobile" />
-		<input type="hidden" name="checkm" value="<?php echo $R['usemobile']?$R['usemobile']:0?>" />
+		<input type="hidden" name="r" value="<?php echo $r?>">
+		<input type="hidden" name="m" value="<?php echo $module?>">
+		<input type="hidden" name="a" value="mobile">
+		<input type="hidden" name="checkm" value="<?php echo $R['usemobile']?$R['usemobile']:0?>">
 
 		<div class="col-md-6">
 			<ul class="list-inline">
