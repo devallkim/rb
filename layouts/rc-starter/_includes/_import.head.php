@@ -1,6 +1,6 @@
 <meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1">
-<meta name="apple-mobile-web-app-capable" content="no">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 <!-- Seo -->
@@ -22,18 +22,21 @@
 
 <!-- rc css -->
 <?php getImport('rc','css/rc','1.0.0-alpha.4','css')?>
+<?php getImport('rc','css/rc-add','1.0.0-alpha.4','css')?>
 
 <!-- jQuery -->
 <?php getImport('jquery','jquery.min','1.12.4','js')?>
 
 <!-- rc js -->
-<?php getImport('rc','js/rc.min','1.0.0-alpha.4','js')?>
+<?php getImport('rc','js/rc-custom','1.0.0-alpha.4','js')?>
 
 <!-- 시스템 폰트 -->
 <?php getImport('font-awesome','css/font-awesome','4.7.0','css')?>
 
+<?php getImport('autosize','autosize.min','3.0.14','js')?>
+
 <!-- global css -->
-<link href="<?php echo $g['url_layout']?>/_css/_style.css<?php echo $g['wcache']?>" rel="stylesheet">
+<link href="<?php echo $g['url_layout']?>/_css/style.css<?php echo $g['wcache']?>" rel="stylesheet">
 
 <!-- 사이트 헤드 코드 -->
 <?php echo $_HS['headercode']?>

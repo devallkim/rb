@@ -25,9 +25,12 @@
  * ----------------------------------------------------------------------------
  */
 
-/*폰트설정*/
-/*@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);*/
-/* '나눔고딕', 'Nanum Gothic' 나눔고딕 지정시 상당한 로딩(체감 2초이상) 걸리는 문제있음 -김성호 20141001- */
+ body, th, td, input, select, textarea, button {
+  line-height: 1.5;
+  font-family: AppleSDGothicNeo-Light,'HelveticaNeue','Malgun Gothic','맑은 고딕',sans-serif;
+  color: #000;
+ }
+
 
 
 /**
@@ -65,6 +68,18 @@
  * ----------------------------------------------------------------------------
  */
 
+/* modal */
+ .modal .login_nav {
+   margin-top: 1.5rem;
+   margin-bottom: 2rem;
+   text-align: center;
+   border-bottom: 1px solid #ddd;
+ }
+ .modal .login_nav .list-inline .list-inline-item {
+  border-right: 1px solid #ddd;
+  padding-right: .6rem;
+  line-height: 1;
+}
 
  /*card*/
  .card-header {

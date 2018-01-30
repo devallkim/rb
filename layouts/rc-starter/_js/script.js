@@ -1,17 +1,17 @@
-function layoutLogCheck(f)
-{
-	if (f.id.value == '')
-	{
-		alert('아이디나 이메일주소를 입력해 주세요.');
-		f.id.focus();
-		return false;
-	}
-	if (f.pw.value == '')
-	{
-		alert('패스워드를 입력해 주세요.');
-		f.pw.focus();
-		return false;
-	}
-	getIframeForAction(f);
-	return true;
-}
+$(function() {
+
+	$('#modal-login-form').submit( function(event){
+		$(this).find('.js-submit').attr("disabled",true);
+		setTimeout(function(){
+			var f = document.getElementById("modal-login-form");
+			getIframeForAction(f);
+			f.submit();
+		}, 500);
+		event.preventDefault();
+		event.stopPropagation();
+		}
+	);
+
+  putCookieAlert('site_login_result') // 로그인/로그아웃 알림 메시지 출력
+
+});
