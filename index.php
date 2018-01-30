@@ -114,7 +114,7 @@ $g['img_layout'] = $g['url_layout'].'/_images';
 
 define('__KIMS_CONTENT__',$g['path_core'].'engine/content.engine.php');
 
-if($my['admin'] && (!$_SERVER['HTTP_REFERER'] || $panel=='Y') && $panel!='N' && !$iframe)
+if($my['admin'] && (!$_SERVER['HTTP_REFERER'] || $panel=='Y') && $panel!='N' && !$iframe && !is_file($g['dir_layout'].'_var/nopanel.txt'))
 {
 	include $g['path_core'].'engine/adminpanel.engine.php';
 }
@@ -140,4 +140,5 @@ else
 	echo "\n".'<!-- KimsQ Rb v.'.$d['admin']['version'].' / Runtime : '.round(getCurrentDate()-$g['time_start'],3).' -->';
 	if($g['buffer']) ob_end_flush();
 }
+db_close($DB_CONNECT);
 ?>
