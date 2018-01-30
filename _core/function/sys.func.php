@@ -623,6 +623,13 @@ function getUpImageSrc($R){
   return $src;
 }
 
+// 이미지 resize 함수
+function getDynamicResizeImg($image,$size){
+  $_array=explode('.',$image);
+  $name=$_array[0];
+  $ext=$_array[1];
+  $result=$name.'_'.$size.'.'.$ext;
+  return $result;
 // 유트브 대표 이미지 src 추출함수
 function getYoutubeImageSrc($R,$width,$height)
 {
