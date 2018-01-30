@@ -33,9 +33,9 @@ RewriteRule ^(files)/(vimeo)/([a-zA-Z0-9_\-]+)/(thumb)_([0-9]+)x([0-9]+)\.(jpg)$
 
 #timthumb
 RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_([0-9]+)x([0-9]+)\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$6&w=$4&h=$5 [NC,L]
-RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_s\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=75&h=75 [NC,L]
-RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_q\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=150&h=150 [NC,L]
-RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_t\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=100&h=67 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_s\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=75&h=75&s=1 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_q\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=150&h=150&s=1 [NC,L]
+RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_t\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=100&h=67&s=1 [NC,L]
 RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_m\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=240&h=160 [NC,L]
 RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_n\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=320&h=213 [NC,L]
 RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_z\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=640&h=427 [NC,L]
