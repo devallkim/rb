@@ -2,6 +2,7 @@
 <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#0275d8">
 
 <!-- Seo -->
 <meta name="robots" content="<?php echo strip_tags($g['meta_bot'])?>">
