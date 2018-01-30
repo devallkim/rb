@@ -601,10 +601,10 @@ function getTimThumb($data=array())
 // 아바타 이미지 추출함수
 function getAavatarSrc($mbruid,$size){
 	global $g,$table;
-	$MBR = getDbData($table['s_mbrdata'],'memberuid='.$mbruid,'photo');
-  $avatar = $g['s'].'/_var/avatar/'.$MBR['photo'];
+	$M = getDbData($table['s_mbrdata'],'memberuid='.$mbruid,'photo');
+  $avatar = $g['s'].'/_var/avatar/'.$M['photo'];
 	$avatar_data=array('src'=>$avatar,'width'=>$size,'height'=>$size,'sharpen'=>1);
-	if ($MBR['photo']) $result=getTimThumb($avatar_data);
+	if ($M['photo']) $result=getTimThumb($avatar_data);
 	else $result=$g['s'].'/_var/avatar/0.svg';
 	return $result;
 }
