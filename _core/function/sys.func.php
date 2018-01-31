@@ -590,7 +590,7 @@ function getTimThumb($data=array())
 	$t=$data['type'];
 	$s=$data['sharpen'];
 	$source='/_core/opensrc/timthumb/thumb.php';
-  $img_qry=$source.'?src='.($data['modal']?'':$g['url_host']).$origin_src;
+  $img_qry=$source.'?src='.$origin_src;
   $img_qry .=($w?'&w='.$w:'').($h?'&h='.$h:'').($q?'&q='.$q:'').($f?'&f='.$f:'').($a?'&a='.$a:'').($t?'&t='.$t:'').($s?'&s='.$s:'');
 
 	if($origin_src) $result=$img_qry;
