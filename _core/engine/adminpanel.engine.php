@@ -687,13 +687,12 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 	</div>
 </div>
 
-<nav class="navbar navbar-default fixed-bottom d-none" style="border-top:#efefef solid 1px;">
+<nav class="navbar navbar-default fixed-bottom" style="border-top:#efefef solid 1px;" hidden>
 	<div class="container">
 		<div class="btn-group">
 			<div class="login-info">
 				<span class="dropdown" style="top:5px;">
 					<a href="#" class="rb-username" data-toggle="dropdown">
-						<img src="<?php echo $g['s']?>/_var/avatar/<?php echo $my['photo']?$my['photo']:'0.gif'?>" alt="" class="rounded-circle">
 						<span style="width:105px;overflow:hidden;color:#666;">
 							<span>
 								<?php echo $my[$_HS['nametype']]?>
