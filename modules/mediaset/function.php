@@ -15,9 +15,10 @@ function getVodUrl($src)
 {
 	return '//www.youtube.com/watch?feature=player_detailpage&v='.getVodCode($src);
 }
-function getMediaLink($R,$type)
+function getMediaLink($R,$type,$size)
 {
-	if ($R['type'] == 2 || $R['type'] == 5) return $R['url'].$R['folder'].'/'.$R[$type?'tmpname':'thumbname'];
+
+	if ($R['type'] == 2 || $R['type'] == 5) return $R['url'].$R['folder'].'/'.getPreviewResize($R['tmpname'],$size);
 	if ($R['type'] == -1) return $R['src'];
 	if ($R['type'] == 0) return getVodUrl($R['src']);
 
