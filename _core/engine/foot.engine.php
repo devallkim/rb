@@ -4,6 +4,14 @@
 <!-- 푸터 스위치 -->
 <?php foreach($g['switch_3'] as $_switch) include $_switch ?>
 
+<?php if($g['mobile']&&$_SESSION['pcmode']=='Y'&&$iframe!='Y'):?>
+<div id="pctomobile" class="bg-faded" style="width:800px">
+	<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=mobilemode" class="btn btn-block btn-secondary" style="font-size: 4rem;padding: 3rem">
+		<i class="fa fa-mobile fa-lg" aria-hidden="true"></i> 모바일 모드 전환
+	</a>
+</div>
+<?php endif?>
+
 <div id="_box_layer_"></div>
 <div id="_action_layer_"></div>
 <div id="_hidden_layer_"></div>
