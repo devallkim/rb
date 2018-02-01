@@ -97,8 +97,7 @@ while($_R=db_fetch_array($RCD))
 					ftp_close($FTP_CONNECT);
 				}
 				else {
-					unlink($g['path_file'].$U['folder'].'/'.$U['tmpname']);
-					if($U['type']==2) unlink($g['path_file'].$U['folder'].'/'.$U['thumbname']);
+					unlink($g['path_file'].$m.'/'.$U['folder'].'/'.$U['tmpname']);
 				}
 			}
 		}
