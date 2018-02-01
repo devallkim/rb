@@ -1,8 +1,8 @@
 <?php
-$d['admin']['version'] = "2.2.0-alpha.4";
+$d['admin']['version'] = "2.2.0-beta.1";
 $d['admin']['themepc'] = "kimsq-dark";
 $d['admin']['pannellink'] = "kimsq-dark.css";
-$d['admin']['cache_flag'] = "";
+$d['admin']['cache_flag'] = "totime";
 $d['admin']['smtp_host'] = "";
 $d['admin']['smtp_port'] = "465";
 $d['admin']['smtp_auth'] = "";
@@ -36,7 +36,7 @@ $d['admin']['uninstall'] = "1";
 $d['admin']['dblclick'] = "1";
 $d['admin']['editor'] = "simplemde";
 $d['admin']['syslang'] = "DEFAULT";
-$d['admin']['sysmail'] = "admin@kimsq.com";
+$d['admin']['sysmail'] = "";
 $d['admin']['sysmodule'] = "site";
 $d['admin']['codeeidt'] = "monokai";
 ?>
