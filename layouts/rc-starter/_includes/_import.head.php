@@ -36,11 +36,11 @@
 
 <?php getImport('autosize','autosize.min','3.0.14','js')?>
 
-<!-- global css -->
-<link href="<?php echo $g['url_layout']?>/_css/style.css<?php echo $g['wcache']?>" rel="stylesheet">
-
 <!-- 사이트 헤드 코드 -->
 <?php echo $_HS['headercode']?>
 
 <!-- 엔진코드:삭제하지마세요 -->
 <?php include $g['path_core'].'engine/cssjs.engine.php' ?>
+
+<!-- global css -->
+<link href="<?php echo $g['url_layout']?>/_css/style.css<?php echo $g['wcache']?>" rel="stylesheet">

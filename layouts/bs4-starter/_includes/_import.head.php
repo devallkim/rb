@@ -33,8 +33,8 @@
 <!-- 시스템 폰트 -->
 <?php getImport('font-awesome','css/font-awesome','4.7.0','css')?>
 
-<!-- global css -->
-<link href="<?php echo $g['url_layout']?>/_css/style.css<?php echo $g['wcache']?>" rel="stylesheet">
-
 <!-- 엔진코드:삭제하지마세요 -->
 <?php include $g['path_core'].'engine/cssjs.engine.php' ?>
+
+<!-- global css -->
+<link href="<?php echo $g['url_layout']?>/_css/style.css<?php echo $g['wcache']?>" rel="stylesheet">
