@@ -667,4 +667,9 @@ function getHtmlToMarkdownClass($className)
 
   require_once $path.$fileName;
 }
+
+//게시물 링크
+function getBbsPostLink($arr){
+	return RW('m=bbs&bid='.$arr['bbsid'].'&uid='.$arr['uid'].($GLOBALS['s']!=$arr['site']?'&s='.$arr['site']:''));
+}
 ?>
