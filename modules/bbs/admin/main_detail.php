@@ -292,6 +292,7 @@ if ($uid)
 						</label>
 						<div class="col-lg-10 col-xl-9">
 
+							<?php if ($R['uid']): ?>
 							<select name="m_layout" class="form-control custom-select" id="" tabindex="-1">
 								<?php if ($_HS['m_layout']): ?>
 								<option value="0">사이트 레이아웃</option>
@@ -313,7 +314,16 @@ if ($uid)
 								<?php endwhile?>
 								<?php closedir($dirs)?>
 							</select>
+							<?php else: ?>
 
+							<!-- 게시판 신규생성시 모바일 레이아웃을  blank.php를 기본값으로 적용  -->
+							<?php
+								$_m_layoutExp1=explode('/',$_HS['m_layout']);
+								$m_layout_bbs = $_m_layoutExp1[0].'/blank.php';
+							?>
+							<input type="hidden" name="m_layout" value="<?php echo $m_layout_bbs ?>">
+
+							<?php endif; ?>
 						</div>
 				 </div>
 
