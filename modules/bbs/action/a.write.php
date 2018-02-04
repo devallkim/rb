@@ -5,7 +5,7 @@ if(!defined('__KIMS__')) exit;
 if (!$bid) getLink('','','게시판 아이디가 지정되지 않았습니다.','');
 $B = getDbData($table[$m.'list'],"id='".$bid."'",'*');
 if (!$B['uid']) getLink('','','존재하지 않는 게시판입니다.','');
-if (!$subject) getLink('','','제목이 입력되지 않았습니다.','');
+if (!$subject) getLink('reload','parent.','제목이 입력되지 않았습니다.','');
 include_once $g['dir_module'].'var/var.php';
 include_once $g['dir_module'].'var/var.'.$B['id'].'.php';
 
@@ -59,162 +59,6 @@ if ($d['bbs']['badword_action'])
 	}
 }
 
-
-if ($num_upfile || $num_photo)
-{
-
-	include_once $g['path_core'].'function/thumb.func.php';
-	//include_once $g['path_module'].'upload/var/var.php';
-
-	$fserver	= $d['mediaset']['use_fileserver'];
-	$fserverurl = $fserver ? $d['mediaset']['ftp_urlpath'] : $g['url_root'].'/files/bbs/';
-	$incPhoto	= '';
-	$upload		= $uid ? $upload : '';
-	$saveDir	= $g['path_file'].$m.'/';
-	$savePath1	= $saveDir.substr($date['today'],0,4);
-	$savePath2	= $savePath1.'/'.substr($date['today'],4,2);
-	$savePath3	= $savePath2.'/'.substr($date['today'],6,2);
-	$up_folder	= substr($date['today'],0,4).'/'.substr($date['today'],4,2).'/'.substr($date['today'],6,2);
-	$up_caption	= $subject;
-	$up_cync	= '';
-
-	if ($fserver)
-	{
-		$FTP_CONNECT = ftp_connect($d['mediaset']['ftp_host'],$d['mediaset']['ftp_port']);
-		$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['mediaset']['ftp_user'],$d['mediaset']['ftp_pass']);
-		if (!$FTP_CONNECT) getLink('','','FTP서버 연결에 문제가 발생했습니다.','');
-		if (!$FTP_CRESULT) getLink('','','FTP서버 아이디나 패스워드가 일치하지 않습니다.','');
-		if ($d['mediaset']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
-		ftp_chdir($FTP_CONNECT,$d['mediaset']['ftp_folder']);
-		for ($i = 1; $i < 4; $i++)
-		{
-			ftp_mkdir($FTP_CONNECT,$d['mediaset']['ftp_folder'].str_replace('./files/','',${'savePath'.$i}));
-		}
-	}
-	else {
-		for ($i = 1; $i < 4; $i++)
-		{
-			if (!is_dir(${'savePath'.$i}))
-			{
-				mkdir(${'savePath'.$i},0707);
-				@chmod(${'savePath'.$i},0707);
-			}
-		}
-	}
-
-	for ($i = 0; $i < $num_upfile + $num_photo; $i++)
-	{
-		if (!$_FILES['upfile']['tmp_name'][$i]) continue;
-
-		$width		= 0;
-		$height		= 0;
-		$up_name	= strtolower($_FILES['upfile']['name'][$i]);
-		$up_size	= $_FILES['upfile']['size'][$i];
-		$up_fileExt	= getExt($up_name);
-		$up_fileExt	= $up_fileExt == 'jpeg' ? 'jpg' : $up_fileExt;
-		$up_type	= getFileType($up_fileExt);
-		$up_tmpname	= md5($up_name).substr($date['totime'],8,14);
-		$up_tmpname	= $up_type == 2 ? $up_tmpname.'.'.$up_fileExt : $up_tmpname;
-		$up_mingid	= getDbCnt($table['s_upload'],'min(gid)','');
-		$up_gid		= $up_mingid ? $up_mingid - 1 : 100000000;
-		$up_saveFile= $savePath3.'/'.$up_tmpname;
-		$up_hidden	= $up_type == 2 ? 1 : 0;
-
-		if ($fserver)
-		{
-			if ($up_type == 2)
-			{
-				$up_thumbname = md5($up_tmpname);
-				$up_thumbFile = $g['path_tmp'].'backup/'.$up_thumbname;
-				ResizeWidth($_FILES['upfile']['tmp_name'][$i],$up_thumbFile,150);
-				$IM = getimagesize($_FILES['upfile']['tmp_name'][$i]);
-				$width = $IM[0];
-				$height= $IM[1];
-				ftp_put($FTP_CONNECT,$d['mediaset']['ftp_folder'].$up_folder.'/'.$up_thumbname,$up_thumbFile,FTP_BINARY);
-				unlink($up_thumbFile);
-			}
-			ftp_put($FTP_CONNECT,$d['mediaset']['ftp_folder'].$up_folder.'/'.$up_tmpname,$_FILES['upfile']['tmp_name'][$i],FTP_BINARY);
-		}
-		else {
-
-			if (!is_file($up_saveFile))
-			{
-				move_uploaded_file($_FILES['upfile']['tmp_name'][$i], $up_saveFile);
-				if ($up_type == 2)
-				{
-					$up_thumbname = md5($up_tmpname);
-					$up_thumbFile = $savePath3.'/'.$up_thumbname;
-					ResizeWidth($up_saveFile,$up_thumbFile,150);
-					@chmod($up_thumbFile,0707);
-					$IM = getimagesize($up_saveFile);
-					$width = $IM[0];
-					$height= $IM[1];
-				}
-				@chmod($up_saveFile,0707);
-			}
-		}
-
-		$QKEY = "gid,hidden,tmpcode,site,mbruid,type,ext,fserver,url,folder,name,tmpname,thumbname,size,width,height,caption,down,d_regis,d_update,cync";
-		$QVAL = "'$up_gid','$up_hidden','','$s','$mbruid','$up_type','$up_fileExt','$fserver','$fserverurl','$up_folder','$up_name','$up_tmpname','$up_thumbname','$up_size','$width','$height','$up_caption','0','$d_regis','','$up_cync'";
-		getDbInsert($table['s_upload'],$QKEY,$QVAL);
-		$up_lastuid = getDbCnt($table['s_upload'],'max(uid)','');
-		$upload .= '['.$up_lastuid.']';
-		if ($up_type == 2)
-		{
-			if ($fserver)
-			{
-				$incPhoto .= '<img src="'.$d['mediaset']['ftp_urlpath'].$up_folder.'/'.$up_tmpname.'" width="'.$d['mediaset']['width_img'].'" class="photo" alt="" /><br /><br />';
-			}
-			else {
-				$incPhoto .= '<img src="'.$g['url_root'].'/files/'.$up_folder.'/'.$up_tmpname.'" width="'.$d['mediaset']['width_img'].'" class="photo" alt="" /><br /><br />';
-			}
-		}
-
-		getDbUpdate($table['s_numinfo'],'upload=upload+1',"date='".$date['today']."' and site=".$s);
-
-		if ($up_gid == 100000000) db_query("OPTIMIZE TABLE ".$table['s_upload'],$DB_CONNECT);
-
-	}
-
-	if ($uid && $upfiles)
-	{
-		$_uploadtmp = getArrayString($upfiles);
-		foreach($_uploadtmp['data'] as $_val)
-		{
-			$U = getUidData($table['s_upload'],$_val);
-			if ($U['type'] == 2)
-			{
-				if ($fserver)
-				{
-					$incPhoto .= '<img src="'.$d['mediaset']['ftp_urlpath'].$U['folder'].'/'.$U['tmpname'].'" width="'.$d['mediaset']['width_img'].'" class="photo" alt="" /><br /><br />';
-				}
-				else {
-					$incPhoto .= '<img src="'.$g['url_root'].'/files/'.$U['folder'].'/'.$U['tmpname'].'" width="'.$d['mediaset']['width_img'].'" class="photo" alt="" /><br /><br />';
-				}
-			}
-		}
-	}
-
-	if ($incPhoto)
-	{
-		if ($insert_photo == 'top')
-		{
-			$content = $incPhoto.nl2br($content);
-		}
-		if ($insert_photo == 'bottom')
-		{
-			$content = nl2br($content).'<br /><br />'.$incPhoto;
-		}
-		$html = 'HTML';
-	}
-
-	if ($fserver)
-	{
-		ftp_close($FTP_CONNECT);
-	}
-}
-
-
 if (!$uid || $reply == 'Y')
 {
 	if(!getDbRows($table[$m.'day'],"date='".$date['today']."' and site=".$s.' and bbs='.$bbsuid))
@@ -263,9 +107,9 @@ if ($uid)
 		$parentmbr = $R['mbruid'];
 
 		$QKEY = "site,gid,bbs,bbsid,depth,parentmbr,display,hidden,notice,name,nic,mbruid,id,pw,category,subject,content,html,tag,";
-		$QKEY.= "hit,down,comment,oneline,trackback,score1,score2,singo,point1,point2,point3,point4,d_regis,d_modify,d_comment,d_trackback,upload,ip,agent,sns,adddata";
+		$QKEY.= "hit,down,comment,oneline,trackback,score1,score2,singo,point1,point2,point3,point4,d_regis,d_modify,d_comment,d_trackback,upload,ip,agent,sns,featured_img,location,pin,adddata";
 		$QVAL = "'$s','$gid','$bbsuid','$bbsid','$depth','$parentmbr','$display','$hidden','$notice','$name','$nic','$mbruid','$id','$pw','$category','$subject','$content','$html','$tag',";
-		$QVAL.= "'0','0','0','0','0','0','0','0','$point1','$point2','$point3','$point4','$d_regis','','','','$upload','$ip','$agent','','$adddata'";
+		$QVAL.= "'0','0','0','0','0','0','0','0','$point1','$point2','$point3','$point4','$d_regis','','','','$upload','$ip','$agent','','$featured_img','$location','$pin','$adddata'";
 		getDbInsert($table[$m.'data'],$QKEY,$QVAL);
 		getDbInsert($table[$m.'idx'],'site,notice,bbs,gid',"'$s','$notice','$bbsuid','$gid'");
 		getDbUpdate($table[$m.'list'],"num_r=num_r+1,d_last='".$d_regis."'",'uid='.$bbsuid);
@@ -290,7 +134,7 @@ if ($uid)
 
 		$pw = !$R['pw'] && !$R['hidden'] && $hidden && $R['mbruid'] ? $R['mbruid'] : $R['pw'];
 
-		$QVAL = "display='$display',hidden='$hidden',notice='$notice',pw='$pw',category='$category',subject='$subject',content='$content',html='$html',tag='$tag',point3='$point3',point4='$point4',d_modify='$d_regis',upload='$upload',adddata='$adddata'";
+		$QVAL = "display='$display',hidden='$hidden',notice='$notice',pw='$pw',category='$category',subject='$subject',content='$content',html='$html',tag='$tag',point3='$point3',point4='$point4',d_modify='$d_regis',upload='$upload',featured_img='$featured_img',location='$location',pin='$pin',adddata='$adddata'";
 		getDbUpdate($table[$m.'data'],$QVAL,'uid='.$R['uid']);
 		getDbUpdate($table[$m.'idx'],'notice='.$notice,'gid='.$R['gid']);
 		if ($cuid) getDbUpdate($table['s_menu'],"num='".getDbCnt($table[$m.'month'],'sum(num)','site='.$R['site'].' and bbs='.$R['bbs'])."'",'uid='.$cuid);
@@ -311,9 +155,9 @@ else
 	$gid = $mingid ? $mingid-1 : 100000000.00;
 
 	$QKEY = "site,gid,bbs,bbsid,depth,parentmbr,display,hidden,notice,name,nic,mbruid,id,pw,category,subject,content,html,tag,";
-	$QKEY.= "hit,down,comment,oneline,trackback,score1,score2,singo,point1,point2,point3,point4,d_regis,d_modify,d_comment,d_trackback,upload,ip,agent,sns,adddata";
+	$QKEY.= "hit,down,comment,oneline,trackback,score1,score2,singo,point1,point2,point3,point4,d_regis,d_modify,d_comment,d_trackback,upload,ip,agent,sns,featured_img,location,pin,adddata";
 	$QVAL = "'$s','$gid','$bbsuid','$bbsid','$depth','$parentmbr','$display','$hidden','$notice','$name','$nic','$mbruid','$id','$pw','$category','$subject','$content','$html','$tag',";
-	$QVAL.= "'0','0','0','0','0','0','0','0','$point1','$point2','$point3','$point4','$d_regis','','','','$upload','$ip','$agent','','$adddata'";
+	$QVAL.= "'0','0','0','0','0','0','0','0','$point1','$point2','$point3','$point4','$d_regis','','','','$upload','$ip','$agent','','$featured_img','$location','$pin','$adddata'";
 	getDbInsert($table[$m.'data'],$QKEY,$QVAL);
 	getDbInsert($table[$m.'idx'],'site,notice,bbs,gid',"'$s','$notice','$bbsuid','$gid'");
 	getDbUpdate($table[$m.'list'],"num_r=num_r+1,d_last='".$d_regis."'",'uid='.$bbsuid);
@@ -338,31 +182,6 @@ else
 
 $NOWUID = $LASTUID ? $LASTUID : $R['uid'];
 
-if ($trackback)
-{
-	$trackback = trim($trackback);
-	$compaurl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'].'/'.$m.'/'.$NOWUID;
-	if ($trackback != $compaurl)
-	{
-		include_once $g['path_core'].'function/trackback.func.php';
-		$orignurl = 'http://'.$_SERVER['HTTP_HOST'].str_replace('index.php','?m=',$_SERVER['SCRIPT_NAME']).$m.'&bid='.$bbsid.'&uid='.$NOWUID;
-		$result = putTrackback($trackback,$orignurl,getUTFtoKR(strip_tags($subject)),getUTFtoKR(${$_HS['nametype']}),getUTFtoKR(strip_tags($content)),0);
-
-		if ($result)
-		{
-			$minuid = getDbCnt($table['s_trackback'],'min(uid)','');
-			$trackuid = $minuid ? $minuid-1 : 100000000;
-			$cync = '['.$m.']['.$NOWUID.'][m:'.$m.',bid:'.$bbsid.',uid:'.$NOWUID.']';
-
-			$QKEY = "uid,site,type,parent,parentmbr,url,name,subject,content,d_regis,d_modify,cync";
-			$QVAL = "'$trackuid','$s','2','".$m.$NOWUID."','$mbruid','$trackback','','','','$d_regis','','$cync'";
-			getDbInsert($table['s_trackback'],$QKEY,$QVAL);
-			getDbUpdate($table['s_numinfo'],'sndtrack=sndtrack+1',"date='".$date['today']."' and site=".$s);
-
-			if ($trackuid == 100000000) db_query("OPTIMIZE TABLE ".$table['s_trackback'],$DB_CONNECT);
-		}
-	}
-}
 
 if ($tag || $R['tag'])
 {
@@ -411,10 +230,12 @@ if ($snsCallBack && ($sns_t||$sns_f||$sns_m||$sns_y))
 	}
 }
 
-
-
-
 $_SESSION['bbsback'] = $backtype;
+
+$msg = '등록';
+if ($uid) $msg = '수정';
+
+setrawcookie('bbs_action_result', rawurlencode('게시물이 '.$msg.' 되었습니다.|default'));  // 처리여부 cookie 저장
 
 if ($backtype == 'list')
 {
