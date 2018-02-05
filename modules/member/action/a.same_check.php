@@ -124,8 +124,9 @@ else {
 <script type="text/javascript">
 //<![CDATA[
 <?php if(!$resultnum):?>
-parent.document.getElementById("memberForm").<?php echo $fname?>.value = '';
+// parent.document.getElementById("memberForm").<?php echo $fname?>.value = '';
 parent.document.getElementById("memberForm").<?php echo $fname?>.focus();
+parent.document.getElementById("<?php echo $flayer?>").className = "invalid-feedback";
 <?php endif?>
 parent.document.getElementById("memberForm").<?php echo $fname?>.className = "<?php echo $resultclass?>";
 parent.document.getElementById("memberForm").check_<?php echo $fname?>.value = "<?php echo $resultnum?>";

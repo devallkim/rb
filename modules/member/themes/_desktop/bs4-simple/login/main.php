@@ -4,7 +4,6 @@
 		<input type="hidden" name="r" value="<?php echo $r?>">
 		<input type="hidden" name="a" value="login">
 		<input type="hidden" name="referer" value="<?php echo $referer ? $referer : $_SERVER['HTTP_REFERER']?>">
-		<input type="hidden" name="usessl" value="<?php echo $d['member']['login_ssl']?>">
 
 		<a href="/" title="홈" class="logo pt-5 pb-2"><i class="kf kf-bi-06"></i></a>
 

@@ -1,4 +1,4 @@
-<header class="bar bar-nav bar-dark bg-inverse">
+<header class="bar bar-nav bar-light bg-faded">
 	<a class="icon icon-home pull-left" role="button" href="<?php  echo RW(0) ?>"></a>
 	<h1 class="title">로그인</h1>
 </header>
@@ -8,32 +8,32 @@
 		<input type="hidden" name="r" value="<?php echo $r?>">
 		<input type="hidden" name="a" value="login">
 		<input type="hidden" name="referer" value="<?php echo $referer ? $referer : $_SERVER['HTTP_REFERER']?>">
-		<input type="hidden" name="usessl" value="<?php echo $d['member']['login_ssl']?>">
 
-		<div class="form-list stacked">
-			<div class="input-row">
-				<label>아이디</label>
-				<input type="text" name="id" id="id" class="form-control" placeholder="" tabindex="1" autocorrect="off" autocapitalize="off" autofocus="autofocus" required placeholder="아이디를 입력하세요.">
-			</div>
-			<div class="input-row">
-				<label>패스워드</label>
-				<input type="password" name="pw" id="password" class="form-control" placeholder="" tabindex="2" required placeholder="패스워드를 입력하세요.">
-			</div>
-			<div class="content-padded">
-
-				<div class="p-y-1">
-					<label class="custom-control custom-checkbox">
-					  <input type="checkbox" class="custom-control-input" name="login_cookie" value="checked" checked>
-					  <span class="custom-control-indicator"></span>
-					  <span class="custom-control-description">로그인 상태 유지</span>
-					</label>
+		<div class="card">
+			<div class="form-list">
+				<input type="text" placeholder="아이디" name="id" required autocapitalize="off" autocorrect="off">
+				<div class="invalid-feedback">
+					아이디를 입력해 주세요.
 				</div>
-
-
-				<button type="submit" id="rb-submit" class="btn btn-primary btn-lg btn-block">로그인</button>
-				<a class="btn btn-outline-primary btn-block" href="./?mod=join" role="button">회원가입</a>
+				<input type="password" placeholder="패스워드" name="pw" required autocapitalize="off" autocorrect="off">
 			</div>
 		</div>
+
+		<div class="content-padded">
+			<div class="p-y-1">
+				<label class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" name="login_cookie" value="checked" checked>
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-description">로그인 상태 유지</span>
+				</label>
+			</div>
+			<button type="submit" class="btn btn-primary btn-lg btn-block js-submit">
+				<span class="not-loading">로그인</span>
+				<span class="is-loading"><i class="fa fa-spinner fa-lg fa-spin fa-fw"></i> 로그인중 ...</span>
+			</button>
+			<a class="btn btn-outline-primary btn-block" href="./?mod=join" role="button">회원가입</a>
+		</div>
+		<p class="m-t-2 content-padded"><a href="./?m=member&front=login&page=password_reset" class="muted-link">비밀번호를 잊으셨나요?</a></p>
 	</form>
 </main>
 

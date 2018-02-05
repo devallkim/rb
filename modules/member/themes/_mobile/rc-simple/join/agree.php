@@ -22,16 +22,48 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
   <input type="hidden" name="mod" value="<?php echo $_GET['mod']?>">
   <input type="hidden" name="page" value="forms">
 
-  <header class="bar bar-nav bar-dark bg-inverse">
-  	<a class="icon icon-home pull-left" role="button" href="<?php  echo RW(0) ?>"></a>
-  	<h1 class="title">약관동의</h1>
+  <header class="bar bar-nav bar-dark bg-primary px-0">
+  	<a class="icon icon-home pull-left p-x-1" role="button" href="<?php  echo RW(0) ?>"></a>
+  	<h1 class="title">회원가입</h1>
   </header>
+  <div class="bar bar-standard bar-header-secondary rb-step bg-white">
+		<ul class="nav nav-inline">
+      <li class="nav-item active">
+        <span class="badge badge-pill badge-default">1</span>
+		    <a class="nav-link">약관</a>
+		  </li>
+		  <li class="nav-item">
+        <span class="badge badge-pill badge-default">2</span>
+		    <a class="nav-link">아이디</a>
+		  </li>
+		  <li class="nav-item">
+        <span class="badge badge-pill badge-default">3</span>
+		    <a class="nav-link">비밀번호</a>
+		  </li>
+		  <li class="nav-item">
+        <span class="badge badge-pill badge-default">4</span>
+		    <a class="nav-link">이름</a>
+		  </li>
+			<li class="nav-item">
+        <span class="badge badge-pill badge-default">5</span>
+		    <a class="nav-link">이메일</a>
+		  </li>
+			<li class="nav-item">
+        <span class="badge badge-pill badge-default">6</span>
+		    <a class="nav-link">닉네임</a>
+		  </li>
+			<li class="nav-item">
+        <span class="badge badge-pill badge-default">7</span>
+		    <a class="nav-link">부가정보</a>
+		  </li>
+		</ul>
+	</div>
   <footer class="bar bar-footer bar-light bg-faded">
     <button class="btn btn-secondary btn-block" type="button" disabled="true" id="next">다음단계로</button>
   </footer>
 
   <main class="content bg-faded">
-    <div class="card card-full join-ageement m-b-2">
+    <div class="card card-full join-ageement m-b-2 animated fadeIn delay-1">
       <div class="card-header clearfix">
         <h4 class="card-title h5 pull-xs-left">이용약관</h4>
         <a href="#modal-docs" class="btn btn-secondary pull-xs-right" data-toggle="modal" data-title="이용약관" data-type="agreement">
@@ -39,7 +71,7 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
         </a>
       </div>
       <div class="card-block p-t-0">
-        <textarea class="form-control" rows="5" id="agreement"><?php readfile($agree1File)?></textarea>
+        <textarea class="form-control" rows="4" id="agreement"><?php readfile($agree1File)?></textarea>
         <p>
           <label class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="checkbox-agreement">
@@ -52,7 +84,7 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
     </div><!-- /.card -->
 
 
-    <div class="card card-full join-ageement m-b-2">
+    <div class="card card-full join-ageement m-b-2 animated fadeIn delay-1">
       <div class="card-header clearfix">
         <h4 class="card-title h5 pull-xs-left">개인정보 취급방침</h4>
         <a href="#modal-docs" class="btn btn-secondary pull-xs-right" data-toggle="modal" data-title="개인정보취급방침" data-type="privacy">
@@ -60,7 +92,7 @@ $agree5File = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite']
         </a>
       </div>
       <div class="card-block p-t-0">
-        <textarea class="form-control" rows="5" id="privacy"><?php readfile($agree2File)?><?php readfile($agree3File)?><?php readfile($agree4File)?><?php readfile($agree5File)?></textarea>
+        <textarea class="form-control" rows="4" id="privacy"><?php readfile($agree2File)?><?php readfile($agree3File)?><?php readfile($agree4File)?><?php readfile($agree5File)?></textarea>
         <p>
           <label class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="checkbox-privacy">
