@@ -5,7 +5,7 @@ $g['dir_widget_skin'] = $g['path_module'].'/bbs/themes/'.$wdgvar['theme'].'/';
 <link href="<?php echo $g['url_widget_skin'] ?>/_main.css" rel="stylesheet">
 <script src="<?php echo $g['url_widget_skin'] ?>/_main.js"></script>
 
-<div class="widget">
+<section class="widget">
   <header>
     <h3><?php echo $wdgvar['title']?></h3>
     <?php if($wdgvar['link']):?>
@@ -14,7 +14,7 @@ $g['dir_widget_skin'] = $g['path_module'].'/bbs/themes/'.$wdgvar['theme'].'/';
     </a>
     <?php endif?>
   </header>
-  <ul class="table-view table-view-full bg-white" data-role="bbs-list">
+  <ul class="table-view bg-white" data-role="bbs-list">
 
     <?php $_RCD=getDbArray($table['bbsdata'],($wdgvar['bid']?'bbs='.$wdgvar['bid'].' and ':'').'display=1 and site='.$_HS['uid'],'*','gid','asc',$wdgvar['limit'],1)?>
   	<?php while($_R=db_fetch_array($_RCD)):?>
@@ -30,12 +30,9 @@ $g['dir_widget_skin'] = $g['path_module'].'/bbs/themes/'.$wdgvar['theme'].'/';
         data-subject="<?php echo $_R['subject'] ?>">
         <?php echo $_R['subject'] ?> <?php if(getNew($_R['d_regis'],24)):?><small class="text-danger ml-1">N</small><?php endif?>
       </a>
-      <span class="badge badge-default badge-inverted"><?php echo getDateFormat($_R['d_regis'],'Y.m.d')?></span>
+      <span class="badge badge-default badge-inverted"><?php echo getDateFormat($_R['d_regis'],'m.d')?></span>
     </li>
     <?php endwhile?>
     <?php if(!db_num_rows($_RCD)):?><div class="none"></div><?php endif?>
   </ul>
-</div>
-
-<!-- 게시판 모달,팝업등의 컴포넌트 모음 -->
-<?php include_once $g['dir_widget_skin'].'_component.php'?>
+</section><!-- /.widget -->

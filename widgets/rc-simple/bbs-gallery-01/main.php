@@ -5,7 +5,7 @@ $g['dir_widget_skin'] = $g['path_module'].'/bbs/themes/'.$wdgvar['theme'].'/';
 <link href="<?php echo $g['url_widget_skin'] ?>/_main.css" rel="stylesheet">
 <script src="<?php echo $g['url_widget_skin'] ?>/_main.js"></script>
 
-<section class="widget mt-3">
+<section class="widget mt-2">
   <header>
     <h3><?php echo $wdgvar['title']?></h3>
     <a href="<?php echo $wdgvar['link']?>">
@@ -39,7 +39,4 @@ $g['dir_widget_skin'] = $g['path_module'].'/bbs/themes/'.$wdgvar['theme'].'/';
     </div><!-- /.card-deck -->
 
   </div>
-
-
-<!-- 게시판 모달,팝업등의 컴포넌트 모음 -->
-<?php include_once $g['dir_widget_skin'].'_component.php'?>
+</section>
