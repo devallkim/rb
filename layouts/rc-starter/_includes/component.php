@@ -1,7 +1,5 @@
-<!-- 모달 -->
-
-<!-- 로그인 -->
-<div id="modal-login" class="modal" >
+<!-- Modal 로그인 -->
+<div id="modal-login" class="modal zoom">
 	<header class="bar bar-nav bar-light bg-faded p-x-0">
 		<a class="icon icon-left-nav pull-left p-x-1" role="button" data-history="back"></a>
 		<h1 class="title" data-role="title">로그인</h1>
@@ -39,5 +37,19 @@
 			</div>
 		</form>
 		<p class="m-t-2 content-padded"><a href="<?php echo $g['s']?>/?m=member&front=login&page=password_reset" class="muted-link">비밀번호를 잊으셨나요?</a></p>
+	</main>
+</div><!-- /.modal -->
+
+<!-- Modal 사이트맵 -->
+<div id="modal-sitemap" class="modal zoom">
+	<header class="bar bar-nav bar-light bg-faded p-x-0">
+		<a class="icon icon-left-nav pull-left p-x-1" role="button" data-history="back"></a>
+		<h1 class="title" data-role="title">사이드맵</h1>
+	</header>
+
+	<main class="content">
+		<div class="content-padded">
+			<?php getWidget('rc-simple/sitemap',array())?>
+		</div>
 	</main>
 </div><!-- /.modal -->

@@ -24,6 +24,16 @@ $d['layout']['dom'] = array(
 		),
 	),
 
+	/* 프론트 */
+	'front' => array(
+		'메인 페이지',
+		'프론트(메인화면)에 출력할 콘텐츠를 설정합니다. 미디어셋을 이용해서 프론트를 꾸며주세요.',
+		array(
+			array('slide','mediaset','메인 슬라이더',''),
+			array('people','mediaset','팀소개',''),
+		),
+	),
+
 	/* 도움말 */
 	'help' => array(
 		'도움말',

@@ -36,6 +36,17 @@
 
 <?php getImport('autosize','autosize.min','3.0.14','js')?>
 
+<!-- 사진전용모달 : photoswipe http://photoswipe.com/documentation/getting-started.html -->
+<?php getImport('photoswipe','photoswipe','4.1.1','css') ?>
+<?php getImport('photoswipe','rc-skin/default-skin','4.1.1','css') ?>
+<?php getImport('photoswipe','rc-photoswipe','4.1.1','js') ?>
+<?php getImport('photoswipe','photoswipe-ui-default.min','4.1.1','js') ?>
+
+<!-- 동영상,유튜브,오디오 player : http://www.mediaelementjs.com/ -->
+<?php getImport('mediaelement','mediaelement-and-player.min','4.1.3','js') ?>
+<?php getImport('mediaelement','lang/ko','4.1.3','js') ?>
+<?php getImport('mediaelement','mediaelementplayer','4.1.3','css') ?>
+
 <!-- 사이트 헤드 코드 -->
 <?php echo $_HS['headercode']?>
 

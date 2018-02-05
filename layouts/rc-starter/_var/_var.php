@@ -1,5 +1,5 @@
 <?php
-$d['layout']['header_title'] = "My homepage";
+$d['layout']['header_title'] = "나의홈";
 $d['layout']['header_file'] = "";
 $d['layout']['header_fixed'] = "true";
 $d['layout']['header_trans'] = "true";

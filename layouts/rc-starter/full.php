@@ -3,16 +3,12 @@
 <head>
 <?php include $g['dir_layout'].'/_includes/_import.head.php' ?>
 </head>
-<body class="rb-layout-default">
+<body class="rb-layout-full">
 
 	<?php include $g['dir_layout'].'/_includes/header.php' ?>
 
-	<main role="main" class="content">
-
-		<div class="content-padded">
-			<?php if ($c) getWidget('rc-simple/nav-sub',array('smenu'=>'0','limit'=>'1','dropdown'=>'1','dispfmenu'=>'1'))?>
-			<?php include __KIMS_CONTENT__ ?>
-		</div>
+	<main role="main" class="content bg-faded">
+		<?php include __KIMS_CONTENT__ ?>
 		<?php include $g['dir_layout'].'/_includes/footer.php' ?>
 	</main>
 
