@@ -14,13 +14,26 @@ include_once $g['path_module'].$module.'/var/var.php';
 			 <select name="skin_main" class="form-control custom-select">
 				 <option value="">선택하세요</option>
 				 <option value="" disabled>--------------------------------</option>
-				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
-				 <?php $dirs = opendir($tdir)?>
-				 <?php while(false !== ($skin = readdir($dirs))):?>
-				 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-				 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-				 <?php endwhile?>
-				 <?php closedir($dirs)?>
+
+				 <optgroup label="데스크탑">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+				 </optgroup>
+				 <optgroup label="모바일">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+				 </optgroup>
+
 			 </select>
 			 <small class="form-text text-muted">
 				 지정된 대표테마는 게시판설정시 별도의 테마지정없이 자동으로 적용됩니다.
@@ -36,13 +49,24 @@ include_once $g['path_module'].$module.'/var/var.php';
 			 <select name="skin_mobile" class="form-control custom-select">
 				 <option value="">모바일 테마 사용안함</option>
 				 <option value="" disabled>--------------------------------</option>
-				 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
-				 <?php $dirs = opendir($tdir)?>
-				 <?php while(false !== ($skin = readdir($dirs))):?>
-				 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-				 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-				 <?php endwhile?>
-				 <?php closedir($dirs)?>
+				 <optgroup label="모바일">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+				 </optgroup>
+				 <optgroup label="데스크탑">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_mobile']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+				 </optgroup>
 			 </select>
 			 <small class="form-text text-muted">
 				 선택하지 않으면 데스크탑 대표테마로 설정됩니다.
@@ -57,13 +81,24 @@ include_once $g['path_module'].$module.'/var/var.php';
 			 <select name="skin_total" class="form-control custom-select">
 				 <option value="">통합보드 사용안함</option>
 				 <option value="" disabled>--------------------------------</option>
-				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
-				 <?php $dirs = opendir($tdir)?>
-				 <?php while(false !== ($skin = readdir($dirs))):?>
-				 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-				 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-				 <?php endwhile?>
-				 <?php closedir($dirs)?>
+				 <optgroup label="데스크탑">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+				 </optgroup>
+				 <optgroup label="모바일">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+				 </optgroup>
 			 </select>
 			 <small class="form-text text-muted">
 				 통합보드란 모든 게시판의 전체 게시물을 하나의 게시판으로 출력해 주는 서비스입니다.<br>
@@ -83,13 +118,24 @@ include_once $g['path_module'].$module.'/var/var.php';
 			 <select name="attach_main" class="form-control custom-select">
 				 <option value="">사용안함</option>
 				 <option value="" disabled>--------------------------------</option>
-				 <?php $mdir = $g['path_module'].'mediaset/themes/_desktop/'?>
-				 <?php $dirs = opendir($mdir)?>
-				 <?php while(false !== ($skin = readdir($dirs))):?>
-				 <?php if($skin=='.' || $skin == '..' || is_file($mdir.$skin))continue?>
-				 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['attach_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mdir.$skin)?>(<?php echo $skin?>)</option>
-				 <?php endwhile?>
-				 <?php closedir($dirs)?>
+				 <optgroup label="데스크탑">
+					 <?php $mdir = $g['path_module'].'mediaset/themes/_desktop/'?>
+					 <?php $dirs = opendir($mdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($mdir.$skin))continue?>
+					 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['attach_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+					</optgroup>
+					<optgroup label="모바일">
+						<?php $mdir = $g['path_module'].'mediaset/themes/_mobile/'?>
+						<?php $dirs = opendir($mdir)?>
+						<?php while(false !== ($skin = readdir($dirs))):?>
+						<?php if($skin=='.' || $skin == '..' || is_file($mdir.$skin))continue?>
+						<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['attach_main']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mdir.$skin)?>(<?php echo $skin?>)</option>
+						<?php endwhile?>
+						<?php closedir($dirs)?>
+					 </optgroup>
 			 </select>
 			 <small class="form-text text-muted">
 				 지정된 대표테마는 게시판설정시 별도의 테마지정없이 자동으로 적용됩니다.
@@ -105,13 +151,24 @@ include_once $g['path_module'].$module.'/var/var.php';
 			 <select name="attach_mobile" class="form-control custom-select">
 				 <option value="">사용안함</option>
 				 <option value="" disabled>--------------------------------</option>
-				 <?php $mmdir = $g['path_module'].'mediaset/themes/_mobile/'?>
-				 <?php $dirs = opendir($mmdir)?>
-				 <?php while(false !== ($skin = readdir($dirs))):?>
-				 <?php if($skin=='.' || $skin == '..' || is_file($mmdir.$skin))continue?>
-				 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['attach_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mmdir.$skin)?>(<?php echo $skin?>)</option>
-				 <?php endwhile?>
-				 <?php closedir($dirs)?>
+				 <optgroup label="모바일">
+					 <?php $mmdir = $g['path_module'].'mediaset/themes/_mobile/'?>
+					 <?php $dirs = opendir($mmdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($mmdir.$skin))continue?>
+					 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['attach_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mmdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+					</optgroup>
+					<optgroup label="데스크탑">
+						<?php $mmdir = $g['path_module'].'mediaset/themes/_desktop/'?>
+						<?php $dirs = opendir($mmdir)?>
+						<?php while(false !== ($skin = readdir($dirs))):?>
+						<?php if($skin=='.' || $skin == '..' || is_file($mmdir.$skin))continue?>
+						<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['attach_mobile']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($mmdir.$skin)?>(<?php echo $skin?>)</option>
+						<?php endwhile?>
+						<?php closedir($dirs)?>
+					 </optgroup>
 			 </select>
 			 <small class="form-text text-muted">
 				 선택하지 않으면 데스크탑 대표테마로 설정됩니다.
@@ -128,13 +185,24 @@ include_once $g['path_module'].$module.'/var/var.php';
 			<select name="comment_main" class="form-control custom-select">
 				<option value="">사용안함</option>
 				<option value="" disabled>--------------------------------</option>
-				<?php $cdir = $g['path_module'].'comment/themes/_desktop/'?>
-				<?php $dirs = opendir($cdir)?>
-				<?php while(false !== ($skin = readdir($dirs))):?>
-				<?php if($skin=='.' || $skin == '..' || is_file($cdir.$skin))continue?>
-				<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['comment_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($cdir.$skin)?>(<?php echo $skin?>)</option>
-				<?php endwhile?>
-				<?php closedir($dirs)?>
+				<optgroup label="데스크탑">
+					<?php $cdir = $g['path_module'].'comment/themes/_desktop/'?>
+					<?php $dirs = opendir($cdir)?>
+					<?php while(false !== ($skin = readdir($dirs))):?>
+					<?php if($skin=='.' || $skin == '..' || is_file($cdir.$skin))continue?>
+					<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['comment_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($cdir.$skin)?>(<?php echo $skin?>)</option>
+					<?php endwhile?>
+					<?php closedir($dirs)?>
+				</optgroup>
+				<optgroup label="모바일">
+					<?php $cdir = $g['path_module'].'comment/themes/_mobile/'?>
+					<?php $dirs = opendir($cdir)?>
+					<?php while(false !== ($skin = readdir($dirs))):?>
+					<?php if($skin=='.' || $skin == '..' || is_file($cdir.$skin))continue?>
+					<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['comment_main']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($cdir.$skin)?>(<?php echo $skin?>)</option>
+					<?php endwhile?>
+					<?php closedir($dirs)?>
+				</optgroup>
 			</select>
 			<small class="form-text text-muted">
 				지정된 대표테마는 게시판설정시 별도의 테마지정없이 자동으로 적용됩니다.
@@ -150,13 +218,24 @@ include_once $g['path_module'].$module.'/var/var.php';
 			<select name="comment_mobile" class="form-control custom-select">
 				<option value="">사용안함</option>
 				<option value="" disabled>--------------------------------</option>
-				<?php $cmdir = $g['path_module'].'comment/themes/_mobile/'?>
-				<?php $dirs = opendir($cmdir)?>
-				<?php while(false !== ($skin = readdir($dirs))):?>
-				<?php if($skin=='.' || $skin == '..' || is_file($cmdir.$skin))continue?>
-				<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['comment_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($cmdir.$skin)?>(<?php echo $skin?>)</option>
-				<?php endwhile?>
-				<?php closedir($dirs)?>
+				<optgroup label="모바일">
+					<?php $cmdir = $g['path_module'].'comment/themes/_mobile/'?>
+					<?php $dirs = opendir($cmdir)?>
+					<?php while(false !== ($skin = readdir($dirs))):?>
+					<?php if($skin=='.' || $skin == '..' || is_file($cmdir.$skin))continue?>
+					<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['comment_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($cmdir.$skin)?>(<?php echo $skin?>)</option>
+					<?php endwhile?>
+					<?php closedir($dirs)?>
+				</optgroup>
+				<optgroup label="데스크탑">
+					<?php $cmdir = $g['path_module'].'comment/themes/_desktop/'?>
+					<?php $dirs = opendir($cmdir)?>
+					<?php while(false !== ($skin = readdir($dirs))):?>
+					<?php if($skin=='.' || $skin == '..' || is_file($cmdir.$skin))continue?>
+					<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['comment_mobile']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($cmdir.$skin)?>(<?php echo $skin?>)</option>
+					<?php endwhile?>
+					<?php closedir($dirs)?>
+				</optgroup>
 			</select>
 			<small class="form-text text-muted">
 				선택하지 않으면 데스크탑 대표테마로 설정됩니다.

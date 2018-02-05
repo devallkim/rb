@@ -15,7 +15,7 @@ $fp = fopen($gfile,'w');
 fwrite($fp, "<?php\n");
 foreach ($fdset as $val)
 {
-	fwrite($fp, "\$d['bbs']['".$val."'] = \"".trim(${$val})."\";\n");
+	fwrite($fp, "\$d['comment']['".$val."'] = \"".trim(${$val})."\";\n");
 }
 fwrite($fp, "?>");
 fclose($fp);

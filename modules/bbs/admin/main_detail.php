@@ -332,16 +332,29 @@ if ($uid)
 				  	  <label class="col-lg-2 col-form-label text-lg-right"><i class="fa fa-list-alt fa-lg fa-fw" aria-hidden="true"></i> 게시판 테마 </label>
 					     <div class="col-lg-10 col-xl-9">
 			  		    <select name="skin" class="form-control custom-select">
+
 									<?php $_skinHexp=explode('/',$d['bbs']['skin_main'])?>
 									<option value="">게시판 대표테마 (<?php echo $d['bbs']['skin_main']?$_skinHexp[1]:'사용안함'?>)</option>
 									<option disabled>--------------------</option>
-									<?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
-									<?php $dirs = opendir($tdir)?>
-									<?php while(false !== ($skin = readdir($dirs))):?>
-									<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-									<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-									<?php endwhile?>
-									<?php closedir($dirs)?>
+									<optgroup label="데스크탑">
+										<?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+										<?php $dirs = opendir($tdir)?>
+										<?php while(false !== ($skin = readdir($dirs))):?>
+										<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+										<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+										<?php endwhile?>
+										<?php closedir($dirs)?>
+									</optgroup>
+									<optgroup label="모바일">
+										<?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+										<?php $dirs = opendir($tdir)?>
+										<?php while(false !== ($skin = readdir($dirs))):?>
+										<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+										<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+										<?php endwhile?>
+										<?php closedir($dirs)?>
+									</optgroup>
+
 								</select>
 							</div> <!-- .col-sm-10  -->
 					</div> <!-- .form-group  -->
@@ -352,13 +365,25 @@ if ($uid)
 									<?php $_skinmHexp=explode('/',$d['bbs']['skin_mobile'])?>
 									<option value="">게시판 모바일 대표테마 (<?php echo $d['bbs']['skin_mobile']?$_skinmHexp[1]:'사용안함'?>)</option>
 									<option disabled>--------------------</option>
-									<?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
-									<?php $dirs = opendir($tdir)?>
-									<?php while(false !== ($skin = readdir($dirs))):?>
-									<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-									<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['m_skin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-									<?php endwhile?>
-									<?php closedir($dirs)?>
+									<optgroup label="모바일">
+										<?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+										<?php $dirs = opendir($tdir)?>
+										<?php while(false !== ($skin = readdir($dirs))):?>
+										<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+										<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['m_skin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+										<?php endwhile?>
+										<?php closedir($dirs)?>
+									</optgroup>
+									<optgroup label="데스크탑">
+										<?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+										<?php $dirs = opendir($tdir)?>
+										<?php while(false !== ($skin = readdir($dirs))):?>
+										<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+										<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['m_skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+										<?php endwhile?>
+										<?php closedir($dirs)?>
+									</optgroup>
+
 								</select>
 							</div> <!-- .col-sm-10  -->
 					</div> <!-- .form-group  -->
@@ -370,13 +395,24 @@ if ($uid)
 								 <?php $_attachHexp=explode('/',$d['bbs']['attach_main'])?>
 								 <option value="">파일첨부 대표테마 (<?php echo $d['bbs']['attach_main']?$_attachHexp[1]:'사용안함'?>)</option>
 								 <option disabled>--------------------</option>
-								 <?php $a_dir = $g['path_module'].'mediaset/themes/_desktop/'?>
-								 <?php $dirs = opendir($a_dir)?>
-								 <?php while(false !== ($skin = readdir($dirs))):?>
-								 <?php if($skin=='.' || $skin == '..' || is_file($a_dir.$skin))continue?>
-								 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($a_dir.$skin)?>(<?php echo $skin?>)</option>
-								 <?php endwhile?>
-								 <?php closedir($dirs)?>
+								 <optgroup label="데스크탑">
+									 <?php $a_dir = $g['path_module'].'mediaset/themes/_desktop/'?>
+									 <?php $dirs = opendir($a_dir)?>
+									 <?php while(false !== ($skin = readdir($dirs))):?>
+									 <?php if($skin=='.' || $skin == '..' || is_file($a_dir.$skin))continue?>
+									 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($a_dir.$skin)?>(<?php echo $skin?>)</option>
+									 <?php endwhile?>
+									 <?php closedir($dirs)?>
+									</optgroup>
+									<optgroup label="모바일">
+										<?php $a_dir = $g['path_module'].'mediaset/themes/_mobile/'?>
+										<?php $dirs = opendir($a_dir)?>
+										<?php while(false !== ($skin = readdir($dirs))):?>
+										<?php if($skin=='.' || $skin == '..' || is_file($a_dir.$skin))continue?>
+										<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_skin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($a_dir.$skin)?>(<?php echo $skin?>)</option>
+										<?php endwhile?>
+										<?php closedir($dirs)?>
+									 </optgroup>
 							 </select>
 						 </div> <!-- .col-sm-10  -->
 				 </div> <!-- .form-group  -->
@@ -387,13 +423,24 @@ if ($uid)
 								 <?php $_attachmHexp=explode('/',$d['bbs']['attach_mobile'])?>
 								 <option value="">파일첨부 모바일 대표테마 (<?php echo $d['bbs']['attach_mobile']?$_attachmHexp[1]:'사용안함'?>)</option>
 								 <option disabled>--------------------</option>
-								 <?php $a_mdir = $g['path_module'].'mediaset/themes/_mobile/'?>
-								 <?php $dirs = opendir($a_mdir)?>
-								 <?php while(false !== ($skin = readdir($dirs))):?>
-								 <?php if($skin=='.' || $skin == '..' || is_file($a_mdir.$skin))continue?>
-								 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_mskin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($a_mdir.$skin)?>(<?php echo $skin?>)</option>
-								 <?php endwhile?>
-								 <?php closedir($dirs)?>
+								 <optgroup label="모바일">
+									 <?php $a_mdir = $g['path_module'].'mediaset/themes/_mobile/'?>
+									 <?php $dirs = opendir($a_mdir)?>
+									 <?php while(false !== ($skin = readdir($dirs))):?>
+									 <?php if($skin=='.' || $skin == '..' || is_file($a_mdir.$skin))continue?>
+									 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_mskin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($a_mdir.$skin)?>(<?php echo $skin?>)</option>
+									 <?php endwhile?>
+									 <?php closedir($dirs)?>
+									</optgroup>
+									<optgroup label="데스크탑">
+										<?php $a_mdir = $g['path_module'].'mediaset/themes/_desktop/'?>
+										<?php $dirs = opendir($a_mdir)?>
+										<?php while(false !== ($skin = readdir($dirs))):?>
+										<?php if($skin=='.' || $skin == '..' || is_file($a_mdir.$skin))continue?>
+										<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['a_mskin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($a_mdir.$skin)?>(<?php echo $skin?>)</option>
+										<?php endwhile?>
+										<?php closedir($dirs)?>
+									 </optgroup>
 							 </select>
 						 </div> <!-- .col-sm-10  -->
 				 </div> <!-- .form-group  -->
@@ -407,13 +454,24 @@ if ($uid)
 								<?php $_commentHexp=explode('/',$d['bbs']['comment_main'])?>
 								<option value="">댓글 대표테마 (<?php echo $d['bbs']['comment_main']?$_commentHexp[1]:'사용안함'?>)</option>
 								<option disabled>--------------------</option>
-								<?php $c_dir = $g['path_module'].'comment/themes/_desktop/'?>
-								<?php $dirs = opendir($c_dir)?>
-								<?php while(false !== ($skin = readdir($dirs))):?>
-								<?php if($skin=='.' || $skin == '..' || is_file($c_dir.$skin))continue?>
-								<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['c_skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($c_dir.$skin)?>(<?php echo $skin?>)</option>
-								<?php endwhile?>
-								<?php closedir($dirs)?>
+								<optgroup label="데스크탑">
+									<?php $c_dir = $g['path_module'].'comment/themes/_desktop/'?>
+									<?php $dirs = opendir($c_dir)?>
+									<?php while(false !== ($skin = readdir($dirs))):?>
+									<?php if($skin=='.' || $skin == '..' || is_file($c_dir.$skin))continue?>
+									<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['c_skin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($c_dir.$skin)?>(<?php echo $skin?>)</option>
+									<?php endwhile?>
+									<?php closedir($dirs)?>
+								</optgroup>
+								<optgroup label="모바일">
+									<?php $c_dir = $g['path_module'].'comment/themes/_mobile/'?>
+									<?php $dirs = opendir($c_dir)?>
+									<?php while(false !== ($skin = readdir($dirs))):?>
+									<?php if($skin=='.' || $skin == '..' || is_file($c_dir.$skin))continue?>
+									<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['c_skin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($c_dir.$skin)?>(<?php echo $skin?>)</option>
+									<?php endwhile?>
+									<?php closedir($dirs)?>
+								</optgroup>
 							</select>
 						</div> <!-- .col-sm-10  -->
 				</div> <!-- .form-group  -->
@@ -424,13 +482,26 @@ if ($uid)
 								<?php $_commentmHexp=explode('/',$d['bbs']['comment_mobile'])?>
 								<option value="">댓글 모바일 대표테마 (<?php echo $d['bbs']['comment_mobile']?$_commentmHexp[1]:'사용안함'?>)</option>
 								<option disabled>--------------------</option>
-								<?php $c_mdir = $g['path_module'].'comment/themes/_mobile/'?>
-								<?php $dirs = opendir($c_mdir)?>
-								<?php while(false !== ($skin = readdir($dirs))):?>
-								<?php if($skin=='.' || $skin == '..' || is_file($c_mdir.$skin))continue?>
-								<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['c_mskin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($c_mdir.$skin)?>(<?php echo $skin?>)</option>
-								<?php endwhile?>
-								<?php closedir($dirs)?>
+
+								<optgroup label="모바일">
+									<?php $c_mdir = $g['path_module'].'comment/themes/_mobile/'?>
+									<?php $dirs = opendir($c_mdir)?>
+									<?php while(false !== ($skin = readdir($dirs))):?>
+									<?php if($skin=='.' || $skin == '..' || is_file($c_mdir.$skin))continue?>
+									<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['c_mskin']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($c_mdir.$skin)?>(<?php echo $skin?>)</option>
+									<?php endwhile?>
+									<?php closedir($dirs)?>
+								</optgroup>
+								<optgroup label="데스크탑">
+									<?php $c_mdir = $g['path_module'].'comment/themes/_desktop/'?>
+									<?php $dirs = opendir($c_mdir)?>
+									<?php while(false !== ($skin = readdir($dirs))):?>
+									<?php if($skin=='.' || $skin == '..' || is_file($c_mdir.$skin))continue?>
+									<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['c_mskin']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($c_mdir.$skin)?>(<?php echo $skin?>)</option>
+									<?php endwhile?>
+									<?php closedir($dirs)?>
+								</optgroup>
+
 							</select>
 						</div> <!-- .col-sm-10  -->
 				</div> <!-- .form-group  -->

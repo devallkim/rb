@@ -97,13 +97,26 @@ include_once $_tmpvfile;
 									 <label>데스크탑 대표테마</label>
 									 <select name="theme_main" class="form-control custom-select">
 										 <option value="">&nbsp;+ 선택하세요</option>
-										 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
-										 <?php $dirs = opendir($tdir)?>
-										 <?php while(false !== ($skin = readdir($dirs))):?>
-										 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-										 <option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_main']==''.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-										 <?php endwhile?>
-										 <?php closedir($dirs)?>
+
+										 <optgroup label="데스크탑">
+											 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+											 <?php $dirs = opendir($tdir)?>
+											 <?php while(false !== ($skin = readdir($dirs))):?>
+											 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+											 <option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_main']==''.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+											 <?php endwhile?>
+											 <?php closedir($dirs)?>
+										 </optgroup>
+										 <optgroup label="모바일">
+											 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+											 <?php $dirs = opendir($tdir)?>
+											 <?php while(false !== ($skin = readdir($dirs))):?>
+											 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+											 <option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_main']==''.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+											 <?php endwhile?>
+											 <?php closedir($dirs)?>
+										 </optgroup>
+
 									 </select>
 									 <small class="form-text text-muted">
 										지정된 대표테마는 별도의 테마를 지정하지 않으면 자동으로 적용됩니다.
@@ -116,13 +129,24 @@ include_once $_tmpvfile;
 									 <label>모바일 전용</label>
 									 <select name="theme_mobile" class="form-control custom-select">
 										 <option value="">&nbsp;+ 모바일 테마 사용안함</option>
-										 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
-										 <?php $dirs = opendir($tdir)?>
-										 <?php while(false !== ($skin = readdir($dirs))):?>
-										 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-										 <option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_mobile']==''.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-										 <?php endwhile?>
-										 <?php closedir($dirs)?>
+										 <optgroup label="모바일">
+											 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+											 <?php $dirs = opendir($tdir)?>
+											 <?php while(false !== ($skin = readdir($dirs))):?>
+											 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+											 <option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_mobile']==''.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+											 <?php endwhile?>
+											 <?php closedir($dirs)?>
+											</optgroup>
+											<optgroup label="데스크탑">
+												<?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+												<?php $dirs = opendir($tdir)?>
+												<?php while(false !== ($skin = readdir($dirs))):?>
+												<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+												<option value="<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_mobile']==''.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+												<?php endwhile?>
+												<?php closedir($dirs)?>
+											 </optgroup>
 									 </select>
 									 <small class="form-text text-muted">
 										 선택하지 않으면 데스크탑 대표테마로 설정됩니다.

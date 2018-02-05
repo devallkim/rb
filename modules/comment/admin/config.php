@@ -11,13 +11,25 @@ include_once $g['path_module'].$module.'/var/var.php';
 			 <select name="skin_main" class="form-control custom-select">
 				 <option value="">&nbsp;+ 선택하세요</option>
 				 <option value="" disabled>--------------------------------</option>
-				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
-				 <?php $dirs = opendir($tdir)?>
-				 <?php while(false !== ($skin = readdir($dirs))):?>
-				 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-				 <option value="_pc/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_pc/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-				 <?php endwhile?>
-				 <?php closedir($dirs)?>
+
+				 <optgroup label="데스크탑">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['comment']['skin_main']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+				 </optgroup>
+				 <optgroup label="모바일">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['comment']['skin_main']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+				 </optgroup>
 			 </select>
 			 <small class="form-text text-muted">
 				지정된 대표테마는 댓글목록 설정시 별도의 테마지정없이 자동으로 적용됩니다.
@@ -31,13 +43,25 @@ include_once $g['path_module'].$module.'/var/var.php';
 			 <select name="skin_mobile" class="form-control custom-select">
 				 <option value="">모바일 테마 사용안함</option>
 				 <option value="" disabled>--------------------------------</option>
-				 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
-				 <?php $dirs = opendir($tdir)?>
-				 <?php while(false !== ($skin = readdir($dirs))):?>
-				 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-				 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-				 <?php endwhile?>
-				 <?php closedir($dirs)?>
+
+				 <optgroup label="모바일">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['comment']['skin_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+					</optgroup>
+					<optgroup label="데스크탑">
+						<?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+						<?php $dirs = opendir($tdir)?>
+						<?php while(false !== ($skin = readdir($dirs))):?>
+						<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+						<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['comment']['skin_mobile']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+						<?php endwhile?>
+						<?php closedir($dirs)?>
+					 </optgroup>
 			 </select>
 			 <small class="form-text text-muted">
 				 선택하지 않으면 데스크탑 대표테마로 설정됩니다.
@@ -50,13 +74,26 @@ include_once $g['path_module'].$module.'/var/var.php';
 			 <select name="skin_total" class="form-control custom-select">
 				 <option value="">통합보드 사용안함</option>
 				 <option value="" disabled>--------------------------------</option>
-				 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
-				 <?php $dirs = opendir($tdir)?>
-				 <?php while(false !== ($skin = readdir($dirs))):?>
-				 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-				 <option value="_pc/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['bbs']['skin_main']=='_pc/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
-				 <?php endwhile?>
-				 <?php closedir($dirs)?>
+
+				 <optgroup label="데스크탑">
+					 <?php $tdir = $g['path_module'].$module.'/themes/_desktop/'?>
+					 <?php $dirs = opendir($tdir)?>
+					 <?php while(false !== ($skin = readdir($dirs))):?>
+					 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+					 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['comment']['skin_total']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+					 <?php endwhile?>
+					 <?php closedir($dirs)?>
+					</optgroup>
+					<optgroup label="모바일">
+						<?php $tdir = $g['path_module'].$module.'/themes/_mobile/'?>
+						<?php $dirs = opendir($tdir)?>
+						<?php while(false !== ($skin = readdir($dirs))):?>
+						<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
+						<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['comment']['skin_total']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+						<?php endwhile?>
+						<?php closedir($dirs)?>
+					 </optgroup>
+
 			 </select>
 			 <small class="form-text text-muted">
 			  통합보드란 모든 댓글목록 전체 게시물을 하나의 댓글목록으로 출력해 주는 서비스입니다.<br>

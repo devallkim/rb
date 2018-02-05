@@ -1,6 +1,6 @@
 <?php
-$d['bbs']['skin_main'] = "_pc/bs4-default";
-$d['bbs']['skin_mobile'] = "_mobile/rc-default";
+$d['bbs']['skin_main'] = "_desktop/bs4-default";
+$d['bbs']['skin_mobile'] = "";
 $d['bbs']['skin_total'] = "";
 $d['bbs']['rss'] = "";
 $d['bbs']['restr'] = "";
