@@ -4,8 +4,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id=""><i class="fa fa-camera-retro"></i> 사진 정보수정</h4>
+              <h4 class="modal-title" id=""><i class="fa fa-camera-retro"></i> 사진 정보수정</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -16,7 +16,9 @@
                                 <label for="file-name" class="control-label">파일명:</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" data-role="filename" name="filename">
-                                    <span class="input-group-addon" data-role="fileext"></span>
+                                    <div class="input-group-append">
+                                    <span class="input-group-text" data-role="fileext">확장자</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

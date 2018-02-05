@@ -19,9 +19,18 @@ include $g['dir_attach_theme'].'/header.php';
     <?php endif?>
   </ul>
 
+  <ul class="list-group rb-attach-file bg-faded" data-role="attach-preview-file"> <!-- 비디오 파일 리스트  -->
+    <?php if($parent_data['uid']):?>
+    <?php echo getAttachFileList($parent_data,'upload','video')?>
+    <?php endif?>
+  </ul>
 
+  <ul class="list-group rb-attach-file bg-faded" data-role="attach-preview-file"> <!-- 오디오 파일 리스트  -->
+    <?php if($parent_data['uid']):?>
+    <?php echo getAttachFileList($parent_data,'upload','audio')?>
+    <?php endif?>
+  </ul>
 </div><!-- /.rb-attach -->
-
 
 <!-- 첨부 사진 메타정보 수정 -->
 <div class="modal fade rb-modal-attach-meta" id="modal-attach-youtube-meta" tabindex="-1" role="dialog" aria-labelledby="">
