@@ -8,7 +8,7 @@ if (!$B['uid']) getLink('','','존재하지 않는 게시판입니다.','');
 
 include_once $g['dir_module'].'var/var.php';
 include_once $g['dir_module'].'var/var.'.$B['id'].'.php';
-include_once $g['path_module'].'upload/var/var.php';
+include_once $g['path_module'].'mediaset/var/var.php';
 
 $backUrl = getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&amp;':'').($c?'c='.$c:'m='.$m),array('bid','skin','iframe','cat','p','sort','orderby','recnum','type','where','keyword'));
 
@@ -34,7 +34,7 @@ if ($d['bbs']['commentdel'])
 	}
 }
 if ($d['bbs']['replydel'])
-{	
+{
 	$_ngid = (int)$R['gid'];
 	if(getDbRows($table[$m.'data'],'gid > '.$_ngid.' and gid < '.($_ngid+1)) && !$R['depth'])
 	{
@@ -62,8 +62,8 @@ if ($R['comment'])
 					getDbDelete($table['s_upload'],'uid='.$U['uid']);
 					if ($U['url']==$d['upload']['ftp_urlpath'])
 					{
-						$FTP_CONNECT = ftp_connect($d['upload']['ftp_host'],$d['upload']['ftp_port']); 
-						$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['upload']['ftp_user'],$d['upload']['ftp_pass']); 
+						$FTP_CONNECT = ftp_connect($d['upload']['ftp_host'],$d['upload']['ftp_port']);
+						$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['upload']['ftp_user'],$d['upload']['ftp_pass']);
 						if (!$FTP_CONNECT) getLink('','','FTP서버 연결에 문제가 발생했습니다.','');
 						if (!$FTP_CRESULT) getLink('','','FTP서버 아이디나 패스워드가 일치하지 않습니다.','');
 						if($d['upload']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
@@ -117,8 +117,8 @@ if ($R['upload'])
 			getDbDelete($table['s_upload'],'uid='.$U['uid']);
 			if ($U['url']==$d['upload']['ftp_urlpath'])
 			{
-				$FTP_CONNECT = ftp_connect($d['upload']['ftp_host'],$d['upload']['ftp_port']); 
-				$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['upload']['ftp_user'],$d['upload']['ftp_pass']); 
+				$FTP_CONNECT = ftp_connect($d['upload']['ftp_host'],$d['upload']['ftp_port']);
+				$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['upload']['ftp_user'],$d['upload']['ftp_pass']);
 				if (!$FTP_CONNECT) getLink('','','FTP서버 연결에 문제가 발생했습니다.','');
 				if (!$FTP_CRESULT) getLink('','','FTP서버 아이디나 패스워드가 일치하지 않습니다.','');
 				if($d['upload']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
@@ -165,5 +165,6 @@ if ($R['point1']&&$R['mbruid'])
 	getDbUpdate($table['s_mbrdata'],'point=point-'.$R['point1'],'memberuid='.$R['mbruid']);
 }
 
+setrawcookie('bbs_action_result', rawurlencode('게시물이 삭제 되었습니다.|default'));  // 처리여부 cookie 저장
 getLink($backUrl ,'parent.' , $alert , $history);
 ?>

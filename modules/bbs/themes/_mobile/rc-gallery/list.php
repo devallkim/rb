@@ -193,10 +193,10 @@ else $g['bbs_reset']	= getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&am
 
               <!-- 일반글 출력부 -->
               <?php foreach($RCD as $R):?>
-              <?php $R['mobile']=isMobileConnect($R['agent'])?>
-
-
-
+              <?php
+              $R['mobile']=isMobileConnect($R['agent']);
+              $d['upload'] = getArrayString($R['upload']);
+              ?>
 
               <div class="card<?php echo $R['depth']?' rb-reply rb-reply-0'.$R['depth']:'' ?><?php echo $R['hidden']?' secret':'' ?>" id="item-<?php echo $R['uid']?>">
 
@@ -214,6 +214,14 @@ else $g['bbs_reset']	= getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&am
                   <div class="card-block">
                     <?php if($R['hidden']):?><span class="badge badge-default badge-inverted"><i class="fa fa-lock"></i></span><?php endif?>
                     <?php echo getStrCut($R['subject'],$d['bbs']['sbjcut'],'')?>
+
+                    <?php if ($d['upload']['count'] > 1): ?>
+                    <span class="badge badge-default badge-outline">
+                      <i class="fa fa-clone" aria-hidden="true"></i>
+                      <?php echo $d['upload']['count'] ?>
+                    </span>
+                    <?php endif; ?>
+
                     <p>
                       <span class="badge badge-default badge-inverted"><?php echo $R[$_HS['nametype']]?></span>
                       <?php if($R['category']):?><span class="badge badge-default badge-inverted"><i class="fa fa-folder-o fa-fw"></i> <?php echo $R['category']?></span><?php endif?>

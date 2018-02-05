@@ -13,7 +13,6 @@ $writecode = trim($writecode);
 $puthead = $inc_head_list.$inc_head_view.$inc_head_write;
 $putfoot = $inc_foot_list.$inc_foot_view.$inc_foot_write;
 
-
 if (!$name) getLink('','','게시판이름을 입력해 주세요.','');
 if (!$id) getLink('','','아이디를 입력해 주세요.','');
 

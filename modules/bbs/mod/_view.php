@@ -36,7 +36,7 @@ if ($d['bbs']['isperm'] && $R['upload'])
 	$d['upload'] = array();
 	$d['upload']['tmp'] = $R['upload'];
 	$d['_pload'] = getArrayString($R['upload']);
-	$attach_file_num=0;// 첨부파일 수량 체크  ---------------------------------> 20151.1 추가 by kiere.
+	$attach_file_num=0;// 첨부파일 수량 체크  ---------------------------------> 2015.1.1 추가 by kiere.
 	foreach($d['_pload']['data'] as $_val)
 	{
 		$U = getUidData($table['s_upload'],$_val);
@@ -64,9 +64,9 @@ if ($d['bbs']['isperm'] && $R['upload'])
 
 // 메타 이미지 세팅 = 해당 포스트의 대표 이미지를 메타 이미지로 적용한다.
 if($R['featured_img']){
-       $FI=getUidData($table['s_upload'],$R['featured_img']);
-       $featured_img=getDynamicResizeImg($FI['tmpname'],'q'); // 동적 사이즈 조정
-       $g['meta_img']=$g['url_root'].$FI['url'].$FI['folder'].'/'.$featured_img;
+   $FI=getUidData($table['s_upload'],$R['featured_img']);
+   $featured_img=getPreviewResize($FI['tmpname'],'q'); // 동적 사이즈 조정
+   $g['meta_img']=$g['url_root'].$FI['url'].$FI['folder'].'/'.$featured_img;
 }
 $mod = $mod ? $mod : 'view';
 $bid = $R['bbsid'];

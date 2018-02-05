@@ -1,6 +1,6 @@
 <?php
 $d['bbs']['skin_main'] = "_desktop/bs4-default";
-$d['bbs']['skin_mobile'] = "";
+$d['bbs']['skin_mobile'] = "_mobile/rc-default";
 $d['bbs']['skin_total'] = "_desktop/bs4-default";
 $d['bbs']['attach_main'] = "_desktop/bs4-summernote-simple";
 $d['bbs']['attach_mobile'] = "_mobile/rc-simple";

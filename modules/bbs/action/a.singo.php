@@ -9,7 +9,7 @@ $B = getUidData($table[$m.'list'],$R['bbs']);
 if (!$B['uid']) getLink('','','존재하지 않는 게시판입니다.','');
 
 include_once $g['dir_module'].'var/var.php';
-include_once $g['path_module'].'upload/var/var.php';
+include_once $g['path_module'].'mediaset/var/var.php';
 
 if ($d['bbs']['singo_del'] && $d['bbs']['singo_del_num'] <= $R['singo'])
 {

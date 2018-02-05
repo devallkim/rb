@@ -4,7 +4,7 @@ if(!defined('__KIMS__')) exit;
 
 checkAdmin(0);
 
-include_once $g['path_module'].'upload/var/var.php';
+include_once $g['path_module'].'mediaset/var/var.php';
 $str_month = '';
 $str_today = '';
 $B = getUidData($table[$m.'list'],$bid);

@@ -158,9 +158,8 @@ $d['bbs']['skin'] = $skin ? $skin : $d['bbs']['skin'];
 
 if ($g['mobile']&&$_SESSION['pcmode']!='Y')
 {
-	//$d['bbs']['skin'] = $d['bbs']['m_skin'] ? $d['bbs']['m_skin'] : $d['bbs']['skin_mobile'];
+	$_HM['m_layout'] = $_HM['m_layout'] ? $_HM['m_layout'] : $d['bbs']['m_layout'];
 	$d['bbs']['skin'] = $d['bbs']['m_skin'] ? $d['bbs']['m_skin'] : ($d['bbs']['skin_mobile']?$d['bbs']['skin_mobile']:$d['bbs']['skin_main']);
-
 }
 
 include_once $g['path_module'].$m.'/themes/'.$d['bbs']['skin'].'/_var.php';

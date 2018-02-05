@@ -23,7 +23,7 @@ if ($d['comment']['singo_del'] && $d['comment']['singo_del_num'] <= $R['singo'])
 		//첨부파일삭제
 		if ($R['upload'])
 		{
-			include_once $g['path_module'].'upload/var/var.php';
+			include_once $g['path_module'].'mediaset/var/var.php';
 			$UPFILES = getArrayString($R['upload']);
 
 			foreach($UPFILES['data'] as $_val)

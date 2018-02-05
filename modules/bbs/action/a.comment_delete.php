@@ -34,7 +34,7 @@ if ($fdexp[0]&&$fdexp[2]&&$cyncArr['data'][3]) getDbUpdate($cyncArr['data'][3],$
 //첨부파일삭제
 if ($R['upload'])
 {
-	//include $g['path_module'].'upload/var/var.php';
+	//include $g['path_module'].'mediaset/var/var.php';
 	$UPFILES = getArrayString($R['upload']);
 
 	foreach($UPFILES['data'] as $_val)

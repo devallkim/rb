@@ -30,7 +30,7 @@
 .rb-panel {
   position: relative;
   background-color: #fff;
-  margin-top: 5px;
+  margin-top: 0.3125rem;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c7cc' x='0' y='0' width='100%' height='0.5'/></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c7cc' x='0' y='0' width='100%' height='0.5'/></svg>");
   background-repeat: no-repeat;
   background-position: 0 100%, 0 0;
@@ -41,10 +41,10 @@
   margin-top: 0;
 }
 .rb-panel .rb-panel-heading {
-  margin-right: 100px;
+  margin-right: 6.25rem;
   margin-top: 0;
   margin-bottom: 0;
-  padding: 10px 10px 8px;
+  padding: 0.625rem 0.625rem 0.5rem;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -55,7 +55,7 @@
   font-weight: 400;
   font-size: 1.2em;
   line-height: 1.23;
-  letter-spacing: -1px;
+  letter-spacing: -0.0625rem;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -65,8 +65,8 @@
   top: 0;
   right: 0;
   width: auto;
-  min-height: 45px;
-  padding: 14px 14px 15px 9px;
+  min-height: 2.8125rem;
+  padding: 0.875rem 0.875rem 0.9375rem 0.5625rem;
   font-size: .93em;
   line-height: 1;
   color: #666;
@@ -76,12 +76,12 @@
   box-sizing: border-box;
 }
 .rb-panel .rb-panel-heading-more:after {
-  padding-left: 2px;
+  padding-left: 0.125rem;
   font-family: FontAwesome;
   content: "\f105";
 }
 .rb-panel .rb-panel-body {
-  padding: 10px
+  padding: 0.625rem
 }
 .rb-panel .table-view {
   margin-bottom: 0
@@ -90,7 +90,7 @@
   padding-top: 0;
 }
 .rb-panel .rb-panel-footer {
-  margin-top: -1px;
+  margin-top: -0.0625rem;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c7cc' x='0' y='0' width='100%' height='0.5'/></svg>"), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='1'><rect fill='#c8c7cc' x='0' y='0' width='100%' height='0.5'/></svg>");
   background-repeat: no-repeat;
   background-position: 0 100%, 0 0;
@@ -98,14 +98,22 @@
   border-bottom: 0;
 }
 .rb-panel .rb-panel-footer .rb-more {
-  font-size: 15px;
+  font-size: 0.9375rem;
   margin-bottom: 0;
   border: none;
   background-color: #fff
 }
 .rb-avatar {
-  width: 42px;
-  height: 42px
+  width: 2.625rem;
+  height: 2.625rem
+}
+.rb-data-none {
+  height: 93%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #9a9eac;
 }
 /*Paging*/
 .bar-footer ~ .content {
@@ -124,8 +132,8 @@
 }
 .rb-paging .rb-count {
   display: inline-block;
-  margin: 5px 42px 0;
-  padding: 0 8px;
+  margin: 0.3125rem 2.625rem 0;
+  padding: 0 0.5rem;
   font-weight: 700;
   font-size: 1.2em;
   line-height: 1.15;
@@ -138,21 +146,20 @@
   color: #2e2e2e;
 }
 .rb-paging .rb-count .rb-bar {
-  padding: 0 2px;
+  padding: 0 0.125rem;
   font-weight: 300;
   font-size: 0.9em;
 }
 .rb-paging .btn {
   position: absolute;
   top: 0;
-  width: 50px;
+  width: 3.125rem;
   height: 100%;
   color: #000;
-  font-size: 30px;
-  /* line-height: 30px; */
+  font-size: 1.875rem;
 }
 .rb-paging .btn i {
-  margin-top: -2px
+  margin-top: -0.125rem
 }
 .rb-paging .btn.rb-disabled {
   color: #ccc
@@ -185,12 +192,12 @@
  * ----------------------------------------------------------------------------
  */
 .rb-bbs-list .table-view-cell {
-  padding-top: 10px;
-  padding-bottom: 10px
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem
 }
 .rb-bbs-list .table-view-cell a {
   font-size: 1.15em;
-  letter-spacing: -1px;
+  letter-spacing: -0.0625rem;
   line-height: 1.4;
 }
 .rb-bbs-list .table-view-cell a.js-btn-href {
@@ -202,7 +209,7 @@
 .rb-bbs-view .rb-panel-heading {
   margin: 0;
   white-space: normal;
-  border-bottom: 1px solid #ddd
+  border-bottom: 0.0625rem solid #ddd
 }
 .rb-bbs-view .rb-panel-heading h1,
 .rb-bbs-view .rb-panel-heading h2,
@@ -212,38 +219,38 @@
 }
 .rb-bbs-view .rb-panel-body p {
   margin-bottom: 2em;
-  font-size: 19px;
+  font-size: 1.1875rem;
   color: #141414;
 }
 .badge.rb-new {
-  padding: 2px 3px 1px 2px;
-  font-size: 9px;
+  padding: 0.125rem 0.1875rem 0.0625rem 0.125rem;
+  font-size: 0.5625rem;
   line-height: 0.9;
-  border-radius: 3px;
+  border-radius: 0.1875rem;
 }
 /*replay*/
 .table-view-cell.rb-reply {
-  padding-left: 55px
+  padding-left: 3.4375rem
 }
 .table-view-cell.rb-reply-01 {
-  padding-left: 35px
+  padding-left: 2.1875rem
 }
 .table-view-cell.rb-reply-02 {
-  padding-left: 45px
+  padding-left: 2.8125rem
 }
 .table-view-cell.rb-reply-03 {
-  padding-left: 55px
+  padding-left: 3.4375rem
 }
 .table-view-cell.rb-reply-01 .rb-icon,
 .table-view-cell.rb-reply-02 .rb-icon {
   position: absolute;
   top: 40%;
-  left: 7px;
-  font-size: 20px;
+  left: 0.4375rem;
+  font-size: 1.25rem;
   color: #999
 }
 #page-bbs-view .bar-nav .title {
-  padding-right: 20px
+  padding-right: 1.25rem
 }
 #page-bbs-view .bar-nav .title span {
   display: -webkit-box;
@@ -268,16 +275,30 @@
 /*게시물 보기*/
 
 .rb-article-title {
-  margin-top: 4px;
+  margin-top: 0.25rem;
   font-weight: normal;
-  font-size: 23px;
-  line-height: 29px;
-  letter-spacing: -1px;
+  font-size: 1.4375rem;
+  line-height: 1.8125rem;
+  letter-spacing: -0.0625rem;
 }
 
 .rb-article {
   line-height: 1.625;
-  font-size: 17px;
+  font-size: 1.0625rem;
+}
+.rb-article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.card.figure .btn {
+  position: absolute;
+  bottom: .3rem;
+  right: .3rem;
+  padding: .5rem;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* border-radius: 50%; */
 }
 
 .popup .share .list-inline-item {
@@ -285,8 +306,22 @@
   text-align: center;
 }
 .popup .share img {
-  width: 55px
+  width: 3.5rem
 }
 .popup .share a {
   color: #444
+}
+
+/* 글쓰기 */
+.guide {
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #9a9eac;
+}
+
+.rb-attach.active ~ .guide  {
+  display: none
 }

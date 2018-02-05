@@ -44,6 +44,7 @@ if($R['uid']){
   		<input type="hidden" name="pcode" value="<?php echo $date['totime']?>">
   		<input type="hidden" name="upfiles" id="upfilesValue" value="<?php echo $reply=='Y'?'':$R['upload']?>">
   		<input type="hidden" name="html" value="HTML">
+      <input type="hidden" name="featured_img" value="<?php echo $R['featured_img'] ?>">
 
       <?php if(!$my['id']):?>
       <div class="form-group row">
@@ -163,7 +164,7 @@ if($R['uid']){
 
 
       <footer class="text-center my-5">
-        <button class="btn btn-light" type="button"onclick="cancelCheck();">취소</button>
+        <button class="btn btn-light" type="button" onclick="cancelCheck();">취소</button>
         <button class="btn btn-primary" type="submit">등록</button>
       </footer>
 
@@ -185,6 +186,9 @@ if($R['uid']){
 <?php getImport('summernote','summernote-bs4.min','0.8.9','js')?>
 <?php getImport('summernote','lang/summernote-ko-KR','0.8.9','js')?>
 <?php getImport('summernote','summernote-bs4','0.8.9','css')?>
+
+
+
 
 <script type="text/javascript">
 
@@ -237,12 +241,16 @@ function writeCheck(f)
 		f.pw.focus();
 		return false;
 	}
-	if (f.category && f.category.value == '')
-	{
-		alert('카테고리를 선택해 주세요. ');
-		f.category.focus();
-		return false;
-	}
+
+  <?php if ($B['category']): ?>
+  if (f.category && f.category.value == '')
+  {
+    alert('카테고리를 선택해 주세요. ');
+    f.category.focus();
+    return false;
+  }
+  <?php endif; ?>
+
 	if (f.subject.value == '')
 	{
 		alert('제목을 입력해 주세요.      ');
@@ -271,22 +279,20 @@ function writeCheck(f)
   var featured_img_input = $('input[name="featured_img"]'); // 대표이미지 input
   var featured_img_uid = $(featured_img_input).val();
   if(featured_img_uid ==''){ // 대표이미지로 지정된 값이 없는 경우
-      var first_attach_img_li = $('.rb-attach-photo li:first'); // 첫번째 첨부된 이미지 리스트 li
-      var first_attach_img_uid = $(first_attach_img_li).data('id');
-      $(featured_img_input).val(first_attach_img_uid);
+    var first_attach_img_li = $('.rb-attach-photo li:first'); // 첫번째 첨부된 이미지 리스트 li
+    var first_attach_img_uid = $(first_attach_img_li).data('id');
+    $(featured_img_input).val(first_attach_img_uid);
   }
 
   // 첨부파일 uid 를 upfiles 값에 추가하기
   var attachfiles=$('input[name="attachfiles[]"]').map(function(){return $(this).val()}).get();
   var new_upfiles='';
   if(attachfiles){
-        for(var i=0;i<attachfiles.length;i++)
-        {
-             new_upfiles+=attachfiles[i];
-        }
-        $('input[name="upfiles"]').val(new_upfiles);
+    for(var i=0;i<attachfiles.length;i++) {
+      new_upfiles+=attachfiles[i];
+    }
+    $('input[name="upfiles"]').val(new_upfiles);
   }
-
 
 	submitFlag = true;
 }

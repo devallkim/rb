@@ -76,6 +76,7 @@
 				<?php if($d['theme']['show_score2']):?><span class="split">|</span> <span class="han">비공감</span> <span class="num"><?php echo $R['score2']?></span> <?php endif?>
 			</div>
 
+			<?php echo $d['upload']['count'] ?>
 
 
 						<!-- 첨부파일 -->
@@ -192,7 +193,7 @@
 						</div>
 						<?php endif?>
 						<!-- /첨부파일-->
-						
+
 
 			<article class="rb-article content-padded">
 				<?php echo getContents($R['content'],$R['html'])?>

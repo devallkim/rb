@@ -2,7 +2,7 @@
 if(!defined('__KIMS__')) exit;
 
 
-include_once $g['path_module'].'upload/var/var.php';
+include_once $g['path_module'].'mediaset/var/var.php';
 include_once $g['dir_module'].'var/var.php';
 
 foreach ($post_members as $val)

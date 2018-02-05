@@ -6,7 +6,7 @@ checkAdmin(0);
 $R = getUidData($table[$m.'list'],$uid);
 if (!$R['uid']) getLink('','','존재하지 않는 게시판입니다.','');
 
-include_once $g['path_module'].'upload/var/var.php';
+include_once $g['path_module'].'mediaset/var/var.php';
 
 $RCD = getDbArray($table[$m.'data'],'bbs='.$R['uid'],'*','gid','asc',0,0);
 while($_R=db_fetch_array($RCD))

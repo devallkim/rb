@@ -2,7 +2,7 @@
 if(!defined('__KIMS__')) exit;
 checkAdmin(0);
 
-//include_once $g['path_module'].'upload/var/var.php'; ----------> 자체 upload 폴더 사용함으로 필요 없음 2014.12.31 by 케르 
+//include_once $g['path_module'].'mediaset/var/var.php'; ----------> 자체 upload 폴더 사용함으로 필요 없음 2014.12.31 by 케르 
 
 
 foreach ($post_members as $val)

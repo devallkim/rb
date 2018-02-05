@@ -1,0 +1,57 @@
+<div class="clearfix">
+
+  <div class="pull-xs-left">
+
+    <div class="media" style="width:15rem">
+      <img class="media-object pull-left rb-avatar img-circle bg-faded" src="{$avatar}" style="width:2.25rem;height:2.25rem">
+      <div class="media-body m-l-1">
+        <span class="badge badge-default badge-inverted">{$name}</span> <br>
+        <span class="badge badge-default badge-inverted">{$date}</span>
+        <span class="badge badge-default badge-inverted">조회 {$hit}</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pull-xs-right">
+    <button type="button" class="btn btn-outline-secondary js-moveComments">
+      <i class="fa fa-comment-o" aria-hidden="true"></i>
+      <span data-role="total_comment" class="badge badge-primary badge-inverted">{$comment}</span>
+    </button>
+
+    <button type="button" class="btn btn-outline-secondary" data-toggle="popup" data-target="#popup-bbs-view-share">
+      <i class="fa fa-share-alt" aria-hidden="true"></i>
+    </button>
+
+  </div>
+
+</div><!-- /.clearfix -->
+
+<hr>
+<article class="rb-article content-padded">
+
+  <div data-role="article-body">
+    {$article}
+  </div>
+  <div class="d-flex mt-4" data-role="toolbar">
+    <a href="{$s}/?r={$r}&m={$m}&bid={$bid}&mod=write&uid={$uid}" name="button" class="btn btn-secondary js-post-modify" data-uid="{$uid}">수정</a>
+    <a href="{$s}/?r={$r}&m={$m}&bid={$bid}&a=delete&uid={$uid}" name="button" class="btn btn-secondary ml-auto" target="_action_frame_{$m}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+  </div>
+
+</article>
+
+<div class="content-padded">
+  {$tag}
+</div>
+
+<hr>
+<div class="text-xs-center mb-4">
+  <button type="button" class="btn btn-outline-secondary btn-lg" data-toggle="button">
+    <i class="fa fa-thumbs-o-up fa-fw fa-lg" aria-hidden="true"></i>
+    <span data-role="total_like" class="badge badge-primary badge-inverted"></span>
+  </button>
+</div>
+
+<script>
+  $('[data-role="article-body"]').find('img').addClass('img-fluid')
+</script>

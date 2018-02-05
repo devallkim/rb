@@ -1,15 +1,14 @@
-<?php
-// 이미지 Resize 함수
-function getPreviewResize($image,$size)
-{
-   $_array=explode('.',$image);
-   $name=$_array[0];
-   $ext=$_array[1];
-   $result=$name.'_'.$size.'.'.$ext;
+<!-- 사진전용모달 : photoswipe http://photoswipe.com/documentation/getting-started.html -->
+<?php getImport('photoswipe','photoswipe','4.1.1','css') ?>
+<?php getImport('photoswipe','rc-skin/default-skin','4.1.1','css') ?>
+<?php getImport('photoswipe','rc-photoswipe','4.1.1','js') ?>
+<?php getImport('photoswipe','photoswipe-ui-default.min','4.1.1','js') ?>
 
-   return $result;
-}
-?>
+<!-- 동영상,유튜브,오디오 player : http://www.mediaelementjs.com/ -->
+<?php getImport('mediaelement','mediaelement-and-player.min','4.1.3','js') ?>
+<?php getImport('mediaelement','lang/ko','4.1.3','js') ?>
+<?php getImport('mediaelement','mediaelementplayer','4.1.3','css') ?>
+
 
 <section class="rb-bbs-view">
 
@@ -61,11 +60,6 @@ function getPreviewResize($image,$size)
 	</div>
 	<?php endif?>
 
-
-	<?php if($d['upload']['data']&&$d['theme']['show_upfile']&&$att_file_num>0):?>
-
-	<?php endif?>
-
 	<?php if($R['tag']&&$d['theme']['show_tag']):?>
 	<div class="">
 		<?php $_tags=explode(',',$R['tag'])?>
@@ -91,10 +85,6 @@ function getPreviewResize($image,$size)
 		 </div>
 		 <a href="<?php echo $g['bbs_list']?>" class="btn btn-light">목록</a>
 	</footer>
-
-
-
-
 
 <?php if($d['upload']['data']&&$d['theme']['show_upfile']&&$attach_file_num>0):?>
 <div class="mt-4">
@@ -128,7 +118,7 @@ function getPreviewResize($image,$size)
 
 <?php if($attach_photo_num>0):?>
 <h5>사진 (<span class="text-danger"><?php echo $attach_photo_num?></span>)</h5>
-<ul class="list-inline mb-3">
+<ul class="list-inline mb-3 gallery">
 	<?php foreach($img_files as $_u):?>
 
 	<?php
@@ -136,9 +126,12 @@ function getPreviewResize($image,$size)
 		$thumb_list=getPreviewResize($img_origin,'q'); // 미리보기 사이즈 조정 (이미지 업로드시 썸네일을 만들 필요 없다.)
 		$thumb_modal=getPreviewResize($img_origin,'c'); // 정보수정 모달용  사이즈 조정 (이미지 업로드시 썸네일을 만들 필요 없다.)
 	?>
-		<li class="list-inline-item">
-			<a href="<?php echo $thumb_modal ?>"><img src="<?php echo $thumb_list ?>" alt=""></a>
-		</li>
+		<figure class="list-inline-item">
+			<a href="<?php echo $thumb_modal ?>" data-size="<?php echo $_u['width']?>x<?php echo $_u['width']?>">
+        <img src="<?php echo $thumb_list ?>" alt="">
+      </a>
+      <figcaption itemprop="caption description"><?php echo $_u['name']?></figcaption>
+		</figure>
 	<?php endforeach?>
 </ul>
 <?php endif?>
@@ -167,6 +160,46 @@ function getPreviewResize($image,$size)
 		<?php endforeach?>
 	</ul>
 </div><!-- /.card -->
+<?php endif?>
+
+<?php if($attach_audio_num>0):?>
+  <h5>오디오 <span class="text-danger"><?php echo $attach_audio_num?></span></h5>
+  <?php foreach($audio_files as $_u):?>
+  <?php
+    $ext_to_fa=array('xls'=>'excel','xlsx'=>'excel','ppt'=>'powerpoint','pptx'=>'powerpoint','txt'=>'text','pdf'=>'pdf','zip'=>'archive','doc'=>'word');
+    $ext_icon=in_array($_u['ext'],array_keys($ext_to_fa))?'-'.$ext_to_fa[$_u['ext']]:'';
+   ?>
+  <div class="card">
+    <audio controls class="card-img-top mejs-player w-100">
+      <source src="<?php echo $_u['url']?><?php echo $_u['folder']?>/<?php echo $_u['tmpname']?>" type="audio/<?php echo $_u['ext']?>">
+    </audio>
+    <div class="card-body">
+      <h6 class="card-title"><?php echo $_u['name']?></h6>
+      <p class="card-text"><small class="text-muted">(<?php echo getSizeFormat($_u['size'],1)?>)</small></p>
+    </div><!-- /.card-block -->
+  </div><!-- /.card -->
+  <?php endforeach?>
+
+<?php endif?>
+
+<?php if($attach_video_num>0):?>
+  <h5>비디오 <span class="text-danger"><?php echo $attach_video_num?></span></h5>
+  <?php foreach($video_files as $_u):?>
+  <?php
+     $ext_to_fa=array('xls'=>'excel','xlsx'=>'excel','ppt'=>'powerpoint','pptx'=>'powerpoint','txt'=>'text','pdf'=>'pdf','zip'=>'archive','doc'=>'word');
+     $ext_icon=in_array($_u['ext'],array_keys($ext_to_fa))?'-'.$ext_to_fa[$_u['ext']]:'';
+   ?>
+  <div class="card">
+    <video width="320" height="240" controls class="card-img-top mejs-player">
+      <source src="<?php echo $_u['url']?><?php echo $_u['folder']?>/<?php echo $_u['tmpname']?>" type="video/<?php echo $_u['ext']?>">
+    </video>
+    <div class="card-body">
+      <h6 class="card-title"><?php echo $_u['name']?></h6>
+      <p class="card-text"><small class="text-muted">(<?php echo getSizeFormat($_u['size'],1)?>)</small></p>
+    </div><!-- /.card-block -->
+  </div><!-- /.card -->
+  <?php endforeach?>
+
 <?php endif?>
 
 
@@ -214,3 +247,7 @@ function getPreviewResize($image,$size)
 <?php include_once $g['dir_module'].'mod/_list.php'?>
 <?php include_once $g['dir_module_skin'].'list.php'?>
 <?php endif?>
+
+<script>
+    $('.mejs-player').mediaelementplayer(); // 동영상, 오디오 플레이어 초기화 http://www.mediaelementjs.com/
+</script>

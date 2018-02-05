@@ -17,7 +17,7 @@ foreach($comment_members as $val)
 	//첨부파일삭제
 	if ($R['upload'])
 	{
-		// include_once $g['path_module'].'upload/var/var.php';
+		// include_once $g['path_module'].'mediaset/var/var.php';
 		$UPFILES = getArrayString($R['upload']);
 
 		foreach($UPFILES['data'] as $_val)
@@ -30,8 +30,8 @@ foreach($comment_members as $val)
 
 				if ($U['url']==$d['upload']['ftp_urlpath'])
 				{
-					$FTP_CONNECT = ftp_connect($d['upload']['ftp_host'],$d['upload']['ftp_port']); 
-					$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['upload']['ftp_user'],$d['upload']['ftp_pass']); 
+					$FTP_CONNECT = ftp_connect($d['upload']['ftp_host'],$d['upload']['ftp_port']);
+					$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['upload']['ftp_user'],$d['upload']['ftp_pass']);
 					if (!$FTP_CONNECT) getLink('','','FTP서버 연결에 문제가 발생했습니다.','');
 					if (!$FTP_CRESULT) getLink('','','FTP서버 아이디나 패스워드가 일치하지 않습니다.','');
 
