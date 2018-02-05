@@ -1090,7 +1090,7 @@ pre code {
   margin-left: 91.666667%;
 }
 
-@media (min-width: 544px) {
+@media (min-width: 576px) {
   .col-sm {
     position: relative;
     -webkit-flex-basis: 0;
@@ -7296,7 +7296,7 @@ input[type="button"].btn-block {
 }
 
 /**
- * Action page 페이지 
+ * Action page 페이지
  * ----------------------------------------------------------------------------
  */
 .page {
