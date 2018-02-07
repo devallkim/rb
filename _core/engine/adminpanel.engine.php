@@ -123,12 +123,13 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 			</div>
 			<div class="rb-buttons rb-content-padded">
 				<div class="btn-group">
-					<a data-toggle="modal" data-target="#modal_window" class="btn btn-light rb-modal-add-package" style="width:165px"><i class="fa fa-plus-circle fa-lg"></i> 패키지 설치</a>
+					<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=project&amp;front=gallery" target="_ADMPNL_" class="btn btn-light rb-modal-add-package" style="width:165px"><i class="fa fa-plus-circle fa-lg"></i> 패키지 갤러리</a>
 					<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-caret-down" aria-hidden="true"></i>
 					</button>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
 						<h6 class="dropdown-header">확장요소 추가하기</h6>
+						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-package">패키지</a>
 						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-module">모듈</a>
 						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-layout">레이아웃</a>
 						<a href="#" data-toggle="modal" data-target="#modal_window" class="dropdown-item rb-modal-add-widget">위젯</a>
