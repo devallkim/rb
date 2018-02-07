@@ -97,10 +97,11 @@ if ($package_step == 2)
 		$gid = $MAXC + 1;
 
 		$name = 'SITE '.$gid;
+		$label = 'SITE '.$gid;
 		$id = 's'.date('His');
 
-		$QKEY = "gid,id,name,title,titlefix,icon,layout,startpage,m_layout,m_startpage,lang,open,dtd,nametype,timecal,rewrite,buffer,usescode,headercode,footercode";
-		$QVAL = "'".$gid."','".$id."','".$name."','{subject} | {site}','0','glyphicon glyphicon-home','".$d['package']['layout']."','0','".$d['package']['layout_mobile']."','0','','1','','nic','0','0','0','1','',''";
+		$QKEY = "gid,id,name,label,title,titlefix,icon,layout,startpage,m_layout,m_startpage,lang,open,dtd,nametype,timecal,rewrite,buffer,usescode,headercode,footercode";
+		$QVAL = "'".$gid."','".$id."','".$name."','".$label."','{subject} | {site}','0','fa fa-home','".$d['package']['layout']."','0','".$d['package']['layout_mobile']."','0','','1','','nic','0','0','0','1','',''";
 		getDbInsert($table['s_site'],$QKEY,$QVAL);
 		$LASTUID = getDbCnt($table['s_site'],'max(uid)','');
 		db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT);
@@ -112,6 +113,9 @@ if ($package_step == 2)
 		fclose($fp);
 		@chmod($vfile,0707);
 
+		mkdir($g['path_var'].'site/'.$id,0707);
+		@chmod($g['path_var'].'site/'.$id,0707);
+
 		@rename($g['path_tmp'].'app/'.$package_folder.'/pages/'.$d['package']['siteid'].'-menus',$g['path_tmp'].'app/'.$package_folder.'/pages/'.$id.'-menus');
 		@rename($g['path_tmp'].'app/'.$package_folder.'/pages/'.$d['package']['siteid'].'-pages',$g['path_tmp'].'app/'.$package_folder.'/pages/'.$id.'-pages');
 
@@ -122,7 +126,7 @@ if ($package_step == 2)
 	if ($ACT_CM)
 	{
 		include $g['path_tmp'].'app/'.$package_folder.'/_settings/var.menu.php';
-		$QKEY = "gid,site,is_child,parent,depth,id,menutype,mobile,hidden,reject,name,target,redirect,joint,perm_g,perm_l,layout,imghead,imgfoot,addattr,num,d_last,addinfo,mediaset";
+		$QKEY = "gid,site,is_child,parent,depth,id,menutype,mobile,hidden,reject,name,target,redirect,joint,perm_g,perm_l,layout,m_layout,imghead,imgfoot,addattr,num,d_last,addinfo,mediaset";
 		foreach($d['package']['menus'] as $R)
 		{
 			$_parent = 0;
@@ -132,7 +136,7 @@ if ($package_step == 2)
 				$_parent = $_PRTUID['uid'];
 			}
 
-			$QVAL = "'".$R['gid']."','".$S['uid']."','".$R['is_child']."','".$_parent."','".$R['depth']."','".$R['id']."','".$R['menutype']."','".$R['mobile']."','0','0','".$R['name']."','".$R['target']."','".$R['redirect']."','".$R['joint']."','','0','".$R['layout']."','".$R['imghead']."','".$R['imgfoot']."','".$R['addattr']."','0','','',''";
+			$QVAL = "'".$R['gid']."','".$S['uid']."','".$R['is_child']."','".$_parent."','".$R['depth']."','".$R['id']."','".$R['menutype']."','".$R['mobile']."','0','0','".$R['name']."','".$R['target']."','".$R['redirect']."','".$R['joint']."','','0','".$R['layout']."','".$R['m_layout']."','".$R['imghead']."','".$R['imgfoot']."','".$R['addattr']."','0','','',''";
 			getDbInsert($table['s_menu'],$QKEY,$QVAL);
 			$lastmenu = getDbCnt($table['s_menu'],'max(uid)','');
 			getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'1','$lastmenu','','','','ALL',''");
@@ -142,16 +146,20 @@ if ($package_step == 2)
 	if ($ACT_CP)
 	{
 		include $g['path_tmp'].'app/'.$package_folder.'/_settings/var.page.php';
-		$QKEY = "site,pagetype,ismain,mobile,id,category,name,perm_g,perm_l,layout,joint,hit,linkedmenu,d_regis,d_update,mediaset,member,extra";
+		$QKEY = "site,pagetype,ismain,mobile,id,category,name,perm_g,perm_l,layout,m_layout,joint,hit,linkedmenu,d_regis,d_update,mediaset,member,extra";
 		foreach($d['package']['pages'] as $R)
 		{
 			if (is_file($g['path_page'].$S['id'].'-pages/'.$R['id'].'.php')) continue;
-			$QVAL = "'".$S['uid']."','".$R['pagetype']."','".$R['ismain']."','".$R['mobile']."','".$R['id']."','".$R['category']."','".$R['name']."','','0','".$R['layout']."','".$R['joint']."','0','".$R['linkedmenu']."','".$date['totime']."','".$date['totime']."','','1',''";
+			$QVAL = "'".$S['uid']."','".$R['pagetype']."','".$R['ismain']."','".$R['mobile']."','".$R['id']."','".$R['category']."','".$R['name']."','','0','".$R['layout']."','".$R['m_layout']."','".$R['joint']."','0','".$R['linkedmenu']."','".$date['totime']."','".$date['totime']."','','1',''";
 			getDbInsert($table['s_page'],$QKEY,$QVAL);
 			$lastpage = getDbCnt($table['s_page'],'max(uid)','');
 			getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'2','$lastpage','','','','ALL',''");
 		}
 	}
+
+	//메인페이지 지정
+	$MP = getDbData($table['s_page'],"ismain=1 and site=".$S['uid'],'uid');
+	getDbUpdate($table['s_site'],"startpage='".$MP['uid']."'",'uid='.$S['uid']);
 
 	//모듈설치
 	if (is_dir($g['path_tmp'].'app/'.$package_folder.'/modules'))
@@ -274,6 +282,20 @@ if ($package_step == 2)
 		@chmod($_ufile,0707);
 	}
 
+	//게시판 생성
+	if ($ACT_CBBS)
+	{
+		include $g['path_tmp'].'app/'.$package_folder.'/_settings/var.bbs.php';
+		$QKEY = "gid,site,id,name,category,num_r,d_last,d_regis,imghead,imgfoot,puthead,putfoot,addinfo,writecode";
+		foreach($d['package']['bbs'] as $R)
+		{
+			$maxgid = getDbCnt($table['bbslist'],'max(gid)','');
+			$QVAL = "'".($maxgid+1)."','".$S['uid']."','".$R['id']."','".$R['name']."','".$R['category']."','".$R['num_r']."','".$date['totime']."','".$date['totime']."','".$R['imghead']."','".$R['imgfoot']."','".$R['puthead']."','".$R['putfoot']."','".$R['addinfo']."','".$R['writecode']."'";
+			getDbInsert($table['bbslist'],$QKEY,$QVAL);
+		}
+	}
+
+	//추가 실행
 	if (is_file($g['path_tmp'].'app/'.$package_folder.'/_settings/run.php'))
 	{
 		include $g['path_tmp'].'app/'.$package_folder.'/_settings/run.php';
