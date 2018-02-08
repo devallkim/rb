@@ -16,19 +16,15 @@ $converter = new HtmlConverter(array('header_style'=>'atx'));
 $mdContent=$converter->convert(getContents($__SRC__,'HTML'));
 ?>
 
-<div class="form-group">
-	<textarea name="source" class="form-control" id="simplemde"><?php echo $mdContent?></textarea>
-</div>
-
-
+<textarea name="source" class="form-control" id="simplemde"><?php echo $mdContent?></textarea>
 
 <script>
 
 // 마크다운 에디터 세팅
 var simplemde = new SimpleMDE({
-      element: $('#simplemde')[0],
-      spellChecker: false,
-    	placeholder: "내용을 작성하세요..."
+  element: $('#simplemde')[0],
+  spellChecker: false,
+	placeholder: "내용을 작성하세요..."
 });
 
 </script>

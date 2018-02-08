@@ -3,7 +3,12 @@ if(!defined('__KIMS__')) exit;
 
 checkAdmin(0);
 
-$__SRC__ = trim(stripslashes($source));
+// parsedown : https://github.com/erusev/parsedown
+include_once $g['path_core'].'opensrc/parsedown/Parsedown.php';
+$Parsedown = new Parsedown();
+$_source = trim(stripslashes($source));
+$__SRC__ = $Parsedown->text($_source);
+
 if($editFilter) include $g['path_plugin'].$editFilter.'/filter.php';
 $source = preg_replace("'<tmp[^>]*?>'si",'',$__SRC__);
 

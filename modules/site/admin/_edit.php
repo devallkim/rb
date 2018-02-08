@@ -107,6 +107,8 @@ $_editArray = array(
 			</div>
 	</div>
 
+
+
 	<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return sourcecheck(this);">
 		<input type="hidden" name="r" value="<?php echo $r?>">
 		<input type="hidden" name="m" value="<?php echo $module?>">
@@ -123,10 +125,9 @@ $_editArray = array(
 
 		<?php
 		if($markdown=='Y'):
-		$__SRC__ = is_file($g['path_page'].$_filekind.'.php') ? htmlspecialchars(implode('',file($g['path_page'].$_filekind.'.php'))) : '';
+		$__SRC__ = is_file($g['path_page'].$_filekind.'.php') ? implode('',file($g['path_page'].$_filekind.'.php')) : '';
 		include $g['path_plugin'].$d['admin']['editor'].'/import.php';
 		?>
-
 		<div class="form-group">
 			<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> 수정하기</button>
 		</div>
@@ -293,12 +294,8 @@ function focusArea(xid)
 function sourcecheck(f)
 {
 	var f = document.procForm;
-	if(confirm('정말로 실행하시겠습니까?'))
-	{
-		getIframeForAction(f);
-		return true;
-	}
-	return false;
+	getIframeForAction(f);
+	return true;
 }
 getId('rb-more-tab-<?php echo $_mtype=='page'?'3':'2'?>').className = 'active';
 </script>
