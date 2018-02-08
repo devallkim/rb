@@ -1,3 +1,9 @@
+/* 데스크탑 IE에서 오류픽스  fixed--> absolute*/
+.page,
+.page .bar {
+  position: absolute !important;
+}
+
 /* 데스크탑 IE에서 백드롭문제 해결 */
 .backdrop {
   position: absolute;
