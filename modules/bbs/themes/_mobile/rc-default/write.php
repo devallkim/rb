@@ -248,7 +248,7 @@
 </section>
 
 <!-- Modal -->
-<div id="modal-DaumPostcode" class="modal">
+<div id="modal-DaumPostcode" class="modal" style="display:none">
   <header class="bar bar-nav bar-light bg-faded px-0">
     <a class="icon icon-close pull-right p-x-1" data-history="back" role="button"></a>
     <h1 class="title">주소 검색</h1>
@@ -328,20 +328,19 @@ $(function() {
 		if (f.name && f.name.value == '')
 		{
 			alert('이름을 입력해 주세요. ');
-			f.name.focus();
+			setTimeout(function(){f.name.focus()}, 100);
 			return false;
 		}
 		if (f.pw && f.pw.value == '')
 		{
 			alert('비밀번호를 입력해 주세요. ');
-			f.pw.focus();
+			setTimeout(function(){f.pw.focus()}, 100);
 			return false;
 		}
 		if (f.subject.value == '')
 		{
 			alert('제목을 입력해 주세요.       ');
-			console.log(f.subject)
-			f.subject.focus();
+			setTimeout(function(){f.subject.focus()}, 100);
 			return false;
 		}
 		if (f.notice && f.hidden)
@@ -356,7 +355,7 @@ $(function() {
 		if (f.content.value == '')
 		{
 			alert('내용을 입력해 주세요.       ');
-			f.content.focus();
+			setTimeout(function(){f.content.focus()}, 100);
 			return false;
 		}
 
