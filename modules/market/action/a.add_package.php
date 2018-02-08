@@ -54,7 +54,7 @@ if ($package_step == 2)
 	if($siteuid)
 	{
 		$S = getUidData($table['s_site'],$siteuid);
-		getDbUpdate($table['s_site'],"layout='".$d['package']['layout']."',m_layout='".$d['package']['layout_mobile']."'",'uid='.$S['uid']);
+		getDbUpdate($table['s_site'],"layout='".$d['package']['layout']."',m_layout='".$d['package']['layout_mobile']."',rewrite='".$d['package']['rewrite']."'",'uid='.$S['uid']);
 
 		//기존메뉴삭제
 		if ($ACT_DM)
@@ -90,6 +90,7 @@ if ($package_step == 2)
 
 		@rename($g['path_tmp'].'app/'.$package_folder.'/pages/'.$d['package']['siteid'].'-menus',$g['path_tmp'].'app/'.$package_folder.'/pages/'.$S['id'].'-menus');
 		@rename($g['path_tmp'].'app/'.$package_folder.'/pages/'.$d['package']['siteid'].'-pages',$g['path_tmp'].'app/'.$package_folder.'/pages/'.$S['id'].'-pages');
+		@rename($g['path_tmp'].'app/'.$package_folder.'/_var/site/'.$d['package']['siteid'],$g['path_tmp'].'app/'.$package_folder.'/_var/site/'.$S['id']);
 	}
 	else {
 
@@ -101,7 +102,7 @@ if ($package_step == 2)
 		$id = 's'.date('His');
 
 		$QKEY = "gid,id,name,label,title,titlefix,icon,layout,startpage,m_layout,m_startpage,lang,open,dtd,nametype,timecal,rewrite,buffer,usescode,headercode,footercode";
-		$QVAL = "'".$gid."','".$id."','".$name."','".$label."','{subject} | {site}','0','fa fa-home','".$d['package']['layout']."','0','".$d['package']['layout_mobile']."','0','','1','','nic','0','0','0','1','',''";
+		$QVAL = "'".$gid."','".$id."','".$name."','".$label."','{subject} | {site}','0','fa fa-home','".$d['package']['layout']."','0','".$d['package']['layout_mobile']."','0','','1','','nic','0','".$d['package']['rewrite']."','0','1','',''";
 		getDbInsert($table['s_site'],$QKEY,$QVAL);
 		$LASTUID = getDbCnt($table['s_site'],'max(uid)','');
 		db_query("OPTIMIZE TABLE ".$table['s_site'],$DB_CONNECT);
@@ -118,6 +119,7 @@ if ($package_step == 2)
 
 		@rename($g['path_tmp'].'app/'.$package_folder.'/pages/'.$d['package']['siteid'].'-menus',$g['path_tmp'].'app/'.$package_folder.'/pages/'.$id.'-menus');
 		@rename($g['path_tmp'].'app/'.$package_folder.'/pages/'.$d['package']['siteid'].'-pages',$g['path_tmp'].'app/'.$package_folder.'/pages/'.$id.'-pages');
+		@rename($g['path_tmp'].'app/'.$package_folder.'/_var/site/'.$d['package']['siteid'],$g['path_tmp'].'app/'.$package_folder.'/_var/site/'.$id);
 
 		$S = getUidData($table['s_site'],$LASTUID);
 	}
