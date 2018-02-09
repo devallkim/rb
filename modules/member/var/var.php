@@ -1,6 +1,6 @@
 <?php
-$d['member']['theme_main'] = "bs4-simple";
-$d['member']['theme_mobile'] = "rc-simple";
+$d['member']['theme_main'] = "_desktop/bs4-simple";
+$d['member']['theme_mobile'] = "_mobile/rc-simple";
 $d['member']['layout_join'] = "";
 $d['member']['layout_join_mobile'] = "rc-starter/blank.php";
 $d['member']['layout_login'] = "";

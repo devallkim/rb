@@ -134,7 +134,7 @@ include_once $_tmpvfile;
 											 <?php $dirs = opendir($tdir)?>
 											 <?php while(false !== ($skin = readdir($dirs))):?>
 											 <?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-											 <option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+											 <option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_mobile']=='_mobile/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
 											 <?php endwhile?>
 											 <?php closedir($dirs)?>
 											</optgroup>
@@ -143,7 +143,7 @@ include_once $_tmpvfile;
 												<?php $dirs = opendir($tdir)?>
 												<?php while(false !== ($skin = readdir($dirs))):?>
 												<?php if($skin=='.' || $skin == '..' || is_file($tdir.$skin))continue?>
-												<option value="_mobile/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_mobile']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
+												<option value="_desktop/<?php echo $skin?>" title="<?php echo $skin?>"<?php if($d['member']['theme_mobile']=='_desktop/'.$skin):?> selected="selected"<?php endif?>>ㆍ<?php echo getFolderName($tdir.$skin)?>(<?php echo $skin?>)</option>
 												<?php endwhile?>
 												<?php closedir($dirs)?>
 											 </optgroup>
