@@ -161,7 +161,7 @@ if ($package_step == 2)
 
 	//메인페이지 지정
 	$MP = getDbData($table['s_page'],"ismain=1 and site=".$S['uid'],'uid');
-	getDbUpdate($table['s_site'],"startpage='".$MP['uid']."'",'uid='.$S['uid']);
+	getDbUpdate($table['s_site'],"startpage='".$MP['uid']."',m_startpage=''",'uid='.$S['uid']);
 
 	//모듈설치
 	if (is_dir($g['path_tmp'].'app/'.$package_folder.'/modules'))
