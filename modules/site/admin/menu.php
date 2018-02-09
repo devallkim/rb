@@ -33,13 +33,13 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 		<div id="accordion">
 			<div class="card">
 				<div class="card-header p-0">
-					<a class="d-block accordion-toggle muted-link" data-toggle="collapse" data-parent="#accordion" href="#collapmetane">
+					<a class="d-block accordion-toggle muted-link" data-toggle="collapse" href="#collapmetane">
 						<i class="fa fa-sitemap fa-lg fa-fw"></i>
 						메뉴구조
 					</a>
 				</div>
 
-				<div class="collapse show" id="collapmetane">
+				<div class="collapse show" id="collapmetane" data-parent="#accordion" >
 					<?php if($SITEN>1):?>
 					<div class="border border-primary">
 						<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
@@ -85,12 +85,12 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 			<?php if($g['device']):?><a name="site-menu-info"></a><?php endif?>
 			<div class="card">
 				<div class="card-header p-0">
-					<a class="d-block accordion-toggle collapsed muted-link" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+					<a class="d-block accordion-toggle collapsed muted-link" data-toggle="collapse" href="#collapseTwo">
 						<i class="fa fa-retweet fa-lg fa-fw"></i>
 						순서 조정
 					</a>
 				</div>
-					<div class="panel-collapse collapse" id="collapseTwo">
+					<div class="panel-collapse collapse" id="collapseTwo" data-parent="#accordion" >
 						<?php if($CINFO['is_child']||(!$cat&&$ISCAT)):?>
 						<form role="form" action="<?php echo $g['s']?>/" method="post">
 							<input type="hidden" name="r" value="<?php echo $r?>">

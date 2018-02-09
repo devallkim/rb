@@ -152,13 +152,13 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 							<?php $d['afile']=$g['path_module'].$_SM1['id'].'/admin/var/var.menu.php'?>
 							<?php if(is_file($d['afile'])) include $d['afile'] ?>
 							<li id="sidebar-quick-<?php echo $_SM1['id']?>" class="list-group-item panel">
-								<a<?php if(!is_file($d['afile'])):?> href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=<?php echo $_SM1['id']?>" target="_ADMPNL_"<?php else:?> data-toggle="collapse" data-parent="#sidebar-quick-tree" href="#sidebar-quick-tree-<?php echo $_SM1['id']?>"<?php endif?> class="collapsed" onclick="_quickSelect('<?php echo $_SM1['id']?>');">
+								<a<?php if(!is_file($d['afile'])):?> href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=<?php echo $_SM1['id']?>" target="_ADMPNL_"<?php else:?> data-toggle="collapse" href="#sidebar-quick-tree-<?php echo $_SM1['id']?>"<?php endif?> class="collapsed" onclick="_quickSelect('<?php echo $_SM1['id']?>');">
 									<i class="<?php echo $_SM1['icon']?$_SM1['icon']:'fa fa-th-large'?>"></i>
 									<span class="menu-item-parent"><?php echo $_SM1['name']?></span>
 									<?php if(is_file($d['afile'])):?><b class="collapse-sign"><em class="fa rb-icon"></em></b><?php endif?>
 								</a>
 								<?php if(count($d['amenu'])):?>
-								<ul id="sidebar-quick-tree-<?php echo $_SM1['id']?>" class="collapse">
+								<ul id="sidebar-quick-tree-<?php echo $_SM1['id']?>" class="collapse" data-parent="#sidebar-quick-tree">
 								<?php foreach($d['amenu'] as $_k => $_v):?>
 									<li id="sidebar-quick-tree-<?php echo $_SM1['id']?>-<?php echo $_k?>">
 										<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&module=<?php echo $_SM1['id']?>&amp;front=<?php echo $_k?>" target="_ADMPNL_" onclick="_quickSelect1('<?php echo $_SM1['id']?>','<?php echo $_k?>');"><?php echo $_v?></a>
