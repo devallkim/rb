@@ -280,11 +280,11 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 					<div class="panel-group rb-scrollbar" id="site-settings-panels">
 						<div class="card" id="site-settings-01">
 							<div class="card-header">
-								<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-01-body">
+								<a class="collapsed" data-toggle="collapse" href="#site-settings-01-body">
 									<i></i>기본정보
 								</a>
 							</div>
-							<div class="card-body panel-collapse collapse" id="site-settings-01-body">
+							<div class="card-body panel-collapse collapse" id="site-settings-01-body" data-parent="#site-settings-panels">
 								<div class="form-group">
 									<label>사이트 라벨</label>
 									<input type="text" class="form-control" name="label" value="<?php echo $_HS['label']?>">
@@ -308,9 +308,9 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 						<div class="card panel-default" id="site-settings-02">
 							<div class="card-header">
-								<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-02-body"><i></i>레이아웃</a>
+								<a class="collapsed" data-toggle="collapse" href="#site-settings-02-body"><i></i>레이아웃</a>
 							</div>
-							<div id="site-settings-02-body" class="panel-collapse collapse">
+							<div id="site-settings-02-body" class="panel-collapse collapse" data-parent="#site-settings-panels">
 								<div class="card-body">
 									<div class="form-group">
 										<label>기본</label>
@@ -371,9 +371,9 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 						<div class="card panel-default" id="site-settings-03">
 							<div class="card-header">
-								<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-03-body"><i></i>메인페이지</a>
+								<a class="collapsed" data-toggle="collapse" href="#site-settings-03-body"><i></i>메인페이지</a>
 							</div>
-							<div id="site-settings-03-body" class="panel-collapse collapse">
+							<div id="site-settings-03-body" class="panel-collapse collapse" data-parent="#site-settings-panels">
 								<div class="card-body">
 									<div class="form-group">
 										<label>모바일 전용</label>
@@ -404,9 +404,9 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 						<div class="card panel-default" id="site-settings-04">
 							<div class="card-header">
-								<a class="collapsed" data-toggle="collapse" data-parent="#site-settings-panels" href="#site-settings-04-body"><i></i>고급설정</a>
+								<a class="collapsed" data-toggle="collapse" href="#site-settings-04-body"><i></i>고급설정</a>
 							</div>
-							<div id="site-settings-04-body" class="panel-collapse collapse">
+							<div id="site-settings-04-body" class="panel-collapse collapse" data-parent="#site-settings-panels">
 								<div class="card-body">
 									<div class="form-group">
 										<label>도메인</label>
@@ -462,11 +462,11 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 						<?php $_i=1;foreach($d['layout']['dom'] as $_key => $_val):$__i=sprintf('%02d',$_i)?>
 						<div class="card" id="layout-settings-<?php echo $__i?>">
 							<div class="card-header">
-								<a class="collapsed" data-toggle="collapse" data-parent="#layout-settings-panels" href="#layout-settings-<?php echo $__i?>-body">
+								<a class="collapsed" data-toggle="collapse" href="#layout-settings-<?php echo $__i?>-body">
 									<i></i><?php echo $_val[0]?>
 								</a>
 							</div>
-							<div class="card-body panel-collapse collapse" id="layout-settings-<?php echo $__i?>-body">
+							<div class="card-body panel-collapse collapse" id="layout-settings-<?php echo $__i?>-body" data-parent="#layout-settings-panels">
 								<p><?php echo $_val[1]?></p>
 
 								<?php if(count($_val[2])):?>
