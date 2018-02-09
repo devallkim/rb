@@ -107,79 +107,117 @@ $_editArray = array(
 			</div>
 	</div>
 
+	<div class="row">
+		<div class="col-sm-8">
 
+			<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return sourcecheck(this);">
+				<input type="hidden" name="r" value="<?php echo $r?>">
+				<input type="hidden" name="m" value="<?php echo $module?>">
+				<input type="hidden" name="a" value="sourcewrite">
+				<input type="hidden" name="type" value="<?php echo $_mtype?>">
+				<?php if($_mtype=='menu'):?>
+				<input type="hidden" name="uid" value="<?php echo $_HM['uid']?>">
+				<input type="hidden" name="id" value="<?php echo $_HM['id']?>">
+				<?php else:?>
+				<input type="hidden" name="id" value="<?php echo $_HP['id']?>">
+				<?php endif?>
+				<input type="hidden" name="markdown" value="<?php echo $markdown?>">
+				<input type="hidden" name="editFilter" value="<?php echo $d['admin']['editor']?>">
 
-	<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return sourcecheck(this);">
-		<input type="hidden" name="r" value="<?php echo $r?>">
-		<input type="hidden" name="m" value="<?php echo $module?>">
-		<input type="hidden" name="a" value="sourcewrite">
-		<input type="hidden" name="type" value="<?php echo $_mtype?>">
-		<?php if($_mtype=='menu'):?>
-		<input type="hidden" name="uid" value="<?php echo $_HM['uid']?>">
-		<input type="hidden" name="id" value="<?php echo $_HM['id']?>">
-		<?php else:?>
-		<input type="hidden" name="id" value="<?php echo $_HP['id']?>">
-		<?php endif?>
-		<input type="hidden" name="markdown" value="<?php echo $markdown?>">
-		<input type="hidden" name="editFilter" value="<?php echo $d['admin']['editor']?>">
+				<?php
+				if($markdown=='Y'):
+				$__SRC__ = is_file($g['path_page'].$_filekind.'.php') ? implode('',file($g['path_page'].$_filekind.'.php')) : '';
+				include $g['path_plugin'].$d['admin']['editor'].'/import.php';
+				?>
 
-		<?php
-		if($markdown=='Y'):
-		$__SRC__ = is_file($g['path_page'].$_filekind.'.php') ? implode('',file($g['path_page'].$_filekind.'.php')) : '';
-		include $g['path_plugin'].$d['admin']['editor'].'/import.php';
-		?>
-		<div class="form-group">
-			<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> 수정하기</button>
-		</div>
-		<?php else:?>
-		<div id="tab-edit-area">
-			<div class="form-group">
-				<div class="panel-group" id="accordion">
-					<?php $_i=1;foreach($_editArray as $_key => $_val):?>
-					<div class="card">
-						<div class="card-header p-0">
-							<a class="d-block collapsed muted-link" data-toggle="collapse" data-parent="#accordion" href="#site-code-<?php echo $_key?>" onclick="focusArea('code_<?php echo $_key?>');sessionSetting('sh_sys_page_edit','<?php echo $_key?>','','');">
-								<?php echo $_val[1]?>
-								<?php if(is_file($g['path_page'].$_filekind.$_val[2])):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
-							</a>
-						</div>
-						<div id="site-code-<?php echo $_key?>" class="panel-collapse collapse<?php if(($_key==$_SESSION['sh_sys_page_edit']) || (!$_SESSION['sh_sys_page_edit']&&$_i==1)):?> in<?php endif?>">
-
-							<div class="rb-codeview">
-								<div class="rb-codeview-header">
-									<ol class="breadcrumb">
-										<li class="breadcrumb-item">파일경로 :</li>
-										<li class="breadcrumb-item">root</li>
-										<li class="breadcrumb-item">pages</li>
-										<?php if($_mtype=='menu'):?>
-										<li class="breadcrumb-item">menu</li>
-										<?php endif?>
-										<li class="breadcrumb-item active"><?php echo str_replace('menu/','',$_filekind).$_val[2]?></li>
-									</ol>
+				<div class="form-group">
+					<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> 수정하기</button>
+				</div>
+				<?php else:?>
+				<div id="tab-edit-area">
+					<div class="form-group">
+						<div class="panel-group" id="accordion">
+							<?php $_i=1;foreach($_editArray as $_key => $_val):?>
+							<div class="card">
+								<div class="card-header p-0">
+									<a class="d-block collapsed muted-link" data-toggle="collapse" data-parent="#accordion" href="#site-code-<?php echo $_key?>" onclick="focusArea('code_<?php echo $_key?>');sessionSetting('sh_sys_page_edit','<?php echo $_key?>','','');">
+										<?php echo $_val[1]?>
+										<?php if(is_file($g['path_page'].$_filekind.$_val[2])):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
+									</a>
 								</div>
-								<div class="rb-codeview-body">
-									<textarea name="<?php echo $_key?>" id="code_<?php echo $_key?>" class="form-control" rows="35"><?php if(is_file($g['path_page'].$_filekind.$_val[2])) echo htmlspecialchars(implode('',file($g['path_page'].$_filekind.$_val[2])))?></textarea>
-								</div>
-								<div class="rb-codeview-footer">
-									<ul class="list-inline">
-										<li><code><?php echo is_file($g['path_page'].$_filekind.$_val[2])?count(file($g['path_page'].$_filekind.$_val[2])):'0'?> lines</code></li>
-										<li><code><?php echo is_file($g['path_page'].$_filekind.$_val[2])?getSizeFormat(@filesize($g['path_page'].$_filekind.$_val[2]),2):'0B'?></code></li>
-										<li class="pull-right">파일을 편집한 후 저장 버튼을 클릭하면 실시간으로 사용자 페이지에 적용됩니다.</li>
-									</ul>
+								<div id="site-code-<?php echo $_key?>" class="panel-collapse collapse<?php if(($_key==$_SESSION['sh_sys_page_edit']) || (!$_SESSION['sh_sys_page_edit']&&$_i==1)):?> in<?php endif?>">
+
+									<div class="rb-codeview">
+										<div class="rb-codeview-header">
+											<ol class="breadcrumb">
+												<li class="breadcrumb-item">파일경로 :</li>
+												<li class="breadcrumb-item">root</li>
+												<li class="breadcrumb-item">pages</li>
+												<?php if($_mtype=='menu'):?>
+												<li class="breadcrumb-item">menu</li>
+												<?php endif?>
+												<li class="breadcrumb-item active"><?php echo str_replace('menu/','',$_filekind).$_val[2]?></li>
+											</ol>
+										</div>
+										<div class="rb-codeview-body">
+											<textarea name="<?php echo $_key?>" id="code_<?php echo $_key?>" class="form-control" rows="35"><?php if(is_file($g['path_page'].$_filekind.$_val[2])) echo htmlspecialchars(implode('',file($g['path_page'].$_filekind.$_val[2])))?></textarea>
+										</div>
+										<div class="rb-codeview-footer">
+											<ul class="list-inline">
+												<li><code><?php echo is_file($g['path_page'].$_filekind.$_val[2])?count(file($g['path_page'].$_filekind.$_val[2])):'0'?> lines</code></li>
+												<li><code><?php echo is_file($g['path_page'].$_filekind.$_val[2])?getSizeFormat(@filesize($g['path_page'].$_filekind.$_val[2]),2):'0B'?></code></li>
+												<li class="pull-right">파일을 편집한 후 저장 버튼을 클릭하면 실시간으로 사용자 페이지에 적용됩니다.</li>
+											</ul>
+										</div>
+									</div>
+
 								</div>
 							</div>
-
+							<?php $_i++;endforeach?>
 						</div>
 					</div>
-					<?php $_i++;endforeach?>
+					<div class="form-group rb-submit">
+						<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> 수정하기</button>
+					</div>
 				</div>
+				<?php endif?>
+			</form>
+
+		</div><!-- /.col-sm-8 -->
+		<div class="col-sm-4">
+
+			<div class="card">
+				<div class="card-header">
+					파일첨부
+				</div>
+				<div class="card-body">
+					<div class="attach-files">
+						<div class="btn-group">
+							<button type="button" data-role="attach-handler-file" data-type="file" class="btn btn-link muted-link btn-sm" title="파일첨부" role="button" data-loading-text="업로드 중...">
+								<i class="fa fa fa-upload"></i> 파일첨부
+							</button>
+							 <small>최대 <?php echo str_replace('M','',ini_get('upload_max_filesize'))?>MB 까지 업로드 할수 있습니다.</small>
+					 </div>
+					</div><!-- /.attach-files -->
+
+					<div class="d-flex justify-content-start align-items-center pl-2">
+						<a href="https://simplemde.com/markdown-guide" class="f12 muted-link" target="_blank">
+							마크다운 문법안내
+						</a>
+					</div>
+
+				</div><!-- /.card -->
+
+				<!-- module : 첨부파일 사용 모듈 , theme : 첨부파일 테마 , attach_handler_file : 파일첨부 실행 엘리먼트 , attach_handler_photo : 사진첨부 실행 엘리먼트 ,parent_data : 수정시 필요한 해당 포스트 데이타 배열 변수, attach_handler_getModalList : 업로드 리스트 모달로 호출용 엘리먼트 (class 인 경우 . 까지 넘긴다.)  -->
+				<?php getWidget('default/attach',array('parent_module'=>$m,'theme'=>'bs4-markdown','attach_handler_file'=>'[data-role="attach-handler-file"]','attach_handler_photo'=>'[data-role="attach-handler-photo"]','attach_handler_getModalList'=>'.getModalList','parent_data'=>$_issue));?>
+
+
 			</div>
-			<div class="form-group rb-submit">
-				<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> 수정하기</button>
-			</div>
-		</div>
-		<?php endif?>
-	</form>
+
+
+		</div><!-- /.col-sm-4 -->
+	</div><!-- /.row -->
+
 </div>
 
 
