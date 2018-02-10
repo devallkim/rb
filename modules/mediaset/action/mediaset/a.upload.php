@@ -33,8 +33,8 @@ if ($link != 'Y')
 {
 	if ($fserver)
 	{
-		$FTP_CONNECT = ftp_connect($d['mediaset']['ftp_host'],$d['mediaset']['ftp_port']); 
-		$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['mediaset']['ftp_user'],$d['mediaset']['ftp_pass']); 
+		$FTP_CONNECT = ftp_connect($d['mediaset']['ftp_host'],$d['mediaset']['ftp_port']);
+		$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['mediaset']['ftp_user'],$d['mediaset']['ftp_pass']);
 		if (!$FTP_CONNECT) getLink('','',_LANG('a5001','mediaset'),'');
 		if (!$FTP_CRESULT) getLink('','',_LANG('a5001','mediaset'),'');
 		if($d['mediaset']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
@@ -117,8 +117,7 @@ if ($link != 'Y')
 		getDbInsert($table['s_upload'],$QKEY,$QVAL);
 		getDbUpdate($table['s_numinfo'],'upload=upload+1',"date='".$date['today']."' and site=".$s);
 
-		if ($gid == 100000000) db_query("OPTIMIZE TABLE ".$table['s_upload'],$DB_CONNECT); 
-
+		if ($gid == 100000000) db_query("OPTIMIZE TABLE ".$table['s_upload'],$DB_CONNECT);
 		$_nowPer = (int)((($i+1)/$upfileNum)*100);
 	?>
 	<script>
@@ -145,7 +144,7 @@ else {
 	$QVAL = "'$gid','$gid','$category','0','$tmpcode','$s','$mbruid','$_fileonly','-1','$fileExt','0','','','$name','','','0','0','0','','','','$src','0','0','0','$d_regis','','',''";
 	getDbInsert($table['s_upload'],$QKEY,$QVAL);
 
-	if ($gid == 100000000) db_query("OPTIMIZE TABLE ".$table['s_upload'],$DB_CONNECT); 
+	if ($gid == 100000000) db_query("OPTIMIZE TABLE ".$table['s_upload'],$DB_CONNECT);
 
 }
 if ($fileonly != 'Y')
@@ -162,6 +161,9 @@ if ($fileonly != 'Y')
 
 	getDbUpdate($table['s_uploadcat'],'r_num=r_num+'.$upfileNum,'mbruid='.$my['uid'].' and type=1'.$_tname);
 }
-if ($link == 'Y') getLink('reload','parent.','','');
+if ($link == 'Y') {
+	setrawcookie('mediaset_result', rawurlencode('사진이 추가 되었습니다.|success'));  // 처리여부 cookie 저장
+	getLink('reload','parent.','','');
+}
 exit;
 ?>

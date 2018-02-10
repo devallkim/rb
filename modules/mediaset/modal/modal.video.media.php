@@ -64,8 +64,225 @@ if ($tab == 'file_info')
 $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropfield='.$dropfield.'&dropfiles='.$dropfiles.'&dfiles='.$dfiles;
 ?>
 
-<?php getImport('bootstrap-select','bootstrap-select',false,'css')?>
-<?php getImport('bootstrap-select','bootstrap-select',false,'js')?>
+
+<style>
+<?php $_gapAdj = strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')||strpos($_SERVER['HTTP_USER_AGENT'],'Firefox')||strpos($_SERVER['HTTP_USER_AGENT'],'rv:1')?true:false?>
+
+#photobox {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: <?php echo $_sideOpen?290: 0?>px;
+  overflow: hidden;
+}
+
+#photobox .category-box {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: <?php echo $dfiles?'0px': '195px'?>;
+  padding-top: 25px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#photobox .photo-box {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: <?php echo $dfiles?'0px': '210px'?>;
+  bottom: 0;
+  right: 0;
+  padding-top: 45px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#photobox .alert {
+  margin-right: <?php echo $_sideOpen=true?'15': '305'?>px;
+}
+
+#photobox .btn-toolbar {
+  position: relative;
+  top: -15px;
+  left: 15px;
+  margin-right: 40px;
+}
+
+#photoorder {
+  padding: 0 0 10px 0;
+}
+
+#photoorder .rb-photo-check {
+  position: absolute;
+  margin-left: 5px;
+}
+
+#photoorder li {
+  float: left;
+  list-style-type: none;
+  border: #dfdfdf solid 3px;
+  padding: 0;
+  margin: 0 9px 20px 10px;
+}
+
+#photoorder .selected {
+  border: #FC5F4A solid 3px;
+}
+
+#photoorder li .photo {
+  width: 170px;
+  height: 98px;
+  cursor: move;
+}
+
+#photoorder li .btn-group {
+  display: none;
+}
+
+#photoorder li:hover .btn-group {
+  display: block;
+  position: absolute;
+}
+
+#photoorder li:hover .btn-group button {
+  top: -34px;
+}
+
+#infobox {
+  position: absolute;
+  display: block;
+  width: 290px;
+  top: 15px;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+#infobox .infobox-body {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-left: #dfdfdf solid 1px;
+  overflow: hidden;
+}
+
+#infobox .infobox-body .pic-info {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 42px;
+  bottom: <?php echo $_gapAdj?'95px': '55px'?>;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#infobox .infobox-body .pic-info img {
+  padding: 15px 15px 0 15px;
+}
+
+#infobox .infobox-body .pic-submit {
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: <?php echo $_gapAdj?'40px': '0'?>;
+  border-top: #dfdfdf solid 1px;
+  padding: 10px 15px 10px 15px;
+}
+
+#infobox .infobox-body .pic-info1 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 42px;
+  bottom: <?php echo $_gapAdj?'132px': '92px'?>;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#infobox .infobox-body .pic-submit1 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  bottom: <?php echo $_gapAdj?'40px': '0'?>;
+  border-top: #dfdfdf solid 1px;
+  padding: 10px 15px 10px 15px;
+}
+
+#infobox .text-center .btn {
+  width: 100%;
+}
+
+#infobox .layoutbox-body {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-left: #dfdfdf solid 1px;
+  overflow: hidden;
+}
+
+#infobox .layoutbox-body .selectbox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 10px 15px 0 15px;
+}
+
+#infobox .layoutbox-body .iframebox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 95px;
+  bottom: <?php echo $_gapAdj?'105px': '55px'?>;
+  padding: 0 0 0 15px;
+  overflow: hidden;
+  border-top: #dfdfdf solid 1px;
+}
+
+#infobox .layoutbox-body .optionbox {
+  position: absolute;
+  display: block;
+  width: 100%;
+  padding: 1px 15px 10px 15px;
+  bottom: <?php echo $_gapAdj?'40px': '0'?>;
+  border-top: #dfdfdf solid 1px;
+}
+
+#infobox .layoutbox-body .optionbox .text-center {
+  border-top: 0;
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+
+#progressBar {
+  display: none;
+  margin-right: 15px;
+}
+
+#progressPer {}
+
+.rb-list-group a {
+  padding: 8px 5px 3px 7px;
+}
+
+.rb-list-group a span {
+  font-weight: normal;
+}
+.rb-data-none {
+  height: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #9a9eac;
+}
+</style>
 
 <form name="_upload_form_" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" target="_upload_iframe_">
 <input type="hidden" name="r" value="<?php echo $r?>">
@@ -102,7 +319,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<input type="hidden" name="m" value="<?php echo $m?>">
 			<input type="hidden" name="a" value="mediaset/category_add">
 			<input type="hidden" name="ablum_type" value="2">
-			<div class="input-group">
+			<div class="input-group mt-3">
 				<input type="text" name="name" class="form-control" placeholder="추가할 분류">
 				<span class="input-group-btn">
 				<input type="submit" class="btn btn-light" value="추가">
@@ -207,9 +424,11 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 		</form>
 
 		<?php else:?>
-		<div class="alert alert-success">
-		<span class="glyphicon glyphicon-info-sign"></span>
-			비디오셋에 등록된 동영상이 없습니다.
+		<div class="rb-data-none text-center">
+			<div class="">
+				<div class="display-3"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></div>
+					등록된 비디오가 없습니다.
+			</div>
 		</div>
 		<?php endif?>
 	</div>
@@ -733,223 +952,9 @@ function modalSetting()
 	parent.getId('_modal_iframe_modal_window').style.overflow = 'hidden';
 	parent.getId('_modal_iframe_modal_window').scrolling = 'no';
 
-	parent.getId('_modal_header_modal_window').style.background = '#3F424B';
-	parent.getId('_modal_header_modal_window').style.color = '#fff';
 }
 modalSetting();
 $('.selectpicker').selectpicker();
 </script>
 
 <!-- 부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
-
-<style>
-<?php $_gapAdj = strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')||strpos($_SERVER['HTTP_USER_AGENT'],'Firefox')||strpos($_SERVER['HTTP_USER_AGENT'],'rv:1')?true:false?>
-
-#photobox {
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: <?php echo $_sideOpen?290: 0?>px;
-  overflow: hidden;
-}
-
-#photobox .category-box {
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: <?php echo $dfiles?'0px': '195px'?>;
-  padding-top: 25px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-#photobox .photo-box {
-  position: absolute;
-  display: block;
-  top: 0;
-  left: <?php echo $dfiles?'0px': '210px'?>;
-  bottom: 0;
-  right: 0;
-  padding-top: 45px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-#photobox .alert {
-  margin-right: <?php echo $_sideOpen=true?'15': '305'?>px;
-}
-
-#photobox .btn-toolbar {
-  position: relative;
-  top: -15px;
-  left: 15px;
-  margin-right: 40px;
-}
-
-#photoorder {
-  padding: 0 0 10px 0;
-}
-
-#photoorder .rb-photo-check {
-  position: absolute;
-  margin-left: 5px;
-}
-
-#photoorder li {
-  float: left;
-  list-style-type: none;
-  border: #dfdfdf solid 3px;
-  padding: 0;
-  margin: 0 9px 20px 10px;
-}
-
-#photoorder .selected {
-  border: #FC5F4A solid 3px;
-}
-
-#photoorder li .photo {
-  width: 170px;
-  height: 98px;
-  cursor: move;
-}
-
-#photoorder li .btn-group {
-  display: none;
-}
-
-#photoorder li:hover .btn-group {
-  display: block;
-  position: absolute;
-}
-
-#photoorder li:hover .btn-group button {
-  top: -34px;
-}
-
-#infobox {
-  position: absolute;
-  display: block;
-  width: 290px;
-  top: 15px;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-}
-
-#infobox .infobox-body {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-left: #dfdfdf solid 1px;
-  overflow: hidden;
-}
-
-#infobox .infobox-body .pic-info {
-  position: absolute;
-  display: block;
-  width: 100%;
-  top: 42px;
-  bottom: <?php echo $_gapAdj?'95px': '55px'?>;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-#infobox .infobox-body .pic-info img {
-  padding: 15px 15px 0 15px;
-}
-
-#infobox .infobox-body .pic-submit {
-  position: absolute;
-  display: block;
-  width: 100%;
-  bottom: <?php echo $_gapAdj?'40px': '0'?>;
-  border-top: #dfdfdf solid 1px;
-  padding: 10px 15px 10px 15px;
-}
-
-#infobox .infobox-body .pic-info1 {
-  position: absolute;
-  display: block;
-  width: 100%;
-  top: 42px;
-  bottom: <?php echo $_gapAdj?'132px': '92px'?>;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-#infobox .infobox-body .pic-submit1 {
-  position: absolute;
-  display: block;
-  width: 100%;
-  bottom: <?php echo $_gapAdj?'40px': '0'?>;
-  border-top: #dfdfdf solid 1px;
-  padding: 10px 15px 10px 15px;
-}
-
-#infobox .text-center .btn {
-  width: 100%;
-}
-
-#infobox .layoutbox-body {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-left: #dfdfdf solid 1px;
-  overflow: hidden;
-}
-
-#infobox .layoutbox-body .selectbox {
-  position: absolute;
-  display: block;
-  width: 100%;
-  left: 0;
-  right: 0;
-  padding: 10px 15px 0 15px;
-}
-
-#infobox .layoutbox-body .iframebox {
-  position: absolute;
-  display: block;
-  width: 100%;
-  top: 95px;
-  bottom: <?php echo $_gapAdj?'105px': '55px'?>;
-  padding: 0 0 0 15px;
-  overflow: hidden;
-  border-top: #dfdfdf solid 1px;
-}
-
-#infobox .layoutbox-body .optionbox {
-  position: absolute;
-  display: block;
-  width: 100%;
-  padding: 1px 15px 10px 15px;
-  bottom: <?php echo $_gapAdj?'40px': '0'?>;
-  border-top: #dfdfdf solid 1px;
-}
-
-#infobox .layoutbox-body .optionbox .text-center {
-  border-top: 0;
-  padding-top: 10px;
-  padding-bottom: 0;
-}
-
-#progressBar {
-  display: none;
-  margin-right: 15px;
-}
-
-#progressPer {}
-
-.rb-list-group a {
-  padding: 8px 5px 3px 7px;
-}
-
-.rb-list-group a span {
-  font-weight: normal;
-}
-
-</style>
