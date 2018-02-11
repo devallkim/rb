@@ -64,6 +64,7 @@ if ($wysiwyg != 'Y')
 
 	$cachefile_mobile = str_replace('.php','.cache',$vfile.'.mobile');
 	if(file_exists($cachefile_mobile)) unlink($cachefile_mobile);
+	getDbUpdate($table['s_menu'],"upload='".$upload."'",'uid='.$uid);
 	setrawcookie('site_edit_result', rawurlencode('소스코드 수정사항이 반영 되었습니다|success'));
 	getLink('reload','parent.','','');
 }

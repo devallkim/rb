@@ -128,7 +128,7 @@ if ($package_step == 2)
 	if ($ACT_CM)
 	{
 		include $g['path_tmp'].'app/'.$package_folder.'/_settings/var.menu.php';
-		$QKEY = "gid,site,is_child,parent,depth,id,menutype,mobile,hidden,reject,name,target,redirect,joint,perm_g,perm_l,layout,m_layout,imghead,imgfoot,addattr,num,d_last,addinfo,mediaset";
+		$QKEY = "gid,site,is_child,parent,depth,id,menutype,mobile,hidden,reject,name,target,redirect,joint,perm_g,perm_l,layout,m_layout,imghead,imgfoot,addattr,num,d_last,addinfo,upload";
 		foreach($d['package']['menus'] as $R)
 		{
 			$_parent = 0;
@@ -148,7 +148,7 @@ if ($package_step == 2)
 	if ($ACT_CP)
 	{
 		include $g['path_tmp'].'app/'.$package_folder.'/_settings/var.page.php';
-		$QKEY = "site,pagetype,ismain,mobile,id,category,name,perm_g,perm_l,layout,m_layout,joint,hit,linkedmenu,d_regis,d_update,mediaset,member,extra";
+		$QKEY = "site,pagetype,ismain,mobile,id,category,name,perm_g,perm_l,layout,m_layout,joint,hit,linkedmenu,d_regis,d_update,upload,member,extra";
 		foreach($d['package']['pages'] as $R)
 		{
 			if (is_file($g['path_page'].$S['id'].'-pages/'.$R['id'].'.php')) continue;

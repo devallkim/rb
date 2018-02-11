@@ -333,11 +333,11 @@ $pageType = array('','모듈연결','직접편집');
 				<div class="panel-group" id="page-settings">
 					<div class="card" id="page-settings-meta">
 						<div class="card-header p-0">
-							<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" data-parent="#page-settings" href="#page-settings-meta-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-meta').className.indexOf('default')==-1?'':'1','','');">
+							<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#page-settings-meta-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-meta').className.indexOf('default')==-1?'':'1','','');">
 								메타설정
 							</a>
 						</div>
-						<div id="page-settings-meta-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==1):?> show<?php endif?>">
+						<div id="page-settings-meta-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==1):?> show<?php endif?>" data-parent="#page-settings">
 							<div class="card-body">
 								<div class="form-group row rb-outside">
 									<label class="col-lg-2 col-form-label text-lg-right">타이틀</label>
@@ -428,11 +428,11 @@ $pageType = array('','모듈연결','직접편집');
 
 					<div class="card" id="page-settings-advance">
 						<div class="card-header p-0">
-							<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" data-parent="#page-settings" href="#page-settings-advance-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-advance').className.indexOf('default')==-1?'':'2','','');">
+							<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#page-settings-advance-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-advance').className.indexOf('default')==-1?'':'2','','');">
 								고급설정
 							</a>
 						</div>
-						<div id="page-settings-advance-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==2):?> show<?php endif?>">
+						<div id="page-settings-advance-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==2):?> show<?php endif?>" data-parent="#page-settings">
 							<div class="card-body">
 								<div class="form-group row">
 									<label class="col-lg-2 col-form-label text-lg-right">레이아웃</label>
@@ -602,7 +602,7 @@ $pageType = array('','모듈연결','직접편집');
 									<label class="col-lg-2 col-form-label text-lg-right">미디어</label>
 									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
-											<input class="form-control" type="text" name="mediaset" id="mediaset" value="<?php echo $R['mediaset']?$R['mediaset']:''?>">
+											<input class="form-control" type="text" name="upload" id="mediaset" value="<?php echo $R['upload']?$R['upload']:''?>">
 											<div class="input-group-append">
 												<button class="btn btn-light rb-modal-photo" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 													<i class="fa fa-photo fa-lg"></i>

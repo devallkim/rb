@@ -18,7 +18,7 @@ $keywords = trim($keywords);
 $description = trim($description);
 $classification = trim($classification);
 $addattr = trim($addattr);
-$mediaset = trim($mediaset);
+$upload = trim($upload);
 $image_src = trim($image_src);
 
 if (!$redirect&&(strstr($joint,'&c=')||strstr($joint,'?c=')))
@@ -77,7 +77,7 @@ if ($cat && !$vtype)
 
 	$QVAL = "id='$id',menutype='$menutype',mobile='$mobile',hidden='$hidden',reject='$reject',name='$name',target='$target',";
 	$QVAL.= "redirect='$redirect',joint='$joint',perm_g='$perm_g',perm_l='$perm_l',";
-	$QVAL.= "layout='$layout',m_layout='$m_layout',imghead='$imghead',imgfoot='$imgfoot',addattr='$addattr',addinfo='$addinfo',mediaset='$mediaset'";
+	$QVAL.= "layout='$layout',m_layout='$m_layout',imghead='$imghead',imgfoot='$imgfoot',addattr='$addattr',addinfo='$addinfo',upload='$upload'";
 	getDbUpdate($table['s_menu'],$QVAL,'uid='.$cat);
 
 	$_SEO = getDbData($table['s_seo'],'uid='.(int)$seouid,'uid');
@@ -169,8 +169,8 @@ else {
 		$xname	= trim($sarr[$i]);
 		$xnarr	= explode('=',$xname);
 
-		$QKEY = "gid,site,is_child,parent,depth,id,menutype,mobile,hidden,reject,name,target,redirect,joint,perm_g,perm_l,layout,m_layout,imghead,imgfoot,addattr,num,d_last,addinfo,mediaset";
-		$QVAL = "'$gid','".$_HS['uid']."','0','$parent','$xdepth','$xnarr[1]','$menutype','$mobile','$hidden','$reject','$xnarr[0]','$target','$redirect','$joint','$perm_g','$perm_l','$layout','$m_layout','','','$addattr','0','','$addinfo','$mediaset'";
+		$QKEY = "gid,site,is_child,parent,depth,id,menutype,mobile,hidden,reject,name,target,redirect,joint,perm_g,perm_l,layout,m_layout,imghead,imgfoot,addattr,num,d_last,addinfo,upload";
+		$QVAL = "'$gid','".$_HS['uid']."','0','$parent','$xdepth','$xnarr[1]','$menutype','$mobile','$hidden','$reject','$xnarr[0]','$target','$redirect','$joint','$perm_g','$perm_l','$layout','$m_layout','','','$addattr','0','','$addinfo','$upload'";
 
 		getDbInsert($table['s_menu'],$QKEY,$QVAL);
 		$lastmenu = getDbCnt($table['s_menu'],'max(uid)','');
