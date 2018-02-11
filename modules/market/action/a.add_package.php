@@ -128,7 +128,7 @@ if ($package_step == 2)
 	if ($ACT_CM)
 	{
 		include $g['path_tmp'].'app/'.$package_folder.'/_settings/var.menu.php';
-		$QKEY = "gid,site,is_child,parent,depth,id,menutype,mobile,hidden,reject,name,target,redirect,joint,perm_g,perm_l,layout,m_layout,imghead,imgfoot,addattr,num,d_last,addinfo,upload";
+		$QKEY = "gid,site,is_child,parent,depth,id,menutype,mobile,hidden,reject,name,target,redirect,joint,perm_g,perm_l,layout,m_layout,imghead,imgfoot,addattr,num,d_last,addinfo,upload,featured_img";
 		foreach($d['package']['menus'] as $R)
 		{
 			$_parent = 0;
@@ -138,7 +138,7 @@ if ($package_step == 2)
 				$_parent = $_PRTUID['uid'];
 			}
 
-			$QVAL = "'".$R['gid']."','".$S['uid']."','".$R['is_child']."','".$_parent."','".$R['depth']."','".$R['id']."','".$R['menutype']."','".$R['mobile']."','0','0','".$R['name']."','".$R['target']."','".$R['redirect']."','".$R['joint']."','','0','".$R['layout']."','".$R['m_layout']."','".$R['imghead']."','".$R['imgfoot']."','".$R['addattr']."','0','','',''";
+			$QVAL = "'".$R['gid']."','".$S['uid']."','".$R['is_child']."','".$_parent."','".$R['depth']."','".$R['id']."','".$R['menutype']."','".$R['mobile']."','0','0','".$R['name']."','".$R['target']."','".$R['redirect']."','".$R['joint']."','','0','".$R['layout']."','".$R['m_layout']."','".$R['imghead']."','".$R['imgfoot']."','".$R['addattr']."','0','','','".$R['upload']."','".$R['featured_img']."'";
 			getDbInsert($table['s_menu'],$QKEY,$QVAL);
 			$lastmenu = getDbCnt($table['s_menu'],'max(uid)','');
 			getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'1','$lastmenu','','','','ALL',''");
@@ -148,11 +148,11 @@ if ($package_step == 2)
 	if ($ACT_CP)
 	{
 		include $g['path_tmp'].'app/'.$package_folder.'/_settings/var.page.php';
-		$QKEY = "site,pagetype,ismain,mobile,id,category,name,perm_g,perm_l,layout,m_layout,joint,hit,linkedmenu,d_regis,d_update,upload,member,extra";
+		$QKEY = "site,pagetype,ismain,mobile,id,category,name,perm_g,perm_l,layout,m_layout,joint,hit,linkedmenu,d_regis,d_update,upload,featured_img,member,extra";
 		foreach($d['package']['pages'] as $R)
 		{
 			if (is_file($g['path_page'].$S['id'].'-pages/'.$R['id'].'.php')) continue;
-			$QVAL = "'".$S['uid']."','".$R['pagetype']."','".$R['ismain']."','".$R['mobile']."','".$R['id']."','".$R['category']."','".$R['name']."','','0','".$R['layout']."','".$R['m_layout']."','".$R['joint']."','0','".$R['linkedmenu']."','".$date['totime']."','".$date['totime']."','','1',''";
+			$QVAL = "'".$S['uid']."','".$R['pagetype']."','".$R['ismain']."','".$R['mobile']."','".$R['id']."','".$R['category']."','".$R['name']."','','0','".$R['layout']."','".$R['m_layout']."','".$R['joint']."','0','".$R['linkedmenu']."','".$date['totime']."','".$date['totime']."','".$R['upload']."','".$R['featured_img']."','1',''";
 			getDbInsert($table['s_page'],$QKEY,$QVAL);
 			$lastpage = getDbCnt($table['s_page'],'max(uid)','');
 			getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'2','$lastpage','','','','ALL',''");
