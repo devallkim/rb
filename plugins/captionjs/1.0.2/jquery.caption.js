@@ -1,22 +1,22 @@
 /*!
  * caption.js | easily and semantically add captions to your images
- * http://captionjs.com
+ * https://captionjs.com
  *
- * Copyright 2013-2014, Eric Magnuson
+ * Copyright 2013–2017, Eric Magnuson
  * Released under the MIT license
  * https://github.com/jquery/jquery/blob/master/MIT-LICENSE.txt
  *
- * v0.9.9
- * Date: 2016-12-16
+ * v1.0.2
+ * Date: 2017-02-03
  */
-(function($, window, undefined){
-	$.fn.captionjs = function(opts){
+(function($, window, undefined) {
+	$.fn.captionjs = function(opts) {
 
 		// Default values for options
 		var defaults = {
 			'class_name'      : 'captionjs', // Class name for each <figure>
 			'schema'          : true,        // Use schema.org markup (i.e., itemtype, itemprop)
-			'mode'            : 'default',   // default | stacked | animated | hide
+			'mode'            : 'default',   // default | stacked | animated | hidden (deprecated: hide)
 			'debug_mode'      : false,       // Output debug info to the JS console
 			'force_dimensions': true,        // Force the dimensions in case they cannot be detected (e.g., image is not yet painted to viewport)
 			'is_responsive'   : false,       // Ensure the figure and image change size when in responsive layout. Requires a container to control responsiveness!
@@ -27,7 +27,7 @@
 		var options = $.extend(defaults, opts || {});
 
 		// Function to copy styles
-		var transferStyles = function(property, reset_val, $origin, $target){
+		var transferStyles = function(property, reset_val, $origin, $target) {
 			if ($origin.jquery && $target.jquery) // Check that they are jQuery objects
 			{
 				$origin.css(property, $target.css(property));
@@ -36,28 +36,34 @@
 		};
 
 		// jQuery chainability -- do the magic below
-		return this.each(function(){
+		return this.each(function() {
 
-			if (options.debug_mode) console.log('caption.js | Starting.');
+			if (options.debug_mode) console.debug('caption.js | Starting.');
 
 			// Form basic structures and assign vars
 			var $this       = $(this),  // The image
 				$caption    = $this.data('caption') ? $this.data('caption') : $this.attr('alt'),
-				$figure     = $this.wrap('<figure class="' + options.class_name + ' ' + options.mode + '"/>').after('<figcaption/>').parent(),
+				$figure     = $this.wrap('<figure class="' + options.class_name + ' ' + options.class_name + '-' + options.mode + '"/>').after('<figcaption/>').parent(),
 				$figcaption = $this.next('figcaption').html($caption),
 				$link       = $this.data('link') ? $figcaption.wrapInner('<a href="' + $this.data('link') + '"/>').children('a').css('padding', '0').css('margin', '0') : null,
 				target_width,
 				target_height;
 
+			// Fallback for name change of hide to hidden
+			if (options.mode === 'hide')
+			{
+				options.mode = 'hidden';
+			}
+
 			// If no caption is supplied, just remove the figcaption.
 			if ($caption === '') $figcaption.remove();
 
-			if (options.debug_mode) console.log('caption.js | Caption: ' + $caption);
+			if (options.debug_mode) console.debug('caption.js | Caption: ' + $caption);
 
 			// Determine the appropriate dimensions for the figure, our top-most container for caption.js.
 			if (options.force_dimensions)
 			{
-				if (options.debug_mode) console.log('caption.js | Forcing dimensions with a clone.');
+				if (options.debug_mode) console.debug('caption.js | Forcing dimensions with a clone.');
 
 				// Create a clone outside of the viewport to detect and then set the dimensions.
 				var $clone = $figure.clone().css({
@@ -100,7 +106,7 @@
 				transferStyles('clear', 'both', $figure, $this);
 				transferStyles('float', 'none', $figure, $this);
 				transferStyles('margin', '0', $figure, $this);
-				// transferStyles('padding', '0', $figure, $this); // Finish this
+				// transferStyles('padding', '0', $figure, $this); // @todo
 				$this.css('padding', '0');
 				transferStyles('left', 'auto', $figure, $this);
 				transferStyles('right', 'auto', $figure, $this);
@@ -128,7 +134,7 @@
 			{
 				$figcaption.css({
 					'margin-bottom': '0',
-					'bottom': '0',
+					'bottom': '0'
 				});
 			}
 
@@ -137,16 +143,41 @@
 			{
 				$figcaption.css({
 					'margin-bottom': '0',
-					'bottom': -target_height,
+					'bottom': -target_height
 				});
 			}
 
-			// Hide mode
-			if (options.mode === 'hide')
+			// Hidden mode
+			if (options.mode === 'hidden')
 			{
 				$figcaption.css({
 					'margin-bottom': target_height,
-					'bottom': -target_height,
+					'bottom': -target_height
+				});
+			}
+
+			// When window resizes, update all the figcaption values if responsive.
+			if (options.is_responsive)
+			{
+				$(window).resize(function(event) {
+
+					target_height = $figcaption.outerHeight();
+
+					if (options.mode === 'animated')
+					{
+						$figcaption.css({
+							'bottom': -target_height
+						});
+					}
+
+					if (options.mode === 'hidden')
+					{
+						$figcaption.css({
+							'margin-bottom': target_height,
+							'bottom': -target_height
+						});
+					}
+
 				});
 			}
 
