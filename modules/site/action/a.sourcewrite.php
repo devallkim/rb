@@ -8,6 +8,7 @@ include_once $g['path_core'].'opensrc/parsedown/Parsedown.php';
 $Parsedown = new Parsedown();
 $_source = trim(stripslashes($source));
 $__SRC__ = $Parsedown->text($_source);
+$seo_src = '['.$featured_img.']';
 
 if($editFilter) include $g['path_plugin'].$editFilter.'/filter.php';
 $source = preg_replace("'<tmp[^>]*?>'si",'',$__SRC__);
@@ -64,8 +65,19 @@ if ($wysiwyg != 'Y')
 
 	$cachefile_mobile = str_replace('.php','.cache',$vfile.'.mobile');
 	if(file_exists($cachefile_mobile)) unlink($cachefile_mobile);
-	getDbUpdate($table['s_menu'],"upload='".$upload."'",'uid='.$uid);
-	setrawcookie('site_edit_result', rawurlencode('소스코드 수정사항이 반영 되었습니다|success'));
+
+	if ($type == 'menu') {
+		getDbUpdate($table['s_menu'],"upload='".$upload."',featured_img='".$featured_img."',d_last='".$date['totime']."'",'uid='.$uid);
+		$_SEO = getDbData($table['s_seo'],'rel=1 and parent='.$uid,'image_src');
+		if (!$_SEO['image_src']) getDbUpdate($table['s_seo'],"image_src='$seo_src'",'parent='.$uid);
+
+	} else {
+		getDbUpdate($table['s_page'],"upload='".$upload."',featured_img='".$featured_img."',d_last='".$date['totime']."'",'uid='.$uid);
+		$_SEO = getDbData($table['s_seo'],'rel=2 and parent='.$uid,'image_src');
+		if (!$_SEO['image_src']) getDbUpdate($table['s_seo'],"image_src='$seo_src'",'parent='.$uid);
+	}
+
+	setrawcookie('site_edit_result', rawurlencode('저장 되었습니다|success'));
 	getLink('reload','parent.','','');
 }
 else {

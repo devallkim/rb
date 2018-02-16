@@ -85,6 +85,8 @@ else
 		}
 		else
 		{
+			$_HM['layout'] = $_HP['layout'];
+			$_HM['m_layout'] = $_HP['m_layout']?$_HP['m_layout']:$_HP['layout'];
 			$g['dir_module_skin'] = $g['path_page'].$r.'-pages/';
 			$g['url_module_skin'] = $g['s'].'/pages/'.$r.'-pages';
 			$g['img_module_skin'] = $g['url_module_skin'].'/images';

@@ -28,6 +28,11 @@ $_editArray = array(
 	'js' => array('js','Javascript','.js'),
 );
 ?>
+
+<!-- timeago -->
+<?php getImport('jquery-timeago','jquery.timeago',false,'js')?>
+<?php getImport('jquery-timeago','locales/jquery.timeago.ko',false,'js')?>
+
 <!-- 직접 꾸미기 -->
 <div id="rb-page-source" class="p-4">
 
@@ -108,7 +113,7 @@ $_editArray = array(
 	</div>
 
 	<div class="row">
-		<div class="col-sm-8">
+		<div class="col-sm-8 col-lg-9">
 
 			<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return sourcecheck(this);">
 				<input type="hidden" name="r" value="<?php echo $r?>">
@@ -118,8 +123,12 @@ $_editArray = array(
 				<?php if($_mtype=='menu'):?>
 				<input type="hidden" name="uid" value="<?php echo $_HM['uid']?>">
 				<input type="hidden" name="id" value="<?php echo $_HM['id']?>">
+				<input type="hidden" name="upload" id="upfilesValue" value="<?php echo $_HM['upload']?>">
+				<input type="hidden" name="featured_img" value="<?php echo $_HM['featured_img']?>">
 				<?php else:?>
 				<input type="hidden" name="id" value="<?php echo $_HP['id']?>">
+				<input type="hidden" name="upload" id="upfilesValue" value="<?php echo $_HP['upload']?>">
+				<input type="hidden" name="featured_img" value="<?php echo $_HP['featured_img']?>">
 				<?php endif?>
 				<input type="hidden" name="markdown" value="<?php echo $markdown?>">
 				<input type="hidden" name="editFilter" value="<?php echo $d['admin']['editor']?>">
@@ -130,9 +139,6 @@ $_editArray = array(
 				include $g['path_plugin'].$d['admin']['editor'].'/import.php';
 				?>
 
-				<div class="form-group">
-					<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> 수정하기</button>
-				</div>
 				<?php else:?>
 				<div id="tab-edit-area">
 					<div class="form-group">
@@ -140,12 +146,12 @@ $_editArray = array(
 							<?php $_i=1;foreach($_editArray as $_key => $_val):?>
 							<div class="card">
 								<div class="card-header p-0">
-									<a class="d-block collapsed muted-link" data-toggle="collapse" data-parent="#accordion" href="#site-code-<?php echo $_key?>" onclick="focusArea('code_<?php echo $_key?>');sessionSetting('sh_sys_page_edit','<?php echo $_key?>','','');">
+									<a class="d-block collapsed muted-link" data-toggle="collapse" href="#site-code-<?php echo $_key?>" onclick="sessionSetting('sh_sys_page_edit','<?php echo $_key?>','','');">
 										<?php echo $_val[1]?>
 										<?php if(is_file($g['path_page'].$_filekind.$_val[2])):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 									</a>
 								</div>
-								<div id="site-code-<?php echo $_key?>" class="panel-collapse collapse<?php if(($_key==$_SESSION['sh_sys_page_edit']) || (!$_SESSION['sh_sys_page_edit']&&$_i==1)):?> in<?php endif?>">
+								<div id="site-code-<?php echo $_key?>" class="panel-collapse collapse<?php if(($_key==$_SESSION['sh_sys_page_edit']) || (!$_SESSION['sh_sys_page_edit']&&$_i==1)):?> show<?php endif?>" data-parent="#accordion" >
 
 									<div class="rb-codeview">
 										<div class="rb-codeview-header">
@@ -184,35 +190,68 @@ $_editArray = array(
 			</form>
 
 		</div><!-- /.col-sm-8 -->
-		<div class="col-sm-4">
+		<div class="col-sm-4 col-lg-3">
 
 			<div class="card">
-				<div class="card-header">
-					파일첨부
-				</div>
-				<div class="card-body">
-					<div class="attach-files">
-						<div class="btn-group">
-							<button type="button" data-role="attach-handler-file" data-type="file" class="btn btn-link muted-link btn-sm" title="파일첨부" role="button" data-loading-text="업로드 중...">
-								<i class="fa fa fa-upload"></i> 파일첨부
-							</button>
-							 <small>최대 <?php echo str_replace('M','',ini_get('upload_max_filesize'))?>MB 까지 업로드 할수 있습니다.</small>
-					 </div>
-					</div><!-- /.attach-files -->
 
-					<div class="d-flex justify-content-start align-items-center pl-2">
-						<a href="https://simplemde.com/markdown-guide" class="f12 muted-link" target="_blank">
-							마크다운 문법안내
-						</a>
-					</div>
+				<?php getWidget('_default/attach',array('parent_module'=>'site','theme'=>'_desktop/bs4-markdownPlus','attach_handler_photo'=>'[data-role="attach-handler-photo"]','parent_data'=>$_HM,'attach_object_type'=>'file'));?>
 
-				</div><!-- /.card -->
+				<?php getWidget('_default/attach',array('parent_module'=>'site','theme'=>'_desktop/bs4-markdownPlus','attach_handler_photo'=>'[data-role="attach-handler-photo"]','parent_data'=>$_HM,'attach_object_type'=>'audio'));?>
 
 				<!-- module : 첨부파일 사용 모듈 , theme : 첨부파일 테마 , attach_handler_file : 파일첨부 실행 엘리먼트 , attach_handler_photo : 사진첨부 실행 엘리먼트 ,parent_data : 수정시 필요한 해당 포스트 데이타 배열 변수, attach_handler_getModalList : 업로드 리스트 모달로 호출용 엘리먼트 (class 인 경우 . 까지 넘긴다.)  -->
-				<?php getWidget('default/attach',array('parent_module'=>$m,'theme'=>'bs4-markdown','attach_handler_file'=>'[data-role="attach-handler-file"]','attach_handler_photo'=>'[data-role="attach-handler-photo"]','attach_handler_getModalList'=>'.getModalList','parent_data'=>$_issue));?>
+				<?php getWidget('_default/attach',array('parent_module'=>'site','theme'=>'_desktop/bs4-markdownPlus','attach_handler_photo'=>'[data-role="attach-handler-photo"]','parent_data'=>$_HM,'attach_object_type'=>'photo'));?>
+
+				<div class="card-body">
+					<small class="text-muted">
+						사진,파일,비디오,오디오를 업로드 할수 있습니다.<br>
+						최대 <?php echo str_replace('M','',ini_get('upload_max_filesize'))?>MB 까지 업로드 할수 있습니다.
+					</small>
+				</div><!-- /.card-body -->
+
+				<div class="card-footer">
+					<!-- data-label="업로드" 값으 button 텍스트  값과 똑같이 해준다.  : 버튼 state 변경시 사용 -->
+					<button type="button" class="btn btn-light btn-block" data-role="attach-handler-photo" data-type="photo" data-label="업로드" data-loading-text="업로드 중...">
+						<i class="fa fa-upload fa-fw"></i> 파일 업로드
+					</button>
+				</div>
+			</div><!-- /.card -->
+
+			<div class="card">
+				<!-- module : 첨부파일 사용 모듈 , theme : 첨부파일 테마 , attach_handler_file : 파일첨부 실행 엘리먼트 , attach_handler_photo : 사진첨부 실행 엘리먼트 ,parent_data : 수정시 필요한 해당 포스트 데이타 배열 변수, attach_handler_getModalList : 업로드 리스트 모달로 호출용 엘리먼트 (class 인 경우 . 까지 넘긴다.)  -->
+				<?php getWidget('_default/attach',array('parent_module'=>'site','theme'=>'_desktop/bs4-markdownPlus','attach_handler_photo'=>'[data-role="attach-handler-photo"]','parent_data'=>$_HM,'attach_object_type'=>'youtube'));?>
+
+				<div class="card-body">
+					<small class="text-muted">
+						Yutube 공유링크로 비디오를 본문에 삽입 또는 첨부할수 있습니다.
+					</small>
+				</div><!-- /.card-body -->
+
+				<div class="card-footer">
+					<!-- data-label="업로드" 값으 button 텍스트  값과 똑같이 해준다.  : 버튼 state 변경시 사용 -->
+					<button type="button" class="btn btn-light btn-block" data-toggle="modal" data-target="#modal-attach-youtube">
+						<i class="fa fa-youtube fa-fw"></i>
+						유튜브 추가하기
+					</button>
+				</div>
+			</div><!-- /.card -->
 
 
-			</div>
+			<a class="btn btn-block btn btn-outline-secondary" href="https://simplemde.com/markdown-guide" target="_blank">
+				본문작성 문법안내
+			</a>
+
+
+			<button class="btn btn-outline-primary btn-block btn-lg js-submit" type="button" name="button">
+        <span class="not-loading">
+					저장하기
+					<?php if ($_HM['d_last']): ?>
+					<small class="text-muted">
+						<time class="timeago small" datetime="<?php echo getDateFormat($_HM['d_last'],'c')?>"></time> 저장됨
+					</small>
+					<?php endif; ?>
+				</span>
+        <span class="is-loading"><i class="fa fa-spinner fa-lg fa-spin fa-fw"></i>저장 중 ...</span>
+      </button>
 
 
 		</div><!-- /.col-sm-4 -->
@@ -241,7 +280,10 @@ $_editArray = array(
 <?php getImport('codemirror','mode/clike/clike',false,'js')?>
 <?php getImport('codemirror','mode/php/php',false,'js')?>
 <?php getImport('codemirror','mode/css/css',false,'js')?>
+
+
 <script>
+
 var editor_php1 = CodeMirror.fromTextArea(getId('code_source'), {
 	mode: "application/x-httpd-php",
     indentUnit: 4,
@@ -325,16 +367,32 @@ function _codefullscreen()
 
 <script>
 _nowArea = '';
-function focusArea(xid)
-{
 
-}
-function sourcecheck(f)
-{
+
+$(".timeago").timeago();
+
+$(".js-submit").click(function() {
+
 	var f = document.procForm;
-	getIframeForAction(f);
-	return true;
-}
+
+	$(this).attr("disabled",true);
+
+	// 첨부파일 uid 를 upfiles 값에 추가하기
+	var attachfiles=$('input[name="attachfiles[]"]').map(function(){return $(this).val()}).get();
+	var new_upfiles='';
+	if(attachfiles){
+		for(var i=0;i<attachfiles.length;i++) {
+		 new_upfiles+=attachfiles[i];
+		}
+		$('input[name="upload"]').val(new_upfiles);
+	}
+
+	setTimeout(function(){
+		getIframeForAction(f);
+		f.submit();
+	}, 500);
+});
+
 getId('rb-more-tab-<?php echo $_mtype=='page'?'3':'2'?>').className = 'active';
 </script>
 <?php endif?>

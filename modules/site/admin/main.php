@@ -27,7 +27,7 @@ if ($R['uid'])
 				<input type="hidden" name="m" value="<?php echo $module?>">
 				<input type="hidden" name="a" value="siteorder_update">
 
-				<div class="dd py-4 pl-3 border-bottom" id="site-icons" style="height: calc(100vh - 10.5rem);">
+				<div class="dd py-4 pl-3" id="site-icons" style="height: calc(100vh - 10.5rem);">
 					<ol class="dd-list list-inline">
 						<?php while($S = db_fetch_array($SITES)):?>
 							<li class="dd-item<?php if($S['uid']==$R['uid']):?> rb-active<?php endif?> mb-0" data-id="_site_<?php echo $S['id']?>_">

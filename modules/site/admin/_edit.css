@@ -1,5 +1,13 @@
+html,
+#rb-body,
+#content-main,
+#rb-admin-page-content,
 #rb-page-source {
+	min-height: 100%;
 	background-color: #fff;
+}
+
+#rb-page-source {
 	color: #333;
 	font-family: 'Apple SD Gothic Neo',Dotum,'돋움',sans-serif;
 	font-size: 14px;
@@ -36,10 +44,9 @@
   font-size: 14px;
 }
 
-
-
-
-
+#rb-page-source .CodeMirror pre {
+	font-family: 'Noto Sans KR', sans-serif, '돋움', dotum, sans-serif;
+}
 
 .timeline-comment .previewable-comment-form {
   display: none;
@@ -106,14 +113,14 @@
 #rb-page-source .editor-preview {
   background: #fff;
 }
-#rb-page-source .CodeMirror {
+#rb-page-source .media .CodeMirror {
   border-radius: 4px !important;
   background-color: #fafbfc;
 }
 #rb-page-source .CodeMirror-scroll {
     padding-bottom: 55px;
 }
-#rb-page-source .CodeMirror.CodeMirror-focused {
+#rb-page-source .media .CodeMirror.CodeMirror-focused {
   background-color: #fff;
   border-color: #2188ff;
   outline: none;
@@ -190,7 +197,6 @@
 #rb-page-source .markdown-body,
 #rb-page-source .markdown-body p {
   color: #24292e; !important;
-  font-size: 14px !important;
 }
 #rb-page-source .markdown-body h1,
 #rb-page-source .markdown-body h2,
@@ -310,4 +316,13 @@
 .rb-top-btnbox {
 	position: relative;
 	top:-10px;
+}
+
+
+#tab-edit-area .card-header {
+	background-color: rgba(0,0,0,.7);
+}
+
+.editor-preview .mejs-player {
+	margin-bottom: 1rem
 }
