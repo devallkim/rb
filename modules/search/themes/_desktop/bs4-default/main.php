@@ -10,7 +10,7 @@
 
 		<div class="input-group input-group-lg w-75">
 			<div class="input-group-prepend">
-				<span class="input-group-text"><i class="fa fa-search"></i> 통합검색</span>
+				<span class="input-group-text"><i class="fa fa-search"></i> 통합검색(데스크탑 테마)</span>
 			</div>
 			<input type="text" name="keyword" class="form-control" value="<?php echo $_keyword?>">
 			<div class="input-group-append">

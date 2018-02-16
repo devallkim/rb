@@ -222,12 +222,49 @@ $SITEN = db_num_rows($SITES);
 					<label class="col-lg-2 col-form-label text-lg-right">검색테마</label>
 					<div class="col-lg-10 col-xl-9">
 						<select class="form-control custom-select" name="theme">
-							<?php $dirs = opendir($g['path_module'].$module.'/themes')?>
-							<?php while(false !== ($theme = readdir($dirs))):?>
-							<?php if(strpos('_..',$theme))continue?>
-							<option value="<?php echo $theme?>"<?php if($d['search']['theme']==$theme):?> selected<?php endif?>><?php echo $theme?></option>
-							<?php endwhile?>
-							<?php closedir($dirs)?>
+							<optgroup label="데스크탑">
+								<?php $dirs = opendir($g['path_module'].$module.'/themes/_desktop')?>
+								<?php while(false !== ($theme = readdir($dirs))):?>
+								<?php if(strpos('_..',$theme))continue?>
+								<option value="_desktop/<?php echo $theme?>"<?php if($d['search']['theme']=='_desktop/'.$theme):?> selected<?php endif?>><?php echo $theme?></option>
+								<?php endwhile?>
+								<?php closedir($dirs)?>
+							</optgroup>
+							<optgroup label="모바일">
+								<?php $dirs = opendir($g['path_module'].$module.'/themes/_mobile')?>
+								<?php while(false !== ($theme = readdir($dirs))):?>
+								<?php if(strpos('_..',$theme))continue?>
+								<option value="_mobile/<?php echo $theme?>"<?php if($d['search']['theme']=='_mobile/'.$theme):?> selected<?php endif?>><?php echo $theme?></option>
+								<?php endwhile?>
+								<?php closedir($dirs)?>
+							</optgroup>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label text-lg-right">
+						<span class="badge badge-dark">모바일</span>
+					</label>
+					<div class="col-lg-10 col-xl-9">
+						<select class="form-control custom-select" name="m_theme">
+							<optgroup label="데스크탑">
+								<?php $dirs = opendir($g['path_module'].$module.'/themes/_desktop')?>
+								<?php while(false !== ($theme = readdir($dirs))):?>
+								<?php if(strpos('_..',$theme))continue?>
+								<option value="_desktop/<?php echo $theme?>"<?php if($d['search']['m_theme']=='_desktop/'.$theme):?> selected<?php endif?>><?php echo $theme?></option>
+								<?php endwhile?>
+								<?php closedir($dirs)?>
+							</optgroup>
+							<optgroup label="모바일">
+								<?php $dirs = opendir($g['path_module'].$module.'/themes/_mobile')?>
+								<?php while(false !== ($theme = readdir($dirs))):?>
+								<?php if(strpos('_..',$theme))continue?>
+								<option value="_mobile/<?php echo $theme?>"<?php if($d['search']['m_theme']=='_mobile/'.$theme):?> selected<?php endif?>><?php echo $theme?></option>
+								<?php endwhile?>
+								<?php closedir($dirs)?>
+							</optgroup>
+
 						</select>
 					</div>
 				</div>
@@ -317,6 +354,42 @@ $SITEN = db_num_rows($SITES);
 						</div>
 					</div>
 				</div>
+
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label text-lg-right">
+						<span class="badge badge-dark">모바일</span>
+					</label>
+					<div class="col-lg-10 col-xl-9">
+
+						<div class="form-row">
+							<div class="col-sm-6" id="rb-layout-select3">
+								<select class="form-control custom-select" name="m_layout_1" required onchange="getSubLayout(this,'rb-layout-select4','m_layout_1_sub','');">
+									<?php $_layoutHexp=explode('/',$_HS['m_layout'])?>
+									<option value="0">사이트 레이아웃(<?php echo getFolderName($g['path_layout'].$_layoutHexp[0])?>)</option>
+									<?php $_layoutExp1=explode('/',$d['search']['m_layout'])?>
+									<?php $dirs = opendir($g['path_layout'])?>
+									<?php while(false !== ($tpl = readdir($dirs))):?>
+									<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
+									<option value="<?php echo $tpl?>"<?php if($_layoutExp1[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
+									<?php endwhile?>
+									<?php closedir($dirs)?>
+								</select>
+							</div>
+							<div class="col-sm-6" id="rb-layout-select4">
+								<select class="form-control custom-select" name="m_layout_1_sub"<?php if(!$d['search']['m_layout']):?> disabled<?php endif?>>
+									<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+									<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
+									<?php while(false !== ($tpl1 = readdir($dirs1))):?>
+									<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
+									<option value="<?php echo $tpl1?>"<?php if($_layoutExp1[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
+									<?php endwhile?>
+									<?php closedir($dirs1)?>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+
 
 				<div class="row">
 					<div class="col-lg-10 offset-lg-2 col-xl-9 offset-xl-2">

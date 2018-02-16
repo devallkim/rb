@@ -8,6 +8,13 @@ $swhere	= $swhere ? $swhere : 'all';
 $_ResultArray = array();
 $_HM['layout'] = $d['search']['layout'];
 
+
+if ($g['mobile']&&$_SESSION['pcmode']!='Y')
+{
+	$_HM['layout'] = $d['search']['m_layout'] ?$d['search']['m_layout'] : $d['search']['layout'];
+	$d['search']['theme'] = $d['search']['m_theme'] ? $d['search']['m_theme'] : $d['search']['theme'];
+}
+
 $g['dir_module_skin'] = $g['dir_module'].'/themes/'.$d['search']['theme'].'/';
 $g['url_module_skin'] = $g['url_module'].'/themes/'.$d['search']['theme'];
 $g['img_module_skin'] = $g['url_module_skin'].'/images';
