@@ -63,6 +63,7 @@ foreach($photomembers as $file_uid)
 				}
 			}
 		}
+		setrawcookie('mediaset_result', rawurlencode('사진이 이동 되었습니다.|success'));  // 처리여부 cookie 저장
 	}
 	else {
 
@@ -71,13 +72,13 @@ foreach($photomembers as $file_uid)
 			if ($mediaset != 'Y' || $dtype == 'delete')
 			{
 				getDbDelete($table['s_upload'],'uid='.$R['uid']);
-				
+
 				if ($R['type']>0)
 				{
 					if ($R['fserver'] && $R['url'] == $d['mediaset']['ftp_urlpath'])
 					{
-						$FTP_CONNECT = ftp_connect($d['mediaset']['ftp_host'],$d['mediaset']['ftp_port']); 
-						$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['mediaset']['ftp_user'],$d['mediaset']['ftp_pass']); 
+						$FTP_CONNECT = ftp_connect($d['mediaset']['ftp_host'],$d['mediaset']['ftp_port']);
+						$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['mediaset']['ftp_user'],$d['mediaset']['ftp_pass']);
 						if (!$FTP_CONNECT) continue;
 						if (!$FTP_CRESULT) continue;
 						if($d['mediaset']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
@@ -103,7 +104,7 @@ foreach($photomembers as $file_uid)
 			}
 			if ($R['category'] == 0)
 			{
-				getDbUpdate($table['s_upload'],'category=-1','uid='.$R['uid']);				
+				getDbUpdate($table['s_upload'],'category=-1','uid='.$R['uid']);
 				getDbUpdate($table['s_uploadcat'],'r_num=r_num-1','mbruid='.$my['uid']." and type=1 and name='none'");
 				if ($mediaset == 'Y' && $dtype != 'delete') getDbUpdate($table['s_uploadcat'],'r_num=r_num+1','mbruid='.$my['uid']." and type=1 and name='trash'");
 			}
@@ -115,6 +116,5 @@ foreach($photomembers as $file_uid)
 		}
 	}
 }
-
 getLink('reload','parent.','','');
 ?>

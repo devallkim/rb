@@ -46,11 +46,11 @@ if ($d['theme']['hidden_photo'] == 1 && $type == 2) {
 
 if ($d['mediaset']['up_ext_cut'] && strstr($d['mediaset']['up_ext_cut'],$fileExt))
 {
-       $code='200';
-       $msg='정상적인 접근이 아닙니다.';
-       $result=array($code,$msg);
-       echo json_encode($result);
-       exit;
+ $code='200';
+ $msg='정상적인 접근이 아닙니다.';
+ $result=array($code,$msg);
+ echo json_encode($result);
+ exit;
 }
 
 $savePath1  = $saveDir.substr($date['today'],0,4);

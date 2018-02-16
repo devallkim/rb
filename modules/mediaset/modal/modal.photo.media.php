@@ -299,7 +299,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 		<div class="list-group rb-list-group">
 			<a href="<?php echo $g['base_href']?>" class="list-group-item d-flex justify-content-between align-items-center<?php if(!$album):?> active<?php endif?>">전체사진<span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid'].' and type=1')?></span></a>
-			<a href="<?php echo $g['base_href']?>&album=none" class="list-group-item d-flex justify-content-between align-items-center<?php if($album=='none'):?> active<?php endif?>">미분류<span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid']." and type=1 and name='none'")?></span></a>
+			<a href="<?php echo $g['base_href']?>&album=none" class="list-group-item d-flex justify-content-between align-items-center<?php if($album=='none'):?> active<?php endif?>">미카테고리<span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid']." and type=1 and name='none'")?></span></a>
 
 			<?php $_TMP_CT=array()?>
 			<?php $_CT_RCD = getDbArray($table['s_uploadcat'],'mbruid='.$my['uid']." and type=1 and name<>'none' and name<>'trash'",'*','gid','asc',0,1)?>
@@ -309,14 +309,14 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 
 			<a href="<?php echo $g['base_href']?>&album=trash" class="list-group-item d-flex justify-content-between align-items-center<?php if($album=='trash'):?> active<?php endif?>">휴지통<span class="badge"><?php echo getDbCnt($table['s_uploadcat'],'sum(r_num)','mbruid='.$my['uid']." and type=1 and name='trash'")?></span></a>
 		</div>
-		<div class="list-group mt-3">
+		<div class="list-group my-3">
 			<form action="<?php echo $g['s']?>/" method="post" target="_upload_iframe_" onsubmit="return AddAlbumRcheck(this);">
 			<input type="hidden" name="r" value="<?php echo $r?>">
 			<input type="hidden" name="m" value="<?php echo $m?>">
 			<input type="hidden" name="a" value="mediaset/category_add">
 			<input type="hidden" name="ablum_type" value="1">
 			<div class="input-group">
-				<input type="text" name="name" class="form-control" placeholder="추가할 분류">
+				<input type="text" name="name" class="form-control" placeholder="추가할 카테고리">
 				<span class="input-group-btn">
 				<input type="submit" class="btn btn-light" value="추가">
 				</span>
@@ -336,9 +336,9 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 		<?php if(!$dfiles):?>
 		<div class="d-flex mb-3">
 			<div class="btn-group btn-group-sm mr-auto">
-				<button type="button" class="btn btn-light" title="전체선택" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','true');"><i class="fa fa-check-square-o"></i></button>
-				<button type="button" class="btn btn-light" title="선택해제" data-tooltip="tooltip" onclick="elementsCheck('photomembers[]','false');"><i class="fa fa-minus-square-o"></i></button>
-				<button type="button" class="btn btn-light"title="휴지통" data-tooltip="tooltip" onclick="deleteCheck(1,'');"><i class="fa fa-trash-o"></i></button>
+				<button type="button" class="btn btn-light" title="전체선택" data-toggle="tooltip" data-placement="top" onclick="elementsCheck('photomembers[]','true');"><i class="fa fa-check-square-o"></i></button>
+				<button type="button" class="btn btn-light" title="선택해제" data-toggle="tooltip" data-placement="top" onclick="elementsCheck('photomembers[]','false');"><i class="fa fa-minus-square-o"></i></button>
+				<button type="button" class="btn btn-light"title="휴지통" data-toggle="tooltip" data-placement="top" onclick="deleteCheck(1,'');"><i class="fa fa-trash-o"></i></button>
 
 				<div class="btn-group btn-group-sm">
 					<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
@@ -346,7 +346,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 					<span class="caret"></span>
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#." onclick="deleteCheck('move','0');"><i class="fa fa-folder-o fa-fw"></i> 미분류</a>
+						<a class="dropdown-item" href="#." onclick="deleteCheck('move','0');"><i class="fa fa-folder-o fa-fw"></i> 미카테고리</a>
 						<?php foreach($_TMP_CT as $_CT):?>
 						<a class="dropdown-item" href="#." onclick="deleteCheck('move','<?php echo $_CT['uid']?>');"><i class="fa fa-folder-o fa-fw"></i> <?php echo $_CT['name']?></a>
 						<?php endforeach?>
@@ -357,8 +357,8 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			</div>
 
 			<div class="btn-group btn-group-sm">
-				<button type="button" class="btn btn-light"<?php if($p-1<1):?> disabled="disabled"<?php endif?> data-tooltip="tooltip" data-placement="bottom" title="이전" onclick="location.href=getPageGo(<?php echo $p-1?>,0);"><i class="fa fa-angle-left fa-lg"></i></button>
-				<button type="button" class="btn btn-light"<?php if($p+1>$TPG):?> disabled="disabled"<?php endif?> data-tooltip="tooltip" data-placement="bottom" title="다음" onclick="location.href=getPageGo(<?php echo $p+1?>,0);"><i class="fa fa-angle-right fa-lg"></i></button>
+				<button type="button" class="btn btn-light"<?php if($p-1<1):?> disabled="disabled"<?php endif?> data-toggle="tooltip" data-placement="bottom" title="이전" onclick="location.href=getPageGo(<?php echo $p-1?>,0);"><i class="fa fa-angle-left fa-lg"></i></button>
+				<button type="button" class="btn btn-light"<?php if($p+1>$TPG):?> disabled="disabled"<?php endif?> data-toggle="tooltip" data-placement="bottom" title="다음" onclick="location.href=getPageGo(<?php echo $p+1?>,0);"><i class="fa fa-angle-right fa-lg"></i></button>
 			</div>
 
 			<div class="btn-group btn-group-sm mx-2">
@@ -396,7 +396,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 					<div class="photo"
 						style="background-image:url('<?php echo $val['url'].$val['folder'].'/'.getPreviewResize($val['tmpname'],'t')?>');" onclick="location.href='<?php echo $g['base_href']?>&file_uid=<?php echo $val['uid']?>&tab=file_info&album=<?php echo $album?>';"></div>
 					<?php else:?>
-					<div title="외부링크" class="photo" data-tooltip="tooltip"><img src="./_core/opensrc/timthumb/thumb.php?src=<?php echo $val['src'] ?>&w=100&h=67&s=1" onclick="location.href='<?php echo $g['base_href']?>&file_uid=<?php echo $val['uid']?>&tab=file_info&album=<?php echo $album?>';"></div>
+					<div title="외부링크" class="photo" data-toggle="tooltip"><img src="./_core/opensrc/timthumb/thumb.php?src=<?php echo $val['src'] ?>&w=100&h=67&s=1" onclick="location.href='<?php echo $g['base_href']?>&file_uid=<?php echo $val['uid']?>&tab=file_info&album=<?php echo $album?>';"></div>
 					<?php endif?>
 				</li>
 				<?php endforeach?>
@@ -587,26 +587,29 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 	<div class="">
 		<button type="button" class="btn btn-secondary" <?php if($album!='trash'):?>onclick="frames._modal_iframe_modal_window.getId('filefiled').click();"<?php else:?>disabled<?php endif?>><i class="fa fa-cloud-upload fa-lg"></i> PC사진</button>
 		<button type="button" class="btn btn-secondary" <?php if($album!='trash'):?>onclick="frames._modal_iframe_modal_window.picAdd();"<?php else:?>disabled<?php endif?>><i class="fa fa-link fa-lg"></i> 외부사진</button>
+
+		<?php if($album>0):?>
+		<button type="button" class="btn btn-danger" onclick="frames._modal_iframe_modal_window.catDelete();">카테고리 삭제</button>
+		<?php endif?>
+		<?php if($NUM>1):?>
+		<?php if($album>0):?>
+		<button type="button" class="btn btn-danger" onclick="frames._modal_iframe_modal_window.orderCheck();">순서변경</button>
+		<?php endif?>
+		<?php endif?>
+
+		<?php if($NUM&&$album=='trash'):?>
+		<button type="button" class="btn btn-danger" onclick="frames._modal_iframe_modal_window.deleteCheck(3,'');">휴지통 비우기</button>
+		<?php endif?>
+
 	</div>
 	<?php endif?>
 
-	<?php if($album>0):?>
-	<button type="button" class="btn btn-light" onclick="frames._modal_iframe_modal_window.catDelete();">분류삭제</button>
-	<?php endif?>
-	<?php if($NUM>1):?>
-	<?php if($album>0):?>
-	<button type="button" class="btn btn-light" onclick="frames._modal_iframe_modal_window.orderCheck();">순서변경</button>
-	<?php endif?>
-	<?php endif?>
-
-	<?php if($NUM&&$album=='trash'):?>
-	<button type="button" class="btn btn-light" onclick="frames._modal_iframe_modal_window.deleteCheck(3,'');">휴지통 비우기</button>
-	<?php endif?>
-
-	<button type="button" class="btn btn-light" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_">닫기</button>
-	<?php if($dropfield&&$dropfield!='editor'):?>
-	<button type="button" class="btn btn-danger" onclick="frames._modal_iframe_modal_window.fieldDrop();">적용하기</button>
-	<?php endif?>
+	<div class="">
+		<button type="button" class="btn btn-secondary" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_">닫기</button>
+		<?php if($dropfield&&$dropfield!='editor'):?>
+		<button type="button" class="btn btn-danger" onclick="frames._modal_iframe_modal_window.fieldDrop();">적용하기</button>
+		<?php endif?>
+	</div>
 
 </div>
 
@@ -627,7 +630,7 @@ dragsort.makeListSortable(getId("photoorder"));
 
 $(function () {
 	putCookieAlert('mediaset_result') // 실행결과 알림 메시지 출
-  $('[data-tooltip="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip()
 })
 
 var isGetPic = false;
@@ -650,11 +653,8 @@ function getPicSave()
 		alert('이미지를 불러온 후 저장해 주세요.   ');
 		return false;
 	}
-	//if (confirm('정말로 저장하시겠습니까?   '))
-	//{
-		var f = document._upload_form1_;
-		f.submit();
-	//}
+	var f = document._upload_form1_;
+	f.submit();
 	return false;
 }
 function getFiles()
@@ -711,7 +711,7 @@ function AddAlbumRcheck(f)
 {
 	if (f.name.value == '')
 	{
-		alert('분류명을 입력해 주세요.  ');
+		alert('카테고리명을 입력해 주세요.  ');
 		f.name.focus();
 		return false;
 	}
@@ -767,13 +767,10 @@ function deleteCheck(x,uid)
 			alert('이동할 사진을 선택해 주세요.');
 			return false;
 		}
-		if (confirm('삭제할 사진을 선택해 주세요.'))
-		{
-			f.a.value = 'mediaset/files_delete';
-			f.dtype.value = x;
-			f.mcat.value = uid;
-			f.submit();
-		}
+		f.a.value = 'mediaset/files_delete';
+		f.dtype.value = x;
+		f.mcat.value = uid;
+		f.submit();
 	}
 	else if (x == 'delete')
 	{
@@ -795,7 +792,7 @@ function deleteCheck(x,uid)
 			alert('삭제할 사진을 선택해 주세요.');
 			return false;
 		}
-		if (confirm('정말로 삭제하시겠습니까?'))
+		if (confirm('휴지통으로 이동하시겠습니까?'))
 		{
 			f.a.value = 'mediaset/files_delete';
 			f.submit();
@@ -809,16 +806,12 @@ function orderCheck()
     var l = document.getElementsByName('photomembers[]');
     var n = l.length;
     var i;
-	if (confirm('적용할 사진을 선택해 주세요.'))
-	{
 		for (i = 0; i < n; i++)
 		{
 			l[i].checked = true;
 		}
 		f.a.value = 'mediaset/files_order';
 		f.submit();
-	}
-	return false;
 }
 function infoCheck()
 {
