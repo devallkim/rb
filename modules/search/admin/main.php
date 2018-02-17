@@ -12,8 +12,15 @@ function getSearchFileList($folder)
 	return $incs;
 }
 
-include $g['path_module'].$module.'/var/var.search.php';
-include $g['path_module'].$module.'/var/var.order.php';
+$g['searchVarForSite'] = $g['path_var'].'site/'.$r.'/search.var.php';
+$_tmpdfile = file_exists($g['searchVarForSite']) ? $g['searchVarForSite'] : $g['path_module'].$module.'/var/var.search.php';
+
+$g['searchOrderVarForSite'] = $g['path_var'].'site/'.$r.'/search.order.var.php';
+$_ufile = file_exists($g['searchOrderVarForSite']) ? $g['searchOrderVarForSite'] : $g['path_module'].$module.'/var/var.order.php';
+
+include_once $_tmpdfile;
+include_once $_ufile;
+
 $MODULE_LIST = getDbArray($table['s_module'],'','*','gid','asc',0,$p);
 $_names = array();
 $PAGESET = array();
@@ -25,16 +32,25 @@ $SITEN = db_num_rows($SITES);
 <div class="container-fluid">
 	<div class="row" id="search-body">
 		<div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
+
+			<div class="">
+				<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&searchfile=<?php echo $searchfile?>&r='+this.value);">
+					<?php while($S = db_fetch_array($SITES)):$TMPST[]=array($S['label'],$S['id'])?>
+					<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
+					<?php endwhile?>
+				</select>
+			</div>
+
 			<div class="panel-group" id="accordion">
 				<div class="card">
 					<div class="card-header">
-						<a class="accordion-toggle collapsed muted-link d-block" data-parent="#accordion" data-toggle="collapse" href="#collapseOne">
+						<a class="accordion-toggle collapsed muted-link d-block" data-toggle="collapse" href="#collapseOne">
 							<i class="fa fa-search fa-lg fa-fw"></i>
 							통합검색 지원모듈
 						</a>
 					</div>
 
-					<div class="panel-collapse collapse show" id="collapseOne">
+					<div class="panel-collapse collapse show" id="collapseOne" data-parent="#accordion">
 						<?php $_i=0;while($MD = db_fetch_array($MODULE_LIST)):?>
 						<?php $forsearching_folder=$g['path_module'].$MD['id'].'/for-searching'?>
 						<?php if(!is_dir($forsearching_folder)) continue?>
@@ -68,19 +84,12 @@ $SITEN = db_num_rows($SITES);
 
 				<div class="card">
 					<div class="card-header">
-						<a class="accordion-toggle muted-link d-block" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo">
+						<a class="accordion-toggle muted-link d-block" data-toggle="collapse" href="#collapseTwo">
 							<i class="fa fa-retweet fa-lg fa-fw"></i>
 							출력옵션 및 순서조정
 						</a>
 					</div>
-					<div class="">
-						<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&searchfile=<?php echo $searchfile?>&r='+this.value);">
-							<?php while($S = db_fetch_array($SITES)):$TMPST[]=array($S['label'],$S['id'])?>
-							<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
-							<?php endwhile?>
-						</select>
-					</div>
-					<div class="panel-collapse collapse" id="collapseTwo">
+					<div class="panel-collapse collapse" id="collapseTwo" data-parent="#accordion">
 						<form role="form" action="<?php echo $g['s']?>/" method="post">
 						<input type="hidden" name="r" value="<?php echo $r?>">
 						<input type="hidden" name="m" value="<?php echo $module?>">
@@ -214,9 +223,11 @@ $SITEN = db_num_rows($SITES);
 			</div>
 
 			<form name="saveForm" role="form" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
+				<input type="hidden" name="r" value="<?php echo $r?>">
 				<input type="hidden" name="m" value="<?php echo $module?>">
 				<input type="hidden" name="a" value="config">
 				<input type="hidden" name="layout" value="">
+				<input type="hidden" name="m_layout" value="">
 
 				<div class="form-group row">
 					<label class="col-lg-2 col-form-label text-lg-right">검색테마</label>
@@ -332,7 +343,7 @@ $SITEN = db_num_rows($SITES);
 							</div>
 							<div class="col-sm-6" id="rb-layout-select2">
 								<select class="form-control custom-select" name="layout_1_sub"<?php if(!$d['search']['layout']):?> disabled<?php endif?>>
-									<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+									<?php if(!$d['search']['layout']):?><option>서브 레이아웃</option><?php endif?>
 									<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
 									<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 									<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
@@ -354,24 +365,24 @@ $SITEN = db_num_rows($SITES);
 						<div class="form-row">
 							<div class="col-sm-6" id="rb-layout-select3">
 								<select class="form-control custom-select" name="m_layout_1" required onchange="getSubLayout(this,'rb-layout-select4','m_layout_1_sub','');">
-									<?php $_layoutHexp=explode('/',$_HS['m_layout'])?>
-									<option value="0">사이트 레이아웃(<?php echo getFolderName($g['path_layout'].$_layoutHexp[0])?>)</option>
-									<?php $_layoutExp1=explode('/',$d['search']['m_layout'])?>
+									<?php $_mlayoutHexp=explode('/',$_HS['m_layout'])?>
+									<option value="0">사이트 레이아웃(<?php echo getFolderName($g['path_layout'].$_mlayoutHexp[0])?>)</option>
+									<?php $_mlayoutExp1=explode('/',$d['search']['m_layout'])?>
 									<?php $dirs = opendir($g['path_layout'])?>
 									<?php while(false !== ($tpl = readdir($dirs))):?>
 									<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
-									<option value="<?php echo $tpl?>"<?php if($_layoutExp1[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
+									<option value="<?php echo $tpl?>"<?php if($_mlayoutExp1[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
 									<?php endwhile?>
 									<?php closedir($dirs)?>
 								</select>
 							</div>
 							<div class="col-sm-6" id="rb-layout-select4">
 								<select class="form-control custom-select" name="m_layout_1_sub"<?php if(!$d['search']['m_layout']):?> disabled<?php endif?>>
-									<?php if(!$R['m_layout']):?><option>서브 레이아웃</option><?php endif?>
-									<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
+									<?php if(!$d['search']['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+									<?php $dirs1 = opendir($g['path_layout'].$_mlayoutExp1[0])?>
 									<?php while(false !== ($tpl1 = readdir($dirs1))):?>
 									<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-									<option value="<?php echo $tpl1?>"<?php if($_layoutExp1[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
+									<option value="<?php echo $tpl1?>"<?php if($_mlayoutExp1[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
 									<?php endwhile?>
 									<?php closedir($dirs1)?>
 								</select>
@@ -409,6 +420,7 @@ $SITEN = db_num_rows($SITES);
 <!-- nestable : https://github.com/dbushell/Nestable -->
 <?php getImport('nestable','jquery.nestable',false,'js')?>
 <script>
+putCookieAlert('search_config_result') // 실행결과 알림 메시지
 $('#nestable-menu').nestable();
 $('.dd').on('change', function() {
 	orderUpdate();
@@ -439,6 +451,10 @@ function saveCheck(f)
 {
 	if(f.layout_1.value != '0') f.layout.value = f.layout_1.value + '/' + f.layout_1_sub.value;
 	else f.layout.value = '';
+
+	if(f.m_layout_1.value != '0') f.m_layout.value = f.m_layout_1.value + '/' + f.m_layout_1_sub.value;
+	else f.m_layout.value = '';
+
 	getIframeForAction(f);
 	return confirm('정말로 실행하시겠습니까?   ');
 }

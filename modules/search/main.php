@@ -1,8 +1,14 @@
 <?php
 if(!defined('__KIMS__')) exit;
 
-include $g['dir_module'].'var/var.search.php';
-include $g['dir_module'].'var/var.order.php';
+$g['searchVarForSite'] = $g['path_var'].'site/'.$r.'/search.var.php';
+$_tmpdfile = file_exists($g['searchVarForSite']) ? $g['searchVarForSite'] : $g['path_module'].$m.'/var/var.search.php';
+
+$g['searchOrderVarForSite'] = $g['path_var'].'site/'.$r.'/search.order.var.php';
+$_ufile = file_exists($g['searchOrderVarForSite']) ? $g['searchOrderVarForSite'] : $g['path_module'].$m.'/var/var.order.php';
+
+include_once $_tmpdfile;
+include_once $_ufile;
 
 $swhere	= $swhere ? $swhere : 'all';
 $_ResultArray = array();
