@@ -8,10 +8,9 @@ $swhere	= $swhere ? $swhere : 'all';
 $_ResultArray = array();
 $_HM['layout'] = $d['search']['layout'];
 
-
 if ($g['mobile']&&$_SESSION['pcmode']!='Y')
 {
-	$_HM['layout'] = $d['search']['m_layout'] ?$d['search']['m_layout'] : $d['search']['layout'];
+	$_HM['m_layout'] = $d['search']['m_layout'] ?$d['search']['m_layout'] : $d['search']['layout'];
 	$d['search']['theme'] = $d['search']['m_theme'] ? $d['search']['m_theme'] : $d['search']['theme'];
 }
 

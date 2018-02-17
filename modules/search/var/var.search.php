@@ -5,5 +5,5 @@ $d['search']['num1'] = "5";
 $d['search']['num2'] = "20";
 $d['search']['term'] = "12";
 $d['search']['layout'] = "bs4-default/container.php";
-$d['search']['m_layout'] = "rc-starter/blank.php";
+$d['search']['m_layout'] = "rc-default/blank.php";
 ?>

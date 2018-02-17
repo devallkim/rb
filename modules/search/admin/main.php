@@ -313,16 +313,6 @@ $SITEN = db_num_rows($SITES);
 				</div>
 
 				<div class="form-group row">
-					<label class="col-lg-2 col-form-label text-lg-right">외부검색</label>
-					<div class="col-lg-10 col-xl-9">
-						<textarea name="searchlist" class="form-control" rows="6"><?php echo trim(implode('',file($g['path_module'].$module.'/var/search.list.txt')))?></textarea>
-						<p class="form-text text-muted">
-							<small>검색엔진명과 검색URL을 콤마(,)로 구분해서 등록해 주세요. 외부검색을 이용해 검색어를 선택된 검색엔진으로 연결해 줍니다.</small>
-						</p>
-					</div>
-				</div>
-
-				<div class="form-group row">
 					<label class="col-lg-2 col-form-label text-lg-right">레이아웃</label>
 					<div class="col-lg-10 col-xl-9">
 
@@ -390,6 +380,15 @@ $SITEN = db_num_rows($SITES);
 					</div>
 				</div>
 
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label text-lg-right">외부검색</label>
+					<div class="col-lg-10 col-xl-9">
+						<textarea name="searchlist" class="form-control" rows="5"><?php echo trim(implode('',file($g['path_module'].$module.'/var/search.list.txt')))?></textarea>
+						<p class="form-text text-muted">
+							<small>검색엔진명과 검색URL을 콤마(,)로 구분해서 등록해 주세요. 외부검색을 이용해 검색어를 선택된 검색엔진으로 연결해 줍니다.</small>
+						</p>
+					</div>
+				</div>
 
 				<div class="row">
 					<div class="col-lg-10 offset-lg-2 col-xl-9 offset-xl-2">
@@ -397,17 +396,12 @@ $SITEN = db_num_rows($SITES);
 					</div>
 				</div>
 
-
-
 			</form>
-
-
 
 			<?php endif?>
 
 		</div>
 	</div>
-
 </div>
 
 
