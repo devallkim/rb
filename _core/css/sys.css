@@ -336,8 +336,61 @@
   display: block;
 }
 
-
-
+/*Paging*/
+.bar-footer ~ .content {
+  padding-bottom: 3rem;
+}
+.bar-standard.bar-footer {
+  height: 3rem
+}
+.rb-paging {
+  position: relative;
+  text-align: center;
+  display: block;
+  height: 3rem;
+  line-height: 3rem;
+  margin: 0;
+}
+.rb-paging .rb-count {
+  display: inline-block;
+  margin: 0.3125rem 2.625rem 0;
+  padding: 0 0.5rem;
+  font-weight: 700;
+  font-size: 1.2em;
+  line-height: 1.15;
+  font-family: helvetica;
+  color: #939393;
+  font-style: normal;
+}
+.rb-paging .rb-count .rb-current {
+  font-weight: 700;
+  color: #2e2e2e;
+}
+.rb-paging .rb-count .rb-bar {
+  padding: 0 0.125rem;
+  font-weight: 300;
+  font-size: 0.9em;
+}
+.rb-paging .btn {
+  position: absolute;
+  top: 0;
+  width: 3.125rem;
+  height: 100%;
+  color: #000;
+  font-size: 1.875rem;
+}
+.rb-paging .btn i {
+  margin-top: -0.125rem
+}
+.rb-paging .btn.rb-disabled {
+  color: #ccc
+}
+.rb-paging .rb-prev {
+  left: 0;
+}
+.rb-paging .rb-next {
+  right: 0
+}
 
 /*utility*/
 .hidden {
