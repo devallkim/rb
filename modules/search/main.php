@@ -4,8 +4,13 @@ if(!defined('__KIMS__')) exit;
 $g['searchVarForSite'] = $g['path_var'].'site/'.$r.'/search.var.php';
 $_tmpdfile = file_exists($g['searchVarForSite']) ? $g['searchVarForSite'] : $g['path_module'].$m.'/var/var.search.php';
 
-$g['searchOrderVarForSite'] = $g['path_var'].'site/'.$r.'/search.order.var.php';
-$_ufile = file_exists($g['searchOrderVarForSite']) ? $g['searchOrderVarForSite'] : $g['path_module'].$m.'/var/var.order.php';
+if ($g['mobile']&&$_SESSION['pcmode']!='Y'){
+	$g['searchOrderVarForSite'] = $g['path_var'].'site/'.$r.'/search.order.mobile.php';
+	$_ufile = file_exists($g['searchOrderVarForSite']) ? $g['searchOrderVarForSite'] : $g['path_module'].$m.'/var/var.order.mobile.php';
+}else{
+	$g['searchOrderVarForSite'] = $g['path_var'].'site/'.$r.'/search.order.desktop.php';
+	$_ufile = file_exists($g['searchOrderVarForSite']) ? $g['searchOrderVarForSite'] : $g['path_module'].$m.'/var/var.order.desktop.php';
+}
 
 include_once $_tmpdfile;
 include_once $_ufile;
