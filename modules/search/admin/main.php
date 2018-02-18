@@ -13,10 +13,15 @@ function getSearchFileList($folder)
 }
 
 $g['searchVarForSite'] = $g['path_var'].'site/'.$r.'/search.var.php';
-$_tmpdfile = file_exists($g['searchVarForSite']) ? $g['searchVarForSite'] : $g['path_module'].$module.'/var/var.search.php';
+$_tmpdfile = file_exists($g['searchVarForSite']) ? $g['searchVarForSite'] : $g['path_module'].$m.'/var/var.search.php';
 
-$g['searchOrderVarForSite'] = $g['path_var'].'site/'.$r.'/search.order.var.php';
-$_ufile = file_exists($g['searchOrderVarForSite']) ? $g['searchOrderVarForSite'] : $g['path_module'].$module.'/var/var.order.php';
+if ($g['mobile']&&$_SESSION['pcmode']!='Y'){
+	$g['searchOrderVarForSite'] = $g['path_var'].'site/'.$r.'/search.order.mobile.php';
+	$_ufile = file_exists($g['searchOrderVarForSite']) ? $g['searchOrderVarForSite'] : $g['path_module'].$m.'/var/var.order.mobile.php';
+}else{
+	$g['searchOrderVarForSite'] = $g['path_var'].'site/'.$r.'/search.order.desktop.php';
+	$_ufile = file_exists($g['searchOrderVarForSite']) ? $g['searchOrderVarForSite'] : $g['path_module'].$m.'/var/var.order.desktop.php';
+}
 
 include_once $_tmpdfile;
 include_once $_ufile;
@@ -52,7 +57,13 @@ $SITEN = db_num_rows($SITES);
 
 					<div class="panel-collapse collapse show" id="collapseOne" data-parent="#accordion">
 						<?php $_i=0;while($MD = db_fetch_array($MODULE_LIST)):?>
-						<?php $forsearching_folder=$g['path_module'].$MD['id'].'/for-searching'?>
+						<?php
+							if ($g['mobile']&&$_SESSION['pcmode']!='Y'){
+								$forsearching_folder=$g['path_module'].$MD['id'].'/for-searching/_mobile';
+							}else{
+								$forsearching_folder=$g['path_module'].$MD['id'].'/for-searching/_desktop';
+							}
+						?>
 						<?php if(!is_dir($forsearching_folder)) continue?>
 						<div class="card-body">
 							<h5><small><i class="<?php echo $MD['icon']?>"></i> <?php echo $MD['name']?> (<?php echo $MD['id']?>)</small></h5>
