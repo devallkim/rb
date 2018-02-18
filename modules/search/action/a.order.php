@@ -3,7 +3,8 @@ if(!defined('__KIMS__')) exit;
 
 checkAdmin(0);
 
-$_ufile = $g['dir_module'].'var/var.order.php';
+$_ufile = $g['path_var'].'site/'.$r.'/'.$m.'.order.var.php';
+
 $fp = fopen($_ufile,'w');
 fwrite($fp, "<?php\n");
 

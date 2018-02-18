@@ -19,6 +19,7 @@ fclose($fp);
 @chmod($_tmpdfile,0707);
 
 $_tmpdfile = $g['dir_module'].'var/search.list.txt';
+
 $fp = fopen($_tmpdfile,'w');
 fwrite($fp,trim(stripslashes($searchlist)));
 fclose($fp);

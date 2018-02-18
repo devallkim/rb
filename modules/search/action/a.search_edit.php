@@ -14,5 +14,6 @@ fwrite($fp,$_nameinfo);
 fclose($fp);
 @chmod($_namefile,0707);
 
-getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&searchfile='.$searchfile.'&autoCheck=Y','parent.','반영 되었습니다.','');
+setrawcookie('search_config_result', rawurlencode('반영 되었습니다.|success'));  // 처리여부 cookie 저장
+getLink($g['s'].'/?r='.$r.'&m=admin&module='.$m.'&searchfile='.$searchfile.'&autoCheck=Y','parent.','','');
 ?>

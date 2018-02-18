@@ -456,7 +456,7 @@ function saveCheck(f)
 	else f.m_layout.value = '';
 
 	getIframeForAction(f);
-	return confirm('정말로 실행하시겠습니까?   ');
+	// return confirm('정말로 실행하시겠습니까?   ');
 }
 <?php if($_nowOrderNum != count($d['search_order']) || $autoCheck=='Y'):?>
 setTimeout("orderUpdate();",100);
