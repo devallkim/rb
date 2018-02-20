@@ -23,7 +23,6 @@ if ($avatar_delete)
 {
 	$photo = '';
 	$saveFile1	= $g['path_var'].'avatar/'.$avatar;
-	$saveFile2	= $g['path_var'].'avatar/180.'.$avatar;
 }
 else {
 	$photo = $avatar;
@@ -39,7 +38,6 @@ else {
 			{
 				$photo		= $id.'.'.$fileExt;
 				$saveFile1	= $g['path_var'].'avatar/'.$photo;
-				$saveFile2	= $g['path_var'].'avatar/180.'.$photo;
 
 				if (is_file($saveFile1)) unlink($saveFile1);
 				if (is_file($saveFile2)) unlink($saveFile2);
@@ -101,8 +99,7 @@ else {
 	$money		= 0;
 	$cash		= 0;
 	$num_login	= 1;
-	$pw_q		= '';
-	$pw_a		= '';
+	$bio	= '';
 	$now_log	= 0;
 	$last_log	= '';
 	$last_pw	= $date['totime'];
@@ -115,10 +112,10 @@ else {
 
 	$_QKEY = "memberuid,site,auth,mygroup,level,comp,admin,adm_view,";
 	$_QKEY.= "email,name,nic,grade,photo,home,sex,birth1,birth2,birthtype,tel1,tel2,zip,";
-	$_QKEY.= "addr0,addr1,addr2,job,marr1,marr2,sms,mailing,smail,point,usepoint,money,cash,num_login,pw_q,pw_a,now_log,last_log,last_pw,is_paper,d_regis,tmpcode,sns,noticeconf,num_notice,addfield";
+	$_QKEY.= "addr0,addr1,addr2,job,marr1,marr2,sms,mailing,smail,point,usepoint,money,cash,num_login,bio,now_log,last_log,last_pw,is_paper,d_regis,tmpcode,sns,noticeconf,num_notice,addfield";
 	$_QVAL = "'$memberuid','$s','$auth','$mygroup','$level','$comp','$admin','$adm_view',";
 	$_QVAL.= "'$email','$name','$nic','','$photo','$home','$sex','$birth1','$birth2','$birthtype','$tel1','$tel2','$zip',";
-	$_QVAL.= "'$addr0','$addr1','$addr2','$job','$marr1','$marr2','$sms','$mailing','$smail','$point','$usepoint','$money','$cash','$num_login','$pw_q','$pw_a','$now_log','$last_log','$last_pw','$is_paper','$d_regis','','$sns','$noticeconf','$num_notice','$addfield'";
+	$_QVAL.= "'$addr0','$addr1','$addr2','$job','$marr1','$marr2','$sms','$mailing','$smail','$point','$usepoint','$money','$cash','$num_login','$bio','$now_log','$last_log','$last_pw','$is_paper','$d_regis','','$sns','$noticeconf','$num_notice','$addfield'";
 	getDbInsert($table['s_mbrdata'],$_QKEY,$_QVAL);
 	getDbUpdate($table['s_mbrlevel'],'num=num+1','uid='.$level);
 	getDbUpdate($table['s_mbrgroup'],'num=num+1','uid='.$mygroup);

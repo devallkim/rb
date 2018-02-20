@@ -11,13 +11,13 @@ if ($type == 'id')
 	if ($result):
 	?>
 	<script>
-	parent.getId('rb-idcheck').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>시스템 환경';
+	parent.getId('rb-idcheck').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>정상';
 	parent.document.procForm.check_id.value = '1';
 	parent.submitFlag = false;
 	</script>
 	<?php else:?>
 	<script>
-	parent.getId('rb-idcheck').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>웹서버';
+	parent.getId('rb-idcheck').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>확인요망';
 	parent.document.procForm.check_id.value = '0';
 	parent.submitFlag = false;
 	</script>
@@ -35,13 +35,13 @@ else if ($type == 'nic')
 	if ($result):
 	?>
 	<script>
-	parent.getId('rb-nickcheck').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>시스템 환경';
+	parent.getId('rb-nickcheck').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>정상';
 	parent.document.procForm.check_nic.value = '1';
 	parent.submitFlag = false;
 	</script>
 	<?php else:?>
 	<script>
-	parent.getId('rb-nickcheck').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>웹서버';
+	parent.getId('rb-nickcheck').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>확인요망';
 	parent.document.procForm.check_nic.value = '0';
 	parent.submitFlag = false;
 	</script>
@@ -62,13 +62,13 @@ else if ($type == 'email')
 	if ($result):
 	?>
 	<script>
-	parent.getId('rb-emailcheck').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>시스템 환경';
+	parent.getId('rb-emailcheck').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>정상';
 	parent.document.procForm.check_email.value = '1';
 	parent.submitFlag = false;
 	</script>
 	<?php else:?>
 	<script>
-	parent.getId('rb-emailcheck').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>웹서버';
+	parent.getId('rb-emailcheck').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>확인요망';
 	parent.document.procForm.check_email.value = '0';
 	parent.submitFlag = false;
 	</script>

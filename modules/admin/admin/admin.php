@@ -99,20 +99,20 @@ $_authset = array('','승인','보류','대기','탈퇴');
 									<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
 										<i class="fa fa-wrench"></i> 관리 <span class="caret"></span>
 									</button>
-									<ul class="dropdown-menu" role="menu">
-										<li role="presentation" class="dropdown-header">회원승인 상태변경</li>
-										<li><a href="#" onclick="actQue('admin_delete','4');">탈퇴</a></li>
-										<li><a href="#" onclick="actQue('admin_delete','1');">승인</a></li>
-										<li><a href="#" onclick="actQue('admin_delete','3');">대기</a></li>
-										<li><a href="#" onclick="actQue('admin_delete','2');">보류</a></li>
-										<li class="divider"></li>
+									<div class="dropdown-menu" role="menu">
+										<h6 class="dropdown-header">회원승인 상태변경</h6>
+										<a class="dropdown-item"  href="#" onclick="actQue('admin_delete','4');">탈퇴</a>
+										<a class="dropdown-item"  href="#" onclick="actQue('admin_delete','1');">승인</a>
+										<a class="dropdown-item"  href="#" onclick="actQue('admin_delete','3');">대기</a>
+										<a class="dropdown-item"  href="#" onclick="actQue('admin_delete','2');">보류</a>
+										<div class="dropdown-divider"></div>
 										<?php if($mtype=='admin'):?>
-										<li><a href="#" onclick="actQue('admin_delete','');">관리자에서 제외</a></li>
+										<a class="dropdown-item"  href="#" onclick="actQue('admin_delete','');">관리자에서 제외</a>
 										<?php else:?>
-										<li><a href="#" onclick="actQue('admin_delete','A');">관리자로 추가</a></li>
+										<a class="dropdown-item"  href="#" onclick="actQue('admin_delete','A');">관리자로 추가</a>
 										<?php endif?>
-										<li><a href="#" onclick="actQue('admin_delete','D');"><span class="text-danger">데이터 삭제</span></a></li>
-									</ul>
+										<a class="dropdown-item"  href="#" onclick="actQue('admin_delete','D');"><span class="text-danger">데이터 삭제</span></a>
+									</div>
 								</div>
 							</div>
 						</fieldset>
@@ -138,7 +138,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 <div class="modal fade" id="modal-admin-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form name="procForm" class="form-horizontal" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" onsubmit="return saveCheck(this);">
+			<form name="procForm" class="form-horizontal" action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" onsubmit="return saveCheck(this);" autocomplete="off">
 			<input type="hidden" name="r" value="<?php echo $r?>">
 			<input type="hidden" name="m" value="<?php echo $module?>">
 			<input type="hidden" name="a" value="admin_member_add">
@@ -162,7 +162,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="text" class="form-control" name="id" placeholder="4~12자의 영문(소문자)과 숫자만 사용" value="" maxlength="12" autofocus onchange="sendCheck('rb-idcheck','id');">
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<button type="button" class="btn btn-light" id="rb-idcheck" onclick="sendCheck('rb-idcheck','id');">중복확인</button>
 							</span>
 						</div>
@@ -184,7 +184,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 					<label for="inputEmail3" class="col-sm-2 control-label">프로필</label>
 					<div class="col-sm-9">
 						<div class="media">
-							<img class="mr-3 img-circle" src="<?php echo $g['s']?>/_var/avatar/0.gif" alt="" style="width:45px">
+							<img class="mr-3 img-circle" src="<?php echo $g['s']?>/_var/avatar/0.svg" alt="" style="width:45px">
 							<div class="media-body">
 								<input type="file" name="upfile" class="hidden" id="rb-upfile-avatar" accept="image/jpg" onchange="getId('rb-photo-btn').innerHTML='이미지 파일 선택됨';">
 								<button type="button" class="btn btn-light btn-sm" onclick="$('#rb-upfile-avatar').click();" id="rb-photo-btn">찾아보기</button>
@@ -204,7 +204,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="text" class="form-control" name="nic" placeholder="닉네임을 입력해주세요" value="" maxlength="20" onchange="sendCheck('rb-nickcheck','nic');">
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<button type="button" class="btn btn-light" id="rb-nickcheck" onclick="sendCheck('rb-nickcheck','nic');">중복확인</button>
 							</span>
 						</div>
@@ -215,7 +215,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요" value="" onchange="sendCheck('rb-emailcheck','email');">
-							<span class="input-group-btn">
+							<span class="input-group-append">
 								<button type="button" class="btn btn-light" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');">중복확인</button>
 							</span>
 						</div>
@@ -250,12 +250,12 @@ $_authset = array('','승인','보류','대기','탈퇴');
 <?php getImport('bootstrap-validator','dist/js/bootstrapValidator.min',false,'js')?>
 <script>
 $(document).ready(function() {
-    $('.form-horizontal').bootstrapValidator({
+    $('[name="procForm"]').bootstrapValidator({
         message: 'This value is not valid',
         feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh'
         },
 
         fields: {
