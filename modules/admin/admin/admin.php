@@ -128,12 +128,6 @@ $_authset = array('','승인','보류','대기','탈퇴');
 </div>
 
 
-
-
-
-
-
-
 <!-- 회원추가 모달 -->
 <div class="modal fade" id="modal-admin-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -146,6 +140,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 			<input type="hidden" name="check_nic" value="0">
 			<input type="hidden" name="check_email" value="0">
 			<?php if($mtype=='admin'):?>
+			<input type="hidden" name="super" value="1">
 			<input type="hidden" name="admin" value="1">
 			<?php endif?>
 
@@ -250,69 +245,77 @@ $_authset = array('','승인','보류','대기','탈퇴');
 <?php getImport('bootstrap-validator','dist/js/bootstrapValidator.min',false,'js')?>
 <script>
 $(document).ready(function() {
-    $('[name="procForm"]').bootstrapValidator({
-        message: 'This value is not valid',
-        feedbackIcons: {
-            valid: 'fa fa-check',
-            invalid: 'fa fa-times',
-            validating: 'fa fa-refresh'
-        },
 
-        fields: {
-            id: {
-                validators: {
-                    notEmpty: {
-                        message: '아이디를 입력해주세요.'
-                    },
-                    regexp: {
-                        regexp: /^[a-z0-9]+$/,
-                        message: '4~12자의 영문(소문자)과 숫자만 사용할 수 있습니다.'
-                    }
-                }
-            },
-            pw1: {
-                message: 'The password is not valid',
-                validators: {
-                    notEmpty: {
-                        message: '비밀번호를 입력해주세요'
-                    }
-                }
-            },
+	putCookieAlert('admin_admin_result') // 실행결과 알림 메시지 출력
 
-            pw2: {
-                message: 'The password is not valid',
-                validators: {
-                    notEmpty: {
-                        message: '비밀번호를 다시 입력해주세요'
-                    }
-                }
-            },
-            name: {
-                message: 'The name is not valid',
-                validators: {
-                    notEmpty: {
-                        message: '이름(실명)을 입력해주세요'
-                    }
-                }
-            },
-            nic: {
-                message: 'The name is not valid',
-                validators: {
-                    notEmpty: {
-                        message: '닉네임을 입력해주세요'
-                    }
-                }
-            },
-            email: {
-                message: '',
-                validators: {
-                    notEmpty: {
-                        message: '이메일을 입력해주세요'
-                    }
-                }
-            },
-        }
-    });
+	$('#modal-admin-add').on('shown.bs.modal', function () {
+		var modal = $(this)
+	  modal.find('[name="id"]').trigger('focus')
+	})
+
+  $('[name="procForm"]').bootstrapValidator({
+      message: 'This value is not valid',
+      feedbackIcons: {
+          valid: 'fa fa-check',
+          invalid: 'fa fa-times',
+          validating: 'fa fa-refresh'
+      },
+
+      fields: {
+          id: {
+              validators: {
+                  notEmpty: {
+                      message: '아이디를 입력해주세요.'
+                  },
+                  regexp: {
+                      regexp: /^[a-z0-9]+$/,
+                      message: '4~12자의 영문(소문자)과 숫자만 사용할 수 있습니다.'
+                  }
+              }
+          },
+          pw1: {
+              message: 'The password is not valid',
+              validators: {
+                  notEmpty: {
+                      message: '비밀번호를 입력해주세요'
+                  }
+              }
+          },
+
+          pw2: {
+              message: 'The password is not valid',
+              validators: {
+                  notEmpty: {
+                      message: '비밀번호를 다시 입력해주세요'
+                  }
+              }
+          },
+          name: {
+              message: 'The name is not valid',
+              validators: {
+                  notEmpty: {
+                      message: '이름(실명)을 입력해주세요'
+                  }
+              }
+          },
+          nic: {
+              message: 'The name is not valid',
+              validators: {
+                  notEmpty: {
+                      message: '닉네임을 입력해주세요'
+                  }
+              }
+          },
+          email: {
+              message: '',
+              validators: {
+                  notEmpty: {
+                      message: '이메일을 입력해주세요'
+                  }
+              }
+          },
+      }
+  });
 });
 </script>
 

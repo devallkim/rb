@@ -10,6 +10,7 @@ $MD = getDbData($table['s_module'],"id='".$module."'",'*');
 
 if (!$MD['id']) getLink($g['s'].'/?r='.$r.'&m=admin&module=admin','','등록되지 않는 모듈입니다.','');
 if ($my['uid']!=1&&strpos('_'.$my['adm_view'],'['.$MD['id'].']')) getLink($g['s'].'/?r='.$r.'&m=site','','접근권한이 없습니다.','');
+if ($my['uid']&&!$my['admin']&&!$my['super']&& !strpos('_'.$my['adm_site'],'['.$SD['id'].']')) getLink('','','접근권한이 없습니다.','-1');
 
 $d['module']['skin']	= $d['admin']['themepc'];
 $g['dir_module_skin']	= $g['dir_module'].'theme/'.$d['module']['skin'].'/';

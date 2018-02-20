@@ -34,16 +34,16 @@ foreach ($mbrmembers as $val)
 		}
 		else if ($auth == 'A')
 		{
-			getDbUpdate($table['s_mbrdata'],"admin=1,adm_view='[admin]'",'memberuid='.$M['uid']);
+			getDbUpdate($table['s_mbrdata'],"super=1,admin=1,adm_view='[admin]'",'memberuid='.$M['uid']);
 		}
 		else {
 			getDbUpdate($table['s_mbrdata'],"auth='$auth'",'memberuid='.$M['uid']);
 		}
 	}
 	else {
-		getDbUpdate($table['s_mbrdata'],"admin=0,adm_view=''",'memberuid='.$M['uid']);
+		getDbUpdate($table['s_mbrdata'],"super=0,admin=0,adm_view='',adm_site=''",'memberuid='.$M['uid']);
 	}
 }
-
+setrawcookie('admin_admin_result', rawurlencode('처리 되었습니다.|success'));  // 처리여부 cookie 저장
 getLink('reload','parent.','','');
 ?>

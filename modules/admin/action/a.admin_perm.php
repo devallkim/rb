@@ -11,6 +11,6 @@ foreach($module_members as $mds)
 }
 
 getDbUpdate($table['s_mbrdata'],"adm_view='".$perm."'",'memberuid='.$memberuid);
-
-getLink('reload','parent.','반영 되었습니다.','');
+setrawcookie('admin_admin_result', rawurlencode('반영 되었습니다.|success'));  // 처리여부 cookie 저장
+getLink('reload','parent.','','');
 ?>
