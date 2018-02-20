@@ -6,6 +6,7 @@ if (!$mod) $mod = 'front';
 
 $module = $module ? $module : 'admin';
 $front  = $front  ? $front  : 'main';
+$SD = getDbData($table['s_site'],"id='".$r."'",'*');
 $MD = getDbData($table['s_module'],"id='".$module."'",'*');
 
 if (!$MD['id']) getLink($g['s'].'/?r='.$r.'&m=admin&module=admin','','등록되지 않는 모듈입니다.','');

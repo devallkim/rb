@@ -119,6 +119,52 @@
 					</div>
 				</li>
 
+				<?php if ($my['super'] && !$my['adm_site']): ?>
+				<?php
+				$SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);
+				$SITEN = db_num_rows($SITES);
+				?>
+					<?php if($SITEN>1 && ($module!='admin' && $module!='project')):?>
+					<li class="nav-item" data-role="siteSelector">
+						<div class="input-group ml-2 border border-primary">
+							<div class="input-group-append" style="margin-left: 0;">
+								<label class="input-group-text text-primary">
+									<i class="<?php echo $SD['icon']?> fa-lg" aria-hidden="true"></i>
+								</label>
+							</div>
+							<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;">
+								<?php while($S = db_fetch_array($SITES)):?>
+								<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
+								<?php endwhile?>
+
+							</select>
+						</div>
+					</li>
+					<?php endif?>
+
+				<?php else: ?>
+				<?php
+				$SITES = getArrayString($my['adm_site']);
+				$SITEN = count($SITES['data']);
+				?>
+					<?php if($SITEN>1 && ($module!='admin' && $module!='project')):?>
+					<li class="nav-item" data-role="siteSelector">
+						<div class="input-group ml-2 border border-primary">
+							<div class="input-group-append" style="margin-left: 0;">
+								<label class="input-group-text text-primary">
+									<i class="<?php echo $SD['icon']?> fa-lg" aria-hidden="true"></i>
+								</label>
+							</div>
+							<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;">
+								<?php $_i=0;foreach($SITES['data'] as $val):?>
+								<?php $_SD = getDbData($table['s_site'],"id='".$val."'",'*'); ?>
+								<option value="<?php echo $_SD['id']?>"<?php if($r==$_SD['id']):?> selected<?php endif?>><?php echo $_SD['label']?> (<?php echo $_SD['id']?>)</option>
+								<?php $_i++;endforeach?>
+							</select>
+						</div>
+					</li>
+					<?php endif?>
+				<?php endif; ?>
 
 			</ul>
 
