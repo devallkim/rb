@@ -381,6 +381,9 @@ border-radius: 0.25rem;
   white-space: nowrap!important;
   vertical-align: middle;
 }
+.table-bordered td, .table-bordered th {
+  border: 1px solid #222;
+}
 
 #rb-body .card .card-header.rb-icon .icon {
   float: left;

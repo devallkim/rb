@@ -160,14 +160,14 @@ if (!$_M['uid']) exit;
 	<?php if($my['uid']==1 && $_M['uid']!=1 && $_M['admin']):?>
 	<li class="nav-item">
 		<a class="nav-link<?php if($tab=='perm'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=perm&amp;uid=<?php echo $_M['uid']?>">
-			모듈 제한
+			<i class="kf-module fa-fw"></i> 모듈 제한
 		</a>
 	</li>
 	<?php endif?>
 	<?php if($my['uid']==1 && $_M['uid']!=1 && !$_M['super']):?>
 	<li class="nav-item">
 		<a class="nav-link<?php if($tab=='site'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=site&amp;uid=<?php echo $_M['uid']?>">
-			사이트 지정
+			<i class="fa fa-home fa-lg fa-fw"></i> 사이트 지정
 		</a>
 	</li>
 	<?php endif?>
@@ -228,6 +228,7 @@ if (!$_M['uid']) exit;
 			<input type="hidden" name="id" value="<?php echo $_M['id']?>">
 			<input type="hidden" name="uid" value="<?php echo $_M['uid']?>">
 			<input type="hidden" name="avatar" value="<?php echo $_M['photo']?>">
+			<input type="hidden" name="super" value="<?php echo $_M['super']?>">
 			<input type="hidden" name="check_id" value="1">
 			<input type="hidden" name="check_nic" value="1">
 			<input type="hidden" name="check_email" value="1">
@@ -524,8 +525,7 @@ if (!$_M['uid']) exit;
 			<div class="">
 				<div class="clearfix">
 					<div class="pull-left">
-						<i class="fa fa-home fa-fw"></i>
-						관리를 지정할 사이트를 선택해 주세요.
+						<span class="text-success">관리를 허용할 사이트</span>를 지정해 주세요.
 					</div>
 					<div class="pull-right">
 						<div class="custom-control custom-checkbox">
@@ -558,7 +558,7 @@ if (!$_M['uid']) exit;
 
 <div id="_modal_header" hidden>
 	<h5 class="modal-title">
-		<small class="badge badge-<?php echo $_M['now_log']?'primary':'default'?> d-inline-block align-top mr-2" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?>">
+		<small class="badge badge-<?php echo $_M['now_log']?'primary':'secondary'?> d-inline-block align-top mr-2" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?>">
 			<?php echo $_M['admin']?($_M['adm_view']?($_M['super']?'부관리자':'사이트관리자'):'최고관리자'):'일반회원'?>
 		</small>
 		<?php echo sprintf('<strong>%s</strong> 님의 정보',$_M['name'])?>

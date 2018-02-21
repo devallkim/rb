@@ -18,7 +18,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 		<input type="hidden" name="a" value="">
 		<input type="hidden" name="auth" value="">
 
-	<div class="panel panel-default">
+		<div class="panel panel-default">
 		<div class="panel-heading clearfix">
 			<label class="pull-left">
 				<span class="dropdown">
@@ -77,9 +77,9 @@ $_authset = array('','승인','보류','대기','탈퇴');
 						<?php endif?>
 						<td><?php echo $_authset[$R['auth']]?></td>
 						<?php if($R['now_log']):?>
-						<td><small class="label label-primary" data-tooltip="tooltip" title="온라인"><?php echo $R['admin']?($R['adm_view']?($R['super']?'부관리자':'사이트관리자'):'최고관리자'):'일반회원'?></small></td>
+						<td><small class="badge badge-pill badge-primary" data-tooltip="tooltip" title="온라인"><?php echo $R['admin']?($R['adm_view']?($R['super']?'부관리자':'사이트관리자'):'최고관리자'):'일반회원'?></small></td>
 						<?php else:?>
-						<td><small class="label label-default" data-tooltip="tooltip" title="오프라인"><?php echo $R['admin']?($R['adm_view']?($R['super']?'부관리자':'사이트관리자'):'최고관리자'):'일반회원'?></small></td>
+						<td><small class="badge badge-pill badge-secondary" data-tooltip="tooltip" title="오프라인"><?php echo $R['admin']?($R['adm_view']?($R['super']?'부관리자':'사이트관리자'):'최고관리자'):'일반회원'?></small></td>
 						<?php endif?>
 
 						<td><a href="#." data-toggle="modal" data-target="#modal_window" class="rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','');"><?php echo $R['name']?></a></td>
@@ -135,6 +135,28 @@ $_authset = array('','승인','보류','대기','탈퇴');
 		</div>
 	</div>
 	</form>
+
+	<p class="mt-4"><small class="text-muted">관리자는 할당된 관리권한에 따라 아래와 같이 분류됩니다.</small></p>
+	<table class="table table-bordered small">
+		<tbody>
+			<tr>
+				<th rowspan="2" class="align-middle">일반 관리자</th>
+				<th>최고 관리자</th>
+				<td>전체 모듈 접근 가능</td>
+				<td rowspan="2">전체 사이트 관리</td>
+			</tr>
+			<tr>
+				<th>부 관리자</th>
+				<td>특정 모듈 접근 불가</td>
+			</tr>
+			<tr>
+				<th rowspan="2" colspan="2">사이트 관리자</th>
+				<td>특정 모듈 접근 불가</td>
+				<td rowspan="2">특정 사이트만 관리</td>
+			</tr>
+		</tbody>
+	</table>
+
 </div>
 
 
@@ -189,7 +211,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 				</div>
 				<hr>
 				<div class="form-group form-row">
-					<label for="inputEmail3" class="col-sm-2 col-form-label">아바타</label>
+					<label for="" class="col-sm-2 col-form-label">아바타</label>
 					<div class="col-sm-9">
 						<div class="media">
 							<img class="mr-3 img-circle" src="<?php echo $g['s']?>/_var/avatar/0.svg" alt="" style="width:45px">
@@ -262,9 +284,9 @@ $(document).ready(function() {
 	})
 
   $('[name="procForm"]').bootstrapValidator({
-      message: 'This value is not valid',
+      message: '입력사항이 유효하기 않습니다.',
       feedbackIcons: {
-          valid: 'fa fa-check',
+          valid: '',
           invalid: 'fa fa-times',
           validating: 'fa fa-refresh'
       },
@@ -282,7 +304,7 @@ $(document).ready(function() {
               }
           },
           pw1: {
-              message: 'The password is not valid',
+              message: '비밀번호가 유효하지 않습니다.',
               validators: {
                   notEmpty: {
                       message: '비밀번호를 입력해주세요'
@@ -291,7 +313,7 @@ $(document).ready(function() {
           },
 
           pw2: {
-              message: 'The password is not valid',
+              message: '비밀번호가 유효하지 않습니다.',
               validators: {
                   notEmpty: {
                       message: '비밀번호를 다시 입력해주세요'
@@ -299,7 +321,7 @@ $(document).ready(function() {
               }
           },
           name: {
-              message: 'The name is not valid',
+              message: '이름이 유효하지 않습니다.',
               validators: {
                   notEmpty: {
                       message: '이름(실명)을 입력해주세요'
@@ -307,7 +329,7 @@ $(document).ready(function() {
               }
           },
           nic: {
-              message: 'The name is not valid',
+              message: '닉네임이 유효하지 않습니다.',
               validators: {
                   notEmpty: {
                       message: '닉네임을 입력해주세요'
@@ -315,7 +337,7 @@ $(document).ready(function() {
               }
           },
           email: {
-              message: '',
+              message: '이메일주소가 유효하지 않습니다.',
               validators: {
                   notEmpty: {
                       message: '이메일을 입력해주세요'
