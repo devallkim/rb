@@ -182,7 +182,7 @@ code {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: 'Noto Sans KR', sans-serif, '돋움', dotum, sans-serif;
-	margin: 0 0 20px;;
+	margin: 0 0 20px;
 }
 .h2, h2 {
   font-size: 30px;
@@ -625,16 +625,33 @@ border-radius: 0.25rem;
 /* modal */
 
 .modal .modal-header {
-  background-color: #007bff !important;
   color: #fff;
-  border-bottom: none
+  border-bottom: 1px solid #222;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 .modal .modal-header .close {
   color: #fff;
   opacity: 1;
 }
 .modal .modal-body iframe body {
-  background-color: #fff
+  background-color: #272c32
+}
+.modal .modal-body {
+  color: #666
+}
+
+.modal-content {
+  border: 1px solid #000;
+  border-radius: 0
+}
+
+.modal-content,
+.modal-body {
+  background-color: #272c32 !important
+}
+.modal-footer {
+  border-top: 1px solid #222;
 }
 
 /*list-group*/
@@ -664,9 +681,8 @@ border-radius: 0.25rem;
 .btn {
   position: relative;
   display: inline-block;
-  padding: 6px 12px;
+  /* padding: 6px 12px; */
   font-size: 14px;
-  font-weight: 600;
   line-height: 20px;
   white-space: nowrap;
   vertical-align: middle;
@@ -717,12 +733,17 @@ border-radius: 0.25rem;
 }
 .btn-light:disabled,
 .btn-light.disabled {
-  color: rgba(36,41,46,0.4);
-  background-color: #eff3f6;
+  color: #555;
+  background-color: #272c32;
   background-image: none;
-  border: 1px solid rgba(27,31,35,0.2);
-  border-color: rgba(27,31,35,0.2);
+  border: 1px solid rgb(34, 34, 34);
   box-shadow: none;
+}
+.btn-light:disabled:focus,
+.btn-light.disabled:focus,
+.btn-light:disabled:hover,
+.btn-light.disabled:hover {
+  background-color: #272c32;
 }
 
 .btn:focus {
@@ -781,6 +802,13 @@ border-radius: 0.25rem;
   background-image: none;
   border-color: rgba(27,31,35,0.2);
   box-shadow: none;
+}
+
+.btn-outline-primary.disabled,
+.btn-outline-primary:disabled {
+  color: #555;
+  background-color: transparent;
+  border-color: #555;
 }
 
 /* Pagination */
@@ -959,6 +987,3 @@ border-radius: 0.25rem;
 .rb-codeview-footer {
   border-top: 1px solid #222
 }
-
-
-/* Nestable */
