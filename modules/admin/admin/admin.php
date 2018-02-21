@@ -155,7 +155,10 @@ $_authset = array('','승인','보류','대기','탈퇴');
 			<?php endif?>
 
 			<div class="modal-header">
-				<h5 class="modal-title"><?php echo $mtype=='admin'?'관리자 추가':'회원 추가'?></h5>
+				<h5 class="modal-title">
+					<i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>
+					<?php echo $mtype=='admin'?'관리자 추가':'회원 추가'?>
+				</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -163,7 +166,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 			<div class="modal-body">
 
 				<div class="form-group form-row rb-outside">
-					<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="text" class="form-control" name="id" placeholder="4~12자의 영문(소문자)과 숫자만 사용" value="" maxlength="12" autofocus onchange="sendCheck('rb-idcheck','id');">
@@ -174,7 +177,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 					</div>
 				</div>
 				<div class="form-group form-row">
-					<label class="col-sm-2 control-label">비밀번호</label>
+					<label class="col-sm-2 col-form-label">비밀번호</label>
 					<div class="col-sm-9">
 						<input type="password" class="form-control" name="pw1" placeholder="">
 					</div>
@@ -186,7 +189,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 				</div>
 				<hr>
 				<div class="form-group form-row">
-					<label for="inputEmail3" class="col-sm-2 control-label">프로필</label>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">아바타</label>
 					<div class="col-sm-9">
 						<div class="media">
 							<img class="mr-3 img-circle" src="<?php echo $g['s']?>/_var/avatar/0.svg" alt="" style="width:45px">
@@ -199,13 +202,13 @@ $_authset = array('','승인','보류','대기','탈퇴');
 					</div>
 				</div>
 				<div class="form-group form-row">
-					<label class="col-sm-2 control-label">이름</label>
+					<label class="col-sm-2 col-form-label">이름</label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control" name="name" placeholder="이름을 입력해주세요" value="<?php echo $regis_name?>" maxlength="10">
 					</div>
 				</div>
 				<div class="form-group form-row rb-outside">
-					<label class="col-sm-2 control-label">닉네임</label>
+					<label class="col-sm-2 col-form-label">닉네임</label>
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="text" class="form-control" name="nic" placeholder="닉네임을 입력해주세요" value="" maxlength="20" onchange="sendCheck('rb-nickcheck','nic');">
@@ -216,7 +219,7 @@ $_authset = array('','승인','보류','대기','탈퇴');
 					</div>
 				</div>
 				<div class="form-group form-row rb-outside">
-					<label class="col-sm-2 control-label">이메일</label>
+					<label class="col-sm-2 col-form-label">이메일</label>
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="email" class="form-control" name="email" placeholder="이메일을 입력해주세요" value="" onchange="sendCheck('rb-emailcheck','email');">
@@ -224,19 +227,14 @@ $_authset = array('','승인','보류','대기','탈퇴');
 								<button type="button" class="btn btn-light" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');">중복확인</button>
 							</span>
 						</div>
-						<p class="form-control-static"><small class="text-muted">비밀번호 분실시에 사용됩니다. 정확하게 입력하세요.</small></p>
+						<small class="form-text text-muted">비밀번호 분실시에 사용됩니다. 정확하게 입력하세요.</small>
 					</div>
 				</div>
-				<div class="form-group form-row">
-					<label class="col-sm-2 control-label">연락처</label>
-					<div class="col-sm-9">
-						<input type="tel" class="form-control" name="tel2" placeholder="예) 010-000-0000" value="">
-					</div>
-				</div>
+
 			</div>
-			<div class="modal-footer">
+			<div class="modal-footer justify-content-between">
 				<button type="button" class="btn btn-light" data-dismiss="modal">취소</button>
-				<button type="submit" class="btn btn-primary">등록하기</button>
+				<button type="submit" class="btn btn-primary">추가하기</button>
 			</div>
 		</form>
 		<form name="actionform" action="<?php echo $g['s']?>/" method="post">

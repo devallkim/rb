@@ -157,12 +157,14 @@ if (!$_M['uid']) exit;
 		</a>
 	</li>
 
-	<?php if($my['uid']==1 && $_M['uid']!=1 && $_M['admin']==1):?>
+	<?php if($my['uid']==1 && $_M['uid']!=1 && $_M['admin']):?>
 	<li class="nav-item">
 		<a class="nav-link<?php if($tab=='perm'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=perm&amp;uid=<?php echo $_M['uid']?>">
 			모듈 제한
 		</a>
 	</li>
+	<?php endif?>
+	<?php if($my['uid']==1 && $_M['uid']!=1 && !$_M['super']):?>
 	<li class="nav-item">
 		<a class="nav-link<?php if($tab=='site'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=site&amp;uid=<?php echo $_M['uid']?>">
 			사이트 지정
@@ -233,24 +235,29 @@ if (!$_M['uid']) exit;
 
 			<?php if($my['uid']==1 && $_M['uid']!=1):?>
 			<div class="form-group form-row">
-				<label class="col-sm-2 control-label">구분</label>
+				<label class="col-sm-2 col-form-label">구분</label>
 				<div class="col-sm-9">
 					<select name="super" class="form-control custom-select">
-						<option value="1" <?php echo $_M['super']?'selected':'' ?>>통합 관리자</option>
+						<option value="1" <?php echo $_M['super']?'selected':'' ?>>일반 관리자</option>
 						<option value="0" <?php echo !$_M['super']?'selected':'' ?>>사이트 관리자</option>
 					</select>
+					<small class="form-text text-muted mt-2">
+					  일반 관리자 : 전체 사이트 관리 <br>
+						사이트 관리자 : 특정 사이트 관리 지정가능
+					</small>
+
 				</div>
 			</div>
 			<?php endif?>
 
 			<div class="form-group form-row">
-				<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
 				<div class="col-sm-9">
 					<p class="form-control-static"><?php echo $_M['id']?></p>
 				</div>
 			</div>
 			<div class="form-group form-row">
-				<label class="col-sm-2 control-label">비밀번호</label>
+				<label class="col-sm-2 col-form-label">비밀번호</label>
 				<div class="col-sm-9">
 					<input type="password" class="form-control" name="pw1" placeholder="">
 				</div>
@@ -262,7 +269,7 @@ if (!$_M['uid']) exit;
 			</div>
 			<hr>
 			<div class="form-group form-row">
-				<label for="inputEmail3" class="col-sm-2 control-label">프로필</label>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">프로필</label>
 				<div class="col-sm-9">
 					<div class="media">
 						<img class="mr-3 rounded-circle" src="<?php echo getAavatarSrc($_M['uid'],'45') ?>" alt="" style="width:45px">
@@ -278,13 +285,13 @@ if (!$_M['uid']) exit;
 				</div>
 			</div>
 			<div class="form-group form-row">
-				<label class="col-sm-2 control-label">이름</label>
+				<label class="col-sm-2 col-form-label">이름</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="name" placeholder="" value="<?php echo $_M['name']?>" maxlength="10">
 				</div>
 			</div>
 			<div class="form-group form-row rb-outside">
-				<label class="col-sm-2 control-label">닉네임</label>
+				<label class="col-sm-2 col-form-label">닉네임</label>
 				<div class="col-sm-9">
 					<div class="input-group">
 						<input type="text" class="form-control" name="nic" placeholder="" value="<?php echo $_M['nic']?>" maxlength="20" onchange="sendCheck('rb-nickcheck','nic');">
@@ -295,7 +302,7 @@ if (!$_M['uid']) exit;
 				</div>
 			</div>
 			<div class="form-group form-row rb-outside">
-				<label class="col-sm-2 control-label">이메일</label>
+				<label class="col-sm-2 col-form-label">이메일</label>
 				<div class="col-sm-9">
 					<div class="input-group">
 						<input type="email" class="form-control" name="email" placeholder="" value="<?php echo $_M['email']?>" onchange="sendCheck('rb-emailcheck','email');">
@@ -307,7 +314,7 @@ if (!$_M['uid']) exit;
 				</div>
 			</div>
 			<div class="form-group form-row">
-				<label class="col-sm-2 control-label">연락처</label>
+				<label class="col-sm-2 col-form-label">연락처</label>
 				<div class="col-sm-9">
 					<input type="tel" class="form-control" name="tel2" placeholder="예) 010-000-0000" value="<?php echo $_M['tel2']?$_M['tel2']:$_M['tel1']?>">
 				</div>
@@ -551,7 +558,9 @@ if (!$_M['uid']) exit;
 
 <div id="_modal_header" hidden>
 	<h5 class="modal-title">
-		<small class="badge badge-<?php echo $_M['now_log']?'primary':'default'?>" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?>"><?php echo $_M['admin']?($_M['adm_view']?'부관리자':'최고관리자'):'일반회원'?></small>
+		<small class="badge badge-<?php echo $_M['now_log']?'primary':'default'?> d-inline-block align-top mr-2" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?>">
+			<?php echo $_M['admin']?($_M['adm_view']?($_M['super']?'부관리자':'사이트관리자'):'최고관리자'):'일반회원'?>
+		</small>
 		<?php echo sprintf('<strong>%s</strong> 님의 정보',$_M['name'])?>
 	</h5>
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -560,13 +569,13 @@ if (!$_M['uid']) exit;
 </div>
 <div id="_modal_footer" hidden>
 	<?php if($tab=='info'):?>
-	<button type="submit" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.saveCheck();">정보 수정</button>
+	<button type="submit" class="btn btn-outline-primary" onclick="frames._modal_iframe_modal_window.saveCheck();">정보 수정</button>
 	<?php endif?>
 	<?php if($tab=='perm'):?>
-	<button type="submit" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.saveCheck1();">권한 제한</button>
+	<button type="submit" class="btn btn-outline-primary" onclick="frames._modal_iframe_modal_window.saveCheck1();">권한 제한</button>
 	<?php endif?>
 	<?php if($tab=='site'):?>
-	<button type="submit" class="btn btn-primary" onclick="frames._modal_iframe_modal_window.saveCheck1();">사이트 관리자로 지정</button>
+	<button type="submit" class="btn btn-outline-primary" onclick="frames._modal_iframe_modal_window.saveCheck1();">사이트 관리자로 지정</button>
 	<?php endif?>
 	<button id="_close_btn_" type="button" class="btn btn-light" data-dismiss="modal">닫기</button>
 </div>
@@ -649,7 +658,7 @@ function modalSetting()
 	parent.$('#_modal_iframe_modal_window').css('height',ht+'px')
 	parent.$('#_modal_body_modal_window').css('height',ht+'px').css('padding','0')
 	parent.$('#_modal_header_modal_window').html(_modal_header).addClass('modal-header')
-	parent.$('#_modal_footer_modal_window').html(_modal_footer).addClass('modal-footer')
+	parent.$('#_modal_footer_modal_window').html(_modal_footer).addClass('modal-footer justify-content-between')
 
 }
 document.body.onresize = document.body.onload = function()
