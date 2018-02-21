@@ -207,6 +207,7 @@
 <script>
 
 (function() {
+
   $(".markdown-body").markdown();
 
   var editor = CodeMirror.fromTextArea(getId('__code__'), {

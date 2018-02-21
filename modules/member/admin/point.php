@@ -36,20 +36,6 @@ $TPG = getTotalPage($NUM,$recnum);
 			<input type="hidden" name="front" value="<?php echo $front?>">
 			<input type="hidden" name="type" value="<?php echo $type?>">
 
-			<?php if($SITEN>1):?>
-			<div class="border border-primary">
-				<select name="account" class="form-control custom-select border-0" onchange="this.form.submit();">
-					<option value="">전체사이트</option>
-					<?php while($S = db_fetch_array($SITES)):?>
-					<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
-					<?php endwhile?>
-					<?php if(!db_num_rows($SITES)):?>
-					<option value="">등록된 사이트가 없습니다.</option>
-					<?php endif?>
-				</select>
-			</div>
-			<?php endif?>
-
 			<div class="card-body">
 				<div class="form-group">
 			    <label>기간</label>
@@ -256,10 +242,12 @@ $('.input-daterange').datepicker({
 </script>
 <script type="text/javascript">
 //<![CDATA[
+
 // 툴팁 이벤트
-$(document).ready(function() {
-    $('[data-toggle=tooltip]').tooltip();
-});
+$('[data-toggle=tooltip]').tooltip();
+
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
 
 // 선택박스 체크 이벤트 핸들러
 $(".checkAll-point-member").click(function(){

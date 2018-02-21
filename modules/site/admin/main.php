@@ -680,6 +680,7 @@ $('#site-info').on('shown.bs.collapse', function () {
 <?php getImport('bootstrap-validator','dist/js/bootstrapValidator.min',false,'js')?>
 
 <script>
+
 $('.form-horizontal').bootstrapValidator({
 	message: 'This value is not valid',
 	<?php if(!$g['device']):?>

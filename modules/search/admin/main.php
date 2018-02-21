@@ -439,6 +439,9 @@ $('.dd').on('change', function() {
 </script>
 
 <script>
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
+
 function orderUpdate()
 {
 	var f = document.forms[0];

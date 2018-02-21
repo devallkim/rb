@@ -43,15 +43,6 @@ include_once $_tmpvfile;
 			<div class="card-header">
 				메뉴
 			</div>
-			<?php if($SITEN>1):?>
-			<div class="border border-primary">
-				<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
-					<?php while($S = db_fetch_array($SITES)):?>
-					<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
-					<?php endwhile?>
-				</select>
-			</div>
-			<?php endif?>
 			<div class="list-group" id="list-tab" role="tablist">
 				<a class="list-group-item list-group-item-action<?php if(!$_SESSION['member_config_nav'] || $_SESSION['member_config_nav']=='settings'):?> active<?php endif?>" data-toggle="list" href="#settings" role="tab" onclick="sessionSetting('member_config_nav','settings','','');">
 					<i class="fa fa-cog fa-lg pull-right"></i> 기초환경 설정
@@ -1154,11 +1145,10 @@ include_once $_tmpvfile;
 </form><!-- /.row -->
 
 
-
-
-
-
 <script type="text/javascript">
+
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
 
 putCookieAlert('member_config_result') // 실행결과 알림 메시지 출력
 

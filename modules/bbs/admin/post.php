@@ -354,6 +354,10 @@ $('.input-daterange').datepicker({
 </script>
 <script type="text/javascript">
 //<![CDATA[
+
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
+
 // 선택박스 체크 이벤트 핸들러
 $(".checkAll-post-user").click(function(){
 	$(".rb-post-user").prop("checked",$(".checkAll-post-user").prop("checked"));

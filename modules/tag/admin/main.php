@@ -99,6 +99,10 @@ $RCD	= getDbSelect($table['s_tag'],$_WHERE1.' group by keyword order by '.$sort.
 
 <script type="text/javascript">
 //<![CDATA[
+
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
+
 function dropDate(date1,date2)
 {
 	var f = document.procForm;

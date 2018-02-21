@@ -40,15 +40,6 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 				</div>
 
 				<div class="collapse show" id="collapmetane" data-parent="#accordion" >
-					<?php if($SITEN>1):?>
-					<div class="border border-primary">
-						<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
-							<?php while($S = db_fetch_array($SITES)):?>
-							<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
-							<?php endwhile?>
-						</select>
-					</div>
-					<?php endif?>
 
 					<?php if($ISCAT):?>
 					<div class="card-body">
@@ -884,6 +875,8 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 
 <script>
 
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
 
 $('input.rb-title').maxlength({	alwaysShow: true,	threshold: 10,	warningClass: "label label-success",	limitReachedClass: "label label-danger",});
 $('textarea.rb-description').maxlength({	alwaysShow: true,	threshold: 10,	warningClass: "label label-success",	limitReachedClass: "label label-danger",});

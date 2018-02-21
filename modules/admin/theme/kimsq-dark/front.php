@@ -125,7 +125,7 @@
 				$SITEN = db_num_rows($SITES);
 				?>
 					<?php if($SITEN>1 && ($module!='admin' && $module!='project')):?>
-					<li class="nav-item" data-role="siteSelector">
+					<li class="nav-item d-none" data-role="siteSelector">
 						<div class="input-group ml-2 border border-primary">
 							<div class="input-group-append" style="margin-left: 0;">
 								<label class="input-group-text text-primary">
@@ -148,7 +148,7 @@
 				$SITEN = count($SITES['data']);
 				?>
 					<?php if($SITEN>1 && ($module!='admin' && $module!='project')):?>
-					<li class="nav-item" data-role="siteSelector">
+					<li class="nav-item d-none" data-role="siteSelector">
 						<div class="input-group ml-2 border border-primary">
 							<div class="input-group-append" style="margin-left: 0;">
 								<label class="input-group-text text-primary">

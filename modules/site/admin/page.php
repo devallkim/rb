@@ -46,18 +46,6 @@ $pageType = array('','모듈연결','직접편집');
 				</button>
 			</div>
 
-			<?php if($SITEN>1):?>
-			<div class="border border-primary">
-				<select class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);">
-					<?php while($S = db_fetch_array($SITES)):?>
-					<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
-					<?php endwhile?>
-				</select>
-			</div>
-			<?php endif?>
-
-
-
 			<div  style="height: calc(100vh - 12.2rem);">
 
 				<div id="panel-search" class="collapse<?php if($_SESSION['sh_site_page_search']):?> show<?php endif?>">
@@ -690,6 +678,9 @@ $(document).ready(function() {
 <?php getImport('bootstrap-validator','dist/css/bootstrapValidator.min',false,'css')?>
 <?php getImport('bootstrap-validator','dist/js/bootstrapValidator.min',false,'js')?>
 <script>
+
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
 
 putCookieAlert('result_page') // 실행결과 알림 메시지 출력
 

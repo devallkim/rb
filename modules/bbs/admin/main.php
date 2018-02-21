@@ -347,8 +347,11 @@ $SITEN   = db_num_rows($SITES);
 <script>
 
 $(function () {
-	putCookieAlert('result_bbs_main') // 실행결과 알림 메시지 출력
 
+	//사이트 셀렉터 출력
+	$('[data-role="siteSelector"]').removeClass('d-none')
+
+	putCookieAlert('result_bbs_main') // 실행결과 알림 메시지 출력
 
 })
 

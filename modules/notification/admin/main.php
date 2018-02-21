@@ -237,6 +237,9 @@ jQuery(document).ready(function() {
 
 <!-- basic -->
 <script>
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
+
 $(".checkAll-noti-user").click(function(){
 	$(".rb-noti-user").prop("checked",$(".checkAll-noti-user").prop("checked"));
 	checkboxCheck();

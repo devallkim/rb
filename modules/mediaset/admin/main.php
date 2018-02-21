@@ -326,6 +326,9 @@ jQuery(document).ready(function() {
 
 <!-- basic -->
 <script>
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
+
 $(".checkAll-file-user").click(function(){
 	$(".rb-file-user").prop("checked",$(".checkAll-file-user").prop("checked"));
 	checkboxCheck();
