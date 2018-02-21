@@ -128,9 +128,9 @@
 					<li class="nav-item d-none" data-role="siteSelector">
 						<div class="input-group ml-2 border border-primary">
 							<div class="input-group-append" style="margin-left: 0;">
-								<label class="input-group-text text-primary">
+								<a class="input-group-text muted-link" href="<?php echo $g['s']?>/?r=<?php echo $SD['id']?>&amp;m=<?php echo $m?>&amp;pickmodule=site&amp;panel=Y" target="_parent">
 									<i class="<?php echo $SD['icon']?> fa-lg" aria-hidden="true"></i>
-								</label>
+								</a>
 							</div>
 							<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;">
 								<?php while($S = db_fetch_array($SITES)):?>
@@ -151,9 +151,9 @@
 					<li class="nav-item d-none" data-role="siteSelector">
 						<div class="input-group ml-2 border border-primary">
 							<div class="input-group-append" style="margin-left: 0;">
-								<label class="input-group-text text-primary">
+								<a class="input-group-text muted-link" href="<?php echo $g['s']?>/?r=<?php echo $_SD['id']?>&amp;m=<?php echo $m?>&amp;pickmodule=site&amp;panel=Y" target="_parent">
 									<i class="<?php echo $SD['icon']?> fa-lg" aria-hidden="true"></i>
-								</label>
+								</a>
 							</div>
 							<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;">
 								<?php $_i=0;foreach($SITES['data'] as $val):?>
