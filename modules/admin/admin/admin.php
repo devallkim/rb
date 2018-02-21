@@ -43,7 +43,12 @@ $_authset = array('','승인','보류','대기','탈퇴');
 			<table class="table">
 				<thead>
 					<tr>
-						<th><label><input type="checkbox" id="checkAll-admin-user"></label></th>
+						<th>
+							<div class="custom-control custom-checkbox custom-control-inline mr-0">
+							  <input type="checkbox" class="custom-control-input" id="checkAll-admin-user">
+							  <label class="custom-control-label" for="checkAll-admin-user"></label>
+							</div>
+						</th>
 						<th>상태</th>
 						<th>구분</th>
 						<th>이름</th>
@@ -61,9 +66,14 @@ $_authset = array('','승인','보류','대기','탈퇴');
 					<?php if($R['memberuid']==$uid)$_P=$R?>
 					<tr>
 						<?php if($R['memberuid']==1):?>
-						<td><input type="checkbox" disabled="disabled"></td>
+						<td></td>
 						<?php else:?>
-						<td class="side1"><input type="checkbox" name="mbrmembers[]" value="<?php echo $R['memberuid']?>" class="rb-admin-user" onclick="checkboxCheck();"></td>
+						<td class="side1">
+							<div class="custom-control custom-checkbox custom-control-inline mr-0">
+							  <input type="checkbox" class="custom-control-input rb-admin-user" id="mbrmembers_<?php echo $R['memberuid']?>" name="mbrmembers[]" value="<?php echo $R['memberuid']?>" class="rb-admin-user" onclick="checkboxCheck();">
+							  <label class="custom-control-label" for="mbrmembers_<?php echo $R['memberuid']?>"></label>
+							</div>
+						</td>
 						<?php endif?>
 						<td><?php echo $_authset[$R['auth']]?></td>
 						<?php if($R['now_log']):?>
