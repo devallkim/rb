@@ -64,8 +64,8 @@ if ($uid)
 		   $_SESSION['mbr_pw']  = $newPw;
 	    }
 	}
-	getDbUpdate($table['s_mbrdata'],"email='$email',name='$name',nic='$nic',photo='$photo',tel2='$tel2'",'memberuid='.$uid);
-	setrawcookie('admin_admin_result', rawurlencode($name.'님이 정보가 갱신 되었습니다.|success'));  // 처리여부 cookie 저장
+	getDbUpdate($table['s_mbrdata'],"super='$super',email='$email',name='$name',nic='$nic',photo='$photo',tel2='$tel2'",'memberuid='.$uid);
+	setrawcookie('admin_admin_result', rawurlencode('수정 되었습니다.|success'));  // 처리여부 cookie 저장
 }
 else {
 	getDbInsert($table['s_mbrid'],'site,id,pw',"'$s','$id','".getCrypt($pw,$date['totime'])."'");
