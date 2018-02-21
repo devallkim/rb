@@ -9,7 +9,7 @@ $sort	= $sort ? $sort : 'uid';
 $orderby= $orderby ? $orderby : 'asc';
 $recnum	= $recnum && $recnum < 200 ? $recnum : 20;
 $_WHERE='uid>0';
-
+$account = $SD['uid'];
 if($account) $_WHERE .=' and site='.$account;
 if($d_start) $_WHERE .= ' and d_regis > '.str_replace('/','',$d_start).'000000';
 if($d_finish) $_WHERE .= ' and d_regis < '.str_replace('/','',$d_finish).'240000';
@@ -36,20 +36,6 @@ $TPG = getTotalPage($NUM,$recnum);
 			 <input type="hidden" name="m" value="<?php echo $m?>">
 			 <input type="hidden" name="module" value="<?php echo $module?>">
 			 <input type="hidden" name="front" value="<?php echo $front?>">
-
-		 <?php if($SITEN>1):?>
-			<div class="border border-primary">
-				<select name="account" class="form-control custom-select border-0" onchange="this.form.submit();">
-					<option value="">ㆍ전체 사이트</option>
-					<?php while($S = db_fetch_array($SITES)):?>
-					<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['name']?></option>
-					<?php endwhile?>
-					<?php if(!db_num_rows($SITES)):?>
-					<option value="">등록된 사이트가 없습니다.</option>
-					<?php endif?>
-				</select>
-			</div>
-			<?php endif?>
 
 			<div id="accordion" role="tablist">
 			  <div class="card">

@@ -1,8 +1,14 @@
 <?php
 $R=array();
 
-$SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);
-$SITEN = db_num_rows($SITES);
+if ($my['super'] && !$my['adm_site']) {
+	$SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);
+	$SITEN = db_num_rows($SITES);
+} else {
+	$SITES = getArrayString($my['adm_site']);
+	$SITEN = $SITES[count];
+}
+
 $PAGES1 = getDbArray($table['s_page'],'site='.$s.' and ismain=1','*','uid','asc',0,$p);
 $PAGES2 = getDbArray($table['s_page'],'site='.$s.' and mobile=1','*','uid','asc',0,$p);
 
@@ -29,19 +35,39 @@ if ($R['uid'])
 
 				<div class="dd py-4 pl-3" id="site-icons" style="height: calc(100vh - 10.5rem);">
 					<ol class="dd-list list-inline">
-						<?php while($S = db_fetch_array($SITES)):?>
-							<li class="dd-item<?php if($S['uid']==$R['uid']):?> rb-active<?php endif?> mb-0" data-id="_site_<?php echo $S['id']?>_">
-							<input type="checkbox" name="sitemembers[]" value="<?php echo $S['uid']?>" class="d-none" checked>
-								<a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;m=<?php echo $m?>&amp;pickmodule=<?php echo $module?>&amp;panel=Y" target="_parent"<?php if($type=='makesite'):?> class="active"<?php endif?>>
-									<span class="rb-site-icon <?php echo $S['icon']?$S['icon']:'fa fa-home'?>" id="_site_icon_<?php echo $S['id']?>"></span>
-									<span class="rb-site-label"><?php echo $S['label']?></span>
+
+						<?php if ($my['super'] && !$my['adm_site']): ?>
+
+							<?php while($S = db_fetch_array($SITES)):?>
+								<li class="dd-item<?php if($S['uid']==$R['uid']):?> rb-active<?php endif?> mb-0" data-id="_site_<?php echo $S['id']?>_">
+								<input type="checkbox" name="sitemembers[]" value="<?php echo $S['uid']?>" class="d-none" checked>
+									<a href="<?php echo $g['s']?>/?r=<?php echo $S['id']?>&amp;m=<?php echo $m?>&amp;pickmodule=<?php echo $module?>&amp;panel=Y" target="_parent"<?php if($type=='makesite'):?> class="active"<?php endif?>>
+										<span class="rb-site-icon <?php echo $S['icon']?$S['icon']:'fa fa-home'?>" id="_site_icon_<?php echo $S['id']?>"></span>
+										<span class="rb-site-label"><?php echo $S['label']?></span>
+									</a>
+								<div class="dd-handle"></div>
+								</li>
+								<?php endwhile?>
+
+						<?php else: ?>
+							<?php $_i=0;foreach($SITES['data'] as $val):?>
+							<?php $_SD = getUidData($table['s_site'],$val); ?>
+							<li class="dd-item<?php if($_SD['uid']==$R['uid']):?> rb-active<?php endif?> mb-0" data-id="_site_<?php echo $_SD['id']?>_">
+							<input type="checkbox" name="sitemembers[]" value="<?php echo $_SD['uid']?>" class="d-none" checked>
+								<a href="<?php echo $g['s']?>/?r=<?php echo $_SD['id']?>&amp;m=<?php echo $m?>&amp;pickmodule=<?php echo $module?>&amp;panel=Y" target="_parent"<?php if($type=='makesite'):?> class="active"<?php endif?>>
+									<span class="rb-site-icon <?php echo $_SD['icon']?$_SD['icon']:'fa fa-home'?>" id="_site_icon_<?php echo $_SD['id']?>"></span>
+									<span class="rb-site-label"><?php echo $_SD['label']?></span>
 								</a>
 							<div class="dd-handle"></div>
 							</li>
-							<?php endwhile?>
+							<?php $_i++;endforeach?>
+						<?php endif; ?>
+
 						</ol>
 					</div>
+					<?php if ($my['super']): ?>
 					<a href="<?php echo $g['adm_href']?>&amp;type=makesite&amp;nosite=<?php echo $nosite?>" class="rb-add<?php if($type=='makesite'):?> active<?php endif?>" data-tooltip="tooltip" title="사이트 추가"><i class="fa fa-plus fa-3x"></i></a>
+					<?php endif; ?>
 			</form>
 		</div><!-- /.sidebar -->
 

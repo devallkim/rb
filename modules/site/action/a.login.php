@@ -48,6 +48,13 @@ while(false !== ($file = readdir($opendir)))
 }
 closedir($opendir);
 
+if ($usertype == 'admin' || $M1['admin']) {
+	if (!$M1['super'] && !$M1['adm_site']) getLink($g['s'].'/?r='.$r,'parent.','관리 사이트가 지정되지 않았습니다.','');
+	$_siteArray = getArrayString($M1['adm_site']);
+	$SD	= getUidData($table['s_site'],$_siteArray[data][0]);
+	$r = $SD['id'];
+}
+
 if ($usertype == 'admin') getLink($g['s'].'/?r='.$r.'&panel=Y&pickmodule=site','parent.parent.','','');
 
 if ($M1['admin']) {

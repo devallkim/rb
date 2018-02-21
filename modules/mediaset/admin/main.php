@@ -6,8 +6,9 @@ $sort	= $sort ? $sort : 'gid';
 $orderby= $orderby ? $orderby : 'asc';
 $recnum	= $recnum && $recnum < 201 ? $recnum : 20;
 
+$account = $SD['uid'];
 $sqlque	= 'uid';
-if ($siteuid) $sqlque .= ' and site='.$siteuid;
+$sqlque .= ' and site='.$account;
 if ($d_start) $sqlque .= ' and d_regis > '.str_replace('/','',$d_start).'000000';
 if ($d_finish) $sqlque .= ' and d_regis < '.str_replace('/','',$d_finish).'240000';
 if ($filekind)
@@ -63,15 +64,6 @@ $TPG = getTotalPage($NUM,$recnum);
 				<label class="col-md-1 col-form-label text-md-center">필터</label>
 				<div class="col-md-11 col-lg-10">
 					<div class="form-row">
-						<div class="col-sm-3">
-							<select name="siteuid" class="form-control custom-select" onchange="this.form.submit();">
-								<option value="">사이트(전체)</option>
-								<?php $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p)?>
-								<?php while($S = db_fetch_array($SITES)):?>
-								<option value="<?php echo $S['uid']?>"<?php if($S['uid']==$siteuid):?> selected<?php endif?>><?php echo $S['name']?> (<?php echo $S['id']?>)</option>
-								<?php endwhile?>
-							</select>
-						</div>
 						<div class="col-sm-3">
 							<select name="filekind" class="form-control custom-select" onchange="this.form.submit();">
 								<option value="">파일종류(전체)</option>

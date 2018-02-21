@@ -67,9 +67,9 @@ $_authset = array('','승인','보류','대기','탈퇴');
 						<?php endif?>
 						<td><?php echo $_authset[$R['auth']]?></td>
 						<?php if($R['now_log']):?>
-						<td><small class="label label-primary" data-tooltip="tooltip" title="온라인"><?php echo $R['admin']?($R['adm_view']?'부관리자':'최고관리자'):'일반회원'?></small></td>
+						<td><small class="label label-primary" data-tooltip="tooltip" title="온라인"><?php echo $R['admin']?($R['adm_view']?($R['super']?'부관리자':'사이트관리자'):'최고관리자'):'일반회원'?></small></td>
 						<?php else:?>
-						<td><small class="label label-default" data-tooltip="tooltip" title="오프라인"><?php echo $R['admin']?($R['adm_view']?'부관리자':'최고관리자'):'일반회원'?></small></td>
+						<td><small class="label label-default" data-tooltip="tooltip" title="오프라인"><?php echo $R['admin']?($R['adm_view']?($R['super']?'부관리자':'사이트관리자'):'최고관리자'):'일반회원'?></small></td>
 						<?php endif?>
 
 						<td><a href="#." data-toggle="modal" data-target="#modal_window" class="rb-modal-admininfo" onmousedown="admIdDrop('<?php echo $R['memberuid']?>','');"><?php echo $R['name']?></a></td>

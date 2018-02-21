@@ -11,7 +11,7 @@ $p		= $p ? $p : 1;
 $recnum	= $recnum && $recnum < 200 ? $recnum : 20;
 $sort	= $sort		? $sort		: 'hit';
 $orderby= $orderby	? $orderby	: 'desc';
-
+$account = $SD['uid'];
 $accountQue = $account ? 'site='.$account.' and ':'';
 
 $_WHERE1= $accountQue.'date >= '.$year1.sprintf('%02d',$month1).sprintf('%02d',$day1).' and date <= '.$year2.sprintf('%02d',$month2).sprintf('%02d',$day2);
@@ -28,16 +28,6 @@ $RCD	= getDbSelect($table['s_tag'],$_WHERE1.' group by keyword order by '.$sort.
 <input type="hidden" name="front" value="<?php echo $front?>" />
 
 <div class="sbox">
-	<select name="account" class="account" onchange="this.form.submit();">
-	<option value="">&nbsp;+ 전체사이트</option>
-	<option value="">---------------------------</option>
-	<?php while($S = db_fetch_array($SITES)):?>
-	<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['name']?></option>
-	<?php endwhile?>
-	<?php if(!db_num_rows($SITES)):?>
-	<option value="">등록된 사이트가 없습니다.</option>
-	<?php endif?>
-	</select>
 
 	<div>
 	<select name="year1">

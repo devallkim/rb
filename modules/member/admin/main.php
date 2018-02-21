@@ -19,9 +19,8 @@ $sort	= $sort ? $sort : 'memberuid';
 $orderby= $orderby ? $orderby : 'desc';
 $recnum	= $recnum && $recnum < 200 ? $recnum : 20;
 
-//사이트선택적용
-//$accountQue = $account ? 'a.site='.$account.' and ':'';
 $_WHERE ='memberuid>0';
+$account = $SD['uid'];
 if ($account) $_WHERE .= ' and site='.$account;
 if ($d_start) $_WHERE .= ' and d_regis > '.str_replace('/','',$d_start).'000000';
 if ($d_finish) $_WHERE .= ' and d_regis < '.str_replace('/','',$d_finish).'240000';
@@ -46,15 +45,8 @@ if ($addr0)
 }
 if ($where && $keyw) $_WHERE .= " and ".$where." like '%".trim($keyw)."%'";
 
-//사이트선택적용
-//$RCD = getDbArray($table['s_mbrdata'].' AS a left join '.$table['s_mbrid'].' AS b on memberuid=uid',$_WHERE,'a.*,b.uid,b.id,b.pw',$sort,$orderby,$recnum,$p);
-//$NUM = getDbRows($table['s_mbrdata'].' AS a left join '.$table['s_mbrid'].' AS b on memberuid=uid',$_WHERE);
-
-$RCD = getDbArray($table['s_mbrdata'].' left join '.$table['s_mbrid'].' on memberuid=uid',$_WHERE,'*',$sort,$orderby,$recnum,$p);
-$NUM = getDbRows($table['s_mbrdata'].' left join '.$table['s_mbrid'].' on memberuid=uid',$_WHERE);
-
-//$RCD = getDbArray($table['s_mbrdata'],$_WHERE,'*',$sort,$orderby,$recnum,$p);
-//$NUM = getDbRows($table['s_mbrdata'],$_WHERE);
+$RCD = getDbArray($table['s_mbrdata'],$_WHERE,'*',$sort,$orderby,$recnum,$p);
+$NUM = getDbRows($table['s_mbrdata'],$_WHERE);
 $TPG = getTotalPage($NUM,$recnum);
 $autharr = array('','승인','보류','대기','탈퇴');
 

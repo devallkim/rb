@@ -128,13 +128,13 @@
 					<li class="nav-item d-none" data-role="siteSelector">
 						<div class="input-group ml-2 border border-primary">
 							<div class="input-group-append" style="margin-left: 0;">
-								<a class="input-group-text muted-link" href="<?php echo $g['s']?>/?r=<?php echo $SD['id']?>&amp;m=<?php echo $m?>&amp;pickmodule=site&amp;panel=Y" target="_parent">
+								<a class="input-group-text muted-link" href="<?php echo $g['s']?>/?r=<?php echo $SD['id']?>&amp;m=<?php echo $m?>&amp;pickmodule=site&amp;panel=Y" target="_parent" data-toggle="tooltip" title="사이트관리">
 									<i class="<?php echo $SD['icon']?> fa-lg" aria-hidden="true"></i>
 								</a>
 							</div>
 							<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;">
 								<?php while($S = db_fetch_array($SITES)):?>
-								<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?> (<?php echo $S['id']?>)</option>
+								<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?></option>
 								<?php endwhile?>
 
 							</select>
@@ -145,7 +145,7 @@
 				<?php else: ?>
 				<?php
 				$SITES = getArrayString($my['adm_site']);
-				$SITEN = count($SITES['data']);
+				$SITEN = $SITES[count];
 				?>
 					<?php if($SITEN>1 && ($module!='admin' && $module!='project')):?>
 					<li class="nav-item d-none" data-role="siteSelector">
@@ -157,8 +157,8 @@
 							</div>
 							<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;">
 								<?php $_i=0;foreach($SITES['data'] as $val):?>
-								<?php $_SD = getDbData($table['s_site'],"id='".$val."'",'*'); ?>
-								<option value="<?php echo $_SD['id']?>"<?php if($r==$_SD['id']):?> selected<?php endif?>><?php echo $_SD['label']?> (<?php echo $_SD['id']?>)</option>
+								<?php $_SD = getUidData($table['s_site'],$val); ?>
+								<option value="<?php echo $_SD['id']?>"<?php if($r==$_SD['id']):?> selected<?php endif?>><?php echo $_SD['label']?></option>
 								<?php $_i++;endforeach?>
 							</select>
 						</div>

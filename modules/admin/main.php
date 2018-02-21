@@ -9,9 +9,16 @@ $front  = $front  ? $front  : 'main';
 $SD = getDbData($table['s_site'],"id='".$r."'",'*');
 $MD = getDbData($table['s_module'],"id='".$module."'",'*');
 
+if ($my['admin'] && !$my['super']) {
+	if (!$my['adm_site']) getLink($g['s'].'/?r='.$r,'parent.','관리 사이트가 지정되지 않았습니다.','');
+	$_siteArray = getArrayString($my['adm_site']);
+	$_SD	= getUidData($table['s_site'],$_siteArray[data][0]);
+	$r = $_SD['id'];
+}
+
 if (!$MD['id']) getLink($g['s'].'/?r='.$r.'&m=admin&module=admin','','등록되지 않는 모듈입니다.','');
-if ($my['uid']!=1&&strpos('_'.$my['adm_view'],'['.$MD['id'].']')) getLink($g['s'].'/?r='.$r.'&m=site','','접근권한이 없습니다.','');
-if ($my['uid']&&!$my['admin']&&!$my['super']&& !strpos('_'.$my['adm_site'],'['.$SD['id'].']')) getLink('','','접근권한이 없습니다.','-1');
+if (!$my['admin']&&strpos('_'.$my['adm_view'],'['.$MD['id'].']')) getLink($g['s'].'/?r='.$r.'&m=site','','접근권한이 없습니다.','');
+if ($my['uid']&&!$my['super']&&!strpos('_'.$my['adm_site'],'['.$SD['uid'].']')) getLink('','','접근권한이 없습니다.','-1');
 
 $d['module']['skin']	= $d['admin']['themepc'];
 $g['dir_module_skin']	= $g['dir_module'].'theme/'.$d['module']['skin'].'/';
