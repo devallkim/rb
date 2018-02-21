@@ -10,6 +10,7 @@ $sort	= $sort ? $sort : 'gid';
 $orderby= $orderby ? $orderby : 'asc';
 $recnum	= $recnum && $recnum < 200 ? $recnum : 20;
 $_WHERE='uid>0';
+$account = $SD['uid'];
 if($account) $_WHERE .=' and site='.$account;
 if ($d_start) $_WHERE .= ' and d_regis > '.str_replace('/','',$d_start).'000000';
 if ($d_finish) $_WHERE .= ' and d_regis < '.str_replace('/','',$d_finish).'240000';
@@ -37,20 +38,6 @@ $TPG = getTotalPage($NUM,$recnum);
 			 <input type="hidden" name="module" value="<?php echo $module?>">
 			 <input type="hidden" name="front" value="<?php echo $front?>">
 
-		 <?php if($SITEN>1):?>
-			<div class="border border-primary">
-				<select name="account" class="form-control custom-select border-0" onchange="this.form.submit();">
-					<option value="">ㆍ전체 사이트</option>
-					<?php while($S = db_fetch_array($SITES)):?>
-					<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
-					<?php endwhile?>
-					<?php if(!db_num_rows($SITES)):?>
-					<option value="">등록된 사이트가 없습니다.</option>
-					<?php endif?>
-				</select>
-			</div>
-			<?php endif?>
-
 			<div id="accordion" role="tablist">
 			  <div class="card">
 			    <div class="card-header p-0" role="tab">
@@ -63,8 +50,8 @@ $TPG = getTotalPage($NUM,$recnum);
 			      <div class="card-body">
 
 							<select name="bid" class="form-control custom-select mb-2" onchange="this.form.submit();">
-								<option value="">전체 게시판</option>
-								<?php $_BBSLIST = getDbArray($table[$module.'list'],'','*','gid','asc',0,1)?>
+								<option value="">사이트 전체 게시판</option>
+								<?php $_BBSLIST = getDbArray($table[$module.'list'],'site='.$account,'*','gid','asc',0,1)?>
 								<?php while($_B=db_fetch_array($_BBSLIST)):?>
 								<option value="<?php echo $_B['uid']?>"<?php if($_B['uid']==$bid):?> selected="selected"<?php endif?>>ㆍ<?php echo $_B['name']?>(<?php echo $_B['id']?> - <?php echo number_format($_B['num_r'])?>)</option>
 								<?php endwhile?>

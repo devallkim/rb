@@ -45,7 +45,7 @@ if ($bid)
 		}
 	}
 
-	$QVAL = "site='$account',name='$name',category='$category',imghead='$imghead',imgfoot='$imgfoot',puthead='$puthead',putfoot='$putfoot',addinfo='$addinfo',writecode='$writecode'";
+	$QVAL = "site='$site',name='$name',category='$category',imghead='$imghead',imgfoot='$imgfoot',puthead='$puthead',putfoot='$putfoot',addinfo='$addinfo',writecode='$writecode'";
 	getDbUpdate($table[$m.'list'],$QVAL,"id='".$bid."'");
 
 	$vfile = $g['dir_module'].'var/code/'.$R['id'];
@@ -109,7 +109,7 @@ else {
 
 	$Ugid = getDbCnt($table[$m.'list'],'max(gid)','') + 1;
 	$QKEY = "gid,site,id,name,category,num_r,d_last,d_regis,imghead,imgfoot,puthead,putfoot,addinfo,writecode";
-	$QVAL = "'$Ugid','".$account."','$id','$name','$category','0','','".$date['totime']."','$imghead','$imgfoot','$puthead','$putfoot','$addinfo','$writecode'";
+	$QVAL = "'$Ugid','".$site."','$id','$name','$category','0','','".$date['totime']."','$imghead','$imgfoot','$puthead','$putfoot','$addinfo','$writecode'";
 	getDbInsert($table[$m.'list'],$QKEY,$QVAL);
 
 	$lastbbs = getDbCnt($table[$m.'list'],'max(uid)','');

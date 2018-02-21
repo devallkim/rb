@@ -4,7 +4,7 @@ $sort	= $sort ? $sort : 'gid';
 $orderby= $orderby ? $orderby : 'asc';
 $recnum	= $recnum && $recnum < 301 ? $recnum : 20;
 $bbsque ='uid>0';
-
+$account = $SD['uid'];
 if ($account) $bbsque .= ' and site='.$account;
 
 // 키원드 검색 추가
@@ -29,15 +29,6 @@ if ($uid)
 <div class="row no-gutters">
    <div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar">
 
-			<select name="account" class="form-control custom-select border-0" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&account='+this.value);">
-				<option value="">전체사이트</option>
-				<?php while($S = db_fetch_array($SITES)):?>
-				<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
-				<?php endwhile?>
-				<?php if(!db_num_rows($SITES)):?>
-				<option value="">등록된 사이트가 없습니다.</option>
-				<?php endif?>
-			</select>
 		 <div id="accordion" role="tablist">
 		   <div class="card">
 		     <div class="card-header p-0" role="tab" id="headingOne">
@@ -194,6 +185,7 @@ if ($uid)
 			<input type="hidden" name="m" value="<?php echo $module?>">
 			<input type="hidden" name="a" value="makebbs">
 			<input type="hidden" name="bid" value="<?php echo $R['id']?>">
+			<?php if (!$uid): ?><input type="hidden" name="site" value="<?php echo $account?>"><?php endif; ?>
 			<input type="hidden" name="perm_g_list" value="<?php echo $R['perm_g_list']?>">
 			<input type="hidden" name="perm_g_view" value="<?php echo $R['perm_g_view']?>">
 			<input type="hidden" name="perm_g_write" value="<?php echo $R['perm_g_write']?>">
@@ -507,25 +499,26 @@ if ($uid)
 				</div> <!-- .form-group  -->
 				<hr>
 
+				<?php if ($uid): ?>
+				<div class="form-group row">
+						<label class="col-lg-2 col-form-label text-lg-right">사이트</label>
+						<div class="col-lg-10 col-xl-9">
+							<select name="site" class="form-control custom-select">
+								<?php $_SITES = getDbArray($table['s_site'],'','*','gid','asc',0,1); ?>
+								<?php while($S = db_fetch_array($_SITES)):?>
+								<option value="<?php echo $S['uid']?>"<?php if($R['site']==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
+								<?php endwhile?>
+								<?php if(!db_num_rows($SITES)):?>
+								<option value="">등록된 사이트가 없습니다.</option>
+								<?php endif?>
+							 </select>
+							 <small class="form-text text-muted">
+								 사이트 전용 게시판이 필요할 경우 지정해 주세요.
+							 </small>
+						</div>
+				 </div>
+				<?php endif; ?>
 
-					<div class="form-group row">
-							<label class="col-lg-2 col-form-label text-lg-right">사이트</label>
-							<div class="col-lg-10 col-xl-9">
-								<select name="account" class="form-control custom-select">
-									<option value="">공통</option>
-									<?php $_SITES = getDbArray($table['s_site'],'','*','gid','asc',0,1); ?>
-									<?php while($S = db_fetch_array($_SITES)):?>
-									<option value="<?php echo $S['uid']?>"<?php if($R['site']==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
-									<?php endwhile?>
-									<?php if(!db_num_rows($SITES)):?>
-									<option value="">등록된 사이트가 없습니다.</option>
-									<?php endif?>
-								 </select>
-								 <small class="form-text text-muted">
-									 사이트 전용 게시판이 필요할 경우 지정해 주세요.
-								 </small>
-							</div>
-					 </div>
 
 					 <div class="form-group row">
 							 <label class="col-lg-2 col-form-label text-lg-right">연결메뉴</label>
@@ -643,6 +636,9 @@ if ($uid)
 
 <iframe hidden name="_orderframe_"></iframe>
 <script type="text/javascript">
+
+//사이트 셀렉터 출력
+$('[data-role="siteSelector"]').removeClass('d-none')
 
 putCookieAlert('result_bbs_main') // 실행결과 알림 메시지 출력
 

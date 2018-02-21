@@ -5,7 +5,7 @@ $sort	= $sort ? $sort : 'gid';
 $orderby= $orderby ? $orderby : 'desc';
 $recnum	= $recnum && $recnum < 301 ? $recnum : 30;
 $bbsque	= 'uid';
-
+$account = $SD['uid'];
 if ($account) $bbsque .= ' and site='.$account;
 
 if ($where && $keyw)
@@ -164,16 +164,6 @@ $SITEN   = db_num_rows($SITES);
 			 <input type="hidden" name="m" value="<?php echo $m?>">
 			 <input type="hidden" name="module" value="<?php echo $module?>">
 			 <input type="hidden" name="front" value="<?php echo $front?>">
-
-				<select name="account" class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&account='+this.value);">
-					<option value="">전체사이트</option>
-					<?php while($S = db_fetch_array($SITES)):?>
-					<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['label']?></option>
-					<?php endwhile?>
-					<?php if(!db_num_rows($SITES)):?>
-					<option value="">등록된 사이트가 없습니다.</option>
-					<?php endif?>
-				</select>
 
 				<select class="form-control custom-select" name="sort" onchange="this.form.submit();">
 					<option value="gid" selected="selected">지정순서</option>
