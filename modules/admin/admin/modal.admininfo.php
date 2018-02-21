@@ -164,7 +164,7 @@ if (!$_M['uid']) exit;
 		</a>
 	</li>
 	<?php endif?>
-	<?php if($my['uid']==1 && $_M['uid']!=1 && !$_M['super']):?>
+	<?php if($my['uid']==1 && $_M['uid']!=1 && !$_M['super'] && $_M['admin']):?>
 	<li class="nav-item">
 		<a class="nav-link<?php if($tab=='site'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=site&amp;uid=<?php echo $_M['uid']?>">
 			<i class="fa fa-home fa-lg fa-fw"></i> 사이트 지정
@@ -234,7 +234,7 @@ if (!$_M['uid']) exit;
 			<input type="hidden" name="check_email" value="1">
 			<input type="submit" style="position:absolute;left:-1000px;">
 
-			<?php if($my['uid']==1 && $_M['uid']!=1):?>
+			<?php if($my['uid']==1 && $_M['uid']!=1 && $_M['admin']):?>
 			<div class="form-group form-row">
 				<label class="col-sm-2 col-form-label">구분</label>
 				<div class="col-sm-9">
@@ -254,7 +254,7 @@ if (!$_M['uid']) exit;
 			<div class="form-group form-row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
 				<div class="col-sm-9">
-					<p class="form-control-static"><?php echo $_M['id']?></p>
+					<input type="text" readonly class="form-control-plaintext" value="<?php echo $_M['id']?>">
 				</div>
 			</div>
 			<div class="form-group form-row">

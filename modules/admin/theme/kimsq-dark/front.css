@@ -318,7 +318,9 @@ border-radius: 0.25rem;
 .form-control[readonly] {
 	color: #999;
 }
-
+.form-control-plaintext {
+  color: #999;
+}
 .btn.btn-light {
 	background-color: #343b43;
 	color: #757a87
