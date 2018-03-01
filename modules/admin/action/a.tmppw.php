@@ -15,11 +15,11 @@ $tmpUpdate = getDbUpdate($table['s_mbrdata'],"tmpcode='".$tmpPw."'",'memberuid=1
 $to = $firstadmin['email'].'|'.$firstadmin['name'];
 $from = $d['admin']['sysmail'];
 
-$result = getSendMail($to,$from,'['.$_HS['name'].']요청하신 임시 패스워드입니다.',$content,'HTML');
+$result = getSendMail($to,$from,'['.$_HS['name'].'] 요청하신 임시 패스워드입니다.',$content,'HTML');
 
 if ($result)
 {
-	getLink('reload','parent.','이메일이 전송되었습니다.','');
+	getLink('reload','parent.',$firstadmin['email'].'로 임시 패스워드가 전송 되었습니다.','');
 }
 else {
 	getLink('','','이메일이 전송되지 못했습니다.','');
