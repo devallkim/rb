@@ -210,17 +210,14 @@ class Comment extends Comment_base{
         global $g,$table;
 
         $M = getDbData($table['s_mbrdata'],'memberuid='.$mbruid,'photo');
+        $result = array();
         if($M['photo']) {
           $user_avatar_src = $g['url_root'].'/_var/avatar/'.$M['photo'];
           $avatar_data=array('src'=>$user_avatar_src,'width'=>150,'height'=>150,'sharpen'=>1);
+          $result['src']=getTimThumb($avatar_data);
         }
         else $user_avatar_src = $g['url_root'].'/_var/avatar/0.svg';
-        $user_avatar_bg = 'style="background: url('.$user_avatar_src.') center center no-repeat;background-size:100% 100%;"';
-
-        // 아바타 요청 타입(src or bg) 에 따른 구분
-        $result = array();
-        $result['src']=getTimThumb($avatar_data);
-        $result['bg'] = $user_avatar_bg;
+        $result['src']=$user_avatar_src;
 
         return $result[$type];
     }
