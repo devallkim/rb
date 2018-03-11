@@ -668,6 +668,16 @@ function getHtmlToMarkdownClass($className)
   require_once $path.$fileName;
 }
 
+// html to markdown
+spl_autoload_register('getHtmlToMarkdownClass');
+use League\HTMLToMarkdown\HtmlConverter;
+
+function getMarkdownContents($str){
+	$converter = new HtmlConverter(array('header_style'=>'atx'));
+	$mdContent=$converter->convert(getContents($str,'HTML'));
+	return $mdContent;
+}
+
 //게시물 링크
 function getBbsPostLink($arr){
 	return RW('m=bbs&bid='.$arr['bbsid'].'&uid='.$arr['uid'].($GLOBALS['s']!=$arr['site']?'&s='.$arr['site']:''));
