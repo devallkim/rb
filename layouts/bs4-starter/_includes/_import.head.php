@@ -14,7 +14,7 @@
 
 <!-- Favicons -->
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['s']?>/_core/images/ico/apple-touch-icon-144-precomposed.png">
-<link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">
+<link rel="shortcut icon" href="<?php echo $g['img_layout']?>/icon/favicon.ico">
 
 <!-- 사이트 헤드 코드 -->
 <?php echo $_HS['headercode']?>
