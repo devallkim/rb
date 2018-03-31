@@ -17,10 +17,26 @@ else {
 	$M1 = getDbData($table['s_mbrdata'],'memberuid='.$M['uid'],'*');
 }
 
-if (!$M['uid'] || $M1['auth'] == 4) getLink('reload','parent.','존재하지 않는 이메일입니다.',$history);
+if (!$M['uid'] || $M1['auth'] == 4) {
+	echo "<script>";
+	echo "parent.$('[name=loginform]').removeClass('was-validated');";
+	echo "parent.$('[type=submit]').prop('disabled', false);";
+	echo "parent.$('#idErrorBlock').text('존재하지 않는 계정입니다.');";
+	echo "parent.$('[name=id]').focus().addClass('is-invalid');";
+	echo "</script>";
+	exit();
+}
 if ($M1['auth'] == 2) getLink('reload','parent.','회원님은 인증보류 상태입니다.',$history);
 if ($M1['auth'] == 3) getLink('reload','parent.','회원님은 이메일 인증대기 상태입니다.',$history);
-if ($M['pw'] != getCrypt($pw,$M1['d_regis']) && $M1['tmpcode'] != $pw) getLink('reload','parent.','패스워드가 일치하지 않습니다.',$history);
+if ($M['pw'] != getCrypt($pw,$M1['d_regis']) && $M1['tmpcode'] != $pw) {
+  echo "<script>";
+	echo "parent.$('[name=loginform]').removeClass('was-validated');";
+	echo "parent.$('[type=submit]').prop('disabled', false);";
+	echo "parent.$('#passwordErrorBlock').text('패스워드가 일치하지 않습니다.');";
+	echo "parent.$('[name=pw]').val('').focus().addClass('is-invalid');";
+	echo "</script>";
+	exit();
+}
 
 if ($usertype == 'admin')
 if (!$M1['admin']) getLink('reload','parent.','회원님은 관리자가 아닙니다.',$history);
