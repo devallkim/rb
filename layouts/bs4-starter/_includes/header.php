@@ -59,15 +59,15 @@
 							<input type="hidden" name="a" value="login">
 							<input type="hidden" name="form" value="">
 
-					    <div class="form-group">
+					    <div class="form-group position-relative">
 					      <label for="">아이디 또는 이메일</label>
 					      <input type="text" class="form-control" name="id" placeholder="" tabindex="1" autocorrect="off" autocapitalize="off" required tabindex="1">
-								<div class="invalid-feedback mt-2" data-role="idErrorBlock"></div>
+								<div class="invalid-tooltip" data-role="idErrorBlock"></div>
 					    </div>
-					    <div class="form-group">
+					    <div class="form-group position-relative">
 					      <label for="">패스워드</label>
 					      <input type="password" class="form-control" name="pw" tabindex="2" required tabindex="2">
-								<div class="invalid-feedback mt-2" data-role="passwordErrorBlock"></div>
+								<div class="invalid-tooltip" data-role="passwordErrorBlock"></div>
 					    </div>
 
 							<div class="custom-control custom-checkbox" data-toggle="collapse" data-target="#popover-collapsealert">
