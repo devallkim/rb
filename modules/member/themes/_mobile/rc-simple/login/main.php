@@ -12,11 +12,11 @@
 
 		<div class="card">
 			<div class="form-list">
-				<span class="position-relative">
+				<span class="position-relative d-block">
 					<input type="text" placeholder="아이디" name="id" required autocapitalize="off" autocorrect="off">
 					<div class="invalid-tooltip" data-role="idErrorBlock"></div>
 				</span>
-				<span class="position-relative">
+				<span class="position-relative d-block">
 					<input type="password" placeholder="패스워드" name="pw" required autocapitalize="off" autocorrect="off">
 					<div class="invalid-tooltip" data-role="passwordErrorBlock"></div>
 				</span>
