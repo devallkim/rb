@@ -1,0 +1,79 @@
+<div class="clearfix">
+
+  <div class="pull-xs-left">
+
+    <div class="media" style="width:15rem">
+      <img class="media-object pull-left rb-avatar img-circle bg-faded" src="{$avatar}" style="width:2.25rem;height:2.25rem">
+      <div class="media-body m-l-1">
+        <span class="badge badge-default badge-inverted">{$name}</span> <br>
+        <span class="badge badge-default badge-inverted">{$date}</span>
+        <span class="badge badge-default badge-inverted">조회 {$hit}</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pull-xs-right">
+    <button type="button" class="btn btn-outline-secondary js-moveComments">
+      <i class="fa fa-comment-o" aria-hidden="true"></i>
+      <span data-role="total_comment" class="badge badge-primary badge-inverted">{$comment}</span>
+    </button>
+
+    <button type="button" class="btn btn-outline-secondary"
+      data-toggle="popup"
+      data-target="#popup-link-share"
+      data-role="linkShare"
+      data-subject="{$subject}"
+      data-title="게시물 공유">
+      <i class="fa fa-share-alt" aria-hidden="true"></i>
+    </button>
+
+  </div>
+
+</div><!-- /.clearfix -->
+
+<hr>
+<article class="rb-article content-padded">
+
+  <div data-role="article-body">
+    {$article}
+  </div>
+  <div class="d-flex mt-4" data-role="toolbar">
+    <a href="{$s}/?r={$r}&m={$m}&bid={$bid}&mod=write&uid={$uid}" name="button" class="btn btn-secondary js-post-modify" data-uid="{$uid}">수정</a>
+    <a href="{$s}/?r={$r}&m={$m}&bid={$bid}&a=delete&uid={$uid}" name="button" class="btn btn-secondary ml-auto" target="_action_frame_{$m}" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+  </div>
+
+</article>
+
+<div class="tag content-padded mt-4" data-role="tags">
+  <h6><i class="fa fa-tag" aria-hidden="true"></i> 태그</h6>
+  {$tag}
+</div>
+
+<hr>
+<div class="text-xs-center mb-4">
+  <button type="button" class="btn btn-outline-secondary btn-lg"
+    data-send="ajax"
+    data-act="opinion"
+    data-uid="{$uid}"
+    data-opinion="like"
+    data-effect="heartbeat"
+    data-role="btn_like">
+    <i class="fa fa fa-heart-o fa-fw fa-lg" aria-hidden="true"></i>
+    <span data-role='likes_{$uid}' class="badge badge-inverted">{$likes}</span>
+  </button>
+  <button type="button" class="btn btn-outline-secondary btn-lg"
+    data-send="ajax"
+    data-act="opinion"
+    data-uid="{$uid}"
+    data-opinion="dislike"
+    data-effect="heartbeat"
+    data-role="btn_dislike">
+    <i class="fa fa-thumbs-o-down fa-fw fa-lg" aria-hidden="true"></i>
+    <span data-role='dislikes_{$uid}' class="badge badge-inverted">{$dislikes}</span>
+  </button>
+</div>
+
+<script>
+  $('[data-role="article-body"]').find('img').addClass('img-fluid')
+</script>

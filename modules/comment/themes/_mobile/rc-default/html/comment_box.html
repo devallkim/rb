@@ -1,0 +1,57 @@
+<!-- 공통 사항 data-* ="*" 과 {$*} 는 수정 금지 -->
+<section data-role="comment-box">
+  <header data-role="header-container">
+     {$comment_header} <!-- 댓글 header : comment_header.html  -->
+  </header>
+  <div class="rb-comments-write" data-role="commentWrite-container"> <!-- 댓글 입렵부 : comment_write.html -->
+    {$comment_write}
+  </div>
+
+  <main data-role="comment-main">
+    <nav class="nav nav-control w-50 m-b-1" data-toggle="buttons">
+      <a class="nav-link active" role="button" data-kcact="changeSort" data-sort="uid" data-orderby="asc">최신순</a>
+      <a class="nav-link" role="button" data-kcact="changeSort" data-sort="likes" data-orderby="desc">추천순</a>
+      <a class="nav-link" role="button" data-kcact="changeSort" data-sort="uid" data-orderby="desc">과거순</a>
+    </nav>
+    <ul class="media-list mt-3" data-role="comment-container"> <!-- 댓글 출력부 : comment_row.html -->
+        {$comment_rows}
+    </ul>
+    <div data-role="btnMore-container"> <!-- 더보기 버튼 -->
+      <a class="btn btn-secondary btn-block" data-role="trigger-getMoreComment">더보기</a>
+    </div>
+  </main>
+
+  <div class="d-none animated fadeIn" data-role="comment-none">
+   <div class="d-flex justify-content-center align-items-center p-3">
+     <div class="text-muted text-xs-center">
+       <i class="fa fa-comment-o" aria-hidden="true"></i> 첫번째 댓글을 남겨주세요.
+     </div>
+   </div>
+  </div>
+</section>
+
+<script>
+$(".rb-comment-wrapper .nav-link").tap(function(){
+  $('.rb-comment-wrapper .nav-link').removeClass('active')
+  $(this).addClass('active')
+});
+
+jQuery(function($) {
+
+   $(".js-modal-window").click(function() {
+ 		modalSetting('modal_window',$(this).attr("data-href"));
+ 	});
+
+  $('.add-comment').click(function() {
+   var uid = $(this).data('parent')
+   var textarea = $('[data-role="oneline-input-'+uid+'"]')
+   setTimeout(function(){ textarea.focus(); }, 200); // 한줄의견 추가시에 textarea focus 처리하기
+  });
+
+  $('.js-comment-focus').click(function() {
+    $('#meta-description-content').focus()
+  });
+
+});
+
+</script>

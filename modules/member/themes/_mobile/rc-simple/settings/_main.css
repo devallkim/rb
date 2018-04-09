@@ -1,0 +1,22 @@
+.avatar-wrapper {
+  text-align: center;
+}
+
+.avatar-wrapper .avatar-photo {
+  display: none
+}
+.avatar-wrapper.active .avatar-photo {
+  display: block
+}
+.avatar-wrapper.active .avatar-blank {
+  display: none
+}
+.avatar-wrapper .avatar-blank > span {
+  position: relative;
+  display: inline-block;
+}
+.avatar-wrapper .avatar-blank > span .fa-stack {
+  position: absolute;
+  right: 0;
+  bottom:0
+}

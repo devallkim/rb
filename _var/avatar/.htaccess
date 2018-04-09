@@ -1,0 +1,4 @@
+<FilesMatch ".(cgi|CGI|pl|PL|php|PHP|htm|HTM|html|HTML)$">
+ Order allow,deny
+ Deny from all
+</FilesMatch>
