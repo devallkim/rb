@@ -1,4 +1,4 @@
-<footer class="footer bg-faded">
+<footer class="footer">
 
   <div class="mb-2">
     <?php if ($my['uid']): ?>

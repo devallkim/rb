@@ -46,26 +46,30 @@
 
 <!-- Modal 통합검색 -->
 <div id="modal-search" class="modal zoom">
-	<header class="bar bar-nav bg-white px-0">
-	  <form class="input-group input-group-inset" action="/" id="drawer-right-search">
+	<header class="bar bar-nav bg-white p-2">
+	  <form class="input-group input-group-lg border border-primary" action="<?php echo $g['s']?>/" id="modal-search-form">
+			<input type="hidden" name="r" value="<?php echo $r?>">
 	    <input type="hidden" name="m" value="search">
-	    <span class="input-group-placeholder icon icon-search fa-2x"></span>
-	    <input type="search" name="keyword" class="form-control" placeholder="통합검색" id="search-input" required autocomplete="off">
-	    <span class="input-group-btn hidden" data-role="keyword-reset" >
-	      <button class="btn btn-link pl-2 pr-3" type="button" data-act="keyword-reset" tabindex="-1">
-	        <i class="fa fa-times-circle fa-lg" aria-hidden="true"></i>
+	    <input type="search" name="keyword" class="form-control bg-white" placeholder="검색어 입력" id="search-input" required autocomplete="off">
+			<span class="input-group-btn hidden" data-role="keyword-reset" >
+	      <button class="btn btn-link pr-2" type="button" data-act="keyword-reset" tabindex="-1">
+	        <i class="fa fa-times-circle" aria-hidden="true"></i>
 	      </button>
 	    </span>
-	    <span class="input-group-btn">
-	      <button class="btn btn-link pl-1 pr-3" type="button" data-history="back">취소</button>
-	    </span>
+			<span class="input-group-btn">
+			  <button class="btn btn-link text-primary" type="submit" id="modal-search-submit">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</button>
+			</span>
 	  </form>
 	</header>
-	<div class="bar bar-standard bar-footer bar-light bg-faded hidden" id="drawer-search-footer">
-	  <button class="btn btn-secondary btn-block" id="drawer-search-submit">검색</button>
-	</div>
+	<nav class="bar bar-tab bar-light bg-faded bg-white">
+	  <a class="tab-item" role="button" data-history="back">
+	    취소
+	  </a>
+	</nav>
 
-	<main class="content">
+	<main class="content bg-faded">
 		<div class="content-padded">
 
 		</div>

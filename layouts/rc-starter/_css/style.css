@@ -1,11 +1,11 @@
 @charset "utf-8";
 /*!
- * kimsQ Rb v2.0 기본형 레이아웃 글로벌 스타일
+ * kimsQ Rb v2.2 모바일 시작하기 레이아웃 글로벌 스타일
  * layout Version: 1.0
- * Homepage: http://www.kimsq.co.kr
- * Copyright 2014 redblock inc
- * Licensed under MIT
- * Based on Bootstrap v3.1.1
+ * Homepage: http://www.kimsq.com
+ * Copyright 2018 redblock inc
+ * Licensed under RBL
+ * Based on RC v1
 */
 
 /**
@@ -14,9 +14,11 @@
  * 1 - Reset 초기화
  * 2 - Structure 구조
  * 3 - Header 헤더
- * 4 - Content 컨텐츠
- * 5 - Sidebar 사이드바
- * 6 - Footer 풋터
+ * 4 - Footer 풋터
+ * 5 - Content 컨텐츠
+ * 6 - Drawer 드로어
+ * 7 - commponent 컴포넌트
+ * 8 - utility 유틸리티
  * ----------------------------------------------------------------------------
  */
 
@@ -26,6 +28,7 @@
  * ----------------------------------------------------------------------------
  */
 
+/* 반응형 설정 */
 @media (min-width: 768px) {
   html {
     font-size: 18px;
@@ -43,15 +46,7 @@ body, th, td, input, select, textarea, button {
   color: #000;
 }
 
-.modal {
-  -webkit-transition-timing-function: cubic-bezier(.1, .5, .1, 1);
-          transition-timing-function: cubic-bezier(.1, .5, .1, 1);
-}
 
-.modal.active {
-  -webkit-transition-timing-function: cubic-bezier(.1, .5, .1, 1);
-          transition-timing-function: cubic-bezier(.1, .5, .1, 1);
-}
 
 /**
  * 2 - Structure 구조
@@ -64,6 +59,8 @@ body, th, td, input, select, textarea, button {
 
 /**
  * 3 - Header 헤더
+ *
+ * 헤더 칼라 등 설정
  * ----------------------------------------------------------------------------
  */
 
@@ -74,12 +71,7 @@ body, th, td, input, select, textarea, button {
 .bar.bg-primary a[role="button"]:active {
   background-color: rgba(0, 0, 0, 0.5);
 }
-.bar .input-group {
-  top: 0;
-}
-.bar .input-group .form-control {
-  top: 0.12rem;
-}
+
 
 /**
   * 4 - Footer 풋터
@@ -87,7 +79,7 @@ body, th, td, input, select, textarea, button {
   */
 
 .footer {
-  padding: 25px 0 39px;
+  padding: 25px 0 25px;
   text-align: center;
   font-size: 12px;
   color: #888;
@@ -115,166 +107,106 @@ body, th, td, input, select, textarea, button {
  * ----------------------------------------------------------------------------
  */
 
- .card:focus,
- .table-view-cell:focus a {
-   background-color: #f4f4f4;
+
+ /*통합검색*/
+  #modal-search .bar-nav {
+    height: 3.75rem;
+  }
+  #modal-search .bar-nav ~ .content {
+    padding-top: 3.75rem;
+  }
+  #modal-search .input-group .form-control {
+    border: none
+  }
+  #modal-search .bar-nav .input-group {
+   top: 0;
+ }
+  #modal-search .input-group > .input-group-btn > .btn {
+   padding: 0.6rem 0.7rem;
+   color: #ccc
  }
 
-
-
-/**
- * 6 - Sidebar 사이드바
- * ----------------------------------------------------------------------------
- */
-
-
-
-/**
- * 7 - commponent 풋터
- * ----------------------------------------------------------------------------
- */
-
-/* sub nav */
-
-.nav-table {
-  display: table;
-  width: 100%;
-  font-size: .9375rem;
-  border-radius: 0;
-  border-collapse:collapse;
-}
-.nav-table-row {
-  display: table-row;
-}
-.nav-table-cell {
-  display: table-cell;
-  overflow: hidden;
-  width: 25%;
-  max-width: 6.25rem;
-  min-height: 1rem;
-  padding: .75rem 0 .625rem;
-  color: #666;
-  letter-spacing: -.0625rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  text-align: center;
-  border: .0625rem solid rgba(0, 0, 0, 0.075);;
-}
-.nav-table-cell:active {
-  background-color: #f4f4f4
-}
-.nav-table-cell.active,
-.nav-table-cell:active {
-  color: #0275d8 !important;
-}
-
-
-
-/* modal */
- .modal .login_nav {
-   margin-top: 1.5rem;
-   margin-bottom: 2rem;
-   text-align: center;
-   border-bottom: 1px solid #ddd;
+ /*검색어 추천*/
+ .autocomplete-suggestions {
+   top: 4.0625rem !important;
+   overflow-y: auto;
+   left:0 !important;
+   padding-left: 0;
+   margin-top: .0625rem;
+   margin-bottom: 0.9375rem;
+   list-style: none;
+   width: 100% !important;
+   background-color: transparent;
+   background-color: #fff
  }
- .modal .login_nav .list-inline .list-inline-item {
-  border-right: 1px solid #ddd;
-  padding-right: .6rem;
-  line-height: 1;
-}
-
-.table-view-cell a {
-  letter-spacing: -1px;
-  color: #101010;
-}
-
-/* table-view */
-
- /*card*/
-
-
-.widget {
-  border-top: 1px solid #e4e6e7;
-  border-bottom: 1px solid #e4e6e7;
-  background-color: #fff
-}
-.widget header {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
-  -webkit-box-align: center !important;
-  -webkit-align-items: center !important;
-  -ms-flex-align: center !important;
-  align-items: center !important;
-  -webkit-box-pack: justify !important;
-  -webkit-justify-content: space-between !important;
-  -ms-flex-pack: justify !important;
-  justify-content: space-between !importa
-  background-color: #fff;
-  border-bottom: 0;
-  padding: .7rem .5rem .3rem
-}
-.widget header h3 {
-  margin-bottom: 0;
-  font-weight: 400;
-  font-size: 1.13em;
-  line-height: 1.29;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.widget header a {
-  color: #888;
-  font-size: .85rem
-}
-
-.widget .card-deck {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  margin-right: -0.15rem;
-  margin-bottom: 0.75rem;
-  margin-left: -0.15rem;
-}
-.widget .card-deck .card {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 0 0%;
-  -ms-flex: 1 0 0%;
-  flex: 1 0 0%;
-  margin-right: 0.15rem;
-  margin-bottom: 0;
-  margin-left: 0.15rem;
-  border: 0
-}
-.widget .card-deck .card:active {
-  background-color: #f4f4f4
-}
-
-.widget .card-deck .card-block {
-  padding: 0.35rem 0.25rem;
-  color: #101010;
-  line-height: 1.4;
-  font-weight: 400;
-  letter-spacing: -1px;
-  font-size: .9rem;
-  overflow: hidden;
-  height: 44px;
-}
-
-.widget.widget-2 .card-deck .card-block {
-  height: 33px;
-}
-
- /* utility */
- .bg-faded {
-   background: #f2f2f2;
- }
-
- /* 링크 공유 */
- #popup-link-share .list-inline-item a:active {
+ .autocomplete-suggestion {
+   position: relative;
+   padding:.6rem 1rem .5rem 1rem;
+   overflow: hidden;
+   border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.075);
    display: block;
-   background-color: #eee
+   overflow: hidden;
+   color: inherit;
  }
+ .autocomplete-suggestion:empty {
+   display: none
+ }
+ .autocomplete-suggestion{color:#333}
+ .autocomplete-suggestion strong{font-weight:normal;color:#0275d8}
+
+
+/**
+ * 6 - Drawer 드로어(사이드 메뉴)
+ * ----------------------------------------------------------------------------
+ */
+ .snap-drawer .bar-nav .title {
+   margin: 0;
+   text-align: left;
+   padding-left: 1rem;
+ }
+
+ .navigate-rightdown:after,
+ .navigate-updown:after{
+   position: absolute;
+   top: 35%;
+   right: .9375rem;
+   display: inline-block;
+   font-family: Ratchicons;
+   font-size: 1rem;
+   line-height: 1;
+   color: #bbb;
+ }
+ .navigate-updown:after {
+   content: '\e81f';
+ }
+ .navigate-updown.collapsed:after {
+   content: '\e814';
+ }
+
+
+ .snap-drawer .table-view .table-view {
+   background-color: #f6f6f8;
+   border-top: 0.0625rem solid #d8dce2;
+ }
+
+
+
+/**
+ * 7 - commponent 컴포넌트
+ * ----------------------------------------------------------------------------
+ */
+
+ .modal {
+   -webkit-transition-timing-function: cubic-bezier(.1, .5, .1, 1);
+           transition-timing-function: cubic-bezier(.1, .5, .1, 1);
+ }
+
+ .modal.active {
+   -webkit-transition-timing-function: cubic-bezier(.1, .5, .1, 1);
+           transition-timing-function: cubic-bezier(.1, .5, .1, 1);
+ }
+
+/**
+  * 8 - utility 유틸리티
+  * ----------------------------------------------------------------------------
+  */
