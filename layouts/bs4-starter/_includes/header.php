@@ -36,7 +36,7 @@
 						</a>
 				    <div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<?php echo RW('mod=settings')?>">개인정보 관리</a>
-				    <a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;a=logout">로그아웃</a>
+				    <a class="dropdown-item" href="<?php echo $g['s']?>/logout">로그아웃</a>
 				  </div>
 				</li>
 				<?php else: ?>
