@@ -156,6 +156,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 			<div class="card-header d-flex justify-content-between align-items-center">
 
 				<?php if($is_regismode):?>
+				<input type="hidden" name="mobile" value="1">
 				<?php if($vtype == 'sub'):?>서브메뉴 만들기<?php else:?>최상위 메뉴 만들기<?php endif?>
 				<?php else:?>
 				<h4 class="h5 mb-0">메뉴 등록정보 <span class="badge badge-primary badge-pill"><?php echo $CINFO['name']?></span></h4>
