@@ -235,9 +235,17 @@ $pageType = array('','모듈연결','직접편집');
 									<a class="btn btn-light rb-modal-code">
 										<i class="fa fa-code"></i> 소스코드
 									</a>
-									<a class="btn btn-light rb-modal-markdown">
-										<i class="fa fa-hashtag"></i> 마크다운
-									</a>
+									<div class="btn-group">
+										<button type="button" class="btn btn-light rb-modal-markdown"><i class="fa fa-hashtag"></i> 마크다운</button>
+										<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<div class="dropdown-menu dropdown-menu-right">
+											<a class="dropdown-item rb-modal-markdown-mobile" href="#">
+												<i class="fa fa-hashtag"></i>  모바일 전용
+											</a>
+										</div>
+									</div>
 								</div>
 							</fieldset>
 							<span class="form-text text-muted mt-2">
@@ -654,6 +662,9 @@ $(document).ready(function() {
 	});
 	$('.rb-modal-markdown').on('click',function() {
 		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=page&uid=<?php echo $R['uid']?>&type=source&markdown=Y&cat=<?php echo urlencode($cat)?>&p=<?php echo $p?>&recnum=<?php echo $recnum?>&keyw=<?php echo urlencode($keyw)?>');
+	});
+	$('.rb-modal-markdown-mobile').on('click',function() {
+		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=page&uid=<?php echo $R['uid']?>&type=source&markdown=Y&cat=<?php echo urlencode($cat)?>&p=<?php echo $p?>&recnum=<?php echo $recnum?>&keyw=<?php echo urlencode($keyw)?>&mobileOnly=Y');
 	});
 	$('.rb-modal-module').on('click',function() {
 		modalSetting('modal_window','<?php echo getModalLink('&amp;system=popup.joint&amp;dropfield=jointf&amp;cmodule=[site]')?>');

@@ -37,7 +37,10 @@ $_editArray = array(
 <div id="rb-page-source" class="p-4">
 
 	<div class="d-flex justify-content-between">
-		<h4><?php echo $_filetype?> - <?php echo $_filesbj?></h4>
+		<h4>
+			<?php echo $_filetype?>
+			<span class="badge badge-primary badge-pill d-inline-block align-top"><?php echo $_filesbj?></span>
+		</h4>
 		<div class="rb-top-btnbox">
 				<?php if($markdown=='Y'):?>
 				<div class="btn-group">
@@ -66,7 +69,7 @@ $_editArray = array(
 					</div>
 				</div>
 				<div class="btn-group">
-					<a id="rb-list-back" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_mtype?>&amp;uid=<?php echo $uid?>&amp;cat=<?php echo urlencode($cat)?>&amp;p=<?php echo $p?>&amp;recnum=<?php echo $recnum?>&amp;keyw=<?php echo urlencode($keyw)?>" class="btn btn-light"><i class="fa fa-list"></i> 페이지목록</a>
+					<a id="rb-list-back" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_mtype?>&amp;uid=<?php echo $uid?>&amp;cat=<?php echo urlencode($cat)?>&amp;p=<?php echo $p?>&amp;recnum=<?php echo $recnum?>&amp;keyw=<?php echo urlencode($keyw)?>" class="btn btn-light"><i class="fa fa-file-text-o fa-fw"></i> 페이지 등록정보</a>
 					<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 						<span class="sr-only">Toggle Dropdown</span>
 					</button>
@@ -93,7 +96,9 @@ $_editArray = array(
 					</div>
 				</div>
 				<div class="btn-group">
-					<a id="rb-list-back" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_mtype?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>" class="btn btn-light">메뉴목록</a>
+					<a id="rb-list-back" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=<?php echo $_mtype?>&amp;cat=<?php echo $uid?>&amp;code=<?php echo $code?>" class="btn btn-light">
+						<i class="fa fa-sitemap fa-fw"></i> 메뉴 등록정보
+					</a>
 					<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 						<span class="sr-only">Toggle Dropdown</span>
 					</button>
@@ -132,6 +137,33 @@ $_editArray = array(
 				<?php endif?>
 				<input type="hidden" name="markdown" value="<?php echo $markdown?>">
 				<input type="hidden" name="editFilter" value="<?php echo $d['admin']['editor']?>">
+
+				<?php if ($markdown=='Y'): ?>
+
+					<?php if ($mobileOnly): ?>
+
+						<div class="alert alert-danger" role="alert" style="z-index:900">
+						 <strong><i class="fa fa-mobile" aria-hidden="true"></i> 모바일 전용</strong> 파일으로 모바일 기기에서만 출력됩니다. 저장시에 본문내용이 없으면 자동으로 제거됩니다.
+						</div>
+						<?php $source = is_file($g['path_page'].$_filekind.'.php') ? implode('',file($g['path_page'].$_filekind.'.php')) : ''  ?>
+						<input type="hidden" name="source" value="<?php echo $source?>">
+						<?php  $_filekind= $_filekind.'.mobile'; ?>
+					<?php else: ?>
+						<?php $mobile = is_file($g['path_page'].$_filekind.'.mobile.php') ? implode('',file($g['path_page'].$_filekind.'.mobile.php')) : ''  ?>
+						<input type="hidden" name="mobile" value="<?php echo $mobile?>">
+					<?php endif; ?>
+
+					<ol class="breadcrumb mb-2 bg-white text-dark border">
+						<li class="breadcrumb-item">파일경로 :</li>
+						<li class="breadcrumb-item">root</li>
+						<li class="breadcrumb-item">pages</li>
+						<?php if($_mtype=='menu'):?>
+						<li class="breadcrumb-item">menu</li>
+						<?php endif?>
+						<li class="breadcrumb-item active"><code><?php echo $_filekind?>.php</code></li>
+					</ol>
+
+				<?php endif; ?>
 
 				<?php
 				if($markdown=='Y'):
@@ -244,11 +276,6 @@ $_editArray = array(
 			<button class="btn btn-outline-primary btn-block btn-lg js-submit" type="button" name="button">
         <span class="not-loading">
 					저장하기
-					<?php if ($_HM['d_last']): ?>
-					<small class="text-muted">
-						<time class="timeago small" datetime="<?php echo getDateFormat($_HM['d_last'],'c')?>"></time> 저장됨
-					</small>
-					<?php endif; ?>
 				</span>
         <span class="is-loading"><i class="fa fa-spinner fa-lg fa-spin fa-fw"></i>저장 중 ...</span>
       </button>

@@ -8,7 +8,7 @@ $__SRC__ = str_replace("))?&gt;",'))" src="./_core/images/blank.gif">',$__SRC__)
 <?php getImport('simplemde','simplemde.min','1.11.2','css')?>
 <?php getImport('simplemde','simplemde.min','1.11.2','js')?>
 
-<?php $editor_type = 'markdown'; // 에디터 타입 : html,markdown  ?> 
+<?php $editor_type = 'markdown'; // 에디터 타입 : html,markdown  ?>
 
 <!-- 동영상,유튜브,오디오 player : http://www.mediaelementjs.com/ -->
 <?php getImport('mediaelement','mediaelement-and-player.min','4.2.8','js') ?>
@@ -16,7 +16,6 @@ $__SRC__ = str_replace("))?&gt;",'))" src="./_core/images/blank.gif">',$__SRC__)
 <?php getImport('mediaelement','mediaelementplayer','4.2.8','css') ?>
 
 <link href="<?php echo $g['s']?>/_core/css/github-markdown.css" rel="stylesheet">
-
 <div class="media">
 	<div class="media-body">
 
@@ -43,7 +42,7 @@ $__SRC__ = str_replace("))?&gt;",'))" src="./_core/images/blank.gif">',$__SRC__)
 					$mdContent=$converter->convert(getContents($__SRC__,'HTML'));
 					?>
 
-					<textarea name="source" class="form-control" id="simplemde"><?php echo $mdContent?></textarea>
+					<textarea name="<?php echo $mobileOnly?'mobile':'source' ?>" class="form-control" id="simplemde"><?php echo $mdContent?></textarea>
 
 				 </div><!-- /.card-body -->
 			</div><!-- /.position-relative -->
