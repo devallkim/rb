@@ -619,7 +619,7 @@ function getUpImageSrc($R){
 		$src=$F['url'].$F['folder'].'/'.$F['tmpname'];
    }else{
     $img_arr=getImgs($R['content'],'jpg|jpge|gif|png');
-    $src=$img_arr[0]?$img_arr[0]:$g['img_core'].'/blank.gif';
+    $src=$img_arr[0]?$img_arr[0]:'/files/noimage.png';
    }
   return $src;
 }
@@ -629,8 +629,7 @@ function getPreviewResize($image,$size){
   $_array=explode('.',$image);
   $name=$_array[0];
   $ext=$_array[1];
-	if(strpos($image,'blank')) $result=$image;
-	else $result=$name.'_'.$size.'.'.$ext;
+	$result=$name.'_'.$size.'.'.$ext;
   return $result;
 }
 
