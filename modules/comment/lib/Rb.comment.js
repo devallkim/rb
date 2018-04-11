@@ -312,6 +312,10 @@
 
         // 한줄의견 입력창 wrapper 숨김/노출 함수
         showHideOnelineInput: function(e){
+            if(!memberid){
+              $('#modal-login').modal()  // 비로그인 일 경우 로그인 모달 호출
+              return false;
+            }
             var target = e.currentTarget;
             var parent = $(target).data('parent');// 댓글 PK
             var oneline_input_wrapper = $('[data-role="oneline-input-wrapper-'+parent+'"]');
@@ -424,7 +428,10 @@
                 $.each(input_array,function(key,InputEle){
                     $(InputEle).css("padding-left","10px");
                     $(InputEle).attr("placeholder","로그인을 해주세요.")
-                    $(InputEle).attr("disabled","disabled");
+                    $(InputEle).attr("readonly",true);
+                    $(InputEle).attr("data-toggle","modal");
+                    $(InputEle).attr("data-target","#modal-login");
+                    $(InputEle).attr("role","button");
                 });
                 // 댓글 입력창
                 $(this.options.emoticonBox).remove();
@@ -535,7 +542,8 @@
             var effect = $(target).data('effect');
 
             if(!memberid && (act!='reload'&&act!='more')){
-                alert('로그인을 해주세요.');
+                // alert('로그인을 해주세요.');
+                $('#modal-login').modal()
                 return false;
             }
 
