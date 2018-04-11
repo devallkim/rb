@@ -1,5 +1,16 @@
 /* utility */
 
+.gutter-half {
+  margin-right: -7.5px;
+  margin-left: -7.5px;
+}
+
+.gutter-half > .col,
+.gutter-half > [class*="col-"] {
+  padding-right: 7.5px;
+  padding-left: 7.5px;
+}
+
 .alert {
   z-index: 1060
 }
