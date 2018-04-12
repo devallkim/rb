@@ -1,4 +1,17 @@
 /* utility */
+.rb-new {
+  display: inline-block;
+  font: normal normal normal 6px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #d9534f;
+  font-size: 60%;
+}
+.rb-new:before {
+  content: "\f111";
+}
 
 .gutter-half {
   margin-right: -7.5px;
