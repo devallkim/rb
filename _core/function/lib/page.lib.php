@@ -27,12 +27,12 @@ function LIB_getPageLink_RC($lnum,$p,$tpage,$push)
 	$g_q  .= '</span>';
 	$pp = $p-1;
 	if($p == 1) { $g_q .= '<span class="btn btn-link rb-prev rb-disabled" title="이전"><i class="fa fa-angle-left"></i></span>'; }
-	else{ $g_q .= '<a href="'.$_N.'p='.$pp.'" data-control="push" class="btn btn-link rb-prev" title="이전"><i class="fa fa-angle-left"></i></a>';}
+	else{ $g_q .= '<a href="'.$_N.'p='.$pp.'" class="btn btn-link rb-prev" title="이전"><i class="fa fa-angle-left"></i></a>';}
 	$st1 = (int)(($p-1)/$lnum)*$lnum + 1;
 	$st2 = $st1 + $lnum;
 	$np = $p+1;
 	if($tpage == $p) { $g_q .= '<span class="btn btn-link rb-next rb-disabled" title="다음"><i class="fa fa-angle-right"></i></span>'; }
-	else{$g_q .= '<a href="'.$_N.'p='.$np.'" data-control="push" class="btn btn-link rb-next" title="다음"><i class="fa fa-angle-right"></i></a>'; }
+	else{$g_q .= '<a href="'.$_N.'p='.$np.'" class="btn btn-link rb-next" title="다음"><i class="fa fa-angle-right"></i></a>'; }
 	$g_q  .= '</span>';
 	return $g_q;
 }
