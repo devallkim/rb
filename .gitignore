@@ -12,3 +12,4 @@ _var/table.info.php
 _var/site/*
 modules/bbs/var/
 pages/*
+_tmp/widget/*
