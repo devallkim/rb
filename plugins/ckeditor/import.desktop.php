@@ -47,7 +47,7 @@ CKEDITOR.replace( 'ckeditor_textarea', {
 	// For more information check http://docs.ckeditor.com/ckeditor4/docs/#!/api/CKEDITOR.config-cfg-customConfig
 	customConfig: '',
 	// Enabling extra plugins, available in the standard-all preset: http://ckeditor.com/presets-all
-	extraPlugins: 'autoembed,embedsemantic,autogrow,tableresize,horizontalrule',
+	extraPlugins: 'autoembed,embedsemantic,tableresize,horizontalrule',
 	/*********************** File management support ***********************/
 	// In order to turn on support for file uploads, CKEditor has to be configured to use some server side
 	// solution with file upload/management capabilities, like for example CKFinder.
@@ -59,11 +59,7 @@ CKEDITOR.replace( 'ckeditor_textarea', {
 	// Remove the default image plugin because image2, which offers captions for images, was enabled above.
 	// removePlugins: 'image',
 	// Make the editing area bigger than default.
-	// height: 450,
-
-	autoGrow_minHeight: <?php echo $editor_height ?>,
-	autoGrow_onStartup: true,
-	autoGrow_bottomSpace: 20,
+	height: 450,
 
 	// An array of stylesheets to style the WYSIWYG area.
 	// Note: it is recommended to keep your own styles in a separate file in order to make future updates painless.
