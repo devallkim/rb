@@ -11,6 +11,7 @@ $attach_object_type=$d['attach']['object_type']; // 첨부 대상에 따른 분�
 
 // 함수 인클루드
 require_once $g['dir_attach_theme'].'/main.func.php';
+require_once $g['dir_attach_theme'].'/_var.php'; // 테마변수 인클루드
 ?>
 <!-- global css -->
 <link href="<?php echo $g['url_attach_theme']?>/_main.css" rel="stylesheet">

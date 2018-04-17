@@ -14,7 +14,7 @@ $upfileNum	= count($_FILES['upfiles']['name']);
 $tmpcode	= $mediaset == 'Y' ? '' : $_SESSION['upsescode'];
 $mbruid		= $my['uid'];
 $fserver	= $d['mediaset']['use_fileserver'];
-$url		= $fserver ? $d['mediaset']['ftp_urlpath'] : $g['url_root'].'/files/';
+$url		= $fserver ? $d['mediaset']['ftp_urlpath'] : '/files/';
 $d_regis	= $date['totime'];
 $down		= 0;
 $width		= 0;

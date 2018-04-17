@@ -140,8 +140,8 @@
 	</div>
 	<div class="content bg-faded">
 
-		<!-- module : 첨부파일 사용 모듈 , theme : 첨부파일 테마 , attach_handler_file : 파일첨부 실행 엘리먼트 , attach_handler_photo : 사진첨부 실행 엘리먼트 ,parent_data : 수정시 필요한 해당 포스트 데이타 배열 변수, attach_handler_getModalList : 업로드 리스트 모달로 호출용 엘리먼트 (class 인 경우 . 까지 넘긴다.)  -->
-		<?php getWidget('_default/attach-rc',array('parent_module'=>'bbs','theme'=>'_mobile/rc-default','attach_handler_file'=>'[data-role="attach-handler-file"]','attach_handler_photo'=>'[data-role="attach-handler-photo"]','attach_handler_getModalList'=>'.getModalList','parent_data'=>$R));?>
+		<!-- 첨부파일 업로드 -->
+		<?php include $g['dir_module_skin'].'_uploader.php'?>
 
 		<?php if (!$R['upload']): ?>
 		<div class="content-padded text-muted guide text-center">
