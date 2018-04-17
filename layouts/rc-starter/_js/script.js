@@ -1,6 +1,20 @@
+/**
+ * --------------------------------------------------------------------------
+ * kimsQ Rb v2.2 모바일 시작하기 레이아웃 스크립트 (rc-starter)
+ * Homepage: http://www.kimsq.com
+ * Licensed under RBL
+ * Copyright 2018 redblock inc
+ * --------------------------------------------------------------------------
+ */
+
+
 $(function() {
 
   putCookieAlert('site_login_result') // 로그인/로그아웃 알림 메시지 출력
+  RC_initPhotoSwipe(); // 포토갤러리 초기화 (모바일 전용)
+
+	$('[data-plugin="timeago"]').timeago();  // 상대시간 플러그인 초기화
+  $('[data-plugin="mediaelement"]').mediaelementplayer(); // 동영상, 오디오 플레이어 초기화 http://www.mediaelementjs.com/
 
 	//modal 로그인 - 실행
 	$('#modal-login').find('form').submit( function(e){

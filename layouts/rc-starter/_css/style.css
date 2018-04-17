@@ -1,6 +1,6 @@
 @charset "utf-8";
 /*!
- * kimsQ Rb v2.2 모바일 시작하기 레이아웃 글로벌 스타일
+ * kimsQ Rb v2.2 모바일 시작하기 레이아웃 스타일 (rc-starter)
  * layout Version: 1.0
  * Homepage: http://www.kimsq.com
  * Copyright 2018 redblock inc
@@ -44,9 +44,8 @@ body, th, td, input, select, textarea, button {
   line-height: 1.5;
   font-family: AppleSDGothicNeo-Light,'HelveticaNeue','Malgun Gothic','맑은 고딕',sans-serif;
   color: #000;
+  letter-spacing:-0.0625rem
 }
-
-
 
 /**
  * 2 - Structure 구조
@@ -108,22 +107,46 @@ body, th, td, input, select, textarea, button {
  */
 
 
- /*통합검색*/
-  #modal-search .bar-nav {
-    height: 3.75rem;
-  }
-  #modal-search .bar-nav ~ .content {
-    padding-top: 3.75rem;
-  }
-  #modal-search .input-group .form-control {
-    border: none
-  }
-  #modal-search .bar-nav .input-group {
-   top: 0;
- }
-  #modal-search .input-group > .input-group-btn > .btn {
-   padding: 0.6rem 0.7rem;
-   color: #ccc
+/* 포커스된 아이템 강조표시 */
+[data-role="bbs-list"]  .table-view-cell:focus {
+  background-color: #F5FFFE !important;
+}
+[data-role="bbs-list"] .card:focus {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+  -webkit-box-shadow: 0 0 0 4px #007bff ;
+  box-shadow: 0 0 0 4px #007bff ;
+}
+[data-role="bbs-list"]  .card a:focus,
+[data-role="bbs-list"]  .table-view-cell a:focus {
+  outline: 0
+}
+
+
+
+/* 새글표시 */
+
+.widget a {
+  letter-spacing:-0.0625rem
+}
+
+/*통합검색*/
+#modal-search .bar-nav {
+  height: 3.75rem;
+}
+#modal-search .bar-nav ~ .content {
+  padding-top: 3.75rem;
+}
+#modal-search .input-group .form-control {
+  border: none
+}
+#modal-search .bar-nav .input-group {
+ top: 0;
+}
+#modal-search .input-group > .input-group-btn > .btn {
+ padding: 0.6rem 0.7rem;
+ color: #ccc
  }
 
  /*검색어 추천*/
@@ -155,10 +178,18 @@ body, th, td, input, select, textarea, button {
  .autocomplete-suggestion strong{font-weight:normal;color:#0275d8}
 
 
+
+
+
 /**
  * 6 - Drawer 드로어(사이드 메뉴)
  * ----------------------------------------------------------------------------
  */
+
+.snap-content {
+  background-color: #fff
+}
+
  .snap-drawer .bar-nav .title {
    margin: 0;
    text-align: left;
@@ -184,17 +215,23 @@ body, th, td, input, select, textarea, button {
  }
 
 
- .snap-drawer .table-view .table-view {
-   background-color: #f6f6f8;
-   border-top: 0.0625rem solid #d8dce2;
- }
-
+.snap-drawer .table-view .table-view {
+  background-color: #f6f6f8;
+  border-top: 0.0625rem solid #d8dce2;
+}
 
 
 /**
  * 7 - commponent 컴포넌트
  * ----------------------------------------------------------------------------
  */
+
+.bar .nav-inline .nav-link {
+  color: #818a91;
+}
+.bar .nav-inline .nav-link.active {
+  color: #0275d8;
+}
 
  .modal {
    -webkit-transition-timing-function: cubic-bezier(.1, .5, .1, 1);
@@ -205,6 +242,56 @@ body, th, td, input, select, textarea, button {
    -webkit-transition-timing-function: cubic-bezier(.1, .5, .1, 1);
            transition-timing-function: cubic-bezier(.1, .5, .1, 1);
  }
+
+
+/* 포토모달 */
+.pswp-gallery .pswp__subject {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.75;
+  overflow: hidden;
+  padding: 13px 0 13px 13px;
+  width: 70%;
+  font-size: 15px;
+  line-height: 1.5em;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.4);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pswp-gallery .pswp__counter {
+  position: absolute;
+  left: 0;
+  top: 35px;
+  font-size: 12px;
+  line-height: 20px;
+  color: #ccc;
+  opacity: 0.75;
+  padding: 0 15px;
+}
+.pswp-gallery .pswp__caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 70%;
+  min-height: 44px;
+}
+
+.pswp-gallery .pswp__reaction {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  width: 25%;
+  min-height: 44px;
+}
+.pswp-gallery .pswp__reaction .pswp__button {
+  background-image: none;
+  font-size: 13px;
+  color: #eee;
+  line-height: 1.7
+}
 
 /**
   * 8 - utility 유틸리티

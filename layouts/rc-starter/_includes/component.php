@@ -1,4 +1,15 @@
-<!-- Modal 로그인 -->
+<!--
+컴포넌트 모음
+
+1. 일반모달 : 로그인
+2. 일반모달 : 통합검색
+3. 일반모달 : 게시물 보기
+4. 포토모달 : 갤러리형
+5. 팝업 : 링크공유
+
+-->
+
+<!-- 1. 일반모달 : 로그인-->
 <div id="modal-login" class="modal zoom">
 	<header class="bar bar-nav bar-light bg-faded p-x-0">
 		<a class="icon icon-left-nav pull-left p-x-1" role="button" data-history="back"></a>
@@ -44,7 +55,7 @@
 	</main>
 </div><!-- /.modal -->
 
-<!-- Modal 통합검색 -->
+<!-- 2. 일반모달 : 통합검색 -->
 <div id="modal-search" class="modal zoom">
 	<header class="bar bar-nav bg-white p-2">
 	  <form class="input-group input-group-lg border border-primary" action="<?php echo $g['s']?>/" id="modal-search-form">
@@ -76,21 +87,145 @@
 	</main>
 </div><!-- /.modal -->
 
-<!-- Modal 사이트맵 -->
-<div id="modal-sitemap" class="modal zoom">
-	<header class="bar bar-nav bar-light bg-faded p-x-0">
-		<a class="icon icon-left-nav pull-left p-x-1" role="button" data-history="back"></a>
-		<h1 class="title" data-role="title">사이드맵</h1>
-	</header>
+<!-- 3. 일반모달 : 게시물 보기 -->
+<div id="modal-bbs-view" class="modal zoom">
 
-	<main class="content">
-		<div class="content-padded">
-			<?php getWidget('rc-simple/sitemap',array())?>
-		</div>
-	</main>
+	<section id="page-bbs-view" class="rb-bbs-list page center" data-role="bbs-list">
+		<input type="hidden" name="bid" value="">
+	  <input type="hidden" name="uid" value="">
+	  <input type="hidden" name="theme" value="">
+	  <header class="bar bar-nav bar-light bg-faded px-0">
+			<a class="icon icon-left-nav pull-left p-x-1" role="button" data-history="back"></a>
+	    <h1 class="title text-truncate text-nowrap w-75" style="left:12.5%" data-role="title">게시물 보기</h1>
+	  </header>
+	  <div class="content">
+	    <div class="content-padded" data-role="post">
+	      <span data-role="cat" class="badge badge-primary badge-inverted">카테고리</span>
+	      <h3 data-role="subject" class="rb-article-title">게시물 제목</h3>
+
+	      <div data-role="article">
+	        본문내용
+	      </div>
+
+	      <div data-role="attach">
+
+	        <!-- 유튜브 -->
+	        <div class="card-group mb-3 hidden" data-role="attach-youtube">
+	        </div>
+
+	        <!-- 비디오 -->
+	        <div class="mb-3 hidden" data-role="attach-video">
+	        </div>
+
+	        <!-- 오디오 -->
+	        <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-audio">
+	        </ul>
+
+	        <!-- 이미지 -->
+	        <div class="card-group mb-3 hidden" data-role="attach-photo" data-plugin="photoswipe">
+	        </div>
+
+	        <!-- 기타파일 -->
+	        <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-file">
+	        </ul>
+	      </div>
+	    </div>
+
+
+	    <div class="commentting-container content-padded m-t-3" id="anchor-comments"></div>
+	  </div>
+	</section>
+
+	<!-- 전체댓글보기 -->
+	<section id="page-bbs-allcomments" class="page right">
+		  <div class="commentting-all"></div>
+	</section>
+
+
 </div><!-- /.modal -->
 
-<!-- Popup :  링크 공유 -->
+<!-- 4. 포토모달 : 갤러리형 -->
+<div class="pswp pswp-gallery" tabindex="-1" role="dialog" aria-hidden="true">
+	<input type="hidden" name="uid" value="">
+  <input type="hidden" name="bid" value="">
+  <input type="hidden" name="theme" value="">
+
+
+  <!-- Background of PhotoSwipe.
+       It's a separate element, as animating opacity is faster than rgba(). -->
+  <div class="pswp__bg"></div>
+
+  <!-- Slides wrapper with overflow:hidden. -->
+  <div class="pswp__scroll-wrap page center" id="page1">
+
+		<!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
+		<div class="pswp__container">
+				<!-- don't modify these 3 pswp__item elements, data is added later on -->
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+				<div class="pswp__item"></div>
+		</div>
+
+		<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+		<div class="pswp__ui pswp__ui--hidden">
+
+				<div class="pswp__top-bar">
+
+						<!--  Controls are self-explanatory. Order can be changed. -->
+						<div class="pswp__subject">
+							<span data-role="category" class="text-primary"></span>
+							<span data-role="subject"></span>
+						</div>
+						<div class="pswp__counter"></div>
+
+						<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+						<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+						<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+						<!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+						<!-- element will get class pswp__preloader--active when preloader is running -->
+						<div class="pswp__preloader">
+								<div class="pswp__preloader__icn">
+									<div class="pswp__preloader__cut">
+										<div class="pswp__preloader__donut"></div>
+									</div>
+								</div>
+						</div>
+				</div>
+
+				<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+						<div class="pswp__share-tooltip"></div>
+				</div>
+
+				<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+				</button>
+
+				<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+				</button>
+
+				<div class="pswp__caption">
+						<div class="pswp__caption__center"></div>
+				</div>
+			</div>
+
+  </div>
+
+	<div class="pswp__reaction" hidden>
+		<button type="button" class="pswp__button" data-toggle="page" data-start="#page1" data-target="#page2">
+			<i class="fa fa-comment-o fa-lg" aria-hidden="true"></i>
+			<br> <span data-role="comment"></span>
+		</button>
+		<button type="button" class="pswp__button">
+			<i class="fa fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
+			<br><span data-role="likes"></span>
+		</button>
+	</div>
+
+</div>
+
+<!-- 5. 팝업 : 링크공유 -->
 <div id="popup-link-share" class="popup zoom">
   <div class="popup-content">
     <header class="bar bar-nav">

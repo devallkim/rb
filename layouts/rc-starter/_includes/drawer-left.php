@@ -37,5 +37,5 @@
 </nav>
 
 <div class="content">
-  <?php getWidget('rc-simple/menu-collapse',array('smenu'=>'0','limit'=>'4','collid'=>'tree','dispfmenu'=>'0','collapse'=>'1'))?>
+  <?php getWidget('menu/rc-menu-collapse-01',array('smenu'=>'0','limit'=>'4','collid'=>'tree','dispfmenu'=>'0','collapse'=>'1'))?>
 </div>

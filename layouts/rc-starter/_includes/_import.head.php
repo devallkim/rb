@@ -13,9 +13,9 @@
 
 <title><?php echo $g['browtitle']?></title>
 
-<!-- Favicons -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['s']?>/_core/images/ico/apple-touch-icon-144-precomposed.png">
-<link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">
+<!-- 파비콘 -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['img_layout']?>/icon/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="<?php echo $g['img_layout']?>/icon/favicon.ico">
 
 
 <!-- 사이트 헤드 코드 -->
@@ -34,18 +34,14 @@
 <!-- 시스템 폰트 -->
 <?php getImport('font-awesome','css/font-awesome','4.7.0','css')?>
 
-<?php getImport('autosize','autosize.min','3.0.14','js')?>
-
-<!-- 사진전용모달 : photoswipe http://photoswipe.com/documentation/getting-started.html -->
-<?php getImport('photoswipe','photoswipe','4.1.1','css') ?>
-<?php getImport('photoswipe','rc-skin/default-skin','4.1.1','css') ?>
-<?php getImport('photoswipe','rc-photoswipe','4.1.1','js') ?>
-<?php getImport('photoswipe','photoswipe-ui-default.min','4.1.1','js') ?>
+<!-- swiper : http://idangero.us/swiper/ -->
+<?php getImport('swiper','css/swiper','4.2.2','css')?>
+<?php getImport('swiper','js/swiper.min','4.2.2','js')?>
 
 <!-- 동영상,유튜브,오디오 player : http://www.mediaelementjs.com/ -->
-<?php getImport('mediaelement','mediaelement-and-player.min','4.1.3','js') ?>
-<?php getImport('mediaelement','lang/ko','4.1.3','js') ?>
-<?php getImport('mediaelement','mediaelementplayer','4.1.3','css') ?>
+<?php getImport('mediaelement','mediaelement-and-player.min','4.2.8','js') ?>
+<?php getImport('mediaelement','lang/ko','4.2.8','js') ?>
+<?php getImport('mediaelement','mediaelementplayer','4.2.8','css') ?>
 
 <!-- 사이트 헤드 코드 -->
 <?php echo $_HS['headercode']?>
@@ -59,5 +55,5 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script type="text/javascript">
-	Kakao.init('ad801e290f033ce0caadf67ceff84ca2');
+	Kakao.init('');
 </script>

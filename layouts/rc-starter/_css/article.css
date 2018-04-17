@@ -1,9 +1,6 @@
 .rb-article {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  color: #333;
-  font-family :"맑은 고딕",malgun gothic,"돋움",Dotum,"Apple SD Gothic Neo",Helvetica,sans-serif;
-  font-size: 16px;
   line-height: 1.6;
   word-wrap: break-word;
 }
