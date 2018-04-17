@@ -10,13 +10,11 @@
 				<?php include $g['dir_layout'].'/_includes/navbar-menu.php' ?>
 			</ul>
 
-
 			<form class="form-inline my-2 my-lg-0" action="<?php echo $g['s']?>/" role="search">
 				<input type="hidden" name="r" value="<?php echo $r ?>">
 				<input type="hidden" name="m" value="search">
 	      <input class="form-control mr-sm-2" type="search" placeholder="통합검색" aria-label="Search" name="keyword" value="<?php echo $_keyword ?>" >
 	    </form>
-
 
 			<ul class="navbar-nav">
 				<?php if ($my['uid']): ?>
@@ -43,15 +41,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="<?php echo RW('mod=join') ?>">회원가입</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="<?php echo RW('mod=login') ?>">로그인(P)</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#modal-login" data-toggle="modal">로그인(M)</a>
-				</li>
 				<li class="nav-item position-relative" id="navbarPopoverLogin">
-					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						로그인(D)
+					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="드롭다운형 로그인">
+						로그인
 					</a>
 					<div class="dropdown-menu dropdown-menu-right">
 					  <form class="px-4 py-3" id="popover-loginform" action="<?php echo $g['s']?>/" method="post" style="width:250px">

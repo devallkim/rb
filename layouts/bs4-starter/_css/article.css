@@ -2,16 +2,8 @@
 .rb-article {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  color: #333;
-  font-family :"맑은 고딕",malgun gothic,"돋움",Dotum,"Apple SD Gothic Neo",Helvetica,sans-serif;
-  font-size: 14px;
   line-height: 1.6;
   word-wrap: break-word;
-}
-
-.rb-article p {
-  font-size: 17px;
-  letter-spacing: -1px;
 }
 
 .rb-article a {
@@ -352,8 +344,8 @@
 .rb-article table,
 .rb-article pre {
   margin-top: 0;
-  /*margin-bottom: 16px;*/
-  margin-bottom: 2em;
+  margin-bottom: 20px;
+  line-height: 24px
 }
 
 .rb-article hr {
@@ -459,11 +451,6 @@
   content: 'videos';
   text-align: center
 }
-
-.mejs__container {
-  margin-bottom: 2rem
-}
-
 
 .rb-article code {
   padding: 0;

@@ -8,9 +8,9 @@
 <meta name="description" content="<?php echo strip_tags($g['meta_des'])?>">
 <link rel="image_src" href="<?php echo strip_tags($g['meta_img'])?>">
 
-<title><?php echo $g['browtitle']?></title>
+<title><?php echo strip_tags($g['meta_tit'])?></title>
 
-<!-- Favicons -->
+<!-- 파비콘 -->
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['img_layout']?>/icon/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="<?php echo $g['img_layout']?>/icon/favicon.ico">
 
@@ -34,7 +34,8 @@
 <!-- 엔진코드:삭제하지마세요 -->
 <?php include $g['path_core'].'engine/cssjs.engine.php' ?>
 
-<!-- 레이아웃 범용 스타일 -->
+<!-- 레이아웃 스타일 -->
 <link href="<?php echo $g['url_layout']?>/_css/style.css<?php echo $g['wcache']?>" rel="stylesheet">
-<!-- 레이아웃 범용 아티클 스타일 -->
+
+<!-- 레이아웃 본문 컨텐츠 스타일(선택) -->
 <link href="<?php echo $g['url_layout']?>/_css/article.css<?php echo $g['wcache']?>" rel="stylesheet">
