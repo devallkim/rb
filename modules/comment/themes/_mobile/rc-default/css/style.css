@@ -15,6 +15,9 @@
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee
 }
+[data-role="comment-container"] .media-body {
+  word-break: break-all;
+}
 .rb-commentting .media-list .media-list .media {
   padding: 15px 0 0;
   border: 0

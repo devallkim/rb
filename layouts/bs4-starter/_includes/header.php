@@ -1,21 +1,27 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark mb-3">
 	<div class="container">
-		<a class="navbar-brand" href="<?php  echo RW(0) ?>"><?php echo stripslashes($d['layout']['header_title'])?></a>
+		<a class="navbar-brand" href="<?php  echo RW(0) ?>">
+			<?php echo $d['layout']['header_file']?'<img src="'.$g['url_layout'].'/_var/'.$d['layout']['header_file'].'">':stripslashes($d['layout']['header_title'])?>
+		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarsDefault">
 			<ul class="navbar-nav mr-auto">
-				<?php include $g['dir_layout'].'/_includes/navbar-menu.php' ?>
+				<!-- 관리자모드 > 위젯코드 추출기를 활용하세요. -->
+				<?php getWidget('menu/bs4-navbar-nav',array('smenu'=>'0','limit'=>'2','link'=>'link','dropdown'=>'1',))?>
 			</ul>
 
+			<?php if($d['layout']['header_search']=='true'):?>
 			<form class="form-inline my-2 my-lg-0" action="<?php echo $g['s']?>/" role="search">
 				<input type="hidden" name="r" value="<?php echo $r ?>">
 				<input type="hidden" name="m" value="search">
 	      <input class="form-control mr-sm-2" type="search" placeholder="통합검색" aria-label="Search" name="keyword" value="<?php echo $_keyword ?>" >
 	    </form>
+			<?php endif?>
 
+			<?php if($d['layout']['header_login']=='true'):?>
 			<ul class="navbar-nav">
 				<?php if ($my['uid']): ?>
 				<li class="nav-item dropdown">
@@ -86,6 +92,7 @@
 
 				<?php endif; ?>
 	    </ul>
+			<?php endif?>
 		</div>
 	</div><!-- /.container -->
 </nav>

@@ -16,6 +16,10 @@
   border-bottom: 1px solid #eee;
 }
 
+[data-role="comment-container"] .media-body {
+  word-break: break-all;
+}
+
 [data-role="comment-container"] > .media:first-child {
   border-bottom: 0
 }

@@ -1,8 +1,10 @@
 <?php
+$B = getDbData($table['bbslist'],'id="'.$wdgvar['bid'].'"','uid');
+$size = $wdgvar['width'].'x'.$wdgvar['height']; // 사진 사이즈
+$print_width = $wdgvar['width'] / 2;  // 실제 출력할 사진의 가로사이즈 (모바일 디스플레이의 특성상 2배수 해상도 필요)
+
 include_once $g['path_module'].'bbs/var/var.php';
 include_once $g['path_module'].'bbs/var/var.'.$wdgvar['bid'].'.php';
-$B = getDbData($table['bbslist'],'id="'.$wdgvar['bid'].'"','uid');
-
 $d['bbs']['skin'] = $d['bbs']['m_skin']?$d['bbs']['m_skin']:$d['bbs']['skin_mobile'];
 $d['bbs']['c_mskin_modal'] = $d['bbs']['c_mskin_modal']?$d['bbs']['c_mskin_modal']:$d['bbs']['comment_mobile_modal'];
 
@@ -24,7 +26,7 @@ include_once $g['dir_module_skin'].'_widget.php';
       data-cat="<?php echo $_R['category'] ?>"
       data-title="<?php echo $wdgvar['title']?>"
       data-subject="<?php echo $_R['subject'] ?>">
-      <img class="media-object pull-left" src="<?php echo getPreviewResize(getUpImageSrc($_R),'262x164') ?>" style="width: 131px">
+      <img class="media-object pull-left" src="<?php echo getPreviewResize(getUpImageSrc($_R),$size) ?>" style="width: <?php echo $print_width ?>px">
       <div class="media-body">
         <?php if(getNew($_R['d_regis'],24)):?>
         <small class="rb-new mr-1" aria-hidden="true"></small>

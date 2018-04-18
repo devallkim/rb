@@ -55,5 +55,5 @@
 <!-- 카카오 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
-	Kakao.init('ad801e290f033ce0caadf67ceff84ca2');  // 카카오 앱의 JavaScript 키를 설정해 주세요.
+	Kakao.init('<?php echo $d['layout']['kakao_key'] ?>');  // 카카오 앱의 JavaScript 키를 설정해 주세요.
 </script>

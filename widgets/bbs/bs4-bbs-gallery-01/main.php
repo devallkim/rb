@@ -12,11 +12,12 @@ if ($wdgvar['view']=='modal') {
 }
 
 $recnum = $wdgvar['recnum']; // 한 열에 출력할 카드 갯수
-$totalCardDeck=ceil($wdgvar['limit']/$recnum); // card-deck 갯수 ($NUM 은 해당 데이타의 총 card 갯수 getDbRows 이용)
-$total_card_num = $totalCardDeck*$recnum;// 총 출력되야 할 card 갯수(빈카드 포함)
+$totalCardRow=ceil($wdgvar['limit']/$recnum); // row 갯수
+$total_card_num = $totalCardRow*$recnum;// 총 출력되야 할 card 갯수(빈카드 포함)
 $print_card_num = 0; // 실제 출력된 카드 숫자 (아래 card 출력될 때마다 1 씩 증가)
 $lack_card_num = $total_card_num;
 ?>
+
 
 <section class="widget">
   <header class="d-flex justify-content-between align-items-center py-2 border-bottom">
@@ -55,7 +56,6 @@ $lack_card_num = $total_card_num;
       $print_card_num++; // 카드 출력될 때마 1씩 증가
       $lack_card_num = $total_card_num - $print_card_num;
      ?>
-
     <?php if(!($i%$recnum)):?></div><div class="row gutter-half mt-3" data-role="bbs-list"><?php endif?>
     <?php endwhile?>
     <?php if($lack_card_num ):?>
@@ -63,6 +63,6 @@ $lack_card_num = $total_card_num;
        <div class="col"></div>
       <?php endfor?>
     <?php endif?>
-    
+
   </div>  <!-- /.row -->
 </section><!-- /.widget -->

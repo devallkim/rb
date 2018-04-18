@@ -30,7 +30,7 @@ if (!function_exists('getMenuWidgetCollapse'))
 	?>
 	<?php if($C['is_child'] && $w['limit'] > 1 && $w['collapse']):?>
 	<li class="table-view-cell">
-		<a data-toggle="collapse" data-parent="#<?php echo $w['collid']?>" href="#<?php echo $w['collid']?>-<?php echo $C['uid']?>" class="navigate-updown collapsed<?php if($_isActive):?> active<?php endif?>">
+		<a data-toggle="collapse" data-parent="#<?php echo $w['accordion']?$w['collid']:''?>" href="#<?php echo $w['collid']?>-<?php echo $C['uid']?>" class="navigate-updown collapsed<?php if($_isActive):?> active<?php endif?>">
 			<?php echo $C['name']?>
 		</a>
 

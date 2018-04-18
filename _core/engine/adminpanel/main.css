@@ -1469,3 +1469,11 @@ body, html {
 .datepicker {
 	z-index: 1151 !important;
 }
+
+/* 유틸리티 */
+.f13 {
+  font-size: 13px !important
+}
+.f12 {
+  font-size: 12px !important
+}

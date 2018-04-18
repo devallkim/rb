@@ -37,5 +37,6 @@
 </nav>
 
 <div class="content">
-  <?php getWidget('menu/rc-menu-collapse-01',array('smenu'=>'0','limit'=>'4','collid'=>'tree','dispfmenu'=>'0','collapse'=>'1'))?>
+  <!-- 관리자모드 > 위젯코드 추출기를 활용하세요. -->
+  <?php getWidget('menu/rc-drawer-menu',array('smenu'=>'0','limit'=>'2','link'=>'link','collid'=>'drawer-menu','accordion'=>'1','collapse'=>'1',))?>
 </div>

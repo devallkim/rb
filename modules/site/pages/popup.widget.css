@@ -101,12 +101,9 @@
   top: 5px
 }
 
-#mjointbox {
-  padding-bottom:50px
-}
 #mjointbox h5 {
   border-bottom:#dfdfdf dashed 1px;
-  padding:12px 0 15px 0;
+  padding:5px 0 15px 0;
   margin:0 0 30px 0
 }
 #mjointbox .rb-label {

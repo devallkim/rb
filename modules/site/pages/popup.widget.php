@@ -124,7 +124,7 @@ function getWidgetPreviewImg($path)
 			<?php endif?>
 		</div><!-- /.position-relative -->
 
-		<div class="tab-content p-3" style="padding-top:12px;">
+		<div class="tab-content p-3">
 			<div class="tab-pane active f14" id="code">
 				<?php include $g['path_widget'].$swidget.'/admin.php' ?>
 			</div>
@@ -146,7 +146,9 @@ function getWidgetPreviewImg($path)
 			</div>
 
 			<div class="tab-pane" id="readme">
-
+				<div class="bg-light text-center text-muted f12 rounded border p-2">
+					위젯파일 경로:  <span class="ml-2"><?php echo $g['path_widget'].$swidget ?>/main.php</span>
+				</div>
 				<?php $markdown_readme = $g['path_widget'].$swidget.'/README.md';?>
 				<?php if (file_exists($markdown_readme)): ?>
 				<div class="pb-5 readme">

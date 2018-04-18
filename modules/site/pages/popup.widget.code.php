@@ -52,13 +52,14 @@ modalSetting();
 
 <style>
 #rb-widget-code-area {
-	width:100%;
-	height:100%;
-	border:0;
-	padding:20px;
-	line-height:150%;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding: 10px;
+	line-height: 150%;
 	font-size: 12px;
-	background-color: #eee
+	background-color: #eee;
+	min-height: 80px;
 }
 #rb-widget-code-area::selection {
   background: rgba(255,238,51,0.99);

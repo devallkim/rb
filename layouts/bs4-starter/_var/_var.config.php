@@ -21,6 +21,9 @@ $d['layout']['dom'] = array(
 		'',
 		array(
 			array('title','input','사이트 제목',''),
+			array('file','file','이미지 로고',''),
+			array('search','select','검색폼 출력','예=true,아니오=false'),
+			array('login','select','로그인폼 출력','예=true,아니오=false'),
 		),
 	),
 

@@ -45,6 +45,27 @@
 				</select>
 			</div>
 		</div>
+		<div class="form-group row">
+			<label class="col-sm-3 control-label control-label-sm">사진사이즈</label>
+			<div class="col-sm-8">
+				<div class="input-group input-group-sm w-75">
+					<input type="number" class="form-control" name="width" value="<?php echo $wdgvar['width']?$wdgvar['width']:260?>" placeholder="">
+					<div class="input-group-append">
+				    <span class="input-group-text">x</span>
+				  </div>
+					<input type="number" class="form-control" name="height" value="<?php echo $wdgvar['height']?$wdgvar['height']:160?>" placeholder="">
+					<div class="input-group-append">
+				    <span class="input-group-text">px</span>
+				  </div>
+				</div>
+				<small class="form-text text-muted mt-3">
+					<span class="badge badge-danger">중요</span>
+					출력될 크기에서 <mark>2배</mark>로 크기를 지정해야 선명하게 출력됩니다. <br>
+					모바일 화면에 130*80 크기으로 출력하려면 260*160으로 지정해주세요.
+				</small>
+			</div>
+		</div>
+
 	</form>
 </div>
 
@@ -59,6 +80,8 @@ function widgetCode(n) {
 	if(bbsx[0]) widgetInfo = "'bid'=>'"+bbsx[0]+"',";
 	if(f.limit.value) widgetInfo+= "'limit'=>'"+f.limit.value+"',";
 	if(f.title.value) widgetInfo+= "'title'=>'"+f.title.value+"',";
+	if(f.width.value) widgetInfo+= "'width'=>'"+f.width.value+"',";
+	if(f.height.value) widgetInfo+= "'height'=>'"+f.height.value+"',";
 	if(f.link.value) widgetInfo+= "'link'=>'"+f.link.value+"'";
 
 	if (n) return "<img alt=\"getWidget('"+widgetName+"',array("+widgetInfo+"))\" class=\"rb-widget-edit-img\" src=\"./_core/images/blank.gif\">"; // 에디터삽입 위젯 이미지 코드

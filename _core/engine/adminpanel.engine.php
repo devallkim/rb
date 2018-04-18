@@ -466,7 +466,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<i></i><?php echo $_val[0]?>
 								</a>
 							</div>
-							<div class="card-body panel-collapse collapse" id="layout-settings-<?php echo $__i?>-body" data-parent="#layout-settings-panels">
+							<div class="card-body panel-collapse collapse f13" id="layout-settings-<?php echo $__i?>-body" data-parent="#layout-settings-panels">
 								<p><?php echo $_val[1]?></p>
 
 								<?php if(count($_val[2])):?>
@@ -523,7 +523,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<?php if($_v[1]=='file'):?>
 									<div class="input-group">
 										<input type="text" class="form-control" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>_name" value="<?php echo $d['layout'][$_key.'_'.$_v[0]]?>" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();">
-										<input type="file" class="hidden" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" onchange="getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>_name').value='파일 선택됨';">
+										<input type="file" class="d-none" name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" id="layout_<?php echo $_key?>_<?php echo $_v[0]?>" onchange="getId('layout_<?php echo $_key?>_<?php echo $_v[0]?>_name').value='파일 선택됨';">
 										<span class="input-group-append">
 											<button class="btn btn-light" type="button" onclick="$('#layout_<?php echo $_key?>_<?php echo $_v[0]?>').click();"><i class="fa fa-picture-o"></i></button>
 										</span>
