@@ -11,13 +11,11 @@ $__SRC__ = $Parsedown->text($_source);
 $seo_src = '['.$featured_img.']';
 
 if($editFilter) include $g['path_plugin'].$editFilter.'/filter.php';
-$source = preg_replace("'<tmp[^>]*?>'si",'',$__SRC__);
-
+$source = $__SRC__;
 
 $_mobile = trim(stripslashes($mobile));
 $__MSRC__ = $Parsedown->text($_mobile);
-$mobile = preg_replace("'<tmp[^>]*?>'si",'',$__MSRC__);
-
+$mobile = $__MSRC__;
 
 $vfile = $type == 'menu' ? $g['path_page'].$r.'-menus/'.$id : $g['path_page'].$r.'-pages/'.$id;
 $fp = fopen($vfile.'.php','w');
