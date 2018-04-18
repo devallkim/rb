@@ -1,8 +1,11 @@
 <?php
+
 //목록
 $d['theme']['show_catnum'] = "1"; //분류별등록수출력(출력=1/감춤=0)
 $d['theme']['pagenum'] = "5"; //페이지스킵숫자갯수
+$d['theme']['media_object'] = "2"; //미디어 오브젝트 (아바타=1/대표이미지=2/감춤=0)
 $d['theme']['search'] = "1"; //검색폼출력(출력=1/감춤=0)
+$d['theme']['timeago'] = "1"; //상대시간 표기(사용=1/날짜표기=0)
 
 //본문
 $d['theme']['date_viewf'] = "Y.m.d H:i"; //날짜포맷
@@ -21,4 +24,6 @@ $d['theme']['perm_photo'] = "1"; //사진첨부권한(등급이상)
 $d['theme']['num_photo'] = "2"; //사진첨부갯수
 $d['theme']['perm_upload'] = "10"; //파일첨부권한(등급이상)
 $d['theme']['num_upload'] = "1"; //파일첨부갯수
+$d['theme']['upload_theme'] = "_mobile/rc-default"; //파일 업로드 테마 (/modules/mediaset/themes/ 참고)
+$d['theme']['perm_upload'] = "1"; //파일첨부권한(등급이상)
 ?>

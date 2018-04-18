@@ -51,7 +51,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  max-height: calc(100vh - 34.3rem);
+  max-height: calc(100vh - 14.3rem);
   overflow-y: auto;
 }
 
@@ -71,9 +71,14 @@
 .rb-comments-write .card.active .card-footer {
   /* display: block */
 }
-
+.media[data-role="comment-item"] {
+  min-width: 100% !important;
+}
 .media[data-role="comment-item"].border-bottom {
   border-bottom: 1px dotted #dee2e6 !important;
+}
+.media[data-role="comment-item"].border-bottom:last-child {
+  border-bottom: 0 !important;
 }
 
 .list-group-item[data-role="oneline-item"] {
@@ -278,4 +283,9 @@
 
 .comment-bottom5p {
   bottom: 5%;
+}
+
+[data-role="comment-input"] {
+  overflow: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }

@@ -164,7 +164,7 @@ function getAttachAudio($R,$mod,$featured_audio_uid)
 		$html='';
 	  $html.='
 		<div class="card bg-white" data-id="'.$R['uid'].'" data-role="attach-item">
-				<audio controls class="card-img-top w-100"><source src="'.$R['url'].$R['folder'].'/'.$R['tmpname'].'" type="audio/'.$R['ext'].'"></audio>
+				<audio controls class="card-img-top w-100"><source src="'.$R['url'].$R['folder'].'/'.$R['tmpname'].'" type="audio/mp3"></audio>
 				<div class="card-block">';
 				if($mod=='upload')  $html.='<input type="hidden" name="attachfiles[]" value="['.$R['uid'].']"/>';
 				$html.='

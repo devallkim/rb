@@ -12,7 +12,13 @@ $result=array();
 $result['error']=false;
 
 $mbruid = $_POST['mbruid'];
-$theme = $_POST['theme'];
+$type = $_POST['type'];
+
+if ($g['mobile']&&$_SESSION['pcmode']!='Y') {
+  $theme = $d['member']['theme_mobile'];
+} else {
+  $theme = $d['member']['theme_main'];
+}
 
 $_MH = getUidData($table['s_mbrid'],$mbruid);
 $_MD = getDbData($table['s_mbrdata'],"memberuid='".$mbruid."'",'*');
@@ -26,7 +32,10 @@ $TMPL['bio'] = $_MD['bio'];
 $TMPL['d_regis'] = getDateFormat($_MD['d_regis'],'Y.m.d');
 $TMPL['avatar'] = getAavatarSrc($mbruid,'84');
 
-$markup_file = 'profile-popover'; // 기본 마크업 페이지 전달 (테마 내부 _html/profile-popover.html)
+if ($type=='popover') {
+  $markup_file = 'profile-popover'; // 기본 마크업 페이지 전달 (테마 내부 _html/profile-popover.html)
+}
+
 
 
 // 최종 결과값 추출 (sys.class.php)

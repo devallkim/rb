@@ -1,0 +1,39 @@
+<?php
+include_once $g['path_module'].'bbs/var/var.php';
+include_once $g['path_module'].'bbs/var/var.'.$wdgvar['bid'].'.php';
+$B = getDbData($table['bbslist'],'id="'.$wdgvar['bid'].'"','uid');
+
+$d['bbs']['skin'] = $d['bbs']['m_skin']?$d['bbs']['m_skin']:$d['bbs']['skin_mobile'];
+$d['bbs']['c_mskin_modal'] = $d['bbs']['c_mskin_modal']?$d['bbs']['c_mskin_modal']:$d['bbs']['comment_mobile_modal'];
+
+$g['url_module_skin'] = $g['s'].'/modules/bbs/themes/'.$d['bbs']['skin'];
+$g['dir_module_skin'] = $g['path_module'].'bbs/themes/'.$d['bbs']['skin'].'/';
+include_once $g['dir_module_skin'].'_widget.php';
+?>
+
+<ul class="widget table-view table-view-full">
+
+  <?php $_RCD=getDbArray($table['bbsdata'],($wdgvar['bid']?'bbs='.$B['uid'].' and ':'').'display=1 and site='.$_HS['uid'],'*','gid','asc',$wdgvar['limit'],1)?>
+  <?php while($_R=db_fetch_array($_RCD)):?>
+  <li class="table-view-cell media">
+    <a role="button" id="item-<?php echo $_R['uid'] ?>"
+      href="#modal-bbs-view" data-toggle="modal"
+      data-bid="<?php echo $wdgvar['bid'] ?>"
+      data-uid="<?php echo $_R['uid'] ?>"
+      data-url="<?php echo getBbsPostLink($_R)?>"
+      data-cat="<?php echo $_R['category'] ?>"
+      data-title="<?php echo $wdgvar['title']?>"
+      data-subject="<?php echo $_R['subject'] ?>">
+      <img class="media-object pull-left" src="<?php echo getPreviewResize(getUpImageSrc($_R),'262x164') ?>" style="width: 131px">
+      <div class="media-body">
+        <?php if(getNew($_R['d_regis'],24)):?>
+        <small class="rb-new mr-1" aria-hidden="true"></small>
+        <?php endif?>
+         <?php echo $_R['subject']?>
+        <p><?php echo $_R['category']?></p>
+      </div>
+    </a>
+  </li>
+  <?php endwhile?>
+
+</ul>

@@ -331,7 +331,7 @@ var RC_initPhotoSwipe=function(init_options){
   	// get closed galleryElement and remove class 'figure-active' of figure
   	var getClosedGalleryElement=function(galleryUID){
 		var closedGalleryElement;
-  		$('[data-extension="photoswipe"]').each(function(){
+  		$('[data-plugin="photoswipe"]').each(function(){
   			 if($(this).attr('data-pswp-uid')==galleryUID){
   			 	 closedGalleryElement=$(this);
   			     var figures=$(this).find('figure');
@@ -345,7 +345,7 @@ var RC_initPhotoSwipe=function(init_options){
   	// get current figure
   	var getCurrenFigure=function(galleryUID,itemIndex){
   		var currentFigure;
-  		$('[data-extension="photoswipe"]').each(function(){
+  		$('[data-plugin="photoswipe"]').each(function(){
   			 if($(this).attr('data-pswp-uid')==galleryUID){
   			     var figures=$(this).find('figure');
   			     $(figures).each(function(index,figure){
@@ -367,10 +367,10 @@ var RC_initPhotoSwipe=function(init_options){
        create_PSWP_Layout();
     }
 
-    // Open Photoswipe Gallery by DOM : [data-extension="photoswipe"] & Excute function of initPhotoSwipeFromDOM
-	$('[data-extension="photoswipe"]').each(function(index,element){
+    // Open Photoswipe Gallery by DOM : [data-plugin="photoswipe"] & Excute function of initPhotoSwipeFromDOM
+	$('[data-plugin="photoswipe"]').each(function(index,element){
          var $this=$(element);
-         var gallerySelector='[data-extension="photoswipe"]';
+         var gallerySelector='[data-plugin="photoswipe"]';
          initPhotoSwipeFromDOM(gallerySelector);
 	})
     // Open Photoswipe by Script

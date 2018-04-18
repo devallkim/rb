@@ -5,7 +5,7 @@
 	<header>
 
 		<div class="media">
-			<img class="mr-3 border rounded" src="<?php echo getAavatarSrc($R['mbruid'],'55') ?>" width="55" height="55" alt="" onclick="getMemberLayer('<?php echo $R['mbruid']?>',event);">
+			<img class="mr-3 border rounded" src="<?php echo getAavatarSrc($R['mbruid'],'55') ?>" width="55" height="55" alt="">
 		  <div class="media-body">
 				<h1 class="h4 mt-0">
 					<?php if($R['category']):?>
@@ -22,7 +22,6 @@
 						<li class="list-inline-item">
 							<a class="muted-link" href="#"
 	              data-toggle="getMemberLayer"
-	              data-theme="<?php echo $d['theme']['member_theme'] ?>"
 	              data-uid="<?php echo $R['uid'] ?>"
 	              data-mbruid="<?php echo $R['mbruid'] ?>">
 	              <?php echo $R[$_HS['nametype']]?>
@@ -47,13 +46,13 @@
 						<button type="button" class="btn btn-link muted-link<?php if($is_saved):?> active<?php endif?>"
 							data-toggle="actionIframe"
 							data-url="<?php echo $g['bbs_action']?>saved&amp;uid=<?php echo $R['uid']?>"
-							data-role="btn_saved">
+							data-role="btn_post_saved">
 							<i class="fa fa-bookmark-o"></i> 저장
 						</button>
 			 			<?php endif?>
 
 						<?php if($d['theme']['show_print']):?>
-						<button class="btn btn-link  muted-link js-print" type="button"><i class="fa fa-print"></i> 인쇄</button>
+						<button class="btn btn-link  muted-link" data-toggle="print" type="button"><i class="fa fa-print"></i> 인쇄</button>
 			 			<?php endif?>
 			 		</div>
 			 	</div><!-- /.d-flex -->
@@ -76,7 +75,7 @@
 				<button type="button" class="btn btn-light btn-lg js-action-iframe<?php if($is_liked):?> active<?php endif?>"
 					data-toggle="actionIframe"
 					data-url="<?php echo $g['bbs_action']?>opinion&amp;opinion=like&amp;uid=<?php echo $R['uid']?>&amp;effect=heartbeat"
-					data-role="btn_like">
+					data-role="btn_post_like">
 					<i class="fa fa fa-heart-o fa-fw" aria-hidden="true"></i> <strong></strong>
 					<span data-role='likes_<?php echo $R['uid']?>' class="badge badge-inverted"><?php echo $R['likes']?></span>
 				</button>
@@ -86,7 +85,7 @@
 				<button type="button" class="btn btn-light btn-lg<?php if($is_disliked):?> active<?php endif?>"
 					data-toggle="actionIframe"
 					data-url="<?php echo $g['bbs_action']?>opinion&amp;opinion=dislike&amp;uid=<?php echo $R['uid']?>&amp;effect=heartbeat"
-					data-role="btn_dislike">
+					data-role="btn_post_dislike">
 					<i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i> <strong></strong>
 					<span data-role='dislikes_<?php echo $R['uid']?>' class="badge badge-inverted"><?php echo $R['dislikes']?></span>
 				</button>
@@ -147,6 +146,10 @@
 
 <?php include $g['dir_module_skin'].'_footer.php'?>
 
-<script>
-	document.title = '<?php echo htmlspecialchars_decode($R['subject']);?>-<?php echo $g['browtitle']?>'  // 브라우저 타이틀 재설정
+<script type="text/javascript">
+
+$(window).on("load", function(){
+	initPhotoSwipeFromDOM('.post-gallery');
+});
+
 </script>

@@ -88,11 +88,11 @@ if ($send=='ajax') {
 
 	$result['error']=false;
 
-	if ($is_liked) $result['is_liked'] = 1;
-	else $result['is_liked'] = 0;
+	if ($is_liked) $result['is_post_liked'] = 1;
+	else $result['is_post_liked'] = 0;
 
-	if ($is_disliked) $result['is_disliked'] = 1;
-	else $result['is_disliked'] = 0;
+	if ($is_disliked) $result['is_post_disliked'] = 1;
+	else $result['is_post_disliked'] = 0;
 
 	$result['likes'] = $R['likes'];
 	$result['dislikes'] = $R['dislikes'];
@@ -107,25 +107,25 @@ if ($send=='ajax') {
 
 <?php if ($opinion=='like'): ?>
 	<?php if ($is_liked): ?>
-	parent.$("[data-role=btn_like]").removeClass("active <?php echo $effect ?>");
+	parent.$("[data-role=btn_post_like]").removeClass("active <?php echo $effect ?>");
 	<?php else: ?>
-	parent.$("[data-role=btn_like]").addClass("active <?php echo $effect ?>");
+	parent.$("[data-role=btn_post_like]").addClass("active <?php echo $effect ?>");
 	<?php endif; ?>
 
 	<?php if ($is_disliked): ?>
-	parent.$("[data-role=btn_dislike]").removeClass("active <?php echo $effect ?>");
+	parent.$("[data-role=btn_post_dislike]").removeClass("active <?php echo $effect ?>");
 	<?php endif; ?>
 <?php endif; ?>
 
 <?php if ($opinion=='dislike'): ?>
 	<?php if ($is_disliked): ?>
-	parent.$("[data-role=btn_dislike]").removeClass("active <?php echo $effect ?>");
+	parent.$("[data-role=btn_post_dislike]").removeClass("active <?php echo $effect ?>");
 	<?php else: ?>
-	parent.$("[data-role=btn_dislike]").addClass("active <?php echo $effect ?>");
+	parent.$("[data-role=btn_post_dislike]").addClass("active <?php echo $effect ?>");
 	<?php endif; ?>
 
 	<?php if ($is_liked ): ?>
-	parent.$("[data-role=btn_like]").removeClass("active");
+	parent.$("[data-role=btn_post_like]").removeClass("active");
 	<?php endif; ?>
 <?php endif; ?>
 

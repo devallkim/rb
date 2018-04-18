@@ -44,13 +44,95 @@ $orderby = 'desc';
 
 if($_iscallpage):
 $RCD = getDbArray($table['bbsdata'],$sqlque,'*','uid',$orderby,$d['search']['num'.($swhere=='all'?1:2)],$p);
+
+include_once $g['path_module'].'bbs/var/var.php';
+
+$g['url_module_skin'] = $g['s'].'/modules/bbs/themes/'.$d['bbs']['skin_main'];
+$g['dir_module_skin'] = $g['path_module'].'bbs/themes/'.$d['bbs']['skin_main'].'/';
+include_once $g['dir_module_skin'].'_widget.php';
+
 ?>
 <article>
-	<ol class="mb-0">
+	<ul class="list-group list-group-flush mb-0" data-role="bbs-list">
 		<?php while($_R=db_fetch_array($RCD)):?>
-		<li><a href="<?php echo $g['s']?>/?r=<?php echo $r?>&mod=<?php echo $_R['id']?>"><?php echo $_R['subject']?></a></li>
+		<?php $B = getUidData($table['bbslist'],$_R['bbs']); ?>
+		<li class="list-group-item d-flex justify-content-between align-items-center" id="item-<?php echo $_R['uid'] ?>">
+
+			<div class="media">
+				<?php if (getUpImageSrc($_R)): ?>
+				<a class="mr-3"
+					href="#modal-bbs-view" data-toggle="modal"
+					data-bid="<?php echo $B['id'] ?>"
+					data-uid="<?php echo $_R['uid'] ?>"
+					data-url="<?php echo getBbsPostLink($_R)?>"
+					data-cat="<?php echo $_R['category'] ?>"
+					data-title="<?php echo $B['name'] ?>"
+					data-subject="<?php echo $_R['subject']?>">
+					<img class="border" src="<?php echo getPreviewResize(getUpImageSrc($_R),'s') ?>" alt=""  width="64" height="64">
+				</a>
+				<?php endif; ?>
+			  <div class="media-body">
+			    <strong class="d-block mb-1">
+
+						<?php if($_R['category']):?>
+            <span class="badge badge-light"><?php echo $_R['category']?></span>
+            <?php endif?>
+
+						<a class="text-nowrap text-truncate muted-link"
+							href="#modal-bbs-view" data-toggle="modal"
+							data-bid="<?php echo $B['id'] ?>"
+							data-uid="<?php echo $_R['uid'] ?>"
+							data-url="<?php echo getBbsPostLink($_R)?>"
+							data-cat="<?php echo $_R['category'] ?>"
+							data-title="<?php echo $B['name'] ?>"
+							data-subject="<?php echo $_R['subject']?>">
+							<?php echo $_R['subject']?>
+							<?php if($_R['upload']):?>
+							<span class="badge badge-light" data-toggle="tooltip" title="첨부파일">
+								<i class="fa fa-paperclip fa-lg"></i>
+							</span>
+							<?php endif?>
+							<?php if(getNew($_R['d_regis'],24)):?><span class="rb-new ml-1"></span><?php endif?>
+						</a>
+					</strong>
+					<p class="small text-muted mb-2">
+						<?php echo getStrCut(str_replace('&nbsp;',' ',strip_tags($_R['content'])),60,'..')?>
+					</p>
+					<ul class="list-inline text-muted mb-0 small">
+						<li class="list-inline-item">
+							<span class="badge badge-pill badge-light"><?php echo $B['name'] ?></span>
+						</li>
+						<li class="list-inline-item">
+							<time class="text-muted small" data-plugin="timeago" datetime="<?php echo getDateFormat($_R['d_regis'],'c')?>">
+								<?php echo getDateFormat($_R['d_regis'],'Y.m.d')?>
+							</time>
+						</li>
+						<li class="list-inline-item">
+							<i class="fa fa-heart-o" aria-hidden="true"></i>
+							 <?php echo $_R['likes']?>
+						</li>
+						<li class="list-inline-item">
+              <i class="fa fa-eye" aria-hidden="true"></i>
+              <?php echo $_R['hit']?>
+            </li>
+						<li class="list-inline-item">
+							<i class="fa fa-comment-o" aria-hidden="true"></i>
+							<?php echo $_R['comment']?>
+						</li>
+						<li class="list-inline-item">
+							<?php echo $_R[$_HS['nametype']]?>
+						</li>
+					</ul>
+
+			  </div>
+			</div>
+
+			<a href="<?php echo getBbsPostLink($_R)?>" class="btn btn-light btn-sm" target="_blank">
+				새창
+			</a>
+			</li>
 		<?php endwhile?>
-	</ol>
+	</ul>
 </article>
 
 <?php

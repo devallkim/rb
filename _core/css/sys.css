@@ -1,16 +1,14 @@
 /* utility */
 .rb-new {
   display: inline-block;
-  font: normal normal normal 6px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #d9534f;
-  font-size: 60%;
-}
-.rb-new:before {
-  content: "\f111";
+  content: " ";
+  width: 5px;
+	height: 5px;
+	background: #dc3545;
+	-moz-border-radius: 2.5px;
+	-webkit-border-radius: 2.5px;
+	border-radius: 2.5px;
+  vertical-align: middle;
 }
 
 .gutter-half {
@@ -1354,4 +1352,138 @@ anger {
 .pswp {
   display: none;
   z-index: 1060 !important;
+}
+
+/* 데스크탑에서도 최소한은 RC 마크업이 구동되도록 */
+.table-view {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0.9375rem;
+  list-style: none;
+  background-color: transparent;
+  border-top: 0.0625rem solid rgba(0, 0, 0, 0.075);
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.075);
+}
+
+.table-view-cell {
+  position: relative;
+  padding: 0.6875rem 4.0625rem 0.6875rem 0.9375rem;
+  overflow: hidden;
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.075);
+}
+
+.table-view-cell:last-child {
+  border-bottom: 0;
+}
+
+.table-view-cell > a:not(.btn) {
+  position: relative;
+  display: block;
+  padding: inherit;
+  margin: -0.6875rem -4.0625rem -0.6875rem -0.9375rem;
+  overflow: hidden;
+  color: inherit;
+}
+
+.table-view-cell > a:not(.btn):active {
+  background-color: #eee;
+}
+
+.table-view-cell p {
+  margin-bottom: 0;
+  font-size: .875rem;
+  color: #818a91;
+}
+
+.table-view-cell .btn {
+  padding: .375rem .5rem .4375rem;
+  font-size: .75rem;
+}
+
+.table-view-divider {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  padding-left: 0.9375rem;
+  margin-top: -.0625rem;
+  margin-left: 0;
+  font-weight: 500;
+  color: #55595c;
+  background-color: #eceeef;
+  border-top: 0.0625rem solid rgba(0, 0, 0, 0.075);
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.075);
+}
+
+.table-view .media,
+.table-view .media-body {
+  overflow: hidden;
+}
+
+.table-view .media-object.pull-left {
+  margin-right: 0.625rem;
+}
+
+.table-view .media-object.pull-right {
+  margin-left: 0.625rem;
+}
+
+.table-view-cell > .btn,
+.table-view-cell > .badge,
+.table-view-cell > .select,
+.table-view-cell > .switch,
+.table-view-cell > a > .btn,
+.table-view-cell > a > .badge,
+.table-view-cell > a > .select,
+.table-view-cell > a > .switch {
+  position: absolute;
+  top: 50%;
+  right: .9375rem;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+       -o-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.table-view-cell .navigate-left > .btn,
+.table-view-cell .navigate-left > .badge,
+.table-view-cell .navigate-left > .select,
+.table-view-cell .navigate-left > .switch,
+.table-view-cell .navigate-right > .btn,
+.table-view-cell .navigate-right > .badge,
+.table-view-cell .navigate-right > .select,
+.table-view-cell .navigate-right > .switch,
+.table-view-cell .push-left > .btn,
+.table-view-cell .push-left > .badge,
+.table-view-cell .push-left > .select,
+.table-view-cell .push-left > .switch,
+.table-view-cell .push-right > .btn,
+.table-view-cell .push-right > .badge,
+.table-view-cell .push-right > .select,
+.table-view-cell .push-right > .switch,
+.table-view-cell > a .navigate-left > .btn,
+.table-view-cell > a .navigate-left > .badge,
+.table-view-cell > a .navigate-left > .select,
+.table-view-cell > a .navigate-left > .switch,
+.table-view-cell > a .navigate-right > .btn,
+.table-view-cell > a .navigate-right > .badge,
+.table-view-cell > a .navigate-right > .select,
+.table-view-cell > a .navigate-right > .switch,
+.table-view-cell > a .push-left > .btn,
+.table-view-cell > a .push-left > .badge,
+.table-view-cell > a .push-left > .select,
+.table-view-cell > a .push-left > .switch,
+.table-view-cell > a .push-right > .btn,
+.table-view-cell > a .push-right > .badge,
+.table-view-cell > a .push-right > .select,
+.table-view-cell > a .push-right > .switch {
+  right: 2.1875rem;
+}
+
+.card-block {
+  padding: 1.25rem;
+}
+
+.card-block::after {
+  content: "";
+  display: table;
+  clear: both;
 }

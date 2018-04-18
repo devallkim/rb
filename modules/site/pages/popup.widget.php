@@ -93,6 +93,9 @@ function getWidgetPreviewImg($path)
 	return false;
 }
 ?>
+
+<link href="<?php echo $g['s']?>/_core/css/github-markdown.css" rel="stylesheet">
+
 <div id="widgetbox">
 	<div class="category bg-light">
 		<?php getDirlist($pwd_start,$step_start)?>
@@ -106,26 +109,34 @@ function getWidgetPreviewImg($path)
 		<input type="hidden" id="s_l" value="">
 		<?php endif?>
 
-		<ul class="nav nav-tabs" role="tablist">
-			<li class="nav-item"><a class="nav-link active" href="#code" role="tab" data-toggle="tab">설정하기</a></li>
-			<li class="nav-item"><a class="nav-link" href="#preview" role="tab" data-toggle="tab">미리보기</a></li>
+		<div class="position-relative">
+			<ul class="nav nav-tabs f14" role="tablist">
+				<li class="nav-item"><a class="nav-link active" href="#code" role="tab" data-toggle="tab">설정하기</a></li>
+				<li class="nav-item"><a class="nav-link" href="#preview" role="tab" data-toggle="tab">미리보기</a></li>
+				<li class="nav-item"><a class="nav-link" href="#readme" role="tab" data-toggle="tab">사용안내</a></li>
+			</ul>
 			<?php if($isWcode=='Y'):?>
-			<li class="nav-item">
-				<a class="nav-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');">
-					<i class="fa fa-trash-o fa-fw"></i> 삭제
+			<div class="js-del">
+				<a class="btn btn-link muted-link btn-sm" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');">
+					<i class="fa fa-trash-o fa-fw"></i>
 				</a>
-			</li>
+			</div>
 			<?php endif?>
-		</ul>
+		</div><!-- /.position-relative -->
 
-		<div class="tab-content" style="padding-top:12px">
-			<div class="tab-pane active" id="code">
+		<div class="tab-content p-3" style="padding-top:12px;">
+			<div class="tab-pane active f14" id="code">
 				<?php include $g['path_widget'].$swidget.'/admin.php' ?>
 			</div>
 			<div class="tab-pane" id="preview">
 				<?php $_widgetPreview=getWidgetPreviewImg($g['path_widget'].$swidget.'/thumb')?>
 				<?php if($_widgetPreview):?>
-				<a href="<?php echo $_widgetPreview?>" target="_blank"><img src="<?php echo $_widgetPreview?>" width="100%" style="margin-top:10px;" alt=""></a>
+					<div class="text-center mt-4">
+							<a href="<?php echo $_widgetPreview?>" target="_blank">
+								<img src="<?php echo $_widgetPreview?>" class="img-fluid" alt="">
+							</a>
+					</div>
+
 				<?php else:?>
 				<div class="none">
 					<i class="fa fa-puzzle-piece fa-5x"></i><br><br>
@@ -133,19 +144,34 @@ function getWidgetPreviewImg($path)
 				</div>
 				<?php endif?>
 			</div>
+
+			<div class="tab-pane" id="readme">
+
+				<?php $markdown_readme = $g['path_widget'].$swidget.'/README.md';?>
+				<?php if (file_exists($markdown_readme)): ?>
+				<div class="pb-5 readme">
+					<?php readfile($g['path_widget'].$swidget.'/README.md')?>
+				</div>
+				<?php else: ?>
+					<div class="d-flex align-items-center justify-content-center" style="height: calc(100vh - 5.53rem);">
+						<div class="text-muted text-center">
+							<h1><i class="fa fa-file-text-o" aria-hidden="true"></i></h1>
+						  <small>안내문서가 없습니다.</small>
+						</div>
+					</div>
+				<?php endif; ?>
+
+			</div>
+
 		</div>
 
 		<?php else:?>
-
-		<div class="none">
-			<i class="fa fa-puzzle-piece fa-5x"></i><br><br>
-			추가할 위젯을 선택하세요.
+		<div class="d-flex align-items-center justify-content-center" style="height: calc(100vh - 5.53rem);">
+			<div class="text-muted text-center">
+				<h1><i class="fa fa-mouse-pointer" aria-hidden="true"></i></h1>
+			  <small>추가할 위젯을 선택하세요.</small>
+			</div>
 		</div>
-		<?php if($isWcode=='Y'):?>
-		<a class="btn btn-secondary btn-block mt-4" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;a=deletewidget&amp;pwd=<?php echo $pwd?>" title="삭제" data-tooltip="tooltip" data-placement="left" onclick="return hrefCheck(this,true,'정말로 삭제하시겠습니까?');">
-			<code><?php echo $pwd?></code> 폴더 삭제
-		</a>
-		<?php endif?>
 		<?php endif?>
 		<textarea id="rb-widget-code-result" class="hidden"></textarea>
 	</div>
@@ -155,7 +181,10 @@ function getWidgetPreviewImg($path)
 <!-- @부모레이어를 제어할 수 있도록 모달의 헤더와 풋터를 부모레이어에 출력시킴 -->
 
 <div id="_modal_header" hidden>
-	<h5 class="modal-title"><i class="kf-widget kf-lg"></i> 위젯 선택하기</h5>
+	<h5 class="modal-title">
+		<i class="kf-widget kf-lg"></i>
+		위젯 선택하기
+	</h5>
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		<span aria-hidden="true">&times;</span>
 	</button>
@@ -165,21 +194,30 @@ function getWidgetPreviewImg($path)
 	<button type="button" class="btn btn-light pull-left" data-dismiss="modal" aria-hidden="true" id="_modalclosebtn_">닫기</button>
 	<?php if(!$isWcode||$isEdit):?>
 	<?php if($isCodeOnly):?>
-	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>코드보기</a>
+	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>
+		<i class="fa fa-code fa-lg"></i> 코드보기
+	</a>
 	<button type="button" class="btn btn-light" disabled>위젯코드만 지원</button>
 	<?php else:?>
-	<button type="button" class="btn btn-light" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>코드보기</a>
+	<button type="button" class="btn btn-light" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>
+		<i class="fa fa-code fa-lg"></i> 코드보기
+	</a>
 	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._saveCheck(<?php echo $isEdit?1:0?>);"<?php if(!$swidget):?> disabled<?php endif?>>삽입하기</button>
 	<?php endif?>
 	<?php else:?>
-	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>코드보기</a>
+	<button type="button" class="btn btn-primary" onclick="frames._modal_iframe_modal_window._widgetCode();modalSetting('.rb-modal-x','<?php echo getModalLink('site/pages/popup.widget.code')?>');" data-toggle="modal" data-target=".rb-modal-x"<?php if(!$swidget):?> disabled<?php endif?>>
+		<i class="fa fa-code fa-lg"></i> 코드보기
+	</a>
 	<?php endif?>
 </div>
 
 
-
+<?php getImport('jquery-markdown','jquery.markdown','0.0.10','js')?>
 
 <script>
+
+$("#readme .readme").markdown();
+
 function _widgetCode()
 {
 	getId('rb-widget-code-result').innerHTML = widgetCode(0);
@@ -206,13 +244,11 @@ getId('s_t').value = parseInt(sz.style.top);
 getId('s_l').value = parseInt(sz.style.left);
 <?php endif?>
 
-function modalSetting()
-{
-	parent.getId('modal_window_dialog_modal_window').style.width = '100%';
+function modalSetting(){
 	parent.getId('modal_window_dialog_modal_window').style.paddingRight = '20px';
 	parent.getId('modal_window_dialog_modal_window').style.maxWidth = '800px';
-	parent.getId('_modal_iframe_modal_window').style.height = '430px';
-	parent.getId('_modal_body_modal_window').style.height = '430px';
+	parent.getId('_modal_iframe_modal_window').style.height = '580px';
+	parent.getId('_modal_body_modal_window').style.height = '580px';
 
 	parent.getId('_modal_header_modal_window').innerHTML = getId('_modal_header').innerHTML;
 	parent.getId('_modal_header_modal_window').className = 'modal-header';
@@ -222,5 +258,8 @@ function modalSetting()
 	parent.getId('_modal_footer_modal_window').innerHTML = getId('_modal_footer').innerHTML;
 	parent.getId('_modal_footer_modal_window').className = 'modal-footer';
 }
+
 modalSetting();
+
+
 </script>

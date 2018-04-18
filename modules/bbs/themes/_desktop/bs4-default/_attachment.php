@@ -19,36 +19,8 @@
 	 $attach_down_num = count ($down_files);
 ?>
 
-<?php if($attach_youtube_num>0):?>
-	<?php foreach($youtube_files as $_u):?>
-	 <video class="mejs-player mb-4"  style="max-width:100%;" preload="none">
-			 <source src="https://www.youtube.com/embed/<?php echo $_u['name']?>" type="video/youtube">
-	 </video>
-	<?php endforeach?>
-<?php endif?>
-
-<?php if($attach_photo_num>0):?>
-<h5>사진 (<span class="text-danger"><?php echo $attach_photo_num?></span>)</h5>
-<ul class="list-inline mb-3 gallery">
-	<?php foreach($img_files as $_u):?>
-
-	<?php
-		$img_origin=$_u['url'].$_u['folder'].'/'.$_u['tmpname'];
-		$thumb_list=getPreviewResize($img_origin,'q'); // 미리보기 사이즈 조정 (이미지 업로드시 썸네일을 만들 필요 없다.)
-		$thumb_modal=getPreviewResize($img_origin,'c'); // 정보수정 모달용  사이즈 조정 (이미지 업로드시 썸네일을 만들 필요 없다.)
-	?>
-		<figure class="list-inline-item">
-			<a href="<?php echo $thumb_modal ?>" data-size="<?php echo $_u['width']?>x<?php echo $_u['width']?>" title="<?php echo $_u['name']?>">
-        <img src="<?php echo $thumb_list ?>" alt="" class="border">
-      </a>
-      <figcaption itemprop="caption description" hidden><?php echo $_u['name']?></figcaption>
-		</figure>
-	<?php endforeach?>
-</ul>
-<?php endif?>
-
 <?php if($attach_down_num>0):?>
-<div class="card">
+<div class="card mb-4">
 	<div class="card-header">
 		파일 (<span class="text-danger"><?php echo $attach_down_num ?></span>)
 	</div>
@@ -74,16 +46,45 @@
 <?php endif?>
 
 
+<?php if($attach_youtube_num>0):?>
+	<?php foreach($youtube_files as $_u):?>
+	 <video class="mejs-player mb-4"  style="max-width:100%;" preload="none">
+			 <source src="https://www.youtube.com/embed/<?php echo $_u['name']?>" type="video/youtube">
+	 </video>
+	<?php endforeach?>
+<?php endif?>
+
+<?php if($attach_photo_num>0):?>
+<h5>사진 (<span class="text-danger"><?php echo $attach_photo_num?></span>)</h5>
+<ul class="list-inline mb-3 gallery" data-plugin="photoswipe">
+	<?php foreach($img_files as $_u):?>
+
+	<?php
+		$img_origin=$_u['url'].$_u['folder'].'/'.$_u['tmpname'];
+		$thumb_list=getPreviewResize($img_origin,'q'); // 미리보기 사이즈 조정 (이미지 업로드시 썸네일을 만들 필요 없다.)
+		$thumb_modal=getPreviewResize($img_origin,'c'); // 정보수정 모달용  사이즈 조정 (이미지 업로드시 썸네일을 만들 필요 없다.)
+	?>
+		<figure class="list-inline-item">
+			<a href="<?php echo $thumb_modal ?>" data-size="<?php echo $_u['width']?>x<?php echo $_u['width']?>" title="<?php echo $_u['name']?>">
+        <img src="<?php echo $thumb_list ?>" alt="" class="border">
+      </a>
+      <figcaption itemprop="caption description" hidden><?php echo $_u['name']?></figcaption>
+		</figure>
+	<?php endforeach?>
+</ul>
+<?php endif?>
+
 
 <?php if($attach_video_num>0):?>
-  <h5 class="mt-5">비디오 <span class="text-danger"><?php echo $attach_video_num?></span></h5>
-  <?php foreach($video_files as $_u):?>
+<h5 class="mt-5">비디오 <span class="text-danger"><?php echo $attach_video_num?></span></h5>
+<div class="card-deck">
+	<?php foreach($video_files as $_u):?>
   <?php
      $ext_to_fa=array('xls'=>'excel','xlsx'=>'excel','ppt'=>'powerpoint','pptx'=>'powerpoint','txt'=>'text','pdf'=>'pdf','zip'=>'archive','doc'=>'word');
      $ext_icon=in_array($_u['ext'],array_keys($ext_to_fa))?'-'.$ext_to_fa[$_u['ext']]:'';
    ?>
   <div class="card">
-    <video width="320" height="240" controls class="card-img-top mejs-player">
+    <video width="320" height="240" controls data-plugin="mediaelement" class="card-img-top">
       <source src="<?php echo $_u['url']?><?php echo $_u['folder']?>/<?php echo $_u['tmpname']?>" type="video/<?php echo $_u['ext']?>">
     </video>
     <div class="card-body">
@@ -92,6 +93,7 @@
     </div><!-- /.card-block -->
   </div><!-- /.card -->
   <?php endforeach?>
+</div><!-- /.card-deck -->
 <?php endif?>
 
 
@@ -103,8 +105,8 @@
     $ext_icon=in_array($_u['ext'],array_keys($ext_to_fa))?'-'.$ext_to_fa[$_u['ext']]:'';
    ?>
   <div class="card">
-    <audio controls class="card-img-top mejs-player w-100">
-      <source src="<?php echo $_u['url']?><?php echo $_u['folder']?>/<?php echo $_u['tmpname']?>" type="audio/<?php echo $_u['ext']?>">
+    <audio controls data-plugin="mediaelement" class="card-img-top w-100">
+      <source src="<?php echo $_u['url']?><?php echo $_u['folder']?>/<?php echo $_u['tmpname']?>" type="audio/mp3">
     </audio>
     <div class="card-body">
       <h6 class="card-title"><?php echo $_u['name']?></h6>

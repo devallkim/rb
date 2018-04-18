@@ -291,7 +291,7 @@ function RW($rewrite)
 		$rewrite = str_replace('&uid=','/',$rewrite);
 		$rewrite = str_replace('&CMT=','/',$rewrite);
 		$rewrite = str_replace('&s=','/s',$rewrite);
-		$rewrite = str_replace('m=member&front=profile&mbrid=','@',$rewrite);		
+		$rewrite = str_replace('m=member&front=profile&mbrid=','@',$rewrite);
 		return $GLOBALS['g']['r'].'/'.$rewrite;
 	}
 	else return $GLOBALS['_HS']['usescode']?('./?r='.$GLOBALS['_HS']['id'].($rewrite?'&amp;'.$rewrite:'')):'./'.($rewrite?'?'.$rewrite:'');
@@ -619,17 +619,21 @@ function getUpImageSrc($R){
 		$src=$F['url'].$F['folder'].'/'.$F['tmpname'];
    }else{
     $img_arr=getImgs($R['content'],'jpg|jpge|gif|png');
-    $src=$img_arr[0]?$img_arr[0]:'/files/noimage.png';
+    $src=$img_arr[0]?$img_arr[0]:'';
    }
   return $src;
 }
 
 // 미리보기용 이미지 resize 함수 .htaccess 연계됨
 function getPreviewResize($image,$size){
-  $_array=explode('.',$image);
-  $name=$_array[0];
-  $ext=$_array[1];
-	$result=$name.'_'.$size.'.'.$ext;
+	if ($image) {
+		$_array=explode('.',$image);
+	  $name=$_array[0];
+	  $ext=$_array[1];
+		$result=$name.'_'.$size.'.'.$ext;
+	} else {
+		$result='';
+	}
   return $result;
 }
 

@@ -37,7 +37,7 @@
 </div>
 
 <div class="content bg-faded" data-role="panal-result">
-	<main class="rb-main">
+	<main class="rb-main" data-plugin="markjs">
 
 		<?php if($keyword && $swhere == 'all'):?>
 		<div id="rb-sortbar" class="card p-a-1 bg-white">
@@ -66,9 +66,9 @@
 				<?php if(is_file($_val[2].'.css')) echo '<link href="'.$_val[2].'.css" rel="stylesheet">'?>
 				<section id="rb_search_panel_<?php echo $_key?>" class="widget mb-2">
 					<header>
-						<div class="">
+						<div class="content-padded">
 							<?php echo $_val[0]?>
-							<small><span id="rb_sresult_num_tt_<?php echo $_key?>" class="text-danger">0</span>건</small>
+							<small class="ml-2"><span id="rb_sresult_num_tt_<?php echo $_key?>" class="text-danger">0</span> 건</small>
 						</div>
 
 					</header>
@@ -108,8 +108,6 @@
 		<?php endif?>
 	</main>
 </div><!-- /.content -->
-
-<?php include $g['dir_layout'].'/_includes/component-bbs.php' ?>
 
 <script>
 
@@ -151,7 +149,7 @@ var doSearchResult  = function(){
 	}
 
 	// marks.js
-	$(".rb-main").mark("<?php echo $keyword ?>");
+	$('[data-plugin="markjs"]').mark("<?php echo $keyword ?>");
 
 	<?php $total = 0?>
 
@@ -176,21 +174,17 @@ var doSearchResult  = function(){
 	$('#rb_sresult_num_all').text(search_result_total)
 
 	<?php if(!$_ResultArray['spage']):?>
-	if(getId('rb-sortbar')) getId('rb-sortbar').className = 'hidden';
+	if(getId('rb-sortbar')) getId('rb-sortbar').className = 'd-none';
 	<?php endif?>
 
 };
 
-(function() {
+$(function () {
 
 	// 검색관련 스크립트 실행
 	doSearchInput();
 	doSearchResult();
 
-	// push 컨트롤 바인드 : http://rc.kimsq.com/controls/push/#push-bind
-	window.addEventListener('push', doSearchInput);
-	window.addEventListener('push', doSearchResult);
-
-})();
+})
 
 </script>

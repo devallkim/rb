@@ -221,6 +221,10 @@ $_editArray = array(
 				<?php endif?>
 			</form>
 
+			<a href="https://simplemde.com/markdown-guide" target="_blank">
+				본문작성 마크다운 문법안내
+			</a>
+
 		</div><!-- /.col-sm-8 -->
 		<div class="col-sm-4 col-lg-3">
 
@@ -267,19 +271,16 @@ $_editArray = array(
 				</div>
 			</div><!-- /.card -->
 
-
-			<a class="btn btn-block btn btn-outline-secondary" href="https://simplemde.com/markdown-guide" target="_blank">
-				본문작성 문법안내
-			</a>
-
-
-			<button class="btn btn-outline-primary btn-block btn-lg js-submit" type="button" name="button">
+			<button class="btn btn-primary btn-block btn-lg js-submit" type="button" name="button">
         <span class="not-loading">
 					저장하기
 				</span>
         <span class="is-loading"><i class="fa fa-spinner fa-lg fa-spin fa-fw"></i>저장 중 ...</span>
       </button>
 
+			<button type="button" class="btn btn-block btn btn-light" onclick="history.back();">
+				취소
+			</button>
 
 		</div><!-- /.col-sm-4 -->
 	</div><!-- /.row -->

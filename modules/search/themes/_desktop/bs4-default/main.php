@@ -35,7 +35,7 @@
 			</div>
 
 		</div>
-		<div class="col-sm-9">
+		<div class="col-sm-9" data-plugin="markjs">
 
 			<?php if($keyword):?>
 			<div class="d-flex justify-content-between align-items-center mb-2">
@@ -63,9 +63,7 @@
 				<?php endif?>
 
 				<!-- 검색결과 -->
-				<div class="card-body">
 				<?php include $_val[2].'.php' ?>
-				</div>
 				<!-- @검색결과 -->
 
 				<?php if($_iscallpage):?>
@@ -99,6 +97,13 @@
 	</div>
 </div>
 
+<!-- markjs js : https://github.com/julmot/mark.js -->
+<?php getImport('markjs','jquery.mark.min','8.11.1','js')?>
+
+<!-- jQuery-Autocomplete : https://github.com/devbridge/jQuery-Autocomplete -->
+<?php getImport('jQuery-Autocomplete','jquery.autocomplete.min','1.3.0','js') ?>
+
+
 <script>
 function searchSortChange(obj)
 {
@@ -107,31 +112,38 @@ function searchSortChange(obj)
 	f.submit();
 }
 
-<?php $total = 0?>
+$(function () {
+
+	<?php $total = 0?>
 
 
-<?php foreach($_ResultArray['num'] as $_key => $_val):$total+=$_val?>
+	<?php foreach($_ResultArray['num'] as $_key => $_val):$total+=$_val?>
 
-	if ($('#rb_sresult_num_tt_<?php echo $_key?>')) {
-		$('#rb_sresult_num_tt_<?php echo $_key?>').text('<?php echo $_val?>')
+		if ($('#rb_sresult_num_tt_<?php echo $_key?>')) {
+			$('#rb_sresult_num_tt_<?php echo $_key?>').text('<?php echo $_val?>')
+		}
+
+		<?php if(!$_val):?>
+		$('#rb_search_panel_<?php echo $_key?>').addClass('d-none')
+		$('#nav_<?php echo $_key?>').addClass('d-none')
+		<?php endif?>
+
+	<?php endforeach?>
+
+	var search_result_total = <?php echo $swhere=='all'?$total:$_ResultArray['num'][$swhere]?>;
+	if(search_result_total==0){
+		$("#search_no_result").removeClass("d-none");
+		$('.bar-header-secondary').remove()
 	}
+	$('#rb_sresult_num_all').text(search_result_total)
 
-	<?php if(!$_val):?>
-	$('#rb_search_panel_<?php echo $_key?>').addClass('d-none')
-	$('#nav_<?php echo $_key?>').addClass('d-none')
+	<?php if(!$_ResultArray['spage']):?>
+	if(getId('rb-sortbar')) getId('rb-sortbar').className = 'd-none';
 	<?php endif?>
 
-<?php endforeach?>
+	// marks.js
+	$('[data-plugin="markjs"]').mark("<?php echo $keyword ?>");
 
-var search_result_total = <?php echo $swhere=='all'?$total:$_ResultArray['num'][$swhere]?>;
-if(search_result_total==0){
-	$("#search_no_result").removeClass("d-none");
-	$('.bar-header-secondary').remove()
-}
-$('#rb_sresult_num_all').text(search_result_total)
-
-<?php if(!$_ResultArray['spage']):?>
-if(getId('rb-sortbar')) getId('rb-sortbar').className = 'hidden';
-<?php endif?>
+})
 
 </script>

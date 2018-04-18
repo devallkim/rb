@@ -1,17 +1,5 @@
 <?php include $g['dir_module_skin'].'_header.php'?>
 
-<!-- 사진전용모달 : photoswipe http://photoswipe.com/documentation/getting-started.html -->
-<?php getImport('photoswipe','photoswipe','4.1.1','css') ?>
-<?php getImport('photoswipe','rc-skin/default-skin','4.1.1','css') ?>
-<?php getImport('photoswipe','rc-photoswipe','4.1.1','js') ?>
-<?php getImport('photoswipe','photoswipe-ui-default.min','4.1.1','js') ?>
-
-<!-- 동영상,유튜브,오디오 player : http://www.mediaelementjs.com/ -->
-<?php getImport('mediaelement','mediaelement-and-player.min','4.2.8','js') ?>
-<?php getImport('mediaelement','lang/ko','4.2.8','js') ?>
-<?php getImport('mediaelement','mediaelementplayer','4.2.8','css') ?>
-
-
 <section class="rb-bbs-view">
 
 	<header>
@@ -24,7 +12,7 @@
 		  <div class="media-body">
 				<h1 class="h4 mt-0">
 					<?php if($R['category']):?>
-					<span class="badge badge-white"><?php echo $R['category']?></span>
+					<span class="badge badge-light"><?php echo $R['category']?></span>
 					<?php endif?>
 					<?php echo $R['subject']?>
 					<?php if($R['hidden']):?>
@@ -38,7 +26,6 @@
 							<?php if ($d['theme']['profile_link']): ?>
 							<a class="muted-link" href="#"
 								data-toggle="getMemberLayer"
-								data-theme="<?php echo $d['theme']['member_theme'] ?>"
 								data-uid="<?php echo $R['uid'] ?>"
 								data-mbruid="<?php echo $R['mbruid'] ?>">
 								<?php echo $R[$_HS['nametype']]?>
@@ -63,12 +50,12 @@
 						<button type="button" class="btn btn-link muted-link<?php if($is_saved):?> active<?php endif?>"
 							data-toggle="actionIframe"
 							data-url="<?php echo $g['bbs_action']?>saved&amp;uid=<?php echo $R['uid']?>"
-							data-role="btn_saved">
+							data-role="btn_post_saved">
 							<i class="fa fa-bookmark-o"></i> 저장
 						</button>
 			 			<?php endif?>
 						<?php if($d['theme']['show_print']):?>
-						<button class="btn btn-link  muted-link js-print" type="button"><i class="fa fa-print"></i> 인쇄</button>
+						<button class="btn btn-link  muted-link" data-toggle="print" type="button"><i class="fa fa-print"></i> 인쇄</button>
 			 			<?php endif?>
 			 		</div>
 			 	</div><!-- /.d-flex -->
@@ -88,7 +75,7 @@
 		<button type="button" class="btn btn-light<?php if($is_liked):?> active<?php endif?>"
 			data-toggle="actionIframe"
 			data-url="<?php echo $g['bbs_action']?>opinion&amp;opinion=like&amp;uid=<?php echo $R['uid']?>&amp;effect=heartbeat"
-			data-role="btn_like">
+			data-role="btn_post_like">
 			<i class="fa fa fa-heart-o fa-fw" aria-hidden="true"></i> <strong></strong>
 			<span data-role='likes_<?php echo $R['uid']?>' class="badge badge-inverted"><?php echo $R['likes']?></span>
 		</button>
@@ -98,7 +85,7 @@
 		<button type="button" class="btn btn btn-light<?php if($is_disliked):?> active<?php endif?>"
 			data-toggle="actionIframe"
 			data-url="<?php echo $g['bbs_action']?>opinion&amp;opinion=dislike&amp;uid=<?php echo $R['uid']?>&amp;effect=heartbeat"
-			data-role="btn_dislike">
+			data-role="btn_post_dislike">
 			<i class="fa fa-thumbs-o-down fa-fw" aria-hidden="true"></i> <strong></strong>
 			<span data-role='dislikes_<?php echo $R['uid']?>' class="badge badge-inverted"><?php echo $R['dislikes']?></span>
 		</button>
@@ -126,6 +113,13 @@
 	</div>
 	<?php endif?>
 
+	<!-- 첨부파일 인클루드 -->
+	<?php if($d['upload']['data']&&$d['theme']['show_upfile']&&$attach_file_num>0):?>
+	<aside class="mt-4">
+		<?php include $g['dir_module_skin'].'_attachment.php'?>
+	</aside>
+	<?php endif?>
+
 	<footer class="d-flex justify-content-between align-items-center mt-3 d-print-none">
 		<div class="btn-group">
 			 <?php if($my['admin'] || $my['uid']==$R['mbruid']):?>
@@ -139,12 +133,6 @@
 		 <a href="<?php echo $g['bbs_list']?>" class="btn btn-light">목록</a>
 	</footer>
 
-	<!-- 첨부파일 인클루드 -->
-	<?php if($d['upload']['data']&&$d['theme']['show_upfile']&&$attach_file_num>0):?>
-	<aside class="mt-4">
-		<?php include $g['dir_module_skin'].'_attachment.php'?>
-	</aside>
-	<?php endif?>
 
 	<!-- 댓글 인클루드 -->
 	<?php if(!$d['bbs']['c_hidden']):?>
@@ -161,8 +149,3 @@
 <?php include_once $g['dir_module'].'mod/_list.php'?>
 <?php include_once $g['dir_module_skin'].'list.php'?>
 <?php endif?>
-
-<script>
-	document.title = '<?php echo $R['subject']?> · <?php echo $g['browtitle']?>'  // 브라우저 타이틀 재설정
-	$('.mejs-player').mediaelementplayer(); // 동영상, 오디오 플레이어 초기화 http://www.mediaelementjs.com/
-</script>

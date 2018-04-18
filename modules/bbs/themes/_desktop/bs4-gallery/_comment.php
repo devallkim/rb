@@ -29,12 +29,18 @@
 </div>
 
 <link href="<?php echo $g['url_root']?>/modules/comment/themes/<?php echo $comment_theme?>/css/style.css" rel="stylesheet">
-<script src="<?php echo $g['url_root']?>/modules/comment/lib/Rb.comment.js"></script>
 
-<script src="<?php echo $g['s']?>/_core/js/jquery.autolink.js"></script>
-<?php getImport('autosize','autosize.min','3.0.14','js')?>
 
 <script>
+
+$(function () {
+
+  // 댓글 출력 함수 실행
+  var p_module = 'bbs';
+  var p_table = '<?php echo $table['bbsdata']?>';
+  var p_uid = '<?php echo $uid?>';
+  var theme = '<?php echo $comment_theme ?>';
+  var commentting_container = $('#commentting-container');
 
   var get_Rb_Comment = function(p_module,p_table,p_uid,theme){
     $('#commentting-container').Rb_comment({
@@ -48,21 +54,12 @@
        noMoreCommentMsg : '댓글 없음 ',
        commentLength : 500, // 댓글 입력 글자 수 제한
     });
-
   }
-
-  // 댓글 출력 함수 실행
-  var p_module = 'bbs';
-  var p_table = '<?php echo $table['bbsdata']?>';
-  var p_uid = '<?php echo $uid?>';
-  var theme = '<?php echo $comment_theme ?>';
 
   get_Rb_Comment(p_module,p_table,p_uid,theme);
 
-  $('[data-toggle="tooltip"]').tooltip()
-
   // 댓글이 등록된 후에
-  $('#commentting-container').on('saved.rb.comment',function(){
+  commentting_container.on('saved.rb.comment',function(){
     // $.notify({message:'댓글이 등록 되었습니다.'});
     $('[data-toggle="tooltip"]').tooltip()
     $('[data-role="comment-item"] article').autolink();
@@ -72,20 +69,20 @@
      var textarea = $('[data-role="oneline-input-'+uid+'"]')
      setTimeout(function(){ textarea.focus(); }, 200); // 한줄의견 추가시에 textarea focus 처리하기
     });
-
   })
   // 댓글이 수정된 후에
-  $('#commentting-container').on('edited.rb.comment',function(){
+  commentting_container.on('edited.rb.comment',function(){
     $.notify({message: '댓글이 수정 되었습니다.'},{type: 'success'});
   })
 
   // 한줄의견이 등록된 후에
-  $('#commentting-container').on('saved.rb.oneline',function(){
+  commentting_container.on('saved.rb.oneline',function(){
     $('[data-toggle="tooltip"]').tooltip()
     $('[data-role="oneline-item"] article').autolink();
   })
-  $('#commentting-container').on('edited.rb.oneline',function(){
+  commentting_container.on('edited.rb.oneline',function(){
     $.notify({message: '의견이 수정 되었습니다.'},{type: 'success'});
   })
 
+})
 </script>

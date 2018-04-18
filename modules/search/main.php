@@ -2,13 +2,13 @@
 if(!defined('__KIMS__')) exit;
 
 $g['searchVarForSite'] = $g['path_var'].'site/'.$r.'/search.var.php';
-$_tmpdfile = file_exists($g['searchVarForSite']) ? $g['searchVarForSite'] : $g['path_module'].$m.'/var/var.search.php';
+$_tmpdfile = file_exists($g['searchVarForSite']) ? $g['searchVarForSite'] : $g['dir_module'].'var/var.search.php';
 include_once $_tmpdfile;
 
 if ($g['mobile']&&$_SESSION['pcmode']!='Y'){
-	include_once $g['path_module'].$m.'/var/var.order.mobile.php';
+	include_once $g['dir_module'].'var/var.order.mobile.php';
 }else{
-	include_once $g['path_module'].$m.'/var/var.order.desktop.php';
+	include_once $g['dir_module'].'var/var.order.desktop.php';
 }
 
 $swhere	= $swhere ? $swhere : 'all';

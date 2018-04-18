@@ -23,7 +23,7 @@ if($R['uid']){
 if ($uid) {
   $submit_btn = '수정';
   $submit_msg = '게시물 수정중...';
-  $title_text = '게시물 수정 · '.$R['subject'];
+  $title_text = '게시물 수정 · '.$B['name'];  
 }
 else {
   $submit_btn = '등록';

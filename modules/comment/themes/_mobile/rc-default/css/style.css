@@ -11,19 +11,34 @@
 
 .rb-commentting .media-list > .media {
   margin-top: -1px;
-  padding: 10px 0;
-  border-top: 1px solid #f5f5f5;
-}
-
-.rb-commentting .media-list .media-list {
-  background-color: #f9f9f9;
-  margin: 10px -10px;
-  padding: 2px 30px;
-}
-
-.rb-commentting .media-list > .media .media {
-  margin-top: 1rem
+  padding: 15px 0;
   border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee
+}
+.rb-commentting .media-list .media-list .media {
+  padding: 15px 0 0;
+  border: 0
+}
+.rb-commentting .media-list .media-list {
+  margin: 10px -10px 0;
+  padding: 2px 20px;
+}
+.rb-commentting .media-list .media-list:empty {
+  margin: 0
+}
+.media-list .ico-replay {
+  margin-top: -3px;
+  margin-right: 3px
+}
+.media-list .ico-replay::before {
+  display: inline-block;
+  width: 13px;
+  height: 10px;
+  margin: 4px 4px 0 1px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAABkCAMAAACvvNBNAAAAclBMVEVMaXEtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUtlvUAAAAtlvXBtxldAAAAJHRSTlMAlgoDD071ePxpN7FZvfDjLRxb/gEGpEL5hxUkyNvqeXyAwuvQ8jQMAAAAqElEQVR42u2R1w7CMAxFu/feu4ze//9FWlRaWlwkBC9IPi+2cpzYSYTPUZwjk7rQaZNk8ENalfAC2pgoctqoRhzRxtKWERxlY+oO4pz2cKUnU7Ww5TkP/Sl/IDVo1srAW04QZBttRfcV0dW7aWHeEx2a9XJHQx1DFI9hz2kqz4tp88rS5Op4KDdr62hAlpDPI13gpkf/elYEhmGYXzAMrL5XO94phvlnbrKzELi3OthbAAAAAElFTkSuQmCC) 0 -30px no-repeat;
+  background-size: 13px 50px;
+  vertical-align: top;
+  content: '';
 }
 
 .rb-commentting .btn-secondary.active {

@@ -143,6 +143,24 @@
 </div>
 
 
+<!-- popup -->
+<div id="pupup-success" class="popup zoom" z-index="9999">
+  <div class="popup-content">
+    <header class="bar bar-nav bar-dark bg-inverse">
+      <h1 class="title">업로드 완료</h1>
+    </header>
+    <nav class="bar bar-standard bar-footer">
+      <button type="button" class="btn btn-secondary btn-block" data-history="back">확인</button>
+    </nav>
+    <div class="content">
+      <div class="p-a-3 text-xs-center">
+        본문작성으로 돌아가려면 <br> 상단 <code>본문작성</code>을 누르세요.
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
 
   $('#attach-moreAct').on('shown.rc.sheet', function (event) {

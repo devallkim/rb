@@ -59,8 +59,8 @@ if ($send=='ajax') {
 
 	$result['error']=false;
 
-	if ($is_saved) $result['is_saved'] = 1;
-	else $result['is_saved'] = 0;
+	if ($is_saved) $result['is_post_saved'] = 1;
+	else $result['is_post_saved'] = 0;
 
 	echo json_encode($result);
 	exit;
@@ -70,9 +70,9 @@ if ($send=='ajax') {
 <script>
 
 <?php if ($is_saved): ?>
-parent.$("[data-role=btn_saved]").removeClass("active");
+parent.$("[data-role=btn_post_saved]").removeClass("active");
 <?php else: ?>
-parent.$("[data-role=btn_saved]").addClass("active");
+parent.$("[data-role=btn_post_saved]").addClass("active");
 <?php endif; ?>
 
 window.parent.$.notify({

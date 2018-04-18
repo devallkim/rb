@@ -18,10 +18,11 @@ $NCD = array();
 $NTC = getDbArray($table[$m.'idx'],$bbsque1,'gid','gid',$orderby,0,0);
 while($_R = db_fetch_array($NTC)) $NCD[] = getDbData($table[$m.'data'],'gid='.$_R['gid'],'*');
 
+$NUM_NOTICE = getDbCnt($table[$m.'month'],'sum(num)',$bbsque1)-count($NCD);
+
 if ($sort == 'gid' && !$keyword && !$cat)
 {
 	$NUM = getDbCnt($table[$m.'month'],'sum(num)',$bbsque0)-count($NCD);
-	$NUM_NOTICE = getDbCnt($table[$m.'month'],'sum(num)',$bbsque1)-count($NCD);
 	$TCD = getDbArray($table[$m.'idx'],$bbsque2,'gid',$sort,$orderby,$recnum,$p);
 	while($_R = db_fetch_array($TCD)) $RCD[] = getDbData($table[$m.'data'],'gid='.$_R['gid'],'*');
 }

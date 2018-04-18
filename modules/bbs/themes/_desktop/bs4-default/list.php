@@ -71,12 +71,12 @@
   </header>
 
   <div class="table-responsive-md">
-    <table class="table text-center">
+    <table class="table text-center" data-role="bbs-list">
       <colgroup>
         <col width="7%"></col>
         <col></col>
-        <col width="13%"></col>
-        <col width="15%"></col>
+        <col width="10%"></col>
+        <col width="10%"></col>
         <col width="10%"></col>
       </colgroup>
       <thead class="thead-light">
@@ -93,7 +93,7 @@
         <!-- 공지사항 출력부  -->
         <?php foreach($NCD as $R):?>
         <?php $R['mobile']=isMobileConnect($R['agent'])?>
-        <tr class="table-light">
+        <tr class="table-light" id="item-<?php echo $R['uid'] ?>">
           <td>
             <?php if($R['uid'] != $uid):?>
             <span class="badge badge-light">공지</span>
@@ -107,9 +107,22 @@
             <?php if($R['category']):?>
             <span class="badge badge-secondary"><?php echo $R['category']?></span>
             <?php endif?>
+
+            <?php if ($d['theme']['modalview']): ?>
+            <a class="muted-link" href="#modal-bbs-view"
+              data-toggle="modal"
+              data-title="게시물 보기"
+              data-subject="<?php echo $R['subject']?>"
+              data-cat="<?php echo $R['category']?>"
+              data-url="<?php echo $g['bbs_view'].$R['uid']?>"
+              data-bid="<?php echo $B['id']?>"
+              data-uid="<?php echo $R['uid'] ?>">
+            <?php else: ?>
             <a href="<?php echo $g['bbs_view'].$R['uid']?>" class="muted-link">
+            <?php endif; ?>
               <?php echo getStrCut($R['subject'],$d['bbs']['sbjcut'],'')?>
             </a>
+
             <?php if(strstr($R['content'],'.jpg') || strstr($R['content'],'.png')):?>
             <span class="badge badge-light" data-toggle="tooltip" title="사진">
               <i class="fa fa-camera-retro fa-lg"></i>
@@ -121,14 +134,17 @@
             </span>
             <?php endif?>
             <?php if($R['hidden']):?><span class="badge badge-light" data-toggle="tooltip" title="비밀글"><i class="fa fa-lock fa-lg"></i></span><?php endif?>
-            <?php if($R['comment']):?><span class="badge badge-light"><?php echo $R['comment']?><?php echo $R['oneline']?'+'.$R['oneline']:''?></span><?php endif?>
-            <?php if(getNew($R['d_regis'],24)):?><small class="text-danger"><small>New</small></span><?php endif?>
+            <?php if($R['comment']):?>
+            <span class="badge badge-light" data-role="total_comment">
+              <?php echo $R['comment']?><?php echo $R['oneline']?'+'.$R['oneline']:''?>
+            </span>
+            <?php endif?>
+            <?php if(getNew($R['d_regis'],24)):?><span class="rb-new"></span><?php endif?>
           </td>
           <td>
             <?php if ($d['theme']['profile_link']): ?>
             <a class="muted-link" href="/@<?php echo $R['id'] ?>"
               data-toggle="getMemberLayer"
-              data-theme="<?php echo $d['theme']['member_theme'] ?>"
               data-uid="<?php echo $R['uid'] ?>"
               data-mbruid="<?php echo $R['mbruid'] ?>">
               <?php echo $R[$_HS['nametype']]?>
@@ -149,7 +165,7 @@
         <!-- 일반글 출력부 -->
         <?php foreach($RCD as $R):?>
         <?php $R['mobile']=isMobileConnect($R['agent'])?>
-        <tr>
+        <tr id="item-<?php echo $R['uid'] ?>">
           <td class="text-muted small">
             <?php if($R['uid'] != $uid):?>
             <?php echo $NUM-((($p-1)*$recnum)+$_rec++)?>
@@ -168,9 +184,22 @@
             <?php if($R['category']):?>
             <span class="badge badge-light"><?php echo $R['category']?></span>
             <?php endif?>
-            <a href="<?php echo $g['bbs_view'].$R['uid']?>" class="muted-link">
+
+            <?php if ($d['theme']['modalview']): ?>
+              <a class="muted-link" href="#modal-bbs-view"
+                data-toggle="modal"
+                data-title="게시물 보기"
+                data-subject="<?php echo $R['subject']?>"
+                data-cat="<?php echo $R['category']?>"
+                data-url="<?php echo $g['bbs_view'].$R['uid']?>"
+                data-bid="<?php echo $B['id']?>"
+                data-uid="<?php echo $R['uid'] ?>">
+            <?php else: ?>
+              <a href="<?php echo $g['bbs_view'].$R['uid']?>" class="muted-link">
+            <?php endif; ?>
               <?php echo getStrCut($R['subject'],$d['bbs']['sbjcut'],'')?>
             </a>
+
             <?php if(strstr($R['content'],'.jpg') || strstr($R['content'],'.png')):?>
             <span class="badge badge-light" data-toggle="tooltip" title="사진">
               <i class="fa fa-camera-retro fa-lg"></i>
@@ -185,17 +214,16 @@
             <span class="badge badge-light" data-toggle="tooltip" title="비밀글"><i class="fa fa-lock fa-lg"></i></span>
             <?php endif?>
             <?php if($R['comment']):?>
-            <span class="badge badge-light">
+            <span class="badge badge-light" data-role="total_comment">
               <?php echo $R['comment']?><?php echo $R['oneline']?'+'.$R['oneline']:''?>
             </span>
             <?php endif?>
-            <?php if(getNew($R['d_regis'],24)):?><small class="text-danger"><small>New</small></span><?php endif?>
+            <?php if(getNew($R['d_regis'],24)):?><span class="rb-new ml-1"></span><?php endif?>
           </td>
           <td>
             <?php if ($d['theme']['profile_link']): ?>
             <a class="muted-link" href="/@<?php echo $R['id'] ?>"
               data-toggle="getMemberLayer"
-              data-theme="<?php echo $d['theme']['member_theme'] ?>"
               data-uid="<?php echo $R['uid'] ?>"
               data-mbruid="<?php echo $R['mbruid'] ?>">
               <?php echo $R[$_HS['nametype']]?>
@@ -244,23 +272,25 @@
 
 <?php include $g['dir_module_skin'].'_footer.php'?>
 
-<!-- timeago -->
-<?php getImport('jquery-timeago','jquery.timeago',false,'js')?>
-<?php getImport('jquery-timeago','locales/jquery.timeago.ko',false,'js')?>
+<!-- 모달 댓글 출력관련  -->
+<link href="<?php echo $g['url_root']?>/modules/comment/themes/<?php echo $d['bbs']['c_skin_modal']?>/css/style.css" rel="stylesheet">
+<script src="<?php echo $g['url_module_skin'] ?>/js/getPostData.js" ></script>
 
 <script>
 $(function () {
-
-  $('[data-plugin="timeago"]').timeago();
 
   //검색어가 있을 경우 검색어 input focus
   <?php if ($keyword): ?>
   $('[name="keyword"]').focus()
   <?php endif; ?>
 
-  <?php if (!$c): ?>
-  document.title = '<?php echo $B['name']?> · <?php echo $g['browtitle']?>'  // 브라우저 타이틀 재설정
-  <?php endif; ?>
+  putCookieAlert('bbs_action_result') // 실행결과 알림 메시지 출력
+
+  var modal_settings={
+    mid  : '#modal-bbs-view', // 모달아이디
+    ctheme  : '<?php echo $d['bbs']['c_skin_modal'] ?>' //모달 댓글테마
+  }
+  getPostData(modal_settings); // 모달 출력관련
 
 })
 </script>

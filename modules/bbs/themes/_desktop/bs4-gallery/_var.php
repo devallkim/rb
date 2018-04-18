@@ -1,6 +1,6 @@
 <?php
 // 공통
-$d['theme']['member_theme'] = "_desktop/bs4-simple"; // 회원 popover에서 사용할 회원모듈 테마 (/modules/member/themes/ 참고)
+$d['theme']['profile_link'] = "1";  // 회원 프로필 링크 (사용=1/사용안함=0)
 
 //목록
 $d['theme']['xl_item'] = "4";  // ≥ 1200px 미디어에서 한줄당 사진수(1,2,3,4,6 범위내 사용, )

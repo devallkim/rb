@@ -52,8 +52,8 @@
 <!-- global css -->
 <link href="<?php echo $g['url_layout']?>/_css/style.css<?php echo $g['wcache']?>" rel="stylesheet">
 
+<!-- 카카오 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
 <script type="text/javascript">
-	Kakao.init('');
+	Kakao.init('ad801e290f033ce0caadf67ceff84ca2');  // 카카오 앱의 JavaScript 키를 설정해 주세요.
 </script>

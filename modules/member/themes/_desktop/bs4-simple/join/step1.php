@@ -1,5 +1,5 @@
-<section class="row justify-content-center my-5">
-	<div class="col-4">
+<section class="row justify-content-center my-5 mx-0">
+	<div class="col-5">
 
 		<div class="text-center">
 			<h2>회원가입</h2>

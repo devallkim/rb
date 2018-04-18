@@ -25,7 +25,7 @@ if($uid)
 			if($B['imgfoot']) $g['add_footer_img'] = $g['url_module'].'/var/files/'.$B['imgfoot'];
 		}
 		if($R['mbruid']) $g['member'] = getDbData($table['s_mbrdata'],'memberuid='.$R['mbruid'],'*');
-		if(!$_HS['titlefix']) $g['browtitle'] = $_HS['title'].' - '.getStripTags($R['subject']);
+		if(!$_HS['titlefix']) $g['browtitle'] = $R['subject'].' - '.$B['name'].' - '.$_HS['name'];
 		$g['meta_tit'] = $R['subject'].' - '.$B['name'].' - '.$_HS['name'];
 		$g['meta_sbj'] = str_replace('"','\'',$R['subject']);
 		$g['meta_key'] = $R['tag'] ? $B['name'].','.$R['tag'] : $B['name'].','.str_replace('"','\'',$R['subject']);
@@ -164,7 +164,11 @@ $d['bbs']['skin']     = $d['bbs']['skin'] ? $d['bbs']['skin'] : $d['bbs']['skin_
 $d['bbs']['m_skin']   = $d['bbs']['m_skin'] ? $d['bbs']['m_skin'] : $d['bbs']['skin_mobile'];
 $d['bbs']['attach']   = $d['bbs']['a_skin'] ? $d['bbs']['a_skin'] : $d['bbs']['attach_main'];
 $d['bbs']['m_attach'] = $d['bbs']['a_mskin'] ? $d['bbs']['a_mskin'] : $d['bbs']['attach_mobile'];
-// $d['bbs']['comment'] = $d['bbs']['comment'] ? $d['bbs']['comment'] : $d['bbs']['comment_main'];
+
+$d['bbs']['c_skin'] = $d['bbs']['c_skin']?$d['bbs']['c_skin']:$d['bbs']['comment_main'];
+$d['bbs']['c_mskin'] = $d['bbs']['c_mskin']?$d['bbs']['c_mskin']:$d['bbs']['comment_mobile'];
+$d['bbs']['c_skin_modal'] = $d['bbs']['c_skin_modal']?$d['bbs']['c_skin_modal']:$d['bbs']['comment_main_modal'];
+$d['bbs']['c_mskin_modal'] = $d['bbs']['c_mskin_modal']?$d['bbs']['c_mskin_modal']:$d['bbs']['comment_mobile_modal'];
 $d['bbs']['skin'] = $skin ? $skin : $d['bbs']['skin'];
 
 if ($g['mobile']&&$_SESSION['pcmode']!='Y')

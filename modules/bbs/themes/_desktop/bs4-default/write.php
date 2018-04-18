@@ -23,12 +23,12 @@ if($R['uid']){
 if ($reply == 'Y') {
   $submit_btn = '답변';
   $submit_msg = '답변 게시물 등록중...';
-  $title_text = '게시물 답변 · '.$R['subject'];
+  $title_text = '게시물 답변 · ';
 }
 else if ($uid) {
   $submit_btn = '수정';
   $submit_msg = '게시물 수정중...';
-  $title_text = '게시물 수정 · '.$R['subject'];
+  $title_text = '게시물 수정 · ';
 }
 else {
   $submit_btn = '등록';
@@ -127,7 +127,7 @@ else {
   			 <div class="form-group mt-4">
     				<label>태그<span class="rb-form-required text-danger"></span></label>
             <input class="form-control" type="text" name="tag" placeholder="검색태그를 입력해 주세요." value="<?php echo $R['tag']?>">
-            <small class="form-text text-muted">이 게시물을 가장 잘 표현할 수 있는 단어를 콤마(,)로 구분해서 입력해 주세요.</small>
+            <small class="form-text text-muted mt-2">이 게시물을 가장 잘 표현할 수 있는 단어를 콤마(,)로 구분해서 입력해 주세요. 첫번째 항목이 대표 태그로 활용됩니다.</small>
   			 </div>
          <?php endif?>
 

@@ -5,7 +5,7 @@
 2. 일반모달 : 게시물 보기
 3. 포토모달 : 댓글형
 4. 포토모달 : 갤러리형
-5. 마크업 : 링크공유
+5. 마크업 참조: 링크공유
 
 -->
 
@@ -66,7 +66,6 @@
 <div class="modal fade" id="modal-bbs-view" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <input type="hidden" name="bid" value="">
   <input type="hidden" name="uid" value="">
-  <input type="hidden" name="theme" value="">
   <div class="modal-dialog modal-lg" role="document" style="max-width: 1000px">
     <div class="modal-content">
       <div class="modal-header">
@@ -98,7 +97,6 @@
 <div class="pswp pswp-comment" tabindex="-1" role="dialog" aria-hidden="true">
   <input type="hidden" name="uid" value="">
   <input type="hidden" name="bid" value="">
-  <input type="hidden" name="theme" value="">
   <div class="pswp__bg"></div>
 
   <!-- Slides wrapper with overflow:hidden. -->
@@ -228,7 +226,7 @@
 
 </div>
 
-<!-- 5. 마크업 : 링크공유 -->
+<!-- 5. 마크업 참조 : 링크공유 -->
 <div id="rb-share" hidden>
   <ul class="share list-inline mt-2 mb-0 mx-2">
     <li class="list-inline-item text-center">

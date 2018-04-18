@@ -4,7 +4,14 @@ if(!defined('__KIMS__')) exit;
 require_once $g['path_core'].'function/sys.class.php';
 include_once $g['dir_module'].'lib/action.func.php';
 
+include_once $g['path_module'].'bbs/var/var.php';
 include_once $g['dir_module'].'var/var.'.$bid.'.php';
+
+if ($g['mobile']&&$_SESSION['pcmode']!='Y') {
+  $theme = $d['bbs']['m_skin']?$d['bbs']['m_skin']:$d['bbs']['skin_mobile'];
+} else {
+  $theme = $d['bbs']['skin']?$d['bbs']['skin']:$d['bbs']['skin_main'];
+}
 include_once $g['dir_module'].'themes/'.$theme.'/_var.php';
 
 $result=array();
@@ -21,9 +28,9 @@ $check_like_qry    = "mbruid='".$mbruid."' and module='".$m."' and entry='".$uid
 $check_dislike_qry = "mbruid='".$mbruid."' and module='".$m."' and entry='".$uid."' and opinion='dislike'";
 $check_saved_qry   = "mbruid='".$mbruid."' and module='".$m."' and entry='".$uid."'";
 
-$is_liked    = getDbRows($table['s_opinion'],$check_like_qry);
-$is_disliked = getDbRows($table['s_opinion'],$check_dislike_qry);
-$is_saved    = getDbRows($table['s_saved'],$check_saved_qry);
+$is_post_liked    = getDbRows($table['s_opinion'],$check_like_qry);
+$is_post_disliked = getDbRows($table['s_opinion'],$check_dislike_qry);
+$is_post_saved    = getDbRows($table['s_saved'],$check_saved_qry);
 
 $TMPL['s']=$rooturl;
 $TMPL['r']=$raccount;
@@ -32,20 +39,33 @@ $TMPL['bid']=$B['id'];
 $TMPL['uid']=$uid;
 $TMPL['subject'] = $R['subject'];
 $TMPL['article'] = getContents($R['content'],$R['html']);
-$TMPL['date'] = getDateFormat($R['d_regis'],'Y.m.d');
+$TMPL['date'] = getDateFormat($R['d_regis'],$d['theme']['date_viewf']);
 $TMPL['avatar'] = getAavatarSrc($R['mbruid'],'84');
 $TMPL['name'] = $R[$_HS['nametype']];
-$TMPL['comment'] = $R['comment'];
+
+if ($R['featured_img']) {
+  $TMPL['featured_img'] = getPreviewResize(getUpImageSrc($R),'c'); //게시물 대표이미지
+} else {
+  $TMPL['featured_img'] = $g['meta_img']?getPreviewResize($g['meta_img'],'c'):$g['img_core'].'/noimage_kimsq.png'; //사이트 대표
+}
+
+if ($R['oneline']) {
+  $TMPL['comment'] = $R['comment'].'+'.$R['oneline'];
+  $result['total_comment'] = $R['comment'].'+'.$R['oneline']; // 댓글,한줄의견 등록시 현재댓글수를 내려주기 위함
+} else {
+  $TMPL['comment'] = $R['comment'];
+  $result['total_comment'] = $R['comment']; // 댓글,한줄의견 등록시 현재댓글수를 내려주기 위함
+}
+
 $TMPL['hit'] = $R['hit'];
 $TMPL['likes'] = $R['likes'];
 $TMPL['dislikes'] = $R['dislikes'];
 $TMPL['tag'] = getPostTag($R['tag'],$bid);
-$result['total_comment'] = $R['comment'];  // 댓글,한줄의견 등록시 현재댓글수를 내려주기 위함
 
-if ($is_liked) $result['is_liked'] = 1;
-if ($is_disliked) $result['is_disliked'] = 1;
-if ($is_saved) $result['is_saved'] = 1;
-if ($R['tag']) $result['is_tag'] = 1;
+if ($is_post_liked) $result['is_post_liked'] = 1;
+if ($is_post_disliked) $result['is_post_disliked'] = 1;
+if ($is_post_saved) $result['is_post_saved'] = 1;
+if ($R['tag']) $result['is_post_tag'] = 1;
 
 if($R['upload']) {
 

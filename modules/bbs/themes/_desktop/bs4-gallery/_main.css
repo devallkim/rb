@@ -1,38 +1,30 @@
 @charset "utf-8";
-[data-role="btn_like"].active .fa-heart-o:before {
-  content: "\f004";
-}
 
-[data-role="btn_like"].active .fa,
-[data-role="btn_dislike"].active .fa {
-  color: red;
-}
+/*!
+ * kimsQ Rb v2.2 데스크탑 갤러리 게시판 테마 스타일 (bs4-gallery)
+ * Homepage: http://www.kimsq.com
+ * Copyright 2018 redblock inc
+ * Licensed under RBL
+ * Based on Bootstrap v4
+*/
 
-[data-role="btn_like"].active.heartbeat .fa,
-[data-role="btn_dislike"].active.heartbeat .fa {
-  animation: heartbeat .8s;
-}
+/**
+ * 목차:
+ *
+ * 1 - 공통 rb-bbs
+ * 2 - 목록 rb-bbs-list
+ * 3 - 보기 rb-bbs-view
+ * 4 - 쓰기 rb-bbs-write
+ * 5 - 컴포넌트 Component
+ * 6 - 유틸리티 Utilities
+ * ----------------------------------------------------------------------------
+ */
 
-@keyframes heartbeat {
-  0% {
-    transform: scale( 1.8);
-  }
-  30% {
-    transform: scale( 1);
-  }
-  60% {
-    transform: scale( 1.8);
-  }
-  100% {
-    transform: scale( 1);
-  }
-}
 
-.tag .badge~.badge {
-  margin-left: .3rem
-}
-
-/* 공통 */
+/**
+ * 1 - 공통 rb-bbs
+ * ----------------------------------------------------------------------------
+ */
 
 .badge-white {
   background-color: #fff;
@@ -46,7 +38,11 @@
   content: "\f02e" !important;
 }
 
-/* 목록 */
+
+/**
+ * 2 - 목록 rb-bbs-list
+ * ----------------------------------------------------------------------------
+ */
 
 .rb-bbs-list .table {
   border-bottom: 1px solid #ddd
@@ -131,7 +127,10 @@
 }
 
 
-/* 보기 */
+/**
+ * 3 - 보기 rb-bbs-view
+ * ----------------------------------------------------------------------------
+ */
 
 .rb-bbs-view header .media-body h1 {
   padding: 4px 0 8px 0;
@@ -168,7 +167,37 @@
   width: 38px
 }
 
-/* 컴포넌트 */
+[data-role="btn_post_like"].active .fa-heart-o:before {
+  content: "\f004";
+}
+
+[data-role="btn_post_like"].active .fa,
+[data-role="btn_post_dislike"].active .fa {
+  color: red;
+}
+
+[data-role="btn_post_like"].active.heartbeat .fa,
+[data-role="btn_post_dislike"].active.heartbeat .fa {
+  animation: heartbeat .8s;
+}
+
+.tag .badge~.badge {
+  margin-left: .3rem
+}
+
+/**
+ * 4 - 쓰기 rb-bbs-write
+ * ----------------------------------------------------------------------------
+ */
+
+
+
+
+/**
+* 5 - 컴포넌트 Component
+* ----------------------------------------------------------------------------
+*/
+
 
 .modal-lg {
   max-width: calc(100vw - 12.53rem);
@@ -321,3 +350,33 @@
 [data-role="btn_saved"].active::after {
   content: '됨'
 }
+
+[data-role="comment-none"] > div {
+  height: 300px !important;
+}
+
+
+.pswp-comment [data-role="comment-main"] .timeline-vscroll {
+  max-height: calc(100vh - 32.3rem) !important;
+}
+
+
+/**
+ * 6 - 유틸리티 Utilities
+ * ----------------------------------------------------------------------------
+ */
+
+ @keyframes heartbeat {
+   0% {
+     transform: scale( 1.8);
+   }
+   30% {
+     transform: scale( 1);
+   }
+   60% {
+     transform: scale( 1.8);
+   }
+   100% {
+     transform: scale( 1);
+   }
+ }

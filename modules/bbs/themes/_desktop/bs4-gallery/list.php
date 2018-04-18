@@ -125,7 +125,7 @@ $col_xs = $d['theme']['xs_item']?' col-xs-'.$col_xs_num:'';
             <?php endif?>
             <?php if($R['hidden']):?><span class="badge badge-white" data-toggle="tooltip" title="비밀글"><i class="fa fa-lock fa-lg"></i></span><?php endif?>
             <?php if($R['comment']):?><span class="badge badge-white"><?php echo $R['comment']?><?php echo $R['oneline']?'+'.$R['oneline']:''?></span><?php endif?>
-            <?php if(getNew($R['d_regis'],24)):?><small class="text-danger"><small>New</small></span><?php endif?>
+            <?php if(getNew($R['d_regis'],24)):?><span class="rb-new ml-1"></span><?php endif?>
           </td>
           <td class="text-muted small"><?php echo getDateFormat($R['d_regis'],'Y.m.d')?></td>
         </tr>
@@ -136,7 +136,7 @@ $col_xs = $d['theme']['xs_item']?' col-xs-'.$col_xs_num:'';
 
 
     <?php if ($NUM): ?>
-      <div class="row">
+      <div class="row gutter-half">
       <!-- 일반글 출력부 -->
       <?php foreach($RCD as $R):?>
       <?php
@@ -149,8 +149,7 @@ $col_xs = $d['theme']['xs_item']?' col-xs-'.$col_xs_num:'';
           <div class="position-relative"
             data-toggle="openGallery"
             data-category="<?php echo $R['category']?>"
-            data-subject="<?php echo htmlspecialchars($R['subject'])?>"
-            data-theme="<?php echo $d['bbs']['skin'] ?>"
+            data-subject="<?php echo $R['subject']?>"
             data-cat="<?php echo $R['category']?>"
             data-url="<?php echo $g['bbs_view'].$R['uid']?>"
             data-bid="<?php echo $B['id']?>"
@@ -208,7 +207,6 @@ $col_xs = $d['theme']['xs_item']?' col-xs-'.$col_xs_num:'';
             <span class="text-muted">
               <a class="muted-link" href="/@<?php echo $R['id'] ?>"
                 data-toggle="getMemberLayer"
-                data-theme="<?php echo $d['theme']['member_theme'] ?>"
                 data-uid="<?php echo $R['uid'] ?>"
                 data-mbruid="<?php echo $R['mbruid'] ?>">
                 <?php echo $R[$_HS['nametype']]?>
@@ -218,7 +216,7 @@ $col_xs = $d['theme']['xs_item']?' col-xs-'.$col_xs_num:'';
               <time <?php echo $d['theme']['timeago']?'data-plugin="timeago"':'' ?> datetime="<?php echo getDateFormat($R['d_regis'],'c')?>">
                 <?php echo getDateFormat($R['d_regis'],'Y.m.d')?>
               </time>
-              <?php if(getNew($R['d_regis'],24)):?><span class="badge badge-inverted badge-danger">N</span><?php endif?>
+              <?php if(getNew($R['d_regis'],24)):?><span class="rb-new ml-1"></span><?php endif?>
             </small>
           </div>
         </div><!-- /.card -->
@@ -258,18 +256,14 @@ $col_xs = $d['theme']['xs_item']?' col-xs-'.$col_xs_num:'';
 
 <?php include $g['dir_module_skin'].'_footer.php'?>
 
-<!-- 모달,팝업등의 컴포넌트 모음 -->
-<?php include_once $g['dir_module_skin'].'_component.php'?>
+<!-- 댓글 출력관련  -->
+<link href="<?php echo $g['url_root']?>/modules/comment/themes/_desktop/bs4-modal/css/style.css" rel="stylesheet">
 
-<!-- timeago -->
-<?php getImport('jquery-timeago','jquery.timeago',false,'js')?>
-<?php getImport('jquery-timeago','locales/jquery.timeago.ko',false,'js')?>
-
+<!-- 포토모달(댓글포함) 오픈 -->
+<script src="<?php echo $g['url_module_skin'] ?>/js/openGallery.js" ></script>
 
 <script>
 $(function () {
-
-  $('[data-plugin="timeago"]').timeago();
 
   //검색어가 있을 경우 검색어 input focus
   <?php if ($keyword): ?>
@@ -281,4 +275,6 @@ $(function () {
   <?php endif; ?>
 
 })
+
+
 </script>

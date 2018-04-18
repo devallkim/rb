@@ -2514,6 +2514,7 @@ if (typeof jQuery === 'undefined') {
              history.back();
        });
 
+
       // Scroll Top
 	$(document).on('tap click', '[data-scroll="top"]', function(e) {
 	       var target=e.currentTarget;
@@ -2733,7 +2734,7 @@ if (typeof jQuery === 'undefined') {
         }
 
         if (transitionFromObj.transition) {
-          activeObj = extendWithDom(activeObj, '.content', activeDom.cloneNode(true));
+          activeObj = extendWithDom(activeObj, '[data-push="swap"]', activeDom.cloneNode(true));
           for (key in bars) {
             if (bars.hasOwnProperty(key)) {
               barElement = document.querySelector(bars[key]);
@@ -2748,7 +2749,7 @@ if (typeof jQuery === 'undefined') {
 
         swapContent(
           (activeObj.contents || activeDom).cloneNode(true),
-          document.querySelector('.content'),
+          document.querySelector('[data-push="swap"]'),
           transition
         );
 
@@ -2768,7 +2769,7 @@ if (typeof jQuery === 'undefined') {
     var key;
     var xhr = PUSH.xhr;
 
-    options.container = options.container || options.transition ? document.querySelector('.content') : document.body;
+    options.container = options.container || options.transition ? document.querySelector('[data-push="swap"]') : document.body;
 
     for (key in bars) {
       if (bars.hasOwnProperty(key)) {
@@ -2883,7 +2884,7 @@ if (typeof jQuery === 'undefined') {
       } else if (swap.classList.contains('content')) {
         document.body.appendChild(swap);
       } else {
-        document.body.insertBefore(swap, document.querySelector('.content'));
+        document.body.insertBefore(swap, document.querySelector('[data-push="swap"]'));
       }
     } else {
       enter  = /in$/.test(transition);
@@ -3022,7 +3023,7 @@ if (typeof jQuery === 'undefined') {
     data.title = data.title && data.title[text].trim();
 
     if (options.transition) {
-      data = extendWithDom(data, '.content', body);
+      data = extendWithDom(data, '[data-push="swap"]', body);
     } else {
       data.contents = body;
     }

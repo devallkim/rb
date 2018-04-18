@@ -93,7 +93,6 @@
 	<section id="page-bbs-view" class="rb-bbs-list page center" data-role="bbs-list">
 		<input type="hidden" name="bid" value="">
 	  <input type="hidden" name="uid" value="">
-	  <input type="hidden" name="theme" value="">
 	  <header class="bar bar-nav bar-light bg-faded px-0">
 			<a class="icon icon-left-nav pull-left p-x-1" role="button" data-history="back"></a>
 	    <h1 class="title text-truncate text-nowrap w-75" style="left:12.5%" data-role="title">게시물 보기</h1>
@@ -148,8 +147,6 @@
 <div class="pswp pswp-gallery" tabindex="-1" role="dialog" aria-hidden="true">
 	<input type="hidden" name="uid" value="">
   <input type="hidden" name="bid" value="">
-  <input type="hidden" name="theme" value="">
-
 
   <!-- Background of PhotoSwipe.
        It's a separate element, as animating opacity is faster than rgba(). -->

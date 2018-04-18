@@ -1,0 +1,51 @@
+<header class="bar bar-nav bar-dark bg-primary p-x-0">
+  <a class="icon icon-left-nav pull-left p-x-1" role="button" data-history="back"></a>
+  <h1 class="title">
+    댓글 <span data-role="total_comment">{$comment_total}</span>
+  </h1>
+</header>
+<footer class="bar bar-standard bar-footer bar-light bg-white rb-comments-write" data-role="commentWrite-container"> <!-- 댓글 입렵부 : comment_write.html -->
+  {$comment_write}
+</footer>
+<div class="content bg-faded">
+  <div class="bg-white p-3" data-role="post">
+    <span data-role="cat" class="badge badge-primary badge-inverted">카테고리</span>
+    <h3 data-role="subject" class="rb-article-title">게시물 제목</h3>
+    <button type="button" class="btn btn-secondary" data-history="back">본문보기</button>
+  </div>
+
+  <div class="mt-2 p-3 bg-white">
+
+    <!-- 공통 사항 data-* ="*" 과 {$*} 는 수정 금지 -->
+    <section data-role="comment-box">
+      <header data-role="header-container">
+         {$comment_header} <!-- 댓글 header : comment_header.html  -->
+      </header>
+
+      <main data-role="comment-main">
+        <ul class="media-list d-flex flex-column-reverse mt-3" data-role="comment-container"> <!-- 댓글 출력부 : comment_row.html -->
+            {$comment_rows}
+        </ul>
+        <div data-role="btnMore-container"> <!-- 더보기 버튼 -->
+          <a class="btn btn-secondary btn-block" data-role="trigger-getMoreComment">더보기</a>
+        </div>
+      </main>
+
+      <div class="d-none animated fadeIn" data-role="comment-none">
+       <div class="d-flex justify-content-center align-items-center p-3" style="height:200px">
+         <div class="text-muted text-xs-center">
+           <i class="fa fa-comment-o mb-3" aria-hidden="true" style="font-size: 3rem"></i><br>
+           첫번째 댓글을 남겨주세요.
+         </div>
+       </div>
+      </div>
+    </section>
+  </div>
+</div><!-- /.content -->
+
+<script>
+$('[data-toggle="buttons"] .nav-link').tap(function(){
+  $('[data-toggle="buttons"] .nav-link').removeClass('active')
+  $(this).addClass('active')
+});
+</script>
