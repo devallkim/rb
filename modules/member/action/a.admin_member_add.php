@@ -22,7 +22,7 @@ $realname	= $_FILES['upfile']['name'];
 if ($avatar_delete)
 {
 	$photo = '';
-	$saveFile1	= $g['path_var'].'avatar/'.$avatar;
+	$saveFile	= $g['path_var'].'avatar/'.$avatar;
 }
 else {
 	$photo = $avatar;
@@ -37,15 +37,15 @@ else {
 			if ($wh[0] >= 250 && $wh[1] >= 250)
 			{
 				$photo		= $id.'.'.$fileExt;
-				$saveFile1	= $g['path_var'].'avatar/'.$photo;
+				$saveFile	= $g['path_var'].'avatar/'.$photo;
 
-				if (is_file($saveFile1)) unlink($saveFile1);
+				if (is_file($saveFile)) unlink($saveFile);
 
 				include $g['path_core'].'function/thumb.func.php';
 
-				move_uploaded_file($tmpname,$saveFile1);
-				ResizeWidth($saveFile1,$saveFile1,250);
-				@chmod($saveFile1,0707);
+				move_uploaded_file($tmpname,$saveFile);
+				ResizeWidth($saveFile,$saveFile,500);
+				@chmod($saveFile,0707);
 			}
 		}
 	}
