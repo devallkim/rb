@@ -93,7 +93,7 @@ if ($uid)
 	$mailing	= $remail;
 	$bio		= trim($bio);
 
-	$_QVAL = "email='$email',name='$name',nic='$nic',home='$home',sex='$sex',birth1='$birth1',birth2='$birth2',birthtype='$birthtype',tel1='$tel1',tel2='$tel2',";
+	$_QVAL = "email='$email',name='$name',nic='$nic',home='$home',sex='$sex',photo='$photo',birth1='$birth1',birth2='$birth2',birthtype='$birthtype',tel1='$tel1',tel2='$tel2',";
 	$_QVAL.= "zip='$zip',addr0='$addr0',addr1='$addr1',addr2='$addr2',job='$job',marr1='$marr1',marr2='$marr2',sms='$sms',mailing='$mailing',bio='$bio',addfield='$addfield'";
 	getDbUpdate($table['s_mbrdata'],$_QVAL,'memberuid='.$uid);
 	setrawcookie('result_member_main', rawurlencode('회원정보가 수정 되었습니다.|success'));  // 처리여부 cookie 저장
