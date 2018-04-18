@@ -38,7 +38,7 @@ if (is_uploaded_file($tmpname))
 	}
 	else {
 		move_uploaded_file($tmpname,$saveFile);
-		ResizeWidth($saveFile,$saveFile,250);
+		ResizeWidth($saveFile,$saveFile,500);
 	}
 
 	getDbUpdate($table['s_mbrdata'],"photo='".$photo."'",'memberuid='.$my['uid']);
