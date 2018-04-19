@@ -563,6 +563,16 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 									<?php endforeach?>
 									<?php endif?>
 
+									<?php if($_v[1]=='menu'):?>
+									<select name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" class="form-control custom-select">
+										<option value="">연결시킬 메뉴를 선택해 주세요.</option>
+								    <option value="" disabled>--------------------------------</option>
+								    <?php include_once $g['path_core'].'function/menu1.func.php'?>
+								    <?php $cat=$d['layout'][$_key.'_'.$_v[0]]?>
+								    <?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
+									</select>
+									<?php endif?>
+
 								</div>
 								<?php endforeach?>
 
