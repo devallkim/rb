@@ -39,7 +39,7 @@ $_ResultArray['num'][$_key] = getDbRows($table['테이블명'],$sqlque); // 검�
 
 <?php
 $sqlque	= 'uid';
-$sqlque .= getSearchSql('subject|content',$keyword,'','or'); // 게시물 제목과 내용 검색
+$sqlque .= getSearchSql('subject|content|tag',$keyword,'','or'); // 게시물 제목과 내용 검색
 $orderby = 'desc';
 
 if($_iscallpage):
@@ -78,7 +78,7 @@ include_once $g['dir_module_skin'].'_widget.php';
             <span class="badge badge-light"><?php echo $_R['category']?></span>
             <?php endif?>
 
-						<a class="text-nowrap text-truncate muted-link"
+						<a class="muted-link"
 							href="#modal-bbs-view" data-toggle="modal"
 							data-bid="<?php echo $B['id'] ?>"
 							data-uid="<?php echo $_R['uid'] ?>"
@@ -121,6 +121,10 @@ include_once $g['dir_module_skin'].'_widget.php';
 						</li>
 						<li class="list-inline-item">
 							<?php echo $_R[$_HS['nametype']]?>
+						</li>
+						<li class="list-inline-item">
+							<i class="fa fa-tag" aria-hidden="true"></i>
+							<?php echo $_R['tag']?>
 						</li>
 					</ul>
 

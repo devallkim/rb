@@ -39,7 +39,7 @@ $_ResultArray['num'][$_key] = getDbRows($table['테이블명'],$sqlque); // 검�
 
 <?php
 $sqlque	= 'uid';
-$sqlque .= getSearchSql('subject|content',$keyword,'','or'); // 게시물 제목과 내용 검색
+$sqlque .= getSearchSql('subject|content|tag',$keyword,'','or'); // 게시물 제목과 내용 검색
 $orderby = 'desc';
 
 if($_iscallpage):
@@ -98,6 +98,11 @@ include_once $g['dir_module_skin'].'_widget.php';
 
 							<span class="badge badge-default badge-inverted ml-1">
 								<?php echo $_R[$_HS['nametype']]?>
+							</span>
+
+							<span class="badge badge-default badge-inverted ml-1">
+								<i class="fa fa-tag" aria-hidden="true"></i>
+								<?php echo $_R['tag']?>
 							</span>
 
 					</p>
