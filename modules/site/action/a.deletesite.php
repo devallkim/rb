@@ -3,6 +3,12 @@ if(!defined('__KIMS__')) exit;
 
 checkAdmin(0);
 
+$exists_bbs = getDbRows($table['bbslist'],'site='.$account);
+if ($exists_bbs) {
+	setrawcookie('result_site', rawurlencode('사이트에 소속된 게시판을 삭제해 주세요.|danger'));
+	getLink('reload','parent.parent.','','');
+}
+
 $R = getUidData($table['s_site'],$account);
 if ($R['uid'])
 {
