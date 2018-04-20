@@ -553,6 +553,7 @@ $xmin1	= substr($date['totime'],10,2);
 				 <a href="<?php echo $g['adm_href']?>" class="btn btn-light btn-block mt-2">
 			 	 	검색조건 초기화
 			 	 </a>
+				 <button type="button" class="btn btn-light btn-block mt-2" data-toggle="modal" data-target="#modal-member-add"><i class="fa fa-plus-circle"></i> 회원추가</button>
 			 </div>
 		 </div>
 	<?php endif?>
