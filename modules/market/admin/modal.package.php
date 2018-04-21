@@ -10,7 +10,6 @@
 			</ul>
 		</div>
 
-
 		<div class="tab-content">
 			<?php if($package_step==1):?>
 				<div id="tab1">
@@ -29,8 +28,6 @@
 						</div>
 						<div class="col-sm-8">
 
-
-
 							<div class="mt-4">
 								<input type="file" name="upfile" id="packageupfile" class="hidden" onchange="progressbar();">
 								<button type="button" class="btn btn-outline-secondary btn-block" id="fileselectbtn" onclick="$('#packageupfile').click();">파일선택</button>
@@ -40,8 +37,6 @@
 									<div class="progress-bar" role="progressbar" aria-valuemax="100"></div>
 								</div>
 							</div>
-
-
 
 							<ul class="mt-4">
 								<li>킴스큐에서 제공하는 공식 패키지만 업로드할 수 있습니다.</li>
@@ -74,16 +69,14 @@
 							<input type="hidden" name="package_folder" value="<?php echo $package_folder?>">
 
 							<div class="well">
-								<div class="form-group form-row">
-									<label for="" class="col-sm-3 control-label">패키지명</label>
+								<div class="form-group row">
+									<label for="" class="col-sm-3 col-form-label">패키지명</label>
 									<div class="col-sm-9">
-										<p class="form-control-static">
-											<?php echo $d['package']['name']?>
-										</p>
+										<?php echo $d['package']['name']?>
 									</div>
 								</div>
-								<div class="form-group form-row">
-									<label for="" class="col-sm-3 control-label">적용사이트</label>
+								<div class="form-group row">
+									<label for="" class="col-sm-3 col-form-label">적용사이트</label>
 									<div class="col-sm-8">
 										<select name="siteuid" class="form-control">
 											<option value="">신규생성 후 적용</option>
@@ -93,7 +86,9 @@
 											<option value="<?php echo $_R['uid']?>"><?php echo $_R['name']?></option>
 											<?php endwhile?>
 										</select>
-										<span class="help-block">운영중인 사이트에는 적용하지 마십시오.</span>
+										<small class="form-text text-danger mt-3">
+											운영중인 사이트에는 적용하지 마십시오.
+										</small>
 									</div>
 								</div>
 							</div>
@@ -104,8 +99,8 @@
 
 
 								<div class="card-body collapse" id="package-options">
-									<div class="form-group form-row">
-										<label class="col-sm-3 control-label">설치옵션</label>
+									<div class="form-group row">
+										<label class="col-sm-3 col-form-label">설치옵션</label>
 										<div class="col-sm-9">
 											<?php foreach($d['package']['execute'] as $_key => $_val):?>
 											<div class="checkbox">
@@ -118,15 +113,14 @@
 										</div>
 									</div>
 									<?php if(is_file($g['path_tmp'].'app/'.$package_folder.'/_settings/readme.txt')):?>
-									<div class="form-group form-row">
-										<label class="col-sm-3 control-label">설치내용</label>
+									<div class="form-group row">
+										<label class="col-sm-3 col-form-label">설치내용</label>
 										<div class="col-sm-9">
 											<?php readfile($g['path_tmp'].'app/'.$package_folder.'/_settings/readme.txt')?>
 										</div>
 									</div>
 									<?php endif?>
 								</div>
-
 
 							</div>
 						</form>
