@@ -23,9 +23,9 @@ fwrite($fp,$rbPackage);
 fclose($fp);
 
 $extractor = new ArchiveExtractor();
-$extractor -> extractArchive($rbPackageFile,$g['path_tmp'].'app/');
+$extractor -> extractArchive($rbPackageFile,$g['path_tmp'].'app/'.$package.'/');
 DirChmod($g['path_tmp'].'app/',0707);
 unlink($rbPackageFile);
 
-getLink($g['s'].'/?r='.$r.'&iframe=Y&m=admin&module='.$m.'&front=modal.package&package_step=2&package_folder='.$realname,'parent.','','');
+getLink($g['s'].'/?r='.$r.'&iframe=Y&m=admin&module='.$m.'&front=modal.package&package_step=2&package_folder='.$package,'parent.','','');
 ?>
