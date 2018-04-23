@@ -11,5 +11,6 @@ _var/project.key.txt
 _var/table.info.php
 _var/site/*
 modules/bbs/var/
+modules/post/
 pages/*
 _tmp/widget/*

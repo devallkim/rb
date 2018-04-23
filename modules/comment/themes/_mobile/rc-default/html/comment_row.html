@@ -6,7 +6,7 @@
       <h4 class="media-heading h6 d-flex align-items-center">
         <span class="text-primary">{$comment_user_name}</span>
         <span class="pl-2 badge badge-default badge-inverted" data-role="comment-time-wrapper-{$comment_uid}">{$comment_regis_time}</span>
-
+        <small class="ml-1 {$comment_getNew}"></small><!-- 24시간이내 new 출력 -->
         <div class="ml-auto">
           {$my_menu} <!-- 수정 모드시 취소/완료 버튼 btn_ediMod.html : 수정권한이 있는 경우에만 노출됨 -->
         </div>
