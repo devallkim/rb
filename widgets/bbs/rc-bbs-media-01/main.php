@@ -13,11 +13,11 @@ $g['dir_module_skin'] = $g['path_module'].'bbs/themes/'.$d['bbs']['skin'].'/';
 include_once $g['dir_module_skin'].'_widget.php';
 ?>
 
-<ul class="widget table-view table-view-full">
+<ul class="widget table-view table-view-full" data-role="bbs-list">
 
   <?php $_RCD=getDbArray($table['bbsdata'],($wdgvar['bid']?'bbs='.$B['uid'].' and ':'').'display=1 and site='.$_HS['uid'],'*','gid','asc',$wdgvar['limit'],1)?>
   <?php while($_R=db_fetch_array($_RCD)):?>
-  <li class="table-view-cell media">
+  <li class="table-view-cell media" id="item-<?php echo $_R['uid'] ?>">
     <a role="button" id="item-<?php echo $_R['uid'] ?>"
       href="#modal-bbs-view" data-toggle="modal"
       data-bid="<?php echo $wdgvar['bid'] ?>"
