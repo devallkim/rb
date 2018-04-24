@@ -1,5 +1,4 @@
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- Seo -->
 <meta name="robots" content="<?php echo strip_tags($g['meta_bot'])?>">
