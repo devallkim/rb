@@ -565,11 +565,24 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 									<?php if($_v[1]=='menu'):?>
 									<select name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" class="form-control custom-select">
-										<option value="">연결메뉴 선택</option>
+										<option value="">사용안함</option>
 								    <option value="" disabled>--------------------------------</option>
 								    <?php include_once $g['path_core'].'function/menu1.func.php'?>
 								    <?php $cat=$d['layout'][$_key.'_'.$_v[0]]?>
-								    <?php getMenuShowSelect($s,$table['s_menu'],0,0,0,0,0,'')?>
+								    <?php getMenuShowSelectCode($s,$table['s_menu'],0,0,0,0,0,'')?>
+									</select>
+									<?php endif?>
+
+									<?php if($_v[1]=='bbs'):?>
+									<select name="layout_<?php echo $_key?>_<?php echo $_v[0]?>" class="form-control custom-select">
+										<option value="">사용안함</option>
+										<option value="" disabled>----------------------------------</option>
+										<?php $BBSLIST = getDbArray($table['bbslist'],'','*','gid','asc',0,1)?>
+										<?php while($R=db_fetch_array($BBSLIST)):?>
+										<option value="<?php echo $R['id']?>"<?php if($d['layout'][$_key.'_'.$_v[0]]==$R['id']):?> selected="selected"<?php endif?>>
+											ㆍ<?php echo $R['name']?>(<?php echo $R['id']?>)
+										</option>
+										<?php endwhile?>
 									</select>
 									<?php endif?>
 
