@@ -24,7 +24,11 @@
 <iframe hidden name="_action_frame_<?php echo $m?>" width="0" height="0" frameborder="0" scrolling="no" title="iframe"></iframe>
 
 <?php
-$g['wdgcod'] = $g['path_tmp'].'widget/c'.$_HM['uid'].'.p'.$_HP['uid'].'.cache';
+if ($g['mobile']&&$_SESSION['pcmode']!='Y') {
+	$g['wdgcod'] = $g['path_tmp'].'widget/c'.$_HM['uid'].'.p'.$_HP['uid'].'.mobile.cache';
+} else {
+	$g['wdgcod'] = $g['path_tmp'].'widget/c'.$_HM['uid'].'.p'.$_HP['uid'].'.desktop.cache';
+}
 if(is_file($g['wdgcod'])) include $g['wdgcod'];
 if($g['widget_cssjs']) include $g['path_core'].'engine/widget.cssjs.php';
 if($my['uid']) include $g['path_core'].'engine/notification.engine.php';
