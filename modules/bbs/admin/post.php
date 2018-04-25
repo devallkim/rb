@@ -296,6 +296,8 @@ $TPG = getTotalPage($NUM,$recnum);
 				<div>
 					<button type="button" onclick="chkFlag('post_members[]');checkboxCheck();" class="btn btn-light btn-sm">선택/해제 </button>
 					<button type="button" onclick="actCheck('multi_delete');" class="btn btn-light btn-sm rb-action-btn" disabled>삭제</button>
+					<button type="button" onclick="actCheck('multi_copy');" class="btn btn-light btn-sm rb-action-btn" disabled >복사</button>
+					<button type="button" onclick="actCheck('multi_move');" class="btn btn-light btn-sm rb-action-btn" disabled >이동</button>
 				</div>
 				<ul class="pagination mb-0">
 					<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
@@ -418,6 +420,10 @@ function actCheck(act)
 			f.submit();
 		}
 	}
+	else {
+		OpenWindow('<?php echo $g['s']?>/?r=<?php echo $r?>&iframe=Y&m=<?php echo $m?>&module=<?php echo $module?>&front=movecopy&type='+act+'&postuid='+s);
+	}
+
 	return false;
 }
 
