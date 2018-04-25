@@ -220,11 +220,11 @@ class Comment extends Comment_base{
         $M = getDbData($table['s_mbrdata'],'memberuid='.$mbruid,'photo');
         if($M['photo']) {
 
-          $user_avatar_src = $g['url_root'].'/_var/avatar/'.$M['photo'];
+          $user_avatar_src = $g['s'].'/_var/avatar/'.$M['photo'];
           $avatar_data=array('src'=>$user_avatar_src,'width'=>150,'height'=>150);
           $user_avatar_src=getTimThumb($avatar_data);
         }
-        else $user_avatar_src = $g['url_root'].'/_var/avatar/0.svg';
+        else $user_avatar_src = $g['s'].'/_var/avatar/0.svg';
 
         $result['src']=$user_avatar_src;
 
