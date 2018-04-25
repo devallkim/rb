@@ -40,7 +40,7 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 <?php getImport('jquery','jquery.min','3.3.1','js')?>
 <?php getImport('popper.js','umd/popper.min','1.14.0','js')?>
-<?php getImport('bootstrap','js/bootstrap.min','4.1.0','js')?>
+<?php getImport('bootstrap','js/bootstrap.min','4.0.0','js')?>
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['s']?>/_core/images/ico/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">
