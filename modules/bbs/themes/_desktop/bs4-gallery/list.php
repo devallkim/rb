@@ -87,9 +87,9 @@ $col_xs = $d['theme']['xs_item']?' col-xs-'.$col_xs_num:'';
   <div class="table-responsive-md">
     <table class="table text-center">
       <colgroup>
-        <col width="7%"></col>
-        <col></col>
-        <col width="10%"></col>
+        <col width="7%">
+        <col>
+        <col width="10%">
       </colgroup>
       <tbody>
 

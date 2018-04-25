@@ -73,11 +73,11 @@
   <div class="table-responsive-md">
     <table class="table text-center" data-role="bbs-list">
       <colgroup>
-        <col width="7%"></col>
-        <col></col>
-        <col width="10%"></col>
-        <col width="10%"></col>
-        <col width="10%"></col>
+        <col width="7%">
+        <col>
+        <col width="10%">
+        <col width="10%">
+        <col width="10%">
       </colgroup>
       <thead class="thead-light">
         <tr>

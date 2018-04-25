@@ -44,7 +44,7 @@ if (!function_exists('getMenuWidgetTree'))
 					$C['link'] = '<a class="dropdown-item"'.$_addattr.$_href.$_target.'>'.$C['name'].'</a>';
 					getMenuWidgetTree($site,$table,$C['is_child'],$C['uid'],$C['depth'],$_newTree,$w,$C);
 				}
-				echo "</li>\n";
+				echo "\n";
 			}
 			for ($i=0;$i<$depth;$i++) echo "\t";
 			if($is_child) echo "</ul>\n";
