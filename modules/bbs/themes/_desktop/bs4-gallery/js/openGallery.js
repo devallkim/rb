@@ -22,7 +22,7 @@ $(function () {
     var modal = $('.pswp-comment')
     var bbs_title = document.title
     var linkShare = $('#rb-share').html();
-    
+
     $(this).closest('.card').attr('tabindex','-1').focus();
 
     modal.find('[name="uid"]').val(uid)
@@ -285,6 +285,7 @@ $(function () {
     var myid = $(this).data('myid')
 
     if(!memberid){
+      alert('로그인이 필요합니다.')
       $('#modal-login').modal()  // 비로그인 일 경우 로그인 모달 호출
       return false;
     }
@@ -347,6 +348,7 @@ $(function () {
    var uid = $(this).data('uid')
 
    if(!memberid){
+     alert('로그인이 필요합니다.')
      $('#modal-login').modal()  // 비로그인 일 경우 로그인 모달 호출
      return false;
    }
@@ -395,8 +397,6 @@ $(function () {
     var naver = 'http://share.naver.com/web/shareView.nhn?url=' + enc_link + '&title=' + sbj;
     var kakaostory = 'https://story.kakao.com/share?url=' + enc_link + '&title=' + enc_sbj;
     var email = 'mailto:' + email + '?subject=링크공유-' + enc_sbj+'&body='+ enc_link;
-
-    $('[data-toggle="tooltip"]').tooltip()
 
     popover.find('[data-role="share"]').val(host+path)
     popover.find('[data-role="share"]').focus(function(){
