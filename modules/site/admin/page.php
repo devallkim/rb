@@ -597,7 +597,7 @@ $pageType = array('','모듈연결','직접편집');
 									<label class="col-lg-2 col-form-label text-lg-right">미디어</label>
 									<div class="col-lg-10 col-xl-9">
 										<div class="input-group">
-											<input class="form-control" type="text" name="upload" id="mediaset" value="<?php echo $R['upload']?$R['upload']:''?>">
+											<input class="form-control rb-modal-photo-drop" type="text" name="upload" id="mediaset" value="<?php echo $R['upload']?$R['upload']:''?>" onmousedown="_mediasetField='mediaset&dfiles='+this.value;" data-toggle="modal" data-target="#modal_window">
 											<div class="input-group-append">
 												<button class="btn btn-light rb-modal-photo" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 													<i class="fa fa-photo fa-lg"></i>

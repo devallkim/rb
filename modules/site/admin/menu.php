@@ -709,7 +709,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 											<label class="col-lg-2 col-form-label text-lg-right">미디어</label>
 											<div class="col-lg-10 col-xl-9">
 												<div class="input-group">
-													<input class="form-control" type="text" name="upload" id="mediaset" value="<?php echo $CINFO['upload']?$CINFO['upload']:''?>">
+													<input class="form-control rb-modal-photo-drop" type="text" name="upload" id="mediaset" value="<?php echo $CINFO['upload']?$CINFO['upload']:''?>" onmousedown="_mediasetField='mediaset&dfiles='+this.value;" data-toggle="modal" data-target="#modal_window">
 													<div class="input-group-append">
 														<button class="btn btn-light rb-modal-photo" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 															<i class="fa fa-photo fa-lg"></i>
