@@ -3,23 +3,27 @@ if(!defined('__KIMS__')) exit;
 
 checkAdmin(0);
 
-// parsedown : https://github.com/erusev/parsedown
-include_once $g['path_core'].'opensrc/parsedown/Parsedown.php';
-$Parsedown = new Parsedown();
-$_source = trim(stripslashes($source));
-$__SRC__ = $Parsedown->text($_source);
+if ($markdown == 'Y') {
+
+	// parsedown : https://github.com/erusev/parsedown
+	include_once $g['path_core'].'opensrc/parsedown/Parsedown.php';
+	$Parsedown = new Parsedown();
+	$_source = trim(stripslashes($source));
+	$__SRC__ = $Parsedown->text($_source);
+	$source = preg_replace("'<tmp[^>]*?>'si",'',$__SRC__);
+
+	$_mobile = trim(stripslashes($mobile));
+	$__MSRC__ = $Parsedown->text($_mobile);
+	$mobile = $__MSRC__;
+}
+
 $seo_src = '['.$featured_img.']';
 
 if($editFilter) include $g['path_plugin'].$editFilter.'/filter.php';
-$source = $__SRC__;
-
-$_mobile = trim(stripslashes($mobile));
-$__MSRC__ = $Parsedown->text($_mobile);
-$mobile = $__MSRC__;
 
 $vfile = $type == 'menu' ? $g['path_page'].$r.'-menus/'.$id : $g['path_page'].$r.'-pages/'.$id;
 $fp = fopen($vfile.'.php','w');
-fwrite($fp, $source."\n");
+fwrite($fp, trim(stripslashes($source)));
 fclose($fp);
 @chmod($vfile.'.php',0707);
 
@@ -28,7 +32,7 @@ if ($wysiwyg != 'Y')
 	if (trim($mobile))
 	{
 		$fp = fopen($vfile.'.mobile.php','w');
-		fwrite($fp, stripslashes($mobile));
+		fwrite($fp, trim(stripslashes($mobile)));
 		fclose($fp);
 		@chmod($vfile.'.mobile.php',0707);
 	}

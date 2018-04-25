@@ -141,16 +141,31 @@ $_editArray = array(
 				<?php if ($markdown=='Y'): ?>
 
 					<?php if ($mobileOnly): ?>
-
 						<div class="alert alert-danger" role="alert" style="z-index:900">
-						 <strong><i class="fa fa-mobile" aria-hidden="true"></i> 모바일 전용</strong> 파일으로 모바일 기기에서만 출력됩니다. 저장시에 본문내용이 없으면 자동으로 제거됩니다.
+							<i class="fa fa-mobile fa-3x fa-pull-left" aria-hidden="true"></i>
+							본 파일은 <strong>모바일 전용</strong> 파일으로 모바일 기기에서만 출력됩니다. 내용이 없으면 자동삭제 됩니다.<br>
+							PHP 또는 Javascript 가 포함된 경우에는 <a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;uid=<?php echo $uid?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>" class="alert-link"><i class="fa fa-code" aria-hidden="true"></i> 소스코드 편집모드</a> 를 이용해 주세요.
 						</div>
 						<?php $source = is_file($g['path_page'].$_filekind.'.php') ? implode('',file($g['path_page'].$_filekind.'.php')) : ''  ?>
-						<input type="hidden" name="source" value="<?php echo $source?>">
+						<textarea name="source" hidden><?php echo $source ?></textarea>
 						<?php  $_filekind= $_filekind.'.mobile'; ?>
 					<?php else: ?>
+						<div class="alert alert-danger" role="alert" style="z-index:900">
+
+							<?php if (is_file($g['path_page'].$_filekind.'.mobile.php')): ?>
+							<i class="fa fa-desktop fa-3x fa-pull-left" aria-hidden="true"></i>
+							본 파일은 데스크탑에서만 출력됩니다.<br>
+							<?php else: ?>
+							<i class="fa fa-desktop fa-3x fa-pull-left" aria-hidden="true"></i>
+							<i class="fa fa-mobile fa-3x fa-pull-left" aria-hidden="true"></i>
+							본 파일은 모든 기기에서 출력됩니다.  모바일 전용 컨텐츠를 구분하려면 <a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;markdown=Y&amp;mobileOnly=Y&amp;uid=<?php echo $uid?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>" class="alert-link">모바일 전용파일</a>을 생성해 주세요.<br>
+							<?php endif; ?>
+
+						 PHP 또는 Javascript 가 포함된 경우에는 <a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;uid=<?php echo $uid?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>" class="alert-link"><i class="fa fa-code" aria-hidden="true"></i> 소스코드 편집모드</a> 를 이용해 주세요.
+						</div>
+
 						<?php $mobile = is_file($g['path_page'].$_filekind.'.mobile.php') ? implode('',file($g['path_page'].$_filekind.'.mobile.php')) : ''  ?>
-						<input type="hidden" name="mobile" value="<?php echo $mobile?>">
+						<textarea name="mobile" hidden><?php echo $mobile ?></textarea>
 					<?php endif; ?>
 
 					<ol class="breadcrumb mb-2 bg-white text-dark border">
