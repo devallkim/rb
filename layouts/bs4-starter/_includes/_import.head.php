@@ -7,7 +7,7 @@
 <meta name="description" content="<?php echo strip_tags($g['meta_des'])?>">
 <link rel="image_src" href="<?php echo strip_tags($g['meta_img'])?>">
 
-<title><?php echo strip_tags($g['meta_tit'])?></title>
+<title><?php echo $g['browtitle']?></title>
 
 <!-- 파비콘 -->
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['img_layout']?>/icon/apple-touch-icon-144-precomposed.png">

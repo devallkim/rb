@@ -502,7 +502,7 @@ function getMetaImage($str)
 	if (strstr($str,'://'))	return $str;
 	$imgs = getArrayString($str);
 	$R = getUidData($GLOBALS['table']['s_upload'],$imgs['data'][0]);
-	if ($R['type'] == 2 || $R['type'] == 5) return $R['url'].$R['folder'].'/'.$R['tmpname'];
+	if ($R['type'] == 2 || $R['type'] == 5) return getPreviewResize($R['url'].$R['folder'].'/'.$R['tmpname'],'z');
 	if ($R['type'] == -1) return $R['src'];
 	return '';
 }

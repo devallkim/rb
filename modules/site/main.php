@@ -18,6 +18,8 @@ if ($system)
 }
 else
 {
+	$_SEO_SITE = getDbData($table['s_seo'],'rel=0 and parent='.$_HS['uid'],'*');
+
 	if ($_HM['uid'])
 	{
 		if (!$my['admin'])
@@ -64,7 +66,8 @@ else
 			$g['meta_key'] = $_SEO['keywords'];
 			$g['meta_des'] = $_SEO['description'];
 			$g['meta_bot'] = $_SEO['classification'];
-			$g['meta_img'] = getMetaImage($_SEO['image_src']);
+			if ($_SEO['image_src']) $g['meta_img'] =  getMetaImage($_SEO['image_src']);
+			else $g['meta_img'] = $_SEO_SITE['image_src']?getMetaImage($_SEO_SITE['image_src']):$g['img_core'].'/noimage_kimsq.png';
 		}
 		else {
 			$g['meta_tit']   = $_HM['name'];
@@ -118,15 +121,21 @@ else
 			$g['location'] .= ' &gt; <a href="'.RW('mod='.$_HP['id']).'">'.$_HP['name'].'</a>';
 		}
 		$_SEO = getDbData($table['s_seo'],'rel=2 and parent='.$_HP['uid'],'*');
-		if ($_SEO['uid'])
-		{
-			$g['meta_tit'] = $_SEO['title'];
-			$g['meta_key'] = $_SEO['keywords'];
-			$g['meta_des'] = $_SEO['description'];
-			$g['meta_bot'] = $_SEO['classification'];
-			$g['meta_img'] = getMetaImage($_SEO['image_src']);
-		}
-		else {
+		if ($_SEO['uid']) {
+			if ($_HP['ismain']) {
+				$g['meta_tit'] = $_SEO['title']?$_SEO['title']:$_SEO_SITE['title'];
+				$g['meta_key'] = $_SEO['keywords']?$_SEO['keywords']:$_SEO_SITE['keywords'];
+				$g['meta_des'] = $_SEO['description']?$_SEO['description']:$_SEO_SITE['description'];
+				$g['meta_bot'] = $_SEO['classification']?$_SEO['classification']:$_SEO_SITE['classification'];
+			} else {
+				$g['meta_tit'] = $_SEO['title'];
+				$g['meta_key'] = $_SEO['keywords'];
+				$g['meta_des'] = $_SEO['description'];
+				$g['meta_bot'] = $_SEO['classification'];
+			}
+			if ($_SEO['image_src']) $g['meta_img'] =  getMetaImage($_SEO['image_src']);
+			else $g['meta_img'] = $_SEO_SITE['image_src']?getMetaImage($_SEO_SITE['image_src']):$g['img_core'].'/noimage_kimsq.png';
+		} else {
 			$g['meta_tit']   = $_HP['name'];
 			$g['meta_key']   = $_HP['name'].','.$_HP['name'];
 		}
