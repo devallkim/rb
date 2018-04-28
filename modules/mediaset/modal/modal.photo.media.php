@@ -67,7 +67,7 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 <style>
 <?php $_gapAdj = strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')||strpos($_SERVER['HTTP_USER_AGENT'],'Firefox')||strpos($_SERVER['HTTP_USER_AGENT'],'rv:1')?true:false?>
 #rb-body {
-  background: #fff;
+  background-color: inherit;
 }
 
 #photobox {
@@ -317,8 +317,8 @@ $g['base_href'] = $g['s'].'/?r='.$r.'&m='.$m.'&iframe=Y&mdfile='.$mdfile.'&dropf
 			<input type="hidden" name="ablum_type" value="1">
 			<div class="input-group">
 				<input type="text" name="name" class="form-control" placeholder="추가할 카테고리">
-				<span class="input-group-btn">
-				<input type="submit" class="btn btn-light" value="추가">
+				<span class="input-group-append">
+					<button type="submit" class="btn btn-light">추가</button>
 				</span>
 			</div>
 			</form>

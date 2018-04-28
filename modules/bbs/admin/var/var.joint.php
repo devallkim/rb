@@ -28,7 +28,7 @@ $tdir = $g['path_module'].$smodule.'/theme/';
       <div class="input-group ml-2">
         <input type="text" name="_keyw" size="15" value="<?php echo addslashes($_keyw)?>" class="form-control" />
 				<div class="input-group-append">
-					<input type="submit" value=" 검색 " class="btn btn-secondary">
+					<input type="submit" value=" 검색 " class="btn btn-light">
 					<input type="button" value=" 리셋 " class="btn btn-light" onclick="thisReset();">
 				</div>
        	<!--<input type="button" value=" 새 게시판 " class="btn<?php echo $newboard?'gray':'blue'?>" onclick="this.form.newboard.value=1;this.form.submit();" />-->
@@ -58,7 +58,6 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 			<tr>
 				<td class="td1">
 					게시판이름
-					<img src="<?php echo $g['img_core']?>/_public/ico_q.gif" alt="도움말" title="도움말" class="hand" onclick="layerShowHide('guide_bbsidname','block','none');" />
 				</td>
 				<td class="td2">
 					<input type="text" name="name" value="" class="input sname" />
@@ -182,30 +181,34 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 
 	<?php else:?>
 	<?php if($NUM):?>
-	<table class="table">
+	<table class="table table-sm table-hover">
 		 <colgroup>
 		    <col width="30%">
 		    <col>
 		    <col width="32%">
 		 </colgroup>
 		<tr>
-				<td class="name"><a href="<?php echo $g['r']?>/?m=<?php echo $smodule?>" target="_blank">전체게시물</td>
+				<td class="name">
+					<a href="<?php echo $g['r']?>/?m=<?php echo $smodule?>" target="_blank" class="muted-link">
+						전체게시물
+					</a>
+					</td>
 				<td>
 				    <?php include $g['path_module'].$smodule.'/var/var.php';?>
-				   <select class="form-control custom-select">
+				   <select class="form-control custom-select form-control-sm">
 				     <option><?php echo getFolderName($tdir.$d['bbs']['skin_total'])?></option>
 				    </select>
 				</td>
-				<td class="text-right">
-					<button class="btn btn-light" onclick="dropJoint('<?php echo $g['s']?>/?m=<?php echo $smodule?>');" /><i class="fa fa-link"></i> 연결하기</button>
+				<td class="text-right pr-2">
+					<button class="btn btn-light btn-sm" onclick="dropJoint('<?php echo $g['s']?>/?m=<?php echo $smodule?>');" /><i class="fa fa-link"></i> 연결하기</button>
 				</td>
 		</tr>
 		<?php while($R = db_fetch_array($PAGES)):?>
 		<?php include $g['path_module'].$smodule.'/var/var.'.$R['id'].'.php'?>
 		<tr<?php if($R['id']==$id):?> class="madetr"<?php endif?>>
-		<td>
+		<td class="align-middle">
 			<?php if($R['category']):?>
-			<select id="cat<?php echo $R['id']?>" class="form-control custom-select" title="<?php echo $R['id']?>">
+			<select id="cat<?php echo $R['id']?>" class="form-control custom-select form-control-sm" title="<?php echo $R['id']?>">
 				<option value="">&nbsp;+ <?php echo $R['name']?></option>
 				<?php $_catexp = explode(',',$R['category']);$_catnum=count($_catexp)?>
 				<option value="" disabled>--------------------------------</option>
@@ -215,23 +218,26 @@ $tdir = $g['path_module'].$smodule.'/theme/';
 			</select>
 			<?php else:?>
 			<input type="hidden" id="cat<?php echo $R['id']?>" value="" class="form-control">
-			<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $smodule?>&amp;bid=<?php echo $R['id']?>" target="_blank" title="게시판보기"><?php echo $R['name']?></a><span class="badge badge-light badge-pill"><?php echo $R['id']?></span>
+			<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $smodule?>&amp;bid=<?php echo $R['id']?>" target="_blank" title="게시판보기" class="muted-link">
+				<?php echo $R['name']?>
+			</a>
+			<span class="badge badge-light badge-pill"><?php echo $R['id']?></span>
 			<?php endif?>
 		</td>
-		<td class="cat">
-			<select class="form-control custom-select">
+		<td class="align-middle">
+			<select class="form-control form-control-sm custom-select">
 		    <option><?php echo $d['bbs']['skin'] ? getFolderName($tdir.$d['bbs']['skin']) : '게시판 대표테마'?></option>
 			</select>
 		</td>
-		<td class="text-right">
-			<button class="btn btn-light" onclick="dropJoint('<?php echo $g['s']?>/?m=<?php echo $smodule?>&bid=<?php echo $R['id']?>'+(getId('cat<?php echo $R['id']?>').value?'&cat='+getId('cat<?php echo $R['id']?>').value:''));" /><i class="fa fa-link"></i> 연결하기</button>
+		<td class="align-middle text-right pr-2">
+			<button class="btn btn-light btn-sm" onclick="dropJoint('<?php echo $g['s']?>/?m=<?php echo $smodule?>&bid=<?php echo $R['id']?>'+(getId('cat<?php echo $R['id']?>').value?'&cat='+getId('cat<?php echo $R['id']?>').value:''));" /><i class="fa fa-link"></i> 연결하기</button>
 		</td>
 		</tr>
 		<?php endwhile?>
 	</table>
 
 	<div class="mt-3">
-		<ul class="pagination justify-content-center">
+		<ul class="pagination pagination-sm justify-content-center">
 			<script type="text/javascript">getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
 		</ul>
 	</div>
