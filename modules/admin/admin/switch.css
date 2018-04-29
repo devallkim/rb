@@ -1,6 +1,9 @@
+#switch  .fa-square:before {
+  color: rgb(68, 68, 68);
+}
 #switch .card-body {
    padding: 15px 10px 15px;
-   border-top: 1px dotted #c0c0c0
+   border-top: 1px dotted #222
 }
 
 #switch .card-body.rb-panel-form {
@@ -62,17 +65,17 @@
     color: #333;
     text-decoration: none;
     font-weight: bold;
-    border: 1px solid #ddd;
-    background: #fafafa;
-    background: -webkit-linear-gradient(top, #fafafa 0%, #eee 100%);
-    background:    -moz-linear-gradient(top, #fafafa 0%, #eee 100%);
-    background:         linear-gradient(top, #fafafa 0%, #eee 100%);
+    border: 1px solid rgba(255,255,255,.01) !important;
+    background: rgba(255,255,255,.01);
+
     -webkit-border-radius: 3px;
             border-radius: 3px;
     box-sizing: border-box; -moz-box-sizing: border-box;
 }
 
-.dd-handle:hover { color: #2ea8e5; background: #fff; }
+.dd-handle:hover {
+  color: #2ea8e5; background: #fff;
+}
 
 
 .dd-placeholder,
@@ -142,15 +145,15 @@
     line-height: 20px;
     padding: 6px 10px 4px 40px;
     color: #333;
-    border: 1px solid #ddd;
-    background: #eee;
+    border: 1px solid rgba(255,255,255,.03);
+    background-color: rgba(255,255,255,.03);
     -webkit-border-radius: 3px;
             border-radius: 3px;
     box-sizing: border-box; -moz-box-sizing: border-box;
 }
 
 .dd3-content:hover {
-    background: #f5f5f5
+    background: rgba(255,255,255,.01);
 }
 
 .dd3-content small {
@@ -159,14 +162,19 @@
 
 
 .dd-item.rb-active .dd3-content {
-    background-color: #428bca;
-    border-color: #357ebd;
-    color: #fff
+  background-color: #428bca;
+  border-color: #357ebd;
+  color: #fff
 }
-
+.dd-item.rb-active .dd3-handle:before {
+  color: #fff
+}
+.dd-item.rb-active .dd3-handle:hover:before {
+  color: #333
+}
 .dd-item.rb-active .dd3-content a,
 .dd-item.rb-active .dd3-content small {
-    color: #fff
+  color: #fff
 }
 
 .dd-dragel > .dd3-item > .dd3-content { margin: 0; }
@@ -184,7 +192,7 @@
 	white-space: nowrap;
 	overflow: hidden;
     border: 1px solid #ddd;
-    background: #ddd;
+    background-color: rgba(255,255,255,.03);
 
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;

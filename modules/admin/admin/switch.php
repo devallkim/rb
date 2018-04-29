@@ -58,7 +58,9 @@ $SITEN = db_num_rows($SITES);
 							<?php $_i=1;foreach(getSwitchList($_key) as $_switch):$_switch[2]=getFolderName($g['path_switch'].$_key.'/'.$_switch[0]);$_switch[3]=$_key?>
 							<li class="dd-item dd3-item<?php if($_key.'/'.$_switch[0]==$switchdir):$sinfo=$_switch?> rb-active<?php endif?>" data-id="<?php echo $_i?>">
 								<div class="dd-handle dd3-handle"></div>
-								<div class="dd3-content"><a href="<?php echo $g['adm_href']?>&amp;switchdir=<?php echo $_key.'/'.$_switch[0]?>"><?php echo $_switch[2]?></a> <small>(<?php echo $_switch[0]?>)</small></div>
+								<div class="dd3-content"><a href="<?php echo $g['adm_href']?>&amp;switchdir=<?php echo $_key.'/'.$_switch[0]?>"><?php echo $_switch[2]?></a>
+									<span class="badge badge-pill badge-dark"><?php echo $_switch[0]?></span>
+								</div>
 								<div class="dd-checkbox">
 									<input type="checkbox" name="switchmembers_<?php echo $_key?>[]" value="<?php echo $_switch[0]?>" checked class="d-none"><i class="fa fa-eye<?php echo strstr($_switch[1],'['.$r.']')?'':'-slash rb-eye-close'?>"></i>
 								</div>
@@ -101,7 +103,8 @@ $SITEN = db_num_rows($SITES);
 				<div class="col-md-10 col-sm-10">
 					<h4 class="mt-3 mb-3">
 						<strong><?php echo $sinfo[2]?></strong>
-						<small class="text-muted">(<?php echo $sinfo[0]?>) <span class="badge badge-info"><?php echo $sinfo[3]?></span></small>
+						<span class="badge badge-dark"><?php echo $sinfo[0]?></span>
+						<span class="badge badge-dark"><?php echo $sinfo[3]?></span>
 					</h4>
 					<div class="btn-group">
 					  <a class="btn btn-light" data-toggle="collapse" data-target="#_edit_area_" onclick="sessionSetting('sh_admin_switch1','1','','1');"><i class="fa fa-code fa-lg"></i> 코드 조회 및 편집</a>
@@ -125,12 +128,15 @@ $SITEN = db_num_rows($SITES);
 				<input type="hidden" name="switch" value="<?php echo $switchdir?>">
 				<input type="hidden" name="name" value="<?php echo $sinfo[2]?>">
 
-				<h5 class="h6 mt-4">데스크탑 적용 사이트 </h5>
+				<h5 class="h6 mt-4">적용 사이트 </h5>
 
 				<?php foreach($TMPST as $_val):?>
 				<div class="custom-control custom-checkbox custom-control-inline">
 					<input type="checkbox" class="custom-control-input" id="aply_sites_<?php echo $_val[1]?>" name="aply_sites[]" value="<?php echo $_val[1]?>"<?php if(strstr($sinfo[1],'['.$_val[1].']')):?> checked<?php endif?>>
-					<label class="custom-control-label" for="aply_sites_<?php echo $_val[1]?>"><?php echo $_val[0]?> <small class="text-muted">(<?php echo $_val[1]?>)</small></label>
+					<label class="custom-control-label" for="aply_sites_<?php echo $_val[1]?>">
+						<?php echo $_val[0]?>
+						<span class="badge badge-dark"><?php echo $_val[1]?></span>
+					</label>
 				</div>
 				<?php endforeach?>
 				<div class="pt-2">
@@ -140,20 +146,6 @@ $SITEN = db_num_rows($SITES);
 
 				<hr>
 
-				<h5 class="h6 mt-5">모바일 적용 사이트 </h5>
-
-				<?php foreach($TMPST as $_val):?>
-				<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" class="custom-control-input" id="aply_sites_<?php echo $_val[1]?>" name="aply_sites_mobile[]" value="<?php echo $_val[1]?>"<?php if(strstr($sinfo[1],'['.$_val[1].']')):?> checked<?php endif?>>
-					<label class="custom-control-label" for="aply_sites_<?php echo $_val[1]?>"><?php echo $_val[0]?> <small class="text-muted">(<?php echo $_val[1]?>)</small></label>
-				</div>
-				<?php endforeach?>
-				<div class="pt-2">
-					<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',true);">전체선택</button>
-					<button type="button" class="btn btn-light" onclick="checkboxChoice('aply_sites[]',false);">전체취소</button>
-				</div>
-
-				<hr>
 
 				<button class="btn btn-outline-primary btn-block my-4" type="submit"><i class="fa fa-check fa-lg"></i> 저장하기</button>
 
@@ -239,55 +231,16 @@ $SITEN = db_num_rows($SITES);
 
 <?php if($d['admin']['codeeidt']):?>
 <!-- codemirror -->
-<style>
-.CodeMirror {
-	font-size: 13px;
-	font-weight: normal;
-	font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
-}
-</style>
-<?php getImport('codemirror','codemirror',false,'css')?>
-<?php getImport('codemirror','codemirror',false,'js')?>
-<?php getImport('codemirror','theme/'.$d['admin']['codeeidt'],false,'css')?>
-<?php getImport('codemirror','addon/display/fullscreen',false,'css')?>
-<?php getImport('codemirror','addon/display/fullscreen',false,'js')?>
-<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
-<?php getImport('codemirror','mode/xml/xml',false,'js')?>
-<?php getImport('codemirror','mode/javascript/javascript',false,'js')?>
-<?php getImport('codemirror','mode/clike/clike',false,'js')?>
-<?php getImport('codemirror','mode/php/php',false,'js')?>
-<?php getImport('codemirror','mode/css/css',false,'js')?>
-<script>
-var editor = CodeMirror.fromTextArea(getId('__code__'), {
-	mode: "application/x-httpd-php",
-    indentUnit: 4,
-    lineNumbers: true,
-    matchBrackets: true,
-    indentWithTabs: true,
-	theme: '<?php echo $d['admin']['codeeidt']?>',
-	extraKeys: {
-		"F11": function(cm) {
-		  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-		},
-		"Esc": function(cm) {
-		  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
-		}
-	}
-});
-editor.setSize('100%','550px');
-_isCodeEdit = true;
-function _codefullscreen()
-{
-	editor.setOption('fullScreen', !editor.getOption('fullScreen'));
-}
-</script>
-<!-- @codemirror -->
+
 <?php endif?>
 
 
 <!-- nestable : https://github.com/dbushell/Nestable -->
 <?php getImport('nestable','jquery.nestable',false,'js')?>
 <script>
+
+putCookieAlert('admin_switch_result') // 실행결과 알림 메시지 출력
+
 $('#nestable-start').nestable({group:1});
 $('#nestable-top').nestable({group:2});
 $('#nestable-head').nestable({group:3});
@@ -326,7 +279,6 @@ function saveCheck(f)
 	}
 
 	getIframeForAction(f);
-	return confirm('정말로 실행하시겠습니까?   ');
 }
 </script>
 
@@ -337,40 +289,40 @@ function saveCheck(f)
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				<h4 class="modal-title">스위치 실행 스트럭처</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 			</div>
 			<div class="modal-body">
 				<fieldset id="guide_structure">
-<pre>
+<pre class="text-muted">
 		<i>- 프로그램 시작 -</i>
 		<i>- DB연결 -</i>
 		<i>- 주요파일 로드 -</i>
 
-		<span>[스타트 스위치]</span>
+		<span class="badge badge-pill badge-primary">스타트 스위치</span>
 
 		<i>- 모듈 정의 -</i>
 		<i>- 레이아웃 정의 -</i>
 
-		<span>[탑 스위치]</span>
+		<span class="badge badge-pill badge-primary">탑 스위치</span>
 		<fieldset>
-		<legend>[화면에 출력되는 부분]</legend>
+		<legend><span class="badge badge-pill badge-dark">화면 출력부</span></legend>
 		&lt;html&gt;
 		&lt;head&gt;
 
 			<i>- 기초 헤드 -</i>
-			<span>[헤더 스위치]</span>
+			<span class="badge badge-pill badge-primary">헤더 스위치</span>
 
 		&lt;/head&gt;
 		&lt;body&gt;
 
 			<i>- 콘텐츠 영역 -</i>
-			<span>[풋터 스위치]</span>
+			<span class="badge badge-pill badge-primary">풋터 스위치</span>
 
 		&lt;/body&gt;
 		&lt;/html&gt;
 		</fieldset>
-		<span>[엔드 스위치]</span>
+		<span class="badge badge-pill badge-primary">엔드 스위치</span>
 
 </pre>
 				</fieldset>
