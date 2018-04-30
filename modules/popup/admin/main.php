@@ -644,6 +644,14 @@ else {
 
 					</div><!-- /.card-body -->
 					<div class="card-footer">
+						<div class="text-muted mb-3">
+							<i class="fa fa-power-off fa-3x fa-pull-left" aria-hidden="true"></i>
+							<strong class="d-block">
+								<a href="?r=<?php echo $r ?>&m=admin&module=admin&front=switch&switchdir=foot/popup">팝업 스위치 설정</a>이 필요합니다.
+							</strong>
+							<small class="text-muted">적용 사이트에 팝업 스위치가 켜지지 않은 경우, 팝업이 뜨지 않습니다. 팝업 스위치가 켜져 있는지 확인해 보세요.</small>
+						</div>
+						<hr>
 						<small class="text-muted">사이트별로 노출할 페이지 및 메뉴를 지정할 수 있습니다.<br>
 							특정 페이지만 출력시 : <code>[페이지ID][페이지ID]...</code> 의 형식으로 출력페이지를 등록<br>
 							특정메뉴만 출력시 : <code>[메뉴코드][메뉴코드]...</code> 의 형식으로 출력메뉴를 등록. <br>
