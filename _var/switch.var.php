@@ -1,5 +1,5 @@
 <?php
 $d['switch']['start']['filterip'] = "";
-$d['switch']['foot']['jquery-timeago-ko'] = "";
+$d['switch']['foot']['popup'] = "[home]";
 $d['switch']['end']['visitorcheck'] = "";
 ?>

@@ -217,7 +217,7 @@ else {
 				<div data-role="term" <?php if($R['term0']):?> class="d-none"<?php endif?>>
 					<div class="form-group row">
 						<label class="col-lg-2 col-form-label text-lg-right">시작일</label>
-						<div class="col-md-9 col-sm-10">
+						<div class="col-lg-10">
 							<div class="form-inline">
 								<div class="input-group">
 									<select name="year1" class="form-control custom-select">
@@ -285,7 +285,7 @@ else {
 
 					<div class="form-group row">
 						<label class="col-lg-2 col-form-label text-lg-right">종료일</label>
-						<div class="col-md-9 col-sm-10">
+						<div class="col-lg-10">
 
 							<div class="form-inline">
 								<div class="input-group">
@@ -577,7 +577,7 @@ else {
 									 <div class="input-group">
 										 <input class="form-control rb-modal-photo-drop" type="text" name="m_upload" id="_mediaset" value="<?php echo $R['m_upload']?$R['m_upload']:''?>" onmousedown="_mediasetField='_mediaset&dfiles='+this.value;" data-toggle="modal" data-target="#modal_window">
 										 <div class="input-group-append">
-											 <button class="btn btn-light rb-modal-photo" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
+											 <button class="btn btn-light rb-modal-photo-mobile" type="button" title="포토셋" data-tooltip="tooltip" data-toggle="modal" data-target="#modal_window">
 												 <i class="fa fa-photo fa-lg"></i>
 											 </button>
 										 </div>
@@ -776,6 +776,9 @@ $(function () {
 
 	$('.rb-modal-photo').on('click',function() {
 		modalSetting('modal_window','<?php echo getModalLink('&amp;m=mediaset&amp;mdfile=modal.photo.media&amp;dropfield=mediaset')?>');
+	});
+	$('.rb-modal-photo-mobile').on('click',function() {
+		modalSetting('modal_window','<?php echo getModalLink('&amp;m=mediaset&amp;mdfile=modal.photo.media&amp;dropfield=_mediaset')?>');
 	});
 	$('.rb-modal-photo-drop').on('click',function() {
 		modalSetting('modal_window','<?php echo getModalLink('&amp;m=mediaset&amp;mdfile=modal.photo.media&amp;dropfield=')?>'+_mediasetField);
