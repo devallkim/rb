@@ -27,13 +27,12 @@ body,
 <?php endif; ?>
 </style>
 
-
 <!-- 팝업 모달-->
 <div class="modal fade rb-popup" tabindex="-1" role="dialog" id="popup-<?php echo $POP['uid']?>"
   style="<?php if ($POP['position']=='manual'): ?><?php if ($POP['center']): ?>left: 50%;top: 50%;<?php endif; ?>width:<?php echo $POP['width']?>px; <?php echo $POP['center']?'margin-top':'top'?>: <?php echo $POP['ptop']?>px; <?php echo $POP['center']?'margin-left':'left'?> : <?php echo $POP['pleft']?>px<?php endif; ?>">
   <div class="modal-dialog <?php if ($POP['position']=='vcenter'): ?>modal-dialog-centered<?php endif; ?>" role="document">
     <div class="modal-content" style="width:<?php echo $POP['width']?>px;">
-      <div class="modal-body" style="max-height: 500px;overflow-y:auto">
+      <div class="modal-body" style="max-height: 500px;overflow-y:auto;background-color: <?php echo $POP['bgcolor'] ?>">
         <?php if ($POP['type']=='code'): ?>
         <div class="p-2">
           <?php echo getContents($POP['content'],$POP['html'])?>

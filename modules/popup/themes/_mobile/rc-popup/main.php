@@ -8,7 +8,7 @@
 <!-- 팝업 popup -->
 <div class="popup zoom" id="popup-<?php echo $POP['uid']?>">
   <div class="popup-content">
-    <nav class="bar bar-standard bar-footer">
+    <nav class="bar bar-standard bar-footer bg-white">
       <div class="row">
         <div class="col-xs-6">
           <button type="button" class="btn btn-secondary btn-block" id="popCheck_<?php echo $POP['uid']?>">오늘 열지않기</button>
@@ -21,7 +21,7 @@
         </div>
       </div>
     </nav>
-    <div class="content">
+    <div class="content"<?php if ($POP['bgcolor']): ?> style="background-color: <?php echo $POP['bgcolor'] ?>"<?php endif; ?>>
 
       <?php if ($POP['type']=='code'): ?>
       <div class="content-padded">
@@ -32,7 +32,7 @@
         <img src="<?php echo $popupImg_URL?>" alt="<?php echo $POP['name'] ?>" class="img-fluid">
       </a>
       <?php endif; ?>
-      
+
     </div>
   </div>
 </div>

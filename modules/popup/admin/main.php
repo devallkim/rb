@@ -354,6 +354,22 @@ else {
 					</div>
 				</div><!-- /data-role="term" -->
 
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label text-lg-right">배경색</label>
+					<div class="col-sm-6">
+
+						<div class="input-group colorpicker-component w-50" id="colorpicker">
+						  <input type="text" class="form-control" placeholder="" name="bgcolor" value="<?php echo $R['bgcolor']?$R['bgcolor']:'#fff' ?>" >
+						  <div class="input-group-append input-group-addon border-0" style="background-color: none">
+								<span class="input-group-text"><i></i></span>
+						  </div>
+						</div>
+						<small class="form-text text-muted mt-2">
+						</small>
+
+					</div>
+				</div>
+
 				<hr>
 
 				<div class="card">
@@ -677,6 +693,10 @@ else {
 <?php getImport('jquery-timeago','jquery.timeago','1.6.1','js')?>
 <?php getImport('jquery-timeago','locales/jquery.timeago.ko','1.6.1','js')?>
 
+<!-- bootstrap-colorpicker -->
+<?php getImport('bootstrap-colorpicker','css/bootstrap-colorpicker','3.0.0-beta.1','css')?>
+<?php getImport('bootstrap-colorpicker','js/bootstrap-colorpicker.min','3.0.0-beta.1','js')?>
+
 <script>
 
 $(function () {
@@ -690,6 +710,8 @@ $(function () {
     var dueday2 = dueday.replace("전", "지남").replace("후", "남음");
     $(this).text(dueday2)
   });
+
+	$('#colorpicker').colorpicker();
 
 	$('#term0').change(function(){
 		if ($(this).is(':checked')) {

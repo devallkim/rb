@@ -230,6 +230,7 @@ m_type		TINYINT			DEFAULT '0'		NOT NULL,
 dispage		TEXT			DEFAULT ''		NOT NULL,
 skin		VARCHAR(50)		DEFAULT ''		NOT NULL,
 m_skin		VARCHAR(50)		DEFAULT ''		NOT NULL,
+bgcolor		VARCHAR(10)		DEFAULT ''		NOT NULL,
 KEY hidden(hidden)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
 db_query("OPTIMIZE TABLE ".$table['s_popup'],$DB_CONNECT);
