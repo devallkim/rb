@@ -138,7 +138,7 @@ if ($package_step == 2)
 				$_parent = $_PRTUID['uid'];
 			}
 
-			$QVAL = "'".$R['gid']."','".$S['uid']."','".$R['is_child']."','".$_parent."','".$R['depth']."','".$R['id']."','".$R['menutype']."','".$R['mobile']."','".$R['hidden']."','0','".$R['name']."','".$R['target']."','".$R['redirect']."','".$R['joint']."','','0','".$R['layout']."','".$R['m_layout']."','".$R['imghead']."','".$R['imgfoot']."','".$R['addattr']."','0','','','".$R['upload']."','".$R['featured_img']."'";
+			$QVAL = "'".$R['gid']."','".$S['uid']."','".$R['is_child']."','".$_parent."','".$R['depth']."','".$R['id']."','".$R['menutype']."','".$R['mobile']."','".$R['hidden']."','0','".$R['name']."','".$R['target']."','".$R['redirect']."','".$R['joint']."','','0','".$R['layout']."','".$R['m_layout']."','".$R['imghead']."','".$R['imgfoot']."','".$R['addattr']."','0','','".$R['addinfo']."','".$R['upload']."','".$R['featured_img']."'";
 			getDbInsert($table['s_menu'],$QKEY,$QVAL);
 			$lastmenu = getDbCnt($table['s_menu'],'max(uid)','');
 			getDbInsert($table['s_seo'],'rel,parent,title,keywords,description,classification,image_src',"'1','$lastmenu','','','','ALL',''");
