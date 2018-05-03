@@ -68,11 +68,11 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 								<td class="rb-name">
 									<i class="kf <?php echo $_R['icon']?$_R['icon']:'kf-'.$_R['id']?>"></i>
 									<?php echo $_R['name']?>
-									<?php if(!$_R['hidden']):?><small><small class="glyphicon glyphicon-eye-open"></small></small><?php endif?>
+									<?php if(!$_R['hidden']):?><small><small class="fa fa-eye"></small></small><?php endif?>
 								</td>
 								<td class="rb-id"><?php echo $_R['id']?></td>
 								<td class="rb-time">
-									<?php echo getDateFormat($_R['d_regis'],$lang['module']['date1'])?>
+									<?php echo getDateFormat($_R['d_regis'],'Y.m.d')?>
 								</td>
 							</tr>
 							<?php endwhile?>
@@ -156,9 +156,9 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 							<td></td>
 							<td><a href="http://<?php echo $_serverinfo[2]?>/market/<?php echo $var1[2]?>" target="_blank"><?php echo $var1[3]?>(<?php echo $var1[0]?>)</a></td>
 							<td><?php echo $var1[4]?></td>
-							<td><?php echo getDateFormat($var1[1],$lang['module']['date1'])?></td>
+							<td><?php echo getDateFormat($var1[1],'Y.m.d')?></td>
 
-							<td><?php echo getDateFormat($_supdate[0],$lang['module']['date1'])?></td>
+							<td><?php echo getDateFormat($_supdate[0],'Y.m.d')?></td>
 							<td>
 								<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_plugin&amp;extension_path=./modules/<?php echo $id?>/&amp;type=download&amp;ufile=<?php echo $var1[0]?>.<?php echo $var1[5]?>" onclick="return hrefCheck(this,true,'정말로 다운로드 받으시겠습니까?');" class="btn btn-light">다운로드</a>
 							</td>
@@ -174,7 +174,7 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 							<td></td>
 							<td><a href="http://<?php echo $_serverinfo[2]?>/market/<?php echo $var1[2]?>" target="_blank"><?php echo $var1[3]?>(<?php echo $var1[0]?>)</a></td>
 							<td><?php echo $var1[4]?></td>
-							<td><?php echo getDateFormat($var1[1],$lang['module']['date1'])?></td>
+							<td><?php echo getDateFormat($var1[1],'Y.m.d')?></td>
 
 							<td><span class="label label-default">미설치</span></td>
 							<td>

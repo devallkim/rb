@@ -83,7 +83,7 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 										</td>
 										<td class="rb-id"><?php echo $_R['id']?></td>
 										<td class="rb-time">
-											<?php echo getDateFormat($_R['d_regis'],$lang['module']['date1'])?>
+											<?php echo getDateFormat($_R['d_regis'],'Y.m.d')?>
 										</td>
 									</tr>
 									<?php endwhile?>
@@ -305,7 +305,7 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 			<div class="form-group row">
 				<label class="col-lg-2 col-form-label text-lg-right">등록일</label>
 				<div class="col-lg-10 col-xl-9">
-					<p class="text-muted pt-2"><?php echo getDateFormat($R['d_regis'],$lang['module']['date1'])?></p>
+					<p class="text-muted pt-2"><?php echo getDateFormat($R['d_regis'],'Y.m.d')?></p>
 				</div>
 			</div>
 
