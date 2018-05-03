@@ -1,7 +1,7 @@
 <?php
 $d['ov']['is-loading'] = '1.0.6';
 $d['ov']['smooth-scroll'] = '12.1.5';
-$d['ov']['codemirror'] = '4.6';
+$d['ov']['codemirror'] = '5.37.0';
 $d['ov']['photoswipe'] = '4.0.6';
 $d['ov']['swiper'] = '4.1.0';
 $d['ov']['rc'] = '1.0.0-alpha.4';
