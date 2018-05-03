@@ -1,5 +1,24 @@
 <link href="<?php echo $g['s']?>/_core/css/github-markdown.css" rel="stylesheet">
+<style>
+#__code__ {
+	font-weight: normal;
+	font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
+}
+</style>
 <?php getImport('jquery-markdown','jquery.markdown','0.0.10','js')?>
+
+<?php getImport('codemirror','lib/codemirror',false,'css')?>
+<?php getImport('codemirror','lib/codemirror',false,'js')?>
+<?php getImport('codemirror','theme/'.$d['admin']['codeeidt'],false,'css')?>
+<?php getImport('codemirror','addon/display/fullscreen',false,'css')?>
+<?php getImport('codemirror','addon/display/fullscreen',false,'js')?>
+<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
+<?php getImport('codemirror','mode/xml/xml',false,'js')?>
+<?php getImport('codemirror','mode/javascript/javascript',false,'js')?>
+<?php getImport('codemirror','mode/css/css',false,'js')?>
+<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
+<?php getImport('codemirror','mode/clike/clike',false,'js')?>
+<?php getImport('codemirror','mode/php/php',false,'js')?>
 
 <div class="row no-gutters">
   <div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar"><!-- 좌측영역 시작 -->
@@ -184,31 +203,17 @@
 </div> <!--.row -->
 
 
-<?php if($d['admin']['codeeidt']):?>
+<?php if($d['admin']['codeeidt'] && $theme):?>
 <!-- codemirror -->
-<style>
-.CodeMirror {
-	font-size: 13px;
-	font-weight: normal;
-	font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
-}
-</style>
-<?php getImport('codemirror','codemirror',false,'css')?>
-<?php getImport('codemirror','codemirror',false,'js')?>
-<?php getImport('codemirror','theme/'.$d['admin']['codeeidt'],false,'css')?>
-<?php getImport('codemirror','addon/display/fullscreen',false,'css')?>
-<?php getImport('codemirror','addon/display/fullscreen',false,'js')?>
-<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
-<?php getImport('codemirror','mode/xml/xml',false,'js')?>
-<?php getImport('codemirror','mode/javascript/javascript',false,'js')?>
-<?php getImport('codemirror','mode/clike/clike',false,'js')?>
-<?php getImport('codemirror','mode/php/php',false,'js')?>
-<?php getImport('codemirror','mode/css/css',false,'js')?>
+
+
 <script>
 
 (function() {
 
   $(".markdown-body").markdown();
+
+	putCookieAlert('result_member_theme') // 실행결과 알림 메시지 출력
 
   var editor = CodeMirror.fromTextArea(getId('__code__'), {
     mode: "<?php echo $codeset[$codeext]?$codeset[$codeext]:'application/x-httpd-php'?>",

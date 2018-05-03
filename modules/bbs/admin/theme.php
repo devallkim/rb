@@ -1,5 +1,25 @@
 <link href="<?php echo $g['s']?>/_core/css/github-markdown.css" rel="stylesheet">
+<style>
+#__code__ {
+	font-weight: normal;
+	font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
+}
+</style>
+
 <?php getImport('jquery-markdown','jquery.markdown','0.0.10','js')?>
+
+<?php getImport('codemirror','lib/codemirror',false,'css')?>
+<?php getImport('codemirror','lib/codemirror',false,'js')?>
+<?php getImport('codemirror','theme/'.$d['admin']['codeeidt'],false,'css')?>
+<?php getImport('codemirror','addon/display/fullscreen',false,'css')?>
+<?php getImport('codemirror','addon/display/fullscreen',false,'js')?>
+<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
+<?php getImport('codemirror','mode/xml/xml',false,'js')?>
+<?php getImport('codemirror','mode/javascript/javascript',false,'js')?>
+<?php getImport('codemirror','mode/css/css',false,'js')?>
+<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
+<?php getImport('codemirror','mode/clike/clike',false,'js')?>
+<?php getImport('codemirror','mode/php/php',false,'js')?>
 
 <div class="row no-gutters">
   <div class="col-sm-4 col-md-4 col-xl-3 d-none d-sm-block sidebar"><!-- 좌측영역 시작 -->
@@ -112,7 +132,7 @@
           <div class="">
             <div class="rb-codeview">
               <div class="rb-codeview-body">
-                <textarea name="theme_var" id="__code__" class="form-control" rows="30"><?php echo implode('',file($g['path_module'].$module.'/themes/'.$theme.'/_var.php'))?></textarea>
+                <textarea name="theme_var" id="__code__" class="form-control f13" rows="30"><?php echo implode('',file($g['path_module'].$module.'/themes/'.$theme.'/_var.php'))?></textarea>
               </div>
 
               <div class="rb-codeview-footer p-2">
@@ -184,33 +204,18 @@
 </div> <!--.row -->
 
 
-<?php if($d['admin']['codeeidt']):?>
+<?php if($d['admin']['codeeidt'] && $theme):?>
 <!-- codemirror -->
-<style>
-.CodeMirror {
-	font-size: 13px;
-	font-weight: normal;
-	font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
-}
-</style>
-<?php getImport('codemirror','codemirror',false,'css')?>
-<?php getImport('codemirror','codemirror',false,'js')?>
-<?php getImport('codemirror','theme/'.$d['admin']['codeeidt'],false,'css')?>
-<?php getImport('codemirror','addon/display/fullscreen',false,'css')?>
-<?php getImport('codemirror','addon/display/fullscreen',false,'js')?>
-<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
-<?php getImport('codemirror','mode/xml/xml',false,'js')?>
-<?php getImport('codemirror','mode/javascript/javascript',false,'js')?>
-<?php getImport('codemirror','mode/clike/clike',false,'js')?>
-<?php getImport('codemirror','mode/php/php',false,'js')?>
-<?php getImport('codemirror','mode/css/css',false,'js')?>
 <script>
 
 (function() {
+
+	putCookieAlert('result_bbs_theme') // 실행결과 알림 메시지 출력
+
   $(".markdown-body").markdown();
 
   var editor = CodeMirror.fromTextArea(getId('__code__'), {
-    mode: "<?php echo $codeset[$codeext]?$codeset[$codeext]:'application/x-httpd-php'?>",
+    mode: "application/x-httpd-php",
       indentUnit: 2,
       lineNumbers: true,
       matchBrackets: true,
@@ -219,7 +224,9 @@
   });
   editor.setSize('100%','500px');
   _isCodeEdit = true;
-})();
+})
+
+();
 
 </script>
 <!-- @codemirror -->
