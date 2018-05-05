@@ -28,7 +28,9 @@ $(function () {
 	}, 300);
 
 	$(".js-hideModal").click(function() {
-		hideModal()
+		setTimeout(function(){
+			hideModal()
+		}, 100);
 	});
 
 })
