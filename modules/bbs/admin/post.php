@@ -232,12 +232,12 @@ $TPG = getTotalPage($NUM,$recnum);
 						<tr>
 							<th><label data-tooltip="tooltip" title="선택"><input type="checkbox" class="checkAll-post-user"></label></th>
 							<th>번호</th>
+							<th>게시판</th>
 							<th>제목</th>
 							<th>이름</th>
 							<th>조회</th>
 							<th>다운</th>
 							<th>좋아요</th>
-							<th>싫어요</th>
 							<th>신고</th>
 							<th>날짜</th>
 						</tr>
@@ -245,10 +245,14 @@ $TPG = getTotalPage($NUM,$recnum);
 		      <tbody class="text-muted">
 					<?php while($R=db_fetch_array($RCD)):?>
 					<?php $R['mobile']=isMobileConnect($R['agent'])?>
+					<?php $B = getUidData($table[$module.'list'],$R['bbs']); ?>
 					<tr>
 						<td><input type="checkbox" name="post_members[]" value="<?php echo $R['uid']?>" class="rb-post-user" onclick="checkboxCheck();"/></td>
 						<td>
 						    <small class="text-muted"><?php echo $NUM-((($p-1)*$recnum)+$_rec++)?></small>
+						</td>
+						<td>
+							<small class="text-muted"><?php echo $B['name'] ?></small>
 						</td>
 						<td class="text-left">
 							<?php if($R['notice']):?><i class="fa fa-volume-up"></i><?php endif?>
@@ -281,7 +285,6 @@ $TPG = getTotalPage($NUM,$recnum);
 						<td><strong><?php echo $R['hit']?></strong></td>
 						<td><?php echo $R['down']?></td>
 						<td><?php echo $R['likes']?></td>
-						<td><?php echo $R['dislikes']?></td>
 						<td><?php echo $R['report']?></td>
 						<td>
 							<small class="text-muted"><?php echo getDateFormat($R['d_regis'],'Y.m.d H:i')?></small>
@@ -320,24 +323,6 @@ $TPG = getTotalPage($NUM,$recnum);
 </div><!-- /.row -->
 
 
-<!-- Modal -->
-<div class="modal fade" id="MoveCopy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
- </div><!-- /.modal -->
 <!-- bootstrap-datepicker,  http://eternicode.github.io/bootstrap-datepicker/  -->
 <?php getImport('bootstrap-datepicker','css/datepicker3',false,'css')?>
 <?php getImport('bootstrap-datepicker','js/bootstrap-datepicker',false,'js')?>
