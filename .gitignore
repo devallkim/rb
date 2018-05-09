@@ -10,6 +10,7 @@ _var/php.version.txt
 _var/project.key.txt
 _var/table.info.php
 _var/site/*
+_var/update/*
 modules/bbs/var/
 modules/post/
 pages/*
