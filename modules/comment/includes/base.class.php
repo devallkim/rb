@@ -27,7 +27,8 @@ Class comment_DB{
 
     // 문자열  escape
     public function real_escape_string($string){
-    	return mysql_real_escape_string($string);
+      global $DB_CONNECT;
+    	return mysqli_real_escape_string($DB_CONNECT,$string);
     }
 
 }
