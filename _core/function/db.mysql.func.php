@@ -1,45 +1,44 @@
 <?php
 function isConnectedToDB($db)
 {
-	$conn = mysql_connect($db['host'].':'.$db['port'],$db['user'],$db['pass']);
-	$selc = mysql_select_db($db['name'],$conn);
-	return $selc ? $conn : false;
+	return mysqli_connect($db['host'],$db['user'],$db['pass'],$db['name']);
 }
 function db_query($sql,$con)
 {
-	mysql_query('set names utf8',$con);
-	mysql_query('set sql_mode=\'\'',$con);
-	return mysql_query($sql,$con);
+	mysqli_query($con,'set names utf8');
+	mysqli_query($con,'set sql_mode=\'\'');
+	return mysqli_query($con,$sql);
 }
 function db_fetch_array($que)
 {
-	return @mysql_fetch_array($que);
+	return @mysqli_fetch_array($que);
 }
 function db_fetch_assoc($que)
 {
-	return mysql_fetch_assoc($que);
+	return mysqli_fetch_assoc($que);
 }
 function db_num_rows($que)
 {
-	return mysql_num_rows($que);
+	return mysqli_num_rows($que);
 }
 function db_info()
 {
-	return mysql_get_server_info();
+	global $DB_CONNECT;
+	return mysqli_get_server_info($DB_CONNECT);
 }
 function db_error()
 {
-	return mysql_error();
+	return mysqli_error();
 }
 function db_close($conn)
 {
-	return mysql_close($conn);
+	return mysqli_close($conn);
 }
 function db_insert_id($conn)
 {
-	return mysql_insert_id($conn);
+	return mysqli_insert_id($conn);
 }
-//DB-UID데이터 
+//DB-UID데이터
 function getUidData($table,$uid)
 {
 	return getDbData($table,'uid='.(int)$uid,'*');
@@ -96,6 +95,7 @@ function getDbDelete($table,$where)
 	global $DB_CONNECT;
 	db_query("delete from ".$table.($where?' where '.getSqlFilter($where):''),$DB_CONNECT);
 }
+
 //SQL필터링
 function getSqlFilter($sql)
 {
