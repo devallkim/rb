@@ -720,4 +720,32 @@ function getMarkdownContents($str){
 function getBbsPostLink($arr){
 	return RW('m=bbs&bid='.$arr['bbsid'].'&uid='.$arr['uid'].($GLOBALS['s']!=$arr['site']?'&s='.$arr['site']:''));
 }
+
+function getCURLData($url,$header) {
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL,$url);
+	if(is_array($header)) curl_setopt($ch, CURLOPT_HTTPHEADER,$header);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false );
+	curl_setopt($ch, CURLOPT_COOKIE, '' );
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
+
+	$curl_exec = curl_exec($ch);
+	curl_close($ch);
+	return $curl_exec;
+}
+
+function remoteFileExist($filepath) {
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL,$filepath);
+  curl_setopt($ch, CURLOPT_NOBODY, 1);
+  curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  if(curl_exec($ch)!==false) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 ?>
