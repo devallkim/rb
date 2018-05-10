@@ -98,6 +98,9 @@ if ($a) require $g['path_core'].'engine/action.engine.php';
 if ($_HS['open'] > 1) require $g['path_core'].'engine/siteopen.engine.php';
 if (!$s && $m != 'admin') getLink($g['s'].'/?m=admin&module='.$g['sys_module'].'&nosite=Y','','','');
 
+$g['location']	= getLocation(0);
+$g['browtitle'] = getPageTitile();
+
 if($modal) $g['main'] = $g['path_module'].$modal.'.php';
 else include $g['dir_module'].'main.php';
 
@@ -132,8 +135,6 @@ else
 		}
 	}
 
-	$g['location']	= getLocation(0);
-	$g['browtitle'] = getPageTitile();
 	include './layouts/'.$d['layout']['dir'].'/_includes/_import.control.php';
 	include $g['path_layout'].$d['layout']['php'];
 	foreach($g['switch_4'] as $_switch) include $_switch;

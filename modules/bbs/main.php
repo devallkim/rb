@@ -25,8 +25,8 @@ if($uid)
 			if($B['imgfoot']) $g['add_footer_img'] = $g['url_module'].'/var/files/'.$B['imgfoot'];
 		}
 		if($R['mbruid']) $g['member'] = getDbData($table['s_mbrdata'],'memberuid='.$R['mbruid'],'*');
-		if(!$_HS['titlefix']) $g['browtitle'] = $R['subject'].' - '.$B['name'].' - '.$_HS['name'];
-		$g['meta_tit'] = $R['subject'].' - '.$B['name'].' - '.$_HS['name'];
+		$g['browtitle'] = strip_tags($R['subject']).' - '.$B['name'].' - '.$_HS['name'];
+		$g['meta_tit'] = strip_tags($R['subject']).' - '.$B['name'].' - '.$_HS['name'];
 		$g['meta_sbj'] = str_replace('"','\'',$R['subject']);
 		$g['meta_key'] = $R['tag'] ? $B['name'].','.$R['tag'] : $B['name'].','.str_replace('"','\'',$R['subject']);
 		$g['meta_des'] = getStrCut(getStripTags($R['content']),150,'');
@@ -44,8 +44,6 @@ if($uid)
 		// 로그인한 사용자가 게시물을 저장했는지 여부 체크
 		$check_saved_qry = "mbruid='".$my['uid']."' and module='".$m."' and entry='".$uid."'";
 		$is_saved = getDbRows($table['s_saved'],$check_saved_qry);
-
-
 	}
 }
 else {
@@ -76,7 +74,7 @@ else {
 			$g['meta_sbj'] = $B['name'];
 			$g['meta_key'] = $B['name'];
 		}
-		if(!$_HS['titlefix']&&!$_HM['uid']) $g['browtitle'] = $_HS['title'].' - '.strip_tags($B['name']);
+		if(!$_HM['uid']) $g['browtitle'] = $g['browtitle'] = $B['name'].' - '.$_HS['name'];
 	}
 	else {
 		if (!$d['bbs']['skin_total']) getLink('','','게시판아이디가 지정되지 않았습니다.','-1');
