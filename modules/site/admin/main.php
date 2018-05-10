@@ -299,7 +299,7 @@ if ($R['uid'])
 						<ul id="guide_title" class="collapse form-text text-muted pl-3 mt-3">
 							<li><small>입력내용은 브라우저의 <code>&lt;title&gt; &lt;/title&gt;</code> 내부에 출력됩니다.</small></li>
 							<li><small>검색엔진 결과 페이지와 소셜미디어 공유 링크 제목등에 사용됩니다.</small></li>
-							<li><small><code>{site}</code>에는 사이트 라벨이 치환됩니다.</small></li>
+							<li><small><code>{site}</code>에는 사이트명이 치환됩니다.</small></li>
 							<li><small><code>{subject}</code>에는 메뉴명, 페이지 제목등이 치환 됩니다.</small></li>
 							<li><small><code>{location}</code>에는 현재위치가 치환 됩니다.</small></li>
 						</ul>
