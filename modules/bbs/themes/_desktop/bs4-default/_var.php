@@ -8,7 +8,7 @@ $d['theme']['show_catnum'] = "1"; //분류별등록수출력(출력=1/감춤=0)
 $d['theme']['pagenum'] = "5"; //페이지스킵숫자갯수
 $d['theme']['search'] = "1"; //검색폼출력(출력=1/감춤=0)
 $d['theme']['timeago'] = "0"; //상대시간 표기(사용=1/날짜표기=0)
-$d['theme']['modalview'] = "1"; //게시물 모달보기(사용=1/사용안함=0)
+$d['theme']['modalview'] = "0"; //게시물 모달보기(사용=1/사용안함=0)
 
 //본문
 $d['theme']['date_viewf'] = "Y.m.d H:i"; //날짜포맷
