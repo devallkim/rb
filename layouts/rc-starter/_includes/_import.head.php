@@ -13,9 +13,9 @@
 
 <title><?php echo $g['browtitle']?></title>
 
-<!-- 파비콘 -->
+<!-- 홈화면에 추가 아이콘 -->
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['img_layout']?>/icon/apple-touch-icon-144-precomposed.png">
-<link rel="shortcut icon" href="<?php echo $g['img_layout']?>/icon/favicon.ico">
+<link rel="shortcut icon" href="<?php echo $g['img_layout']?>/icon/icon.png">
 
 
 <!-- 사이트 헤드 코드 -->
