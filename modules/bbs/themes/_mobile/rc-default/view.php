@@ -1,4 +1,4 @@
-<section id="page-bbs-view" class="rb-bbs-view" data-uid="<?php echo $R['uid'] ?>" data-bid="<?php echo $B['id'] ?>">
+<section class="rb-bbs-view" data-uid="<?php echo $R['uid'] ?>" data-bid="<?php echo $B['id'] ?>">
 	<header class="bar bar-nav bar-dark bg-primary px-0">
 		<a class="btn btn-link btn-nav pull-left p-x-1" href="<?php echo RW(0)?>">
 	    <span class="icon icon-home"></span>
