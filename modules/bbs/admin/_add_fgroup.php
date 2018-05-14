@@ -157,7 +157,7 @@
 				</div>
 			</div>
 	 </div>
-	<div class="form-group row">
+	<div class="form-group row d-none">
 			<label class="col-lg-2 col-form-label text-lg-right">다운 포인트</label>
 			<div class="col-lg-10 col-xl-9">
 				<div class="row">
