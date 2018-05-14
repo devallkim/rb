@@ -363,6 +363,60 @@
           </div>
         	<?php endif?>
 
+
+          <?php $_add = file($g['path_var'].'site/'.$_HS['id'].'/member.add_field.txt')?>
+        	<?php foreach($_add as $_key):?>
+        	<?php $_val = explode('|',trim($_key))?>
+        	<?php if($_val[6]) continue?>
+        	<?php $_myadd1 = explode($_val[0].'^^^',$my['addfield'])?>
+        	<?php $_myadd2 = explode('|||',$_myadd1[1])?>
+
+        	<div class="form-group row">
+            <label class="col-sm-2 col-form-label"><?php echo $_val[1]?><?php if($_val[5]):?> <span class="text-danger">*</span><?php endif?></label>
+
+          	<div class="col-sm-10">
+            	<?php if($_val[2]=='text'):?>
+            	<input type="text" name="add_<?php echo $_val[0]?>" class="form-control" value="<?php echo $_myadd2[0]?>" <?php if($_val[5]):?> required<?php endif?>>
+            	<?php endif?>
+            	<?php if($_val[2]=='password'):?>
+            	<input type="password" name="add_<?php echo $_val[0]?>" class="form-control" value="<?php echo $_myadd2[0]?>" <?php if($_val[5]):?> required<?php endif?>>
+            	<?php endif?>
+            	<?php if($_val[2]=='select'): $_skey=explode(',',$_val[3])?>
+            	<select name="add_<?php echo $_val[0]?>" class="form-control custom-select"<?php if($_val[5]):?> required<?php endif?>>
+              	<option value="">&nbsp;+ 선택하세요</option>
+              	<?php foreach($_skey as $_sval):?>
+              	<option value="<?php echo trim($_sval)?>"<?php if(trim($_sval)==$_myadd2[0]):?> selected="selected"<?php endif?>>ㆍ<?php echo trim($_sval)?></option>
+              	<?php endforeach?>
+            	</select>
+            	<?php endif?>
+            	<?php if($_val[2]=='radio'): $_skey=explode(',',$_val[3])?>
+            	<div class="shift">
+            	<?php foreach($_skey as $_sval):?>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"  name="add_<?php echo $_val[0]?>" value="<?php echo trim($_sval)?>"<?php if(trim($_sval)==$_myadd2[0]):?> checked="checked"<?php endif?> class="custom-control-input">
+                <label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+              </div>
+            	<?php endforeach?>
+            	</div>
+            	<?php endif?>
+            	<?php if($_val[2]=='checkbox'): $_skey=explode(',',$_val[3])?>
+            	<div class="shift">
+            	<?php foreach($_skey as $_sval):?>
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"  name="add_<?php echo $_val[0]?>[]" value="<?php echo trim($_sval)?>"<?php if(strstr($_myadd2[0],'['.trim($_sval).']')):?> checked="checked"<?php endif?> >
+                <label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+              </div>
+            	<?php endforeach?>
+            	</div>
+            	<?php endif?>
+            	<?php if($_val[2]=='textarea'):?>
+            	<textarea name="add_<?php echo $_val[0]?>" rows="5" class="form-control" <?php if($_val[5]):?> required<?php endif?>><?php echo $_myadd2[0]?></textarea>
+            	<?php endif?>
+            </div>
+
+          </div>
+        	<?php endforeach?>
+
           <div class="form-group row">
             <div class="col-sm-10 offset-sm-2">
               <button type="submit" class="btn btn-primary js-submit">

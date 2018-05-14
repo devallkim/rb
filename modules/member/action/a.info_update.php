@@ -6,7 +6,6 @@ if (!$my['uid'])
 	getLink('','','정상적인 접근이 아닙니다.','');
 }
 
-
 if ($act == 'info')  // 프로필 정보 변경
 {
 
@@ -65,12 +64,27 @@ if ($act == 'info')  // 프로필 정보 변경
 	$sms		= $tel2 && $sms ? 1 : 0;
 	$mailing	= $remail;
 	$bio		= trim($bio);
-
-	$_add = explode('<split>',$my['addfield']);
 	$addfield	= '';
-	for ($i = 0; $i < 10; $i++)
+
+	$_addarray	= file($g['path_var'].'site/'.$r.'/member.add_field.txt');
+	foreach($_addarray as $_key)
 	{
-		$addfield .= ($i ? $_add[$i] : $addfield_0).'<split>';
+		$_val = explode('|',trim($_key));
+		if ($_val[2] == 'checkbox')
+		{
+			$addfield .= $_val[0].'^^^';
+			if (is_array(${'add_'.$_val[0]}))
+			{
+				foreach(${'add_'.$_val[0]} as $_skey)
+				{
+					$addfield .= '['.$_skey.']';
+				}
+			}
+			$addfield .= '|||';
+		}
+		else {
+			$addfield .= $_val[0].'^^^'.trim(${'add_'.$_val[0]}).'|||';
+		}
 	}
 
 	$_QVAL = "email='$email',name='$name',nic='$nic',home='$home',sex='$sex',birth1='$birth1',birth2='$birth2',birthtype='$birthtype',tel1='$tel1',tel2='$tel2',";

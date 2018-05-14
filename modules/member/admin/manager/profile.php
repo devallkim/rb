@@ -68,6 +68,11 @@ $lastlogdate = -getRemainDate($_M['last_log']);
 					<span class="badge badge-pill badge-dark"><?php echo sprintf('%d일전',-getRemainDate($_M['d_regis']))?></span>
 				</dd>
 
+				<dt class="col-3 text-muted">ㆍ 홈페이지</dt>
+				<dd class="col-9">
+					<a href="<?php echo $_M['home'] ?>" target="_blank" class="muted-link"><?php echo $_M['home'] ?></a>
+				</dd>
+
 			</dl>
 		</div>
 
@@ -132,6 +137,14 @@ $lastlogdate = -getRemainDate($_M['last_log']);
 
 			<dl class="row">
 
+				<?php if($_M['sns']):?>
+				<dt class="col-2 text-muted">ㆍ SNS</dt>
+				<dd class="col-10"><?php echo $_M['sns'] ?>
+
+
+				</dd>
+				<?php endif?>
+
 				<?php if($_M['addr0']):?>
 				<dt class="col-2 text-muted">ㆍ 지역</dt>
 				<dd class="col-10">
@@ -161,11 +174,21 @@ $lastlogdate = -getRemainDate($_M['last_log']);
 				</dd>
 				<?php endif?>
 
+				<?php $_add = file($g['path_var'].'site/'.$r.'/member.add_field.txt')?>
+				<?php foreach($_add as $_key):?>
+				<?php $_val = explode('|',trim($_key))?>
+				<?php if($_val[6]) continue?>
+				<?php $_myadd1 = explode($_val[0].'^^^',$_M['addfield'])?>
+				<?php $_myadd2 = explode('|||',$_myadd1[1])?>
+				<dt class="col-2 text-muted">ㆍ <?php echo $_val[1]?></dt>
+				<dd class="col-9">
+					<?php echo $_myadd2[0] ?>
+				</dd>
+				<?php endforeach?>
 
 			</dl>
 
 		</div>
-
 	</div>
 
 </section>

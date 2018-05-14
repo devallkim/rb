@@ -93,6 +93,29 @@ if ($uid)
 	$mailing	= $remail;
 	$bio		= trim($bio);
 
+	$addfield	= '';
+
+	$_addarray	= file($g['path_var'].'site/'.$r.'/member.add_field.txt');
+	foreach($_addarray as $_key)
+	{
+		$_val = explode('|',trim($_key));
+		if ($_val[2] == 'checkbox')
+		{
+			$addfield .= $_val[0].'^^^';
+			if (is_array(${'add_'.$_val[0]}))
+			{
+				foreach(${'add_'.$_val[0]} as $_skey)
+				{
+					$addfield .= '['.$_skey.']';
+				}
+			}
+			$addfield .= '|||';
+		}
+		else {
+			$addfield .= $_val[0].'^^^'.trim(${'add_'.$_val[0]}).'|||';
+		}
+	}
+
 	$_QVAL = "email='$email',name='$name',nic='$nic',home='$home',sex='$sex',photo='$photo',birth1='$birth1',birth2='$birth2',birthtype='$birthtype',tel1='$tel1',tel2='$tel2',";
 	$_QVAL.= "zip='$zip',addr0='$addr0',addr1='$addr1',addr2='$addr2',job='$job',marr1='$marr1',marr2='$marr2',sms='$sms',mailing='$mailing',bio='$bio',addfield='$addfield'";
 	getDbUpdate($table['s_mbrdata'],$_QVAL,'memberuid='.$uid);

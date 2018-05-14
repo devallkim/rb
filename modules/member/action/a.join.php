@@ -95,7 +95,8 @@ $d_regis	= $date['totime'];
 $sns		= '';
 $addfield	= '';
 
-$_addarray	= file($g['path_module'].$m.'/var/add_field.txt');
+$_addarray	= file($g['path_var'].'site/'.$r.'/member.add_field.txt');
+
 foreach($_addarray as $_key)
 {
 	$_val = explode('|',trim($_key));

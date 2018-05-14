@@ -912,32 +912,34 @@ include_once $_tmpvfile;
 	 								<?php $_val = explode('|',trim($_key))?>
 
 	 								<tr>
-	 								<td><input type="button" value="삭제" class="btn btn-danger" onclick="delField(this.form,'<?php echo $_val[0]?>');"></td>
-	 								<td><input type="text" name="add_name_<?php echo $_val[0]?>" size="13" value="<?php echo $_val[1]?>" class="form-control"></td>
-	 								<td>
-	 									<input type="checkbox" name="addFieldMembers[]" value="<?php echo $_val[0]?>" checked="checked" class="d-none">
-	 									<select name="add_type_<?php echo $_val[0]?>" class="form-control custom-select">
-	 										<option value="text"<?php if($_val[2]=='text'):?> selected="selected"<?php endif?>>TEXT</option>
-	 										<option value="password"<?php if($_val[2]=='password'):?> selected="selected"<?php endif?>>PASSWORD</option>
-	 										<option value="select"<?php if($_val[2]=='select'):?> selected="selected"<?php endif?>>SELECT</option>
-	 										<option value="radio"<?php if($_val[2]=='radio'):?> selected="selected"<?php endif?>>RADIO</option>
-	 										<option value="checkbox"<?php if($_val[2]=='checkbox'):?> selected="selected"<?php endif?>>CHECKBOX</option>
-	 										<option value="textarea"<?php if($_val[2]=='textarea'):?> selected="selected"<?php endif?>>TEXTAREA</option>
-	 									</select>
-	 								</td>
-	 								<td><input type="text" name="add_value_<?php echo $_val[0]?>" size="30" value="<?php echo $_val[3]?>" class="form-control"/></td>
-	 							<!-- 	<td><input type="text" name="add_size_<?php echo $_val[0]?>" size="4" value="<?php echo $_val[4]?>" class="form-control" /></td>
-	 							 필요할 경우 주석제거-->	<td>
-	 								 <label class="custom-control custom-checkbox">
-	 									 <input type="checkbox" class="custom-control-input" name="add_pilsu_<?php echo $_val[0]?>" value="1"<?php if($_val[5]):?> checked="checked"<?php endif?>>
-	 									 <span class="custom-control-indicator"></span>
-	 								 </label>
-	 								<td>
-	 									<div class="checkbox add-field-chk">
-	 										<label>
-	 											 <input type="checkbox" name="add_hidden_<?php echo $_val[0]?>" value="1"<?php if($_val[6]):?> checked="checked"<?php endif?>></td>
-	 											</label>
+		 								<td><input type="button" value="삭제" class="btn btn-danger" onclick="delField(this.form,'<?php echo $_val[0]?>');"></td>
+		 								<td><input type="text" name="add_name_<?php echo $_val[0]?>" size="13" value="<?php echo $_val[1]?>" class="form-control"></td>
+		 								<td>
+		 									<input type="checkbox" name="addFieldMembers[]" value="<?php echo $_val[0]?>" checked="checked" class="d-none">
+		 									<select name="add_type_<?php echo $_val[0]?>" class="form-control custom-select">
+		 										<option value="text"<?php if($_val[2]=='text'):?> selected="selected"<?php endif?>>TEXT</option>
+		 										<option value="password"<?php if($_val[2]=='password'):?> selected="selected"<?php endif?>>PASSWORD</option>
+		 										<option value="select"<?php if($_val[2]=='select'):?> selected="selected"<?php endif?>>SELECT</option>
+		 										<option value="radio"<?php if($_val[2]=='radio'):?> selected="selected"<?php endif?>>RADIO</option>
+		 										<option value="checkbox"<?php if($_val[2]=='checkbox'):?> selected="selected"<?php endif?>>CHECKBOX</option>
+		 										<option value="textarea"<?php if($_val[2]=='textarea'):?> selected="selected"<?php endif?>>TEXTAREA</option>
+		 									</select>
+		 								</td>
+		 								<td><input type="text" name="add_value_<?php echo $_val[0]?>" size="30" value="<?php echo $_val[3]?>" class="form-control"/></td>
+		 							<!-- 	<td><input type="text" name="add_size_<?php echo $_val[0]?>" size="4" value="<?php echo $_val[4]?>" class="form-control" /></td>
+		 							 필요할 경우 주석제거-->
+									 <td>
+		 								 <label class="custom-control custom-checkbox mb-0">
+		 									 <input type="checkbox" class="custom-control-input" name="add_pilsu_<?php echo $_val[0]?>" value="1"<?php if($_val[5]):?> checked="checked"<?php endif?>  id="add_pilsu_<?php echo $_val[0]?>">
+		 									 <span class="custom-control-label" for="add_pilsu_<?php echo $_val[0]?>"></span>
+		 								 </label>
+									 </td>
+	 								 <td>
+											<div class="custom-control custom-checkbox mb-0">
+	 									   <input type="checkbox" class="custom-control-input" name="add_hidden_<?php echo $_val[0]?>" value="1"<?php if($_val[6]):?> checked="checked"<?php endif?> id="add_hidden_<?php echo $_val[0]?>">
+	 									   <label class="custom-control-label" for="add_hidden_<?php echo $_val[0]?>"></label>
 	 									 </div>
+								 		</td>
 	 								</tr>
 	 								<?php endforeach?>
 	 								<tr class="active">
@@ -977,7 +979,7 @@ include_once $_tmpvfile;
 	 						 </table>
 	 						 <p class="collapse bg-light p-3 text-muted border-light small" id="value-guide">
 	 								<code>input</code> 의 경우 해당 값이 되므로 입력하지 않는 것이 일반적입니다. <br>
-	 								<code>select</code><code>radio</code><code>checkbox</code> 의 경우 선택항목이 되며 콤마(,)로 구분하시면 됩니다.
+	 								<code>select</code>,<code>radio</code>,<code>checkbox</code> 의 경우 선택항목이 되며 콤마(,)로 구분하시면 됩니다.
 	 						 </p>
 	 					 </div>
 
@@ -989,52 +991,57 @@ include_once $_tmpvfile;
 	 								 <?php $_val = explode('|',trim($_key))?>
 	 								 <?php if(!$_val[0]) continue?>
 	 										 <div class="form-group">
-	 												 <label  for="<?php echo $_val[0]?>" class="col-sm-3 control-label"><?php echo $_val[1]?></label>
+ 												 <label  for="<?php echo $_val[0]?>" class="col-sm-3 control-label">
+													 <?php echo $_val[1]?>
+													 <?php if($_val[5]):?> <span class="text-danger">*</span><?php endif?>
+												 </label>
 	 												<div class="col-sm-8">
-	 															<!-- 일반 input=text -->
+ 															<!-- 일반 input=text -->
 	 														<?php if($_val[2]=='text'):?>
-	 																<input type="text" id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" value="<?php echo $_val[3]?>" class="form-control"/>
+															<input type="text" id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" value="<?php echo $_val[3]?>" class="form-control"/>
 	 														<?php endif?>
 
 	 														<!-- password input=text -->
 	 														<?php if($_val[2]=='password'):?>
-	 																 <input type="password" id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" value="<?php echo $_val[3]?>" class="form-control" />
+														  <input type="password" id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" value="<?php echo $_val[3]?>" class="form-control" />
 	 														<?php endif?>
 
-	 																		 <!-- select box -->
+														 	<!-- select box -->
 	 														<?php if($_val[2]=='select'): $_skey=explode(',',$_val[3])?>
-	 															<select name="add_<?php echo $_val[0]?>" id="<?php echo $_val[0]?>" class="form-control">
-	 																<option value="">&nbsp;+ 선택하세요</option>
-	 																<?php foreach($_skey as $_sval):?>
-	 																<option value="<?php echo trim($_sval)?>">ㆍ<?php echo trim($_sval)?></option>
-	 																<?php endforeach?>
-	 															</select>
+ 															<select name="add_<?php echo $_val[0]?>" id="<?php echo $_val[0]?>" class="form-control">
+ 																<option value="">&nbsp;+ 선택하세요</option>
+ 																<?php foreach($_skey as $_sval):?>
+ 																<option value="<?php echo trim($_sval)?>">ㆍ<?php echo trim($_sval)?></option>
+ 																<?php endforeach?>
+ 															</select>
 	 														<?php endif?>
 
 	 														<!-- input=radio -->
 	 														<?php if($_val[2]=='radio'): $_skey=explode(',',$_val[3])?>
-	 															<?php foreach($_skey as $_sval):?>
-	 																	<label class="radio-inline">
-	 																		<input type="radio" name="add_<?php echo $_val[0]?>" value="<?php echo trim($_sval)?>" /><?php echo trim($_sval)?>
-	 																		 </label>
-	 															 <?php endforeach?>
+															<?php foreach($_skey as $_sval):?>
+															<div class="custom-control custom-radio custom-control-inline">
+															  <input type="radio" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>" name="add_<?php echo $_val[0]?>" value="<?php echo trim($_sval)?>" class="custom-control-input">
+															  <label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+															</div>
+															<?php endforeach?>
 	 														<?php endif?>
 
-	 														<!-- input=checkbox -->
-	 														<?php if($_val[2]=='checkbox'): $_skey=explode(',',$_val[3])?>
-	 																<?php foreach($_skey as $_sval):?>
-	 																	 <label class="checkbox-inline">
-	 																			 <input type="checkbox" name="add_<?php echo $_val[0]?>[]" value="<?php echo trim($_sval)?>" /><?php echo trim($_sval)?>
-	 																	 </label>
-	 																	<?php endforeach?>
-	 														<?php endif?>
+															<!-- input=checkbox -->
+															<?php if($_val[2]=='checkbox'): $_skey=explode(',',$_val[3])?>
+															<?php foreach($_skey as $_sval):?>
+															<div class="custom-control custom-checkbox custom-control-inline">
+																<input type="checkbox" class="custom-control-input" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>" name="add_<?php echo $_val[0]?>[]" value="<?php echo trim($_sval)?>">
+																<label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+															</div>
+															<?php endforeach?>
+															<?php endif?>
 
 	 														<!-- textarea -->
 	 														<?php if($_val[2]=='textarea'):?>
 	 														<textarea id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" rows="5" class="form-control"><?php echo $_val[3]?></textarea>
 	 														<?php endif?>
 
-	 																 </div> <!-- .col-sm-8 -->
+														 </div> <!-- .col-sm-8 -->
 	 												</div> <!-- .form-group -->
 	 												<?php endforeach?>
 

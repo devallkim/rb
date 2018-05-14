@@ -1,3 +1,5 @@
+<?php $_add = file($g['path_var'].'site/'.$_HS['id'].'/member.add_field.txt')?>
+
 <!-- Start Page -->
 <div id="page-main" class="page center">
 	<header class="bar bar-nav bar-dark bg-primary px-0">
@@ -193,12 +195,20 @@
 				</a>
 			</li>
 			<?php endif?>
+
+			<?php if($_add):?>
+			<li class="table-view-cell">
+				<a class="navigate-right" data-toggle="page" data-start="#page-main" href="#page-addfield">
+					추가정보
+				</a>
+			</li>
+			<?php endif?>
+
 		</ul>
 
 		<ul class="table-view bg-white">
 			<li class="table-view-cell">
 				<a class="navigate-right" data-toggle="page" data-start="#page-main" href="#page-leave">
-
 					탈퇴
 				</a>
 			</li>
@@ -250,6 +260,19 @@
 			<input type="hidden" name="marr_1" value="<?php echo $my['marr1']?>">
 			<input type="hidden" name="marr_2" value="<?php echo substr($my['marr2'],0,2)?>">
 			<input type="hidden" name="marr_3" value="<?php echo substr($my['marr2'],2,4)?>">
+
+			<?php foreach($_add as $_key):?>
+			<?php $_val = explode('|',trim($_key))?>
+			<?php if($_val[6]) continue?>
+			<?php $_myadd1 = explode($_val[0].'^^^',$my['addfield'])?>
+			<?php $_myadd2 = explode('|||',$_myadd1[1])?>
+
+			<?php if ($_val[2]=='checkbox'): ?>
+			<input type="hidden" name="add_<?php echo $_val[0]?>[]" value="<?php echo $_myadd2[0]?>">
+			<?php else: ?>
+			<input type="hidden" name="add_<?php echo $_val[0]?>" value="<?php echo $_myadd2[0]?>">
+			<?php endif; ?>
+			<?php endforeach?>
 
 		</form>
 
@@ -784,6 +807,133 @@
 	</div>
 </div>
 <?php endif?>
+
+
+<!-- Target Page : 추가 가입항목 -->
+<div id="page-addfield" class="page right">
+	<header class="bar bar-nav bar-dark bg-primary px-0">
+		<a class="icon icon-left-nav pull-left p-x-1" role="button" data-history="back"></a>
+		<h1 class="title">추가정보</h1>
+	</header>
+	<div class="bar bar-standard bar-footer bar-light bg-faded">
+		<button type="button" class="btn btn-outline-primary btn-block js-save">변경하기</button>
+	</div>
+	<div class="content">
+		<div class="content-padded">
+
+			<?php $_add = file($g['path_var'].'site/'.$_HS['id'].'/member.add_field.txt')?>
+			<?php foreach($_add as $_key):?>
+			<?php $_val = explode('|',trim($_key))?>
+			<?php if($_val[6]) continue?>
+			<?php $_myadd1 = explode($_val[0].'^^^',$my['addfield'])?>
+			<?php $_myadd2 = explode('|||',$_myadd1[1])?>
+
+			<div class="form-group">
+		    <label><?php echo $_val[1]?><?php if($_val[5]):?> <span class="text-danger">*</span><?php endif?></label>
+				<?php if($_val[2]=='text'):?>
+				<input type="text" name="add_<?php echo $_val[0]?>" class="form-control" value="<?php echo $_myadd2[0]?>" />
+				<?php endif?>
+				<?php if($_val[2]=='password'):?>
+				<input type="password" name="add_<?php echo $_val[0]?>" class="form-control" value="<?php echo $_myadd2[0]?>" />
+				<?php endif?>
+				<?php if($_val[2]=='select'): $_skey=explode(',',$_val[3])?>
+				<select name="add_<?php echo $_val[0]?>" class="form-control custom-select">
+					<option value="">&nbsp;+ 선택하세요</option>
+					<?php foreach($_skey as $_sval):?>
+					<option value="<?php echo trim($_sval)?>"<?php if(trim($_sval)==$_myadd2[0]):?> selected="selected"<?php endif?>>ㆍ<?php echo trim($_sval)?></option>
+					<?php endforeach?>
+				</select>
+				<?php endif?>
+				<?php if($_val[2]=='radio'): $_skey=explode(',',$_val[3])?>
+				<div class="custom-controls-stacked">
+				<?php foreach($_skey as $_sval):?>
+				<div class="custom-control custom-radio">
+					<input type="radio" class="custom-control-input" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"  name="add_<?php echo $_val[0]?>" value="<?php echo trim($_sval)?>"<?php if(trim($_sval)==$_myadd2[0]):?> checked="checked"<?php endif?> class="custom-control-input">
+					<span class="custom-control-indicator"></span>
+					<label class="custom-control-description" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+				</div>
+				<?php endforeach?>
+				</div>
+				<?php endif?>
+				<?php if($_val[2]=='checkbox'): $_skey=explode(',',$_val[3])?>
+				<div class="custom-controls-stacked">
+				<?php foreach($_skey as $_sval):?>
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"  name="add_<?php echo $_val[0]?>[]" value="<?php echo trim($_sval)?>"<?php if(strstr($_myadd2[0],'['.trim($_sval).']')):?> checked="checked"<?php endif?> >
+					<span class="custom-control-indicator"></span>
+					<label class="custom-control-description" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+				</div>
+
+				<?php endforeach?>
+				</div>
+				<?php endif?>
+				<?php if($_val[2]=='textarea'):?>
+				<textarea name="add_<?php echo $_val[0]?>" rows="5" class="form-control"><?php echo $_myadd2[0]?></textarea>
+				<?php endif?>
+		  </div>
+
+			<?php endforeach?>
+
+		</div>
+	</div>
+</div>
+
+
+<script>
+
+//추가정보 전용
+var f = document.getElementById("memberForm");
+var page_main = $('#page-main')
+var page_addfield = $('#page-addfield')
+
+page_addfield.find('.js-save').tap(function() {
+
+	<?php foreach($_add as $_key):?>
+
+	<?php $_val = explode('|',trim($_key))?>
+	<?php if($_val[6]) continue?>
+	<?php $_myadd1 = explode($_val[0].'^^^',$my['addfield'])?>
+	<?php $_myadd2 = explode('|||',$_myadd1[1])?>
+
+	<?php if ($_val[2]=='radio'): ?>
+	var add_<?php echo $_val[0]?> = page_addfield.find('[name="add_<?php echo $_val[0]?>"]:checked').val()
+	page_main.find('[name="add_<?php echo $_val[0]?>"]').val(add_<?php echo $_val[0]?>);
+
+	<?php elseif ($_val[2]=='checkbox'): ?>
+	var add_checkbox = page_main.find('[name="add_<?php echo $_val[0]?>[]"]')
+	add_checkbox.val('');
+
+	page_addfield.find('[name="add_<?php echo $_val[0]?>[]"]:checked').each(function() {
+		var item = $(this).val();
+		var item2 = add_checkbox.val();
+		add_checkbox.val(item2+'['+item+']');
+	});
+
+	<?php else: ?>
+	var add_<?php echo $_val[0]?> = page_addfield.find('[name="add_<?php echo $_val[0]?>"]').val()
+	page_main.find('[name="add_<?php echo $_val[0]?>"]').val(add_<?php echo $_val[0]?>);
+	<?php endif; ?>
+
+	<?php endforeach?>
+
+	setTimeout(function() {
+		$('#page-addfield').find('.content').loader({
+			text:       "변경중...",
+			position:   "overlay"
+		});
+	}, 300); //가상 키보드가 내려오는 시간동안 대기
+
+	setTimeout(function() {
+		$('#page-addfield').find('.content').loader("hide");
+		window.history.back();  // 메인 페이지로 복귀
+		setTimeout(function() {
+			getIframeForAction(f);
+	    f.submit();
+		}, 500); //페이지 전환효과 소요시간동안 대기
+	}, 700);
+});
+
+</script>
 
 
 <!-- Target Page : 회원탈퇴 -->

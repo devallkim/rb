@@ -324,7 +324,58 @@
 			<?php endif?>
 
 
-			<div class="d-flex justify-content-between">
+			<!-- 추가 가입항목 -->
+			<?php $_add = file($g['path_var'].'site/'.$_HS['id'].'/member.add_field.txt')?>
+			<?php foreach($_add as $_key):?>
+			<?php $_val = explode('|',trim($_key))?>
+			<?php if($_val[6]) continue?>
+			<div class="form-group">
+				<label><?php echo $_val[1]?><?php if($_val[5]):?><span class="text-danger">*</span><?php endif?></label>
+
+				<?php if($_val[2]=='text'):?>
+				<input type="text" name="add_<?php echo $_val[0]?>" class="form-control" value="<?php echo $_val[3]?>"<?php if($_val[5]):?> required<?php endif?>>
+				<?php endif?>
+				<?php if($_val[2]=='password'):?>
+				<input type="password" name="add_<?php echo $_val[0]?>" class="form-control" value="<?php echo $_val[3]?>"<?php if($_val[5]):?> required<?php endif?>>
+				<?php endif?>
+				<?php if($_val[2]=='select'): $_skey=explode(',',$_val[3])?>
+				<select name="add_<?php echo $_val[0]?>" class="form-control custom-select"<?php if($_val[5]):?> required<?php endif?>>
+					<option value="">&nbsp;+ 선택하세요</option>
+					<?php foreach($_skey as $_sval):?>
+					<option value="<?php echo trim($_sval)?>">ㆍ<?php echo trim($_sval)?></option>
+					<?php endforeach?>
+				</select>
+				<?php endif?>
+				<?php if($_val[2]=='radio'): $_skey=explode(',',$_val[3])?>
+				<div class="">
+				<?php foreach($_skey as $_sval):?>
+				<div class="custom-control custom-radio custom-control-inline">
+				  <input type="radio" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>" name="add_<?php echo $_val[0]?>" value="<?php echo trim($_sval)?>" class="custom-control-input">
+				  <label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+				</div>
+				<?php endforeach?>
+				</div>
+				<?php endif?>
+				<?php if($_val[2]=='checkbox'): $_skey=explode(',',$_val[3])?>
+				<div>
+				<?php foreach($_skey as $_sval):?>
+				<div class="custom-control custom-checkbox custom-control-inline">
+				  <input type="checkbox" class="custom-control-input" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>" name="add_<?php echo $_val[0]?>[]" value="<?php echo trim($_sval)?>">
+				  <label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+				</div>
+				<?php endforeach?>
+				</div>
+				<?php endif?>
+				<?php if($_val[2]=='textarea'):?>
+				<textarea name="add_<?php echo $_val[0]?>" rows="5" class="form-control"<?php if($_val[5]):?> required<?php endif?>><?php echo $_val[3]?></textarea>
+				<?php endif?>
+
+			</div><!-- /.form-group -->
+			<?php endforeach?>
+
+
+
+			<div class="d-flex justify-content-between mt-4">
 				<div class="custom-control custom-checkbox">
 					<input type="checkbox" class="custom-control-input" id="agreecheckbox" name="agreecheckbox">
 					<label class="custom-control-label" for="agreecheckbox">서비스 약관에 동의합니다.</label>
@@ -671,6 +722,53 @@ $(function () {
 			return false;
 		}
 		<?php endif?>
+
+
+		var radioarray;
+		var checkarray;
+		var i;
+		var j = 0;
+		<?php foreach($_add as $_key):?>
+		<?php $_val = explode('|',trim($_key))?>
+		<?php if(!$_val[5]||$_val[6]) continue?>
+		<?php if($_val[2]=='text' || $_val[2]=='password' || $_val[2]=='select' || $_val[2]=='textarea'):?>
+		if (f.add_<?php echo $_val[0]?>.value == '')
+		{
+			alert('<?php echo $_val[1]?>이(가) <?php echo $_val[2]=='select'?'선택':'입력'?>되지 않았습니다.     ');
+			f.add_<?php echo $_val[0]?>.focus();
+			return false;
+		}
+		<?php endif?>
+		<?php if($_val[2]=='radio'):?>
+		j = 0;
+		radioarray = f.add_<?php echo $_val[0]?>;
+		for (i = 0; i < radioarray.length; i++)
+		{
+			if (radioarray[i].checked == true) j++;
+		}
+		if (!j)
+		{
+			alert('<?php echo $_val[1]?>이(가) 선택되지 않았습니다.     ');
+			radioarray[0].focus();
+			return false;
+		}
+		<?php endif?>
+		<?php if($_val[2]=='checkbox'):?>
+		j = 0;
+		checkarray = document.getElementsByName("add_<?php echo $_val[0]?>[]");
+		for (i = 0; i < checkarray.length; i++)
+		{
+			if (checkarray[i].checked == true) j++;
+		}
+		if (!j)
+		{
+			alert('<?php echo $_val[1]?>이(가) 선택되지 않았습니다.     ');
+			checkarray[0].focus();
+			return false;
+		}
+		<?php endif?>
+		<?php endforeach?>
+
 
 		if (f.check_id.value == '0' || f.check_email.value == '0' || f.check_pw.value == '0') {
 			event.preventDefault();
