@@ -1,6 +1,6 @@
 <?php
 $recnum = 10;
-$catque = 'uid';
+$catque = 'uid and site='.$s;
 if ($_keyw) $catque .= " and ".$where." like '".$_keyw."%'";
 $PAGES = getDbArray($table[$smodule.'list'],$catque,'*','gid','asc',$recnum,$p);
 $NUM = getDbRows($table[$smodule.'list'],$catque);
