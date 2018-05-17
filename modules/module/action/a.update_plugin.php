@@ -14,7 +14,7 @@ if ($type == 'delete')
 {
 	unlink($_ufile);
 	//여기에 실제 테마 삭제처리
-	DirDelete($extension_path.'theme/'.$_ufileexp[0]);
+	DirDelete($extension_path.'themes/'.$_ufileexp[0]);
 	getLink('reload','parent.','테마가 제거되었습니다.','');
 }
 else if ($type == 'download')
@@ -26,7 +26,7 @@ else {
 	require $g['path_core'].'opensrc/unzip/ArchiveExtractor.class.php';
 	include $g['path_core'].'function/rss.func.php';
 	include $g['path_module'].'market/var/var.php';
-	$_serverinfo = explode('/',$d['market']['url']);
+	$_serverinfo = explode('/',$d['update']['url']);
 	$_updatedate = getUrlData('http://'.$_serverinfo[2].'/__update/market/'.$_upath.'theme.txt',10);
 	$_updatelist = explode("\n",$_updatedate);
 	$_updateleng = count($_updatelist)-1;
@@ -71,10 +71,10 @@ else {
 
 
 	// 테스트용
-	mkdir($extension_path.'theme',0707);
-	@chmod($extension_path.'theme',0707);
-	mkdir($extension_path.'theme/'.$_ufileexp[0],0707);
-	@chmod($extension_path.'theme/'.$_ufileexp[0],0707);
+	mkdir($extension_path.'themes',0707);
+	@chmod($extension_path.'themes',0707);
+	mkdir($extension_path.'themes/'.$_ufileexp[0],0707);
+	@chmod($extension_path.'themes/'.$_ufileexp[0],0707);
 
 
 

@@ -120,18 +120,20 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 			include $g['path_core'].'function/rss.func.php';
 			include $g['path_module'].'market/var/var.php';
 			$_serverinfo = explode('/',$d['update']['url']);
-			$_updatelist = getUrlData('http://'.$_serverinfo[2].'/__update/market/modules/'.$id.'/theme.txt',10);
+			$updatefile = 'http://'.$_serverinfo[2].'/__update/market/modules/'.$id.'/theme.txt';
+			$_updatelist = getUrlData($updatefile,10);
 			$_updatelist = explode("\n",$_updatelist);
 			$_updatelength = count($_updatelist)-1;
-			$recnum	=  10;
+			$recnum	=  1000;
 			$TPG = getTotalPage($_updatelength,$recnum);
 			?>
 
+			<?php if (remoteFileExist($updatefile) == 1): ?>
 			<div class="table-responsive">
-				<table class="table table-hover">
-					<thead>
+				<table class="table table-hover f13 text-center">
+					<thead class="text-muted">
 						<tr>
-							<th colspan="2">내 테마</th>
+							<th>내 테마</th>
 							<th>테마명(아이디)</th>
 							<th>제작자</th>
 							<th>마켓등록일</td>
@@ -141,7 +143,6 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 						</tr>
 					</thead>
 					<tbody>
-
 						<?php $_ishistory=false?>
 						<?php for($i = $_updatelength-(($p-1)*$recnum)-1; $i > $_updatelength-($p*$recnum)-1; $i--):?>
 						<?php $_update=trim($_updatelist[$i]);if(!$_update)continue?>
@@ -152,8 +153,7 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 						<?php $_supdate=explode(',',implode('',file($_updatefile)))?>
 
 						<tr>
-							<td><?php if(is_dir($g['path_module'].$id.'/theme/'.$var1[0])):?><span style="color:red;">Y</span><?php else:?>N<?php endif?></td>
-							<td></td>
+							<td><?php if(is_dir($g['path_module'].$id.'/themes/'.$var1[0])):?><span style="color:red;">Y</span><?php else:?>N<?php endif?></td>
 							<td><a href="http://<?php echo $_serverinfo[2]?>/market/<?php echo $var1[2]?>" target="_blank"><?php echo $var1[3]?>(<?php echo $var1[0]?>)</a></td>
 							<td><?php echo $var1[4]?></td>
 							<td><?php echo getDateFormat($var1[1],'Y.m.d')?></td>
@@ -189,19 +189,21 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 						<?php endfor?>
 						<?php if(!$_updatelength):?>
 						<tr>
-						<td colspan="8">마켓에 등록된 관련테마나 플러그인이 없습니다.</td>
+						<td colspan="8" class="text-center text-muted">마켓에 등록된 관련테마나 플러그인이 없습니다.</td>
 						</tr>
 						<?php endif?>
 					</tbody>
 				</table>
 			</div>
 
-			<div class="text-center">
-				<ul class="pagination">
-					<script type="text/javascript">getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
-					<?php //echo getPageLink(5,$p,$TPG,'')?>
-				</ul>
-			</div>
+			<ul class="pagination justify-content-center d-none">
+				<script type="text/javascript">getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
+			</ul>
+		<?php else: ?>
+		<div class="p-5 text-muted small text-center">
+			업데이트 정보가 없습니다.
+		</div>
+		<?php endif; ?>
 
 		</div>
 	</div>

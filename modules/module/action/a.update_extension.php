@@ -25,7 +25,7 @@ else {
 	require $g['path_core'].'function/dir.func.php';
 	include $g['path_core'].'function/rss.func.php';
 	include $g['path_module'].'market/var/var.php';
-	$_serverinfo = explode('/',$d['market']['url']);
+	$_serverinfo = explode('/',$d['update']['url']);
 	$_updatedate = getUrlData('http://'.$_serverinfo[2].'/__update/market/'.$_upath.'update.txt',10);
 	$_updatelist = explode("\n",$_updatedate);
 	$_updateleng = count($_updatelist)-1;

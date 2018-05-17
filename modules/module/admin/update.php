@@ -120,16 +120,19 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 			include $g['path_core'].'function/rss.func.php';
 			include $g['path_module'].'market/var/var.php';
 			$_serverinfo = explode('/',$d['update']['url']);
-			$_updatelist = getUrlData('http://'.$_serverinfo[2].'/__update/market/modules/'.$id.'/update.txt',10);
+			$updatefile = 'http://'.$_serverinfo[2].'/__update/market/modules/'.$id.'/update.txt';
+			$_updatelist = getUrlData($updatefile,10);
 			$_updatelist = explode("\n",$_updatelist);
 			$_updatelength = count($_updatelist)-1;
-			$recnum	=  10;
-			$TPG = getTotalPage($_updatelength,$recnum);
+			$recnum2	=  1000;
+			$TPG2 = getTotalPage($_updatelength,$recnum2);
 			?>
 
+
+			<?php if (remoteFileExist($updatefile) == 1): ?>
 			<div class="table-responsive">
-				<table class="table table-hover">
-					<thead>
+				<table class="table table-hover f13 text-center">
+					<thead class="text-muted">
 						<tr>
 							<th>버전</th>
 							<th>패치/업데이트</th>
@@ -141,7 +144,7 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 					<tbody>
 
 						<?php $_ishistory=false?>
-						<?php for($i = $_updatelength-(($p-1)*$recnum)-1; $i > $_updatelength-($p*$recnum)-1; $i--):?>
+						<?php for($i = $_updatelength-(($p2-1)*$recnum2)-1; $i > $_updatelength-($p2*$recnum2)-1; $i--):?>
 						<?php $_update=trim($_updatelist[$i]);if(!$_update)continue?>
 						<?php $var1=explode(',',$_update)?>
 						<?php $var2=explode(',',$_updatelist[$i-1])?>
@@ -167,8 +170,8 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 							<td></td>
 							<td>미적용</td>
 							<td>
-								<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_extension&amp;extension_path=./modules/<?php echo $id?>/&amp;type=auto&amp;ufile=<?php echo $var1[1]?>" onclick="return hrefCheck(this,true,'정말로 업데이트 하시겠습니까?');">원격 업데이트</a>
-								<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_extension&amp;extension_path=./modules/<?php echo $id?>/&amp;type=manual&amp;ufile=<?php echo $var1[1]?>" title="수동 업데이트 처리" onclick="return hrefCheck(this,true,'정말로 수동으로 업데이트 처리하시겠습니까?\n수동 업데이트 처리시 원격업데이트는 건너뜁니다.');">수동 업데이트</a>
+								<a class="btn btn-light" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_extension&amp;extension_path=./modules/<?php echo $id?>/&amp;type=auto&amp;ufile=<?php echo $var1[1]?>" onclick="return hrefCheck(this,true,'정말로 업데이트 하시겠습니까?');">원격 업데이트</a>
+								<a class="btn btn-light" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $module?>&amp;a=update_extension&amp;extension_path=./modules/<?php echo $id?>/&amp;type=manual&amp;ufile=<?php echo $var1[1]?>" title="수동 업데이트 처리" onclick="return hrefCheck(this,true,'정말로 수동으로 업데이트 처리하시겠습니까?\n수동 업데이트 처리시 원격업데이트는 건너뜁니다.');">수동 업데이트</a>
 							</td>
 						</tr>
 
@@ -176,19 +179,23 @@ $R = getDbData($table['s_module'],"id='".$id."'",'*');
 						<?php endfor?>
 						<?php if(!$_updatelength):?>
 						<tr>
-						<td colspan="5">업데이트 대기리스트가 없습니다.</td>
+						<td colspan="5" class="text-center text-muted">업데이트 대기리스트가 없습니다.</td>
 						</tr>
 						<?php endif?>
 					</tbody>
 				</table>
 			</div>
 
-			<div class="text-center">
-				<ul class="pagination">
-					<script type="text/javascript">getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
-					<?php //echo getPageLink(5,$p,$TPG,'')?>
-				</ul>
-			</div>
+			<ul class="pagination justify-content-center d-none">
+				<script type="text/javascript">getPageLink(5,<?php echo $p2?>,<?php echo $TPG2?>,'');</script>
+			</ul>
+
+		<?php else: ?>
+		<div class="p-5 text-muted small text-center">
+			업데이트 정보가 없습니다.
+		</div>
+		<?php endif; ?>
+
 		</div>
 	</div>
 </div>
