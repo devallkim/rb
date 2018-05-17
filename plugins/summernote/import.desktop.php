@@ -14,8 +14,8 @@ $__SRC__ = str_replace("))?&gt;",'))" src="./_core/images/blank.gif">',$__SRC__)
 <!-- 코드미러를 먼저 호출하고 난 후에 summernote 호출해야 코드미러가 적용이 됨-->
 <!-- include summernote codemirror-->
 
-<?php getImport('codemirror','codemirror',false,'css')?>
-<?php getImport('codemirror','codemirror',false,'js')?>
+<?php getImport('codemirror','lib/codemirror',false,'css')?>
+<?php getImport('codemirror','lib/codemirror',false,'js')?>
 <?php getImport('codemirror','theme/monokai',false,'css')?>
 <?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
 <?php getImport('codemirror','mode/xml/xml',false,'js')?>

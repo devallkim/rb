@@ -20,8 +20,8 @@ $__SRC__ = str_replace("))?&gt;",'))" src="./_core/images/blank.gif">',$__SRC__)
 	display: none;
 }
 </style>
-<?php getImport('codemirror','codemirror',false,'css')?>
-<?php getImport('codemirror','codemirror',false,'js')?>
+<?php getImport('codemirror','lib/codemirror',false,'css')?>
+<?php getImport('codemirror','lib/codemirror',false,'js')?>
 <?php getImport('codemirror','theme/'.$d['admin']['codeeidt'],false,'css')?>
 <?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
 <?php getImport('codemirror','mode/xml/xml',false,'js')?>
@@ -31,7 +31,7 @@ $__SRC__ = str_replace("))?&gt;",'))" src="./_core/images/blank.gif">',$__SRC__)
 <?php if($lang['site']['a4027']) getImport('summernote','lang/summernote-'.$lang['site']['a4027'],false,'js')?>
 <?php getImport('summernote','dist/summernote',false,'css')?>
 
-<?php $editor_type = 'html'; // 에디터 타입 : html,markdown  ?> 
+<?php $editor_type = 'html'; // 에디터 타입 : html,markdown  ?>
 
 <script>
 function InserHTMLtoEditor(sHTML)

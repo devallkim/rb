@@ -229,16 +229,16 @@ $_editArray = array(
 							<?php $_i++;endforeach?>
 						</div>
 					</div>
-					<div class="form-group rb-submit">
-						<button class="btn btn-outline-primary btn-block btn-lg my-4" id="rb-submit-button" type="submit"><i class="fa fa-check fa-lg"></i> 수정하기</button>
-					</div>
+
 				</div>
 				<?php endif?>
 			</form>
 
+			<?php if ($markdown=='Y'): ?>
 			<a href="https://simplemde.com/markdown-guide" target="_blank">
 				본문작성 마크다운 문법안내
 			</a>
+			<?php endif; ?>
 
 		</div><!-- /.col-sm-8 -->
 		<div class="col-sm-4 col-lg-3">
@@ -312,17 +312,18 @@ $_editArray = array(
 	font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
 }
 </style>
-<?php getImport('codemirror','codemirror',false,'css')?>
-<?php getImport('codemirror','codemirror',false,'js')?>
+<?php getImport('codemirror','lib/codemirror',false,'css')?>
+<?php getImport('codemirror','lib/codemirror',false,'js')?>
 <?php getImport('codemirror','theme/'.$d['admin']['codeeidt'],false,'css')?>
 <?php getImport('codemirror','addon/display/fullscreen',false,'css')?>
 <?php getImport('codemirror','addon/display/fullscreen',false,'js')?>
 <?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
 <?php getImport('codemirror','mode/xml/xml',false,'js')?>
 <?php getImport('codemirror','mode/javascript/javascript',false,'js')?>
+<?php getImport('codemirror','mode/css/css',false,'js')?>
+<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
 <?php getImport('codemirror','mode/clike/clike',false,'js')?>
 <?php getImport('codemirror','mode/php/php',false,'js')?>
-<?php getImport('codemirror','mode/css/css',false,'js')?>
 
 
 <script>
