@@ -71,7 +71,7 @@
 }
 
 #layout-code .rb-codeview-footer {
-	border-top: 1px solid #ddd;	
+	border-top: 1px solid #ddd;
 	padding: 10px;
 	background-color: #e8e8e8;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#e8e8e8));
@@ -115,20 +115,17 @@
 	position: relative;
 	top:-10px;
 }
-.input-group {
-	border-top: #ccc solid 1px;
+
+.input-group,
+.input-group .form-control,
+.input-group>.input-group-prepend>.input-group-text {
+  border-radius: 0;
 }
-.input-group .input-group-addon,
-.input-group .form-control {
-	border: 0;
-}
-.input-group .input-group-addon {
-	border-left: #dfdfdf solid 1px;
-	border-right: #dfdfdf solid 1px;
-}
-.input-group .form-control {
-	background: #fff;
-}
+
+
+
+
+
 
 @media (max-width: 767px) {
 	#layout-code .rb-nav-tabs {
@@ -140,4 +137,8 @@
 	#layout-code .rb-nav-tabs li:last-child {
 		width: 100%;
 	}
+}
+
+.CodeMirror-fullscreen {
+	z-index: 99999 !important
 }

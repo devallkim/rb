@@ -10,7 +10,6 @@
 				<div class="panel-collapse collapse show" id="collapmetane">
 					<div class="card-body">
 						<div style="min-height:250px;height: calc(100vh - 13.2rem);">
-							<link href="<?php echo $g['s']?>/_core/css/tree.css" rel="stylesheet">
 							<div class="rb-tree">
 								<ul id="tree-layout">
 								<?php $numSub=array()?>
@@ -127,27 +126,31 @@
 					<input type="hidden" name="editfile" value="<?php echo $etcfile?>">
 						<div class="rb-files">
 							<div class="rb-codeview">
-								<div class="rb-codeview-header">
-									<ol class="breadcrumb pull-left">
+								<div class="rb-codeview-header d-flex align-items-center justify-content-between">
+									<ol class="breadcrumb">
 										<li class="breadcrumb-item">파일경로 :</li>
 										<li class="breadcrumb-item">root</li>
 										<li class="breadcrumb-item">layouts</li>
 										<li class="breadcrumb-item"><?php echo $layout?></li>
 										<li class="breadcrumb-item"><?php echo str_replace('/','</li><li class="active">',$etcfile)?></li>
 									</ol>
-									<button type="button" class="btn btn-light btn-xs pull-right" data-tooltip="tooltip" title="전체화면" onclick="editFullSize('tab-edit-area',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
+									<button type="button" class="btn btn-secondary btn-sm" data-tooltip="tooltip" title="전체화면" onclick="editFullSize('tab-edit-area',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
 								</div>
 								<div class="rb-codeview-body">
 									<textarea name="code" id="__code__" class="form-control" rows="35"><?php if(is_file($codfile)) echo htmlspecialchars(implode('',file($codfile)))?></textarea>
 								</div>
-								<div class="input-group">
-									<span class="input-group-addon"><small>레이아웃명</small></span>
+								<div class="input-group input-group-sm">
+									<div class="input-group-prepend">
+								    <span class="input-group-text">레이아웃명</span>
+								  </div>
 									<input type="text" name="name" value="<?php echo getFolderName($g['path_layout'].$layout)?>" class="form-control">
-
-									<span class="input-group-addon"><small>레이아웃 폴더</small></span>
+									<div class="input-group-prepend">
+										<span class="input-group-text">레이아웃 폴더</span>
+									</div>
 									<input type="text" name="newLayout" value="<?php echo $layout?>" class="form-control">
-
-									<span class="input-group-addon"><small>서브레이아웃</small></span>
+									<div class="input-group-prepend">
+										<span class="input-group-text">서브 레이아웃</span>
+									</div>
 									<input type="text" name="newSLayout" value="<?php echo $_sublayout?>" class="form-control">
 								</div>
 								<div class="rb-codeview-footer">
@@ -180,8 +183,8 @@
 	font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
 }
 </style>
-<?php getImport('codemirror','codemirror',false,'css')?>
-<?php getImport('codemirror','codemirror',false,'js')?>
+<?php getImport('codemirror','lib/codemirror',false,'css')?>
+<?php getImport('codemirror','lib/codemirror',false,'js')?>
 <?php getImport('codemirror','theme/'.$d['admin']['codeeidt'],false,'css')?>
 <?php getImport('codemirror','addon/display/fullscreen',false,'css')?>
 <?php getImport('codemirror','addon/display/fullscreen',false,'js')?>
