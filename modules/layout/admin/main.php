@@ -129,11 +129,11 @@
 							<div class="rb-codeview">
 								<div class="rb-codeview-header">
 									<ol class="breadcrumb pull-left">
-										<li>파일경로 :</li>
-										<li>root</li>
-										<li>layouts</li>
-										<li><?php echo $layout?></li>
-										<li><?php echo str_replace('/','</li><li class="active">',$etcfile)?></li>
+										<li class="breadcrumb-item">파일경로 :</li>
+										<li class="breadcrumb-item">root</li>
+										<li class="breadcrumb-item">layouts</li>
+										<li class="breadcrumb-item"><?php echo $layout?></li>
+										<li class="breadcrumb-item"><?php echo str_replace('/','</li><li class="active">',$etcfile)?></li>
 									</ol>
 									<button type="button" class="btn btn-light btn-xs pull-right" data-tooltip="tooltip" title="전체화면" onclick="editFullSize('tab-edit-area',this);"><i class="fa fa-arrows-alt fa-lg"></i></button>
 								</div>
