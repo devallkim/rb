@@ -748,4 +748,32 @@ function remoteFileExist($filepath) {
   }
 }
 
+// 소셜 로그인 URL 생성 (로그인과 정보 제공 동의 과정이 완료되면 콜백 URL에 code값과 state 값이 URL 문자열로 전송됩니다.)
+function getSocialLoginUrl($s,$id,$secret,$callBack,$type){
+	$_SESSION['SL']['state'.$s] = md5(microtime().mt_rand());
+	$g['slogin']['client_id'] = $id;
+	$g['slogin']['client_secret'] = $secret;
+	$g['slogin']['redirect_uri'] = urlencode($callBack);
+	$g['slogin']['state'] = $_SESSION['SL']['state'.$s];
+
+	if ($s == 'naver') {
+		$g['slogin']['callapi'] = 'https://nid.naver.com/oauth2.0/authorize?client_id='.$g['slogin']['client_id'].'&response_type=code&redirect_uri='.$g['slogin']['redirect_uri'].'&state='.$g['slogin']['state'];
+	}
+	if ($s == 'kakao') {
+		$g['slogin']['callapi'] = 'https://kauth.kakao.com/oauth/authorize?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&response_type=code&scope=';
+	}
+	if ($s == 'google') {
+		$g['slogin']['callapi'] = 'https://accounts.google.com/o/oauth2/auth?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&response_type=code&scope=email%20profile&state=%2Fprofile&approval_prompt=auto';
+	}
+	if ($s == 'facebook') {
+		$g['slogin']['callapi'] = 'https://www.facebook.com/v3.0/dialog/oauth?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&state='.$g['slogin']['state'];
+	}
+	if ($s == 'twitter') {
+		$g['slogin']['callapi'] = 'https://api.twitter.com/oauth/authorize?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&response_type=code';
+	}
+	if ($s == 'instagram') {
+		$g['slogin']['callapi'] = 'https://api.instagram.com/oauth/authorize/?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&response_type=code';
+	}
+	return $g['slogin'];
+}
 ?>
