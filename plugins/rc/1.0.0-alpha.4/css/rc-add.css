@@ -1278,11 +1278,11 @@
   border: none;
 }
 .table-view-full .table-view-cell {
-  padding: 0.6875rem 0.9375rem 0.6875rem 0.9375rem;
+  /* padding: 0.6875rem 0.9375rem 0.6875rem 0.9375rem; */
 }
 .table-view-full .table-view-cell > a:not(.btn) {
   min-width: 100%;
-  margin: -0.6875rem -0.9375rem -0.6875rem -0.9375rem;
+  /* margin: -0.6875rem -0.9375rem -0.6875rem -0.9375rem; */
 }
 
 /* 유틸리티 */
