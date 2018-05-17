@@ -28,6 +28,10 @@ RewriteRule ^([a-zA-Z0-9_\-]+)/(b)/([a-zA-Z0-9_\-]+)/([0-9]+)/s([0-9]+)/?$ ./ind
 RewriteRule ^([a-zA-Z0-9_\-]+)/(b)/([a-zA-Z0-9_\-]+)/([0-9]+)/([0-9]+)/?$ ./index.php?r=$1&m=bbs&bid=$3&uid=$4&CMT=$5#CMT [L]
 RewriteRule ^([a-zA-Z0-9_\-]+)/(b)/([a-zA-Z0-9_\-]+)/([0-9]+)/([0-9]+)/s([0-9]+)/?$ ./index.php?r=$1&m=bbs&bid=$3&uid=$4&CMT=$5&s=$6#CMT [L]
 
+#소셜로그인 콜백
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^([a-zA-Z0-9_\-]+)/(oauth)/([a-zA-Z]+)/?$ ./index.php?r=$1&m=connect&a=slogin&sloginReturn=$3&%1 [L]
+
 #프로필
 RewriteCond %{QUERY_STRING} ^(.*)$
 RewriteRule ^(@)([a-z-A-Z-0-9_]+)/?$ ./index.php?mod=profile&mbrid=$2&%1 [L]
