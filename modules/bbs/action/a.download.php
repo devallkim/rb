@@ -28,7 +28,7 @@ if (!strstr($_SERVER['HTTP_REFERER'],'module=upload'))
 			$B['var'] = $d['bbs'];
 			if (!$my['admin'] && $my['uid'] != $AT['mbruid'])
 			{
-				if ($B['var']['perm_l_down'] > $my['level'] || strstr($B['var']['perm_g_down'],'['.$my['sosok'].']'))
+				if ($B['var']['perm_l_down'] > $my['level'] || strstr($B['var']['perm_g_down'],'['.$my['mygroup'].']'))
 				{
 					getLink('','','다운로드 권한이 없습니다.','-1');
 				}
@@ -69,20 +69,20 @@ if (!strstr($_SERVER['HTTP_REFERER'],'module=upload'))
 	getDbUpdate($table['s_upload'],'down=down+1','uid='.$R['uid']);
 	getDbUpdate($table['s_numinfo'],'download=download+1',"date='".$date['today']."' and site=".$s);
 }
-header("Content-Type: application/octet-stream"); 
-header("Content-Length: " .$filesize); 
-header('Content-Disposition: attachment; filename="'.$filename.'"'); 
-header("Cache-Control: private, must-revalidate"); 
+header("Content-Type: application/octet-stream");
+header("Content-Length: " .$filesize);
+header('Content-Disposition: attachment; filename="'.$filename.'"');
+header("Cache-Control: private, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 if ($R['url']==$d['upload']['ftp_urlpath'])
 {
-	$FTP_CONNECT = ftp_connect($d['upload']['ftp_host'],$d['upload']['ftp_port']); 
-	$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['upload']['ftp_user'],$d['upload']['ftp_pass']); 
+	$FTP_CONNECT = ftp_connect($d['upload']['ftp_host'],$d['upload']['ftp_port']);
+	$FTP_CRESULT = ftp_login($FTP_CONNECT,$d['upload']['ftp_user'],$d['upload']['ftp_pass']);
 	if (!$FTP_CONNECT) getLink('','','FTP서버 연결에 문제가 발생했습니다.','');
 	if (!$FTP_CRESULT) getLink('','','FTP서버 아이디나 패스워드가 일치하지 않습니다.','');
 	if($d['upload']['ftp_pasv']) ftp_pasv($FTP_CONNECT, true);
-	
+
 	$filepath = $g['path_tmp'].'session/'.$filetmpname;
 	ftp_get($FTP_CONNECT,$filepath,$d['upload']['ftp_folder'].$R['folder'].'/'.$filetmpname,FTP_BINARY);
 	ftp_close($FTP_CONNECT);

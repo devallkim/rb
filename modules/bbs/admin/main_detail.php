@@ -537,9 +537,9 @@ if ($uid)
 						<?php if($d['bbs']['c_hidden']):?><i class="fa fa-comments-o fa-fw fa-lg" aria-hidden="true"></i> 댓글<?php endif?>
 					</label>
 					 <div class="col-lg-10 col-xl-9">
-						 <div class="custom-control custom-checkbox" data-toggle="collapse" data-target="#show-comment">
+						 <div class="custom-control custom-checkbox mt-2" data-toggle="collapse" data-target="#show-comment">
 						  <input type="checkbox" class="custom-control-input" name="c_hidden" id="c_hidden" value="1"<?php if($d['bbs']['c_hidden']):?> checked<?php endif?>>
-						  <label class="custom-control-label" for="c_hidden">사용안함</label>
+						  <label class="custom-control-label" for="c_hidden">댓글 사용안함</label>
 						</div>
 					 </div> <!-- .col-sm-10  -->
 				</div> <!-- .form-group  -->

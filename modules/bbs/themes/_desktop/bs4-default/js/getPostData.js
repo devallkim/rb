@@ -43,6 +43,7 @@ function getPostData(modal_settings){
        var zip=result.zip;
        var doc=result.doc;
        var hidden=result.hidden;
+       var hidden_attach=result.hidden_attach;
        var mypost=result.mypost;
 
        var is_post_liked=result.is_post_liked;
@@ -50,12 +51,14 @@ function getPostData(modal_settings){
        var is_post_saved=result.is_post_saved;
        var is_post_tag=result.is_post_tag;
 
+       var bbs_c_hidden=result.bbs_c_hidden;  // 댓글 사용여부
        var theme_use_reply=result.theme_use_reply;
        var theme_show_tag=result.theme_show_tag;
        var theme_show_upfile=result.theme_show_upfile;
+       var theme_show_saved=result.theme_show_saved;
        var theme_show_like=result.theme_show_like;
        var theme_show_dislike=result.theme_show_dislike;
-       var theme_snsping=result.theme_snsping;
+       var theme_show_share=result.theme_show_share;
 
        modal.find('[data-role="subject"]').text(subject)
        modal.find('[data-role="article"]').html(article);
@@ -71,15 +74,23 @@ function getPostData(modal_settings){
        if (is_post_disliked) modal.find('[data-role="btn_post_dislike"]').addClass('active')
        if (is_post_saved) modal.find('[data-role="btn_post_saved"]').addClass('active')
 
+       if (bbs_c_hidden) {
+        modal.find('[data-role="btn_comment"]').remove()  // 댓글 바로가기 버튼 제거
+        modal.find('[data-role="comment-area"]').remove()  // 댓글 영역 제거
+        modal.find('[data-role="comment-alert"]').removeClass('d-none') // 댓글 미사용 알림글 출력
+       }
 
+       if (theme_show_saved==0) {
+        modal.find('[data-role="btn_post_saved"]').remove()  // 좋아요 버튼 제거
+       }
        if (theme_show_like==0) {
         modal.find('[data-role="btn_post_like"]').remove()  // 좋아요 버튼 제거
        }
        if (theme_show_dislike==0) {
         modal.find('[data-role="btn_post_dislike"]').remove()  // 싫어요 버튼 제거
        }
-       if (theme_snsping==0) {
-        modal.find('[data-role="snsping"]').remove()  // sns공유 버튼 제거
+       if (theme_show_share==0) {
+        modal.find('[data-role="share"]').remove()  // sns공유 버튼 제거
        }
 
        if (theme_show_tag==0 || !is_post_tag) {
@@ -154,7 +165,7 @@ function getPostData(modal_settings){
         modal.find('[data-role="toolbar"]').remove()  // 수정,삭제가 포함된 툴바,첨부파일,댓글을 제거함
        }
 
-       if (hidden && !mypost) {  // 비밀글 일때
+       if (hidden || hidden_attach) {  // 권한이 없거나 비밀글 이거나 첨부파일 권한이 없을 경우 일때
         modal.find('[data-role="attach-photo"]').empty()
         modal.find('[data-role="attach-video"]').empty()
         modal.find('[data-role="attach-audio"]').empty()

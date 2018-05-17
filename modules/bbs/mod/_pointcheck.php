@@ -1,6 +1,3 @@
-<div class="subhead mt-0">
-	<h1 class="subhead-heading">게시물 열람 안내</h1>
-</div>
 
 <div class="card w-75 mx-auto my-5">
 	<div class="card-header">

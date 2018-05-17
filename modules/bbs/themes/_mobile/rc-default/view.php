@@ -39,13 +39,15 @@
 					</div>
 
 					<div class="pull-xs-right">
-
+						<?php if(!$d['bbs']['c_hidden']):?>
 						<button type="button" class="btn btn-outline-secondary js-moveComments">
 							<i class="fa fa-comment-o" aria-hidden="true"></i>
 							<span class="badge badge-primary badge-inverted" data-role="total_comment">
 								<?php echo $R['comment']?><?php echo $R['oneline']?'+'.$R['oneline']:''?>
 							</span>
 						</button>
+						<?php endif?>
+						<?php if($d['theme']['show_share']):?>
 						<button type="button" class="btn btn-outline-secondary"
 				      data-toggle="popup"
 				      data-target="#popup-link-share"
@@ -58,6 +60,7 @@
 				      data-title="게시물 공유">
 				      <i class="fa fa-share-alt" aria-hidden="true"></i>
 				    </button>
+						<?php endif?>
 					</div>
 
 				</div><!-- /.clearfix -->
@@ -108,7 +111,7 @@
 
 			<!-- 첨부파일 인클루드 -->
 			<?php if($d['upload']['data']&&$d['theme']['show_upfile']&&$attach_file_num>0):?>
-			<aside class="mt-4 content-padded">
+			<aside class="mt-4">
 				<?php include $g['dir_module_skin'].'_attachment.php'?>
 			</aside>
 			<?php endif?>
@@ -116,13 +119,19 @@
 		</div>
 
 		<div class="nav nav-control content-padded my-4">
+			<?php if($my['admin'] || $my['uid']==$R['mbruid']):?>
 			<a class="nav-link" role="button" href="<?php echo $g['bbs_modify'].$R['uid']?>">수정</a>
-			<?php if($d['theme']['use_reply']):?><a class="nav-link" role="button" href="<?php echo $g['bbs_reply'].$R['uid']?>">답변</a><?php endif?>
-			<a class="nav-link" role="button" href="<?php echo $g['bbs_delete'].$R['uid']?>" target="_action_frame_<?php echo $m?>" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</a>
+			<a class="nav-link" role="button" href="<?php echo $g['bbs_delete'].$R['uid']?>" target="_action_frame_<?php echo $m?>" onclick="return confirm('정말로 삭제하시겠습니까?');">
+				삭제
+			</a>
+			<?php endif?>
+			<?php if($d['theme']['use_reply']):?>
+			<a class="nav-link" role="button" href="<?php echo $g['bbs_reply'].$R['uid']?>">답변</a>
+			<?php endif?>
 		</div>
 
-
 		<!-- 댓글 인클루드 -->
+
 		<?php if(!$d['bbs']['c_hidden']):?>
 		<aside class="mt-2 content-padded" id="anchor-comments">
 			<?php include $g['dir_module_skin'].'_comment.php'?>

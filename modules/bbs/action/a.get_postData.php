@@ -18,6 +18,7 @@ $result=array();
 $result['error']=false;
 
 $uid = $_POST['uid'];
+$device = $_POST['device'];
 
 $R = getUidData($table['bbsdata'],$uid);
 $B = getUidData($table['bbslist'],$R['bbs']);
@@ -68,18 +69,17 @@ if ($is_post_saved) $result['is_post_saved'] = 1;
 if ($R['tag']) $result['is_post_tag'] = 1;
 
 if($R['upload']) {
-
   if ($AttachListType == 'object') {
     $result['photo'] = getAttachObjectArray($R,'photo');
   } else {
-    $result['attachNum'] = getAttachNum($R['upload'],'view');
-    $result['file'] = getAttachFileList($R,'view','file');
-    $result['photo'] = getAttachFileList($R,'view','photo');
-    $result['video'] = getAttachFileList($R,'view','video');
-    $result['audio'] = getAttachFileList($R,'view','audio');
-    $result['doc'] = getAttachFileList($R,'view','doc');
-    $result['zip'] = getAttachFileList($R,'view','zip');
-    $result['youtube'] = getAttachPlatformList($R,'view','default');
+    $result['attachNum'] = getAttachNum($R['upload'],'view',$device);
+    $result['file'] = getAttachFileList($R,'view','file',$device);
+    $result['photo'] = getAttachFileList($R,'view','photo',$device);
+    $result['video'] = getAttachFileList($R,'view','video',$device);
+    $result['audio'] = getAttachFileList($R,'view','audio',$device);
+    $result['doc'] = getAttachFileList($R,'view','doc',$device);
+    $result['zip'] = getAttachFileList($R,'view','zip',$device);
+    $result['youtube'] = getAttachPlatformList($R,'view','default',$device);
   }
 }
 
@@ -87,13 +87,17 @@ if($my['admin'] || $my['uid']==$R['mbruid']) {  // 수정,삭제 버튼 출력�
   $result['mypost'] = 1;
 }
 
+//개별 게시판 설정
+$result['bbs_c_hidden'] = $d['bbs']['c_hidden'];
+
 // 테마설정
 $result['theme_use_reply'] = $d['theme']['use_reply'];
 $result['theme_show_tag'] = $d['theme']['show_tag'];
 $result['theme_show_upfile'] = $d['theme']['show_upfile'] ;
+$result['theme_show_saved'] = $d['theme']['show_saved'];
 $result['theme_show_like'] = $d['theme']['show_like'];
 $result['theme_show_dislike'] = $d['theme']['show_dislike'];
-$result['theme_snsping'] = $d['theme']['snsping'];
+$result['theme_show_share'] = $d['theme']['show_share'];
 
 $markup_file = 'view'; // 기본 마크업 페이지 전달 (테마 내부 _html/view.html)
 
@@ -102,6 +106,21 @@ if ($R['hidden']) {  // 비밀글의 경우
     $markup_file = 'lock'; //잠김페이지 전달 (테마 내부 _html/lock.html)
     $result['hidden'] = 1;
   }
+}
+
+//게시물 보기 권한체크
+if (!$my['admin'] && !strstr(','.($d['bbs']['admin']?$d['bbs']['admin']:'.').',',','.$my['id'].',')) {
+	if ($d['bbs']['perm_l_view'] > $my['level'] || strpos('_'.$d['bbs']['perm_g_view'],'['.$my['mygroup'].']')) {
+    $markup_file = 'permcheck'; //잠김페이지 전달 (테마 내부 _html/permcheck.html)
+    $result['hidden'] = 1;
+	}
+}
+
+//첨부파일 권한체크
+if (!$my['admin'] && !strstr(','.($d['bbs']['admin']?$d['bbs']['admin']:'.').',',','.$my['id'].',')) {
+	if ($d['bbs']['perm_l_down'] > $my['level'] || (strpos($d['bbs']['perm_g_down'],'['.$my['mygroup'].']')!== false)) {
+    $result['hidden_attach'] = 1;
+	}
 }
 
 $d['bbs']['isperm'] = true;

@@ -257,34 +257,35 @@ else $g['bbs_reset']	= getLinkFilter($g['s'].'/?'.($_HS['usescode']?'r='.$r.'&am
     <div class="content-padded" data-role="post">
       <span data-role="cat" class="badge badge-primary badge-inverted">카테고리</span>
       <h3 data-role="subject" class="rb-article-title">게시물 제목</h3>
-
-      <div data-role="article">
-        본문내용
-      </div>
-
-      <div data-role="attach">
-
-        <!-- 유튜브 -->
-        <div class="card-group mb-3 hidden" data-role="attach-youtube">
-        </div>
-
-        <!-- 비디오 -->
-        <div class="mb-3 hidden" data-role="attach-video">
-        </div>
-
-        <!-- 오디오 -->
-        <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-audio">
-        </ul>
-
-        <!-- 이미지 -->
-        <div class="card-group mb-3 hidden" data-role="attach-photo" data-plugin="photoswipe">
-        </div>
-
-        <!-- 기타파일 -->
-        <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-file">
-        </ul>
-      </div>
     </div>
+
+    <div data-role="article">
+      본문내용
+    </div>
+
+    <div data-role="attach">
+
+      <!-- 유튜브 -->
+      <div class="card-group mb-3 hidden" data-role="attach-youtube">
+      </div>
+
+      <!-- 비디오 -->
+      <div class="mb-3 hidden" data-role="attach-video">
+      </div>
+
+      <!-- 오디오 -->
+      <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-audio">
+      </ul>
+
+      <!-- 이미지 -->
+      <div class="card-group mb-3 hidden" data-role="attach-photo" data-plugin="photoswipe">
+      </div>
+
+      <!-- 기타파일 -->
+      <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-file">
+      </ul>
+    </div>
+
 
   </div>
 </section>

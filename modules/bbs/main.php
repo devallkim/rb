@@ -90,7 +90,7 @@ if ($mod == 'list')
 {
 	if (!$my['admin'] && !strstr(','.($d['bbs']['admin']?$d['bbs']['admin']:'.').',',','.$my['id'].','))
 	{
-		if ($d['bbs']['perm_l_list'] > $my['level'] || strpos('_'.$d['bbs']['perm_g_list'],'['.$my['sosok'].']'))
+		if ($d['bbs']['perm_l_list'] > $my['level'] || strpos('_'.$d['bbs']['perm_g_list'],'['.$my['mygroup'].']'))
 		{
 			$g['main'] = $g['dir_module'].'mod/_permcheck.php';
 			$d['bbs']['isperm'] = false;
@@ -117,7 +117,7 @@ else if ($mod == 'write')
 
 	if (!$my['admin'] && !strstr(','.($d['bbs']['admin']?$d['bbs']['admin']:'.').',',','.$my['id'].','))
 	{
-		if ($d['bbs']['perm_l_write'] > $my['level'] || strpos('_'.$d['bbs']['perm_g_write'],'['.$my['sosok'].']'))
+		if ($d['bbs']['perm_l_write'] > $my['level'] || strpos('_'.$d['bbs']['perm_g_write'],'['.$my['mygroup'].']'))
 		{
 			$g['main'] = $g['dir_module'].'mod/_permcheck.php';
 			$d['bbs']['isperm'] = false;

@@ -83,7 +83,7 @@ if ($uid)
 	{
 		if (!$my['admin'] && !strstr(','.($d['bbs']['admin']?$d['bbs']['admin']:'.').',',','.$my['id'].','))
 		{
-			if ($d['bbs']['perm_l_write'] > $my['level'] || strstr($d['bbs']['perm_g_write'],'['.$my['sosok'].']'))
+			if ($d['bbs']['perm_l_write'] > $my['level'] || strstr($d['bbs']['perm_g_write'],'['.$my['mygroup'].']'))
 			{
 				getLink('','','정상적인 접근이 아닙니다.','');
 			}
@@ -151,7 +151,7 @@ else
 {
 	if (!$my['admin'] && !strstr(','.($d['bbs']['admin']?$d['bbs']['admin']:'.').',',','.$my['id'].','))
 	{
-		if ($d['bbs']['perm_l_write'] > $my['level'] || strstr($d['bbs']['perm_g_write'],'['.$my['sosok'].']'))
+		if ($d['bbs']['perm_l_write'] > $my['level'] || strstr($d['bbs']['perm_g_write'],'['.$my['mygroup'].']'))
 		{
 			getLink('','','정상적인 접근이 아닙니다.','');
 		}

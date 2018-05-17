@@ -32,7 +32,7 @@ if ($hidden) $_WHERE .= ' and hidden=1';
 if ($where && $keyw)
 {
 	if (strstr('[name][nic][id][ip]',$where)) $_WHERE .= " and ".$where."='".$keyw."'";
-	else $_WHERE .= getSearchSql($where,$keyw,$ikeyword,'or');	
+	else $_WHERE .= getSearchSql($where,$keyw,$ikeyword,'or');
 }
 $RCD = getDbArray($table['s_comment'],$_WHERE,'*',$sort,$orderby,$recnum,$p);
 $NUM = getDbRows($table['s_comment'],$_WHERE);
@@ -79,15 +79,15 @@ $TPG = getTotalPage($NUM,$recnum);
 						    	  <label class="checkbox" style="margin-top:0">
 							        <input  type="checkbox"  name="notice" value="Y"<?php if($notice=='Y'):?> checked<?php endif?> onclick="this.form.submit();"  class="form-control"> <i></i>공지글
 							     </label>
-							 </div>   
+							 </div>
 						    <div class="col-sm-2">
 						 	    <label class="checkbox" style="margin-top:0">
-						          <input  type="checkbox" name="hidden" value="Y"<?php if($hidden=='Y'):?> checked<?php endif?> onclick="this.form.submit();"  class="form-control"><i></i>비밀글		
+						          <input  type="checkbox" name="hidden" value="Y"<?php if($hidden=='Y'):?> checked<?php endif?> onclick="this.form.submit();"  class="form-control"><i></i>비밀글
 						       </label>
-						    </div> 
-			 	 	  	 </div>		            
+						    </div>
+			 	 	  	 </div>
 		         </div>
-		       </div>     
+		       </div>
 				<div class="form-group">
 					<label class="col-sm-1 control-label">기간</label>
 					<div class="col-sm-10">
@@ -212,7 +212,7 @@ $TPG = getTotalPage($NUM,$recnum);
 	<input type="hidden" name="m" value="<?php echo $module?>">
 	<input type="hidden" name="a" value="">
 	<div class="table-responsive">
-		<table class="table table-striped">          
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th><label data-tooltip="tooltip" title="선택"><input type="checkbox" class="checkAll-post-user"></label></th>
@@ -235,7 +235,7 @@ $TPG = getTotalPage($NUM,$recnum);
 				<td>
 				    <?php echo $NUM-((($p-1)*$recnum)+$_rec++)?>
 				</td>
-				<td> 
+				<td>
 					<?php if($R['notice']):?><i class="fa fa-volume-up"></i><?php endif?>
 					<?php if($R['mobile']):?><i class="fa fa-mobile f-lg"></i><?php endif?>
 					<a href="<?php echo getCyncUrl($R['cync'].',CMT:'.$R['uid'].',s:'.$R['site'])?>#CMT" target="_blank"><?php echo $R['subject']?></a>
@@ -256,8 +256,8 @@ $TPG = getTotalPage($NUM,$recnum);
 				<td><?php echo $R['score2']?></td>
 				<td><?php echo $R['report']?></td>
 				<td><?php echo getDateFormat($R['d_regis'],'Y.m.d H:i')?></td>
-			</tr> 
-	     <?php endwhile?> 
+			</tr>
+	     <?php endwhile?>
 	</tbody>
 	</table>
     <?php if(!$NUM):?>
@@ -269,7 +269,7 @@ $TPG = getTotalPage($NUM,$recnum);
 				<script>getPageLink(5,<?php echo $p?>,<?php echo $TPG?>,'');</script>
 				<?php //echo getPageLink(5,$p,$TPG,'')?>
 				</ul>
-			</div>	
+			</div>
 			<div>
 				<button type="button" onclick="chkFlag('comment_members[]');checkboxCheck();" class="btn btn-default btn-sm">선택/해제 </button>
 				<button type="button" onclick="actCheck('comment_multi_delete');" class="btn btn-default btn-sm rb-action-btn" disabled>삭제</button>
@@ -372,7 +372,7 @@ function actCheck(act)
 			f.a.value = act;
 			f.submit();
 		}
-	}	
+	}
 	return false;
 }
 //]]>

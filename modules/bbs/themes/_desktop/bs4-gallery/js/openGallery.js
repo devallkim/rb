@@ -14,7 +14,6 @@ $(function () {
   $('[data-toggle="openGallery"]').click(function(e) {
     var category = $(this).data('category')
     var subject = $(this).data('subject')
-    // var subject = subject.replace(/&quot;/g, '"');
     var bid = $(this).data('bid')
     var uid = $(this).data('uid')
     var url = $(this).data('url')
@@ -28,7 +27,6 @@ $(function () {
     modal.find('[name="uid"]').val(uid)
     modal.find('[name="bid"]').val(bid)
     modal.find('[data-role="subject"]').text(subject);
-    document.title = subject+'-'+bbs_title
 
     $('body').addClass('modal-open')  // 페이지 스크롤바를 제거하기 위해
 
@@ -44,6 +42,7 @@ $(function () {
        var adddata=result.adddata;
 
        var hidden=result.hidden;
+       var hidden_attach=result.hidden_attach;
        var mypost=result.mypost;
        var items=result.photo;
 
@@ -52,12 +51,13 @@ $(function () {
        var is_post_saved=result.is_post_saved;
        var is_post_tag=result.is_post_tag;
 
+       var bbs_c_hidden=result.bbs_c_hidden;  // 댓글 사용여부
        var theme_use_reply=result.theme_use_reply;
        var theme_show_tag=result.theme_show_tag;
        var theme_show_upfile=result.theme_show_upfile;
        var theme_show_like=result.theme_show_like;
        var theme_show_dislike=result.theme_show_dislike;
-       var theme_snsping=result.theme_snsping;
+       var theme_show_share=result.theme_show_share;
 
        if (category) {
          modal.find('[data-role="category"]').html('<span class="badge badge-pill badge-secondary d-inline-block align-top">'+category+'</span>');
@@ -75,21 +75,25 @@ $(function () {
        if (is_post_disliked) modal.find('[data-role="btn_post_dislike"]').addClass('active')
        if (is_post_saved) modal.find('[data-role="btn_post_saved"]').addClass('active')
 
+       if (bbs_c_hidden) {
+        modal.find('[data-role="btn_comment"]').remove()  // 댓글 바로가기 버튼 제거
+        modal.find('[data-role="comment-area"]').remove()  // 댓글 영역 제거
+        modal.find('[data-role="comment-alert"]').removeClass('d-none') // 댓글 미사용 알림글 출력
+       }
+
        if (theme_show_like==0) {
         modal.find('[data-role="btn_post_like"]').remove()  // 좋아요 버튼 제거
        }
        if (theme_show_dislike==0) {
         modal.find('[data-role="btn_post_dislike"]').remove()  // 싫어요 버튼 제거
        }
-       if (theme_snsping==0) {
-        modal.find('[data-role="snsping"]').remove()  // sns공유 버튼 제거
+       if (theme_show_share==0) {
+        modal.find('[data-role="share"]').remove()  // sns공유 버튼 제거
        }
 
        if (theme_show_tag==0 || !is_post_tag) {
         modal.find('[data-role="post_tags"]').remove()  // 테그목록 제거
        }
-
-
 
        // photosiwpe 초기화
 
@@ -122,6 +126,19 @@ $(function () {
        var counter =  '('+modal.find('.pswp__counter').text().replace(/ /g, '')+') ';
        document.title = counter+subject+'-'+bbs_title  // 브라우저 타이틀 재설정
 
+       if (hidden  || hidden_attach) {  // 권한이 없거나 비밀글 이거나 첨부파일 권한이 없을 경우 일때
+        modal.find('[data-role="attach-photo"]').empty()
+        modal.find('[data-role="attach-video"]').empty()
+        modal.find('[data-role="attach-audio"]').empty()
+        modal.find('[data-role="attach-file"]').empty()
+        modal.find('.pswp__container .pswp__item').empty()
+        modal.find('.pswp__subject').empty()
+        modal.find('.pswp__counter').empty()
+        modal.find('.pswp__caption__center').empty()
+        modal.find('.pswp__top-bar').addClass('d-none')
+        modal.find('.pswp__button').addClass('d-none')
+       }
+
        //슬라이드 갱신 후에
        gallery.listen('afterChange', function() {
          var counter =  '('+modal.find('.pswp__counter').text().replace(/ /g, '')+') ';
@@ -142,7 +159,7 @@ $(function () {
          $('#item-'+uid).focus() // 목록 아이템 포커스 처리
          $('[data-toggle="tooltip"]').tooltip('hide')
          $('body').removeClass('modal-open')  // 페이지 스크롤바 원상복귀를 위해
-         document.title = 'test'+bbs_title  // 게시판의 원래 타이틀 복귀
+         document.title = bbs_title  // 게시판의 원래 타이틀 복귀
        });
 
        // 댓글 출력 함수 정의
@@ -175,16 +192,6 @@ $(function () {
         modal.find('[data-role="myToolbar"]').remove()  // 수정,삭제가 포함된 툴바,첨부파일,댓글을 제거함
        }
 
-       if (hidden && !mypost) {  // 비밀글 일때
-        modal.find('[data-role="attach-photo"]').empty()
-        modal.find('[data-role="attach-video"]').empty()
-        modal.find('[data-role="attach-audio"]').empty()
-        modal.find('[data-role="attach-file"]').empty()
-        modal.find('.pswp__container .pswp__item').empty()
-        modal.find('.pswp__subject').empty()
-        modal.find('.pswp__counter').empty()
-        modal.find('.pswp__caption__center').empty()
-       }
     });
   });
 

@@ -75,7 +75,7 @@
       <colgroup>
         <col width="7%">
         <col>
-        <col width="10%">
+        <col width="15%">
         <col width="10%">
         <col width="10%">
       </colgroup>
