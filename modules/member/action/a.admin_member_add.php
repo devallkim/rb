@@ -58,7 +58,8 @@ if ($uid)
 	{
 		$newPw = getCrypt($pw,$_M['d_regis']);
 	    getDbUpdate($table['s_mbrid'],"pw='".$newPw."'",'uid='.$uid);
-
+			getDbUpdate($table['s_mbrdata'],"last_pw='".$date['totime']."'",'memberuid='.$uid);
+			
 	    if ($my['uid'] == $uid)
 	    {
 		   $_SESSION['mbr_pw']  = $newPw;
