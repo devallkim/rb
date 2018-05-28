@@ -44,11 +44,15 @@ if ($type) $PageLink .= 'type='.$type.'&amp;';
 			<div class="">
 				<span>총 <?php echo number_format($NUM)?>건</span>
 			</div>
-			<form class="w-25" name="hideForm" action="./point" method="get">
+			<form class="w-25" name="hideForm" action="<?php echo $g['s']?>/" method="get">
+				<input type="hidden" name="r" value="<?php echo $r?>">
+				<input type="hidden" name="m" value="<?php echo $m?>">
+				<input type="hidden" name="front" value="<?php echo $front?>">
+				<input type="hidden" name="page" value="<?php echo $page?>">
 				<select name="type" class="form-control" onchange="this.form.submit();">
 					<option value="">전체</option>
 					<option value="1"<?php if($type=='1'):?> selected="selected"<?php endif?>>획득</option>
-					<option value="2"<?php if($tpye=='2'):?> selected="selected"<?php endif?>>사용</option>
+					<option value="2"<?php if($type=='2'):?> selected="selected"<?php endif?>>사용</option>
 				</select>
 			</form>
 		</div>
