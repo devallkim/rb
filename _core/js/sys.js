@@ -29,6 +29,14 @@ function chkEmailAddr(email)
 	if (email.indexOf('\@') == -1 || email.indexOf('.') == -1) return false;
 	return true;
 }
+//휴대폰체크
+function chkPhoneNumber(phone)
+{
+	if (phone == '') return false;
+	phone = phone.split('-').join('');
+	var regPhone = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+	return regPhone.test(phone);
+}
 //오픈윈도우
 function OpenWindow(url)
 {
