@@ -915,6 +915,54 @@ KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
 db_query("OPTIMIZE TABLE ".$table['s_mbremail'],$DB_CONNECT);
 }
+
+//회원 휴대폰 목록 저장
+$_tmp = db_query( "select count(*) from ".$table['s_mbrphone'], $DB_CONNECT );
+if ( !$_tmp ) {
+$_tmp = ("
+CREATE TABLE ".$table['s_mbrphone']." (
+uid			      BIGINT			  PRIMARY KEY		NOT NULL AUTO_INCREMENT,
+mbruid		    INT				    DEFAULT '0'		NOT NULL,
+phone    	    VARCHAR(20)	  DEFAULT ''		NOT NULL,
+prim		      TINYINT			  DEFAULT '0'		NOT NULL,
+backup		    TINYINT			  DEFAULT '0'		NOT NULL,
+d_regis		    VARCHAR(14)		DEFAULT ''		NOT NULL,
+d_code		    VARCHAR(14)		DEFAULT ''		NOT NULL,
+d_verified		VARCHAR(14)		DEFAULT ''		NOT NULL,
+KEY mbruid(mbruid),
+KEY prim(prim),
+KEY backup(backup),
+KEY d_verified(d_verified),
+KEY d_code(d_code),
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
+db_query($_tmp, $DB_CONNECT);
+db_query("OPTIMIZE TABLE ".$table['s_mbrphone'],$DB_CONNECT);
+}
+
+//인증코드 저장
+$_tmp = db_query( "select count(*) from ".$table['s_code'], $DB_CONNECT );
+if ( !$_tmp ) {
+$_tmp = ("
+CREATE TABLE ".$table['s_code']." (
+uid     INT           PRIMARY KEY  NOT NULL AUTO_INCREMENT,
+mbruid	INT				    DEFAULT '0'		NOT NULL,
+name	  VARCHAR(30)		DEFAULT ''		NOT NULL,
+entry  	INT				DEFAULT '0'		NOT NULL,
+code		VARCHAR(100)	DEFAULT ''		NOT NULL,
+sms   	TINYINT			  DEFAULT '0'		NOT NULL,
+email 	TINYINT		  	DEFAULT '0'		NOT NULL,
+d_regis	VARCHAR(14)		DEFAULT ''		NOT NULL,
+KEY mbruid(mbruid),
+KEY name(name),
+KEY entry(entry),
+KEY email(email),
+KEY sms(sms),
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
+db_query($_tmp, $DB_CONNECT);
+db_query("OPTIMIZE TABLE ".$table['s_code'],$DB_CONNECT);
+}
+
+
 //SEO테이블
 $_tmp = db_query( "select count(*) from ".$table['s_seo'], $DB_CONNECT );
 if ( !$_tmp ) {
