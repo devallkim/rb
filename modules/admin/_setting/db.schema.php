@@ -893,6 +893,28 @@ db_query($_tmp, $DB_CONNECT);
 db_query("OPTIMIZE TABLE ".$table['s_mbrtoken'],$DB_CONNECT);
 }
 
+//회원 이메일 목록
+$_tmp = db_query( "select count(*) from ".$table['s_mbremail'], $DB_CONNECT );
+if ( !$_tmp ) {
+$_tmp = ("
+CREATE TABLE ".$table['s_mbremail']." (
+uid			      BIGINT			  PRIMARY KEY		NOT NULL AUTO_INCREMENT,
+mbruid		    INT				    DEFAULT '0'		NOT NULL,
+email    	    VARCHAR(50)	  DEFAULT ''		NOT NULL,
+prim		      TINYINT			  DEFAULT '0'		NOT NULL,
+backup		    TINYINT			  DEFAULT '0'		NOT NULL,
+d_regis		    VARCHAR(14)		DEFAULT ''		NOT NULL,
+d_code		    VARCHAR(14)		DEFAULT ''		NOT NULL,
+d_verified		VARCHAR(14)		DEFAULT ''		NOT NULL,
+KEY mbruid(mbruid),
+KEY prim(prim),
+KEY backup(backup),
+KEY d_code(d_code),
+KEY d_verified(d_verified),
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
+db_query($_tmp, $DB_CONNECT);
+db_query("OPTIMIZE TABLE ".$table['s_mbremail'],$DB_CONNECT);
+}
 //SEO테이블
 $_tmp = db_query( "select count(*) from ".$table['s_seo'], $DB_CONNECT );
 if ( !$_tmp ) {
