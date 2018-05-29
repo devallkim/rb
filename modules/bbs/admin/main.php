@@ -196,7 +196,7 @@ $SITEN   = db_num_rows($SITES);
 				</select>
 
 				<label class="sr-only" for="inlineFormInputName2">검색</label>
-				<input type="text" class="form-control mr-sm-2" placeholder="">
+				<input type="text" class="form-control mr-sm-2" placeholder="" name="keyw" value="<?php echo stripslashes($keyw)?>" >
 
 				<button type="submit" class="btn btn-light">검색</button>
 				<button type="button" class="btn btn-light" onclick="location.href='<?php echo $g['adm_href']?>';">리셋</button>
