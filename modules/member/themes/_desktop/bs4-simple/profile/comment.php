@@ -55,7 +55,7 @@ $TPG = getTotalPage($NUM,$recnum);
 				<td><?php echo $NUM-((($p-1)*$recnum)+$_rec++)?></td>
 				<td class="text-left">
 					<?php if($R['mobile']):?><i class="fa fa-mobile fa-lg"></i><?php endif?>
-					<a href="<?php echo getSyncUrl($R['sync'].',CMT:'.$R['uid'].',s:'.$R['site'])?>#CMT" target="_blank" class="muted-link"><?php echo $R['subject']?></a>
+					<?php echo $R['subject']?>
 					<?php if(strstr($R['content'],'.jpg')):?>
 					<span class="badge badge-light" data-toggle="tooltip" title="사진">
 						<i class="fa fa-camera-retro fa-lg"></i>
