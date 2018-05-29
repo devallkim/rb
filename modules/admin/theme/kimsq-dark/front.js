@@ -21,6 +21,9 @@ function editFullSize(id,obj)
 	}
 }
 
+function goHref_parent(url) {
+	parent.location.href = url;
+}
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()

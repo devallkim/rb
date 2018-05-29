@@ -132,7 +132,7 @@
 									<i class="<?php echo $SD['icon']?> fa-lg" aria-hidden="true"></i>
 								</a>
 							</div>
-							<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;min-width:100px">
+							<select class="form-control custom-select" onchange="goHref_parent('<?php echo $g['s']?>/?m=<?php echo $m?>&pickmodule=<?php echo $module?>&panel=Y&pickfront=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;min-width:100px">
 								<?php while($S = db_fetch_array($SITES)):?>
 								<option value="<?php echo $S['id']?>"<?php if($r==$S['id']):?> selected<?php endif?>><?php echo $S['label']?></option>
 								<?php endwhile?>
@@ -155,7 +155,7 @@
 									<i class="<?php echo $SD['icon']?> fa-lg" aria-hidden="true"></i>
 								</a>
 							</div>
-							<select class="form-control custom-select" onchange="goHref('<?php echo $g['s']?>/?m=<?php echo $m?>&module=<?php echo $module?>&front=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;min-width:100px">
+							<select class="form-control custom-select" onchange="goHref_parent('<?php echo $g['s']?>/?m=<?php echo $m?>&pickmodule=<?php echo $module?>&panel=Y&pickfront=<?php echo $front?>&r='+this.value);" style="margin-left: -1px;min-width:100px">
 								<?php $_i=0;foreach($SITES['data'] as $val):?>
 								<?php $_SD = getUidData($table['s_site'],$val); ?>
 								<option value="<?php echo $_SD['id']?>"<?php if($r==$_SD['id']):?> selected<?php endif?>><?php echo $_SD['label']?></option>
