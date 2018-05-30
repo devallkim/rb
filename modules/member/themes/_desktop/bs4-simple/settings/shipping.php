@@ -45,7 +45,8 @@ $NUM = getDbRows($table['s_mbrshipping'],$sqlque0);
 
         <?php while($P=db_fetch_array($PCD)):?>
         <tr>
-          <th scope="row" class="align-middle"><?php echo $P['label'] ?><br><small class="text-muted"><?php echo $P['name'] ?></small><br><span class="badge badge-primary">기본배송지</span></th>
+          <th scope="row" class="align-middle">
+            <?php echo $P['label'] ?><br><small class="text-muted"><?php echo $P['name'] ?></small><br><span class="badge badge-primary">기본배송지</span></th>
           <td class="text-left">
             <span class="text-muted"><?php echo $P['zip'] ?></span><br>
             <?php echo $P['addr1'] ?><br><?php echo $P['addr2'] ?>
@@ -89,7 +90,7 @@ $NUM = getDbRows($table['s_mbrshipping'],$sqlque0);
     <?php else: ?>
     <div class="card p-5 my-4 text-center text-muted">
       등록된 배송지가 없습니다. <br>
-      쇼핑에서 사용할 배송지를 최대 15개까지 함께 관리하실 수 있습니다.<br>
+      쇼핑에서 사용할 배송지를 관리하실 수 있습니다.<br>
       자주 쓰는 배송지를 편리하게 통합 관리 하세요!<br>
       <button type="button" class="btn btn-link" data-toggle="modal" data-target="#modal-shipping" data-act="add">
         배송지 등록
@@ -101,7 +102,10 @@ $NUM = getDbRows($table['s_mbrshipping'],$sqlque0);
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">배송지 정보 상세</h5>
+            <h5 class="modal-title">
+              <i class="fa fa-truck fa-fw fa-lg" aria-hidden="true"></i>
+              <span data-role="title">배송지 정보 상세</span>
+            </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -326,7 +330,7 @@ $(function () {
       var title = '배송지 등록'
     }
 
-    modal.find('.modal-title').text(title)
+    modal.find('[data-role="title"]').text(title)
     modal.find('[name="uid"]').val(uid)
   })
 
@@ -339,9 +343,7 @@ $(function () {
       var uid = $(this).data('uid')
       var act = 'del'
       var url = rooturl+'/?r='+raccount+'&m=member&a=settings_shipping&act='+act+'&uid='+uid
-      // $(this).attr('disabled',true)
       getIframeForAction();
-      console.log(url)
       frames.__iframe_for_action__.location.href = url;
     }
   });
@@ -353,6 +355,11 @@ $(function () {
       modal.find('#shippingForm').submit()
       // modal.modal('hide')
     }, 500);
+  });
+
+  // 폼유효성 상태표시 흔적 초기화
+  form.find('[type="text"]').keyup(function(){
+    $(this).removeClass('is-invalid is-valid')
   });
 
   $("#execDaumPostcode").click(function() {
@@ -383,7 +390,9 @@ $(function () {
                  document.getElementById('zip').value = data.zonecode; //5자리 새우편번호 사용
                  document.getElementById('addr1').value = fullAddr;
                  $('#modal-DaumPostcode').modal('hide')// 우편번호 검색모달을 숨김
+                 $('#addr1').removeClass('is-invalid') //에러표시 초기화
                  $('#addr2').focus()
+
              },
              // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
              width : '100%',
