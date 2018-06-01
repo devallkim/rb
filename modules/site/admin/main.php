@@ -33,7 +33,7 @@ if ($R['uid'])
 				<input type="hidden" name="m" value="<?php echo $module?>">
 				<input type="hidden" name="a" value="siteorder_update">
 
-				<div class="dd py-4 pl-3" id="site-icons" style="height: calc(100vh - 10.5rem);">
+				<div class="dd py-4 pl-3" id="site-icons" style="height: calc(100vh - 10.5rem);overflow: auto;">
 					<ol class="dd-list list-inline">
 
 						<?php if ($my['super'] && !$my['adm_site']): ?>
