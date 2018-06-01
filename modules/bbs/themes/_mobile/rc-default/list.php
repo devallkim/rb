@@ -323,7 +323,7 @@ $(function () {
   var bar_nav = new Swiper('.swiper-container', {
     autoHeight: true,
     pagination: {
-      el: '.nav-inline',
+      el: '.rb-bbs-list .nav-inline',
       dynamicBullets: false,
       type: 'bullets',
       className : 'nav-link',
