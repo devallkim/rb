@@ -13,6 +13,12 @@ $my['level'] = 0;
 if ($_SESSION['mbr_uid'])
 {
 	$my = array_merge(getUidData($table['s_mbrid'],$_SESSION['mbr_uid']),getDbData($table['s_mbrdata'],"memberuid='".$_SESSION['mbr_uid']."'",'*'));
+	if (!$my['uid']) { // 로그인 상태에서 관리자 회원삭제 된 경우
+		$_SESSION['mbr_uid'] = '';
+		$_SESSION['mbr_pw']  = '';
+		$_SESSION['mbr_logout'] = '1';
+		setAccessToken($my['uid'],'logout');
+	}
 	if($my['pw'] != $_SESSION['mbr_pw']) exit;
 	$g['mysns'] = explode('|',$my['sns']);
 }
