@@ -141,7 +141,7 @@ $_editArray = array(
 				<?php if ($markdown=='Y'): ?>
 
 					<?php if ($mobileOnly): ?>
-						<div class="alert alert-danger" role="alert" style="z-index:900">
+						<div class="p-3 mb-3 alert-danger" role="alert" style="z-index:900">
 							<i class="fa fa-mobile fa-3x fa-pull-left" aria-hidden="true"></i>
 							본 파일은 <strong>모바일 전용</strong> 파일으로 모바일 기기에서만 출력됩니다. 내용이 없으면 자동삭제 됩니다.<br>
 							PHP 또는 Javascript 가 포함된 경우에는 <a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=<?php echo $m?>&amp;module=<?php echo $module?>&amp;front=_edit&amp;_mtype=<?php echo $_mtype?>&amp;type=source&amp;uid=<?php echo $uid?>&amp;cat=<?php echo $cat?>&amp;code=<?php echo $code?>" class="alert-link"><i class="fa fa-code" aria-hidden="true"></i> 소스코드 편집모드</a> 를 이용해 주세요.
@@ -150,7 +150,7 @@ $_editArray = array(
 						<textarea name="source" hidden><?php echo $source ?></textarea>
 						<?php  $_filekind= $_filekind.'.mobile'; ?>
 					<?php else: ?>
-						<div class="alert alert-danger" role="alert" style="z-index:900">
+						<div class="p-3 mb-3 alert-danger" role="alert" style="z-index:900">
 
 							<?php if (is_file($g['path_page'].$_filekind.'.mobile.php')): ?>
 							<i class="fa fa-desktop fa-3x fa-pull-left" aria-hidden="true"></i>
