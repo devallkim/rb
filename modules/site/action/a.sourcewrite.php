@@ -6,14 +6,19 @@ checkAdmin(0);
 if ($markdown == 'Y') {
 
 	// parsedown : https://github.com/erusev/parsedown
-	include_once $g['path_core'].'opensrc/parsedown/Parsedown.php';
+	include_once $g['path_core'].'opensrc/parsedown/1.7.1/Parsedown.php';
 	$Parsedown = new Parsedown();
+
 	$_source = trim(stripslashes($source));
-	$__SRC__ = $Parsedown->text($_source);
+	$__SRC__ = Parsedown::instance()
+					   ->setBreaksEnabled(true) # enables automatic line breaks
+					   ->text($_source);
 	$source = preg_replace("'<tmp[^>]*?>'si",'',$__SRC__);
 
 	$_mobile = trim(stripslashes($mobile));
-	$__MSRC__ = $Parsedown->text($_mobile);
+	$__MSRC__ = Parsedown::instance()
+					   ->setBreaksEnabled(true) # enables automatic line breaks
+					   ->text($_mobile);
 	$mobile = $__MSRC__;
 }
 
@@ -85,8 +90,11 @@ if ($wysiwyg != 'Y')
 		if (!$_SEO['image_src']) getDbUpdate($table['s_seo'],"image_src='$seo_src'",'parent='.$uid);
 	}
 
-	setrawcookie('site_edit_result', rawurlencode('저장 되었습니다|success'));
-	getLink('reload','parent.','','');
+	echo '<script type="text/javascript">';
+	echo 'parent.$.notify({message: "저장 되었습니다."},{type: "success"});';
+	echo 'parent.$(".js-submit").prop("disabled",false);';
+	echo '</script>';
+	exit;
 }
 else {
 	$cachefile_pc = str_replace('.php','.cache',$vfile);

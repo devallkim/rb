@@ -18,7 +18,7 @@ if ($uid)
 	$R = getUidData($table['s_page'],$uid);
 	$_SEO = getDbData($table['s_seo'],'rel=2 and parent='.$R['uid'],'*');
 }
-$pageType = array('','모듈연결','직접편집');
+$pageType = array('','모듈연결','코드편집','문서편집');
 ?>
 
 <div class="row no-gutters">
@@ -142,7 +142,7 @@ $pageType = array('','모듈연결','직접편집');
 			<input type="hidden" name="recnum" value="<?php echo $recnum?>">
 			<input type="hidden" name="keyw" value="<?php echo $keyw?>">
 			<input type="hidden" name="p" value="<?php echo $p?>">
-			<input type="hidden" name="pagetype" value="<?php echo $R['uid']?$R['pagetype']:2?>">
+			<input type="hidden" name="pagetype" value="<?php echo $R['uid']?$R['pagetype']:3?>">
 
 			<div class="card-header d-flex justify-content-between align-items-center">
 				<?php if($R['uid']):?>
@@ -165,6 +165,7 @@ $pageType = array('','모듈연결','직접편집');
 									<span id="rb-document-type"><?php echo $pageType[$R['pagetype']]?></span> <span class="caret"></span>
 								</button>
 								<div class="dropdown-menu" role="menu">
+									<a class="dropdown-item" href="#" onclick="docType(3,'<?php echo $pageType[3]?>');"><i class="fa fa-hashtag"></i> <?php echo $pageType[3]?></a>
 									<a class="dropdown-item" href="#" onclick="docType(2,'<?php echo $pageType[2]?>');"><i class="fa fa-code"></i> <?php echo $pageType[2]?></a>
 									<a class="dropdown-item" href="#" onclick="docType(1,'<?php echo $pageType[1]?>');"><i class="kf kf-module"></i> <?php echo $pageType[1]?></a>
 								</div>
@@ -228,35 +229,52 @@ $pageType = array('','모듈연결','직접편집');
 				</div>
 
 				<div class="form-group tab-content<?php if(!$R['uid']):?> d-none<?php endif?>">
-					<div class="form-group row<?php if($R['pagetype']!=2):?> d-none<?php endif?>" id="editBox3">
+
+					<div class="form-group row<?php if($R['pagetype']!=2):?> d-none<?php endif?>" id="editBox2">
 						<div class="col-lg-10 col-xl-9 offset-lg-2">
-							<fieldset<?php if($R['pagetype']!=2):?> disabled<?php endif?>>
-								<div class="btn-group btn-group-justified" data-toggle="buttons">
-									<a class="btn btn-light rb-modal-code">
-										<i class="fa fa-code"></i> 소스코드
-									</a>
-									<div class="btn-group">
-										<button type="button" class="btn btn-light rb-modal-markdown"><i class="fa fa-hashtag"></i> 마크다운</button>
-										<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="sr-only">Toggle Dropdown</span>
-										</button>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a class="dropdown-item rb-modal-markdown-mobile" href="#">
-												<i class="fa fa-hashtag"></i>  모바일 전용
-											</a>
-										</div>
-									</div>
-								</div>
-							</fieldset>
-							<span class="form-text text-muted mt-2">
-								<ul class="list-unstyled mb-0">
-									<li><small>직접꾸미기는 소스코드를 직접 편집하거나 마크다운 에디터를 이용할 수 있습니다.</small></li>
-									<li><small>소스코드로 작성한 페이지를 마크다운으로 재편집하면 소스코드가 변형될 수 있으니 유의하세요.</small></li>
-									<?php if($R['pagetype']!=3):?><li><small>페이지 속성을 변경한 후에 활성화 됩니다.</small></li><?php endif?>
+							<p class="text-muted small mb-1">파일경로</p>
+							<ol class="breadcrumb  mb-2 py-1 small">
+							 <li class="breadcrumb-item active">기본 &nbsp; : </li>
+							 <li class="breadcrumb-item">pages</li>
+							 <li class="breadcrumb-item"><?php echo $r ?>-pages</li>
+							 <li class="breadcrumb-item"><a href="#" class="rb-modal-code" data-toggle="buttons"><?php echo $R['id']?$R['id']:'p'.$date['tohour']?>.php</a></li>
+						 </ol>
+							<ol class="breadcrumb py-1 small">
+								<li class="breadcrumb-item active">모바일 : </li>
+								<li class="breadcrumb-item">pages</li>
+								<li class="breadcrumb-item"><?php echo $r ?>-pages</li>
+								<li class="breadcrumb-item"><a href="#" class="rb-modal-code-mobile" data-toggle="buttons"><?php echo $R['id']?$R['id']:'p'.$date['tohour']?>.mobile.php</a></li>
+							</ol>
+
+							<small>
+								<ul class="form-text text-muted pl-3 mt-3">
+									<li>직접편집은 <code>PHP</code> <code>HTML</code> <code>CSS</code> <code>JS</code> 코드로 직접 편집할 수 있습니다.</li>
+									<li>FTP로 접속후 텍스트 에디터를 통해 파일편집을 추천합니다.</li>
+									<li>간단한 편집은 <a href="#" data-toggle="buttons" class="badge badge-dark rb-modal-code"><i class="fa fa-code"></i> 편집기</a> 활용하시면 편리합니다.</li>
 								</ul>
-							</span>
+							</small>
 						</div>
 					</div>
+
+					<div class="form-group row<?php if($R['pagetype']!=3):?> d-none<?php endif?>" id="editBox3">
+						<div class="col-lg-10 col-xl-9 offset-lg-2">
+
+							<div class="btn-group">
+								<button type="button" class="btn btn-light rb-modal-markdown"><i class="fa fa-hashtag"></i> 기본</button>
+								<button type="button" class="btn btn-light rb-modal-markdown-mobile"><i class="fa fa-hashtag"></i> 모바일 전용</button>
+							</div>
+							<div class="form-text mt-2">
+								<small>
+									<ul class="form-text text-muted pl-3 mt-3">
+										<li>마크다운 문법을 사용하여 문서를 편집할 수 있습니다.</li>
+										<li>소스코드로 작성한 페이지를 마크다운으로 재편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
+									</ul>
+								</small>
+							</div>
+
+						</div>
+					</div>
+
 					<div class="form-group row<?php if($R['pagetype']!=1):?> d-none<?php endif?>" id="editBox1">
 						<div class="col-lg-10 col-xl-9 offset-lg-2">
 							<fieldset>
@@ -277,6 +295,9 @@ $pageType = array('','모듈연결','직접편집');
 							</small>
 						</div>
 					</div>
+
+
+
 				</div>
 
 
@@ -659,6 +680,9 @@ var _mediasetField='';
 $(document).ready(function() {
 	$('.rb-modal-code').on('click',function() {
 		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=page&uid=<?php echo $R['uid']?>&type=source&cat=<?php echo urlencode($cat)?>&p=<?php echo $p?>&recnum=<?php echo $recnum?>&keyw=<?php echo urlencode($keyw)?>');
+	});
+	$('.rb-modal-code-mobile').on('click',function() {
+		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=page&uid=<?php echo $R['uid']?>&type=source&cat=<?php echo urlencode($cat)?>&p=<?php echo $p?>&recnum=<?php echo $recnum?>&keyw=<?php echo urlencode($keyw)?>&mobileOnly=Y');
 	});
 	$('.rb-modal-markdown').on('click',function() {
 		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=page&uid=<?php echo $R['uid']?>&type=source&markdown=Y&cat=<?php echo urlencode($cat)?>&p=<?php echo $p?>&recnum=<?php echo $recnum?>&keyw=<?php echo urlencode($keyw)?>');

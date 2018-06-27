@@ -25,7 +25,7 @@ if ($is_regismode){
 	$CINFO['imghead']  = '';
 	$CINFO['imgfoot']  = '';
 }
-$menuType = array('','모듈연결','직접편집','메뉴연결');
+$menuType = array('','모듈연결','코드편집','메뉴연결','문서편집');
 ?>
 
 <div id="catebody" class="row no-gutters">
@@ -151,7 +151,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 			<input type="hidden" name="seouid" value="<?php echo $_SEO['uid']?>">
 			<input type="hidden" name="layout" value="">
 			<input type="hidden" name="m_layout" value="">
-			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:2?>">
+			<input type="hidden" name="menutype" value="<?php echo $CINFO['uid']?$CINFO['menutype']:4?>">
 
 			<div class="card-header d-flex justify-content-between align-items-center">
 
@@ -211,6 +211,7 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 										<span id="rb-document-type"><?php echo $menuType[$CINFO['menutype']]?></span>
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" href="#" onclick="docType(4,'<?php echo $menuType[4]?>');"><i class="fa fa-hashtag"></i> <?php echo $menuType[4]?></a>
 										<a class="dropdown-item" href="#" onclick="docType(2,'<?php echo $menuType[2]?>');"><i class="fa fa-code"></i> <?php echo $menuType[2]?></a>
 										<a class="dropdown-item" href="#" onclick="docType(1,'<?php echo $menuType[1]?>');"><i class="kf kf-module"></i> <?php echo $menuType[1]?></a>
 										<a class="dropdown-item" href="#" onclick="docType(3,'<?php echo $menuType[3]?>');"><i class="fa fa-sitemap"></i> <?php echo $menuType[3]?></a>
@@ -291,29 +292,26 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 						</div>
 						<div class="form-group form-row" id="editBox2"<?php if($CINFO['menutype']!=2):?> hidden<?php endif?>>
 							<div class="col-lg-10 col-xl-9 offset-lg-2">
-								<fieldset<?php if($CINFO['menutype']!=2):?> disabled<?php endif?>>
-									<div class="btn-group btn-group-justified" data-toggle="buttons">
-										<a class="btn btn-light rb-modal-code">
-											<i class="fa fa-code"></i> 소스코드
-										</a>
-										<div class="btn-group">
-										  <button type="button" class="btn btn-light rb-modal-markdown"><i class="fa fa-hashtag"></i> 마크다운</button>
-										  <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										    <span class="sr-only">Toggle Dropdown</span>
-										  </button>
-										  <div class="dropdown-menu dropdown-menu-right">
-										    <a class="dropdown-item rb-modal-markdown-mobile" href="#">
-													<i class="fa fa-hashtag"></i>  모바일 전용
-												</a>
-										  </div>
-										</div>
-									</div>
-								</fieldset>
+
+								<p class="text-muted small mb-1">파일경로</p>
+								<ol class="breadcrumb  mb-2 py-1 small">
+								 <li class="breadcrumb-item active">기본 &nbsp; : </li>
+								 <li class="breadcrumb-item">pages</li>
+								 <li class="breadcrumb-item"><?php echo $r ?>-menus</li>
+								 <li class="breadcrumb-item"><a href="#" class="rb-modal-code" data-toggle="buttons"><?php echo $CINFO['id']?>.php</a></li>
+							 </ol>
+								<ol class="breadcrumb py-1 small">
+									<li class="breadcrumb-item active">모바일 : </li>
+									<li class="breadcrumb-item">pages</li>
+									<li class="breadcrumb-item"><?php echo $r ?>-menus</li>
+									<li class="breadcrumb-item"><a href="#" class="rb-modal-code-mobile" data-toggle="buttons"><?php echo $CINFO['id']?>.mobile.php</a></li>
+								</ol>
+
 								<small>
 									<ul class="form-text text-muted pl-3 mt-3">
-										<li>직접꾸미기는 소스코드를 직접 편집하거나 마크다운 에디터를 이용할 수 있습니다.</li>
-										<li>소스코드로 작성한 페이지를 마크다운으로 재편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
-										<?php if($CINFO['menutype']!=2):?><li>메뉴 속성을 변경한 후에 활성화 됩니다.</li><?php endif?>
+										<li>직접편집은 <code>PHP</code> <code>HTML</code> <code>CSS</code> <code>JS</code> 코드로 직접 편집할 수 있습니다.</li>
+										<li>FTP로 접속후 텍스트 에디터를 통해 파일편집을 추천합니다.</li>
+										<li>간단한 편집은 <a href="#" data-toggle="buttons" class="badge badge-dark rb-modal-code"><i class="fa fa-code"></i> 편집기</a> 활용하시면 편리합니다.</li>
 									</ul>
 								</small>
 							</div>
@@ -339,6 +337,25 @@ $menuType = array('','모듈연결','직접편집','메뉴연결');
 							</div>
 						</div>
 
+						<div class="form-group form-row" id="editBox4"<?php if($CINFO['menutype']!=4):?> hidden<?php endif?>>
+							<div class="col-lg-10 col-xl-9 offset-lg-2">
+								<fieldset<?php if($CINFO['menutype']!=4):?> disabled<?php endif?>>
+									<div class="btn-group btn-group-justified" data-toggle="buttons">
+										<button type="button" class="btn btn-light rb-modal-markdown"><i class="fa fa-hashtag"></i> 기본</button>
+										<button type="button" class="btn btn-light rb-modal-markdown-mobile"><i class="fa fa-hashtag"></i> 모바일 전용</button>
+
+									</div>
+								</fieldset>
+								<div class="form-text mt-2">
+									<small>
+										<ul class="form-text text-muted pl-3 mt-3">
+											<li>마크다운 문법을 사용하여 문서를 편집할 수 있습니다.</li>
+											<li>소스코드로 작성한 페이지를 마크다운으로 재편집하면 소스코드가 변형될 수 있으니 유의하세요.</li>
+										</ul>
+									</small>
+								</div>
+							</div>
+						</div>
 					</div>
 
 				<?php if($CINFO['uid']&&!$vtype):?>
@@ -914,6 +931,9 @@ $(document).ready(function() {
 	$('.rb-modal-code').on('click',function() {
 		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=menu&uid=<?php echo $CINFO['uid']?>&type=source&cat=<?php echo $cat?>&code=<?php echo $code?>');
 	});
+	$('.rb-modal-code-mobile').on('click',function() {
+		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=menu&uid=<?php echo $CINFO['uid']?>&type=source&cat=<?php echo $cat?>&code=<?php echo $code?>&mobileOnly=Y');
+	});
 	$('.rb-modal-markdown').on('click',function() {
 		goHref('<?php echo $g['s']?>/?r=<?php echo $r?>&m=admin&module=site&front=_edit&_mtype=menu&uid=<?php echo $CINFO['uid']?>&type=source&markdown=Y&cat=<?php echo $cat?>&code=<?php echo $code?>');
 	});
@@ -1018,6 +1038,7 @@ function docType(n,str)
 	$('#editBox1').addClass('d-none').removeAttr('hidden');
 	$('#editBox2').addClass('d-none').removeAttr('hidden');
 	$('#editBox3').addClass('d-none').removeAttr('hidden');
+	$('#editBox4').addClass('d-none').removeAttr('hidden');
 	$('#editBox'+n).removeClass('d-none');
 	getIframeForAction(document.procForm);
 	document.procForm.menutype.value = n;

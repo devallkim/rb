@@ -40,12 +40,8 @@ html,
 }
 
 #rb-page-source .CodeMirror .CodeMirror-scroll {
-  line-height: 1.45 !important;
-  font-size: 14px;
-}
-
-#rb-page-source .CodeMirror pre {
-	font-family: 'Noto Sans KR', sans-serif, '돋움', dotum, sans-serif;
+  font-size: 12px;
+	font-weight: normal;
 }
 
 .timeline-comment .previewable-comment-form {
@@ -325,4 +321,8 @@ html,
 
 .editor-preview .mejs-player {
 	margin-bottom: 1rem
+}
+
+.CodeMirror-code {
+	font-size: 13px
 }

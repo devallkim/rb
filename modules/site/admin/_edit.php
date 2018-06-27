@@ -118,7 +118,7 @@ $_editArray = array(
 	</div>
 
 	<div class="row">
-		<div class="col-sm-8 col-lg-9">
+		<div class="<?php echo $markdown=='Y'?'col-sm-8 col-lg-9':'col-12' ?>">
 
 			<form name="procForm" action="<?php echo $g['s']?>/" method="post" onsubmit="return sourcecheck(this);">
 				<input type="hidden" name="r" value="<?php echo $r?>">
@@ -191,7 +191,7 @@ $_editArray = array(
 					<div class="form-group">
 						<div class="panel-group" id="accordion">
 							<?php $_i=1;foreach($_editArray as $_key => $_val):?>
-							<div class="card">
+							<div class="card mb-0">
 								<div class="card-header p-0">
 									<a class="d-block collapsed muted-link" data-toggle="collapse" href="#site-code-<?php echo $_key?>" onclick="sessionSetting('sh_sys_page_edit','<?php echo $_key?>','','');">
 										<?php echo $_val[1]?>
@@ -201,7 +201,7 @@ $_editArray = array(
 								<div id="site-code-<?php echo $_key?>" class="panel-collapse collapse<?php if(($_key==$_SESSION['sh_sys_page_edit']) || (!$_SESSION['sh_sys_page_edit']&&$_i==1)):?> show<?php endif?>" data-parent="#accordion" >
 
 									<div class="rb-codeview">
-										<div class="rb-codeview-header">
+										<div class="rb-codeview-header d-flex justify-content-between align-items-center">
 											<ol class="breadcrumb">
 												<li class="breadcrumb-item">파일경로 :</li>
 												<li class="breadcrumb-item">root</li>
@@ -211,9 +211,16 @@ $_editArray = array(
 												<?php endif?>
 												<li class="breadcrumb-item active"><?php echo str_replace('menu/','',$_filekind).$_val[2]?></li>
 											</ol>
+											<button class="btn btn-light btn-sm js-submit" type="button" name="button">
+								        <span class="not-loading">
+													저장하기
+												</span>
+								        <span class="is-loading"><i class="fa fa-spinner fa-lg fa-spin fa-fw"></i></span>
+								      </button>
+
 										</div>
 										<div class="rb-codeview-body">
-											<textarea name="<?php echo $_key?>" id="code_<?php echo $_key?>" class="form-control" rows="35"><?php if(is_file($g['path_page'].$_filekind.$_val[2])) echo htmlspecialchars(implode('',file($g['path_page'].$_filekind.$_val[2])))?></textarea>
+											<textarea name="<?php echo $_key?>" id="code_<?php echo $_key?>" class="form-control f13 d-none" rows="35"><?php if(is_file($g['path_page'].$_filekind.$_val[2])) echo htmlspecialchars(implode('',file($g['path_page'].$_filekind.$_val[2])))?></textarea>
 										</div>
 										<div class="rb-codeview-footer">
 											<ul class="list-inline">
@@ -241,6 +248,8 @@ $_editArray = array(
 			<?php endif; ?>
 
 		</div><!-- /.col-sm-8 -->
+
+		<?php if ($markdown=='Y'): ?>
 		<div class="col-sm-4 col-lg-3">
 
 			<div class="card">
@@ -298,6 +307,7 @@ $_editArray = array(
 			</button>
 
 		</div><!-- /.col-sm-4 -->
+		<?php endif; ?>
 	</div><!-- /.row -->
 
 </div>
@@ -307,7 +317,6 @@ $_editArray = array(
 <!-- codemirror -->
 <style>
 .CodeMirror {
-	font-size: 13px;
 	font-weight: normal;
 	font-family: Menlo,Monaco,Consolas,"Courier New",monospace !important;
 }
@@ -328,74 +337,99 @@ $_editArray = array(
 
 <script>
 
-var editor_php1 = CodeMirror.fromTextArea(getId('code_source'), {
-	mode: "application/x-httpd-php",
-    indentUnit: 4,
-    lineNumbers: true,
-    matchBrackets: true,
-    indentWithTabs: true,
-	theme: '<?php echo $d['admin']['codeeidt']?>',
-	extraKeys: {
-		"F11": function(cm) {
-		  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-		},
-		"Esc": function(cm) {
-		  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+
+$(function () {
+
+	var editor_php1 = CodeMirror.fromTextArea(getId('code_source'), {
+		mode: "application/x-httpd-php",
+	    indentUnit: 2,
+	    lineNumbers: true,
+	    matchBrackets: true,
+	    indentWithTabs: true,
+			theme: '<?php echo $d['admin']['codeeidt']?>',
+		extraKeys: {
+			"F11": function(cm) {
+			  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+			},
+			"Esc": function(cm) {
+			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+			}
 		}
-	}
-});
-var editor_php2 = CodeMirror.fromTextArea(getId('code_mobile'), {
-	mode: "application/x-httpd-php",
-    indentUnit: 4,
-    lineNumbers: true,
-    matchBrackets: true,
-    indentWithTabs: true,
-	theme: '<?php echo $d['admin']['codeeidt']?>',
-	extraKeys: {
-		"F11": function(cm) {
-		  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-		},
-		"Esc": function(cm) {
-		  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+	});
+	var editor_php2 = CodeMirror.fromTextArea(getId('code_mobile'), {
+		mode: "application/x-httpd-php",
+	    indentUnit: 4,
+	    lineNumbers: true,
+	    matchBrackets: true,
+	    indentWithTabs: true,
+		theme: '<?php echo $d['admin']['codeeidt']?>',
+		extraKeys: {
+			"F11": function(cm) {
+			  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+			},
+			"Esc": function(cm) {
+			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+			}
 		}
-	}
-});
-var editor_css = CodeMirror.fromTextArea(getId('code_css'), {
-	mode: "text/css",
-    indentUnit: 4,
-    lineNumbers: true,
-    matchBrackets: true,
-    indentWithTabs: true,
-	theme: '<?php echo $d['admin']['codeeidt']?>',
-	extraKeys: {
-		"F11": function(cm) {
-		  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-		},
-		"Esc": function(cm) {
-		  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+	});
+	var editor_css = CodeMirror.fromTextArea(getId('code_css'), {
+		mode: "text/css",
+	    indentUnit: 4,
+	    lineNumbers: true,
+	    matchBrackets: true,
+	    indentWithTabs: true,
+		theme: '<?php echo $d['admin']['codeeidt']?>',
+		extraKeys: {
+			"F11": function(cm) {
+			  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+			},
+			"Esc": function(cm) {
+			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+			}
 		}
-	}
-});
-var editor_js = CodeMirror.fromTextArea(getId('code_js'), {
-	mode: "text/javascript",
-    indentUnit: 4,
-    lineNumbers: true,
-    matchBrackets: true,
-    indentWithTabs: true,
-	theme: '<?php echo $d['admin']['codeeidt']?>',
-	extraKeys: {
-		"F11": function(cm) {
-		  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-		},
-		"Esc": function(cm) {
-		  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+	});
+	var editor_js = CodeMirror.fromTextArea(getId('code_js'), {
+		mode: "text/javascript",
+	    indentUnit: 4,
+	    lineNumbers: true,
+	    matchBrackets: true,
+	    indentWithTabs: true,
+		theme: '<?php echo $d['admin']['codeeidt']?>',
+		extraKeys: {
+			"F11": function(cm) {
+			  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+			},
+			"Esc": function(cm) {
+			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+			}
 		}
-	}
-});
-editor_php1.setSize('100%','550px');
-editor_php2.setSize('100%','550px');
-editor_css.setSize('100%','550px');
-editor_js.setSize('100%','550px');
+	});
+	editor_php1.setSize('100%','550px');
+	editor_php2.setSize('100%','550px');
+	editor_css.setSize('100%','550px');
+	editor_js.setSize('100%','550px');
+
+
+	$('#site-code-source').on('shown.bs.collapse', function () {
+		editor_php1.refresh();
+	})
+	$('#site-code-mobile').on('shown.bs.collapse', function () {
+		editor_php2.refresh();
+	})
+	$('#site-code-css').on('shown.bs.collapse', function () {
+		editor_css.refresh();
+	})
+	$('#site-code-js').on('shown.bs.collapse', function () {
+		editor_js.refresh();
+	})
+
+	<?php if ($mobileOnly=='Y'): ?>
+	$('#site-code-mobile').collapse('show')
+	<?php endif; ?>
+
+})
+
+
 
 _isCodeEdit = true;
 function _codefullscreen()
