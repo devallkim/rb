@@ -13,14 +13,14 @@ $my['level'] = 0;
 if ($_SESSION['mbr_uid'])
 {
 	$my = array_merge(getUidData($table['s_mbrid'],$_SESSION['mbr_uid']),getDbData($table['s_mbrdata'],"memberuid='".$_SESSION['mbr_uid']."'",'*'));
-	if (!$my['uid']) { // 로그인 상태에서 관리자 회원삭제 된 경우
+	if (!$my['uid'] || $my['pw'] != $_SESSION['mbr_pw']) { // 로그인 상태에서 관리자 회원삭제 된 경우
 		$_SESSION['mbr_uid'] = '';
 		$_SESSION['mbr_pw']  = '';
 		$_SESSION['mbr_logout'] = '1';
 		setAccessToken($my['uid'],'logout');
+		setrawcookie('site_login_result', rawurlencode('로그아웃 되었습니다.|danger'),time() + (60 * 30), '/');
+		getLink('reload','','','');
 	}
-	if($my['pw'] != $_SESSION['mbr_pw']) exit;
-	$g['mysns'] = explode('|',$my['sns']);
 }
 
 // 로그인 상태 유지 프로세스 추가
@@ -33,7 +33,6 @@ if($_COOKIE[$DB['head'].'_token'])
     $is_token=getDbData($DB['head'].'_s_mbrtoken',$t_que,'*');
      if($is_token['uid']){
      	  $my = array_merge(getUidData($table['s_mbrid'],$memberuid),getDbData($table['s_mbrdata'],"memberuid='".$memberuid."'",'*'));
-	     $g['mysns'] = explode('|',$my['sns']);
      }
 }
 
@@ -183,4 +182,195 @@ $g['switch_1'] = getSwitchInc('top');
 $g['switch_2'] = getSwitchInc('head');
 $g['switch_3'] = getSwitchInc('foot');
 $g['switch_4'] = getSwitchInc('end');
+
+//사이트별 회원설정 변수
+$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php'; // 사이트 회원모듈 변수파일
+$_member_varfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].'member/var/var.php';
+include_once $_member_varfile; // 변수파일 인클루드
+
+// 회원가입을 위한 이메일/휴대폰 본인인증 후 관련세션 존재유무
+if (isset($_SESSION['JOIN']['email']) || isset($_SESSION['JOIN']['phone'])) {
+	$call_modal_join_site=1;  //  인증후,가입 모달 호출
+}
+
+//사이트별 외부연결 설정
+if (file_exists($g['path_var'].'site/'.$r.'/connect.var.php')) {
+	include $g['path_var'].'site/'.$r.'/connect.var.php';
+}
+
+//소셜로그인 세션 존재유무
+if(isset($_SESSION['SL']['naver'])||isset($_SESSION['SL']['kakao'])||isset($_SESSION['SL']['facebook'])||isset($_SESSION['SL']['google'])||isset($_SESSION['SL']['instagram'])||isset($_SESSION['SL']['twitter'])){
+	if (is_array($_SESSION['SL']['naver']) || is_array($_SESSION['SL']['kakao']) || is_array($_SESSION['SL']['facebook']) || is_array($_SESSION['SL']['google']) || is_array($_SESSION['SL']['instagram']) || is_array($_SESSION['SL']['twitter'])){
+		$is_socialUserinfoSession = 1;
+	}
+}
+
+//소셜로그인을 사용할때
+if ($d['member']['login_social'] || $d['member']['join_bySocial']) {
+	if ($is_socialUserinfoSession) {
+		if (isset($_SESSION['SL']['naver'])) {
+			$sns_code = 'n';
+			$sns_name = 'naver';
+			$sns_name_ko = '네이버';
+			$sns_access_token	= $_SESSION['SL']['naver']['userinfo']['access_token']; //소셜미디어 접근토큰
+			$sns_refresh_token	= $_SESSION['SL']['naver']['userinfo']['refresh_token']; //소셜미디어 갱신토큰
+			$sns_expires_in	= $_SESSION['SL']['naver']['userinfo']['expires_in']; //소셜미디어 접근 토큰 유효기간(초)
+			$snsuid	= $_SESSION['SL']['naver']['userinfo']['uid']; //소셜미디어 고유번호
+			$name	= $_SESSION['SL']['naver']['userinfo']['name'];
+			$email	= $_SESSION['SL']['naver']['userinfo']['email'];
+			$_photo	= $_SESSION['SL']['naver']['userinfo']['photo'];
+		}
+		if (isset($_SESSION['SL']['kakao'])) {
+			$sns_code = 'k';
+			$sns_name = 'kakao';
+			$sns_name_ko = '카카오';
+			$sns_access_token	= $_SESSION['SL']['kakao']['userinfo']['access_token']; //소셜미디어 접근토큰
+			$sns_refresh_token	= $_SESSION['SL']['kakao']['userinfo']['refresh_token']; //소셜미디어 갱신토큰
+			$sns_expires_in	= $_SESSION['SL']['kakao']['userinfo']['expires_in']; //소셜미디어 접근 토큰 유효기간(초)
+			$snsuid	= $_SESSION['SL']['kakao']['userinfo']['uid'];  //소셜미디어 고유번호
+			$name	= $_SESSION['SL']['kakao']['userinfo']['name'];
+			$email	= $_SESSION['SL']['kakao']['userinfo']['email'];
+			$_photo	= $_SESSION['SL']['kakao']['userinfo']['photo'];
+		}
+		if (isset($_SESSION['SL']['facebook'])) {
+			$sns_code = 'f';
+			$sns_name = 'facebook';
+			$sns_name_ko = '페이스북';
+			$sns_access_token	= $_SESSION['SL']['facebook']['userinfo']['access_token']; //소셜미디어 접근토큰
+			$sns_refresh_token	= $_SESSION['SL']['facebook']['userinfo']['refresh_token']; //소셜미디어 갱신토큰
+			$sns_expires_in	= $_SESSION['SL']['facebook']['userinfo']['expires_in']; //소셜미디어 접근 토큰 유효기간(초)
+			$snsuid	= $_SESSION['SL']['facebook']['userinfo']['uid'];  //소셜미디어 고유번호
+			$name	= $_SESSION['SL']['facebook']['userinfo']['name'];
+			$email	= $_SESSION['SL']['facebook']['userinfo']['email'];
+			$_photo	= $_SESSION['SL']['facebook']['userinfo']['photo'];
+		}
+		if (isset($_SESSION['SL']['google'])) {
+			$sns_code = 'g';
+			$sns_name = 'google';
+			$sns_name_ko = '구글';
+			$sns_access_token	= $_SESSION['SL']['google']['userinfo']['access_token']; //소셜미디어 접근토큰
+			$sns_refresh_token	= $_SESSION['SL']['google']['userinfo']['refresh_token']; //소셜미디어 갱신토큰
+			$sns_expires_in	= $_SESSION['SL']['google']['userinfo']['expires_in']; //소셜미디어 접근 토큰 유효기간(초)
+			$snsuid	= $_SESSION['SL']['google']['userinfo']['uid'];  //소셜미디어 고유번호
+			$name	= $_SESSION['SL']['google']['userinfo']['name'];
+			$email	= $_SESSION['SL']['google']['userinfo']['email'];
+			$_photo	= $_SESSION['SL']['google']['userinfo']['photo'];
+		}
+		if (isset($_SESSION['SL']['instagram'])) {
+			$sns_code = 'i';
+			$sns_name = 'instagram';
+			$sns_name_ko = '인스타그램';
+			$sns_access_token	= $_SESSION['SL']['instagram']['userinfo']['access_token']; //소셜미디어 접근토큰
+			$snsuid	= $_SESSION['SL']['instagram']['userinfo']['uid']; //소셜미디어 고유번호
+			$name	= $_SESSION['SL']['instagram']['userinfo']['name'];
+			$_photo	= $_SESSION['SL']['instagram']['userinfo']['photo'];
+		}
+
+		$mbr_sns = getDbData($table['s_mbrsns'],'id='.$snsuid.' and sns="'.$sns_name.'"','mbruid');
+		$mbr_email = getDbData($table['s_mbremail'],"email='".$email."'",'*');
+		$d_regis	= $date['totime'];
+
+		if ($my['uid']) {
+
+			// 개인정보관리 > 연결계정 > 추가 연결
+			if ($mbr_sns['mbruid'] && ($mbr_sns['mbruid'] != $my['uid'])) {
+				setrawcookie('site_login_result', rawurlencode($sns_name_ko.' 계정이 이미 다른계정에 연결되어 있습니다.|danger'),time() + (60 * 30), '/');
+				$_SESSION['SL'] = '';  // 세션비우기
+				getLink('reload','','','');
+			}
+
+			if ($mbr_sns['mbruid']) {
+				$msg = ' 계정이 재인증 되었습니다.'; //개인정보관리 > 개인정보잠금 > 재인증
+			} else {  //신규연결
+				$msg = ' 계정이 연결 되었습니다.';  // 개인정보관리 > 연결계정 > 추가 연결
+				getDbInsert($table['s_mbrsns'],'mbruid,sns,id,access_token,refresh_token,expires_in,d_regis',"'".$my['uid']."','".$sns_name."','$snsuid','$sns_access_token','$sns_refresh_token','$sns_expires_in','$d_regis'");
+			}
+
+			getDbUpdate($table['s_mbrdata'],"last_log='".$date['totime']."'",'memberuid='.$my['uid']);
+			setrawcookie('site_login_result', rawurlencode($sns_name_ko.$msg.'|default'),time() + (60 * 30), '/');  // 알림레이어 출력를 위한 로그인 상태 cookie 저장
+			$_SESSION['SL'] = '';  // 세션비우기
+			getLink('reload','','','');
+
+		} else {  // 비로그인 상태
+
+				//결과값 못 받은 경우
+				if (!$name) {
+					$_SESSION['SL'] = '';
+					setrawcookie('site_login_result',rawurlencode($sns_name_ko.' 에서 정보를 수신하지 못했습니다.|danger'),time() + (60 * 30), '/');
+					getLink('reload','','','');
+				}
+
+				// 정상 소셜로그인 (이미 연결된 소셜미디어 고유번호가 있을 경우, 해당회원 로그인 처리)
+				if ($mbr_sns['mbruid']) {
+					$M	= getUidData($table['s_mbrid'],$mbr_sns['mbruid']);
+					getDbUpdate($table['s_mbrdata'],"tmpcode='',now_log=1,last_log='".$date['totime']."',sns='".$sns_name."'",'memberuid='.$M['uid']);
+					$_SESSION['mbr_uid'] = $M['uid'];
+					$_SESSION['mbr_pw']  = $M['pw'];
+
+					setAccessToken($mbr_sns['mbruid'],'login');  //로그인 유지 기본적용
+
+					setrawcookie('site_login_result',rawurlencode($sns_name_ko.' 계정으로 로그인 되었습니다.|default'),time() + (60 * 30), '/');  // 알림레이어 출력를 위한 로그인 상태 cookie 저장
+					$_SESSION['SL'] = ''; //세션 비우기
+					getLink('reload','','','');
+				}
+
+				// 소셜미디어에서 획득한 이메일이 기존 회원의 동일한 이메일에 있을 경우,
+				if ($mbr_email['mbruid']) {
+
+					if ($mbr_email['d_verified']) {
+						// 본인 인증된 메일일 경우, 자동 로그인 및 연결처리 (동일인 중복가입을 막기위해)
+						$M	= getUidData($table['s_mbrid'],$mbr_email['mbruid']);
+						$d_regis	= $date['totime'];
+						getDbUpdate($table['s_mbrdata'],"tmpcode='',now_log=1,last_log='".$date['totime']."',sns='".$sns_name."'",'memberuid='.$M['uid']);
+						getDbInsert($table['s_mbrsns'],'mbruid,sns,id,access_token,refresh_token,expires_in,d_regis',"'".$M['uid']."','".$sns_name."','$snsuid','$sns_access_token','$sns_refresh_token','$sns_expires_in','$d_regis'");
+
+						$_SESSION['mbr_uid'] = $M['uid'];
+						$_SESSION['mbr_pw']  = $M['pw'];
+						setrawcookie('site_login_result', rawurlencode($sns_name_ko.' 계정으로 로그인 되었습니다.|default'),time() + (60 * 30), '/');  // 알림레이어 출력를 위한 로그인 상태 cookie 저장
+						$_SESSION['SL'] = ''; //세션 비우기
+						getLink('reload','','','');
+
+					} else {
+						// 계정연결 모달 호출
+
+						$is_sns = getDbData($table['s_mbrsns'],'mbruid="'.$mbr_email['mbruid'].'"','sns');
+						$has_sns = $is_sns['sns'];
+
+						if ($is_sns['sns']=='naver') $has_sns_ko = '네이버';
+						if ($is_sns['sns']=='kakao') $has_sns_ko = '카카오';
+						if ($is_sns['sns']=='google') $has_sns_ko = '구글';
+						if ($is_sns['sns']=='facebook') $has_sns_ko = '페이스북';
+						if ($is_sns['sns']=='instagram') $has_sns_ko = '인스타그램';
+
+						setrawcookie('site_login_result', rawurlencode($sns_name_ko.' 사용자 인증 되었습니다. 계정을 연결해 주세요.|default'),time() + (60 * 30), '/'); // 알림레이어 출력를 위한 로그인 상태 cookie 저장
+						if ($m!='member' || $front!="login") {
+							$call_modal_combine=1;  // 계정통합 모달 호출
+						}
+					}
+
+				} else {
+
+					if ($d['member']['join_enable']) { // 회원가입 작동 중지
+						setrawcookie('site_login_result', rawurlencode($sns_name_ko.' 사용자 인증 되었습니다.|default'),time() + (60 * 30), '/'); // 알림레이어 출력를 위한 로그인 상태 cookie 저장
+						if ($m!='member' || $front!="join") {
+							$call_modal_join_social=1;  // 소셜로그인 인증후,가입 모달 호출
+						}
+					} else {
+						$call_modal_join_social=0;
+						$_SESSION['SL'] = ''; //세션 비우기
+						setrawcookie('site_login_result', rawurlencode(' 죄송합니다. 지금은 회원가입을 하실 수 없습니다.|danger'),time() + (60 * 30), '/'); // 알림레이어 출력를 위한 로그인 상태 cookie 저장
+					}
+
+				}
+		}
+
+	} //소셜미디어에서 확득한 사용자 정보배열 세션이 있을때 끝
+
+	// 연결계정 정보
+	$my_naver = getDbData($table['s_mbrsns'],"mbruid='".$my['uid']."' and sns='naver'",'*');
+	$my_kakao = getDbData($table['s_mbrsns'],"mbruid='".$my['uid']."' and sns='kakao'",'*');
+	$my_google = getDbData($table['s_mbrsns'],"mbruid='".$my['uid']."' and sns='google'",'*');
+	$my_facebook = getDbData($table['s_mbrsns'],"mbruid='".$my['uid']."' and sns='facebook'",'*');
+	$my_instagram = getDbData($table['s_mbrsns'],"mbruid='".$my['uid']."' and sns='instagram'",'*');
+}
 ?>

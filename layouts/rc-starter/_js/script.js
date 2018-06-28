@@ -11,10 +11,23 @@
 $(function() {
 
   putCookieAlert('site_login_result') // 로그인/로그아웃 알림 메시지 출력
+
   RC_initPhotoSwipe(); // 포토갤러리 초기화 (모바일 전용)
 
 	$('[data-plugin="timeago"]').timeago();  // 상대시간 플러그인 초기화
   $('[data-plugin="mediaelement"]').mediaelementplayer(); // 동영상, 오디오 플레이어 초기화 http://www.mediaelementjs.com/
+
+
+  $(document).on('tap','[data-toggle="changeModal"]', function (e) {
+    var $this   = $(this)
+    var href    = $this.attr('href')
+    var type    = $this.attr('data-type')
+    var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, '')))
+    var $start = $($this.closest('.modal'))
+    if ($this.is('a')) e.preventDefault()
+    $start.modal('hide').removeClass('active')
+    setTimeout(function(){ $target.modal('show'); }, 300);
+	});
 
 	//modal 로그인 - 실행
 	$('#modal-login').find('form').submit( function(e){
@@ -34,7 +47,7 @@ $(function() {
   });
 
 	// 드로어(사이드메뉴영역) 닫기
-	$('#drawer-close').tap(function() {
+  $('body').on('tap click','#drawer-close',function(){
 		$('#drawer-left').drawer('hide')
 	});
 
@@ -81,7 +94,7 @@ $(function() {
   });
 
 	// 검색어 입력필드 초기화
-  $('[data-act="keyword-reset"]').tap(function(){
+  $('body').on('tap click','[data-act="keyword-reset"]',function(){
     var modal = $('#modal-search')
     modal.find("#search-input").val('').autocomplete('clear'); // 입력필드 초기화
     setTimeout(function(){
@@ -97,5 +110,37 @@ $(function() {
 		$('.autocomplete-suggestions').remove();
     modal.find('[data-role="keyword-reset"]').addClass("hidden"); // 검색어 초기화 버튼 숨김'
   })
+
+	//외부서비스 사용자 인증요청
+  $('body').on('tap click','[data-connect]',function(){
+    var provider = $(this).data('connect')
+
+		// /core/engine/cssjs.engine.php 참고
+		if (provider=='naver') var target = connect_naver
+		if (provider=='kakao') var target = connect_kakao
+		if (provider=='google') var target = connect_google
+		if (provider=='facebook') var target = connect_facebook
+		if (provider=='instagram') var target = connect_instagram
+    var referer = window.location.href  // 연결후, 원래 페이지 복귀를 위해
+
+    $(".content").loader({
+      text:       "연결 중...",
+      position:   "overlay"
+    });
+
+    $.post(rooturl+'/?r='+raccount+'&m=connect&a=save_referer',{
+    	referer : referer
+  		},function(response,status){
+
+        if(status=='success'){
+          setTimeout(function() {
+  					$(".content").loader("hide");
+  		      document.location = target;
+  		    }, 500);
+        }else{
+          alert(status);
+        }
+    });
+	});
 
 });

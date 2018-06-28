@@ -20,7 +20,7 @@
     <span class="icon icon-person"></span>
     <span class="tab-label">개인정보</span>
   </a>
-  <a class="tab-item" role="button" href="<?php echo $g['s']?>/logout">
+  <a class="tab-item" role="button" href="#popup-logout" data-toggle="popup">
     <span class="icon fa fa-sign-out"></span>
     <span class="tab-label">로그아웃</span>
   </a>
@@ -29,7 +29,7 @@
     <span class="icon fa fa-sign-in"></span>
     <span class="tab-label">로그인</span>
   </a>
-  <a class="tab-item" role="button" href="<?php echo RW('mod=join') ?>">
+  <a class="tab-item" role="button" href="#modal-join" data-toggle="modal" data-url="">
     <span class="icon icon-person"></span>
     <span class="tab-label">회원가입</span>
   </a>

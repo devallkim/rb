@@ -19,6 +19,11 @@ var raccount= '<?php echo $r?>';
 var moduleid= '<?php echo $m?>';
 var memberid= '<?php echo $my['id']?>';
 var is_admin= '<?php echo $my['admin']?>';
+var connect_naver= '<?php echo getConnectUrl('naver',$d['connect']['key_n'],$d['connect']['secret_n'],$g['url_root'].'/'.$r.'/oauth/naver',false)?>';
+var connect_kakao= '<?php echo getConnectUrl('kakao',$d['connect']['key_k'],$d['connect']['secret_k'],$g['url_root'].'/'.$r.'/oauth/kakao',false)?>';
+var connect_google= '<?php echo getConnectUrl('google',$d['connect']['key_g'],$d['connect']['secret_g'],$g['url_root'].'/'.$r.'/oauth/google',false)?>';
+var connect_facebook= '<?php echo getConnectUrl('facebook',$d['connect']['key_f'],$d['connect']['secret_f'],$g['url_root'].'/'.$r.'/oauth/facebook',false)?>';
+var connect_instagram= '<?php echo getConnectUrl('instagram',$d['connect']['key_i'],$d['connect']['secret_i'],$g['url_root'].'/'.$r.'/oauth/instagram',false)?>';
 </script>
 
 <!-- is-loading : https://github.com/hekigan/is-loading-->

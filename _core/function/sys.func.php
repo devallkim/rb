@@ -93,11 +93,19 @@ function getWeekday($n)
 {
 	return $GLOBALS['lang']['admin']['week'][$n];
 }
-//시간비교
+//시간비교(시간단위)
 function getNew($time,$term)
 {
 	if(!$time) return false;
 	$dtime = date('YmdHis',mktime(substr($time,8,2)+$term,substr($time,10,2),substr($time,12,2),substr($time,4,2),substr($time,6,2),substr($time,0,4)));
+	if ($dtime > $GLOBALS['date']['totime']) return true;
+	else return false;
+}
+//시간비교(분단위)
+function getValid($time,$term)
+{
+	if(!$time) return false;
+	$dtime = date('YmdHis',mktime(substr($time,8,2),substr($time,10,2)+$term,substr($time,12,2),substr($time,4,2),substr($time,6,2),substr($time,0,4)));
 	if ($dtime > $GLOBALS['date']['totime']) return true;
 	else return false;
 }
@@ -637,7 +645,7 @@ function getPreviewResize($image,$size){
   return $result;
 }
 
-// 이미지 가로/세로 교정 by 한꼬마(hancoma)
+// 이미지 가로/세로 교정
 function img_rot_box($up_saveFile) {
 	$exifData = exif_read_data($up_saveFile);
 	if($exifData['Orientation'] == 6) {
@@ -665,6 +673,15 @@ function img_rot_box($up_saveFile) {
 			$source = imagerotate ($source , $degree, 0);
 			imagepng($source, $up_saveFile);
 		}
+	}
+}
+
+//페이지 출력
+function getPageSelect($site,$main,$mobile,$pid) {
+	global $table;
+	$PCD=getDbSelect($table['s_page'],$site?'site='.$site.''.($main ? ' and ismain=1':'').($mobile ? ' and mobile=1':''):'','*');
+	while($P=db_fetch_array($PCD)) {
+		echo '<option value="'.$P['id'].'"'.($P['id']==$pid?' selected':'').'>'.$P['name'].' - '.$P['id'].'</option>';
 	}
 }
 
@@ -748,32 +765,30 @@ function remoteFileExist($filepath) {
   }
 }
 
-// 소셜 로그인 URL 생성 (로그인과 정보 제공 동의 과정이 완료되면 콜백 URL에 code값과 state 값이 URL 문자열로 전송됩니다.)
-function getSocialLoginUrl($s,$id,$secret,$callBack,$type){
+// 외부연결 URL 생성 (로그인과 정보 제공 동의 과정이 완료되면 콜백 URL에 code값과 state 값이 URL 문자열로 전송됩니다.)
+function getConnectUrl($s,$id,$secret,$callBack,$type){
 	$_SESSION['SL']['state'.$s] = md5(microtime().mt_rand());
-	$g['slogin']['client_id'] = $id;
-	$g['slogin']['client_secret'] = $secret;
-	$g['slogin']['redirect_uri'] = urlencode($callBack);
-	$g['slogin']['state'] = $_SESSION['SL']['state'.$s];
+	$g['connect']['client_id'] = $id;
+	$g['connect']['client_secret'] = $secret;
+	$g['connect']['redirect_uri'] = urlencode($callBack);
+	$g['connect']['state'] = $_SESSION['SL']['state'.$s];
 
 	if ($s == 'naver') {
-		$g['slogin']['callapi'] = 'https://nid.naver.com/oauth2.0/authorize?client_id='.$g['slogin']['client_id'].'&response_type=code&redirect_uri='.$g['slogin']['redirect_uri'].'&state='.$g['slogin']['state'];
+		$_type = $type?'&auth_type='.$type:'';
+		$g['connect'] = 'https://nid.naver.com/oauth2.0/authorize?client_id='.$g['connect']['client_id'].'&response_type=code&redirect_uri='.$g['connect']['redirect_uri'].'&state='.$g['connect']['state'].$_type;
 	}
 	if ($s == 'kakao') {
-		$g['slogin']['callapi'] = 'https://kauth.kakao.com/oauth/authorize?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&response_type=code&scope=';
+		$g['connect'] = 'https://kauth.kakao.com/oauth/authorize?client_id='.$g['connect']['client_id'].'&redirect_uri='.$g['connect']['redirect_uri'].'&response_type=code&scope=';
 	}
 	if ($s == 'google') {
-		$g['slogin']['callapi'] = 'https://accounts.google.com/o/oauth2/auth?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&response_type=code&scope=email%20profile&state=%2Fprofile&approval_prompt=auto';
+		$g['connect'] = 'https://accounts.google.com/o/oauth2/auth?client_id='.$g['connect']['client_id'].'&redirect_uri='.$g['connect']['redirect_uri'].'&response_type=code&scope=email%20profile&state=%2Fprofile&approval_prompt=auto';
 	}
 	if ($s == 'facebook') {
-		$g['slogin']['callapi'] = 'https://www.facebook.com/v3.0/dialog/oauth?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&state='.$g['slogin']['state'];
-	}
-	if ($s == 'twitter') {
-		$g['slogin']['callapi'] = 'https://api.twitter.com/oauth/authorize?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&response_type=code';
+		$g['connect']= 'https://www.facebook.com/v3.0/dialog/oauth?client_id='.$g['connect']['client_id'].'&redirect_uri='.$g['connect']['redirect_uri'].'&state='.$g['connect']['state'];
 	}
 	if ($s == 'instagram') {
-		$g['slogin']['callapi'] = 'https://api.instagram.com/oauth/authorize/?client_id='.$g['slogin']['client_id'].'&redirect_uri='.$g['slogin']['redirect_uri'].'&response_type=code';
+		$g['connect']= 'https://api.instagram.com/oauth/authorize/?client_id='.$g['connect']['client_id'].'&redirect_uri='.$g['connect']['redirect_uri'].'&response_type=code';
 	}
-	return $g['slogin'];
+	return $g['connect'];
 }
 ?>

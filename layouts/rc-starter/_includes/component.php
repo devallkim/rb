@@ -1,61 +1,47 @@
 <!--
 컴포넌트 모음
 
-1. 일반모달 : 로그인
-2. 일반모달 : 통합검색
-3. 일반모달 : 게시물 보기
-4. 포토모달 : 갤러리형
-5. 팝업 : 링크공유
+1. 일반모달 : 회원가입
+2. 일반모달 : 로그인
+3. 팝업   : 로그아웃
+4. 일반모달 : 통합검색
+5. 일반모달 : 게시물 보기
+6. 포토모달 : 갤러리형
+7. 팝업 : 링크공유
 
 -->
 
-<!-- 1. 일반모달 : 로그인-->
-<div id="modal-login" class="modal zoom">
-	<header class="bar bar-nav bar-light bg-faded p-x-0">
-		<a class="icon icon-left-nav pull-left p-x-1" role="button" data-history="back"></a>
-		<h1 class="title" data-role="title">로그인</h1>
-	</header>
+<!-- 1. 일반모달 : 회원가입 -->
+<?php include_once $g['path_module'].'member/themes/'.$d['member']['theme_mobile'].'/join/component.php'; ?>
 
-	<main class="content">
-		<form id="modal-loginform" action="<?php echo $g['s']?>/" method="post" autocomplete="off">
-			<input type="hidden" name="r" value="<?php echo $r?>">
-			<input type="hidden" name="a" value="login">
-			<input type="hidden" name="referer" value="<?php echo $referer ? $referer : $_SERVER['REQUEST_URI']?>">
-			<input type="hidden" name="form" value="">
+<!-- 2. 일반모달 : 로그인 -->
+<?php include_once $g['path_module'].'member/themes/'.$d['member']['theme_mobile'].'/login/component.php';  ?>
 
-			<div class="card">
-	      <div class="form-list">
-					<span class="position-relative d-block">
-						<input type="text" placeholder="아이디" name="id" required autocapitalize="off" autocorrect="off">
-						<div class="invalid-tooltip" data-role="idErrorBlock"></div>
-					</span>
-					<span class="position-relative d-block">
-						<input type="password" placeholder="패스워드" name="pw" required autocapitalize="off" autocorrect="off">
-						<div class="invalid-tooltip" data-role="passwordErrorBlock"></div>
-					</span>
-	      </div>
-	    </div>
-
-			<div class="content-padded">
-				<div class="p-y-1">
-					<label class="custom-control custom-checkbox">
-					  <input type="checkbox" class="custom-control-input" name="login_cookie" value="checked" checked>
-					  <span class="custom-control-indicator"></span>
-					  <span class="custom-control-description">로그인 상태 유지</span>
-					</label>
-				</div>
-				<button type="submit" class="btn btn-primary btn-lg btn-block" data-role="submit">
-					<span class="not-loading">로그인</span>
-	        <span class="is-loading"><i class="fa fa-spinner fa-lg fa-spin fa-fw"></i> 로그인중 ...</span>
-				</button>
-				<a class="btn btn-outline-primary btn-block" href="<?php echo RW('mod=join') ?>" role="button">회원가입</a>
+<!-- 3. 팝업 : 로그아웃-->
+<div id="popup-logout" class="popup zoom">
+  <div class="popup-content">
+    <header class="bar bar-nav">
+      <h1 class="title">로그아웃 전에 확인해주세요.</h1>
+    </header>
+    <nav class="bar bar-standard bar-footer">
+      <div class="row">
+        <div class="col-xs-6">
+          <button type="button" class="btn btn-secondary btn-block" data-history="back">취소</button>
+        </div>
+        <div class="col-xs-6 p-l-0">
+          <a href="<?php echo $g['s']?>/logout" type="button" class="btn btn-primary btn-block">로그이웃</a>
+        </div>
+      </div>
+    </nav>
+    <div class="content">
+      <div class="p-a-3 text-xs-center">
+				정말로 로그아웃 하시겠습니까?
 			</div>
-		</form>
-		<p class="m-t-2 content-padded"><a href="<?php echo $g['s']?>/?m=member&front=login&page=password_reset" class="muted-link">비밀번호를 잊으셨나요?</a></p>
-	</main>
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
 
-<!-- 2. 일반모달 : 통합검색 -->
+<!-- 4. 일반모달 : 통합검색 -->
 <div id="modal-search" class="modal zoom">
 	<header class="bar bar-nav bg-white p-2">
 	  <form class="input-group input-group-lg border border-primary" action="<?php echo $g['s']?>/" id="modal-search-form">
@@ -87,7 +73,7 @@
 	</main>
 </div><!-- /.modal -->
 
-<!-- 3. 일반모달 : 게시물 보기 -->
+<!-- 5. 일반모달 : 게시물 보기 -->
 <div id="modal-bbs-view" class="modal zoom">
 
 	<section id="page-bbs-view" class="rb-bbs-list page center" data-role="bbs-list">
@@ -101,35 +87,34 @@
 	    <div class="content-padded" data-role="post">
 	      <span data-role="cat" class="badge badge-primary badge-inverted">카테고리</span>
 	      <h3 data-role="subject" class="rb-article-title">게시물 제목</h3>
+			</div>
 
-	      <div data-role="article">
-	        본문내용
-	      </div>
+      <div data-role="article">
+        본문내용
+      </div>
 
-	      <div data-role="attach">
+      <div data-role="attach">
 
-	        <!-- 유튜브 -->
-	        <div class="card-group mb-3 hidden" data-role="attach-youtube">
-	        </div>
+        <!-- 유튜브 -->
+        <div class="card-group mb-3 hidden" data-role="attach-youtube">
+        </div>
 
-	        <!-- 비디오 -->
-	        <div class="mb-3 hidden" data-role="attach-video">
-	        </div>
+        <!-- 비디오 -->
+        <div class="mb-3 hidden" data-role="attach-video">
+        </div>
 
-	        <!-- 오디오 -->
-	        <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-audio">
-	        </ul>
+        <!-- 오디오 -->
+        <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-audio">
+        </ul>
 
-	        <!-- 이미지 -->
-	        <div class="card-group mb-3 hidden" data-role="attach-photo" data-plugin="photoswipe">
-	        </div>
+        <!-- 이미지 -->
+        <div class="card-group mb-3 hidden" data-role="attach-photo" data-plugin="photoswipe">
+        </div>
 
-	        <!-- 기타파일 -->
-	        <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-file">
-	        </ul>
-	      </div>
-	    </div>
-
+        <!-- 기타파일 -->
+        <ul class="table-view table-view-full bg-white mb-3 hidden" data-role="attach-file">
+        </ul>
+      </div>
 
 	    <div class="commentting-container content-padded m-t-3" id="anchor-comments"></div>
 	  </div>
@@ -143,7 +128,7 @@
 
 </div><!-- /.modal -->
 
-<!-- 4. 포토모달 : 갤러리형 -->
+<!-- 6. 포토모달 : 갤러리형 -->
 <div class="pswp pswp-gallery" tabindex="-1" role="dialog" aria-hidden="true">
 	<input type="hidden" name="uid" value="">
   <input type="hidden" name="bid" value="">
@@ -222,7 +207,7 @@
 
 </div>
 
-<!-- 5. 팝업 : 링크공유 -->
+<!-- 7. 팝업 : 링크공유 -->
 <div id="popup-link-share" class="popup zoom">
   <div class="popup-content">
     <header class="bar bar-nav">
