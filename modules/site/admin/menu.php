@@ -441,11 +441,11 @@ $menuType = array('','모듈연결','코드편집','메뉴연결','문서편집'
 							<!-- 메타설정-->
 							<div class="card" id="menu-settings-meta">
 								<div class="card-header p-0">
-									<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#menu-settings-meta-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-meta').className.indexOf('default')==-1?'':'1','','');">
+									<a class="d-block pl-3 pr-4 muted-link<?php if(!$code && $_SESSION['sh_site_menu_1']!=1):?> collapsed<?php endif?>" data-toggle="collapse" href="#menu-settings-meta-body">
 										메타설정
 									</a>
 								</div>
-								<div id="menu-settings-meta-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_1']==1):?> show<?php endif?>" data-parent="#menu-settings">
+								<div id="menu-settings-meta-body" class="panel-collapse collapse<?php if($code && $_SESSION['sh_site_menu_1']==1):?> show<?php endif?>" data-parent="#menu-settings">
 									<div class="card-body">
 										<div class="form-group row rb-outside">
 											<label class="col-lg-2 col-form-label text-lg-right">타이틀</label>
@@ -542,12 +542,12 @@ $menuType = array('','모듈연결','코드편집','메뉴연결','문서편집'
 							<div class="card" id="menu-settings-advance"><!--고급설정-->
 
 								<div class="card-header p-0">
-									<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#menu-settings-advance-body" onclick="sessionSetting('sh_site_menu_1',getId('menu-settings-advance').className.indexOf('default')==-1?'':'2','','')">
+									<a class="d-block pl-3 pr-4 muted-link<?php if(!$code && $_SESSION['sh_site_menu_1']!=2):?> collapsed<?php endif?>" data-toggle="collapse" href="#menu-settings-advance-body">
 										고급설정
 									</a>
 								</div>
 
-								<div id="menu-settings-advance-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_menu_1']==2):?> show<?php endif?>" data-parent="#menu-settings">
+								<div id="menu-settings-advance-body" class="panel-collapse collapse<?php if($code && $_SESSION['sh_site_menu_1']==2):?> show<?php endif?>" data-parent="#menu-settings">
 								<div class="card-body">
 										<div class="form-group row">
 											<label class="col-lg-2 col-form-label text-lg-right">레이아웃</label>
@@ -955,6 +955,20 @@ $(document).ready(function() {
 	$('.rb-modal-photo-drop').on('click',function() {
 		modalSetting('modal_window','<?php echo getModalLink('&amp;m=mediaset&amp;mdfile=modal.photo.media&amp;dropfield=')?>'+_mediasetField);
 	});
+
+	$('#menu-settings-meta-body').on('show.bs.collapse', function () {
+		sessionSetting('sh_site_menu_1','1','','')
+	})
+	$('#menu-settings-meta-body').on('hidden.bs.collapse', function () {
+		sessionSetting('sh_site_menu_1','','','')
+	})
+	$('#menu-settings-advance-body').on('show.bs.collapse', function () {
+		sessionSetting('sh_site_menu_1','2','','')
+	})
+	$('#menu-settings-advance-body').on('hidden.bs.collapse', function () {
+		sessionSetting('sh_site_menu_1','','','')
+	})
+
 });
 </script>
 

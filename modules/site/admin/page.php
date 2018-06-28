@@ -349,11 +349,11 @@ $pageType = array('','모듈연결','코드편집','문서편집');
 				<div class="panel-group" id="page-settings">
 					<div class="card" id="page-settings-meta">
 						<div class="card-header p-0">
-							<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#page-settings-meta-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-meta').className.indexOf('default')==-1?'':'1','','');">
+							<a class="d-block pl-3 pr-4 muted-link<?php if(!$uid && $_SESSION['sh_site_page_1']!=1):?> collapsed<?php endif?>" data-toggle="collapse" href="#page-settings-meta-body">
 								메타설정
 							</a>
 						</div>
-						<div id="page-settings-meta-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==1):?> show<?php endif?>" data-parent="#page-settings">
+						<div id="page-settings-meta-body" class="panel-collapse collapse<?php if($uid && $_SESSION['sh_site_page_1']==1):?> show<?php endif?>" data-parent="#page-settings">
 							<div class="card-body">
 								<div class="form-group row rb-outside">
 									<label class="col-lg-2 col-form-label text-lg-right">타이틀</label>
@@ -444,11 +444,11 @@ $pageType = array('','모듈연결','코드편집','문서편집');
 
 					<div class="card" id="page-settings-advance">
 						<div class="card-header p-0">
-							<a class="d-block pl-3 pr-4 muted-link collapsed" data-toggle="collapse" href="#page-settings-advance-body" onclick="sessionSetting('sh_site_page_1',getId('page-settings-advance').className.indexOf('default')==-1?'':'2','','');">
+							<a class="d-block pl-3 pr-4 muted-link<?php if(!$uid && $_SESSION['sh_site_page_1']!=2):?> collapsed<?php endif?>" data-toggle="collapse" href="#page-settings-advance-body">
 								고급설정
 							</a>
 						</div>
-						<div id="page-settings-advance-body" class="panel-collapse collapse<?php if($_SESSION['sh_site_page_1']==2):?> show<?php endif?>" data-parent="#page-settings">
+						<div id="page-settings-advance-body" class="panel-collapse collapse<?php if($uid && $_SESSION['sh_site_page_1']==2):?> show<?php endif?>" data-parent="#page-settings">
 							<div class="card-body">
 								<div class="form-group row">
 									<label class="col-lg-2 col-form-label text-lg-right">레이아웃</label>
@@ -705,6 +705,20 @@ $(document).ready(function() {
 	$('.rb-modal-photo-drop').on('click',function() {
 		modalSetting('modal_window','<?php echo getModalLink('&amp;m=mediaset&amp;mdfile=modal.photo.media&amp;dropfield=')?>'+_mediasetField);
 	});
+
+	$('#page-settings-meta-body').on('show.bs.collapse', function () {
+		sessionSetting('sh_site_page_1','1','','')
+	})
+	$('#page-settings-meta-body').on('hidden.bs.collapse', function () {
+		sessionSetting('sh_site_page_1','','','')
+	})
+	$('#page-settings-advance-body').on('show.bs.collapse', function () {
+		sessionSetting('sh_site_page_1','2','','')
+	})
+	$('#page-settings-advance-body').on('hidden.bs.collapse', function () {
+		sessionSetting('sh_site_page_1','','','')
+	})
+
 });
 </script>
 
