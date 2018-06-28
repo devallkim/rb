@@ -113,3 +113,63 @@ a {
     border-radius: 6px;
   }
 }
+
+
+#modal-pwReset {
+	font-size: 14px
+}
+
+#modal-pwReset .modal-header,
+#modal-pwReset .card-header {
+	background-color: #0069d9;
+	color:#fff
+}
+
+#modal-pwReset .modal-content {
+	border-radius: .45rem;
+}
+
+#modal-pwReset .nav-tabs .nav-link:focus,
+#modal-pwReset .nav-tabs .nav-link:hover {
+  border-color: #0069d9 #0069d9 #fff;
+}
+
+#modal-pwReset .form-control,
+#modal-pwReset .form-control[readonly] {
+  background-color: #fff;
+	border: 1px solid #ced4da;
+  border-radius: 0;
+	color: #495057;
+}
+.btn-light {
+  color: #24292e;
+  user-select: none;
+  background-color: #eff3f6;
+  background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+  background-repeat: repeat-x;
+  background-position: -1px -1px;
+  background-size: 110% 110%;
+  border: 1px solid rgba(27,31,35,0.2);
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.btn-light:hover, .btn-light.hover {
+  background-color: #e6ebf1;
+  background-image: linear-gradient(-180deg, #f0f3f6 0%, #e6ebf1 90%);
+  background-position: -.5em;
+  border-color: rgba(27,31,35,0.35);
+}
+.btn-light:not(:disabled):not(.disabled).active,
+.btn-light:not(:disabled):not(.disabled):active,
+.show>.btn-light.dropdown-toggle {
+  background-color: #e9ecef;
+  background-image: none;
+  border-color: rgba(27,31,35,0.35);
+  box-shadow: inset 0 0.15em 0.3em rgba(27,31,35,0.15);
+}
+.btn-light:not(:disabled):not(.disabled).active:focus,
+.btn-light:not(:disabled):not(.disabled):active:focus,
+.show>.btn-light.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2em rgba(3,102,214,0.3);
+}
