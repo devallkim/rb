@@ -647,7 +647,7 @@ else {
 						<div class="text-muted mb-3">
 							<i class="fa fa-power-off fa-3x fa-pull-left" aria-hidden="true"></i>
 							<strong class="d-block">
-								<a href="?r=<?php echo $r ?>&m=admin&module=admin&front=switch&switchdir=foot/popup">팝업 스위치 설정</a>이 필요합니다.
+								<a href="<?php echo $g['s']?>/?r=<?php echo $r ?>&m=admin&module=admin&front=switch&switchdir=foot/popup">팝업 스위치 설정</a>이 필요합니다.
 							</strong>
 							<small class="text-muted">적용 사이트에 팝업 스위치가 켜지지 않은 경우, 팝업이 뜨지 않습니다. 팝업 스위치가 켜져 있는지 확인해 보세요.</small>
 						</div>
