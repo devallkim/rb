@@ -1,8 +1,12 @@
 <?php
-//댓글링크
+//한줄의견링크
 function getPostLink($arr)
 {
-	return RW('m=bbs&bid='.$arr['bbsid'].'&uid='.$arr['uid'].($GLOBALS['s']!=$arr['site']?'&s='.$arr['site']:''));
+	global $table;
+	$C = getUidData($table['s_comment'],$arr['parent']);
+	$sync_arr=explode('|',$C['sync']);
+	$B = getUidData($sync_arr[0],$sync_arr[2]);
+	return RW('m='.$sync_arr[1].'&bid='.$B['bbsid'].'&uid='.$sync_arr[2].($GLOBALS['s']!=$arr['site']?'&s='.$arr['site']:''.'#OLN-'.$arr['uid']));
 }
 $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,1);
 $sort	= $sort ? $sort : 'uid';
@@ -40,35 +44,13 @@ $TPG = getTotalPage($NUM,$recnum);
 			<div id="accordion" role="tablist">
 			  <div class="card">
 			    <div class="card-header p-0" role="tab">
-						<a class="d-block muted-link collapsed" data-toggle="collapse" href="#collapse-filter" role="button" aria-expanded="true" aria-controls="collapseOne">
+						<a class="d-block muted-link<?php if($_SESSION['comment_oneline_collapse']!='filter'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse-filter" role="button" aria-expanded="true" aria-controls="collapseOne" onclick="sessionSetting('comment_oneline_collapse','filter','','');">
 							필터
 						</a>
 			    </div>
 
-			    <div id="collapse-filter" class="collapse" role="tabpanel" data-parent="#accordion">
+			    <div id="collapse-filter" class="collapse<?php if($_SESSION['comment_oneline_collapse']=='filter'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
 			      <div class="card-body">
-
-							<select name="bid" class="form-control custom-select mb-2" onchange="this.form.submit();">
-								<option value="">전체 게시판</option>
-								<?php $_BBSLIST = getDbArray($table[$module.'list'],'','*','gid','asc',0,1)?>
-								<?php while($_B=db_fetch_array($_BBSLIST)):?>
-								<option value="<?php echo $_B['uid']?>"<?php if($_B['uid']==$bid):?> selected="selected"<?php endif?>>ㆍ<?php echo $_B['name']?>(<?php echo $_B['id']?> - <?php echo number_format($_B['num_r'])?>)</option>
-								<?php endwhile?>
-								<?php if(!db_num_rows($_BBSLIST)):?>
-								<option value="">등록된 게시판이 없습니다.</option>
-								<?php endif?>
-							</select>
-
-							<select name="category" onchange="this.form.submit();" class="form-control custom-select mb-2">
-								<?php $getCate=db_query("select * from rb_bbs_data where bbs='".$bid."' and category<>'' group by category",$DB_CONNECT)?>
-								<option value="0">전체 카테고리</option>
-								<?php while($ct=db_fetch_array($getCate)):?>
-								<option value="<?php echo $ct['category']?>" <?php if($category==$ct['category']):?> selected="selected"<?php endif?>><?php echo $ct['category']?></option>
-								<?php endwhile?>
-								<?php if(!db_num_rows($getCate)):?>
-								<option value="">등록된 카테고리가 없습니다.</option>
-								<?php endif?>
-						 </select>
 
 						 <div class="mb-2">
 
@@ -112,17 +94,17 @@ $TPG = getTotalPage($NUM,$recnum);
 			  </div>
 			  <div class="card">
 			    <div class="card-header p-0" role="tab">
-						<a class="d-block muted-link collapsed" data-toggle="collapse" href="#collapse-sort" role="button" aria-expanded="false" aria-controls="collapseTwo">
+						<a class="d-block muted-link<?php if($_SESSION['comment_oneline_collapse']!='sort'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse-sort" role="button" aria-expanded="false" aria-controls="collapseTwo"  onclick="sessionSetting('comment_oneline_collapse','sort','','');">
 							정렬
 						</a>
 			    </div>
-			    <div id="collapse-sort" class="collapse" role="tabpanel" data-parent="#accordion">
+			    <div id="collapse-sort" class="collapse<?php if($_SESSION['comment_oneline_collapse']=='sort'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
 			      <div class="card-body">
 
 							<div class="btn-toolbar">
 								<div class="btn-group btn-group-sm btn-group-toggle mb-2" data-toggle="buttons">
-									<label class="btn btn-light<?php if($sort=='gid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="gid" name="sort"<?php if($sort=='gid'):?> checked<?php endif?>> 등록일
+									<label class="btn btn-light<?php if($sort=='d_regis'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+										<input type="radio" value="d_regis" name="sort"<?php if($sort=='d_regis'):?> checked<?php endif?>> 등록일
 									</label>
 									 <label class="btn btn-light<?php if($sort=='hit'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 										<input type="radio" value="hit" name="sort"<?php if($sort=='hit'):?> checked<?php endif?>> 조회
@@ -130,22 +112,16 @@ $TPG = getTotalPage($NUM,$recnum);
 									<label class="btn btn-light<?php if($sort=='down'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
 										<input type="radio" value="down" name="sort"<?php if($sort=='down'):?> checked<?php endif?>> 다운
 									</label>
-									<label class="btn btn-light<?php if($sort=='comment'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="comment" name="sort"<?php if($sort=='comment'):?> checked<?php endif?>> 댓글
-									</label>
-									<label class="btn btn-light<?php if($sort=='oneline'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="oneline" name="sort"<?php if($sort=='oneline'):?> checked<?php endif?>> 한줄의견
-									</label>
 								</div>
 								<div class="btn-group btn-group-sm btn-group-toggle mb-2" data-toggle="buttons">
-									<label class="btn btn-light<?php if($sort=='score1'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="score1" name="sort"<?php if($sort=='score1'):?> checked<?php endif?>> 추천
+									<label class="btn btn-light<?php if($sort=='likes'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+										<input type="radio" value="likes" name="sort"<?php if($sort=='likes'):?> checked<?php endif?>> 추천
 									</label>
-									<label class="btn btn-light<?php if($sort=='score2'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="score2" name="sort"<?php if($sort=='score2'):?> checked<?php endif?>> 비추천
+									<label class="btn btn-light<?php if($sort=='dislikes'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+										<input type="radio" value="dislikes" name="sort"<?php if($sort=='dislikes'):?> checked<?php endif?>> 비추천
 									</label>
-									<label class="btn btn-light<?php if($sort=='singo'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="singo" name="sort"<?php if($sort=='singo'):?> checked<?php endif?>> 신고
+									<label class="btn btn-light<?php if($sort=='report'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+										<input type="radio" value="report" name="sort"<?php if($sort=='report'):?> checked<?php endif?>> 신고
 									</label>
 								</div>
 
@@ -165,15 +141,14 @@ $TPG = getTotalPage($NUM,$recnum);
 			  </div>
 			  <div class="card">
 					<div class="card-header p-0" role="tab">
-						<a class="d-block muted-link collapsed" data-toggle="collapse" href="#collapse-search" role="button" aria-expanded="false" aria-controls="collapseTwo">
+						<a class="d-block muted-link<?php if($_SESSION['comment_oneline_collapse']!='search'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse-search" role="button" aria-expanded="false" aria-controls="collapseThree" onclick="sessionSetting('comment_oneline_collapse','search','','');">
 							검색
 						</a>
 			    </div>
-			    <div id="collapse-search" class="collapse" role="tabpanel" data-parent="#accordion">
+			    <div id="collapse-search" class="collapse<?php if($_SESSION['comment_oneline_collapse']=='search'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
 			      <div class="card-body">
 
 							<select name="where" class="form-control custom-select mb-2">
-								 <option value="subject|tag"<?php if($where=='subject|tag'):?> selected="selected"<?php endif?>>제목+태그</option>
 								<option value="content"<?php if($where=='content'):?> selected="selected"<?php endif?>>본문</option>
 								<option value="name"<?php if($where=='name'):?> selected="selected"<?php endif?>>이름</option>
 								<option value="nic"<?php if($where=='nic'):?> selected="selected"<?php endif?>>닉네임</option>
@@ -203,160 +178,11 @@ $TPG = getTotalPage($NUM,$recnum);
 				</div>
 
 				<?php if($NUM):?>
-				<a href="<?php echo $g['adm_href']?>" class="btn btn-light btn-block">검색조건 초기화</a>
+				<a href="<?php echo $g['adm_href']?>" class="btn btn-block btn-light<?php echo $keyw?' active':'' ?>">검색조건 초기화</a>
 				<?php endif?>
 			</div>
 
 		</form>
-
-
-		<form name="procForm" action="<?php echo $g['s']?>/" method="get" class="d-none">
-			 <input type="hidden" name="r" value="<?php echo $r?>" />
-			 <input type="hidden" name="m" value="<?php echo $m?>" />
-			 <input type="hidden" name="module" value="<?php echo $module?>" />
-			 <input type="hidden" name="front" value="<?php echo $front?>" />
-
-			 <div class="rb-heading well well-sm">
-			    <div class="form-group">
-				 	<label class="col-sm-1 control-label">옵션 </label>
-				 	<div class="col-sm-10">
-			 	 	  	<div class="row">
-			 	 	  	    <div class="col-sm-4">
-			 	 	  	    	<select name="account" class="form-control" onchange="this.form.submit();">
-									<option value="">&nbsp;+ 전체사이트</option>
-									<option value="" disabled>---------------------------</option>
-									<?php while($S = db_fetch_array($SITES)):?>
-									<option value="<?php echo $S['uid']?>"<?php if($account==$S['uid']):?> selected="selected"<?php endif?>>ㆍ<?php echo $S['name']?></option>
-									<?php endwhile?>
-									<?php if(!db_num_rows($SITES)):?>
-									<option value="">등록된 사이트가 없습니다.</option>
-									<?php endif?>
-								</select>
-			 	 	  	    </div>
-			 	 	  	  	<div class="col-sm-2">
-						    	  <label class="checkbox" style="margin-top:0">
-							        <input  type="checkbox"  name="notice" value="Y"<?php if($notice=='Y'):?> checked<?php endif?> onclick="this.form.submit();"  class="form-control"> <i></i>공지글
-							     </label>
-							</div>
-						    <div class="col-sm-2">
-						 	    <label class="checkbox" style="margin-top:0">
-						          <input  type="checkbox" name="hidden" value="Y"<?php if($hidden=='Y'):?> checked<?php endif?> onclick="this.form.submit();"  class="form-control"><i></i>비밀글
-						       </label>
-						    </div>
-			 	 	  	</div>
-			         </div>
-			       </div>
-					<div class="form-group">
-						<label class="col-sm-1 control-label">기간</label>
-						<div class="col-sm-10">
-							<div class="row">
-								<div class="col-sm-5">
-									<div class="input-daterange input-group input-group-sm" id="datepicker">
-										<input type="text" class="form-control" name="d_start" placeholder="시작일 선택" value="<?php echo $d_start?>">
-										<span class="input-group-addon">~</span>
-										<input type="text" class="form-control" name="d_finish" placeholder="종료일 선택" value="<?php echo $d_finish?>">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit">기간적용</button>
-										</span>
-									</div>
-								</div>
-								<div class="col-sm-3 hidden-xs">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>','<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-1,substr($date['today'],0,4)))?>');">어제</button>
-										<button class="btn btn-default" type="button" onclick="dropDate('<?php echo getDateFormat($date['today'],'Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">오늘</button>
-										<button class="btn btn-default" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2),substr($date['today'],6,2)-7,substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">일주</button>
-										<button class="btn btn-default" type="button" onclick="dropDate('<?php echo date('Y/m/d',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">한달</button>
-										<button class="btn btn-default" type="button" onclick="dropDate('<?php echo getDateFormat(substr($date['today'],0,6).'01','Y/m/d')?>','<?php echo getDateFormat($date['today'],'Y/m/d')?>');">당월</button>
-										<button class="btn btn-default" type="button" onclick="dropDate('<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>01','<?php echo date('Y/m/',mktime(0,0,0,substr($date['today'],4,2)-1,substr($date['today'],6,2),substr($date['today'],0,4)))?>31');">전월</button>
-										<button class="btn btn-default" type="button" onclick="dropDate('','');">전체</button>
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="form-group hidden-xs">
-						<label class="col-sm-1 control-label">정렬</label>
-						<div class="col-sm-10">
-							<div class="btn-toolbar">
-								<div class="btn-group btn-group-sm" data-toggle="buttons">
-									<label class="btn btn-default<?php if($sort=='gid'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="gid" name="sort"<?php if($sort=='gid'):?> checked<?php endif?>> 등록일
-									</label>
-									 <label class="btn btn-default<?php if($sort=='hit'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="hit" name="sort"<?php if($sort=='hit'):?> checked<?php endif?>> 조회
-									</label>
-									<label class="btn btn-default<?php if($sort=='down'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="down" name="sort"<?php if($sort=='down'):?> checked<?php endif?>> 다운
-									</label>
-									<label class="btn btn-default<?php if($sort=='comment'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="comment" name="sort"<?php if($sort=='comment'):?> checked<?php endif?>> 댓글
-									</label>
-									<label class="btn btn-default<?php if($sort=='oneline'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="oneline" name="sort"<?php if($sort=='oneline'):?> checked<?php endif?>> 한줄의견
-									</label>
-									<label class="btn btn-default<?php if($sort=='trackback'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="trackback" name="sort"<?php if($sort=='trackback'):?> checked<?php endif?>> 트랙백
-									</label>
-									<label class="btn btn-default<?php if($sort=='score1'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="score1" name="sort"<?php if($sort=='score1'):?> checked<?php endif?>> 점수1
-									</label>
-									<label class="btn btn-default<?php if($sort=='score2'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="score2" name="sort"<?php if($sort=='score2'):?> checked<?php endif?>> 점수2
-									</label>
-									<label class="btn btn-default<?php if($sort=='singo'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="singo" name="sort"<?php if($sort=='singo'):?> checked<?php endif?>> 신고
-									</label>
-								</div>
-								<div class="btn-group btn-group-sm" data-toggle="buttons">
-									<label class="btn btn-default<?php if($orderby=='desc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="desc" name="orderby"<?php if($orderby=='desc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-desc"></i>역순
-									</label>
-									<label class="btn btn-default<?php if($orderby=='asc'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="asc" name="orderby"<?php if($orderby=='asc'):?> checked<?php endif?>> <i class="fa fa-sort-amount-asc"></i>정순
-									</label>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-1 control-label">검색</label>
-						<div class="col-sm-10">
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="input-group input-group-sm">
-										<span class="input-group-btn hidden-xs" style="width:165px">
-											<select name="where" class="form-control btn btn-default">
-											   <option value="subject|tag"<?php if($where=='subject|tag'):?> selected="selected"<?php endif?>>제목+태그</option>
-												<option value="content"<?php if($where=='content'):?> selected="selected"<?php endif?>>본문</option>
-												<option value="name"<?php if($where=='name'):?> selected="selected"<?php endif?>>이름</option>
-												<option value="nic"<?php if($where=='nic'):?> selected="selected"<?php endif?>>닉네임</option>
-												<option value="id"<?php if($where=='id'):?> selected="selected"<?php endif?>>아이디</option>
-												<option value="ip"<?php if($where=='ip'):?> selected="selected"<?php endif?>>아이피</option>
-											</select>
-										</span>
-										<input type="text" name="keyw" value="<?php echo stripslashes($keyw)?>" class="form-control">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit">검색</button>
-										</span>
-									</div>
-								</div>
-								<div class="col-sm-4">
-					        		<select name="recnum" onchange="this.form.submit();" class="form-control">
-					        			<option value="">+ 출력갯수</option>
-										<option value="20"<?php if($recnum==20):?> selected="selected"<?php endif?>>20</option>
-										<option value="35"<?php if($recnum==35):?> selected="selected"<?php endif?>>35</option>
-										<option value="50"<?php if($recnum==50):?> selected="selected"<?php endif?>>50</option>
-										<option value="75"<?php if($recnum==75):?> selected="selected"<?php endif?>>75</option>
-										<option value="90"<?php if($recnum==90):?> selected="selected"<?php endif?>>90</option>
-									</select>
-							    </div>
-						    </div>
-						</div>
-					</div>
-				</div>
-			</form>
-
-
 
 
 
@@ -401,7 +227,9 @@ $TPG = getTotalPage($NUM,$recnum);
 								<?php if($R['notice']):?><i class="fa fa-volume-up"></i><?php endif?>
 								<?php if($R['mobile']):?><i class="fa fa-mobile f-lg"></i><?php endif?>
 								<?php if($R['category']):?><strong>[<?php echo $R['category']?>]</strong><?php endif?>
-								<a href="<?php echo getPostLink($R)?>" target="_blank" class="muted-link"><?php echo $R['content']?></a>
+								<a href="<?php echo getPostLink($R)?>" target="_blank" class="muted-link">
+									<?php echo getStrCut($R['content'],50,'..')?>
+								</a>
 								<?php if(strstr($R['content'],'.jpg')):?><i class="fa fa-picture-o"></i><?php endif?>
 								<?php if($R['upload']):?><i class="glyphicon glyphicon-floppy-disk"></i><?php endif?>
 								<?php if($R['hidden']):?><i class="fa fa-lock fa-lg"></i><?php endif?>
