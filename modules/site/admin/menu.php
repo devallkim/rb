@@ -3,20 +3,24 @@ $SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);
 $SITEN = db_num_rows($SITES);
 include $g['path_core'].'function/menu.func.php';
 $ISCAT = getDbRows($table['s_menu'],'site='.$_HS['uid']);
-if($cat){	$CINFO = getUidData($table['s_menu'],$cat);	$_SEO = getDbData($table['s_seo'],'rel=1 and parent='.$CINFO['uid'],'*');	$ctarr = getMenuCodeToPath($table['s_menu'],$cat,0);	$ctnum = count($ctarr);
+if($cat){
+	$CINFO = getUidData($table['s_menu'],$cat);
+	$_SEO = getDbData($table['s_seo'],'rel=1 and parent='.$CINFO['uid'],'*');
+	$ctarr = getMenuCodeToPath($table['s_menu'],$cat,0);	$ctnum = count($ctarr);
 	$CINFO['code'] = '';
-	for ($i = 0; $i < $ctnum; $i++)
-	{
+	for ($i = 0; $i < $ctnum; $i++) {
 		$CXA[] = $ctarr[$i]['uid'];
 		$CINFO['code'] .= $ctarr[$i]['id'].($i < $ctnum-1 ? '/' : '');
 		$_code .= $ctarr[$i]['uid'].($i < $ctnum-1 ? '/' : '');
 	}
 	$code = $code ? $code : $_code;
 }
-$catcode = '';$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';$is_regismode = !$CINFO['uid'] || $vtype == 'sub';
+$catcode = '';
+$is_fcategory =  $CINFO['uid'] && $vtype != 'sub';
+$is_regismode = !$CINFO['uid'] || $vtype == 'sub';
 
 if ($is_regismode){
-	$CINFO['menutype'] = '2';
+	$CINFO['menutype'] = '4';
 	$CINFO['name']	   = '';
 	$CINFO['joint']	   = '';
 	$CINFO['redirect'] = '';

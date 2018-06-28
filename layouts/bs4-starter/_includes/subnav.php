@@ -1,6 +1,9 @@
 <?php $_MENUS2=getDbSelect($table['s_menu'],'site='.$s.' and parent='.$_CA[0].' and hidden=0 and depth=2 order by gid asc','*')?>
 <?php $_MENUSN=db_num_rows($_MENUS2)?>
 <?php if($_MENUN || $_CA[0]):?>
+
+<h3><?php echo $_FHM['name'] ?></h3>
+
 <ul class="nav flex-column">
   <?php $_i=0;while($_M2=db_fetch_array($_MENUS2)):$_i++?>
   <li class="nav-item<?php if($_MENUSN==$_i):?> _last<?php endif?>">
@@ -25,4 +28,5 @@
 <li class="text-muted text-center p-5 small bg-light">서브메뉴가 없습니다.</li>
 <?php endif?>
 </ul>
+
 <?php endif?>

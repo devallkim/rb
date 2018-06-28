@@ -168,15 +168,20 @@ $_editArray = array(
 						<textarea name="mobile" hidden><?php echo $mobile ?></textarea>
 					<?php endif; ?>
 
-					<ol class="breadcrumb mb-2 bg-white text-dark border">
-						<li class="breadcrumb-item">파일경로 :</li>
-						<li class="breadcrumb-item">root</li>
-						<li class="breadcrumb-item">pages</li>
-						<?php if($_mtype=='menu'):?>
-						<li class="breadcrumb-item">menu</li>
-						<?php endif?>
-						<li class="breadcrumb-item active"><code><?php echo $_filekind?>.php</code></li>
-					</ol>
+					<div class="border rounded mb-2  d-flex justify-content-between align-items-center">
+						<ol class="breadcrumb bg-white text-dark mb-0">
+							<li class="breadcrumb-item"><span class="badge badge-pill badge-light align-middle">파일경로</span> :</li>
+							<li class="breadcrumb-item">root</li>
+							<li class="breadcrumb-item">pages</li>
+							<?php if($_mtype=='menu'):?>
+							<li class="breadcrumb-item">menu</li>
+							<?php endif?>
+							<li class="breadcrumb-item active"><code><?php echo $_filekind?>.php</code></li>
+						</ol>
+						<div class="pr-3">
+						</div>
+					</div>
+
 
 				<?php endif; ?>
 
