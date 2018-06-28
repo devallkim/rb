@@ -433,14 +433,13 @@ if ($R['uid'])
 				<div class="form-group row">
 					<label class="col-lg-2 col-form-label text-lg-right">이름표시</label>
 					<div class="col-sm-9 pt-2">
-
 						<div class="custom-control custom-radio custom-control-inline">
-						  <input type="radio" class="custom-control-input" id="nametype_nic" name="nametype" value="nic"<?php if(!$R['uid']||$R['nametype']=='nic'):?> checked<?php endif?>>
-						  <label class="custom-control-label" for="nametype_nic">닉네임</label>
+						  <input type="radio" class="custom-control-input" id="nametype_name" name="nametype" value="name"<?php if(!$R['uid'] || $R['nametype']=='name'):?> checked<?php endif?>>
+						  <label class="custom-control-label" for="nametype_name">이름</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-						  <input type="radio" class="custom-control-input" id="nametype_name" name="nametype" value="name"<?php if($R['nametype']=='name'):?> checked<?php endif?>>
-						  <label class="custom-control-label" for="nametype_name">이름(실명)</label>
+						  <input type="radio" class="custom-control-input" id="nametype_nic" name="nametype" value="nic"<?php if($R['nametype']=='nic'):?> checked<?php endif?>>
+						  <label class="custom-control-label" for="nametype_nic">닉네임</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
 						  <input type="radio" class="custom-control-input" id="nametype_id" name="nametype" value="id"<?php if($R['nametype']=='id'):?> checked<?php endif?>>
