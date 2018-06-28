@@ -9,7 +9,7 @@
 
 	<main role="main" class="container px-0">
 		<div class="page-wrapper row">
-			<nav class="page-nav col bg-light">
+			<nav class="page-nav col">
 				<?php include $g['dir_layout'].'/_includes/subnav.php' ?>
 			</nav><!-- /.page-nav -->
 			<div class="page-main col">

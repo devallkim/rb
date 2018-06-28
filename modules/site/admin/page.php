@@ -823,6 +823,13 @@ function docType(n,str)
 	$('#editBox2').addClass('d-none');
 	$('#editBox3').addClass('d-none');
 	$('#editBox'+n).removeClass('d-none');
+
+	if(document.procForm.layout_1.value != '0') document.procForm.layout.value = document.procForm.layout_1.value + '/' + document.procForm.layout_1_sub.value;
+	else document.procForm.layout.value = '';
+
+	if(document.procForm.m_layout_1.value != '0') document.procForm.m_layout.value = document.procForm.m_layout_1.value + '/' + document.procForm.m_layout_1_sub.value;
+	else document.procForm.m_layout.value = '';
+
 	getIframeForAction(document.procForm);
 	document.procForm.pagetype.value = n;
 	document.procForm.submit();

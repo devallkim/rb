@@ -1055,6 +1055,12 @@ function docType(n,str)
 	$('#editBox4').addClass('d-none').removeAttr('hidden');
 	$('#editBox'+n).removeClass('d-none');
 	getIframeForAction(document.procForm);
+
+	if (document.procForm.layout_1.value != '0') document.procForm.layout.value = document.procForm.layout_1.value + '/' + document.procForm.layout_1_sub.value;
+  else document.procForm.layout.value = '';
+  if (document.procForm.m_layout_1.value != '0') document.procForm.m_layout.value = document.procForm.m_layout_1.value + '/' + document.procForm.m_layout_1_sub.value;
+  else document.procForm.m_layout.value = '';
+
 	document.procForm.menutype.value = n;
 	document.procForm.joint.value = '';
 	document.procForm.joint_menu.value = '';
