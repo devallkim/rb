@@ -140,7 +140,6 @@ code {
   border-left: 1px solid #222;
 }
 
-
 .sidebar .nav {
   margin-bottom: 20px;
 }
@@ -173,7 +172,12 @@ code {
 .sidebar .card-footer {
 	background-color: transparent
 }
-
+.sidebar .list-group-item.active {
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: rgb(0, 123, 255) !important;
+  border-image: initial !important;
+}
 
 /* ------------------ button --------------------*/
 

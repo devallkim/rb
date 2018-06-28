@@ -40,7 +40,7 @@ if (is_file($g['main']))
 
 				include $g['main'];
 
-				$g['buffer'] = ob_get_contents(); 
+				$g['buffer'] = ob_get_contents();
 				ob_end_clean();
 				echo $g['buffer'];
 
