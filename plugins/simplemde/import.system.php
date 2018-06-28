@@ -64,7 +64,7 @@ var simplemde = new SimpleMDE({
 		image: ["![](http://", ")"],
 		link: ["[", "](http://)"],
 	},
-	toolbar: ["bold", "italic", "heading","link","horizontal-rule","|",
+	toolbar: ["bold", "italic", "heading","link","horizontal-rule","table","|",
 			"code",
 			"quote",
 			"unordered-list",
