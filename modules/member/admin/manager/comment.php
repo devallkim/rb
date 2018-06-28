@@ -1,20 +1,10 @@
 <?php
- //동기화URL
-function getCyncUrl($cync)
+//댓글링크
+function getPostLink($arr)
 {
-	if (!$cync) return $GLOBALS['g']['r'];
-	$_r = getArrayString($cync);
-	$_r = $_r['data'][5];
-	if ($GLOBALS['_HS']['rewrite']&&strpos('_'.$_r,'m:bbs,bid:'))
-	{
-		$_r = str_replace('m:bbs','b',$_r);
-		$_r = str_replace(',bid:','/',$_r);
-		$_r = str_replace(',uid:','/',$_r);
-		$_r = str_replace(',CMT:','/',$_r);
-		$_r = str_replace(',s:','/s',$_r);
-		return $GLOBALS['g']['r'].'/'.$_r;
-	}
-	else return $GLOBALS['g']['s'].'/?'.($GLOBALS['_HS']['usescode']?'r='.$GLOBALS['_HS']['id'].'&amp;':'').str_replace(':','=',str_replace(',','&amp;',$_r));
+	$sync_arr=explode('|',$arr['sync']);
+	$B = getUidData($sync_arr[0],$sync_arr[2]);
+	return RW('m='.$sync_arr[1].'&bid='.$B['bbsid'].'&uid='.$sync_arr[2].($GLOBALS['s']!=$arr['site']?'&s='.$arr['site']:''.'#CMT-'.$arr['uid']));
 }
 $sort	= $sort ? $sort : 'uid';
 $orderby= $orderby ? $orderby : 'asc';
@@ -122,7 +112,7 @@ $TPG = getTotalPage($NUM,$recnum);
 					<td><?php echo $NUM-((($p-1)*$recnum)+$_rec++)?></td>
 					<td class="text-left">
 						<?php if($R['mobile']):?><i class="fa fa-mobile fa-lg"></i><?php endif?>
-						<a class="muted-link" href="<?php echo getCyncUrl($R['sync'].',CMT:'.$R['uid'])?>" target="_blank"><?php echo getStrCut($R['subject'],40,'')?></a>
+						<a href="<?php echo getPostLink($R)?>" target="_blank" class="muted-link"><?php echo getStrCut($R['subject'],40,'')?></a>
 						<?php if(strstr($R['content'],'.jpg')):?><i class="fa fa-image fa-lg"></i><?php endif?>
 						<?php if($R['upload']):?><i class="glyphicon glyphicon-floppy-disk glyphicon-lg"></i><?php endif?>
 						<?php if($R['hidden']):?><i class="fa fa-lock fa-lg"></i><?php endif?>

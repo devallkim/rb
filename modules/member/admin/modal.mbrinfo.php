@@ -28,6 +28,9 @@ else $del_file=$tab.'_multi_delete';
 	<li class="nav-item">
     <a class="nav-link<?php if($tab=='saved'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=saved&amp;uid=<?php echo $_M['uid']?>">저장함</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link<?php if($tab=='sms'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=sms&amp;uid=<?php echo $_M['uid']?>">문자</a>
+  </li>
 	<li class="nav-item">
     <a class="nav-link<?php if($tab=='paper'):?> active<?php endif?>" href="<?php echo $g['adm_href']?>&amp;iframe=Y&amp;tab=paper&amp;uid=<?php echo $_M['uid']?>">쪽지</a>
   </li>
@@ -56,8 +59,8 @@ else $del_file=$tab.'_multi_delete';
     <small class="badge badge-pill badge-<?php echo $_M['now_log']?'success':'secondary'?> d-inline-block align-top mr-2" data-tooltip="tooltip" title="<?php echo $_M['now_log']?'온라인':'오프라인'?>">
 			<?php echo $_M['admin']?($_M['adm_view']?($_M['super']?'부관리자':'사이트관리자'):'최고관리자'):'일반회원'?>
 		</small>
-    <?php echo sprintf('<strong>%s</strong> 님의 정보',$_M['nic'])?>
-    <small class="text-muted">(<?php echo $_M['name'] ?>)</small>
+    <?php echo sprintf('<strong>%s</strong> 님의 정보',$_M['name'])?>
+    <?php if ($_M['only_sns']): ?><small class="badge badge-pill badge-dark">소셜전용</small><?php endif; ?>
    </h5>
   <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 </div>
@@ -225,12 +228,7 @@ function saveCheck() {
 		f.nic.focus();
 		return false;
 	}
-	if (f.email.value == '')
-	{
-		alert('이메일을 입력해 주세요.   ');
-		f.email.focus();
-		return false;
-	}
+
   getIframeForAction(f);
   f.submit();
 }

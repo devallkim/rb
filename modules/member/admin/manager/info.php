@@ -8,6 +8,7 @@
 		<input type="hidden" name="check_id" value="1">
 		<input type="hidden" name="check_nic" value="1">
 		<input type="hidden" name="check_email" value="1">
+		<input type="hidden" name="check_phone" value="1">
 		<input type="submit" style="position:absolute;left:-1000px;">
 
 
@@ -50,6 +51,75 @@
 						<input type="text" class="form-control form-control-sm" name="name" placeholder="" value="<?php echo $_M['name']?>" maxlength="10">
 					</div>
 				</div>
+
+				<div class="form-group row no-gutters">
+					<label class="col-sm-2 col-form-label">이메일</label>
+					<div class="col-sm-10">
+
+						<select class="form-control custom-select form-control-sm" name="email">
+							<option value="">&nbsp;+ 선택하세요</option>
+							<option value="" disabled>------------------</option>
+							<?php
+							$sqlque = 'mbruid='.$_M['uid'];
+							$ECD = getDbArray($table['s_mbremail'],$sqlque,'*','uid','asc',0,1);
+							$NUM_MAIL = getDbRows($table['s_mbremail'],$sqlque);
+							?>
+							<?php while($E=db_fetch_array($ECD)):?>
+							<option value="<?php echo $E['email']?>"<?php if($E['email']==$_M['email']):?> selected="selected"<?php endif?>>
+								<?php echo $E['email']?> <?php if (!$E['d_verified']): ?>(미인증)<?php endif; ?>
+							</option>
+							<?php endwhile?>
+							<?php if (!$NUM_MAIL): ?>
+							<option value="" disabled selected="selected">등록된 이메일이 없습니다.</option>
+							<?php endif; ?>
+						</select>
+
+						<div class=" mt-2">
+							<div class="custom-control custom-checkbox custom-control-inline">
+								<input type="checkbox" class="custom-control-input" id="remail" name="remail" value="1"<?php if($_M['mailing']):?> checked="checked"<?php endif?> <?php echo !$_M['email']?' disabled':'' ?>>
+								<label class="custom-control-label" for="remail">뉴스레터나 공지이메일을 수신받겠습니다.</label>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+				<div class="form-group row no-gutters">
+					<label class="col-sm-2 col-form-label">휴대전화</label>
+					<div class="col-sm-10">
+						<select class="form-control custom-select form-control-sm" name="phone">
+							<option value="">&nbsp;+ 선택하세요</option>
+							<option value="" disabled>------------------</option>
+							<?php
+							$sqlque = 'mbruid='.$_M['uid'];
+							$PCD = getDbArray($table['s_mbrphone'],$sqlque,'*','uid','asc',0,1);
+							$NUM_PHONE = getDbRows($table['s_mbrphone'],$sqlque);
+							?>
+							<?php while($P=db_fetch_array($PCD)):?>
+							<option value="<?php echo $P['phone']?>"<?php if($P['phone']==$_M['phone']):?> selected="selected"<?php endif?>>
+								<?php echo substr($P['phone'], 0,3).'-'.substr($P['phone'], 3,4).'-'.substr($P['phone'], 7,4) ?> <?php if (!$P['d_verified']): ?>(미인증)<?php endif; ?>
+							</option>
+							<?php endwhile?>
+							<?php if (!$NUM_PHONE): ?>
+							<option value="" disabled selected="selected">등록된 휴대폰이 없습니다.</option>
+							<?php endif; ?>
+						</select>
+
+						<div class="pt-2">
+							<div class="custom-control custom-checkbox custom-control-inline">
+								<input type="checkbox" class="custom-control-input" id="sms" name="sms" value="1"<?php if($_M['sms']):?> checked="checked"<?php endif?><?php echo !$_M['phone']?' disabled':'' ?>>
+								<label class="custom-control-label" for="sms">이벤트와 공지 SMS를 수신 받겠습니다.</label>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+
+			</div><!-- /.col -->
+			<div class="col border-left">
+
 				<div class="form-group row no-gutters">
 					<label class="col-sm-2 col-form-label">닉네임</label>
 					<div class="col-sm-10">
@@ -61,55 +131,15 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group row no-gutters">
-					<label class="col-sm-2 col-form-label">이메일</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input type="email" class="form-control form-control-sm" name="email" placeholder="" value="<?php echo $_M['email']?>" onchange="sendCheck('rb-emailcheck','email');">
-							<span class="input-group-append">
-								<button type="button" class="btn btn-light" id="rb-emailcheck" onclick="sendCheck('rb-emailcheck','email');">중복확인</button>
-							</span>
-						</div>
-
-						<div class="custom-control custom-checkbox mt-2">
-							<input type="checkbox" class="custom-control-input" id="remail" name="remail" value="1"<?php if($_M['mailing']):?> checked="checked"<?php endif?>>
-							<label class="custom-control-label" for="remail">공지 이메일 수신</label>
-						</div>
-
-					</div>
-				</div>
-				<hr>
 
 				<div class="form-group row no-gutters">
-					<label class="col-sm-2 col-form-label">휴대전화</label>
-					<div class="col-sm-10">
-						<?php $tel2=explode('-',$_M['tel2'])?>
-						<div class="form-inline">
-							<input type="text" name="tel2_1" value="<?php echo $tel2[0]?>" maxlength="3" size="4" class="form-control form-control-sm">
-							<input type="text" name="tel2_2" value="<?php echo $tel2[1]?>" maxlength="4" size="4" class="form-control form-control-sm ml-2">
-							<input type="text" name="tel2_3" value="<?php echo $tel2[2]?>" maxlength="4" size="4" class="form-control form-control-sm ml-2">
-
-							<div class="custom-control custom-checkbox ml-3">
-								<input type="checkbox" class="custom-control-input" id="sms" name="sms" value="1"<?php if($_M['sms']):?> checked="checked"<?php endif?>>
-								<label class="custom-control-label" for="sms">알림문자 수신</label>
-							</div>
-
-							<div class="invalid-feedback">
-								휴대전화 번호를 입력해주세요.
-							</div>
-						</div><!-- /.form-inline -->
-
-					</div>
-				</div>
-
-				<div class="form-group row no-gutters mb-0">
 					<label class="col-sm-2 col-form-label">전화번호</label>
 					<div class="col-sm-10">
-						<?php $tel1=explode('-',$_M['tel1'])?>
+						<?php $tel=explode('-',$_M['tel'])?>
 						<div class="form-inline">
-							<input type="text" name="tel1_1" value="<?php echo $tel1[0]?>" maxlength="4" size="4" class="form-control form-control-sm">
-							<input type="text" name="tel1_2" value="<?php echo $tel1[1]?>" maxlength="4" size="4" class="form-control form-control-sm ml-2">
-							<input type="text" name="tel1_3" value="<?php echo $tel1[2]?>" maxlength="4" size="4" class="form-control form-control-sm ml-2">
+							<input type="text" name="tel_1" value="<?php echo $tel[0]?>" maxlength="4" size="4" class="form-control form-control-sm">
+							<input type="text" name="tel_2" value="<?php echo $tel[1]?>" maxlength="4" size="4" class="form-control form-control-sm ml-2">
+							<input type="text" name="tel_3" value="<?php echo $tel[2]?>" maxlength="4" size="4" class="form-control form-control-sm ml-2">
 							<div class="invalid-feedback">
 								전화번호를 입력해주세요.
 							</div>
@@ -119,8 +149,6 @@
 				</div>
 
 
-			</div><!-- /.col -->
-			<div class="col border-left">
 
 				<div class="form-group row no-gutters">
 					<label class="col-sm-2 col-form-label">생년월일</label>
@@ -176,51 +204,9 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label class="sr-only">주소</label>
-					<div>
-
-						<div id="addrbox"<?php if($_M['addr0']=='해외'):?> class="d-none"<?php endif?>>
-							<div class="form-row">
-							 <div class="form-group col-3">
-								 <input type="text" class="form-control form-control-sm" name="zip" value="<?php echo substr($_M['zip'],0,5)?>" id="zip" maxlength="5" size="5" readonly>
-							 </div>
-							 <div class="form-group col-6">
-								 <button type="button" class="btn btn-light" role="button" id="execDaumPostcode">우편번호찾기</button>
-							 </div>
-						 </div>
-
-						 <div class="form-group mb-1">
-							 <input type="text" class="form-control form-control-sm" name="addr1" id="addr1" value="<?php echo $_M['addr1']?>" readonly>
-						 </div>
-						 <div class="form-group">
-							 <input type="text" class="form-control form-control-sm" name="addr2" id="addr2" value="<?php echo $_M['addr2']?>">
-							 <div class="invalid-feedback">
-								 주소를 입력해주세요.
-							 </div>
-						 </div>
-
-						</div><!-- /#addrbox -->
-
-						<div class="">
-							<?php if($_M['addr0']=='해외'):?>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input js-overseasChk" id="overseas" name="overseas" value="1" checked="checked" onclick="overseasChk(this);">
-								<label class="custom-control-label" for="overseas" id="overseas_ment">해외거주자 입니다.</label>
-							</div>
-							<?php else:?>
-							<div class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input js-overseasChk" id="overseas" name="overseas" value="1" onclick="overseasChk(this);">
-								<label class="custom-control-label" for="overseas" id="overseas_ment">해외거주자일 경우 체크해 주세요.</label>
-							</div>
-							<?php endif?>
-						</div>
-
-					</div>
-				</div>
 				<hr>
 				<div class="form-group">
-					<label class="sr-only">간단소개</label>
+					<label>간단소개</label>
 					<textarea class="form-control" name="bio" rows="2" placeholder="간단소개를 입력해 주세요."><?php echo $_M['bio']?></textarea>
 				</div>
 				<div class="form-group row no-gutters">
@@ -234,14 +220,32 @@
 				</div>
 				<hr>
 				<div class="form-group row no-gutters">
+					<label class="col-sm-2 col-form-label">거주지역</label>
+					<div class="col-sm-10">
+						<select class="form-control custom-select form-control-sm" name="location">
+							<option value="">&nbsp;+ 선택하세요</option>
+							<option value="" disabled>------------------</option>
+							<?php
+							$_tmpvfile = $g['path_module'].$module.'/var/location.txt';
+							$_location=file($_tmpvfile);
+							?>
+							<?php foreach($_location as $_val):?>
+							<option value="<?php echo trim($_val)?>"<?php if(trim($_val)==$_M['location']):?> selected="selected"<?php endif?>>ㆍ<?php echo trim($_val)?></option>
+							<?php endforeach?>
+						</select>
+						<div class="invalid-feedback">
+							거주지역을 선택해 주세요.
+						</div>
+					</div>
+				</div>
+				<div class="form-group row no-gutters">
 					<label class="col-sm-2 col-form-label">직업</label>
 					<div class="col-sm-10">
 						<select class="form-control custom-select form-control-sm" name="job">
 							<option value="">&nbsp;+ 선택하세요</option>
 							<option value="" disabled>------------------</option>
 							<?php
-							$g['memberJobVarForSite'] = $g['path_var'].'site/'.$r.'/member.job.txt';
-							$_tmpvfile = file_exists($g['memberJobVarForSite']) ? $g['memberJobVarForSite'] : $g['path_module'].$module.'/var/member.job.txt';
+							$_tmpvfile = $g['path_module'].$module.'/var/job.txt';
 							$_job=file($_tmpvfile);
 							?>
 							<?php foreach($_job as $_val):?>
@@ -291,7 +295,8 @@
 		<div class="row">
 			<div class="col">
 
-				<?php $_add = file($g['path_var'].'site/'.$r.'/member.add_field.txt')?>
+				<?php $g['memberAddFieldSite'] = $g['path_var'].'site/'.$r.'/member.add_field.txt'; ?>
+				<?php $_add = file_exists($g['memberAddFieldSite']) ? file($g['memberAddFieldSite']) : file($g['path_module'].'member/var/add_field.txt');?>
 				<?php foreach($_add as $_key):?>
 				<?php $_val = explode('|',trim($_key))?>
 				<?php if($_val[6]) continue?>
@@ -357,86 +362,14 @@
 	</form>
 
 
-		<!-- Modal -->
-		<div id="modal-DaumPostcode" class="modal fade" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">우편번호 찾기</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body p-0" id="postLayer" style="height: 500px">
-					</div>
-				</div>
-			</div>
-		</div>
 
 
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script>
 
 
 	$(function() {
 
-		$("#execDaumPostcode").click(function() {
-			// 우편번호 찾기 화면을 넣을 element
-			var element_wrap = document.getElementById('postLayer');
-
-			function execDaumPostcode() {
-					new daum.Postcode({
-							 oncomplete: function(data) {
-									 // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-									 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-									 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-									 var fullAddr = data.address; // 최종 주소 변수
-									 var extraAddr = ''; // 조합형 주소 변수
-
-									 // 기본 주소가 도로명 타입일때 조합한다.
-									 if(data.addressType === 'R'){
-											 //법정동명이 있을 경우 추가한다.
-											 if(data.bname !== ''){
-													 extraAddr += data.bname;
-											 }
-											 // 건물명이 있을 경우 추가한다.
-											 if(data.buildingName !== ''){
-													 extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-											 }
-											 // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-											 fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-									 }
-
-									 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-									 document.getElementById('zip').value = data.zonecode; //5자리 새우편번호 사용
-									 document.getElementById('addr1').value = fullAddr;
-									 $('#modal-DaumPostcode').modal('hide')// 우편번호 검색모달을 숨김
-									 $('#addr2').focus()
-							 },
-
-							 // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
-							 width : '100%',
-							 height : '100%'
-					 }).embed(element_wrap);
-					 element_wrap.style.display = 'block';
-					$('#modal-DaumPostcode').modal('show')
-			}
-			execDaumPostcode()
-
-		})
 	});
-
-function overseasChk(obj) {
-	if (obj.checked == true)
-	{
-    $('#addrbox').addClass('d-none')
-    $('#overseas_ment').text('해외거주자 입니다.')
-	}
-	else {
-    $('#addrbox').removeClass('d-none')
-    $('#overseas_ment').text('해외거주자일 경우 체크해 주세요.')
-	}
-}
 
 </script>

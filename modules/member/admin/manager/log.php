@@ -69,8 +69,8 @@ $TPG = getTotalPage($NUM,$recnum);
 				</div><!-- /.form-inline -->
 				<div class="form-inline">
 					<select name="where" class="form-control form-control-sm custom-select">
-						<option<?php if($where=='ip'):?> selected<?php endif?>>아이피</option>
-						<option<?php if($where=='referer'):?> selected<?php endif?>>접속경로</option>
+						<option<?php if($where=='ip'):?> selected<?php endif?> value="ip">아이피</option>
+						<option<?php if($where=='referer'):?> selected<?php endif?> value="referer">접속경로</option>
 					</select>
 					<input type="text" name="keyw" class="form-control form-control-sm ml-1" placeholder="검색어를 입력해주세요." value="<?php echo $keyw?>">
 					<button class="btn btn-light ml-1" type="submit"><i class="fa fa-search"></i>검색</button>
@@ -81,7 +81,7 @@ $TPG = getTotalPage($NUM,$recnum);
  </form>
 </div>
 
-<table class="table table-sm table-hover border-bottom mt-3">
+<table class="table table-sm table-hover border-bottom mt-3 text-center f12">
 	<thead class="small text-muted">
 		<tr>
 			<th>번호</th>
@@ -104,9 +104,9 @@ $TPG = getTotalPage($NUM,$recnum);
 			<td><?php echo strtoupper($_browzer)?></td>
 			<td>
 				<?php if($_browzer=='Mobile'):?>
-				<small class="label label-<?php echo $_deviceType=='tablet'?'danger':'warning'?>" data-tooltip="tooltip" title="<?php echo $_deviceKind?>"><?php echo $_deviceType?></small>
+				<small class="badge badge-<?php echo $_deviceType=='tablet'?'danger':'warning'?>" data-tooltip="tooltip" title="<?php echo $_deviceKind?>"><?php echo $_deviceType?></small>
 				<?php else:?>
-				<small class="label label-default">desktop</small>
+				<small class="badge badge-dark">DESKTOP</small>
 				<?php endif?>
 			</td>
 			<td class="rb-update">

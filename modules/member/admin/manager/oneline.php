@@ -1,5 +1,13 @@
 <?php
-
+//한줄의견링크
+function getPostLink($arr)
+{
+	global $table;
+	$C = getUidData($table['s_comment'],$arr['parent']);
+	$sync_arr=explode('|',$C['sync']);
+	$B = getUidData($sync_arr[0],$sync_arr[2]);
+	return RW('m='.$sync_arr[1].'&bid='.$B['bbsid'].'&uid='.$sync_arr[2].($GLOBALS['s']!=$arr['site']?'&s='.$arr['site']:''.'#OLN-'.$arr['uid']));
+}
 $sort	= $sort ? $sort : 'uid';
 $orderby= $orderby ? $orderby : 'desc';
 $recnum	= $recnum && $recnum < 200 ? $recnum : 5;
@@ -110,7 +118,7 @@ $TPG = getTotalPage($NUM,$recnum);
 						<td><?php echo $NUM-((($p-1)*$recnum)+$_rec++)?></td>
 						<td class="text-left">
 							<?php if($R['mobile']):?><i class="fa fa-mobile fa-lg"></i><?php endif?>
-							<?php echo getStrCut($R['content'],40,'')?>
+							<a href="<?php echo getPostLink($R)?>" target="_blank" class="muted-link"><?php echo getStrCut($R['content'],40,'')?></a>
 							<?php if(getNew($R['d_regis'],24)):?><small class="text-danger">New</small><?php endif?>
 						</td>
 						<td class="rb-update">
