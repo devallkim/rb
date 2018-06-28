@@ -29,11 +29,10 @@ switch ($front) {
 			getLink(RW(0),'','','');
 		}
 
-		$page = $page=='main' ? 'step1' : $page;
+		$page = $page=='main' ? 'main' : $page;
+		if (!$d['member']['form_agree']) $page = $page == 'agree' ? 'agree' : $page;
+		if ($token) $page = 'auth_email';
 
-		if (!$d['member']['form_agree']) {
-			$page = $page == 'agree' ? 'forms' : $page;
-		}
 		if ($d['member']['layout_join_mobile'] && $g['mobile'] && $_SESSION['pcmode'] != 'Y') {
 			$_HM['m_layout'] = $_HM['m_layout'] ? $_HM['m_layout'] : $d['member']['layout_join_mobile'];
 		} else {
@@ -43,6 +42,7 @@ switch ($front) {
 
 	case 'login' :
 
+		if ($is_socialUserinfoSession) $page = 'combine';
 		$d['member']['sosokmenu'] = $d['member']['sosokmenu_login'];
 
 		if ($page !='password_reset' && $my['uid']){
@@ -81,16 +81,22 @@ switch ($front) {
 
 		$d['member']['sosokmenu'] = $d['member']['sosokmenu_settings'];
 
-		if (!$my['uid']){
-			getLink($g['s'].'/?r='.$r.'&mod=login&referer='.urlencode(RW('mod=settings')),'','','');
-		}
-
-		// $page	= 'pw';
+		if (!$my['uid']) getLink(RW(0),'','','');
 
 		if ($d['member']['layout_settings_mobile'] && $g['mobile'] && $_SESSION['pcmode'] != 'Y') {
 			$_HM['m_layout'] = $_HM['m_layout'] ? $_HM['m_layout'] : $d['member']['layout_settings_mobile'];
 		} else {
 			$_HM['layout'] = $_HM['layout'] ? $_HM['layout'] : $d['member']['layout_settings'];
+		}
+
+	break;
+
+	case 'saved' :
+
+		$d['member']['sosokmenu'] = $d['member']['sosokmenu_saved'];
+
+		if (!$my['uid']){
+			getLink($g['s'].'/?r='.$r.'&mod=login&referer='.urlencode(RW('mod=saved')),'','','');
 		}
 
 	break;
