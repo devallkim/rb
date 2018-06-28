@@ -311,7 +311,7 @@ if ($uid)
 							<!-- 게시판 신규생성시 모바일 레이아웃을  blank.php를 기본값으로 적용  -->
 							<?php
 								$_m_layoutExp1=explode('/',$_HS['m_layout']);
-								$m_layout_bbs = $_m_layoutExp1[0].'/blank.php';
+								$m_layout_bbs = $_m_layoutExp1[0].'/blank-drawer.php';
 							?>
 							<input type="hidden" name="m_layout" value="<?php echo $m_layout_bbs ?>">
 
