@@ -201,7 +201,7 @@ $TPG = getTotalPage($NUM,$recnum);
 							</div>
 						</td>
 						<td><?php echo ($NUM-((($p-1)*$recnum)+$_recnum++))?></td>
-						<td><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-mbrinfo" onmousedown="mbrIdDrop('<?php echo $M1['memberuid']?>','point');" data-toggle="tooltip" title="획득/사용내역"><?php echo $M1[$_HS['nametype']]?></a></td><!-- main -->
+						<td><a href="#" data-toggle="modal" data-target="#modal_window" class="rb-modal-mbrinfo" onmousedown="mbrIdDrop('<?php echo $M1['memberuid']?>','point');" data-toggle="tooltip" title="획득/사용내역"><?php echo $M1['name']?></a></td><!-- main -->
 					   <td><span class="badge badge-pill badge-dark"><?php echo number_format($R['price'])?></span></td>
 						<td>
 							<span class="badge badge-pill badge-dark">
