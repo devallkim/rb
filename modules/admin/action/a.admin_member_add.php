@@ -64,7 +64,7 @@ if ($uid)
 		   $_SESSION['mbr_pw']  = $newPw;
 	    }
 	}
-	getDbUpdate($table['s_mbrdata'],"super='$super',email='$email',name='$name',nic='$nic',photo='$photo',tel2='$tel2'",'memberuid='.$uid);
+	getDbUpdate($table['s_mbrdata'],"super='$super',email='$email',name='$name',nic='$nic',photo='$photo',phone='$phone'",'memberuid='.$uid);
 	setrawcookie('admin_admin_result', rawurlencode('수정 되었습니다.|success'));  // 처리여부 cookie 저장
 }
 else {
@@ -81,12 +81,6 @@ else {
 	$birth1		= 0;
 	$birth2		= 0;
 	$birthtype	= 0;
-	$tel1		= $tel2 && substr($tel2,0,2) != '01' ? $tel2 : '';
-	$tel2		= $tel2 && substr($tel2,0,2) == '01' ? $tel2 : '';
-	$zip		= '';
-	$addr0		= '';
-	$addr1		= '';
-	$addr2		= '';
 	$job		= '';
 	$marr1		= 0;
 	$marr2		= 0;
@@ -110,14 +104,22 @@ else {
 	$addfield	= '';
 
 	$_QKEY = "memberuid,site,auth,mygroup,level,comp,super,admin,adm_view,adm_site,";
-	$_QKEY.= "email,name,nic,grade,photo,home,sex,birth1,birth2,birthtype,tel1,tel2,zip,";
-	$_QKEY.= "addr0,addr1,addr2,job,marr1,marr2,sms,mailing,smail,point,usepoint,money,cash,num_login,bio,now_log,last_log,last_pw,is_paper,d_regis,tmpcode,sns,noticeconf,num_notice,addfield";
+	$_QKEY.= "email,name,nic,grade,photo,home,sex,birth1,birth2,birthtype,phone,tel,";
+	$_QKEY.= "job,marr1,marr2,sms,mailing,smail,point,usepoint,money,cash,num_login,bio,now_log,last_log,last_pw,is_paper,d_regis,tmpcode,sns,noticeconf,num_notice,addfield";
 	$_QVAL = "'$memberuid','$s','$auth','$mygroup','$level','$comp','$super','$admin','$adm_view','$adm_site',";
-	$_QVAL.= "'$email','$name','$nic','','$photo','$home','$sex','$birth1','$birth2','$birthtype','$tel1','$tel2','$zip',";
-	$_QVAL.= "'$addr0','$addr1','$addr2','$job','$marr1','$marr2','$sms','$mailing','$smail','$point','$usepoint','$money','$cash','$num_login','$bio','$now_log','$last_log','$last_pw','$is_paper','$d_regis','','$sns','$noticeconf','$num_notice','$addfield'";
+	$_QVAL.= "'$email','$name','$nic','','$photo','$home','$sex','$birth1','$birth2','$birthtype','$phone','$tel',";
+	$_QVAL.= "'$job','$marr1','$marr2','$sms','$mailing','$smail','$point','$usepoint','$money','$cash','$num_login','$bio','$now_log','$last_log','$last_pw','$is_paper','$d_regis','','$sns','$noticeconf','$num_notice','$addfield'";
 	getDbInsert($table['s_mbrdata'],$_QKEY,$_QVAL);
 	getDbUpdate($table['s_mbrlevel'],'num=num+1','uid='.$level);
 	getDbUpdate($table['s_mbrgroup'],'num=num+1','uid='.$mygroup);
+
+	if ($email){
+		getDbInsert($table['s_mbremail'],'mbruid,email,base,backup,d_regis,d_code,d_verified',"'".$memberuid."','".$email."',1,0,'".$d_regis."','',''");
+	}
+	if ($phone) {
+		getDbInsert($table['s_mbrphone'],'mbruid,phone,base,backup,d_regis,d_code,d_verified',"'".$memberuid."','".$phone."',1,0,'".$d_regis."','',''");
+	}
+
 	setrawcookie('admin_admin_result', rawurlencode($name.'님이 추가 되었습니다.|success'));  // 처리여부 cookie 저장
 }
 getLink('reload','parent.','','');

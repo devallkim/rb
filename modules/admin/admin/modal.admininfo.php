@@ -202,8 +202,8 @@ if (!$_M['uid']) exit;
 							<td><a href="mailto:<?php echo $_M['email']?>"><?php echo $_M['email']?></a></td>
 						</tr>
 						<tr>
-							<td>연락처</td>
-							<td><?php echo $_M['tel2']?$_M['tel2']:($_M['tel1']?$_M['tel1']:'<small>미등록</small>')?></td>
+							<td>휴대폰</td>
+							<td><?php echo $_M['phone']?$_M['phone']:($_M['tel']?$_M['tel']:'<small>미등록</small>')?></td>
 						</tr>
 						<tr>
 							<td>최근접속</td>
@@ -315,9 +315,9 @@ if (!$_M['uid']) exit;
 				</div>
 			</div>
 			<div class="form-group form-row">
-				<label class="col-sm-2 col-form-label">연락처</label>
+				<label class="col-sm-2 col-form-label">휴대폰</label>
 				<div class="col-sm-9">
-					<input type="tel" class="form-control" name="tel2" placeholder="예) 010-000-0000" value="<?php echo $_M['tel2']?$_M['tel2']:$_M['tel1']?>">
+					<input type="tel" class="form-control" name="phone" placeholder="예) 010-000-0000" value="<?php echo $_M['phone']?>">
 				</div>
 			</div>
 		</form>
@@ -390,7 +390,7 @@ if (!$_M['uid']) exit;
 
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr class="f12 text-muted">
 						<th>번호</th>
 						<th>아이피</th>
 						<th class="rb-url">접속경로</th>
@@ -411,9 +411,9 @@ if (!$_M['uid']) exit;
 						<td><?php echo strtoupper($_browzer)?></td>
 						<td>
 							<?php if($_browzer=='Mobile'):?>
-							<small class="label label-<?php echo $_deviceType=='tablet'?'danger':'warning'?>" data-tooltip="tooltip" title="<?php echo $_deviceKind?>"><?php echo $_deviceType?></small>
+							<small class="badge badge-<?php echo $_deviceType=='tablet'?'danger':'warning'?>" data-tooltip="tooltip" title="<?php echo $_deviceKind?>"><?php echo $_deviceType?></small>
 							<?php else:?>
-							<small class="label label-default">desktop</small>
+							<small class="badge badge-dark">DESKTOP</small>
 							<?php endif?>
 						</td>
 						<td class="rb-update">
@@ -436,8 +436,8 @@ if (!$_M['uid']) exit;
 				<div class="input-group mt-4">
 					<div class="input-group-prepend">
 						<select name="where" class="form-control custom-select">
-							<option<?php if($where=='ip'):?> selected<?php endif?>>아이피</option>
-							<option<?php if($where=='referer'):?> selected<?php endif?>>접속경로</option>
+							<option<?php if($where=='ip'):?> selected<?php endif?> value="ip">아이피</option>
+							<option<?php if($where=='referer'):?> selected<?php endif?> value="referer">접속경로</option>
 						</select>
 					</div>
 					<input type="text" name="keyw" class="form-control" placeholder="검색어를 입력해주세요" value="<?php echo $keyw?>" >
