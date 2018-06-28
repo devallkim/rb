@@ -154,35 +154,64 @@ body, th, td, input, select, textarea, button {
  color: #ccc
  }
 
- /*검색어 추천*/
- .autocomplete-suggestions {
-   top: 4.0625rem !important;
-   overflow-y: auto;
-   left:0 !important;
-   padding-left: 0;
-   margin-top: .0625rem;
-   margin-bottom: 0.9375rem;
-   list-style: none;
-   width: 100% !important;
-   background-color: transparent;
-   background-color: #fff
- }
- .autocomplete-suggestion {
-   position: relative;
-   padding:.6rem 1rem .5rem 1rem;
-   overflow: hidden;
-   border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.075);
-   display: block;
-   overflow: hidden;
-   color: inherit;
- }
- .autocomplete-suggestion:empty {
-   display: none
- }
- .autocomplete-suggestion{color:#333}
- .autocomplete-suggestion strong{font-weight:normal;color:#0275d8}
+/*검색어 추천*/
+.autocomplete-suggestions {
+  top: 4.0625rem !important;
+  overflow-y: auto;
+  left:0 !important;
+  padding-left: 0;
+  margin-top: .0625rem;
+  margin-bottom: 0.9375rem;
+  list-style: none;
+  width: 100% !important;
+  background-color: transparent;
+  background-color: #fff
+}
+.autocomplete-suggestion {
+  position: relative;
+  padding:.6rem 1rem .5rem 1rem;
+  overflow: hidden;
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.075);
+  display: block;
+  overflow: hidden;
+  color: inherit;
+}
+.autocomplete-suggestion:empty {
+  display: none
+}
+.autocomplete-suggestion{color:#333}
+.autocomplete-suggestion strong{font-weight:normal;color:#0275d8}
 
-
+/* 구분선 */
+.section-divider {
+  position: relative;
+  display: block;
+  margin: 20px 0 19px;
+  color: #888;
+  font-size: 13px;
+  text-align: center;
+  line-height: 16px;
+}
+.section-divider:before {
+  z-index: -1;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  background: #ebebeb;
+  content: '';
+}
+.section-divider span {
+  padding: 0 8px;
+  background: #f7f7f9;
+}
 
 
 
@@ -238,6 +267,13 @@ body, th, td, input, select, textarea, button {
   color: #0275d8;
 }
 
+.bar .btn-link:disabled {
+  color: #373a3c;
+}
+.bar .btn-link {
+  color: #0275d8;
+}
+
  .modal {
    -webkit-transition-timing-function: cubic-bezier(.1, .5, .1, 1);
            transition-timing-function: cubic-bezier(.1, .5, .1, 1);
@@ -247,6 +283,35 @@ body, th, td, input, select, textarea, button {
    -webkit-transition-timing-function: cubic-bezier(.1, .5, .1, 1);
            transition-timing-function: cubic-bezier(.1, .5, .1, 1);
  }
+
+
+ .form-list.floating .input-row {
+  padding: 0.375rem 0 0.125rem 0;
+  overflow: inherit;
+}
+
+.form-list.floating .input-row.focus {
+  border-bottom-color: #0275d8
+}
+.form-list.floating .input-row label {
+  padding: 0;
+  color: #999;
+  font-size: 0.7rem;
+}
+.form-list.floating .input-row input {
+  padding-top: 0;
+  font-size: 1.7rem !important;
+  line-height: 1;
+}
+/*Change text in autofill textbox*/
+.form-list.floating .input-row input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1.25rem white inset;
+  -webkit-text-fill-color: #ccc !important;
+}
+.form-list.floating .input-row input::-webkit-input-placeholder {
+  color: #ccc;
+}
+
 
 
 /* 포토모달 */

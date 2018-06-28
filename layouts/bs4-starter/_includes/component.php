@@ -2,67 +2,21 @@
 컴포넌트 모음
 
 1. 일반모달 : 로그인
-2. 일반모달 : 게시물 보기
-3. 포토모달 : 댓글형
-4. 포토모달 : 갤러리형
-5. 마크업 참조: 링크공유
+2. 일반모달 : 로그인(기존계정에 연결하기)
+4. 일반모달 : 게시물 보기
+5. 포토모달 : 댓글형
+6. 포토모달 : 갤러리형
+7. 마크업 참조: 링크공유
 
 -->
 
+<!-- 1. 일반모달 : 회원가입 -->
+<?php include_once $g['path_module'].'member/themes/'.$d['member']['theme_main'].'/join/component.php'; ?>
 
 <!-- 1. 일반모달 : 로그인 -->
-<div class="modal fade" id="modal-login" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 400px;">
-    <div class="modal-content">
-      <div class="modal-body">
-        <h3 class="text-center my-4">회원 로그인</h3>
-        <form class="px-4" id="modal-loginform" action="<?php echo $g['s']?>/" method="post">
-          <input type="hidden" name="r" value="<?php echo $r?>">
-          <input type="hidden" name="a" value="login">
-          <input type="hidden" name="form" value="">
+<?php include_once $g['path_module'].'member/themes/'.$d['member']['theme_main'].'/login/component.php';  ?>
 
-          <div class="form-group position-relative">
-            <label class="sr-only">아이디 또는 이메일</label>
-            <input type="text" class="form-control form-control-lg" name="id" placeholder="아이디 또는 이메일" tabindex="1" autocorrect="off" autocapitalize="off" required>
-            <div class="invalid-tooltip" data-role="idErrorBlock"></div>
-          </div>
-          <div class="form-group position-relative">
-            <label class="sr-only">패스워드</label>
-            <input type="password" class="form-control form-control-lg" name="pw" tabindex="2" required placeholder="비밀번호를 입력하세요.">
-            <div class="invalid-tooltip" data-role="passwordErrorBlock"></div>
-          </div>
-
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="custom-control custom-checkbox" data-toggle="collapse" data-target="#modal-collapsealert">
-              <input type="checkbox" class="custom-control-input" id="modal-login-cookie" name="login_cookie" value="checked">
-              <label class="custom-control-label" for="modal-login-cookie">로그인 상태 유지</label>
-            </div>
-            <a class="small muted-link" href="<?php echo RW('mod=password_reset')?>">비밀번호를 잊으셨나요?</a>
-          </div>
-
-          <div class="collapse" id="modal-collapsealert">
-            <div class="alert alert-light border f12 mt-3">
-              개인정보 보호를 위해, 개인 PC에서만 사용해 주세요.
-            </div>
-          </div>
-
-          <div class="my-3">
-            <button type="submit" class="btn btn-primary btn-lg btn-block" data-role="submit" tabindex="3">
-              <span class="not-loading">로그인</span>
-              <span class="is-loading"><i class="fa fa-spinner fa-lg fa-spin fa-fw"></i> 로그인중 ...</span>
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer justify-content-between">
-        <button type="button" class="btn btn-link muted-link" data-dismiss="modal">닫기</button>
-        <a href="<?php echo RW('mod=join') ?>" tabindex="6" class="btn btn-link muted-link">회원계정이 없으신가요 ?</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 2. 일반모달 : 게시물 보기-->
+<!-- 4. 일반모달 : 게시물 보기-->
 <div class="modal fade" id="modal-bbs-view" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <input type="hidden" name="bid" value="">
   <input type="hidden" name="uid" value="">
@@ -81,9 +35,12 @@
             <div data-role="article"></div>
           </main>
           <aside class="col-4 border-left">
-
-            <div class="commentting-container"></div>
-
+            <div class="commentting-container" data-role="comment-area"></div>
+            <div data-role="comment-alert" class="d-none">
+              <div class="d-flex align-items-center justify-content-center text-muted" style="height: calc(100vh - 9.5rem);">
+                댓글이 지원되지 않습니다.
+              </div>
+            </div>
           </aside>
         </div><!-- /.row -->
 
@@ -93,7 +50,7 @@
   </div>
 </div>
 
-<!-- 3. 포토모달 : 댓글형 -->
+<!-- 5. 포토모달 : 댓글형 -->
 <div class="pswp pswp-comment" tabindex="-1" role="dialog" aria-hidden="true">
   <input type="hidden" name="uid" value="">
   <input type="hidden" name="bid" value="">
@@ -155,14 +112,19 @@
 
   <div class="rb__area bg-light">
     <div data-role="article"></div>
-    <div class="commentting-container mt-4"></div>
+    <div class="commentting-container mt-4" data-role="comment-area"></div>
+    <div data-role="comment-alert" class="d-none">
+      <div class="d-flex align-items-center justify-content-center text-muted" style="height: calc(100vh - 27.5rem);">
+        댓글이 지원되지 않습니다.
+      </div>
+    </div>
   </div>
 
   <button class="pswp__button pswp__button--close" data-toggle="tooltip" title="닫기(Esc)"></button>
 
 </div>
 
-<!-- 4. 포토모달 : 갤러리형 -->
+<!-- 6. 포토모달 : 갤러리형 -->
 <div class="pswp pswp-gallery" tabindex="-1" role="dialog" aria-hidden="true">
 
     <!-- Background of PhotoSwipe.
@@ -226,7 +188,7 @@
 
 </div>
 
-<!-- 5. 마크업 참조 : 링크공유 -->
+<!-- 7. 마크업 참조 : 링크공유 -->
 <div id="rb-share" hidden>
   <ul class="share list-inline mt-2 mb-0 mx-2">
     <li class="list-inline-item text-center">

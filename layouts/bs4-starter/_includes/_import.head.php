@@ -13,6 +13,9 @@
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['img_layout']?>/icon/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="<?php echo $g['img_layout']?>/icon/favicon.ico">
 
+
+<link rel="manifest" href="<?php echo $g['url_layout']?>/_var/manifest.json" />
+
 <!-- 사이트 헤드 코드 -->
 <?php echo $_HS['headercode']?>
 

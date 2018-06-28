@@ -15,9 +15,10 @@
  * 2 - Structure 구조
  * 3 - Header 헤더
  * 4 - Content 컨텐츠
- * 5 - Footer 풋터
- * 6 - Component 컴포넌트
- * 7 - Utilities 유틸리티
+ * 5 - Sidebar 사이드바
+ * 6 - Footer 풋터
+ * 7 - Component 컴포넌트
+ * 8 - Utilities 유틸리티
  * ----------------------------------------------------------------------------
  */
 
@@ -50,7 +51,16 @@ body  {
   max-width: 975px !important;
 }
 
-
+.page-nav {
+  -ms-flex: 0 0 23%;
+  flex: 0 0 23%;
+  max-width: 23%;
+}
+.page-main {
+  -ms-flex: 0 0 77%;
+  flex: 0 0 77%;
+  max-width: 77%;
+}
 
 /**
  * 3 - Header 헤더
@@ -116,10 +126,66 @@ body  {
   display: none
 }
 
+/* 구분선 */
+.section-divider {
+  position: relative;
+  display: block;
+  margin: 20px 0 19px;
+  color: #888;
+  font-size: 13px;
+  text-align: center;
+  line-height: 16px;
+}
+.section-divider:before {
+  z-index: -1;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  background: #ebebeb;
+  content: '';
+}
+.section-divider span {
+  padding: 0 8px;
+  background: #fff;
+}
+
+/**
+ * 5 - Sidebar 사이드바
+ * ----------------------------------------------------------------------------
+ */
+
+.page-nav .nav-link {
+  font-size: 14px;
+  color: #4b4f56;
+  font-weight: 500;
+  margin: 4px 0;
+  padding: 0;
+  text-decoration: none;
+  word-break: break-word;
+}
+.page-nav .nav-link:hover {
+  color: #1d2129;
+  text-decoration: underline
+}
+
+.page-nav .nav-link.active {
+  color: #4080ff;
+}
+
+
+
 
 
 /**
- * 5 - Footer 풋터
+ * 6 - Footer 풋터
  * ----------------------------------------------------------------------------
  */
 .rb-footer {
@@ -131,7 +197,7 @@ body  {
 
 
 /**
- * 6 - Component 컴포넌트
+ * 7 - Component 컴포넌트
  * ----------------------------------------------------------------------------
  */
 
@@ -148,6 +214,9 @@ body  {
 /* form */
 .form-control {
   border-radius: 0
+}
+.invalid-feedback {
+  margin-top: .5rem!important;
 }
 
  /* button */
@@ -216,8 +285,13 @@ body  {
   background-color: #6c757d;
 }
 
+/* input-group */
+.input-group-text {
+  border-radius: 0;
+}
+
 
 /**
- * 7 - Utilities 유틸리티
+ * 8 - Utilities 유틸리티
  * ----------------------------------------------------------------------------
  */

@@ -13,7 +13,7 @@
 
 <title><?php echo $g['browtitle']?></title>
 
-<!-- 홈화면에 추가 아이콘 -->
+<!-- 파비콘 -->
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['img_layout']?>/icon/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="<?php echo $g['img_layout']?>/icon/icon.png">
 
@@ -55,5 +55,5 @@
 <!-- 카카오 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
-	Kakao.init('<?php echo $d['layout']['kakao_key'] ?>');  // 카카오 앱의 JavaScript 키를 설정해 주세요.
+	Kakao.init('<?php echo $d['connect']['jskey_k'] ?>');  // 카카오 앱의 JavaScript 키를 설정해 주세요.
 </script>

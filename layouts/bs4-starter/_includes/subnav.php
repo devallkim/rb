@@ -1,4 +1,4 @@
-<?php $_MENUS2=getDbSelect($table['s_menu'],'site='.$s.' and parent='.$_CA[0].' and hidden=0 and depth=2 order by gid asc','*')?>
+<?php $_MENUS2=getDbSelect($table['s_menu'],'site='.$s.' and parent='.$_FHM['uid'].' and hidden=0 and depth=2 order by gid asc','*')?>
 <?php $_MENUSN=db_num_rows($_MENUS2)?>
 <?php if($_MENUN || $_CA[0]):?>
 
