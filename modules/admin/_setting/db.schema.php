@@ -261,16 +261,20 @@ $_tmp = ("
 CREATE TABLE ".$table['s_mbrdata']." (
 memberuid	INT				PRIMARY KEY		NOT NULL,
 site		INT				DEFAULT '0'		NOT NULL,
-auth		TINYINT			DEFAULT '0'		NOT NULL,
-hidden		TINYINT			DEFAULT '0'		NOT NULL,
+auth		    TINYINT			DEFAULT '0'		NOT NULL,
+hidden		  TINYINT			DEFAULT '0'		NOT NULL,
 mygroup		INT				DEFAULT '0'		NOT NULL,
-level		INT				DEFAULT '0'		NOT NULL,
+level		  INT				DEFAULT '0'		NOT NULL,
 comp		TINYINT			DEFAULT '0'		NOT NULL,
 super		TINYINT			DEFAULT '0'		NOT NULL,
 admin		TINYINT			DEFAULT '0'		NOT NULL,
 adm_view	TEXT			NOT NULL,
 adm_site	TEXT			NOT NULL,
 email		VARCHAR(50)	 	DEFAULT ''		NOT NULL,
+email_profile		VARCHAR(50)	 	DEFAULT ''		NOT NULL,
+email_noti		VARCHAR(50)	 	DEFAULT ''		NOT NULL,
+email_backup		VARCHAR(50)	 	DEFAULT ''		NOT NULL,
+phone		VARCHAR(20)		DEFAULT ''		NOT NULL,
 name		VARCHAR(30)	 	DEFAULT ''		NOT NULL,
 nic			VARCHAR(50)		DEFAULT ''		NOT NULL,
 grade		VARCHAR(20)		DEFAULT ''		NOT NULL,
@@ -281,12 +285,8 @@ sex			TINYINT			DEFAULT '0'		NOT NULL,
 birth1		SMALLINT		DEFAULT '0'		NOT NULL,
 birth2		SMALLINT(4)		UNSIGNED ZEROFILL DEFAULT '0000' NOT NULL,
 birthtype	TINYINT			DEFAULT '0'		NOT NULL,
-tel1		VARCHAR(20)		DEFAULT ''		NOT NULL,
-tel2		VARCHAR(20)		DEFAULT ''		NOT NULL,
-zip			VARCHAR(20)		DEFAULT ''		NOT NULL,
-addr0		VARCHAR(6)		DEFAULT ''		NOT NULL,
-addr1		VARCHAR(250)	DEFAULT ''		NOT NULL,
-addr2		VARCHAR(250)	DEFAULT ''		NOT NULL,
+tel		VARCHAR(20)		DEFAULT ''		NOT NULL,
+location			VARCHAR(250)		DEFAULT ''		NOT NULL,
 job			VARCHAR(30)		DEFAULT ''		NOT NULL,
 marr1		SMALLINT		DEFAULT '0'		NOT NULL,
 marr2		SMALLINT(4)		UNSIGNED ZEROFILL DEFAULT '0000' NOT NULL,
@@ -305,7 +305,7 @@ last_pw		VARCHAR(8)		DEFAULT ''		NOT NULL,
 is_paper	TINYINT			DEFAULT '0'		NOT NULL,
 d_regis		VARCHAR(14)		DEFAULT ''		NOT NULL,
 tmpcode		VARCHAR(250)	DEFAULT ''		NOT NULL,
-sns			TEXT			NOT NULL,
+sns		VARCHAR(14)		DEFAULT ''		NOT NULL,
 noticeconf	TEXT			NOT NULL,
 num_notice	INT				DEFAULT '0'		NOT NULL,
 addfield	TEXT			NOT NULL,
@@ -316,13 +316,17 @@ KEY mygroup(mygroup),
 KEY level(level),
 KEY admin(admin),
 KEY email(email),
+KEY email_profile(email_profile),
+KEY email_noti(email_noti),
+KEY email_backup(email_backup),
+KEY phone(phone),
 KEY name(name),
 KEY nic(nic),
 KEY sex(sex),
 KEY birth1(birth1),
 KEY birth2(birth2),
 KEY birthtype(birthtype),
-KEY addr0(addr0),
+KEY location(location),
 KEY job(job),
 KEY marr1(marr1),
 KEY marr2(marr2),
@@ -335,36 +339,6 @@ KEY now_log(now_log),
 KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
 db_query("OPTIMIZE TABLE ".$table['s_mbrdata'],$DB_CONNECT);
-}
-
-//회원기업데이터
-$_tmp = db_query( "select count(*) from ".$table['s_mbrcomp'], $DB_CONNECT );
-if ( !$_tmp ) {
-$_tmp = ("
-
-CREATE TABLE ".$table['s_mbrcomp']." (
-memberuid	INT				PRIMARY KEY		NOT NULL,
-comp_num	INT			 	DEFAULT '0'		NOT NULL,
-comp_type	TINYINT			DEFAULT '0'		NOT NULL,
-comp_name	VARCHAR(50)	 	DEFAULT ''		NOT NULL,
-comp_ceo	VARCHAR(30)	 	DEFAULT ''		NOT NULL,
-comp_condition	VARCHAR(100)	DEFAULT ''		NOT NULL,
-comp_item	VARCHAR(100)	DEFAULT ''		NOT NULL,
-comp_tel	VARCHAR(20)	 	DEFAULT ''		NOT NULL,
-comp_fax	VARCHAR(20)	 	DEFAULT ''		NOT NULL,
-comp_zip	VARCHAR(20)	 	DEFAULT ''		NOT NULL,
-comp_addr0	VARCHAR(6)		DEFAULT ''		NOT NULL,
-comp_addr1	VARCHAR(250)	DEFAULT ''		NOT NULL,
-comp_addr2	VARCHAR(250)	DEFAULT ''		NOT NULL,
-comp_part	VARCHAR(30)		DEFAULT ''		NOT NULL,
-comp_level	VARCHAR(20)		DEFAULT ''		NOT NULL,
-KEY comp_num(comp_num),
-KEY comp_type(comp_type),
-KEY comp_name(comp_name),
-KEY comp_ceo(comp_ceo),
-KEY comp_addr0(comp_addr0)) ENGINE=".$DB['type']." CHARSET=UTF8");
-db_query($_tmp, $DB_CONNECT);
-db_query("OPTIMIZE TABLE ".$table['s_mbrcomp'],$DB_CONNECT);
 }
 
 //접속카운트
@@ -801,6 +775,35 @@ KEY d_read(d_read)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
 db_query("OPTIMIZE TABLE ".$table['s_paper'],$DB_CONNECT);
 }
+//SMS테이블
+$_tmp = db_query( "select count(*) from ".$table['s_sms'], $DB_CONNECT );
+if ( !$_tmp ) {
+$_tmp = ("
+
+CREATE TABLE ".$table['s_sms']." (
+uid			  BIGINT			PRIMARY KEY		NOT NULL AUTO_INCREMENT,
+site	  	INT				DEFAULT '0'		NOT NULL,
+module	  VARCHAR(50)		DEFAULT ''		NOT NULL,
+to_mbruid	INT				DEFAULT '0'		NOT NULL,
+to_phone	VARCHAR(20)	  DEFAULT ''		NOT NULL,
+from_mbruid	INT				DEFAULT '0'		NOT NULL,
+from_tel	VARCHAR(20)	  DEFAULT ''		NOT NULL,
+type		  TINYINT			DEFAULT '0'		NOT NULL,
+subject	  VARCHAR(200)	  DEFAULT ''		NOT NULL,
+content		TEXT			NOT NULL,
+upload		TEXT			NOT NULL,
+d_regis		VARCHAR(14)		DEFAULT ''		NOT NULL,
+KEY site(site),
+KEY module(module),
+KEY to_mbruid(to_mbruid),
+KEY to_phone(to_phone),
+KEY from_mbruid(from_mbruid),
+KEY from_tel(from_tel),
+KEY type(type),
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
+db_query($_tmp, $DB_CONNECT);
+db_query("OPTIMIZE TABLE ".$table['s_sms'],$DB_CONNECT);
+}
 //친구테이블
 $_tmp = db_query( "select count(*) from ".$table['s_friend'], $DB_CONNECT );
 if ( !$_tmp ) {
@@ -863,22 +866,23 @@ if ( !$_tmp ) {
 $_tmp = ("
 
 CREATE TABLE ".$table['s_mbrsns']." (
-memberuid	INT				PRIMARY KEY		NOT NULL,
-st			VARCHAR(40)		DEFAULT ''		NOT NULL,
-sf			VARCHAR(40)		DEFAULT ''		NOT NULL,
-sg			VARCHAR(40)		DEFAULT ''		NOT NULL,
-sd			VARCHAR(40)		DEFAULT ''		NOT NULL,
-sn			VARCHAR(40)		DEFAULT ''		NOT NULL,
-KEY st(st),
-KEY sf(sf),
-KEY sm(sg),
-KEY sy(sd),
-KEY sn(sn)) ENGINE=".$DB['type']." CHARSET=UTF8");
+uid			        BIGINT			PRIMARY KEY		NOT NULL AUTO_INCREMENT,
+mbruid		      INT				DEFAULT '0'		NOT NULL,
+sns    	        VARCHAR(30)		DEFAULT ''		NOT NULL,
+id  		        VARCHAR(100)		DEFAULT ''		NOT NULL,
+access_token		VARCHAR(100)	DEFAULT ''		NOT NULL,
+refresh_token		VARCHAR(100)	DEFAULT ''		NOT NULL,
+expires_in			INT				DEFAULT '0'		NOT NULL,
+d_regis		      VARCHAR(14)		DEFAULT ''		NOT NULL,
+KEY mbruid(mbruid),
+KEY sns(sns),
+KEY expires_in(expires_in),
+KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
 db_query("OPTIMIZE TABLE ".$table['s_mbrsns'],$DB_CONNECT);
 }
 
-//로그인 상태유지 토큰 저장
+//로그인 상태유지 토큰
 $_tmp = db_query( "select count(*) from ".$table['s_mbrtoken'], $DB_CONNECT );
 if ( !$_tmp ) {
 $_tmp = ("
@@ -893,6 +897,24 @@ db_query($_tmp, $DB_CONNECT);
 db_query("OPTIMIZE TABLE ".$table['s_mbrtoken'],$DB_CONNECT);
 }
 
+//비회원 본인인증 정보
+$_tmp = db_query( "select count(*) from ".$table['s_guestauth'], $DB_CONNECT );
+if ( !$_tmp ) {
+$_tmp = ("
+CREATE TABLE ".$table['s_guestauth']." (
+uid             INT    PRIMARY KEY  NOT NULL AUTO_INCREMENT,
+auth		        TINYINT			DEFAULT '0'		NOT NULL,
+email    	      VARCHAR(50)	  DEFAULT ''		NOT NULL,
+phone    	      VARCHAR(20)	  DEFAULT ''		NOT NULL,
+token		        VARCHAR(100)	DEFAULT ''		NOT NULL,
+code		        VARCHAR(30)	  DEFAULT ''		NOT NULL,
+d_regis	        VARCHAR(14)		DEFAULT ''		NOT NULL,
+ip		          VARCHAR(15)   DEFAULT ''    NOT NULL,
+KEY auth(auth)) ENGINE=".$DB['type']." CHARSET=UTF8");
+db_query($_tmp, $DB_CONNECT);
+db_query("OPTIMIZE TABLE ".$table['s_guestauth'],$DB_CONNECT);
+}
+
 //회원 이메일 목록
 $_tmp = db_query( "select count(*) from ".$table['s_mbremail'], $DB_CONNECT );
 if ( !$_tmp ) {
@@ -901,13 +923,13 @@ CREATE TABLE ".$table['s_mbremail']." (
 uid			      BIGINT			  PRIMARY KEY		NOT NULL AUTO_INCREMENT,
 mbruid		    INT				    DEFAULT '0'		NOT NULL,
 email    	    VARCHAR(50)	  DEFAULT ''		NOT NULL,
-prim		      TINYINT			  DEFAULT '0'		NOT NULL,
+base		      TINYINT			  DEFAULT '0'		NOT NULL,
 backup		    TINYINT			  DEFAULT '0'		NOT NULL,
 d_regis		    VARCHAR(14)		DEFAULT ''		NOT NULL,
 d_code		    VARCHAR(14)		DEFAULT ''		NOT NULL,
 d_verified		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY mbruid(mbruid),
-KEY prim(prim),
+KEY base(base),
 KEY backup(backup),
 KEY d_code(d_code),
 KEY d_verified(d_verified),
@@ -924,19 +946,45 @@ CREATE TABLE ".$table['s_mbrphone']." (
 uid			      BIGINT			  PRIMARY KEY		NOT NULL AUTO_INCREMENT,
 mbruid		    INT				    DEFAULT '0'		NOT NULL,
 phone    	    VARCHAR(20)	  DEFAULT ''		NOT NULL,
-prim		      TINYINT			  DEFAULT '0'		NOT NULL,
+base		      TINYINT			  DEFAULT '0'		NOT NULL,
 backup		    TINYINT			  DEFAULT '0'		NOT NULL,
 d_regis		    VARCHAR(14)		DEFAULT ''		NOT NULL,
 d_code		    VARCHAR(14)		DEFAULT ''		NOT NULL,
 d_verified		VARCHAR(14)		DEFAULT ''		NOT NULL,
 KEY mbruid(mbruid),
-KEY prim(prim),
+KEY base(base),
 KEY backup(backup),
 KEY d_verified(d_verified),
 KEY d_code(d_code),
 KEY d_regis(d_regis)) ENGINE=".$DB['type']." CHARSET=UTF8");
 db_query($_tmp, $DB_CONNECT);
 db_query("OPTIMIZE TABLE ".$table['s_mbrphone'],$DB_CONNECT);
+}
+
+//회원 배송지 목록
+$_tmp = db_query( "select count(*) from ".$table['s_mbrshipping'], $DB_CONNECT );
+if ( !$_tmp ) {
+$_tmp = ("
+CREATE TABLE ".$table['s_mbrshipping']." (
+uid			  BIGINT			  PRIMARY KEY		NOT NULL AUTO_INCREMENT,
+mbruid	  INT				    DEFAULT '0'		NOT NULL,
+label		  VARCHAR(50)	 	DEFAULT ''		NOT NULL,
+name      VARCHAR(30)	 	DEFAULT ''		NOT NULL,
+tel1		  VARCHAR(20)		DEFAULT ''		NOT NULL,
+tel2		  VARCHAR(20)		DEFAULT ''		NOT NULL,
+zip			  VARCHAR(20)		DEFAULT ''		NOT NULL,
+addr0		  VARCHAR(6)		DEFAULT ''		NOT NULL,
+addr1		  VARCHAR(250)	DEFAULT ''		NOT NULL,
+addr2		  VARCHAR(250)	DEFAULT ''		NOT NULL,
+base		  TINYINT			  DEFAULT '0'		NOT NULL,
+last_log	VARCHAR(14)		DEFAULT ''		NOT NULL,
+KEY mbruid(mbruid),
+KEY label(label),
+KEY name(name),
+KEY base(base),
+KEY last_log(last_log)) ENGINE=".$DB['type']." CHARSET=UTF8");
+db_query($_tmp, $DB_CONNECT);
+db_query("OPTIMIZE TABLE ".$table['s_mbrshipping'],$DB_CONNECT);
 }
 
 //인증코드 저장
