@@ -41,6 +41,189 @@
 		<input type="hidden" name="ftp" value="<?php echo $d['admin']['ftp']?>">
 		<input type="hidden" name="type" value="">
 		<input type="hidden" name="chk_email" value="">
+		<input type="hidden" name="chk_sms" value="">
+
+
+		<div class="card mb-3">
+			<div class="card-header">
+				이메일
+			</div>
+			<div class="card-body">
+
+				<div class="btn-group btn-group-toggle nav" data-toggle="buttons">
+					<label class="btn btn-light<?php if(!$d['admin']['smtp_use']):?> active<?php endif?>" data-toggle="pill" data-target="#mail-sendmail">
+						<input type="radio" name="smtp_use" value=""<?php if(!$d['admin']['smtp_use']):?> checked<?php endif?>> Sendmail
+					</label>
+					<label class="btn btn-light<?php if($d['admin']['smtp_use']=='1'):?> active<?php endif?> js-tooltip" data-toggle="pill" data-target="#mail-smtp" title="SMTP 계정이 필요합니다.">
+						<input type="radio" name="smtp_use" value="1"<?php if($d['admin']['smtp_use']=='1'):?> checked<?php endif?>> SMTP
+					</label>
+				</div>
+
+				<div class="tab-content pt-3">
+					<div id="mail-sendmail" class="tab-pane <?php if(!$d['admin']['smtp_use']):?> active<?php endif?>">
+
+						<div class="form-group mb-0">
+							<label>시스템 기본 메일</label>
+							<div class="input-group">
+								<input type="email" name="sysmail" value="<?php echo $d['admin']['sysmail']?$d['admin']['sysmail']:$my['email']?>" class="form-control">
+								<span class="input-group-append">
+									<button class="btn btn-light" type="button" id="sendmailbtn" onclick="sendCheck(this.id);">
+										<?php if($d['admin']['email']):?>발송 테스트<?php else:?>이메일 전송확인<?php endif?>
+									</button>
+								</span>
+							</div>
+							<small class="form-text text-muted">입력한 이메일 주소로 전송이 되면 메일서버가 정상작동되는 상태입니다.</small>
+						</div>
+
+					</div>
+
+					<div id="mail-smtp" class="tab-pane<?php if($d['admin']['smtp_use']=='1'):?> active<?php endif?>">
+
+						<div class="form-row">
+							<div class="form-group col-sm-4">
+								<label>SMTP Server</label>
+								<input class="form-control" type="text" name="smtp_host" value="<?php echo $d['admin']['smtp_host']?>" placeholder="예) smtp.mail.com">
+							</div>
+							<div class="form-group col-sm-2">
+								<label>SMTP Port</label>
+								<input type="text" class="form-control" name="smtp_port" value="<?php echo $d['admin']['smtp_port']?$d['admin']['smtp_port']:465?>" placeholder="">
+							</div>
+							<div class="form-group col-sm-6 pt-5">
+								<label class="mr-3">
+									<input type="checkbox" name="smtp_auth" value="1"<?php if($d['admin']['smtp_auth']):?> checked<?php endif?>><i></i> SMTP 인증 필요
+								</label>
+								<label><input type="radio" name="smtp_ssl" value=""<?php if(!$d['admin']['smtp_ssl']):?> checked<?php endif?>> 일반</label>
+								<label><input type="radio" name="smtp_ssl" value="SSL"<?php if($d['admin']['smtp_ssl']=='SSL'):?> checked<?php endif?>> SSL</label>
+								<label><input type="radio" name="smtp_ssl" value="TLS"<?php if($d['admin']['smtp_ssl']=='TLS'):?> checked<?php endif?>> TLS</label>
+							</div>
+						</div><!-- /.form-row -->
+
+						<div class="form-row">
+							<div class="form-group col-sm-6">
+								<label>인증 아이디</label>
+								<input type="text" class="form-control" name="smtp_user" value="<?php echo $d['admin']['smtp_user']?>" placeholder="인증 아이디">
+							</div>
+							<div class="form-group col-sm-6">
+								<label>인증 암호</label>
+								<input type="password" class="form-control" name="smtp_pass" value="<?php echo $d['admin']['smtp_pass']?>" placeholder="인증 암호">
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-light" id="smtpbtn" onclick="sendCheck(this.id);"><?php if($d['admin']['smtp']):?><i class="fa fa-info-circle fa-lg fa-fw"></i>정상<?php else:?>SMTP 연결확인<?php endif?></button>
+						<p class="form-control-static"><small class="text-muted">시스템 대표메일로 전송이 되면 메일서버가 정상 작동되는 상태입니다.</small></p>
+
+					</div>
+				</div>
+
+			</div><!-- /.card-body -->
+		</div><!-- /.card -->
+
+
+		<div class="card">
+			<div class="card-header">
+				SMS  <span class="badge badge-light ml-1">유료</span>
+			</div>
+			<div class="card-body">
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label pt-3">SMS 발신번호</label>
+					<div class="col-lg-10 col-xl-9">
+						<input class="form-control" type="text" name="sms_tel" value="<?php echo $d['admin']['sms_tel'] ?>" placeholder="SMS 발신번호 등록 후 입력해주세요.">
+						<small class="form-text text-muted">발신번호등록이 완료된 번호에서만 SMS 발신이 가능합니다. 자세한 내용은 <a href="https://kimsq.com/blog/post/25" target="_blank">여기</a>를 참고해 주세요.</small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label pt-3">SMS 계정번호</label>
+					<div class="col-lg-10 col-xl-9">
+						<input class="form-control" type="text" name="sms_id" value="<?php echo $d['admin']['sms_id'] ?>">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label pt-3">SMS 계정 인증키</label>
+					<div class="col-lg-10 col-xl-9">
+						<input class="form-control" type="text" name="sms_key" value="<?php echo $d['admin']['sms_key'] ?>">
+					</div>
+				</div>
+				<hr>
+
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label pt-3">발송 테스트</label>
+					<div class="col-lg-10 col-xl-9">
+
+						<div class="input-group">
+							<input type="tel" name="testsms" value="<?php echo $my['phone']?>" class="form-control" placeholder="휴대폰 번호">
+							<span class="input-group-append">
+								<button class="btn btn-light" type="button" id="sendsmsbtn" onclick="sendCheck(this.id);">
+									<?php if($d['admin']['sms']):?>발송하기<?php else:?>SMS 전송확인<?php endif?>
+								</button>
+							</span>
+						</div>
+						<small class="form-text text-muted">입력한 휴대폰 번호로 테스트 메시지가 수신되는지 확인해 보세요.</small>
+					</div>
+				</div>
+
+			</div><!-- /.card-body -->
+			<div class="card-footer">
+				<small class="form-text text-muted">
+					SMS(핸드폰 문자메시지) 유료서비스 이며, 킴스큐 프로젝트 콘솔에서 충전할 수 있습니다. 자세한 내용은 <a href="#" target="_blank">여기</a>를 참조해주세요.
+				</small>
+			</div>
+		</div><!-- /.card -->
+
+
+		<div class="card d-none">
+			<div class="card-header">
+				FCM <span class="badge badge-light ml-1">무료</span>
+			</div>
+			<div class="card-body">
+
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label">콘솔</label>
+					<div class="col-lg-10 col-xl-9 pt-2">
+						<a href="https://console.firebase.google.com" target="_blank">https://console.firebase.google.com</a>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label pt-3">서버 키</label>
+					<div class="col-lg-10 col-xl-9">
+						<textarea class="form-control f13	" name="fcm_key" rows="2"><?php echo $d['admin']['fcm_key'] ?></textarea>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label pt-3">발신자 ID</label>
+					<div class="col-lg-10 col-xl-9">
+						<input class="form-control" type="text" name="fcm_id" value="<?php echo $d['admin']['fcm_id'] ?>">
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="form-group row">
+					<label class="col-lg-2 col-form-label pt-3">발송 테스트</label>
+					<div class="col-lg-10 col-xl-9">
+
+						<div class="input-group">
+							<input type="tel" name="" value="<?php echo $my['phone']?>" class="form-control">
+							<span class="input-group-append">
+								<button class="btn btn-light" type="button" id="sendfcmbtn" onclick="sendCheck(this.id);">
+									<?php if($d['admin']['fcm']):?>발송하기<?php else:?>FCM 전송확인<?php endif?>
+								</button>
+							</span>
+						</div>
+						<small class="form-text text-muted">입력한 디바이스 토큰으로 테스트 메시지가 수신되는지 확인해 보세요.</small>
+
+					</div>
+				</div>
+
+			</div><!-- /.card-body -->
+			<div class="card-footer">
+				<small class="form-text text-muted">
+					FCM (Firebase 클라우드 메시징)은 클라우드에서 기기로 푸시하는 메시징 서비스로 Google 클라우드 메시징 서비스 입니다.<br>
+					사용제한 없이 무료로 이용할 수 있으며 Android, iOS, 웹 플랫폼을 지원하며, 높은 신뢰성을 갖고, 배터리를 최소한으로 사용하도록 최적화 되었습니다.<br>
+					자세한 내용은 <a href="https://firebase.google.com/docs/cloud-messaging/?hl=ko" target="_blank">여기</a>를 참조해주세요.
+				</small>
+			</div>
+		</div><!-- /.card -->
+
 
 		<div class="card mb-3">
 			<div class="card-header">
@@ -159,14 +342,7 @@
 						<div class="form-group">
 							<label>시스템 언어</label>
 							<select name="syslang" class="form-control custom-select">
-								<?php if(is_dir($g['path_module'].$module.'/language')):?>
-								<?php $dirs = opendir($g['path_module'].$module.'/language')?>
-								<?php while(false !== ($tpl = readdir($dirs))):?>
-								<?php if($tpl=='.'||$tpl=='..')continue?>
-								<option value="<?php echo $tpl?>"<?php if($d['admin']['syslang']==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_module'].$module.'/language/'.$tpl)?></option>
-								<?php endwhile?>
-								<?php closedir($dirs)?>
-								<?php endif?>
+								<option value="DEFAULT" selected="">한국어</option>
 							</select>
 							<small class="form-text text-muted">
 								이 설정을 이용해서 킴스큐 전체의 언어를 제어합니다. 개별 사이트나 모듈에서도 사용할 언어를 지정할 수 있습니다.
@@ -179,84 +355,6 @@
 
 			</div><!-- /.card-body -->
 		</div><!-- /.card -->
-
-
-		<div class="card mb-3">
-			<div class="card-header">
-				이메일
-			</div>
-			<div class="card-body">
-
-				<div class="btn-group btn-group-toggle nav" data-toggle="buttons">
-					<label class="btn btn-light<?php if(!$d['admin']['smtp_use']):?> active<?php endif?>" data-toggle="pill" data-target="#mail-sendmail">
-						<input type="radio" name="smtp_use" value=""<?php if(!$d['admin']['smtp_use']):?> checked<?php endif?>> Sendmail
-					</label>
-					<label class="btn btn-light<?php if($d['admin']['smtp_use']=='1'):?> active<?php endif?> js-tooltip" data-toggle="pill" data-target="#mail-smtp" title="SMTP 계정이 필요합니다.">
-						<input type="radio" name="smtp_use" value="1"<?php if($d['admin']['smtp_use']=='1'):?> checked<?php endif?>> SMTP
-					</label>
-				</div>
-
-				<div class="tab-content pt-3">
-					<div id="mail-sendmail" class="tab-pane <?php if(!$d['admin']['smtp_use']):?> active<?php endif?>">
-
-						<p>호스팅 서버환경에서는 발송메일이 스펨으로 분류되어 차단될 수 있습니다.</p>
-
-						<div class="form-group">
-							<label>시스템 메일</label>
-							<div class="input-group">
-								<input type="email" name="sysmail" value="<?php echo $d['admin']['sysmail']?$d['admin']['sysmail']:$my['email']?>" class="form-control">
-								<span class="input-group-append">
-									<button class="btn btn-light" type="button" id="sendmailbtn" onclick="sendCheck(this.id);">
-										<?php if($d['admin']['email']):?><i class="fa fa-info-circle fa-lg fa-fw"></i>정상<?php else:?>이메일 전송확인<?php endif?>
-									</button>
-								</span>
-							</div>
-							<small class="form-text text-muted">입력한 이메일주소로 전송이 되면 메일서버가 정상작동되는 상태입니다.</small>
-						</div>
-
-					</div>
-
-					<div id="mail-smtp" class="tab-pane<?php if($d['admin']['smtp_use']=='1'):?> active<?php endif?>">
-
-						<div class="form-row">
-							<div class="form-group col-sm-4">
-								<label>SMTP Server</label>
-								<input class="form-control" type="text" name="smtp_host" value="<?php echo $d['admin']['smtp_host']?>" placeholder="예) smtp.mail.com">
-							</div>
-							<div class="form-group col-sm-2">
-								<label>SMTP Port</label>
-								<input type="text" class="form-control" name="smtp_port" value="<?php echo $d['admin']['smtp_port']?$d['admin']['smtp_port']:465?>" placeholder="">
-							</div>
-							<div class="form-group col-sm-6 pt-5">
-								<label class="mr-3">
-									<input type="checkbox" name="smtp_auth" value="1"<?php if($d['admin']['smtp_auth']):?> checked<?php endif?>><i></i> SMTP 인증 필요
-								</label>
-								<label><input type="radio" name="smtp_ssl" value=""<?php if(!$d['admin']['smtp_ssl']):?> checked<?php endif?>> 일반</label>
-								<label><input type="radio" name="smtp_ssl" value="SSL"<?php if($d['admin']['smtp_ssl']=='SSL'):?> checked<?php endif?>> SSL</label>
-								<label><input type="radio" name="smtp_ssl" value="TLS"<?php if($d['admin']['smtp_ssl']=='TLS'):?> checked<?php endif?>> TLS</label>
-							</div>
-						</div><!-- /.form-row -->
-
-						<div class="form-row">
-							<div class="form-group col-sm-6">
-								<label>인증 아이디</label>
-								<input type="text" class="form-control" name="smtp_user" value="<?php echo $d['admin']['smtp_user']?>" placeholder="인증 아이디">
-							</div>
-							<div class="form-group col-sm-6">
-								<label>인증 암호</label>
-								<input type="password" class="form-control" name="smtp_pass" value="<?php echo $d['admin']['smtp_pass']?>" placeholder="인증 암호">
-							</div>
-						</div>
-
-						<button type="button" class="btn btn-light" id="smtpbtn" onclick="sendCheck(this.id);"><?php if($d['admin']['smtp']):?><i class="fa fa-info-circle fa-lg fa-fw"></i>정상<?php else:?>SMTP 연결확인<?php endif?></button>
-						<p class="form-control-static"><small class="text-muted">시스템 대표메일로 전송이 되면 메일서버가 정상 작동되는 상태입니다.</small></p>
-
-					</div>
-				</div>
-
-			</div><!-- /.card-body -->
-		</div><!-- /.card -->
-
 
 		<div class="card">
 			<div class="card-header">
@@ -343,11 +441,98 @@
 		<button class="mt-3 btn btn-outline-primary btn-block btn-lg" type="submit">저장하기</button>
 
 	</form>
+
+
+	<hr>
+
+	<div class="card" id="emailTemplate">
+		<div class="card-header">
+			<div class="d-flex justify-content-between pt-2 pb-3 border-bottom">
+				<span>
+					<i class="fa fa-envelope-o fa-fw"></i> 이메일 양식
+				</span>
+				<span class="badge badge-pill badge-dark">시스템 공통</span>
+			</div>
+
+			<ul class="nav nav-tabs card-header-tabs" role="tablist" style="margin-left:-18px">
+			 <li class="nav-item">
+				 <a class="nav-link active py-3" id="email-code-tab" data-toggle="tab" href="#email-code" role="tab" aria-controls="home" aria-selected="true">
+					 <i class="fa fa-code fa-fw" aria-hidden="true"></i>
+					 소스코드
+				 </a>
+			 </li>
+			 <li class="nav-item">
+				 <a class="nav-link py-3" id="email-preview-tab" data-toggle="tab" href="#email-preview" role="tab" aria-controls="profile" aria-selected="false">
+					 <i class="fa fa-eye fa-fw" aria-hidden="true"></i>
+					 미리보기
+				 </a>
+			 </li>
+		 </ul>
+		</div><!-- /.card-header -->
+
+		<div class="card-body tab-content">
+			<?php
+			$_email_header = $g['path_module'].$module.'/var/email.header.txt';
+			$_email_footer = $g['path_module'].$module.'/var/email.footer.txt';
+			$email_header = implode('',file($g['path_module'].$module.'/var/email.header.txt'));  //이메일 헤더 양식
+			$email_footer = implode('',file($g['path_module'].$module.'/var/email.footer.txt')); // //이메일 풋터 양식
+			?>
+
+			<div class="tab-pane fade show active" id="email-code" role="tabpanel">
+				<ul class="pl-3 small text-muted">
+					<li>시스템에서 발송되는 메일에 공통 적용되는 이메일 양식 입니다.</li>
+					<li>양식에는 다음과 같은 치환문자를 사용할 수 있습니다.</li>
+					<li>사이트명 : <code>{SITE}</code> / 대표이메일 : <code>{EMAIL_MAIN}</code> / 대표전화 : <code>{TEL_MAIN}</code></li>
+				</ul>
+				<form role="form" name="procForm2" action="<?php echo $g['s']?>/" method="post" onsubmit="return saveCheck(this);">
+					<input type="hidden" name="r" value="<?php echo $r?>">
+					<input type="hidden" name="m" value="<?php echo $module?>">
+					<input type="hidden" name="a" value="email_layout">
+
+					<div class="form-group">
+						<label class="d-flex justify-content-between">헤더  <span class="badge badge-pill badge-dark"><?php echo $_email_header ?></span></label>
+						<textarea class="form-control f13" id="code_header" name="email_header" rows="18"><?php readfile($_email_header)?></textarea>
+					</div>
+					<hr>
+					<div class="form-group">
+						<label class="d-flex justify-content-between">풋터  <span class="badge badge-pill badge-dark"><?php echo $_email_footer ?></span></label>
+						<textarea class="form-control f13" id="code_footer" name="email_footer" rows="18"><?php readfile($_email_footer)?></textarea>
+					</div>
+					<button class="mt-3 btn btn-outline-primary btn-block btn-lg" type="submit">메일양식 저장하기</button>
+				</form>
+			</div><!-- /.tab-pane -->
+
+			<div class="tab-pane fade" id="email-preview" role="tabpanel">
+
+				<?php echo $email_header ?>
+				<div class="text-muted samll">
+					메일본문이 추가됩니다.
+				</div>
+				<?php echo $email_footer ?>
+			</div><!-- /.tab-pane -->
+
+		</div><!-- /.card-body tab-content -->
+	</div><!-- /.card -->
+
+
+
 </div>
 
 
 <div hidden><iframe name="_autosave_"></iframe></div>
 
+<?php getImport('codemirror','lib/codemirror',false,'css')?>
+<?php getImport('codemirror','lib/codemirror',false,'js')?>
+<?php getImport('codemirror','theme/'.$d['admin']['codeeidt'],false,'css')?>
+<?php getImport('codemirror','addon/display/fullscreen',false,'css')?>
+<?php getImport('codemirror','addon/display/fullscreen',false,'js')?>
+<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
+<?php getImport('codemirror','mode/xml/xml',false,'js')?>
+<?php getImport('codemirror','mode/javascript/javascript',false,'js')?>
+<?php getImport('codemirror','mode/css/css',false,'js')?>
+<?php getImport('codemirror','mode/htmlmixed/htmlmixed',false,'js')?>
+<?php getImport('codemirror','mode/clike/clike',false,'js')?>
+<?php getImport('codemirror','mode/php/php',false,'js')?>
 
 
 <!-- basic -->
@@ -435,7 +620,21 @@ function sendCheck(id)
 		}
 	}
 	submitFlag = true;
-	f.a.value = 'email_check';
+
+	if (id == 'sendsmsbtn') {
+		f.chk_sms.value = f.sms_tel.value;
+		f.a.value = 'sms_check';
+
+		if (f.testsms.value == '') {
+			alert('휴대폰 번호를 입력해주세요.');
+			f.testsms.focus();
+			var submitFlag = false;
+			return false;
+		}
+
+	} else {
+		f.a.value = 'email_check';
+	}
 	f.type.value = id;
 	getId(id).innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
 	getIframeForAction(f);
@@ -449,6 +648,22 @@ function ftp_select(obj)
 function saveCheck(f)
 {
 	getIframeForAction(f);
-	return confirm('정말로 실행하시겠습니까?     ');
 }
+
+var editor_html = CodeMirror.fromTextArea(getId('code_header'), {
+	mode: "text/html",
+  indentUnit: 2,
+  lineNumbers: true,
+  matchBrackets: false,
+  indentWithTabs: true,
+});
+
+var editor_html = CodeMirror.fromTextArea(getId('code_footer'), {
+	mode: "text/html",
+  indentUnit: 2,
+  lineNumbers: true,
+  matchBrackets: false,
+  indentWithTabs: true,
+});
+
 </script>
