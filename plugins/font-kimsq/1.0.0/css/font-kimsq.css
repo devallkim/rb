@@ -121,3 +121,6 @@
 .kf-post:before {
 	content: "\e61c";
 }
+.kf-connect:before {
+	content: "\e613";
+}
