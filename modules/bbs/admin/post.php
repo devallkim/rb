@@ -41,12 +41,12 @@ $TPG = getTotalPage($NUM,$recnum);
 			<div id="accordion" role="tablist">
 			  <div class="card">
 			    <div class="card-header p-0" role="tab">
-						<a class="d-block muted-link collapsed" data-toggle="collapse" href="#collapse-filter" role="button" aria-expanded="true" aria-controls="collapseOne">
+						<a class="d-block muted-link<?php if($_SESSION['bbs_post_collapse']!='filter'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse-filter" role="button" aria-expanded="true" aria-controls="collapseOne" onclick="sessionSetting('bbs_post_collapse','filter','','');">
 							필터
 						</a>
 			    </div>
 
-			    <div id="collapse-filter" class="collapse" role="tabpanel" data-parent="#accordion">
+			    <div id="collapse-filter" class="collapse<?php if($_SESSION['bbs_post_collapse']=='filter'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
 			      <div class="card-body">
 
 							<select name="bid" class="form-control custom-select mb-2" onchange="this.form.submit();">
@@ -113,11 +113,11 @@ $TPG = getTotalPage($NUM,$recnum);
 			  </div>
 			  <div class="card">
 			    <div class="card-header p-0" role="tab">
-						<a class="d-block muted-link collapsed" data-toggle="collapse" href="#collapse-sort" role="button" aria-expanded="false" aria-controls="collapseTwo">
+						<a class="d-block muted-link<?php if($_SESSION['bbs_post_collapse']!='sort'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse-sort" role="button" aria-expanded="false" aria-controls="collapseTwo" onclick="sessionSetting('bbs_post_collapse','sort','','');">
 							정렬
 						</a>
 			    </div>
-			    <div id="collapse-sort" class="collapse" role="tabpanel" data-parent="#accordion">
+			    <div id="collapse-sort" class="collapse<?php if($_SESSION['bbs_post_collapse']=='sort'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
 			      <div class="card-body">
 
 							<div class="btn-toolbar">
@@ -139,14 +139,14 @@ $TPG = getTotalPage($NUM,$recnum);
 									</label>
 								</div>
 								<div class="btn-group btn-group-sm btn-group-toggle mb-2" data-toggle="buttons">
-									<label class="btn btn-light<?php if($sort=='score1'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="score1" name="sort"<?php if($sort=='score1'):?> checked<?php endif?>> 좋아요
+									<label class="btn btn-light<?php if($sort=='likes'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+										<input type="radio" value="likes" name="sort"<?php if($sort=='likes'):?> checked<?php endif?>> 좋아요
 									</label>
-									<label class="btn btn-light<?php if($sort=='score2'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="score2" name="sort"<?php if($sort=='score2'):?> checked<?php endif?>> 비좋아요
+									<label class="btn btn-light<?php if($sort=='dislikes'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+										<input type="radio" value="dislikes" name="sort"<?php if($sort=='dislikes'):?> checked<?php endif?>> 비좋아요
 									</label>
-									<label class="btn btn-light<?php if($sort=='singo'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
-										<input type="radio" value="singo" name="sort"<?php if($sort=='singo'):?> checked<?php endif?>> 신고
+									<label class="btn btn-light<?php if($sort=='report'):?> active<?php endif?>" onclick="btnFormSubmit(this);">
+										<input type="radio" value="report" name="sort"<?php if($sort=='report'):?> checked<?php endif?>> 신고
 									</label>
 								</div>
 
@@ -166,11 +166,11 @@ $TPG = getTotalPage($NUM,$recnum);
 			  </div>
 			  <div class="card">
 					<div class="card-header p-0" role="tab">
-						<a class="d-block muted-link collapsed" data-toggle="collapse" href="#collapse-search" role="button" aria-expanded="false" aria-controls="collapseTwo">
+						<a class="d-block muted-link<?php if($_SESSION['bbs_post_collapse']!='search'):?> collapsed<?php endif?>" data-toggle="collapse" href="#collapse-search" role="button" aria-expanded="false" aria-controls="collapseTwo" onclick="sessionSetting('bbs_post_collapse','search','','');">
 							검색
 						</a>
 			    </div>
-			    <div id="collapse-search" class="collapse" role="tabpanel" data-parent="#accordion">
+			    <div id="collapse-search" class="collapse<?php if($_SESSION['bbs_post_collapse']=='search'):?> show<?php endif?>" role="tabpanel" data-parent="#accordion">
 			      <div class="card-body">
 
 							<select name="where" class="form-control custom-select mb-2">
@@ -204,7 +204,9 @@ $TPG = getTotalPage($NUM,$recnum);
 				</div>
 
 				<?php if($NUM):?>
-				<a href="<?php echo $g['adm_href']?>" class="btn btn-light btn-block">검색조건 초기화</a>
+				<div style="padding: .74rem">
+					<a href="<?php echo $g['adm_href']?>" class="btn btn-block btn-light<?php echo $keyw?' active':'' ?>">검색조건 초기화</a>
+				</div>
 				<?php endif?>
 			</div>
 
