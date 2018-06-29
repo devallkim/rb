@@ -9,8 +9,8 @@ include $g['path_core'].'function/email.func.php';
 $tmpPw = rand(0,999999);
 $content = '<h4>'.$tmpPw.'</h4><br><b>임시 패스워드로 로그인 하신 후 반드시 패스워드를 변경해 주세요.</b>';
 
-$firstadmin = getDbData($table['s_mbrdata'],'memberuid=1','name,email');
-$tmpUpdate = getDbUpdate($table['s_mbrdata'],"tmpcode='".$tmpPw."'",'memberuid=1');
+$firstadmin = getDbData($table['s_mbrdata'],'memberuid=1','name,email,d_regis');
+$tmpUpdate = getDbUpdate($table['s_mbrdata'],"tmpcode='".getCrypt($tmpPw,$firstadmin['d_regis'])."'",'memberuid=1');
 
 $to = $firstadmin['email'].'|'.$firstadmin['name'];
 $from = $d['admin']['sysmail'];
