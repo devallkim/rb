@@ -45,7 +45,7 @@ if ($act=='del') {
 	getDbDelete($table['s_mbrphone'],'uid='.$uid.' and mbruid='.$my['uid']);
 	getDbDelete($table['s_code'],'entry='.$uid.' and mbruid='.$my['uid'].' and name="settings_phone" and sms=1');
 
-	if ($R['prim']==1) {  //삭제한 휴대폰이 기본 휴대폰 경우
+	if ($R['base']==1) {  //삭제한 휴대폰이 기본 휴대폰 경우
 		getDbUpdate($table['s_mbrdata'],'phone=""','memberuid='.$my['uid']);  //회원정보에서 휴대폰 정보 제거
 	}
 
@@ -61,33 +61,41 @@ if ($act=='del') {
 //인증번호 발송
 if ($act=='send_code') {
 
-	$g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
-	$_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
-	include_once $_tmpvfile;
-
 	$verify_code = date('His');
 	$code_name	= 'settings_phone';
 	$d_regis = $date['totime'];
 	$mbruid = $my['uid'];
 
-	if (!$d['member']['join_tel']) {
-		getLink('','','죄송합니다. 대표전화가 등록되지 않았습니다. 관리자에게 문의해 주세요.','');
+	$sms_tel = $d['member']['join_tel']?$d['member']['join_tel']:$d['admin']['sms_tel'];
+
+	if (!$sms_tel) {
+		getLink('','','죄송합니다. SMS발신 전화번호가 등록되지 않았습니다. 관리자에게 문의해 주세요.','');
 	}
 
 	if (!$R['phone']) getLink('','','등록된 휴대폰이 아닙니다.','');
 
 	include_once $g['path_core'].'function/sms.func.php';
+	$content = implode('',file($g['dir_module'].'doc/sms/_settings.auth.phone.txt'));
 	$content = str_replace('{NAME}',$my['name'],$content);
 	$content = str_replace('{NICK}',$my['nic'],$content);
-	$content = str_replace('{ID}',$R['id'],$content);
-	$content = str_replace('{phone}',$my['phone'],$content);
-	$content.= $_HS['name'].' 인증번호 ['.$verify_code.'] '.$d['member']['settings_keyexpire'].'분 이내에 입력해주세요.';
+	$content = str_replace('{SITE}',$_HS['name'],$content); //사이트명
+	$content = str_replace('{CODE}',$verify_code,$content); //인증번호
+	$content = str_replace('{TIME}',$d['member']['settings_keyexpire'],$content); //인증제한시간
+	$result = getSendSMS($R['phone'],$sms_tel,'',$content,'sms');
 
-	$result = getSendSMS($R['phone'],$d['member']['join_tel'],'',$content,'sms');
-
-	if (!$result) {
-		getLink('reload','parent.','죄송합니다. 문자메시지 발송서버가 응답하지 않아 SMS를 보내드리지 못했습니다.','');
+	if ($result != 'OK') {
+		getLink('reload','parent.',$result,'');
 	}
+
+	//발송이력 저장
+	$to_mbruid = $my['uid'];
+	$from_mbruid = $my['uid'];
+	$to = $R['phone'];
+	$from = $d['admin']['sms_tel'];
+	$subject = '';
+	$_QKEY = "site,module,to_mbruid,to_phone,from_mbruid,from_tel,type,subject,content,upload,d_regis";
+	$_QVAL = "'$r','$m','$to_mbruid','$to','$from_mbruid','$from',1,'$subject','$content','','$d_regis'";
+	getDbInsert($table['s_sms'],$_QKEY,$_QVAL);
 
 	$has_code_query = 'mbruid='.$my['uid'].' and name="settings_phone" and entry='.$uid.' and sms=1';
 	$has_code=getDbRows($table['s_code'],$has_code_query);  // 코드 발급여부
@@ -103,7 +111,6 @@ if ($act=='send_code') {
 	getDbUpdate($table['s_mbrphone'],'d_code='.$d_regis,'uid='.$R['uid']);
 
 	setrawcookie('member_settings_result', rawurlencode('요청하신 휴대폰으로 인증번호가 전송 되었습니다.|success'));  // 처리여부 cookie 저장
-	//setrawcookie('settings_phone_code_'.$uid, rawurlencode(''));  // 처리여부 cookie 저장
 	getLink('reload','parent.','','');
 
 }
@@ -113,8 +120,8 @@ if ($act=='save_primary') {
 
 	$phone = $R['phone'];
 
-	getDbUpdate($table['s_mbrphone'],'prim=0','mbruid='.$my['uid']); // 기본 휴대폰 초기화
-	getDbUpdate($table['s_mbrphone'],'prim=1','uid='.$R['uid'].' and mbruid='.$my['uid']); // 기본 휴대폰 지정
+	getDbUpdate($table['s_mbrphone'],'base=0','mbruid='.$my['uid']); // 기본 휴대폰 초기화
+	getDbUpdate($table['s_mbrphone'],'base=1','uid='.$R['uid'].' and mbruid='.$my['uid']); // 기본 휴대폰 지정
 	getDbUpdate($table['s_mbrdata'],'phone="'.$phone.'"','memberuid='.$my['uid']);  //회원정보 저장
 
 	setrawcookie('member_settings_result', rawurlencode('기본 휴대폰이 설정 되었습니다.|success'));  // 처리여부 cookie 저장
@@ -168,7 +175,7 @@ if ($act=='confirm_code') {
 
 	// 기본 휴대폰이 없을 경우, 기본 휴대폰으로 지정
 	if (!$my['phone']) {
-		getDbUpdate($table['s_mbrphone'],'prim=1','uid='.$uid.' and mbruid='.$my['uid']); // 기본 휴대폰 지정
+		getDbUpdate($table['s_mbrphone'],'base=1','uid='.$uid.' and mbruid='.$my['uid']); // 기본 휴대폰 지정
 		getDbUpdate($table['s_mbrdata'],'phone="'.$R['phone'].'"','memberuid='.$my['uid']);  //회원정보 저장
 	}
 

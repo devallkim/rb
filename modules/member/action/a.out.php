@@ -26,7 +26,7 @@ if($d['member']['join_out']==1)
 	getDbDelete($table['s_simbol'],'mbruid='.$my['uid']);
 	getDbDelete($table['s_friend'],'my_mbruid='.$my['uid'].' or by_mbruid='.$my['uid']);
 	getDbUpdate($table['s_mbrlevel'],'num=num-1','uid='.$my['level']);
-	getDbUpdate($table['s_mbrgroup'],'num=num-1','uid='.$my['sosok']);
+	getDbUpdate($table['s_mbrgroup'],'num=num-1','uid='.$my['mygroup']);
 	if (is_file($g['path_var'].'avatar/'.$my['photo']))
 	{
 		unlink($g['path_var'].'avatar/'.$my['photo']);

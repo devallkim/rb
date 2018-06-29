@@ -27,6 +27,12 @@ if ($act=='get_data') {
 
 }
 
+
+$addrx		= explode(' ',$addr1);
+$addr0		= $addr1 && $addr2 ? $addrx[0] : '';
+$addr1		= $addr1 && $addr2 ? $addr1 : '';
+$addr2		= trim($addr2);
+
 $tel1		= $tel1_1 && $tel1_2 && $tel1_3 ? $tel1_1 .'-'. $tel1_2 .'-'. $tel1_3 : '';
 $tel2		= $tel2_1 && $tel2_2 && $tel2_3 ? $tel2_1 .'-'. $tel2_2 .'-'. $tel2_3 : '';
 
@@ -36,6 +42,7 @@ if ($base) { // 기본배송지가 지정된 경우
 
 //배송지 수정
 if ($act=='edit') {
+
 	$_QVAL = "label='$label',name='$name',tel1='$tel1',tel2='$tel2',zip='$zip',addr0='$addr0',addr1='$addr1',addr2='$addr2',base='$base',last_log='$last_log'";
 	getDbUpdate($table['s_mbrshipping'],$_QVAL,'mbruid='.$mbruid.' and uid='.$uid);
 	setrawcookie('member_settings_result', rawurlencode('배송지가 저장 되었습니다.|success'));  // 처리여부 cookie 저장

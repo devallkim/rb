@@ -11,7 +11,7 @@ if ($my['admin'])
 {
 	$resultnum = 1;
 	$resultmsg = 'OK!';
-	$resultclass = 'form-control is-valid';
+	$resultclass = 'is-valid';
 }
 else {
 	if ($fname == 'id')
@@ -56,23 +56,17 @@ else {
 	}
 	if ($fname == 'email')
 	{
-		if ($my['uid'])
-		{
-			$isId = getDbRows($table['s_mbrdata'],"email='".$fvalue."' and email <> '".$my['email']."'");
-		}
-		else {
-			$isId = getDbRows($table['s_mbrdata'],"email='".$fvalue."'");
-		}
+		$isId = getDbRows($table['s_mbremail'],"email='".$fvalue."'");
 		if (!$isId)
 		{
 			$resultnum = 1;
 			$resultmsg = '';
-			$resultclass = 'form-control is-valid';
+			$resultclass = 'is-valid';
 		}
 		else {
 			$resultnum = 0;
 			$resultmsg = '이미 존재하는 이메일입니다';
-			$resultclass = 'form-control is-invalid';
+			$resultclass = 'is-invalid';
 		}
 	}
 	if ($fname == 'nic')
@@ -82,7 +76,7 @@ else {
 		{
 			$resultnum = 0;
 			$resultmsg = '이미 존재하는 닉네임입니다';
-			$resultclass = 'form-control is-invalid';
+			$resultclass = 'is-invalid';
 		}
 		else
 		{
@@ -90,7 +84,7 @@ else {
 			{
 				$resultnum = 1;
 				$resultmsg = '';
-				$resultclass = 'form-control is-valid';
+				$resultclass = 'is-valid';
 			}
 			else {
 				if($my['uid'])
@@ -104,12 +98,12 @@ else {
 				{
 					$resultnum = 1;
 					$resultmsg = '';
-					$resultclass = 'form-control is-valid';
+					$resultclass = 'is-valid';
 				}
 				else {
 					$resultnum = 0;
 					$resultmsg = '이미 존재하는 닉네임입니다.';
-					$resultclass = 'form-control is-invalid';
+					$resultclass = 'is-invalid';
 				}
 			}
 		}
@@ -128,7 +122,7 @@ else {
 parent.document.getElementById("memberForm").<?php echo $fname?>.focus();
 parent.document.getElementById("<?php echo $flayer?>").className = "invalid-feedback";
 <?php endif?>
-parent.document.getElementById("memberForm").<?php echo $fname?>.className = "<?php echo $resultclass?>";
+parent.document.getElementById("memberForm").<?php echo $fname?>.classList.add("<?php echo $resultclass?>");
 parent.document.getElementById("memberForm").check_<?php echo $fname?>.value = "<?php echo $resultnum?>";
 parent.document.getElementById("<?php echo $flayer?>").innerHTML = '<?php echo addslashes($resultmsg)?>';
 //]]>

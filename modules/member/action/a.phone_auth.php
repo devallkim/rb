@@ -20,17 +20,13 @@ if ($R['auth'] == 1)
 
 if ($R['auth'] == 3)
 {
-	getDbUpdate($table['s_mbrdata'],'auth=1,verify_email='.$date['totime'],'memberuid='.$R['memberuid']);
-
-	$d_regis	= $date['totime'];
-	$_QVAL = "d_verified='$d_regis',d_code=''";
-	getDbUpdate($table['s_mbremail'],$_QVAL,'mbruid='.$R['memberuid']);  // 이메일 본인확인 처리
+	getDbUpdate($table['s_mbrdata'],'auth=1,verify_phone=1','memberuid='.$R['memberuid']);
 }
 
 $g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
 $_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
 include_once $_tmpvfile;
-include_once $g['path_core'].'function/email.func.php';
+include_once $g['path_core'].'function/sms.func.php';
 
 if ($d['member']['join_email_send']&&$d['member']['join_email'])
 {
@@ -41,7 +37,7 @@ if ($d['member']['join_email_send']&&$d['member']['join_email'])
 	$content = str_replace('{ID}',$M['id'],$content);
 	$content = str_replace('{EMAIL}',$R['email'],$content);
 
-	getSendMail($R['email'].'|'.$R['name'], $d['member']['join_email'].'|'.$_HS['name'], '['.$_HS['name'].']회원가입을 축하드립니다.', $content, 'HTML');
+	getSendSMS($R['email'].'|'.$R['name'], $d['member']['join_email'].'|'.$_HS['name'], '['.$_HS['name'].']회원가입을 축하드립니다.', $content, 'HTML');
 }
 
 getLink(RW(0),'','인증이 완료되었습니다. 로그인해 주세요.','');

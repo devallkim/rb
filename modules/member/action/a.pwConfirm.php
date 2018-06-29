@@ -26,7 +26,7 @@ if (!$M['uid'] || $M1['auth'] == 4) {
 	exit();
 }
 if ($M1['auth'] == 2) getLink('reload','parent.','회원님은 인증보류 상태입니다.','-1');
-if ($M1['auth'] == 3) getLink('reload','parent.','회원님은 이메일 인증대기 상태입니다.','-1');
+if ($M1['auth'] == 3) getLink('reload','parent.','회원님은 인증대기 상태입니다.','-1');
 if ($M['pw'] != getCrypt($pw,$M1['d_regis']) && $M1['tmpcode'] != $pw) {
   echo "<script>";
 	echo "parent.$('".$form."').removeClass('was-validated');";

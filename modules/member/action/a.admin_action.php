@@ -57,8 +57,8 @@ if (substr($act,0,4) == 'dump')
 		echo '<td>Sex</td>';
 		echo '<td>Birthday</td>';
 		echo '<td>Birthtype</td>';
-		echo '<td>Tel1</td>';
-		echo '<td>Tel2</td>';
+		echo '<td>Phone</td>';
+		echo '<td>Tel</td>';
 		echo '<td>Zipcode</td>';
 		echo '<td>Address</td>';
 		echo '<td>Job</td>';
@@ -103,18 +103,22 @@ foreach ($MEMBERS as $M)
 	//회원삭제
 	if ($act == 'tool_delete')
 	{
-		getDbDelete($table['s_mbrsns'],'memberuid='.$M['memberuid']);
 		getDbDelete($table['s_mbrid'],'uid='.$M['memberuid']);
 		getDbDelete($table['s_mbrdata'],'memberuid='.$M['memberuid']);
-		getDbDelete($table['s_mbrcomp'],'memberuid='.$M['memberuid']);
+		getDbDelete($table['s_mbremail'],'mbruid='.$M['memberuid']);
+		getDbDelete($table['s_mbrphone'],'mbruid='.$M['memberuid']);
+		getDbDelete($table['s_mbrsns'],'mbruid='.$M['memberuid']);
+		getDbDelete($table['s_mbrshipping'],'mbruid='.$M['memberuid']);
 		getDbDelete($table['s_paper'],'my_mbruid='.$M['memberuid']);
 		getDbDelete($table['s_point'],'my_mbruid='.$M['memberuid']);
 		getDbDelete($table['s_saved'],'mbruid='.$M['memberuid']);
 		getDbDelete($table['s_avatar'],'mbruid='.$M['memberuid']);
 		getDbDelete($table['s_friend'],'my_mbruid='.$M['memberuid'].' or by_mbruid='.$M['memberuid']);
 		getDbUpdate($table['s_mbrlevel'],'num=num-1','uid='.$M['level']);
-		getDbUpdate($table['s_mbrgroup'],'num=num-1','uid='.$M['sosok']);
+		getDbUpdate($table['s_mbrgroup'],'num=num-1','uid='.$M['mygroup']);
 
+		getDbDelete($table['s_code'],'mbruid='.$M['memberuid']);
+		getDbDelete($table['s_guestauth'],'email="'.$M['email'].'" or phone="'.$M['phone'].'"');
 
 		if (is_file($g['path_var'].'avatar/'.$M['photo']))
 		{
@@ -204,8 +208,8 @@ foreach ($MEMBERS as $M)
 	{
 		echo '<tr>';
 		echo '<td>'.$M['name'].'</td>';
-		echo '<td>'.$M['tel1'].'</td>';
-		echo '<td>'.$M['tel2'].'</td>';
+		echo '<td>'.$M['phone'].'</td>';
+		echo '<td>'.$M['tel'].'</td>';
 		echo '</tr>';
 	}
 	//DM추출
@@ -229,8 +233,8 @@ foreach ($MEMBERS as $M)
 		echo '<td>'.($M['sex']==1?'남':'여').'</td>';
 		echo '<td>'.$M['birth1'].$M['birth2'].'</td>';
 		echo '<td>'.($M['birthtype']?'음':'양').'</td>';
-		echo '<td>'.$M['tel1'].'</td>';
-		echo '<td>'.$M['tel2'].'</td>';
+		echo '<td>'.$M['phone'].'</td>';
+		echo '<td>'.$M['tel'].'</td>';
 		echo '<td>'.substr($M['zip'],0,3).'-'.substr($M['zip'],3,3).'</td>';
 		echo '<td>'.$M['addr1'].' '.$M['addr2'].'</td>';
 		echo '<td>'.$M['job'].'</td>';

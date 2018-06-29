@@ -33,7 +33,6 @@ for($i=0;$i<count($id);$i++)
 	$birth1		= $birth_1;
 	$birth2		= $birth_2.$birth_3;
 	$birthtype	= $birthtype ? $birthtype : 0;
-	$tel1		= $comp_tel_1 && $comp_tel_2 && $comp_tel_3 ? $comp_tel_1 .'-'. $comp_tel_2 .'-'. $comp_tel_3 : '';
 
 	if(!$foreign)
 	{
@@ -67,10 +66,10 @@ for($i=0;$i<count($id);$i++)
 
 
 	$_QKEY = "memberuid,site,auth,sosok,level,comp,admin,adm_view,";
-	$_QKEY.= "email,name,nic,grade,photo,home,sex,birth1,birth2,birthtype,tel1,tel2,zip,";
+	$_QKEY.= "email,name,nic,grade,photo,home,sex,birth1,birth2,birthtype,phone,tel,zip,";
 	$_QKEY.= "addr0,addr1,addr2,job,marr1,marr2,sms,mailing,smail,point,usepoint,money,cash,num_login,pw_q,pw_a,now_log,last_log,last_pw,is_paper,d_regis,tmpcode,sns,addfield";
 	$_QVAL = "'$memberuid','$s','$auth','$sosok[$i]','$level','$comp','$admin[$i]','',";
-	$_QVAL.= "'$email[$i]','$name[$i]','$nic[$i]','','$photo','$home','$sex','$birth1','$birth2','$birthtype','$tel1','$tel2','$zip',";
+	$_QVAL.= "'$email[$i]','$name[$i]','$nic[$i]','','$photo','$home','$sex','$birth1','$birth2','$birthtype','$phone','$tel','$zip',";
 	$_QVAL.= "'$addr0','$addr1','$addr2','$job','$marr1','$marr2','$sms','$mailing','$smail','$point','$usepoint','$money','$cash','$num_login','$pw_q','$pw_a','$now_log','$last_log','$last_pw','$is_paper','$d_regis','','$sns','$addfield'";
 	getDbInsert($table['s_mbrdata'],$_QKEY,$_QVAL);
 	getDbUpdate($table['s_mbrlevel'],'num=num+1','uid='.$level);
@@ -92,7 +91,7 @@ for($i=0;$i<count($id);$i++)
 		$comp_addr0	= $comp_addr1 && $comp_addr2 ? substr($comp_addr1,0,6) : '';
 		$comp_addr1	= $comp_addr1 && $comp_addr2 ? $comp_addr1 : '';
 		$comp_addr2	= trim($comp_addr2);
-		$comp_part	= trim($comp_part); 
+		$comp_part	= trim($comp_part);
 		$comp_level	= trim($comp_level);
 
 		$_QKEY = "memberuid,comp_num,comp_type,comp_name,comp_ceo,comp_upte,comp_jongmok,";
@@ -103,7 +102,7 @@ for($i=0;$i<count($id);$i++)
 	}
 	if ($point)
 	{
-		getDbInsert($table['s_point'],'my_mbruid,by_mbruid,price,content,d_regis',"'$memberuid','0','$point','".$d['member']['join_pointmsg']."','$d_regis'");	
+		getDbInsert($table['s_point'],'my_mbruid,by_mbruid,price,content,d_regis',"'$memberuid','0','$point','".$d['member']['join_pointmsg']."','$d_regis'");
 	}
 
 }// for 문

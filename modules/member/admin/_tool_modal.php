@@ -233,7 +233,7 @@
 $('.doc-type').on('click',function(e) {
 	 e.preventDefault();
     var cnt=$(this).find('input[name="doc_type"]').val();
-    //alert(cnt);
+    alert(cnt);
     $('#summernote').code(cnt);
 })
 </script>

@@ -9,6 +9,7 @@
 			<input type="hidden" name="check_id" value="0">
 			<input type="hidden" name="check_nic" value="0">
 			<input type="hidden" name="check_email" value="0">
+			<input type="hidden" name="check_phone" value="0">
 
 			<div class="modal-header">
 				<h5 class="modal-title">회원 추가</h5>
@@ -70,9 +71,16 @@
 					</div>
 				</div>
 				<div class="form-group row">
-					<label class="col-sm-2 col-form-label">연락처</label>
+					<label class="col-sm-2 col-form-label">휴대폰</label>
 					<div class="col-sm-9">
-						<input type="tel" class="form-control" name="tel2" placeholder="예) 010-000-0000" value="">
+
+						<div class="input-group">
+							<input type="number" class="form-control" name="phone" placeholder="숫자만 등록" value="" onchange="sendCheck('rb-phonecheck','phone');">
+							<span class="input-group-append">
+								<button type="button" class="btn btn-light" id="rb-phonecheck" onclick="sendCheck('rb-phonecheck','phone');">중복확인</button>
+							</span>
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -90,4 +98,38 @@
 		</form>
 		</div>
 	</div>
+</div>
+
+
+<!-- 이메일 발송 -->
+<div class="modal fade" id="modal-email" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+				<h5 class="modal-title">
+					<i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i> 이메일 발송
+					<span class="badge badge-pill badge-dark align-text-top" data-role="name"></span>
+				</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+				<form>
+          <div class="form-group">
+            <label class="col-form-label">받는 이메일주소:</label>
+            <input type="text" class="form-control" data-role="to">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">내용:</label>
+            <textarea class="form-control" data-role="content"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>

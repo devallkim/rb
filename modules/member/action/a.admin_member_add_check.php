@@ -50,8 +50,8 @@ else if ($type == 'email')
 {
 	if (strpos($fvalue,'@') && strpos($fvalue,'.'))
 	{
-		if ($my['uid']) $isId = getDbRows($table['s_mbrdata'],"email='".$fvalue."' and email <> '".$my['email']."'");
-		else $isId = getDbRows($table['s_mbrdata'],"email='".$fvalue."'");
+		if ($my['uid']) $isId = getDbRows($table['s_mbremail'],"email='".$fvalue."' and email <> '".$my['email']."'");
+		else $isId = getDbRows($table['s_mbremail'],"email='".$fvalue."'");
 		if (!$isId) $result = true;
 	}
 	if ($result):
@@ -65,6 +65,28 @@ else if ($type == 'email')
 	<script>
 	parent.getId('rb-emailcheck').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>확인요망';
 	parent.document.addForm.check_email.value = '0';
+	parent.submitFlag = false;
+	</script>
+	<?php
+	endif;
+}
+
+else if ($type == 'phone')
+{
+	if ($my['uid']) $isId = getDbRows($table['s_mbrphone'],"phone='".$fvalue."' and phone <> '".$my['phone']."'");
+	else $isId = getDbRows($table['s_mbrphone'],"phone='".$fvalue."'");
+	if (!$isId) $result = true;
+	if ($result):
+	?>
+	<script>
+	parent.getId('rb-phonecheck').innerHTML = '<i class="fa fa-info-circle fa-lg fa-fw"></i>정상';
+	parent.document.addForm.check_phone.value = '1';
+	parent.submitFlag = false;
+	</script>
+	<?php else:?>
+	<script>
+	parent.getId('rb-phonecheck').innerHTML = '<i class="fa fa-question fa-lg fa-fw"></i>확인요망';
+	parent.document.addForm.check_phone.value = '0';
 	parent.submitFlag = false;
 	</script>
 	<?php

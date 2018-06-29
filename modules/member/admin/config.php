@@ -1,30 +1,15 @@
 <?php
-$SITES   = getDbArray($table['s_site'],'','*','gid','asc',0,$p);
+$SITES = getDbArray($table['s_site'],'','*','gid','asc',0,$p);
 $SITEN   = db_num_rows($SITES);
 
 $g['memberVarForSite'] = $g['path_var'].'site/'.$r.'/member.var.php';
 $_tmpvfile = file_exists($g['memberVarForSite']) ? $g['memberVarForSite'] : $g['path_module'].$module.'/var/var.php';
 
-$g['memberJobForSite'] = $g['path_var'].'site/'.$r.'/member.job.txt';
-$_tmpjfile = file_exists($g['memberJobForSite']) ? $g['memberJobForSite'] : $g['path_module'].$module.'/var/job.txt';
+$_tmplfile =  $g['path_module'].$module.'/var/location.txt';
+$_tmpjfile = $g['path_module'].$module.'/var/job.txt';
 
 $g['memberAdd_fieldForSite'] = $g['path_var'].'site/'.$r.'/member.add_field.txt';
 $_tmpafile = file_exists($g['memberAdd_fieldForSite']) ? $g['memberAdd_fieldForSite'] : $g['path_module'].$module.'/var/add_field.txt';
-
-$g['memberAgree1ForSite'] = $g['path_var'].'site/'.$r.'/member.agree1.txt';
-$_tmpag1file = file_exists($g['memberAgree1ForSite']) ? $g['memberAgree1ForSite'] : $g['path_module'].$module.'/var/agree1.txt';
-
-$g['memberAgree2ForSite'] = $g['path_var'].'site/'.$r.'/member.agree2.txt';
-$_tmpag2file = file_exists($g['memberAgree2ForSite']) ? $g['memberAgree2ForSite'] : $g['path_module'].$module.'/var/agree2.txt';
-
-$g['memberAgree3ForSite'] = $g['path_var'].'site/'.$r.'/member.agree3.txt';
-$_tmpag3file = file_exists($g['memberAgree3ForSite']) ? $g['memberAgree3ForSite'] : $g['path_module'].$module.'/var/agree3.txt';
-
-$g['memberAgree4ForSite'] = $g['path_var'].'site/'.$r.'/member.agree4.txt';
-$_tmpag4file = file_exists($g['memberAgree4ForSite']) ? $g['memberAgree4ForSite'] : $g['path_module'].$module.'/var/agree4.txt';
-
-$g['memberAgree5ForSite'] = $g['path_var'].'site/'.$r.'/member.agree5.txt';
-$_tmpag5file = file_exists($g['memberAgree5ForSite']) ? $g['memberAgree5ForSite'] : $g['path_module'].$module.'/var/agree5.txt';
 
 include_once $_tmpvfile;
 ?>
@@ -35,7 +20,6 @@ include_once $_tmpvfile;
 	<input type="hidden" name="m" value="<?php echo $module?>">
 	<input type="hidden" name="a" value="">
 	<input type="hidden" name="_join_menu" value="<?php echo $_SESSION['_join_menu']?$_SESSION['_join_menu']:1?>">
-	<input type="hidden" name="_join_tab" value="<?php echo $_SESSION['_join_tab']?$_SESSION['_join_tab']:'terms'?>">
 
 	<div class="col-sm-3 col-md-3 col-xl-3 d-none d-sm-block sidebar">
 
@@ -44,23 +28,34 @@ include_once $_tmpvfile;
 				메뉴
 			</div>
 			<div class="list-group" id="list-tab" role="tablist">
-				<a class="list-group-item list-group-item-action<?php if(!$_SESSION['member_config_nav'] || $_SESSION['member_config_nav']=='settings'):?> active<?php endif?>" data-toggle="list" href="#settings" role="tab" onclick="sessionSetting('member_config_nav','settings','','');">
-					<i class="fa fa-cog fa-lg pull-right"></i> 기초환경 설정
+				<a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action<?php if(!$_SESSION['member_config_nav'] || $_SESSION['member_config_nav']=='settings'):?> active<?php endif?>" data-toggle="list" href="#settings" role="tab" onclick="sessionSetting('member_config_nav','settings','','');">
+					기초환경 설정
+					<span class="badge badge-dark">공통</span>
 				</a>
-				<a class="list-group-item list-group-item-action<?php if($_SESSION['member_config_nav']=='login-config'):?> active<?php endif?>" data-toggle="list" href="#login-config" role="tab" onclick="sessionSetting('member_config_nav','login-config','','');">
-					<i class="fa fa-sign-in fa-lg pull-right"></i> 로그인 설정
+
+	      <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action<?php if($_SESSION['member_config_nav']=='signup-config'):?> active<?php endif?>" data-toggle="list" href="#signup-config" role="tab" onclick="sessionSetting('member_config_nav','signup-config','','');">
+					회원가입 설정
+					<span class="badge badge-dark">가입</span>
 				</a>
-	      <a class="list-group-item list-group-item-action<?php if($_SESSION['member_config_nav']=='signup-config'):?> active<?php endif?>" data-toggle="list" href="#signup-config" role="tab" onclick="sessionSetting('member_config_nav','signup-config','','');">
-					<i class="fa fa-user-plus fa-lg pull-right"></i> 회원가입 설정
+	      <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action<?php if($_SESSION['member_config_nav']=='signup-form-config'):?> active<?php endif?>" data-toggle="list" href="#signup-form-config" role="tab" onclick="sessionSetting('member_config_nav','signup-form-config','','');">
+					가입양식 관리
+					<span class="badge badge-dark">가입</span>
 				</a>
-	      <a class="list-group-item list-group-item-action<?php if($_SESSION['member_config_nav']=='signup-form-config'):?> active<?php endif?>" data-toggle="list" href="#signup-form-config" role="tab" onclick="sessionSetting('member_config_nav','signup-form-config','','');">
-					<i class="fa fa-check-square-o fa-lg pull-right"></i> 가입양식 관리
+	      <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action<?php if($_SESSION['member_config_nav']=='signup-form-add'):?> active<?php endif?>" data-toggle="list" href="#signup-form-add" role="tab" onclick="sessionSetting('member_config_nav','signup-form-add','','');">
+					가입항목 추가
+					<span class="badge badge-dark">가입</span>
 				</a>
-	      <a class="list-group-item list-group-item-action<?php if($_SESSION['member_config_nav']=='signup-form-add'):?> active<?php endif?>" data-toggle="list" href="#signup-form-add" role="tab" onclick="sessionSetting('member_config_nav','signup-form-add','','');">
-					<i class="fa fa-plus-circle fa-lg pull-right"></i> 가입항목 추가
+				<a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action<?php if($_SESSION['member_config_nav']=='terms'):?> active<?php endif?>" data-toggle="list" href="#terms" role="tab" onclick="sessionSetting('member_config_nav','terms','','');">
+					약관/안내메시지
+					<span class="badge badge-dark">가입</span>
 				</a>
-				<a class="list-group-item list-group-item-action<?php if($_SESSION['member_config_nav']=='terms'):?> active<?php endif?>" data-toggle="list" href="#terms" role="tab" onclick="sessionSetting('member_config_nav','terms','','');">
-					<i class="fa fa-file-text-o fa-lg pull-right"></i>  약관/안내메시지
+				<a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action<?php if($_SESSION['member_config_nav']=='login-config'):?> active<?php endif?>" data-toggle="list" href="#login-config" role="tab" onclick="sessionSetting('member_config_nav','login-config','','');">
+					로그인
+					<span class="badge badge-dark">로그인</span>
+				</a>
+				<a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action<?php if($_SESSION['member_config_nav']=='settings-config'):?> active<?php endif?>" data-toggle="list" href="#settings-config" role="tab" onclick="sessionSetting('member_config_nav','settings-config','','');">
+					개인정보관리
+					<span class="badge badge-dark">개인정보관리</span>
 				</a>
 	    </div>
 		</div>
@@ -439,64 +434,7 @@ include_once $_tmpvfile;
 			 </div>
 				<!-- /기초환경 설정 -->
 
-				<!-- 로그인 설정 -->
-			 <div class="tab-pane fade<?php if($_SESSION['member_config_nav']=='login-config'):?> show active<?php endif?>" id="login-config">
-
-				 <div class="card rounded-0 mb-0">
-					 <div class="card-header">
-						 로그인 설정
-					 </div>
-					 <div class="card-body">
-						 <div class="form-group">
-							 <label>로그인 페이지 옵션</label>
-							 <div class="">
-
-								 <div class="custom-control custom-checkbox custom-control-inline">
-									 <input type="checkbox" class="custom-control-input" id="login_emailid" name="login_emailid" value="1"<?php if($d['member']['login_emailid']):?> checked="checked"<?php endif?>>
-									 <label class="custom-control-label" for="login_emailid">이메일 아이디 사용</label>
-								 </div>
-
-								 <div class="custom-control custom-checkbox custom-control-inline">
-									 <input type="checkbox" class="custom-control-input" id="login_cookie" name="login_cookie" value="1" <?php if($d['member']['login_cookie']):?> checked="checked"<?php endif?>>
-									 <label class="custom-control-label" for="login_cookie">로그인 상태 유지 기능 사용</label>
-								 </div>
-
-							 </div>
-						 </div>
-
-						 <div class="form-group">
-								<label>로그인 유지기간</label>
-								<div class="input-group w-25">
-									<input type="text" name="login_expire" value="<?php echo $d['member']['login_expire']?>" size="5" class="form-control">
-									 <div class="input-group-append">
-										 <span class="input-group-text">일</span>
-									 </div>
-								</div>
-							</div>
-
-							<div class="form-group">
- 								<label>본인확인 유효시간</label>
- 								<div class="input-group w-25">
- 									<input type="text" name="settings_expire" value="<?php echo $d['member']['settings_expire']?>" size="5" class="form-control">
- 									 <div class="input-group-append">
- 										 <span class="input-group-text">분</span>
- 									 </div>
- 								</div>
-								<small class="form-text text-muted">개인정보 관리를 위한 본인확인 유효시간을 설정합니다. 개인정보 설정시 <?php echo $d['member']['settings_expire']?>분이 경과하면 본인확인을 위해 비밀번호 확인화면이 출력됩니다. </small>
-
- 							</div>
-
-
-					 </div><!-- /.card-body -->
-					 <div class="card-footer">
-						 <button type="submit" class="btn btn-outline-primary btn-block btn-lg my-4"><i class="fa fa-check"></i> 정보저장</button>
-					 </div>
-				 </div><!-- /.card -->
-
-			 </div>
-				<!-- /로그인 설정 -->
-
-				 <div class="tab-pane fade<?php if($_SESSION['member_config_nav']=='signup-config'):?>  show active<?php endif?>" id="signup-config">
+				<div class="tab-pane fade<?php if($_SESSION['member_config_nav']=='signup-config'):?>  show active<?php endif?>" id="signup-config">
 
 
 					<!-- 회원가입 설정 -->
@@ -505,39 +443,132 @@ include_once $_tmpvfile;
 							회원가입 설정
 						</div>
 						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>회원가입 작동상태</label>
-										<div class="">
-											<div class="btn-group btn-group-toggle" data-toggle="buttons">
-												<label class="btn btn-light <?php if($d['member']['join_enable']):?>active<?php endif?>">
-													<input type="radio" name="join_enable" value="1" id="option1" <?php if($d['member']['join_enable']):?>checked<?php endif?>/> 작동
-												</label>
-												<label class="btn btn-light <?php if(!$d['member']['join_enable']):?>active<?php endif?>">
-													<input type="radio" name="join_enable" value="0" <?php if(!$d['member']['join_enable']):?>checke<?php endif?> id="option2" /> 중단
-												</label>
-											</div>
-										</div>
 
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>모바일 회원가입</label>
-										<div>
-											<div class="btn-group btn-group-toggle" data-toggle="buttons">
-												<label class="btn btn-light <?php if($d['member']['join_mobile']):?>active<?php endif?>">
-													<input type="radio" name="join_mobile" value="1"  <?php if($d['member']['join_mobile']):?>checked<?php endif?> id="option3" /> 지원함
-												</label>
-												<label class="btn btn-light <?php if(!$d['member']['join_mobile']):?>active<?php endif?>">
-													<input type="radio" name="join_mobile" value="0" <?php if(!$d['member']['join_mobile']):?>checked<?php endif?> id="option4" /> 지원 안함
-												</label>
-											</div>
-										</div>
+							<div class="form-group">
+								<label>회원가입 작동상태</label>
+								<div class="">
+									<div class="btn-group btn-group-toggle" data-toggle="buttons">
+										<label class="btn btn-light <?php if($d['member']['join_enable']):?>active<?php endif?>">
+											<input type="radio" name="join_enable" value="1" id="option1" <?php if($d['member']['join_enable']):?>checked<?php endif?>/> 작동
+										</label>
+										<label class="btn btn-light <?php if(!$d['member']['join_enable']):?>active<?php endif?>">
+											<input type="radio" name="join_enable" value="0" <?php if(!$d['member']['join_enable']):?>checked<?php endif?> id="option2" /> 중단
+										</label>
 									</div>
 								</div>
 							</div>
+
+							<hr>
+
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>가입수단</label>
+
+										<div class="mt-2">
+											<div class="custom-control custom-checkbox custom-control-inline">
+												<input type="checkbox" class="custom-control-input" name="join_byEmail" id="join_byEmail"<?php if($d['member']['join_byEmail']):?> checked<?php endif?> value="1">
+												<label class="custom-control-label" for="join_byEmail">이메일로 가입</label>
+											</div>
+
+											<div class="custom-control custom-checkbox custom-control-inline">
+												<input type="checkbox" class="custom-control-input" name="join_byPhone" id="join_byPhone"<?php if($d['member']['join_byPhone']):?> checked<?php endif?> value="1">
+												<label class="custom-control-label" for="join_byPhone">휴대폰 번호로 가입</label>
+											</div>
+
+											<div class="custom-control custom-checkbox custom-control-inline">
+												<input type="checkbox" class="custom-control-input" name="join_bySocial" id="join_bySocial"<?php if($d['member']['join_bySocial']):?> checked<?php endif?> value="1">
+												<label class="custom-control-label" for="join_bySocial">소셜미디어 계정으로 가입</label>
+											</div>
+
+										</div>
+			 						 <small class="form-text text-muted">소셜미디어 계정으로 가입 사용시 <a href="<?php echo $g['s']?>/?r=<?php echo $r ?>&m=admin&module=connect&front=main">연결설정</a>이 필요합니다.</small>
+									</div>
+								</div>
+							</div>
+
+							<hr>
+							<div class="row">
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>가입시 본인확인 여부</label>
+
+										<div class="">
+											<div class="custom-control custom-radio custom-control-inline">
+											  <input type="radio" id="join_verify_0" name="join_verify" class="custom-control-input"<?php if(!$d['member']['join_verify']):?> checked<?php endif?> value="0">
+											  <label class="custom-control-label" for="join_verify_0">사용안함</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" id="join_verify_1" name="join_verify" class="custom-control-input"<?php if($d['member']['join_verify']):?> checked<?php endif?> value="1">
+												<label class="custom-control-label" for="join_verify_1">사용함</label>
+											</div>
+
+										</div>
+			 						 <small class="form-text text-muted">
+										 이메일 및 SMS로 이메일 인증번호 및 인증링크가 발송됩니다.
+										 이메일 및 SMS <a href="<?php echo $g['s']?>/?r=<?php echo $r ?>&m=admin&module=admin&front=main">발송설정과 점검</a>이 필요합니다.<br>
+										 소셜미디어 계정으로 로그인 성공시 본인확인이 완료된 것으로 처리됩니다.
+									 </small>
+									</div>
+								</div>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-6">
+
+									<div class="form-group">
+										<label>본인확인 인증번호 및 인증링크의 유효시간</label>
+										<div class="input-group w-25">
+			 							 <input type="text" name="join_keyexpire" value="<?php echo $d['member']['join_keyexpire']?>" size="5" class="form-control text-center">
+			 								<div class="input-group-append">
+			 									<span class="input-group-text">분</span>
+			 								</div>
+			 						 </div>
+			 						 <small class="form-text text-muted">이메일과 휴대폰으로 전달된 인증코드 및 링크의 유효시간을 설정합니다. </small>
+									</div><!-- /.form-group -->
+
+
+								</div>
+								<div class="col-sm-6">
+
+									<div class="form-group">
+										<label>본인확인 SMS 일발송 제한</label>
+										<div class="input-group w-25">
+										 <input type="text" name="join_daysms" value="<?php echo $d['member']['join_daysms']?>" size="5" class="form-control text-center">
+											<div class="input-group-append">
+												<span class="input-group-text">회</span>
+											</div>
+									 </div>
+									 <small class="form-text text-muted">지정된 횟수 초과시 본인확인을 위한 SMS 발송이 제한됩니다.</small>
+									</div><!-- /.form-group -->
+
+
+								</div>
+							</div>
+
+							<hr>
+
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>가입시 승인처리</label>
+										<select name="join_auth" class="form-control custom-select">
+											<option value="1"<?php if($d['member']['join_auth']==1):?> selected="selected"<?php endif?>>즉시승인</option>
+											<option value="2"<?php if($d['member']['join_auth']==2):?> selected="selected"<?php endif?>>관리자 확인 후 승인</option>
+										 </select>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group error">
+										<label>가입시 지급포인트</label>
+										<input type="number" name="join_point" value="<?php echo $d['member']['join_point']?>" class="form-control" placeholder="">
+									</div>
+								</div>
+							</div>
+
+							<hr>
+
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
@@ -562,6 +593,114 @@ include_once $_tmpvfile;
 									</div>
 								</div>
 							</div>
+
+							<hr>
+
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>대표 이메일</label>
+										<input type="email" name="join_email" value="<?php echo $d['member']['join_email']?>" class="form-control">
+										<small class="form-text text-muted">
+											본인확인 인증번호 및 가입완료 메일 등의 발신자 이메일로 활용됩니다.
+										</small>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>가입완료 안내</label>
+										<div class="pt-2">
+
+											<div class="custom-control custom-checkbox custom-control-inline">
+											  <input type="checkbox" class="custom-control-input" id="join_email_send" name="join_email_send" value="1"<?php if($d['member']['join_email_send']):?> checked="checked"<?php endif?>>
+											  <label class="custom-control-label" for="join_email_send">가입완료 이메일 발송</label>
+											</div>
+											<small class="form-text text-muted">
+												이메일 <a href="<?php echo $g['s']?>/?r=<?php echo $r ?>&m=admin&module=admin&front=main">발송점검</a>이 필요합니다.
+											</small>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>대표 전화</label>
+										<input type="tel" name="join_tel" value="<?php echo $d['member']['join_tel']?>" class="form-control">
+										<small class="form-text text-muted">
+											본인확인 인증번호 및 가입완료 문자메시지 등의 발신자 전화번호로 활용됩니다.
+										</small>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>가입완료 안내</label>
+										<div class="pt-2">
+
+											<div class="custom-control custom-checkbox">
+												<input type="checkbox" class="custom-control-input" id="join_sms_send" name="join_sms_send" value="1"<?php if($d['member']['join_sms_send']):?> checked="checked"<?php endif?>>
+												<label class="custom-control-label" for="join_sms_send">가입완료 SMS 발송</label>
+											</div>
+											<small class="form-text text-muted">
+												유료충전, SMS 발신번호 등록 및
+												<a href="<?php echo $g['s']?>/?r=<?php echo $r ?>&m=admin&module=admin&front=main">발송설정과 점검</a>이 필요합니다
+											</small>
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<hr>
+
+							<div class="row">
+
+								<div class="col-sm-12">
+									<div class="form-group error">
+										<label>가입제한 이메일</label>
+										<textarea class="form-control" name="join_cutemail" rows="4"><?php echo $d['member']['join_cutemail']?></textarea>
+										<small class="form-text text-muted">사용을 제한하려는 이메일을 콤마(,)로 구분해서 입력해 주세요.(예: test@email.com,@myhome.com)</small>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group error">
+										<label>가입제한 휴대폰</label>
+										<textarea class="form-control" name="join_cutphone" rows="4"><?php echo $d['member']['join_cutphone']?></textarea>
+										<small class="form-text text-muted">사용을 제한하려는 휴대폰을 콤마(,)로 구분해서 입력해 주세요.(예: 01012345678,0102345678)</small>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>사용제한 닉네임</label>
+										<textarea class="form-control" name="join_cutnic" rows="3"><?php echo $d['member']['join_cutnic']?></textarea>
+										<small class="form-text text-muted">사용을 제한하려는 닉네임을 콤마(,)로 구분해서 입력해 주세요.</small>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group error">
+										<label>사용제한 아이디</label>
+										<textarea class="form-control" name="join_cutid" rows="4"><?php echo $d['member']['join_cutid']?></textarea>
+										<small class="form-text text-muted">사용을 제한하려는 아이디를 콤마(,)로 구분해서 입력해 주세요.</small>
+									</div>
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>포인트지급 메세지</label>
+										<input type="text" name="join_pointmsg" value="<?php echo $d['member']['join_pointmsg']?>" class="form-control">
+									</div>
+								</div>
+							</div>
+
+							<hr>
+
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
@@ -602,80 +741,6 @@ include_once $_tmpvfile;
 									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>가입시 승인처리</label>
-										<select name="join_auth" class="form-control custom-select">
-											<option value="1"<?php if($d['member']['join_auth']==1):?> selected="selected"<?php endif?>>즉시승인</option>
-											<option value="2"<?php if($d['member']['join_auth']==2):?> selected="selected"<?php endif?>>관리자확인 후 승인</option>
-											<option value="3"<?php if($d['member']['join_auth']==3):?> selected="selected"<?php endif?>>이메일인증 후 승인</option>
-										 </select>
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group error">
-										<label>가입시 지급포인트</label>
-										<input type="number" name="join_point" value="<?php echo $d['member']['join_point']?>" class="form-control" placeholder="">
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>대표 이메일</label>
-										<input type="email" name="join_email" value="<?php echo $d['member']['join_email']?>" class="form-control">
-									</div>
-								</div>
-								<div class="col-sm-6">
-									<div class="form-group">
-										<label>가입 이메일</label>
-										<div>
-
-											<div class="custom-control custom-checkbox">
-											  <input type="checkbox" class="custom-control-input" id="join_email_send" name="join_email_send" value="1"<?php if($d['member']['join_email_send']):?> checked="checked"<?php endif?>>
-											  <label class="custom-control-label" for="join_email_send">가입안내 이메일 발송</label>
-											</div>
-
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="row">
-										<div class="col-sm-12">
-									<div class="form-group">
-										<label>사용제한 닉네임</label>
-										<textarea class="form-control" name="join_cutnic" rows="3"><?php echo $d['member']['join_cutnic']?></textarea>
-										<small class="form-text text-muted">사용을 제한하려는 닉네임을 콤마(,)로 구분해서 입력해 주세요.</small>
-									</div>
-								</div>
-								<div class="col-sm-12">
-									<div class="form-group error">
-										<label>가입제한 아이디</label>
-										<textarea class="form-control" name="join_cutid" rows="4"><?php echo $d['member']['join_cutid']?></textarea>
-										<small class="form-text text-muted">사용을 제한하려는 아이디를 콤마(,)로 구분해서 입력해 주세요.</small>
-									</div>
-								</div>
-
-								<div class="col-sm-12">
-									<div class="form-group error">
-										<label>가입제한 이메일</label>
-										<textarea class="form-control" name="join_cutemail" rows="4"><?php echo $d['member']['join_cutemail']?></textarea>
-										<small class="form-text text-muted">사용을 제한하려는 이메일을 콤마(,)로 구분해서 @URL형식 입력해 주세요.(예: @email.com,@myhome.com)</small>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<div class="form-group">
-										<label>포인트지급 메세지</label>
-										<input type="text" name="join_pointmsg" value="<?php echo $d['member']['join_pointmsg']?>" class="form-control">
-									</div>
-								</div>
-								<div class="col-sm-6">
-								</div>
-							</div>
 
 						</div><!-- /.card-body -->
 						<div class="card-footer">
@@ -694,72 +759,18 @@ include_once $_tmpvfile;
 							가입양식 관리
 						</div>
 						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-4">
 
-									<div class="form-group">
-										<label>이용약관/개인정보</label>
-										<div class="">
-											<div class="btn-group btn-group-toggle" data-toggle="buttons">
-												<label class="btn btn-light <?php if(!$d['member']['form_agree']):?>active<?php endif?>">
-													<input type="radio" name="form_agree" value="0"  <?php if(!$d['member']['form_agree']):?>checked<?php endif?> id="fa-0"> 생략
-												</label>
-												<label class="btn btn-light <?php if($d['member']['form_agree']):?>active<?php endif?>">
-												<input type="radio" name="form_agree" value="1" <?php if($d['member']['form_agree']):?>checked<?php endif?> id="fa-1"> 동의얻음
-												</label>
-											</div>
-										</div>
-
-									</div>
-								</div>
-								<div class="col-sm-4">
-									<div class="form-group">
-										<label>회원가입 연령제한</label>
-										<div>
-											<div class="btn-group btn-group-toggle" data-toggle="buttons">
-												<label class="btn btn-light <?php if(!$d['member']['form_age']):?>active<?php endif?>">
-													<input type="radio" name="form_age" value="0" <?php if(!$d['member']['form_age']):?>checked<?php endif?> id="age-0"> 연령 제한없음
-												</label>
-												 <label class="btn btn-light <?php if($d['member']['form_age']):?>active<?php endif?>">
-													<input type="radio" name="form_age" value="1" <?php if($d['member']['form_age']):?>checked<?php endif?> id="age-1"> 14세이하 제한
-												</label>
-											</div>
-										</div>
-									</div>
-								 </div>
-
-								<div class="col-sm-4">
-									<div class="form-group">
-										<label>해외거주자 가입</label>
-										<div class="">
-											<div class="btn-group btn-group-toggle" data-toggle="buttons">
-												<label class="btn btn-light <?php if(!$d['member']['form_overseas']):?>active<?php endif?>">
-													<input type="radio" name="form_overseas" value="0" <?php if(!$d['member']['form_overseas']):?>checked<?php endif?> id="en-0"> 허용안함
-												</label>
-												<label class="btn btn-light <?php if($d['member']['form_overseas']):?>active<?php endif?>">
-													<input type="radio" name="form_overseas" value="1" <?php if($d['member']['form_overseas']):?>checked<?php endif?> id="en-1"> 허용함
-												</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label>직업군</label>
-								<textarea name="job" class="form-control" rows="5"><?php readfile($_tmpjfile)?></textarea>
-							</div>
-
-							<div class="card mt-3">
+							<div class="card">
 								<div class="card-header">
-									회원가입 노출항목 및 옵션 <code>join</code>
+									<span class="badge badge-light">데스크탑</span> 회원가입 노출항목 및 옵션 <code>join</code>
 								</div>
 								<div class="card-body">
 									<div class="row">
 										<div class="col-sm-6">
-											<?php $opset = array('id'=>'아이디','email'=>'이메일','password'=>'패스워드','name'=>'이름','nic'=>'닉네임','birth'=>'생년월일','sex'=>'성별')?>
+											<?php $opset = array('id'=>'아이디','email'=>'이메일','phone'=>'휴대폰','password'=>'패스워드','name'=>'이름','nic'=>'닉네임','birth'=>'생년월일')?>
 											<?php $i=0;foreach($opset as $_key => $_val):?>
-										   <fieldset <?php echo $i<4?'disabled':''?>>
-											 <?php if($i<4):?>
+										   <fieldset <?php echo $i<5?'disabled':''?>>
+											 <?php if($i<5):?>
 											<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
 												<input type="checkbox" class="custom-control-input" id="customCheck1" checked>
 												<label class="custom-control-label" for="customCheck1"><?php echo $_val?></label>
@@ -786,7 +797,7 @@ include_once $_tmpvfile;
 										 <?php $i++;endforeach?>
 										</div>
 										<div class="col-sm-6">
-											<?php $opset = array('bio'=>'간단소개','home'=>'홈페이지','tel1'=>'유선전화','tel2'=>'휴대폰','job'=>'직업','marr'=>'결혼기념일','addr'=>'주소')?>
+											<?php $opset = array('bio'=>'간단소개','sex'=>'성별','home'=>'홈페이지','tel'=>'일반전화','location'=>'거주지역','job'=>'직업','marr'=>'결혼기념일','add'=>'추가항목')?>
 											<?php foreach($opset as $_key => $_val):?>
 											<fieldset>
 
@@ -807,63 +818,67 @@ include_once $_tmpvfile;
 										</div>
 									</div>
 								</div>
+
+								<div class="card-footer small text-muted">
+									 회원 가입시에는 입력항목을 최소화 할것을 권고 드립니다.<br>추가로 필요한 개인정보는 가입 이후에 개인정보관리 페이지를 통해 필요할때 추가입력 받는 것을 추천드립니다.
+								 </div>
 							</div>
 
-							<div class="card mt-3">
+							<div class="card">
 								<div class="card-header">
-									개인정보설정 노출항목 및 옵션 <code>settings</code>
+									<span class="badge badge-light">모바일</span> 회원가입 노출항목 및 옵션 <code>join</code>
 								</div>
 								<div class="card-body">
 									<div class="row">
 										<div class="col-sm-6">
-											<?php $opset2 = array('id'=>'아이디','email'=>'이메일','password'=>'패스워드','name'=>'이름','nic'=>'닉네임','birth'=>'생년월일','sex'=>'성별')?>
-											<?php $i=0;foreach($opset2 as $_key => $_val):?>
-										   <fieldset <?php echo $i<4?'disabled':''?>>
-											 <?php if($i<4):?>
-											<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
-												<input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-												<label class="custom-control-label" for="customCheck1"><?php echo $_val?></label>
-											</div>
-											 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
-											 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
-													<input type="checkbox" class="custom-control-input" id="customCheck2" checked>
-													<label class="custom-control-label" for="customCheck2">필수입력</label>
-												 </div>
+											<fieldset disabled="">
+												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+												<input type="checkbox" class="custom-control-input" id="" checked="">
+												<label class="custom-control-label" for="">이메일</label>
+												</div>
+												<i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+												<input type="checkbox" class="custom-control-input" id="" checked="">
+												<label class="custom-control-label" for="">필수입력</label>
+												</div>
+											</fieldset>
 
-											 <?php else:?>
-												 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
-	 												<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>" name="form_settings_<?php echo $_key?>" value="1"<?php if($d['member']['form_settings_'.$_key]):?> checked<?php endif?>>
-	 												<label class="custom-control-label" for="form_settings_<?php echo $_key?>"><?php echo $_val?></label>
-	 											 </div>
-												 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
-												 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
-	 												<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>_required" name="form_settings_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_settings_'.$_key.'_required']):?> checked<?php endif?>>
-	 												<label class="custom-control-label" for="form_settings_<?php echo $_key?>_required">필수입력</label>
-	 											 </div>
-
-											 <?php endif?>
-										 		</fieldset>
-										 <?php $i++;endforeach?>
+											<fieldset disabled="">
+												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+												<input type="checkbox" class="custom-control-input" id="" checked="">
+												<label class="custom-control-label" for="">휴대폰번호</label>
+												</div>
+												<i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+												<input type="checkbox" class="custom-control-input" id="" checked="">
+												<label class="custom-control-label" for="">필수입력</label>
+												</div>
+											</fieldset>
 										</div>
 										<div class="col-sm-6">
-											<?php $opset2 = array('avatar'=>'프로필 사진','bio'=>'간단소개','home'=>'홈페이지','tel1'=>'유선전화','tel2'=>'휴대폰','job'=>'직업','marr'=>'결혼기념일','addr'=>'주소')?>
-											<?php foreach($opset2 as $_key => $_val):?>
-											<fieldset>
-
-												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 100px">
-		 											<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>" name="form_settings_<?php echo $_key?>" value="1"<?php if($d['member']['form_settings_'.$_key]):?> checked<?php endif?>>
-		 											<label class="custom-control-label" for="form_settings_<?php echo $_key?>"><?php echo $_val?></label>
-		 										 </div>
-
-			 								 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
-
-											 <div class="custom-control custom-checkbox custom-control-inline">
-	 											<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>_required" name="form_settings_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_settings_'.$_key.'_required']):?> checked<?php endif?>>
-	 											<label class="custom-control-label" for="form_settings_<?php echo $_key?>_required">필수입력</label>
-	 										 </div>
-
+											<fieldset disabled="">
+												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+												<input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+												<label class="custom-control-label" for="customCheck1">비밀번호</label>
+												</div>
+												<i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+												<input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
+												<label class="custom-control-label" for="customCheck2">필수입력</label>
+												</div>
 											</fieldset>
-											<?php endforeach?>
+
+											<fieldset disabled="">
+												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+												<input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+												<label class="custom-control-label" for="customCheck1">이름</label>
+												</div>
+												<i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+												<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 80px">
+												<input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
+												<label class="custom-control-label" for="customCheck2">필수입력</label>
+												</div>
+											</fieldset>
 										</div>
 									</div>
 								</div>
@@ -875,11 +890,12 @@ include_once $_tmpvfile;
 						</div>
 					</div><!-- /.card -->
 
+
 				</div>
 				 <!-- /가입양식 관리 -->
 
-				 <!-- 가입항목 추가 -->
-				 <div class="tab-pane fade<?php if($_SESSION['member_config_nav']=='signup-form-add'):?> show active<?php endif?>" id="signup-form-add">
+			 <!-- 가입항목 추가 -->
+			 <div class="tab-pane fade<?php if($_SESSION['member_config_nav']=='signup-form-add'):?> show active<?php endif?>" id="signup-form-add">
 
 					<div class="card rounded-0 mb-0">
 						<div class="card-header">
@@ -990,60 +1006,60 @@ include_once $_tmpvfile;
 	 								 <?php foreach($_add as $_key):?>
 	 								 <?php $_val = explode('|',trim($_key))?>
 	 								 <?php if(!$_val[0]) continue?>
-	 										 <div class="form-group">
- 												 <label  for="<?php echo $_val[0]?>" class="col-sm-3 control-label">
-													 <?php echo $_val[1]?>
-													 <?php if($_val[5]):?> <span class="text-danger">*</span><?php endif?>
-												 </label>
-	 												<div class="col-sm-8">
- 															<!-- 일반 input=text -->
-	 														<?php if($_val[2]=='text'):?>
-															<input type="text" id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" value="<?php echo $_val[3]?>" class="form-control"/>
-	 														<?php endif?>
+									 <div class="form-group">
+										 <label  for="<?php echo $_val[0]?>" class="col-sm-3 control-label">
+										 <?php echo $_val[1]?>
+										 <?php if($_val[5]):?> <span class="text-danger">*</span><?php endif?>
+										 </label>
+												<div class="col-sm-8">
+														<!-- 일반 input=text -->
+														<?php if($_val[2]=='text'):?>
+													<input type="text" id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" value="<?php echo $_val[3]?>" class="form-control"/>
+														<?php endif?>
 
-	 														<!-- password input=text -->
-	 														<?php if($_val[2]=='password'):?>
-														  <input type="password" id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" value="<?php echo $_val[3]?>" class="form-control" />
-	 														<?php endif?>
+														<!-- password input=text -->
+														<?php if($_val[2]=='password'):?>
+												  <input type="password" id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" value="<?php echo $_val[3]?>" class="form-control" />
+														<?php endif?>
 
-														 	<!-- select box -->
-	 														<?php if($_val[2]=='select'): $_skey=explode(',',$_val[3])?>
- 															<select name="add_<?php echo $_val[0]?>" id="<?php echo $_val[0]?>" class="form-control">
- 																<option value="">&nbsp;+ 선택하세요</option>
- 																<?php foreach($_skey as $_sval):?>
- 																<option value="<?php echo trim($_sval)?>">ㆍ<?php echo trim($_sval)?></option>
- 																<?php endforeach?>
- 															</select>
-	 														<?php endif?>
-
-	 														<!-- input=radio -->
-	 														<?php if($_val[2]=='radio'): $_skey=explode(',',$_val[3])?>
+												 	<!-- select box -->
+														<?php if($_val[2]=='select'): $_skey=explode(',',$_val[3])?>
+														<select name="add_<?php echo $_val[0]?>" id="<?php echo $_val[0]?>" class="form-control">
+															<option value="">&nbsp;+ 선택하세요</option>
 															<?php foreach($_skey as $_sval):?>
-															<div class="custom-control custom-radio custom-control-inline">
-															  <input type="radio" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>" name="add_<?php echo $_val[0]?>" value="<?php echo trim($_sval)?>" class="custom-control-input">
-															  <label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
-															</div>
+															<option value="<?php echo trim($_sval)?>">ㆍ<?php echo trim($_sval)?></option>
 															<?php endforeach?>
-	 														<?php endif?>
+														</select>
+														<?php endif?>
 
-															<!-- input=checkbox -->
-															<?php if($_val[2]=='checkbox'): $_skey=explode(',',$_val[3])?>
-															<?php foreach($_skey as $_sval):?>
-															<div class="custom-control custom-checkbox custom-control-inline">
-																<input type="checkbox" class="custom-control-input" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>" name="add_<?php echo $_val[0]?>[]" value="<?php echo trim($_sval)?>">
-																<label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
-															</div>
-															<?php endforeach?>
-															<?php endif?>
+														<!-- input=radio -->
+														<?php if($_val[2]=='radio'): $_skey=explode(',',$_val[3])?>
+													<?php foreach($_skey as $_sval):?>
+													<div class="custom-control custom-radio custom-control-inline">
+													  <input type="radio" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>" name="add_<?php echo $_val[0]?>" value="<?php echo trim($_sval)?>" class="custom-control-input">
+													  <label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+													</div>
+													<?php endforeach?>
+														<?php endif?>
 
-	 														<!-- textarea -->
-	 														<?php if($_val[2]=='textarea'):?>
-	 														<textarea id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" rows="5" class="form-control"><?php echo $_val[3]?></textarea>
-	 														<?php endif?>
+													<!-- input=checkbox -->
+													<?php if($_val[2]=='checkbox'): $_skey=explode(',',$_val[3])?>
+													<?php foreach($_skey as $_sval):?>
+													<div class="custom-control custom-checkbox custom-control-inline">
+														<input type="checkbox" class="custom-control-input" id="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>" name="add_<?php echo $_val[0]?>[]" value="<?php echo trim($_sval)?>">
+														<label class="custom-control-label" for="add_<?php echo $_val[0]?>_<?php echo trim($_sval)?>"><?php echo trim($_sval)?></label>
+													</div>
+													<?php endforeach?>
+													<?php endif?>
 
-														 </div> <!-- .col-sm-8 -->
-	 												</div> <!-- .form-group -->
-	 												<?php endforeach?>
+														<!-- textarea -->
+														<?php if($_val[2]=='textarea'):?>
+														<textarea id="<?php echo $_val[0]?>" name="add_<?php echo $_val[0]?>" rows="5" class="form-control"><?php echo $_val[3]?></textarea>
+														<?php endif?>
+
+												 </div> <!-- .col-sm-8 -->
+												</div> <!-- .form-group -->
+												<?php endforeach?>
 
 
 	 						<p class="text-muted small">
@@ -1067,88 +1083,41 @@ include_once $_tmpvfile;
 							약관/안내 메시지
 						</div>
 						<div class="card-body">
-							<div id="accordion">
-								<div class="card mb-2">
-									<div class="card-header p-0" role="tab">
-							      <h5 class="h6 mb-0">
-							        <a class="d-block muted-link js-agree" data-toggle="collapse" href="#terms-1" aria-expanded="true">
-							          <i class="fa fa-file-text-o fa-fw"></i> 홈페이지 이용약관
-							        </a>
-							      </h5>
-							    </div>
 
-									<div class="collapse show" id="terms-1" data-parent="#accordion">
-										<div class="card-body">
-											 <textarea name="agree1" class="form-control" rows="15"><?php readfile($_tmpag1file)?></textarea>
-										</div>
-									</div>
-								</div>
-								<div class="card mb-2">
-
-									<div class="card-header p-0" role="tab">
-							      <h5 class="h6 mb-0">
-							        <a class="d-block muted-link collapsed js-agree" data-toggle="collapse" href="#terms-2" aria-expanded="false">
-							          <i class="fa fa-file-text-o fa-fw"></i> 정보수집/이용목적
-							        </a>
-							      </h5>
-							    </div>
-
-									<div class="collapse" id="terms-2" data-parent="#accordion">
-										<div class="card-body">
-											<textarea name="agree2" class="form-control" rows="15"><?php readfile($_tmpag2file)?></textarea>
-										</div>
-									</div>
-								</div>
-								<div class="card mb-2">
-
-									<div class="card-header p-0" role="tab">
-							      <h5 class="h6 mb-0">
-							        <a class="d-block muted-link collapsed js-agree" data-toggle="collapse" href="#terms-3" aria-expanded="false">
-							          <i class="fa fa-file-text-o fa-fw"></i> 개인정보수집항목
-							        </a>
-							      </h5>
-							    </div>
-
-									<div class="collapse" id="terms-3" data-parent="#accordion">
-										<div class="card-body">
-													 <textarea name="agree3" class="form-control" rows="8"><?php readfile($_tmpag3file)?></textarea>
-										</div>
-									</div>
-								</div>
-								<div class="card mb-2">
-
-									<div class="card-header p-0" role="tab">
-							      <h5 class="h6 mb-0">
-							        <a class="d-block muted-link collapsed js-agree" data-toggle="collapse" href="#terms-4" aria-expanded="false">
-							          <i class="fa fa-file-text-o fa-fw"></i> 정보보유/이용기간
-							        </a>
-							      </h5>
-							    </div>
-
-									<div class="collapse" id="terms-4" data-parent="#accordion">
-										<div class="card-body">
-											 <textarea name="agree4" class="form-control" rows="15"><?php readfile($_tmpag4file)?></textarea>
-										</div>
-									</div>
-								</div>
-
-								<div class="card mb-2">
-
-									<div class="card-header p-0" role="tab">
-							      <h5 class="h6 mb-0">
-							        <a class="d-block muted-link collapsed js-agree" data-toggle="collapse" href="#terms-5" aria-expanded="false">
-							          <i class="fa fa-file-text-o fa-fw"></i> 개인정보위탁처리
-							        </a>
-							      </h5>
-							    </div>
-
-									<div class="collapse" id="terms-5" data-parent="#accordion">
-										<div class="card-body">
-											<textarea name="agree5" class="form-control" rows="15"><?php readfile($_tmpag5file)?></textarea>
-										</div>
-									</div>
+							<div class="form-group row">
+								<label class="col-lg-2 col-form-label">개인정보취급방침</label>
+								<div class="col-lg-10 col-xl-9">
+									<div class="input-group">
+										<select name="join_joint_privacy" class="form-control custom-select" >
+											<option value="">연결시킬 페이지를 선택해 주세요.</option>
+											<option value="" disabled>--------------------------------</option>
+											<?php getPageSelect($s,0,0,$d['member']['join_joint_privacy']) ?>
+										</select>
+									  <div class="input-group-append">
+									    <a href="<?php echo $g['s'].'/index.php?r='.$r.'&mod='.$d['member']['join_joint_privacy'] ?>" class="btn btn-light" data-tooltip="tooltip" title="새창" target="_blank">접속</a>
+									  </div>
+									</div><!-- /.input-group -->
 								</div>
 							</div>
+
+							<div class="form-group row">
+								<label class="col-lg-2 col-form-label">이용약관</label>
+								<div class="col-lg-10 col-xl-9">
+									<div class="input-group">
+										<select name="join_joint_policy" class="form-control custom-select" >
+											<option value="">연결시킬 페이지를 선택해 주세요.</option>
+											<option value="" disabled>--------------------------------</option>
+											<?php getPageSelect($s,0,0,$d['member']['join_joint_policy']) ?>
+										</select>
+									  <div class="input-group-append">
+									    <a href="<?php echo $g['s'].'/index.php?r='.$r.'&mod='.$d['member']['join_joint_policy'] ?>" class="btn btn-light" data-tooltip="tooltip" title="새창" target="_blank">접속</a>
+									  </div>
+									</div><!-- /.input-group -->
+								</div>
+							</div>
+
+
+
 						</div><!-- /.card-body -->
 						<div class="card-footer">
 							<button type="submit" class="btn btn-outline-primary btn-block btn-lg my-3"><i class="fa fa-check"></i> 정보저장</button>
@@ -1158,7 +1127,224 @@ include_once $_tmpvfile;
 				</div>
 				<!-- 약관/안내메시지 -->
 
-			</div>
+
+
+			<!-- 로그인 설정 -->
+		 	<div class="tab-pane fade<?php if($_SESSION['member_config_nav']=='login-config'):?> show active<?php endif?>" id="login-config">
+
+				 <div class="card rounded-0 mb-0">
+					 <div class="card-header">
+						 로그인 설정
+					 </div>
+					 <div class="card-body">
+
+						 <div class="card">
+							 <div class="card-header">
+								 기본 옵션
+							 </div>
+							 <div class="card-body">
+
+
+								 <div class="custom-control custom-checkbox custom-control-inline">
+									 <input type="checkbox" class="custom-control-input" id="login_emailid" name="login_emailid" value="1"<?php if($d['member']['login_emailid']):?> checked="checked"<?php endif?>>
+									 <label class="custom-control-label" for="login_emailid">이메일 또는 휴대폰 번호로 로그인 사용</label>
+								 </div>
+
+								 <div class="custom-control custom-checkbox custom-control-inline">
+									 <input type="checkbox" class="custom-control-input" id="login_social" name="login_social" value="1"<?php if($d['member']['login_social']):?> checked="checked"<?php endif?>>
+									 <label class="custom-control-label" for="login_social">소셜미디어 계정으로 로그인 사용</label>
+								 </div>
+
+
+							 </div>
+							 <div class="card-footer small text-muted">
+								 소셜 로그인을 사용하기 위해서는 <a href="<?php echo $g['s']?>/?r=<?php echo $r ?>&m=admin&module=connect">연결설정</a>이 필요합니다.
+							 </div>
+
+						 </div><!-- /.card -->
+
+						 <div class="card">
+							 <div class="card-header">
+								 로그인 상태 유지
+							 </div>
+							 <div class="card-body">
+
+								 <div class="row align-items-center">
+									 <div class="col">
+										 <div class="custom-control custom-checkbox custom-control-inline mb-0">
+											 <input type="checkbox" class="custom-control-input" id="login_cookie" name="login_cookie" value="1" <?php if($d['member']['login_cookie']):?> checked="checked"<?php endif?>>
+											 <label class="custom-control-label" for="login_cookie">로그인 상태 유지 기능 사용</label>
+										 </div>
+									 </div><!-- /.col -->
+									 <div class="col">
+										 <div class="input-group w-50">
+	 										<div class="input-group-prepend">
+	 											<span class="input-group-text">유지기간</span>
+	 										</div>
+	 										<input type="text" name="login_expire" value="<?php echo $d['member']['login_expire']?>" size="5" class="form-control text-center">
+	 										 <div class="input-group-append">
+	 											 <span class="input-group-text">일</span>
+	 										 </div>
+	 									</div>
+									 </div><!-- /.col -->
+								 </div><!-- /.row -->
+
+							 </div>
+							 <div class="card-footer small text-muted">
+								 매번 로그인할 필요 없이 편리하게 서비스를 이용할 수 있는 기능입니다. 해당 옵션을 선택하고 로그인하시면, 브라우저의 쿠키를 삭제하거나 직접 로그아웃을 선택하기 전까지는 지정된 유지기간 동안 로그인 상태가 유지됩니다.
+							 </div>
+						 </div><!-- /.card -->
+
+					 </div><!-- /.card-body -->
+					 <div class="card-footer">
+						 <button type="submit" class="btn btn-outline-primary btn-block btn-lg my-4"><i class="fa fa-check"></i> 정보저장</button>
+					 </div>
+				 </div><!-- /.card -->
+
+			 </div>
+			<!-- /로그인 설정 -->
+
+
+			<!-- 개인정보관리 설정 -->
+		 	<div class="tab-pane fade<?php if($_SESSION['member_config_nav']=='settings-config'):?> show active<?php endif?>" id="settings-config">
+
+			 <div class="card rounded-0 mb-0">
+				 <div class="card-header">
+					 개인정보관리 설정
+				 </div>
+				 <div class="card-body">
+
+					 <div class="card">
+					 	<div class="card-header">
+					 		노출항목 및 옵션 <code>settings</code>
+					 	</div>
+					 	<div class="card-body">
+					 		<div class="row">
+					 			<div class="col-sm-6">
+					 				<?php $opset2 = array('name'=>'이름','nic'=>'닉네임','email_profile'=>'공개 이메일','avatar'=>'아바타','birth'=>'생년월일','sex'=>'성별')?>
+					 				<?php $i=0;foreach($opset2 as $_key => $_val):?>
+					 				 <fieldset <?php echo $i<1?'disabled':''?>>
+					 				 <?php if($i<1):?>
+					 				<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 100px">
+					 					<input type="checkbox" class="custom-control-input" id="customCheck1" checked>
+					 					<label class="custom-control-label" for="customCheck1"><?php echo $_val?></label>
+					 				</div>
+					 				 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+					 				 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 100px">
+					 						<input type="checkbox" class="custom-control-input" id="customCheck2" checked>
+					 						<label class="custom-control-label" for="customCheck2">필수입력</label>
+					 					 </div>
+
+					 				 <?php else:?>
+					 					 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 100px">
+					 						<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>" name="form_settings_<?php echo $_key?>" value="1"<?php if($d['member']['form_settings_'.$_key]):?> checked<?php endif?>>
+					 						<label class="custom-control-label" for="form_settings_<?php echo $_key?>"><?php echo $_val?></label>
+					 					 </div>
+					 					 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+					 					 <div class="custom-control custom-checkbox custom-control-inline" style="min-width: 100px">
+					 						<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>_required" name="form_settings_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_settings_'.$_key.'_required']):?> checked<?php endif?>>
+					 						<label class="custom-control-label" for="form_settings_<?php echo $_key?>_required">필수입력</label>
+					 					 </div>
+
+					 				 <?php endif?>
+					 					</fieldset>
+					 			 <?php $i++;endforeach?>
+					 			</div>
+					 			<div class="col-sm-6">
+					 				<?php $opset2 = array('bio'=>'간단소개','home'=>'홈페이지','tel'=>'일반전화','location'=>'거주지역','job'=>'직업','marr'=>'결혼기념일','add'=>'추가항목')?>
+					 				<?php foreach($opset2 as $_key => $_val):?>
+					 				<fieldset>
+
+					 					<div class="custom-control custom-checkbox custom-control-inline" style="min-width: 100px">
+					 						<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>" name="form_settings_<?php echo $_key?>" value="1"<?php if($d['member']['form_settings_'.$_key]):?> checked<?php endif?>>
+					 						<label class="custom-control-label" for="form_settings_<?php echo $_key?>"><?php echo $_val?></label>
+					 					 </div>
+
+					 				 <i class="fa fa-long-arrow-right fa-lg text-muted pr-3"></i>
+
+					 				 <div class="custom-control custom-checkbox custom-control-inline">
+					 					<input type="checkbox" class="custom-control-input" id="form_settings_<?php echo $_key?>_required" name="form_settings_<?php echo $_key?>_required" value="1"<?php if($d['member']['form_settings_'.$_key.'_required']):?> checked<?php endif?>>
+					 					<label class="custom-control-label" for="form_settings_<?php echo $_key?>_required">필수입력</label>
+					 				 </div>
+
+					 				</fieldset>
+					 				<?php endforeach?>
+					 			</div>
+					 		</div>
+					 	</div>
+					 </div>
+
+					 <div class="card">
+						 <div class="card-header">
+							 <i class="fa fa-lock fa-fw" aria-hidden="true"></i>  개인정보보호
+						 </div>
+						 <div class="card-body">
+
+							 <div class="input-group w-50">
+								 <div class="input-group-prepend">
+									 <span class="input-group-text">개인정보 관리 잠금</span>
+								 </div>
+								 <input type="text" name="settings_expire" value="<?php echo $d['member']['settings_expire']?>" size="5" class="form-control text-center">
+									<div class="input-group-append">
+										<span class="input-group-text">분</span>
+									</div>
+							 </div>
+							 <small class="form-text text-muted">로그인 후, <?php echo $d['member']['settings_expire']?>분이 경과하면 개인정보관리 페이지에서 본인 재인증 화면이 출력됩니다. </small>
+
+
+							</div><!-- /.card-body -->
+						</div><!-- /.card -->
+
+						<div class="card">
+ 						 <div class="card-header">
+ 							 <i class="fa fa-user-circle-o fa-fw" aria-hidden="true"></i> 이메일 및 휴대폰 본인인증
+ 						 </div>
+ 						 <div class="card-body">
+
+ 							 <div class="input-group w-50">
+ 								 <div class="input-group-prepend">
+ 									 <span class="input-group-text"><i class="fa fa-hourglass-end fa-fw" aria-hidden="true"></i> 인증번호 유효시간</span>
+ 								 </div>
+ 								 <input type="text" name="settings_keyexpire" value="<?php echo $d['member']['settings_keyexpire']?>" size="5" class="form-control text-center">
+ 									<div class="input-group-append">
+ 										<span class="input-group-text">분</span>
+ 									</div>
+ 							 </div>
+ 							 <small class="form-text text-muted">이메일 및 휴대폰에 대한 본인인증 시, 인증코드의 유효시간을 설정합니다. </small>
+
+ 							</div><!-- /.card-body -->
+ 						</div><!-- /.card -->
+
+
+						<div class="row mt-5">
+							<div class="col">
+								<div class="form-group">
+									<label class="d-flex justify-content-between">
+										거주지역 <span class="badge badge-pill badge-dark">사이트 공통</span>
+									</label>
+									<textarea name="location" class="form-control f13" rows="5"><?php readfile($_tmplfile)?></textarea>
+								</div>
+							</div><!-- /.col -->
+							<div class="col">
+								<div class="form-group">
+									<label class="d-flex justify-content-between">
+										직업군 <span class="badge badge-pill badge-dark">사이트 공통</span>
+									</label>
+									<textarea name="job" class="form-control f13" rows="5"><?php readfile($_tmpjfile)?></textarea>
+								</div>
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+
+				 </div><!-- /.card-body -->
+				 <div class="card-footer">
+					 <button type="submit" class="btn btn-outline-primary btn-block btn-lg my-4"><i class="fa fa-check"></i> 정보저장</button>
+				 </div>
+			 </div><!-- /.card -->
+
+		 </div>
+
+
+		</div>
 
 
 	</div>
@@ -1207,16 +1393,7 @@ $('.list-group-item-action').on('click',function(){
 	 var href=$(this).attr('href');
 	 var _join_menu=href.replace('#','');
 	 $('input[name="_join_menu"]').val(_join_menu);
-});
-
-// 약관/안내메세지 클릭시 이벤트 _join_tab 값을 변경한다.
-$('.js-agree').on('click',function(){
-    var href=$(this).attr('href');
-    var _join_tab=href.replace('#','');
-		var _join_tab_arr=_join_tab.split('_');
-		var __join_tab=_join_tab_arr[0];
-
-	 $('input[name="_join_tab"]').val(__join_tab);
+	 console.log('11')
 });
 
 function saveCheck(f)
@@ -1229,9 +1406,7 @@ function saveCheck(f)
 		return false;
 	}
 
-	var _join_menu=$('input[name="_join_menu"]').val();
-	if(_join_menu=='terms') f.a.value='agreesave';
-	else f.a.value='member_config';
+	f.a.value='member_config';
 	getIframeForAction(f);
 	f.submit();
 }
