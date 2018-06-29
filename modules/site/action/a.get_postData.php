@@ -6,14 +6,12 @@ $result['error']=false;
 
 if ($_mtype == 'page')
 {
-	$_HP = getUidData($table['s_page'],$uid);
-	$_filekind = $r.'-pages/'.$_HP['id'];
+	$_filekind = $r.'-pages/'.$id;
 	$_filesbj = $_HP['name'];
 }
 if ($_mtype == 'menu')
 {
-	$_HM = getUidData($table['s_menu'],$uid);
-	$_filekind = $r.'-menus/'.$_HM['id'];
+	$_filekind = $r.'-menus/'.$id;
 	$_filesbj = $_HM['name'];
 }
 
