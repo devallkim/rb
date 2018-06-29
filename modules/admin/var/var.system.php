@@ -1,10 +1,10 @@
 <?php
-$d['admin']['version'] = "2.2.2";
+$d['admin']['version'] = "2.3.0";
 $d['admin']['themepc'] = "kimsq-dark";
 $d['admin']['pannellink'] = "kimsq-dark.css";
 $d['admin']['cache_flag'] = "totime";
 $d['admin']['smtp_host'] = "";
-$d['admin']['smtp_port'] = "465";
+$d['admin']['smtp_port'] = "";
 $d['admin']['smtp_auth'] = "";
 $d['admin']['smtp_user'] = "";
 $d['admin']['smtp_pass'] = "";
@@ -16,7 +16,7 @@ $d['admin']['ftp_pasv'] = "";
 $d['admin']['ftp_user'] = "";
 $d['admin']['ftp_pass'] = "";
 $d['admin']['smtp_use'] = "";
-$d['admin']['email'] = "";
+$d['admin']['email'] = "1";
 $d['admin']['smtp'] = "";
 $d['admin']['ftp'] = "";
 $d['admin']['ftp_rb'] = "";
@@ -32,11 +32,14 @@ $d['admin']['secu_flash'] = "";
 $d['admin']['secu_domain'] = "youtube.com,vimeo.com,";
 $d['admin']['secu_param'] = ";a=,&a=,?a=,m=admin,system=,";
 $d['admin']['smtp_ssl'] = "";
-$d['admin']['uninstall'] = "1";
+$d['admin']['uninstall'] = "";
 $d['admin']['dblclick'] = "1";
 $d['admin']['editor'] = "simplemde";
 $d['admin']['syslang'] = "DEFAULT";
-$d['admin']['sysmail'] = "";
+$d['admin']['sysmail'] = "notifications@kimsq.com";
 $d['admin']['sysmodule'] = "site";
 $d['admin']['codeeidt'] = "monokai";
+$d['admin']['sms_tel'] = "";
+$d['admin']['sms_id'] = "";
+$d['admin']['sms_key'] = "";
 ?>
