@@ -5,7 +5,7 @@
 <div id="rb-context-menu" class="dropdown"><a data-toggle="dropdown" href="#."></a><ul class="dropdown-menu" role="menu"></ul></div>
 <iframe hidden name="_action_frame_<?php echo $m?>" width="0" height="0" frameborder="0" scrolling="no"></iframe>
 
-<?php if($my['uid']&&$m=='admin') include $g['path_core'].'engine/notification.engine.php'?>
+<?php if($my['uid']&&$m=='admin') include $g['path_core'].'engine/notification.engine.admin.php'?>
 
 <script>
 
