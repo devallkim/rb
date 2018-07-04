@@ -243,7 +243,7 @@ if ($reply == 'Y') $msg = '답변';
 else if ($uid) $msg = '수정';
 else $msg = '등록';
 
-setrawcookie('bbs_action_result', rawurlencode('게시물이 '.$msg.' 되었습니다.|success'));  // 처리여부 cookie 저장
+setrawcookie('bbs_action_result', rawurlencode('게시물이 '.$msg.' 되었습니다.'));  // 처리여부 cookie 저장
 
 if ($backtype == 'list')
 {

@@ -47,21 +47,39 @@ $(function() {
 	<?php endif; ?>
 
 	// 알림 기본 셋팅값 정의
+	<?php if ($g['mobile'] && $_SESSION['pcmode'] != 'Y'): ?>
 	$.notifyDefaults({
-	  placement: {
-	    from: "bottom",
-	    align: "center"
-	  },
-	  allow_dismiss: false,
-	  offset: 20,
-	  type: "dark",
-	  timer: 100,
-	  delay: 1500,
-	  animate: {
-	    enter: "animated fadeInUp",
-	    exit: "animated fadeOutDown"
-	  }
+		placement: {
+			from: "bottom",
+			align: "center"
+		},
+		allow_dismiss: false,
+		offset: 20,
+		type: "default",
+		timer: 100,
+		delay: 1500,
+		animate: {
+			enter: "animated fadeInUp",
+			exit: "animated fadeOutDown"
+		}
 	});
+	<?php else: ?>
+	$.notifyDefaults({
+		placement: {
+			from: "top",
+			align: "right"
+		},
+		allow_dismiss: false,
+		offset: 20,
+		type: "success",
+		timer: 100,
+		delay: 1500,
+		animate: {
+			enter: "animated fadeInDown",
+			exit: "animated fadeOutUp"
+		}
+	});
+	<?php endif; ?>
 
 });
 
