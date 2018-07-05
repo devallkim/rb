@@ -618,6 +618,14 @@ function getAavatarSrc($mbruid,$size){
 	return $result;
 }
 
+// 프로필 페이지 링크
+function getProfileLink($mbruid){
+	global $g,$table;
+	$M = getDbData($table['s_mbrid'],'uid='.$mbruid,'id');
+	$result=$g['s'].'/@'.$M['id'];
+	return $result;
+}
+
 // 업로드 이미지 src 추출함수
 function getUpImageSrc($R){
   global $g,$table;
