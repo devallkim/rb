@@ -61,6 +61,8 @@ RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_b\.(jpg|jpeg|png|gif)$ ./_core/opens
 RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_h\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=1600&h=1068 [NC,L]
 RewriteRule ^(files)/([a-zA-Z0-9_\-]+)/(.*)_k\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./files/$2/$3.$4&w=2048&h=1367 [NC,L]
 RewriteRule ^(files)/(noimage)_([0-9]+)x([0-9]+)\.(png)$ ./_core/opensrc/timthumb/thumb.php?src=./_core/images/noimage.png&w=$3&h=$4&s=1 [NC,L]
+RewriteRule ^(_core)/(images)/(touch)/(.*)-([0-9]+)x([0-9]+)\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./_core/images/touch/$4.$7&w=$5&h=$6&s=1 [NC,L]
+RewriteRule ^(_var)/(site)/([a-zA-Z0-9_\-]+)/(.*)-([0-9]+)x([0-9]+)\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./_var/site/$3/$4.$7&w=$5&h=$6&s=1 [NC,L]
 
 #avatar
 RewriteRule ^(avatar)/(.*)_s\.(jpg|jpeg|png|gif)$ ./_core/opensrc/timthumb/thumb.php?src=./_var/avatar/$2.$3&w=40&h=40&s=1 [NC,L]

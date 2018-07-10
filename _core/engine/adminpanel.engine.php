@@ -27,6 +27,12 @@ if (is_file($g['themelang2'])) include $g['themelang2'];
 else if (is_file($g['themelang1'])) include $g['themelang1'];
 if (is_file($g['layvarfile'])) include $g['layvarfile'];
 $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag']]:'';
+
+//사이트별 매니페스트
+$g['manifestForSite'] = $g['path_var'].'site/'.$r.'/manifest.json'; // 사이트 회원모듈 변수파일
+$_manifestfile = file_exists($g['manifestForSite']) ? $g['manifestForSite'] : $g['path_module'].'site/var/manifest.json';
+$mf_str = file_get_contents($_manifestfile);
+$mf_json = json_decode($mf_str , true);
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -268,180 +274,283 @@ $g['wcache'] = $d['admin']['cache_flag']?'?nFlag='.$date[$d['admin']['cache_flag
 
 			<div class="tab-content" style="padding-top:15px;">
 				<div class="tab-pane<?php if($_COOKIE['rightAdmTab']=='site'||!$_COOKIE['rightAdmTab']):?> active<?php endif?><?php if(!$_HS['uid']):?> hidden<?php endif?>" id="site-settings">
-					<form action="<?php echo $g['s']?>/" method="post" target="_ACTION_" onsubmit="return _siteInfoSaveCheck(this);">
-					<input type="hidden" name="r" value="<?php echo $r?>">
-					<input type="hidden" name="m" value="site">
-					<input type="hidden" name="a" value="regissitepanel" />
-					<input type="hidden" name="site_uid" value="<?php echo $_HS['uid']?>">
-					<input type="hidden" name="layout" value="">
-					<input type="hidden" name="m_layout" value="">
-					<input type="hidden" name="referer" value="">
 
-					<div class="panel-group rb-scrollbar" id="site-settings-panels">
-						<div class="card" id="site-settings-01">
-							<div class="card-header">
-								<a class="collapsed" data-toggle="collapse" href="#site-settings-01-body">
-									<i></i>기본정보
-								</a>
-							</div>
-							<div class="card-body panel-collapse collapse" id="site-settings-01-body" data-parent="#site-settings-panels">
-								<div class="form-group">
-									<label>사이트 라벨</label>
-									<input type="text" class="form-control" name="label" value="<?php echo $_HS['label']?>">
-								</div>
-								<div class="form-group">
-									<label>사이트 명</label>
-									<input type="text" class="form-control" name="name" value="<?php echo $_HS['name']?>">
-								</div>
-								<div class="form-group">
-									<label>사이트 코드</label>
-									<input type="text" class="form-control" name="id" value="<?php echo $_HS['id']?>">
-								</div>
-								<div class="form-group">
-									<label>타이틀 구성</label>
-									<input type="text" class="form-control" name="title" value="<?php echo $_HS['title']?>">
-									<span class="form-text text-muted"><small>입력된 내용은 브라우저의 타이틀로 사용됩니다. 치환코드는 매뉴얼을 참고하세요.</small></span>
-								</div>
-								<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
-							</div>
-						</div>
+						<div class="panel-group rb-scrollbar" id="site-settings-panels">
 
-						<div class="card panel-default" id="site-settings-02">
-							<div class="card-header">
-								<a class="collapsed" data-toggle="collapse" href="#site-settings-02-body"><i></i>레이아웃</a>
-							</div>
-							<div id="site-settings-02-body" class="panel-collapse collapse" data-parent="#site-settings-panels">
-								<div class="card-body">
-									<div class="form-group">
-										<label>기본</label>
-										<div id="rb-layout-select">
-											<select class="form-control custom-select" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','');">
-												<?php $_layoutExp1=explode('/',$_HS['layout'])?>
-												<?php $dirs = opendir($g['path_layout'])?>
-												<?php $_i=0;while(false !== ($tpl = readdir($dirs))):?>
-												<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
-												<?php if(!$_i&&!$_HS['layout']) $_layoutExp1[0] = $tpl?>
-												<option value="<?php echo $tpl?>"<?php if($_layoutExp1[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
+							<div class="card" id="site-settings-manifest" style="margin-bottom: 5px">
+								<div class="card-header">
+									<a class="collapsed" data-toggle="collapse" href="#site-settings-manifest-body"><i></i>매니페스트</a>
+								</div>
+								<div class="card-body panel-collapse collapse" id="site-settings-manifest-body" data-parent="#site-settings-panels">
+									<form action="<?php echo $g['s']?>/" method="post" enctype="multipart/form-data" target="_ACTION_">
+										<input type="hidden" name="r" value="<?php echo $r?>">
+										<input type="hidden" name="m" value="site">
+										<input type="hidden" name="a" value="regisSiteManifest">
+										<input type="hidden" name="site_uid" value="<?php echo $_HS['uid']?>">
 
-												<?php $_i++;endwhile?>
-												<?php closedir($dirs)?>
+										<div class="form-group">
+											<label>앱 짧은 이름</label>
+											<input type="text" class="form-control" name="site_manifest_short_name" value="<?php echo $mf_json['short_name'] ?>">
+										</div>
+
+										<div class="form-group">
+											<label>앱 이름</label>
+											<input type="text" class="form-control" name="site_manifest_name" value="<?php echo $mf_json['name'] ?>">
+										</div>
+
+										<?php
+										$_manifestIcon_png = $g['path_var'].'site/'.$r.'/homescreen.png';
+										$_manifestIcon_jpg = $g['path_var'].'site/'.$r.'/homescreen.jpg';
+										$_manifestIcon_gif = $g['path_var'].'site/'.$r.'/homescreen.gif';
+										if (file_exists($_manifestIcon_png) || file_exists($_manifestIcon_jpg) || file_exists($_manifestIcon_gif)) {
+											$is_manifestIcon = ture;
+										}
+										?>
+
+										<div class="form-group">
+											<label>아이콘 (png,192x192 이상)</label>
+											<div class="input-group">
+												<input type="text" class="form-control" id="site_manifest_icon_name" value="<?php echo $is_manifestIcon?'등록됨':'' ?>" onclick="$('#site_manifest_icon').click();">
+												<input type="file" class="d-none" name="site_manifest_icon" id="site_manifest_icon" onchange="getId('site_manifest_icon_name').value='파일 선택됨';">
+												<span class="input-group-append">
+													<button class="btn btn-light" type="button" onclick="$('#site_manifest_icon').click();">
+														<i class="fa fa-picture-o"></i>
+													</button>
+												</span>
+											</div>
+
+											<?php if ($is_manifestIcon): ?>
+											<div style="padding:3px 0 0 2px;"><input type="checkbox" name="site_manifest_icon_del" value="1"> 현재파일 삭제</div>
+											<?php endif; ?>
+
+										</div>
+
+										<div class="form-group">
+											<label>배경 색상</label>
+											<div class="input-group">
+												<input type="text" class="form-control" name="site_manifest_background_color" id="site_manifest_background_color" value="<?php echo $mf_json['background_color'] ?>">
+												<span class="input-group-append">
+													<button class="btn btn-light" type="button" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="getColorLayer(getId('site_manifest_background_color').value.replace('#',''),'site_manifest_background_color');">
+													<i class="fa fa-tint"></i>
+													</button>
+												</span>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label>테마 색상</label>
+											<div class="input-group">
+												<input type="text" class="form-control" name="site_manifest_theme_color" id="site_manifest_theme_color" value="<?php echo $mf_json['theme_color'] ?>">
+												<span class="input-group-append">
+													<button class="btn btn-light" type="button" data-toggle="modal" data-target=".bs-example-modal-sm" onclick="getColorLayer(getId('site_manifest_theme_color').value.replace('#',''),'site_manifest_theme_color');">
+													<i class="fa fa-tint"></i>
+													</button>
+												</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label>디스플레이 유형</label>
+											<select name="site_manifest_display" class="form-control custom-select">
+												<option value="standalone"<?php echo $mf_json['display']=='standalone'?' selected':'' ?>>Standalone</option>
+												<option value="fullscreen"<?php echo $mf_json['display']=='fullscreen'?' selected':'' ?>>fullscreen</option>
+												<option value="minimal-ui"<?php echo $mf_json['display']=='minimal-ui'?' selected':'' ?>>minimal-ui</option>
+												<option value="browser"<?php echo $mf_json['display']=='browser'?' selected':'' ?>>Browser</option>
 											</select>
 										</div>
-										<div id="rb-layout-select2" style="margin-top:5px;">
-											<select class="form-control custom-select" name="layout_1_sub"<?php if(!$_layoutExp1[0]):?> disabled<?php endif?>>
-												<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
-												<?php while(false !== ($tpl1 = readdir($dirs1))):?>
-												<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-												<option value="<?php echo $tpl1?>"<?php if($_layoutExp1[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
+										<div class="form-group">
+											<label>초기 방향</label>
+											<select name="site_manifest_orientation" class="form-control custom-select">
+												<option value=""<?php echo !$mf_json['orientation']?' selected':'' ?>>Potrait</option>
+												<option value="landscape"<?php echo $mf_json['orientation']=='landscape'?' selected':'' ?>>Landscape</option>
+											</select>
+										</div>
+
+										<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
+									</form>
+
+									<p class="mt-3 mb-0 small">웹앱을 위한 <a href="https://developers.google.com/web/fundamentals/web-app-manifest/?hl=ko&authuser=0" target="_blank">매니페스트</a> 파일을 구성합니다.</p>
+
+								</div>
+							</div>
+
+
+							<form action="<?php echo $g['s']?>/" method="post" target="_ACTION_" onsubmit="return _siteInfoSaveCheck(this);">
+								<input type="hidden" name="r" value="<?php echo $r?>">
+								<input type="hidden" name="m" value="site">
+								<input type="hidden" name="a" value="regissitepanel" />
+								<input type="hidden" name="site_uid" value="<?php echo $_HS['uid']?>">
+								<input type="hidden" name="layout" value="">
+								<input type="hidden" name="m_layout" value="">
+								<input type="hidden" name="referer" value="">
+
+								<div class="card" id="site-settings-01">
+									<div class="card-header">
+										<a class="collapsed" data-toggle="collapse" href="#site-settings-01-body">
+											<i></i>기본정보
+										</a>
+									</div>
+									<div class="card-body panel-collapse collapse" id="site-settings-01-body" data-parent="#site-settings-panels">
+										<div class="form-group">
+											<label>사이트 라벨</label>
+											<input type="text" class="form-control" name="label" value="<?php echo $_HS['label']?>">
+										</div>
+										<div class="form-group">
+											<label>사이트 명</label>
+											<input type="text" class="form-control" name="name" value="<?php echo $_HS['name']?>">
+										</div>
+										<div class="form-group">
+											<label>사이트 코드</label>
+											<input type="text" class="form-control" name="id" value="<?php echo $_HS['id']?>">
+										</div>
+										<div class="form-group">
+											<label>타이틀 구성</label>
+											<input type="text" class="form-control" name="title" value="<?php echo $_HS['title']?>">
+											<span class="form-text text-muted"><small>입력된 내용은 브라우저의 타이틀로 사용됩니다. 치환코드는 매뉴얼을 참고하세요.</small></span>
+										</div>
+										<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
+									</div>
+								</div>
+
+								<div class="card panel-default" id="site-settings-02">
+									<div class="card-header">
+										<a class="collapsed" data-toggle="collapse" href="#site-settings-02-body"><i></i>레이아웃</a>
+									</div>
+									<div id="site-settings-02-body" class="panel-collapse collapse" data-parent="#site-settings-panels">
+										<div class="card-body">
+											<div class="form-group">
+												<label>기본</label>
+												<div id="rb-layout-select">
+													<select class="form-control custom-select" name="layout_1" required onchange="getSubLayout(this,'rb-layout-select2','layout_1_sub','');">
+														<?php $_layoutExp1=explode('/',$_HS['layout'])?>
+														<?php $dirs = opendir($g['path_layout'])?>
+														<?php $_i=0;while(false !== ($tpl = readdir($dirs))):?>
+														<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
+														<?php if(!$_i&&!$_HS['layout']) $_layoutExp1[0] = $tpl?>
+														<option value="<?php echo $tpl?>"<?php if($_layoutExp1[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
+
+														<?php $_i++;endwhile?>
+														<?php closedir($dirs)?>
+													</select>
+												</div>
+												<div id="rb-layout-select2" style="margin-top:5px;">
+													<select class="form-control custom-select" name="layout_1_sub"<?php if(!$_layoutExp1[0]):?> disabled<?php endif?>>
+														<?php $dirs1 = opendir($g['path_layout'].$_layoutExp1[0])?>
+														<?php while(false !== ($tpl1 = readdir($dirs1))):?>
+														<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
+														<option value="<?php echo $tpl1?>"<?php if($_layoutExp1[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
+														<?php endwhile?>
+														<?php closedir($dirs1)?>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label>모바일 전용</label>
+												<div id="rb-mlayout-select">
+													<select class="form-control custom-select" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','');">
+														<option value="0">사용안함</option>
+														<?php $_layoutExp2=explode('/',$_HS['m_layout'])?>
+														<?php $dirs = opendir($g['path_layout'])?>
+														<?php while(false !== ($tpl = readdir($dirs))):?>
+														<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
+														<option value="<?php echo $tpl?>"<?php if($_layoutExp2[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
+														<?php endwhile?>
+														<?php closedir($dirs)?>
+													</select>
+												</div>
+												<div id="rb-mlayout-select2" style="margin-top:5px;">
+													<select class="form-control custom-select" name="m_layout_1_sub"<?php if(!$_HS['m_layout']):?> disabled<?php endif?>>
+														<?php if(!$_HS['m_layout']):?><option>서브 레이아웃</option><?php endif?>
+														<?php $dirs1 = opendir($g['path_layout'].$_layoutExp2[0])?>
+														<?php while(false !== ($tpl1 = readdir($dirs1))):?>
+														<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
+														<option value="<?php echo $tpl1?>"<?php if($_layoutExp2[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
+														<?php endwhile?>
+														<?php closedir($dirs1)?>
+													</select>
+												</div>
+											</div>
+											<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
+										</div>
+									</div>
+								</div>
+
+								<div class="card panel-default" id="site-settings-03">
+									<div class="card-header">
+										<a class="collapsed" data-toggle="collapse" href="#site-settings-03-body"><i></i>메인페이지</a>
+									</div>
+									<div id="site-settings-03-body" class="panel-collapse collapse" data-parent="#site-settings-panels">
+										<div class="card-body">
+											<div class="form-group">
+												<label>모바일 전용</label>
+												<select name="startpage" class="form-control custom-select">
+												<option>레이아웃에 포함된 메인페이지</option>
+												<option disabled><i class="fa fa-edit"></i>페이지 리스트 ↓</option>
+												<?php $PAGES1 = getDbArray($table['s_page'],'site='.$s.' and ismain=1','*','uid','asc',0,1)?>
+												<?php while($S = db_fetch_array($PAGES1)):?>
+												<option value="<?php echo $S['uid']?>"<?php if($_HS['startpage']==$S['uid']):?> selected<?php endif?>><?php echo $S['name']?>(<?php echo $S['id']?>)</option>
 												<?php endwhile?>
-												<?php closedir($dirs1)?>
-											</select>
+												</select>
+											</div>
+											<div class="form-group">
+												<label>모바일 전용</label>
+												<select name="m_startpage" class="form-control custom-select">
+												<option>레이아웃에 포함된 메인페이지</option>
+												<option disabled><i class="fa fa-edit"></i>페이지 리스트 ↓</option>
+												<?php $PAGES2 = getDbArray($table['s_page'],'site='.$s.' and mobile=1','*','uid','asc',0,1)?>
+												<?php while($S = db_fetch_array($PAGES2)):?>
+												<option value="<?php echo $S['uid']?>"<?php if($_HS['m_startpage']==$S['uid']):?> selected<?php endif?>><?php echo $S['name']?>(<?php echo $S['id']?>)</option>
+												<?php endwhile?>
+												</select>
+											</div>
+											<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
 										</div>
 									</div>
-									<div class="form-group">
-										<label>모바일 전용</label>
-										<div id="rb-mlayout-select">
-											<select class="form-control custom-select" name="m_layout_1" required onchange="getSubLayout(this,'rb-mlayout-select2','m_layout_1_sub','');">
-												<option value="0">사용안함</option>
-												<?php $_layoutExp2=explode('/',$_HS['m_layout'])?>
-												<?php $dirs = opendir($g['path_layout'])?>
-												<?php while(false !== ($tpl = readdir($dirs))):?>
-												<?php if($tpl=='.' || $tpl == '..' || $tpl == '_blank' || is_file($g['path_layout'].$tpl))continue?>
-												<option value="<?php echo $tpl?>"<?php if($_layoutExp2[0]==$tpl):?> selected<?php endif?>><?php echo getFolderName($g['path_layout'].$tpl)?>(<?php echo $tpl?>)</option>
-												<?php endwhile?>
-												<?php closedir($dirs)?>
-											</select>
-										</div>
-										<div id="rb-mlayout-select2" style="margin-top:5px;">
-											<select class="form-control custom-select" name="m_layout_1_sub"<?php if(!$_HS['m_layout']):?> disabled<?php endif?>>
-												<?php if(!$_HS['m_layout']):?><option>서브 레이아웃</option><?php endif?>
-												<?php $dirs1 = opendir($g['path_layout'].$_layoutExp2[0])?>
-												<?php while(false !== ($tpl1 = readdir($dirs1))):?>
-												<?php if(!strstr($tpl1,'.php') || $tpl1=='_main.php')continue?>
-												<option value="<?php echo $tpl1?>"<?php if($_layoutExp2[1]==$tpl1):?> selected<?php endif?>><?php echo str_replace('.php','',$tpl1)?></option>
-												<?php endwhile?>
-												<?php closedir($dirs1)?>
-											</select>
-										</div>
-									</div>
-									<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
 								</div>
-							</div>
+
+								<div class="card panel-default" id="site-settings-04">
+									<div class="card-header">
+										<a class="collapsed" data-toggle="collapse" href="#site-settings-04-body"><i></i>고급설정</a>
+									</div>
+									<div id="site-settings-04-body" class="panel-collapse collapse" data-parent="#site-settings-panels">
+										<div class="card-body">
+											<div class="form-group">
+												<label>도메인</label>
+												<ul class="list-unstyled">
+													<?php $DOMAINS = getDbArray($table['s_domain'],'site='.$_HS['uid'],'*','gid','asc',0,1)?>
+													<?php $DOMAINN = db_num_rows($DOMAINS)?>
+													<?php if($DOMAINN):?>
+													<?php while($D=db_fetch_array($DOMAINS)):?>
+													<li><a href="http://<?php echo $D['name']?>" target="_blank"><?php echo $D['name']?></a></li>
+													<?php endwhile?>
+													<?php else:?>
+													<li>
+														<small class="text-muted">연결된 도메인이 없습니다.
+														<a class="muted-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=domain&amp;selsite=<?php echo $_HS['uid']?>&amp;type=makedomain" target="_ADMPNL_">
+															추가하기
+														</a>
+														</small>
+													</li>
+													<?php endif?>
+												</ul>
+											</div>
+											<div class="form-group">
+												<label>서비스 상태</label>
+												<select name="open" class="form-control custom-select">
+												<option value="1"<?php if($_HS['s004']=='1'):?> selected="selected"<?php endif?>>정상서비스</option>
+												<option value="2"<?php if($_HS['s004']=='2'):?> selected="selected"<?php endif?>>관리자오픈</option>
+												<option value="3"<?php if($_HS['s004']=='3'):?> selected="selected"<?php endif?>>정지</option>
+												</select>
+											</div>
+											<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
+										</div>
+									</div>
+								</div>
+
+							</form>
 						</div>
 
-						<div class="card panel-default" id="site-settings-03">
-							<div class="card-header">
-								<a class="collapsed" data-toggle="collapse" href="#site-settings-03-body"><i></i>메인페이지</a>
-							</div>
-							<div id="site-settings-03-body" class="panel-collapse collapse" data-parent="#site-settings-panels">
-								<div class="card-body">
-									<div class="form-group">
-										<label>모바일 전용</label>
-										<select name="startpage" class="form-control custom-select">
-										<option>레이아웃에 포함된 메인페이지</option>
-										<option disabled><i class="fa fa-edit"></i>페이지 리스트 ↓</option>
-										<?php $PAGES1 = getDbArray($table['s_page'],'site='.$s.' and ismain=1','*','uid','asc',0,1)?>
-										<?php while($S = db_fetch_array($PAGES1)):?>
-										<option value="<?php echo $S['uid']?>"<?php if($_HS['startpage']==$S['uid']):?> selected<?php endif?>><?php echo $S['name']?>(<?php echo $S['id']?>)</option>
-										<?php endwhile?>
-										</select>
-									</div>
-									<div class="form-group">
-										<label>모바일 전용</label>
-										<select name="m_startpage" class="form-control custom-select">
-										<option>레이아웃에 포함된 메인페이지</option>
-										<option disabled><i class="fa fa-edit"></i>페이지 리스트 ↓</option>
-										<?php $PAGES2 = getDbArray($table['s_page'],'site='.$s.' and mobile=1','*','uid','asc',0,1)?>
-										<?php while($S = db_fetch_array($PAGES2)):?>
-										<option value="<?php echo $S['uid']?>"<?php if($_HS['m_startpage']==$S['uid']):?> selected<?php endif?>><?php echo $S['name']?>(<?php echo $S['id']?>)</option>
-										<?php endwhile?>
-										</select>
-									</div>
-									<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
-								</div>
-							</div>
-						</div>
 
-						<div class="card panel-default" id="site-settings-04">
-							<div class="card-header">
-								<a class="collapsed" data-toggle="collapse" href="#site-settings-04-body"><i></i>고급설정</a>
-							</div>
-							<div id="site-settings-04-body" class="panel-collapse collapse" data-parent="#site-settings-panels">
-								<div class="card-body">
-									<div class="form-group">
-										<label>도메인</label>
-										<ul class="list-unstyled">
-											<?php $DOMAINS = getDbArray($table['s_domain'],'site='.$_HS['uid'],'*','gid','asc',0,1)?>
-											<?php $DOMAINN = db_num_rows($DOMAINS)?>
-											<?php if($DOMAINN):?>
-											<?php while($D=db_fetch_array($DOMAINS)):?>
-											<li><a href="http://<?php echo $D['name']?>" target="_blank"><?php echo $D['name']?></a></li>
-											<?php endwhile?>
-											<?php else:?>
-											<li>
-												<small class="text-muted">연결된 도메인이 없습니다.
-												<a class="muted-link" href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=domain&amp;selsite=<?php echo $_HS['uid']?>&amp;type=makedomain" target="_ADMPNL_">
-													추가하기
-												</a>
-												</small>
-											</li>
-											<?php endif?>
-										</ul>
-									</div>
-									<div class="form-group">
-										<label>서비스 상태</label>
-										<select name="open" class="form-control custom-select">
-										<option value="1"<?php if($_HS['s004']=='1'):?> selected="selected"<?php endif?>>정상서비스</option>
-										<option value="2"<?php if($_HS['s004']=='2'):?> selected="selected"<?php endif?>>관리자오픈</option>
-										<option value="3"<?php if($_HS['s004']=='3'):?> selected="selected"<?php endif?>>정지</option>
-										</select>
-									</div>
-									<button type="submit" class="btn btn-outline-primary btn-block">저장하기</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					</form>
+
 
 					<div class="bg-light rb-tab-pane-bottom">
 						<a href="<?php echo $g['s']?>/?r=<?php echo $r?>&amp;m=admin&amp;module=site" target="_ADMPNL_" class="btn btn-light btn-block">자세히</a>
