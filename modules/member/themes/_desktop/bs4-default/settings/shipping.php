@@ -235,8 +235,11 @@ $NUM = getDbRows($table['s_mbrshipping'],$sqlque0);
 
 <?php include_once $g['dir_module_skin'].'_footer.php'?>
 
-<!-- <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> -->
+<?php if($_SERVER['HTTPS'] == 'on'):?>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<?php else:?>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<?php endif?>
 
 <script>
 
