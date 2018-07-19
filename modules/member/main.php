@@ -64,10 +64,14 @@ switch ($front) {
 
 			$_MP = getDbData($table['s_mbrid'],"id='".$mbrid."'",'*');
 
-			if ($_MH['org'] == 1) {
-				 $_MP = array_merge(getDbData($table['s_orgdata'],"memberuid='".$_MP['uid']."'",'*'),$_MP);
+			if ($_MP['uid']) {
+				if ($_MH['org'] == 1) {
+					$_MP = array_merge(getDbData($table['s_orgdata'],"memberuid='".$_MP['uid']."'",'*'),$_MP);
+				} else {
+			  	$_MP = array_merge(getDbData($table['s_mbrdata'],"memberuid='".$_MP['uid']."'",'*'),$_MP);
+				}
 			} else {
-				 $_MP = array_merge(getDbData($table['s_mbrdata'],"memberuid='".$_MP['uid']."'",'*'),$_MP);
+				$page = '_404';
 			}
 		}
 		if ($d['member']['layout_profile_mobile'] && $g['mobile'] && $_SESSION['pcmode'] != 'Y') {
@@ -92,13 +96,14 @@ switch ($front) {
 	break;
 
 	case 'saved' :
-
 		$d['member']['sosokmenu'] = $d['member']['sosokmenu_saved'];
 
 		if (!$my['uid']){
 			getLink($g['s'].'/?r='.$r.'&mod=login&referer='.urlencode(RW('mod=saved')),'','','');
 		}
 
+		if ($d['member']['layout_saved_mobile'] && $g['mobile'] && $_SESSION['pcmode'] != 'Y') {
+			$_HM['m_layout'] = $_HM['m_layout'] ? $_HM['m_layout'] : $d['member']['layout_saved_mobile'];
 	break;
 
 }
