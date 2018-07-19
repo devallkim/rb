@@ -1,5 +1,5 @@
 <div class="text-center">
-  <img src="<?php echo getAavatarSrc($_MP['uid'],'230') ?>" width="230" height="230" alt="" class="rounded">
+  <img src="<?php echo getAavatarSrc($_MP['uid'],'230') ?>" width="230" height="230" alt="" class="rounded img-fluid">
 </div>
 
 <div class="vcard-names-container pt-3">
