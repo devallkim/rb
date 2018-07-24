@@ -6,8 +6,9 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 #기본사이트
 RewriteRule ^(admin)/?$ ./index.php?m=$1&pickmodule=dashboard [L]
 RewriteRule ^(logout)/?$ ./index.php?a=logout [L]
-RewriteRule ^(p)/([a-zA-Z0-9_\-]+)/?$ ./index.php?mod=$2 [L]
-RewriteRule ^(c)/([a-zA-Z0-9_\-\/]+)/?$ ./index.php?c=$2 [L]
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(p)/([a-zA-Z0-9_\-]+)/?$ ./index.php?mod=$2&%1 [L]
+RewriteRule ^(c)/([a-zA-Z0-9_\-\/]+)/?$ ./index.php?c=$2&%1 [L]
 RewriteRule ^([0-9]+)/?$ ./index.php?m=bbs&uid=$1 [L]
 RewriteRule ^(b)/?$ ./index.php?m=bbs [L]
 RewriteRule ^(b)/([a-zA-Z0-9_\-]+)/?$ ./index.php?m=bbs&bid=$2 [L]
@@ -20,8 +21,9 @@ RewriteRule ^(b)/([a-zA-Z0-9_\-]+)/([0-9]+)/([0-9]+)/s([0-9]+)/?$ ./index.php?m=
 #사이트코드 확장
 RewriteRule ^([a-zA-Z0-9_\-]+)/?$ ./index.php?r=$1 [L]
 RewriteRule ^([a-zA-Z0-9_\-]+)/(admin)/?$ ./index.php?r=$1&m=$2&mdule=$2 [L]
-RewriteRule ^([a-zA-Z0-9_\-]+)/(p)/([a-zA-Z0-9_\-]+)/?$ ./index.php?r=$1&mod=$3 [L]
-RewriteRule ^([a-zA-Z0-9_\-]+)/(c)/([a-zA-Z0-9_\-\/]+)/?$ ./index.php?r=$1&c=$3 [L]
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^([a-zA-Z0-9_\-]+)/(p)/([a-zA-Z0-9_\-]+)/?$ ./index.php?r=$1&mod=$3&%1 [L]
+RewriteRule ^([a-zA-Z0-9_\-]+)/(c)/([a-zA-Z0-9_\-\/]+)/?$ ./index.php?r=$1&c=$3&%1 [L]
 RewriteRule ^([a-zA-Z0-9_\-]+)/([0-9]+)/?$ ./index.php?r=$1&m=bbs&uid=$2 [L]
 RewriteRule ^([a-zA-Z0-9_\-]+)/(b)/?$ ./index.php?r=$1&m=bbs [L]
 RewriteRule ^([a-zA-Z0-9_\-]+)/(b)/([a-zA-Z0-9_\-]+)/?$ ./index.php?r=$1&m=bbs&bid=$3 [L]
