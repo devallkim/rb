@@ -1,5 +1,8 @@
 RewriteEngine On
 
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
 #기본사이트
 RewriteRule ^(admin)/?$ ./index.php?m=$1&pickmodule=dashboard [L]
 RewriteRule ^(logout)/?$ ./index.php?a=logout [L]
