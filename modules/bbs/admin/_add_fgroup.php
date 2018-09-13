@@ -198,10 +198,10 @@
 		<div class="form-group row">
 			<label class="col-lg-2 col-form-label text-lg-right">부가필드</label>
 			<div class="col-lg-10 col-xl-9">
-				<textarea name="adddata" class="form-control" rows="3"><?php echo htmlspecialchars($R['adddata'])?></textarea>
+				<textarea name="addinfo" class="form-control" rows="3"><?php echo htmlspecialchars($R['addinfo'])?></textarea>
 				<small class="form-text text-muted">
 					이 게시판에 대해서 추가적인 정보가 필요할 경우 사용합니다.<br />
-					필드명은 <code>[adddata]</code> 입니다.
+					필드명은 <code>[addinfo]</code> 입니다.
 				</small>
 			</div>
 		</div>
