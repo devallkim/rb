@@ -42,11 +42,11 @@ $mf_json = json_decode($mf_str , true);
 <meta name="robots" content="NOINDEX,NOFOLLOW">
 <title>킴스큐 관리모드 (Rb V <?php echo $d['admin']['version']?>)</title>
 
-<?php getImport('bootstrap','css/bootstrap.min','4.1.0','css')?>
+<?php getImport('bootstrap','css/bootstrap.min','4.1.3','css')?>
 
 <?php getImport('jquery','jquery.min','3.3.1','js')?>
 <?php getImport('popper.js','umd/popper.min','1.14.0','js')?>
-<?php getImport('bootstrap','js/bootstrap.min','4.0.0','js')?>
+<?php getImport('bootstrap','js/bootstrap.min','4.1.3','js')?>
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $g['s']?>/_core/images/ico/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">

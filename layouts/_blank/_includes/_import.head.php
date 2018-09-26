@@ -11,7 +11,7 @@
 <link rel="shortcut icon" href="<?php echo $g['s']?>/_core/images/ico/favicon.ico">
 
 <!-- bootstrap css -->
-<?php getImport('bootstrap','css/bootstrap.min','4.1.0','css')?>
+<?php getImport('bootstrap','css/bootstrap.min','4.1.3','css')?>
 
 <!-- jQuery -->
 <?php getImport('jquery','jquery.min','3.3.1','js')?>
@@ -19,7 +19,7 @@
 <?php getImport('popper.js','umd/popper.min','1.14.0','js')?>
 
 <!-- bootstrap js -->
-<?php getImport('bootstrap','js/bootstrap.min','4.0.0','js')?>
+<?php getImport('bootstrap','js/bootstrap.min','4.1.3','js')?>
 
 <!-- 시스템 폰트 -->
 <?php getImport('font-awesome','css/font-awesome','4.7.0','css')?>
