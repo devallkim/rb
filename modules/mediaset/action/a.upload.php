@@ -78,6 +78,8 @@ if(isset($_FILES["files"]))
             {
                   if ($type == 2)
                   {
+                       ResizeWidth($_FILES['files']['tmp_name'],$_FILES['files']['tmp_name'],$d['mediaset']['thumbsize']);
+                       @chmod($_FILES['files']['tmp_name'],0707);
                        $IM = getimagesize($_FILES['files']['tmp_name']);
                        $width = $IM[0];
                        $height= $IM[1];
@@ -101,18 +103,23 @@ if(isset($_FILES["files"]))
 
             if ($Overwrite == 'true' || !is_file($saveFile))
             {
-                    move_uploaded_file($_FILES['files']['tmp_name'], $saveFile);
-                    if ($type == 2)
-                    {
-                          // $thumbname = md5($tmpname).'.'.$fileExt;
-                          // $thumbFile = $savePath3.'/'.$thumbname;
-                          // ResizeWidth($saveFile,$thumbFile,150);
-                          // @chmod($thumbFile,0707);
-                          $IM = getimagesize($saveFile);
-                          $width = $IM[0];
-                          $height= $IM[1];
-                    }
-                   @chmod($saveFile,0707);
+                move_uploaded_file($_FILES['files']['tmp_name'], $saveFile);
+                if ($type == 2)
+                {
+                  exifRotate($saveFile); //가로세로 교정
+
+                  $IM = getimagesize($saveFile);
+
+                  if ($IM[0] >= $IM[1]) {
+                    ResizeWidth($saveFile,$saveFile,$d['mediaset']['thumbsize']);
+                  } else {
+                    ResizeHeight($saveFile,$saveFile,$d['mediaset']['thumbsize']);
+                  }
+
+                  $width = $IM[0];
+                  $height= $IM[1];
+                }
+               @chmod($saveFile,0707);
             }
 
     }

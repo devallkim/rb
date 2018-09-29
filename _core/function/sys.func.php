@@ -653,37 +653,6 @@ function getPreviewResize($image,$size){
   return $result;
 }
 
-// 이미지 가로/세로 교정
-function img_rot_box($up_saveFile) {
-	$exifData = exif_read_data($up_saveFile);
-	if($exifData['Orientation'] == 6) {
-		$degree = 270; // 시계방향으로 90도 돌려줘야 정상인데 270도 돌려야 정상적으로 출력됨
-	}
-	else if($exifData['Orientation'] == 8) {
-		$degree = 90; // 반시계방향으로 90도 돌려줘야 정상
-	}
-	else if($exifData['Orientation'] == 3) {
-		$degree = 180;
-	}
-	if($degree) {
-		if($exifData[FileType] == 1) {
-			$source = imagecreatefromgif($up_saveFile);
-			$source = imagerotate ($source , $degree, 0);
-			imagegif($source, $up_saveFile);
-		}
-		else if($exifData[FileType] == 2) {
-			$source = imagecreatefromjpeg($up_saveFile);
-			$source = imagerotate ($source , $degree, 0);
-			imagejpeg($source, $up_saveFile);
-		}
-		else if($exifData[FileType] == 3) {
-			$source = imagecreatefrompng($up_saveFile);
-			$source = imagerotate ($source , $degree, 0);
-			imagepng($source, $up_saveFile);
-		}
-	}
-}
-
 //페이지 출력
 function getPageSelect($site,$main,$mobile,$pid) {
 	global $table;
