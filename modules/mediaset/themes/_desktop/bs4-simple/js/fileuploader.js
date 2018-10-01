@@ -70,7 +70,7 @@
 			dragDropHoverClass: "state-hover",
 			errorClass: "alert alert-danger",
 			uploadButtonClass: "ajax-file-upload",
-			dragDropStr: "<span>또는 여기에 파일 놓기</span>",
+			dragDropStr: "<span class='align-middle'>또는 여기에 파일 놓기</span>",
 			uploadStr:"Upload",
 			uploadStr:"<i class='fa fa fa-upload fa-fw'></i> 파일첨부", // 첨부파일 버튼을 커스텀할 수 있도록 숨긴다.
 			abortStr: "실패",
