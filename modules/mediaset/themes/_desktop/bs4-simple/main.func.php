@@ -105,7 +105,7 @@ function getAttachFile($R,$mod,$featured_img_uid,$editor)
 
       $html='';
 	$html.='
-	 <li class="list-group-item d-flex justify-content-start dd-item" data-id="'.$R['uid'].'" style="background-color: transparent">';
+	 <li class="list-group-item d-flex justify-content-start dd-item animated fadeInDown" data-id="'.$R['uid'].'" style="background-color: transparent">';
 
 	 if($R['type']==2){
 	      $html.='
@@ -123,7 +123,7 @@ function getAttachFile($R,$mod,$featured_img_uid,$editor)
 			}else {
             $html.='
 						<div class="dd-handle fa fa-arrows" title="순서변경"></div>
-						<div class="ml-5 mr-auto">
+						<div class="ml-5 mr-auto align-self-center">
             <i class="fa fa-floppy-o fa-fw mr-1"></i>';
            $html.='<span class="badge badge-secondary'.(!$R['hidden']?' d-none':'').'" data-role="attachList-label-hidden-'.$R['uid'].'">숨김</span>';
            $html.='
@@ -172,37 +172,41 @@ function getAttachAudio($R,$mod,$featured_audio_uid)
 		$html='';
 	  $html.='
 		<li class="list-group-item d-flex justify-content-between align-items-center dd-item" data-id="'.$R['uid'].'" style="background-color: transparent">
-			<div class="dd-handle fa fa-arrows" title="순서변경"></div>
-			<span class="ml-5">
-				<div class="btn-group btn-group-sm">';
-				if($mod=='upload')  $html.='<input type="hidden" name="attachfiles[]" value="['.$R['uid'].']"/>';
-				$html.='
-				<button type="button" class="btn btn-light" data-attach-act="delete" data-id="'.$R['uid'].'" data-role="attachList-menu-delete-'.$R['uid'].'" data-featured="" data-type="audio">삭제</button>';
-				if($mod=='upload'){
-				$html.='
-				<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-					<span class="sr-only">Toggle Dropdown</span>
-				</button>
-				<div class="dropdown-menu dropdown-menu-right">';
-									$html.='
-										<a class="dropdown-item" href="#" data-attach-act="featured-audio" data-type="'.$type.'" data-id="'.$R['uid'].'">대표오디오 설정</a>';
+			<div class="dd-handle fa fa-arrows" title="순서변경"></div>';
 
-									 $html.='
-						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-attach-file-meta" data-filename="'.$file_name.'"  data-fileext="'.$R['ext'].'" data-caption="'.$caption.'" data-src="'.$thumb_modal.'" data-origin="'.$img_origin.'" data-attach-act="edit" data-id="'.$R['uid'].'" data-type="audio" data-role="attachList-menu-edit-'.$R['uid'].'">정보수정</a>
-						<a class="dropdown-item" href="#" data-attach-act="showhide" data-role="attachList-menu-showhide-'.$R['uid'].'" data-id="'.$R['uid'].'" data-content="'.($R['hidden']?'show':'hide').'" >'.($R['hidden']?'보이기':'숨기기').'</a>
-						<a class="dropdown-item" href="#" data-attach-act="delete" data-id="'.$R['uid'].'" data-role="attachList-menu-delete-'.$R['uid'].'" data-featured="" data-type="audio">삭제</a>
-				 </div>';
-				}
-				$html.='
-		</div>
-	</span>';
-		$html.='<span class="badge badge-secondary'.($R['uid']==$featured_audio_uid?'':' d-none').'" data-role="attachList-label-featured" data-id="'.$R['uid'].'">대표</span> ';
+		$html.='<div class="ml-5 mr-auto w-100"><span class="badge badge-secondary'.($R['uid']==$featured_audio_uid?'':' d-none').'" data-role="attachList-label-featured" data-id="'.$R['uid'].'">대표</span> ';
 	  $html.='<span class="badge badge-secondary'.(!$R['hidden']?' d-none':'').'" data-role="attachList-label-hidden-'.$R['uid'].'">숨김</span>';
 		$html.='
-		<audio controls class="align-middle"><source src="'.$R['url'].$R['folder'].'/'.$R['tmpname'].'" type="audio/mpeg"></audio>';
+		<audio controls class="align-middle mr-4"><source src="'.$R['url'].$R['folder'].'/'.$R['tmpname'].'" type="audio/mpeg"></audio>';
 		$html.='<span data-role="attachList-list-name-'.$R['uid'].'" >'.$R['name'].'</span>';
 		$html.='
-		<span class="badge badge-secondary">'.getSizeFormat($R['size'],2).'</span></li>';
+		<span class="badge badge-secondary">'.getSizeFormat($R['size'],2).'</span></div>';
+		$html.='
+		<span class="align-self-center">
+		  <div class="btn-group btn-group-sm">';
+		  if($mod=='upload')  $html.='<input type="hidden" name="attachfiles[]" value="['.$R['uid'].']"/>';
+		  $html.='
+		  <button type="button" class="btn btn-light" data-attach-act="delete" data-id="'.$R['uid'].'" data-role="attachList-menu-delete-'.$R['uid'].'" data-featured="" data-type="audio">삭제</button>';
+		  if($mod=='upload'){
+		  $html.='
+		  <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+		    <span class="sr-only">Toggle Dropdown</span>
+		  </button>
+		  <div class="dropdown-menu dropdown-menu-right">';
+		            $html.='
+		              <a class="dropdown-item" href="#" data-attach-act="featured-audio" data-type="'.$type.'" data-id="'.$R['uid'].'">대표오디오 설정</a>';
+
+		             $html.='
+		      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-attach-file-meta" data-filename="'.$file_name.'"  data-fileext="'.$R['ext'].'" data-caption="'.$caption.'" data-src="'.$thumb_modal.'" data-origin="'.$img_origin.'" data-attach-act="edit" data-id="'.$R['uid'].'" data-type="audio" data-role="attachList-menu-edit-'.$R['uid'].'">정보수정</a>
+		      <a class="dropdown-item" href="#" data-attach-act="showhide" data-role="attachList-menu-showhide-'.$R['uid'].'" data-id="'.$R['uid'].'" data-content="'.($R['hidden']?'show':'hide').'" >'.($R['hidden']?'보이기':'숨기기').'</a>
+		      <a class="dropdown-item" href="#" data-attach-act="delete" data-id="'.$R['uid'].'" data-role="attachList-menu-delete-'.$R['uid'].'" data-featured="" data-type="audio">삭제</a>
+		   </div>';
+		  }
+		  $html.='
+		</div>
+		</span>
+
+		</li>';
 		return $html;
 }
 
@@ -220,38 +224,41 @@ function getAttachVideo($R,$mod,$featured_video_uid)
 	  $html.='
 		<li class="list-group-item d-flex justify-content-between align-items-center dd-item" data-id="'.$R['uid'].'" style="background-color: transparent">
 			<div class="dd-handle fa fa-arrows" title="순서변경"></div>
-			<div class="ml-5 mr-auto w-100">
-				<span class="">
-					<div class="btn-group btn-group-sm">';
-					if($mod=='upload')  $html.='<input type="hidden" name="attachfiles[]" value="['.$R['uid'].']"/>';
-					$html.='
-					<button type="button" class="btn btn-light" data-attach-act="delete" data-id="'.$R['uid'].'" data-role="attachList-menu-delete-'.$R['uid'].'" data-featured="" data-type="video">삭제</button>';
-					if($mod=='upload'){
-					$html.='
-					<button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
-							<span class="sr-only">Toggle Dropdown</span>
-					</button>
-					<div class="dropdown-menu dropdown-menu-right">';
-										$html.='
-											<a class="dropdown-item" href="#" data-attach-act="featured-video" data-type="'.$type.'" data-id="'.$R['uid'].'">대표 비디오 설정</a>';
+			<div class="ml-5 mr-auto w-100">';
 
-										 $html.='
-							<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-attach-file-meta" data-filename="'.$file_name.'"  data-fileext="'.$R['ext'].'" data-caption="'.$caption.'" data-src="'.$thumb_modal.'" data-origin="'.$img_origin.'" data-attach-act="edit" data-id="'.$R['uid'].'" data-type="video" data-role="attachList-menu-edit-'.$R['uid'].'">정보수정</a>
-							<a class="dropdown-item" href="#" data-attach-act="showhide" data-role="attachList-menu-showhide-'.$R['uid'].'" data-id="'.$R['uid'].'" data-content="'.($R['hidden']?'show':'hide').'" >'.($R['hidden']?'보이기':'숨기기').'</a>
-							<a class="dropdown-item" href="#" data-attach-act="delete" data-id="'.$R['uid'].'" data-role="attachList-menu-delete-'.$R['uid'].'" data-featured="" data-type="video	">삭제</a>
-					 </div>';
-					}
-					$html.='
-			</div>
-		</span>';
 		$html.='<span class="badge badge-secondary'.($R['uid']==$featured_video_uid?'':' d-none').'" data-role="attachList-label-featured" data-id="'.$R['uid'].'">대표</span> ';
 	  $html.='<span class="badge badge-secondary'.(!$R['hidden']?' d-none':'').'" data-role="attachList-label-hidden-'.$R['uid'].'">숨김</span>';
 		$html.='
-		<video width="320" height="240" controls class="align-middle"><source src="'.$R['url'].$R['folder'].'/'.$R['tmpname'].'" type="video/'.$R['ext'].'"></video>';
+		<video width="320" height="240" controls class="align-middle mr-3"><source src="'.$R['url'].$R['folder'].'/'.$R['tmpname'].'" type="video/'.$R['ext'].'"></video>';
 		$html.='<span data-role="attachList-list-name-'.$R['uid'].'" >'.$R['name'].'</span>';
 		$html.='
-		<span class="badge badge-secondary">'.getSizeFormat($R['size'],2).'</span></div></li>';
+		<span class="badge badge-secondary">'.getSizeFormat($R['size'],2).'</span></div>';
+		$html.='<div class="align-self-center">
+		  <div class="btn-group btn-group-sm">';
+		  if($mod=='upload')  $html.='<input type="hidden" name="attachfiles[]" value="['.$R['uid'].']"/>';
+		  $html.='
+		  <button type="button" class="btn btn-light" data-attach-act="delete" data-id="'.$R['uid'].'" data-role="attachList-menu-delete-'.$R['uid'].'" data-featured="" data-type="video">삭제</button>';
+		  if($mod=='upload'){
+		  $html.='
+		  <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown">
+		      <span class="caret"></span>
+		      <span class="sr-only">Toggle Dropdown</span>
+		  </button>
+		  <div class="dropdown-menu dropdown-menu-right">';
+		            $html.='
+		              <a class="dropdown-item" href="#" data-attach-act="featured-video" data-type="'.$type.'" data-id="'.$R['uid'].'">대표 비디오 설정</a>';
+
+		             $html.='
+		      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-attach-file-meta" data-filename="'.$file_name.'"  data-fileext="'.$R['ext'].'" data-caption="'.$caption.'" data-src="'.$thumb_modal.'" data-origin="'.$img_origin.'" data-attach-act="edit" data-id="'.$R['uid'].'" data-type="video" data-role="attachList-menu-edit-'.$R['uid'].'">정보수정</a>
+		      <a class="dropdown-item" href="#" data-attach-act="showhide" data-role="attachList-menu-showhide-'.$R['uid'].'" data-id="'.$R['uid'].'" data-content="'.($R['hidden']?'show':'hide').'" >'.($R['hidden']?'보이기':'숨기기').'</a>
+		      <a class="dropdown-item" href="#" data-attach-act="delete" data-id="'.$R['uid'].'" data-role="attachList-menu-delete-'.$R['uid'].'" data-featured="" data-type="video	">삭제</a>
+		   </div>';
+		  }
+		  $html.='
+		</div>
+		</div>
+
+		</li>';
 		return $html;
 }
 

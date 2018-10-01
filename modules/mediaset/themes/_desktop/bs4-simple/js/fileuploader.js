@@ -68,11 +68,11 @@
 			cancelButtonClass: "ajax-file-upload-cancel content-padded text-danger",
 			dragDropContainerClass: "ajax-upload-dragdrop",
 			dragDropHoverClass: "state-hover",
-			errorClass: "content-padded text-danger",
+			errorClass: "alert alert-danger",
 			uploadButtonClass: "ajax-file-upload",
-			dragDropStr: "<span><b>Drag &amp; Drop Files</b></span>",
-			//uploadStr:"Upload",
-			uploadStr:"", // 첨부파일 버튼을 커스텀할 수 있도록 숨긴다.
+			dragDropStr: "<span>또는 여기에 파일 놓기</span>",
+			uploadStr:"Upload",
+			uploadStr:"<i class='fa fa fa-upload fa-fw'></i> 파일첨부", // 첨부파일 버튼을 커스텀할 수 있도록 숨긴다.
 			abortStr: "실패",
 			cancelStr: "취소",
 			deletelStr: "삭제",
@@ -87,7 +87,7 @@
 			customErrorKeyStr: "content-padded text-danger",
 			showQueueDiv: false,
 			statusBarWidth: 400,
-			dragdropWidth: 400,
+			// dragdropWidth: 400,
 			showPreview: false,
 			previewHeight: "auto",
 			previewWidth: "100%",
@@ -114,7 +114,7 @@
 
 		var obj = this;
 
-		var uploadLabel = $('<div>' + s.uploadStr + '</div>');
+		var uploadLabel = $('<div class="btn btn-link muted-link">' + s.uploadStr + '</div>');
 
 		$(uploadLabel).addClass(s.uploadButtonClass);
 
@@ -417,7 +417,7 @@
 					continue;
 				}
 				if(s.maxFileCount != -1 && obj.selectedFiles >= s.maxFileCount) {
-					if(s.showError) $("<div class='" + s.errorClass + "'><b>" + files[i].name + "</b> " + s.maxFileCountErrorStr + s.maxFileCount + "</div>").appendTo(
+					if(s.showError) $("<div class='" + s.errorClass + "'><b>" + files[i].name + "</b> " + s.maxFileCountErrorStr + s.maxFileCount + "개까지 허용됨</div>").appendTo(
 						obj.errorLog);
 					continue;
 				}
@@ -605,7 +605,7 @@
 				uploadLabel.css({
 					position: 'relative',
 					overflow: 'hidden',
-					cursor: 'default'
+					cursor: 'pointer'
 				});
 				fileInput.css({
 					position: 'absolute',

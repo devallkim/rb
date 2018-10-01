@@ -7,16 +7,17 @@
 		<input type="hidden" name="m" value="<?php echo $module?>">
 		<input type="hidden" name="a" value="config">
 		<input type="hidden" name="ftp_connect" value="<?php echo $d['mediaset']['use_fileserver']?>">
+		<input type="hidden" name="maxsize_file" value="<?php echo $d['mediaset']['maxsize_file']?>">
 
 		<h4>파일첨부 설정</h4>
 
 		<div class="form-group row">
-			<label class="col-sm-2 col-form-label text-sm-right">일반파일 첨부</label>
+			<label class="col-sm-2 col-form-label text-sm-right">파일 첨부</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
 						<div class="input-group">
-							<input type="text" name="maxnum_file" value="<?php echo $d['mediaset']['maxnum_file']?>" class="form-control">
+							<input type="number" name="maxnum_file" value="<?php echo $d['mediaset']['maxnum_file']?>" class="form-control">
 							<div class="input-group-append">
 						    <span class="input-group-text">개</span>
 						  </div>
@@ -24,53 +25,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="input-group">
-							<input type="text" name="maxsize_file" value="<?php echo $d['mediaset']['maxsize_file']?>" class="form-control">
-							<div class="input-group-append">
-						    <span class="input-group-text">MB이내</span>
-						  </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-label text-sm-right">사진파일 첨부</label>
-			<div class="col-sm-10">
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="input-group">
-							<input type="text" name="maxnum_img" value="<?php echo $d['mediaset']['maxnum_img']?>" class="form-control">
-							<div class="input-group-append">
-						    <span class="input-group-text">개</span>
-						  </div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="input-group">
-							<input type="text" name="maxsize_img" value="<?php echo $d['mediaset']['maxsize_img']?>" class="form-control">
-							<div class="input-group-append">
-						    <span class="input-group-text">MB이내</span>
-						  </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-label text-sm-right">동영상파일 첨부</label>
-			<div class="col-sm-10">
-				<div class="row">
-					<div class="col-sm-3">
-						<div class="input-group">
-							<input type="text" name="maxnum_vod" value="<?php echo $d['mediaset']['maxnum_vod']?>" class="form-control">
-							<div class="input-group-append">
-						    <span class="input-group-text">개</span>
-						  </div>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="input-group">
-							<input type="text" name="maxsize_vod" value="<?php echo $d['mediaset']['maxsize_vod']?>" class="form-control">
+							<input type="number" name="maxsize_mb" value="" class="form-control" onChange="mbConverter()">
 							<div class="input-group-append">
 						    <span class="input-group-text">MB이내</span>
 						  </div>
@@ -80,13 +35,14 @@
 				<small class="form-text text-muted"><?php echo sprintf('현재 서버에서 허용하고 있는 1회 최대 첨부용량은 <code>%sMB</code>입니다.',str_replace('M','',ini_get('upload_max_filesize')))?></small>
 			</div>
 		</div>
+
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label text-sm-right">최대 사진 사이즈</label>
 			<div class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-3">
 						<div class="input-group">
-							<input type="text" name="thumbsize" value="<?php echo $d['mediaset']['thumbsize']?>" class="form-control">
+							<input type="number" name="thumbsize" value="<?php echo $d['mediaset']['thumbsize']?>" class="form-control">
 							<div class="input-group-append">
 						    <span class="input-group-text">픽셀</span>
 						  </div>
@@ -94,8 +50,7 @@
 					</div>
 				</div>
 				<small class="form-text text-muted">
-					사진파일 업로드시 사진의 사이즈가 기준점을 초과할 경우 자동으로 리사이징 됩니다.<br>
-					세로사이즈는 가로사이즈의 비율에 맞춰 자동으로 조정됩니다.
+					사진파일 업로드시 사진의 사이즈가 기준점을 초과할 경우 자동으로 리사이징 됩니다.
 				</small>
 			</div>
 		</div>
@@ -210,6 +165,15 @@
 
 
 <script>
+
+function mbConverter(){
+	document.procForm.maxsize_file.value = document.procForm.maxsize_mb.value * 1024 * 1024
+}
+
+function byteConverter(){
+	document.procForm.maxsize_mb.value = document.procForm.maxsize_file.value / (1024*1024)
+}
+
 function serverChange(obj)
 {
 	if (obj.value == '1')
@@ -266,6 +230,9 @@ function sendCheck(id)
 		f.ftp_urlpath.focus();
 		return false;
 	}
+
+	mbConverter()
+
 	f.a.value = 'ftp_check';
 	getId(id).innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
 	getIframeForAction(f);
@@ -313,17 +280,22 @@ function saveCheck(f)
 			return false;
 		}
 	}
-	if (f.ftp_connect.value == '')
-	{
-		alert('FTP가 연결되는지 확인해 주세요.   ');
-		return false;
-	}
+	// if (f.ftp_connect.value == '')
+	// {
+		// alert('FTP가 연결되는지 확인해 주세요.   ');
+		// return false;
+	// }
 	getIframeForAction(f);
-	return confirm('정말로 실행하시겠습니까?         ');
+
 }
 function ftp_select(obj)
 {
 	if (obj.value == '') obj.form.ftp_port.value = '21';
 	else obj.form.ftp_port.value = '22';
 }
+
+putCookieAlert('mediaset_config_result') // 실행결과 알림 메시지 출력
+
+byteConverter()
+
 </script>

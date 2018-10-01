@@ -44,8 +44,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id=""><i class="fa fa-floppy-o"></i> 첨부파일 정보수정</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -57,8 +57,11 @@
             <div class="form-group">
               <label for="file-name" class="control-label">파일명:</label>
               <div class="input-group">
-                <input type="text" class="form-control" name="filename" data-role="filename">
-                <span class="input-group-addon" data-role="fileext"></span>
+                <input type="text" class="form-control" name="filename" data-role="filename">                
+                <div class="input-group-append">
+                  <span class="input-group-text" data-role="fileext">확장자</span>
+                </div>
+
               </div>
             </div>
             <div class="form-group">

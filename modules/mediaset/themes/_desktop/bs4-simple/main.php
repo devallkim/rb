@@ -1,14 +1,8 @@
 <?php
 include $g['dir_attach_theme'].'/header.php';
 ?>
-<button type="button" class="btn btn-light mb-3" title="파일첨부" role="button"
-  data-role="attach-handler-file"
-  data-type="file"
-  data-loading-text="업로드 중...">
-  <i class="fa fa-upload"></i> 파일첨부
-</button>
 
-<div id="attach-files" class="files"><!-- 파일폼 출력 -->
+<div id="attach-files" class="files position-relative"><!-- 파일폼 출력 -->
 </div>
 
 <div class="rb-attach mb-3 dd" id="nestable-photo">

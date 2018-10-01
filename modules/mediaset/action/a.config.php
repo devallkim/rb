@@ -8,10 +8,6 @@ $fp = fopen($_tmpdfile,'w');
 fwrite($fp, "<?php\n");
 fwrite($fp, "\$d['mediaset']['maxnum_file'] = \"".$maxnum_file."\";\n");
 fwrite($fp, "\$d['mediaset']['maxsize_file'] = \"".$maxsize_file."\";\n");
-fwrite($fp, "\$d['mediaset']['maxnum_img'] = \"".$maxnum_img."\";\n");
-fwrite($fp, "\$d['mediaset']['maxsize_img'] = \"".$maxsize_img."\";\n");
-fwrite($fp, "\$d['mediaset']['maxnum_vod'] = \"".$maxnum_vod."\";\n");
-fwrite($fp, "\$d['mediaset']['maxsize_vod'] = \"".$maxsize_vod."\";\n");
 fwrite($fp, "\$d['mediaset']['thumbsize'] = \"".$thumbsize."\";\n");
 fwrite($fp, "\$d['mediaset']['use_fileserver'] = \"".$use_fileserver."\";\n");
 fwrite($fp, "\$d['mediaset']['ftp_type'] = \"".$ftp_type."\";\n");
@@ -26,5 +22,6 @@ fwrite($fp, "?>");
 fclose($fp);
 @chmod($_tmpdfile,0707);
 
-getLink('reload','parent.','갱신 되었습니다.','');
+setrawcookie('mediaset_config_result', rawurlencode('<i class="fa fa-check" aria-hidden="true"></i> 설정이 변경 되었습니다.|success'));  // 처리여부 cookie 저장
+getLink('reload','parent.','','');
 ?>
