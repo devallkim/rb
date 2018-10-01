@@ -67,7 +67,7 @@
 			$thumb_modal=getPreviewResize($img_origin,'c'); // 정보수정 모달용  사이즈 조정 (이미지 업로드시 썸네일을 만들 필요 없다.)
 		?>
 			<figure class="list-inline-item">
-				<a href="<?php echo $thumb_modal ?>" data-size="<?php echo $_u['width']?>x<?php echo $_u['width']?>" title="<?php echo $_u['name']?>">
+				<a href="<?php echo $img_origin ?>" data-size="<?php echo $_u['width']?>x<?php echo $_u['height']?>" title="<?php echo $_u['name']?>">
 	        <img src="<?php echo $thumb_list ?>" alt="" class="border">
 	      </a>
 	      <figcaption itemprop="caption description" hidden><?php echo $_u['name']?></figcaption>
