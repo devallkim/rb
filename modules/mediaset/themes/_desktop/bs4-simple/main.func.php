@@ -171,7 +171,7 @@ function getAttachAudio($R,$mod,$featured_audio_uid)
 
 		$html='';
 	  $html.='
-		<li class="list-group-item d-flex justify-content-between align-items-center dd-item" data-id="'.$R['uid'].'" style="background-color: transparent">
+		<li class="list-group-item d-flex justify-content-between align-items-center dd-item animated fadeInDown" data-id="'.$R['uid'].'" style="background-color: transparent">
 			<div class="dd-handle fa fa-arrows" title="순서변경"></div>';
 
 		$html.='<div class="ml-5 mr-auto w-100"><span class="badge badge-secondary'.($R['uid']==$featured_audio_uid?'':' d-none').'" data-role="attachList-label-featured" data-id="'.$R['uid'].'">대표</span> ';
@@ -222,7 +222,7 @@ function getAttachVideo($R,$mod,$featured_video_uid)
 
 		$html='';
 	  $html.='
-		<li class="list-group-item d-flex justify-content-between align-items-center dd-item" data-id="'.$R['uid'].'" style="background-color: transparent">
+		<li class="list-group-item d-flex justify-content-between align-items-center dd-item animated fadeInDown" data-id="'.$R['uid'].'" style="background-color: transparent">
 			<div class="dd-handle fa fa-arrows" title="순서변경"></div>
 			<div class="ml-5 mr-auto w-100">';
 
