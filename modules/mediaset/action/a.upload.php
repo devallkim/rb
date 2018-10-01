@@ -116,8 +116,9 @@ if(isset($_FILES["files"]))
                     ResizeHeight($saveFile,$saveFile,$d['mediaset']['thumbsize']);
                   }
 
-                  $width = $IM[0];
-                  $height= $IM[1];
+                  $_IM = getimagesize($saveFile);  // 리사이징된 크기 다시 측정
+                  $width = $_IM[0];
+                  $height= $_IM[1];
                 }
                @chmod($saveFile,0707);
             }
