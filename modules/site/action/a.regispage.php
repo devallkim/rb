@@ -81,7 +81,7 @@ else {
 
 		$xname	= trim($sarr[$i]);
 		$xnarr	= explode('=',$xname);
-		$xnid	= $xnarr[1] ? $xnarr[1] : $id.$i;
+		$xnid	= $xnarr[1] ? $xnarr[1] : $id;
 
 		if(getDbRows($table['s_page'],"site=".$s." and id='".$xnid."'")) continue;
 
