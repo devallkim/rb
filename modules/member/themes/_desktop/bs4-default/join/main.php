@@ -257,7 +257,8 @@
 
 
 			<!-- 추가 가입항목 -->
-			<?php $_add = file($g['path_var'].'site/'.$_HS['id'].'/member.add_field.txt')?>
+			<?php $g['memberAddFieldSite'] = $g['path_var'].'site/'.$_HS['id'].'/member.add_field.txt'; ?>
+			<?php $_add = file_exists($g['memberAddFieldSite']) ? file($g['memberAddFieldSite']) : file($g['path_module'].'member/var/add_field.txt');?>
 			<?php foreach($_add as $_key):?>
 			<?php $_val = explode('|',trim($_key))?>
 			<?php if($_val[6]) continue?>
