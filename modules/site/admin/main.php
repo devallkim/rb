@@ -467,12 +467,12 @@ if ($R['uid'])
 						<div class="panel-group">
 							<div class="card">
 								<div class="card-header p-0">
-									<a class="d-block muted-link collapsed" data-toggle="collapse" data-parent="#accordion" href="#site-code-head" onclick="sessionSetting('sh_site_main_2','1','','1');">
+									<a class="d-block muted-link collapsed" data-toggle="collapse" href="#site-code-head" onclick="sessionSetting('sh_site_main_2','1','','1');">
 										head 코드 <?php if($R['headercode']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 										<small><code>&lt;head&gt; &lt;/head&gt;</code> 태그 내부에 삽입할 코드를 등록해 주세요.</small>
 									</a>
 								</div>
-								<div id="site-code-head" class="panel-collapse collapse<?php if($_SESSION['sh_site_main_2']):?> in<?php endif?>">
+								<div id="site-code-head" class="panel-collapse collapse<?php if($_SESSION['sh_site_main_2']):?> show<?php endif?>">
 									<div class="card-body">
 										<textarea name="headercode" class="form-control" rows="7"><?php echo htmlspecialchars($R['headercode'])?></textarea>
 									</div>
@@ -480,7 +480,7 @@ if ($R['uid'])
 							</div>
 							<div class="card">
 								<div class="card-header p-0">
-									<a class="d-block muted-link collapsed" data-toggle="collapse" data-parent="#accordion" href="#site-code-foot" onclick="sessionSetting('sh_site_main_3','1','','1');">
+									<a class="d-block muted-link collapsed" data-toggle="collapse" href="#site-code-foot" onclick="sessionSetting('sh_site_main_3','1','','1');">
 										foot 코드 <?php if($R['footercode']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 										<small><code>&lt;/body&gt;&lt;/html&gt;</code> 태그 직전에 삽입할 코드를 등록해 주세요.</small>
 									</a>
@@ -495,7 +495,7 @@ if ($R['uid'])
 
 								<div class="card">
 								<div class="card-header p-0">
-									<a class="d-block muted-link collapsed" data-toggle="collapse" data-parent="#accordion" href="#site-code-php" onclick="sessionSetting('sh_site_main_4','1','','1');">
+									<a class="d-block muted-link collapsed" data-toggle="collapse" href="#site-code-php" onclick="sessionSetting('sh_site_main_4','1','','1');">
 										PHP코드 <?php if($R['uid']&&filesize($g['path_var'].'sitephp/'.$R['uid'].'.php')):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 											<small>이 사이트 전용 <code>&lt;?php ?&gt;</code> 를 등록해 주세요.</small>
 									</a>
@@ -510,7 +510,7 @@ if ($R['uid'])
 
 							<div class="card">
 								<div class="card-header p-0">
-									<a class="d-block muted-link collapsed" data-toggle="collapse" data-parent="#accordion" href="#site-code-googleanalytics" onclick="sessionSetting('sh_site_main_5','1','','1');">
+									<a class="d-block muted-link collapsed" data-toggle="collapse" href="#site-code-googleanalytics" onclick="sessionSetting('sh_site_main_5','1','','1');">
 										구글 웹로그 분석 <?php if($R['dtd']):?><i class="fa fa-check-circle" title="내용있음" data-tooltip="tooltip"></i><?php endif?>
 											<small>이 사이트 전용 Google Analytics <code>추적 ID</code> 를 등록해 주세요.</small>
 									</a>
@@ -779,4 +779,21 @@ document.ondblclick = function(event)
 	getContext('<a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>">사용자모드 보기</a><a class="dropdown-item" href="<?php echo $g['s']?>/?r=<?php echo $r?>&m=<?php echo $m?>&module=<?php echo $module?>&type=makesite">새 사이트 만들기</a><div class="dropdown-divider"></div><a class="dropdown-item" href="#." onclick="getId(\'rb-submit-button\').click();">실행하기</a>',event);
 }
 <?php endif?>
+
+// 고급 설정
+$('#site-code-head').on('shown.bs.collapse', function () {
+  $(this).find('textarea').focus()
+})
+$('#site-code-head').on('shown.bs.collapse', function () {
+  $(this).find('textarea').focus()
+})
+$('#site-code-foot').on('shown.bs.collapse', function () {
+  $(this).find('textarea').focus()
+})
+$('#site-code-php').on('shown.bs.collapse', function () {
+  $(this).find('textarea').focus()
+})
+$('#site-code-googleanalytics').on('shown.bs.collapse', function () {
+  $(this).find('input').focus()
+})
 </script>
