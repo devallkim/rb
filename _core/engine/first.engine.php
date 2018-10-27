@@ -23,7 +23,7 @@ function safeInputs(&$c) {
   
     $v = escapeFnc($v);
     
-   if($lv === 0) setGBValues($k,$v);
+   if($lv < 2) setGBValues($k,$v);
   
   }
   
@@ -38,10 +38,8 @@ function escapeFnc($c) {
 }
 
 function setGBValues($k,$v) {
-
-  global $INPUTS;
   
-  $INPUTS[$k] = $v;
+  $GLOBALS[$k] = $v;
 
 }
 
