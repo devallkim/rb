@@ -45,7 +45,9 @@ function setGBValues($k,$v) {
 
 }
 
-safeInputs($_REQUEST);
+safeInputs($_POST);
+safeInputs($_GET);
+safeInputs($_COOKIE);
 
   
 ?>
