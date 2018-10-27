@@ -5,8 +5,6 @@ session_start();
 
 include './_core/engine/first.engine.php';
 
-$INPUTS = array();
-
 if(is_array($_GET) && count($_GET)) {
 	
 	safeInputs($_GET);	
