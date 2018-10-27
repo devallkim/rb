@@ -6,6 +6,8 @@
 
 
 function safeInputs(&$c) {
+  
+  if(!$c || !is_array($c)) return;
 
   static $lv = 0;
 
