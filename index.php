@@ -3,19 +3,7 @@ header("Content-type:text/html;charset=utf-8");
 define('__KIMS__',true);
 session_start();
 
-include './_core/engine/first.engine.php';
 
-if(is_array($_GET) && count($_GET)) {
-	
-	safeInputs($_GET);	
-	
-}
-
-if(is_array($_POST) && count($_POST)) {
-	
-	safeInputs($_POST);
-	
-}
 
 $d = array();
 $g = array(
@@ -31,6 +19,8 @@ $g = array(
 	'path_page'   => './pages/',
 	'path_file'   => './files/'
 );
+
+include $g['path_core'].'engine/first.engine.php';
 
 $g['time_split'] = explode(' ',microtime());
 $g['time_start'] = $g['time_split'][0]+$g['time_split'][1];
