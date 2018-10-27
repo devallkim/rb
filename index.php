@@ -3,27 +3,20 @@ header("Content-type:text/html;charset=utf-8");
 define('__KIMS__',true);
 session_start();
 
-if(!get_magic_quotes_gpc())
-{
-	if (is_array($_GET))
-		foreach($_GET as $_tmp['k'] => $_tmp['v'])
-			if (is_array($_GET[$_tmp['k']]))
-				foreach($_GET[$_tmp['k']] as $_tmp['k1'] => $_tmp['v1']) 
-					$_GET[$_tmp['k']][$_tmp['k1']] = ${$_tmp['k']}[$_tmp['k1']] = addslashes($_tmp['v1']); 
-			else $_GET[$_tmp['k']] = ${$_tmp['k']} = addslashes($_tmp['v']);
-	if (is_array($_POST))
-		foreach($_POST as $_tmp['k'] => $_tmp['v'])
-			if (is_array($_POST[$_tmp['k']]))
-				foreach($_POST[$_tmp['k']] as $_tmp['k1'] => $_tmp['v1']) 
-					$_POST[$_tmp['k']][$_tmp['k1']] = ${$_tmp['k']}[$_tmp['k1']] = addslashes($_tmp['v1']);
-			else $_POST[$_tmp['k']] = ${$_tmp['k']} = addslashes($_tmp['v']);
+include './_core/engine/first.engine.php';
+
+$INPUTS = array();
+
+if(is_array($_GET) && count($_GET)) {
+	
+	safeInputs($_GET);	
+	
 }
-else {
-	if (!ini_get('register_globals'))
-	{
-		extract($_GET);
-		extract($_POST);
-	}
+
+if(is_array($_POST) && count($_POST)) {
+	
+	safeInputs($_POST);
+	
 }
 
 $d = array();
@@ -71,8 +64,7 @@ require $g['path_core'].'engine/main.engine.php';
 
 if ($keyword)
 {
-	$keyword = trim($keyword);
-	$_keyword= stripslashes(htmlspecialchars($keyword));
+	$_keyword = $keyword = trim($keyword);
 }
 if (!$p) $p = 1;
 if (!is_dir($g['path_module'].$m)) $m = $g['sys_module'];
